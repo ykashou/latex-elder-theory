@@ -1,106 +1,20 @@
-% Mathematical macros for "Elder, the Arcane Realization"
+% Math macros for Elder theory
 
-% Common sets
-\newcommand{\N}{\mathbb{N}}  % Natural numbers
-\newcommand{\Z}{\mathbb{Z}}  % Integers
-\newcommand{\Q}{\mathbb{Q}}  % Rational numbers
-\newcommand{\R}{\mathbb{R}}  % Real numbers
-\newcommand{\C}{\mathbb{C}}  % Complex numbers
-\newcommand{\F}{\mathbb{F}}  % Generic field
-
-% Set operations
-\newcommand{\union}{\cup}
-\newcommand{\intersection}{\cap}
-\newcommand{\compose}{\circ}
-\newcommand{\tensor}{\otimes}
-\newcommand{\bigtensor}{\bigotimes}
-
-% Calculus
-\newcommand{\deriv}[2]{\frac{d #1}{d #2}}
-\newcommand{\pderiv}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\integral}[2]{\int_{#1}^{#2}}
-\newcommand{\closed}[1]{\overline{#1}}
-\newcommand{\open}[1]{\stackrel{\circ}{#1}}
-
-% Linear algebra
-\newcommand{\inner}[2]{\langle #1, #2 \rangle}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\transpose}{^{\mathsf{T}}}
-\newcommand{\adj}{^{*}}
-\newcommand{\tr}{\operatorname{tr}}
-\newcommand{\rank}{\operatorname{rank}}
-\newcommand{\nullity}{\operatorname{nullity}}
-\newcommand{\im}{\operatorname{im}}
-\newcommand{\vspan}{\operatorname{span}}
-
-% Group theory
-\newcommand{\group}[1]{\mathcal{#1}}
-\newcommand{\subgroup}{\leqslant}
-\newcommand{\normalsubgroup}{\trianglelefteq}
-\newcommand{\quotient}[2]{#1/#2}
-\newcommand{\conj}[2]{#1^{#2}}
-\newcommand{\comm}[2]{[#1,#2]}
-\newcommand{\commutator}[2]{[#1,#2]}
-
-% Category theory
-\newcommand{\cat}[1]{\mathbf{#1}}
-\newcommand{\Fun}{\operatorname{Fun}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\End}{\operatorname{End}}
-\newcommand{\Aut}{\operatorname{Aut}}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\iso}{\cong}
-\newcommand{\too}{\longrightarrow}
-\newcommand{\functorial}[1]{#1^{\bullet}}
-
-% Topology
-\newcommand{\closure}[1]{\overline{#1}}
-\newcommand{\interior}[1]{\mathring{#1}}
-\newcommand{\boundary}[1]{\partial #1}
-\newcommand{\connected}{\text{connected}}
-\newcommand{\compact}{\text{compact}}
-\newcommand{\covering}{\text{covering}}
-
-% Analysis
-\newcommand{\limsup}{\varlimsup}
-\newcommand{\liminf}{\varliminf}
-\newcommand{\tendsto}{\rightarrow}
-\newcommand{\converge}{\xrightarrow{\text{conv.}}}
-\newcommand{\weakconverge}{\xrightarrow{\text{w.}}}
-\newcommand{\uniformconverge}{\xrightarrow{\text{unif.}}}
-
-% Probability
-\newcommand{\Prob}{\mathbb{P}}
-\newcommand{\Expectation}{\mathbb{E}}
-\newcommand{\Variance}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\distribution}{\sim}
-
-% Logic
-\newcommand{\implies}{\Rightarrow}
-\newcommand{\myiff}{\Leftrightarrow}
-\newcommand{\notimplies}{\not\Rightarrow}
-\newcommand{\notiff}{\not\Leftrightarrow}
-% Using standard commands
-% \newcommand{\forall}{\forall}
-% \newcommand{\exists}{\exists}
-\newcommand{\existsunique}{\exists!}
-
-% Specific to the book 
+% Core notation
 \newcommand{\arcane}[1]{\mathfrak{A}_{#1}}
 \newcommand{\elder}[1]{\mathcal{E}_{#1}}
 \newcommand{\realization}[1]{\mathcal{R}(#1)}
-\newcommand{\arcanesequence}[1]{\{A_{#1}\}}
-\newcommand{\eldestate}{\mathbf{\Psi}}
 
-% Common operators
-\DeclareMathOperator{\lcm}{lcm}
-% Use MathOperators that don't conflict with existing commands
-% \DeclareMathOperator{\gcd}{gcd}
-\DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\charOp}{char}
-\DeclareMathOperator{\degOp}{deg}
-\DeclareMathOperator{\supp}{supp}
+% Loss functions
+\newcommand{\eloss}{\mathcal{L}_{\text{El}}}
+\newcommand{\mloss}{\mathcal{L}_{\text{M}}}
+\newcommand{\erloss}{\mathcal{L}_{\text{E}}}
+
+% Magefile notation
+\newcommand{\magefile}{\mathcal{M}}
+\newcommand{\embedding}{\Psi}
+
+% Parameter spaces
+\newcommand{\paramspace}{\Theta}
+\newcommand{\mentorparams}{\Theta_{\text{M}}}
+\newcommand{\eruditeparams}{\Theta_{\text{E}}}

@@ -30,10 +30,8 @@
 \definecolor{PropositionYellow}{RGB}{245, 245, 230}
 \definecolor{DefinitionPurple}{RGB}{240, 230, 245}
 
-% Math commands for Elder theory
-\newcommand{\arcane}[1]{\mathfrak{A}_{#1}}
-\newcommand{\elder}[1]{\mathcal{E}_{#1}}
-\newcommand{\realization}[1]{\mathcal{R}(#1)}
+% Include math macros
+\input{macros/math_macros.tex}
 
 % Set up fancy chapter headings
 \titleformat{\chapter}[display]
@@ -51,6 +49,8 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{remark}{Remark}[chapter]
 
 % Customize page layout
 \geometry{
@@ -185,6 +185,8 @@ For any quantum system described by a Hilbert space $\mathcal{H}$, there exists 
 \end{theorem}
 
 This theorem, which builds on the work of Witten \cite{witten1988topological}, establishes a deep connection between quantum mechanics and Elder theory, suggesting that the latter may serve as a more general mathematical framework for physics.
+
+\input{chapters/chapter3.tex}
 
 \backmatter
 \printbibliography[title={References}]
