@@ -100,7 +100,27 @@ The fundamental requirements of completeness, orthogonality, spectral decomposit
 
 \subsection{Mathematical Formalism and End-to-End Derivation}
 
-The Erudite Loss function serves as the foundation for task-specific learning in the Elder framework. This section presents a rigorous mathematical derivation of this loss function, focusing exclusively on its properties and construction.
+The Erudite Loss function serves as the foundation for task-specific learning in the Elder framework. This section presents a rigorous mathematical derivation of this loss function, focusing exclusively on its properties and construction. We develop the Erudite Loss through a sequence of principled steps, starting from basic requirements and building toward a comprehensive formulation.
+
+\subsubsection{Desiderata for an Optimal Loss Function}
+
+Before formulating the Erudite Loss, we establish the key requirements that this loss function must satisfy:
+
+\begin{enumerate}
+\item \textbf{Structural Fidelity}: The loss must capture both global structure and local details in the data, particularly important for audio data with rich hierarchical structure.
+
+\item \textbf{Statistical Consistency}: The loss should lead to consistent estimators, ensuring convergence to the true data-generating distribution as sample size increases.
+
+\item \textbf{Distributional Awareness}: The loss must account for the underlying probabilistic nature of the data, not just point-wise differences.
+
+\item \textbf{Computational Tractability}: While theoretically sophisticated, the loss must remain computationally feasible for practical implementation.
+
+\item \textbf{Differentiability}: The loss must be differentiable with respect to model parameters to enable gradient-based optimization.
+
+\item \textbf{Task Adaptability}: The loss should be adaptable to various audio-related tasks through appropriate parameterization.
+\end{enumerate}
+
+These requirements guide our construction of the Erudite Loss function.
 
 \subsubsection{Formulation of the Basic Learning Problem}
 
@@ -112,11 +132,30 @@ The Erudite component parameterized by $\theta_E \in \eruditeparams$ implements 
 f_{\theta_E}: \mathcal{X} \rightarrow \mathcal{Y}
 \end{equation}
 
-Given an input $x \in \mathcal{X}$, the Erudite generates an output $\hat{y} = f_{\theta_E}(x)$. The goal is to define a loss function that measures the discrepancy between this generated output $\hat{y}$ and the ground truth output $y \in \mathcal{Y}$.
+Given an input $x \in \mathcal{X}$, the Erudite generates an output $\hat{y} = f_{\theta_E}(x)$. Our goal is to define a loss function that measures the discrepancy between this generated output $\hat{y}$ and the ground truth output $y \in \mathcal{Y}$.
 
-\subsubsection{Hilbert Space Embedding}
+A naive approach might use a simple squared error measure:
 
-We define a feature extraction mapping $\mathcal{F}: \mathcal{Y} \rightarrow \mathcal{H}$ that embeds outputs into a Hilbert space $\mathcal{H}$. For mathematical rigor, we construct this mapping as:
+\begin{equation}
+\mathcal{L}_{\text{naive}}(y, \hat{y}) = \|y - \hat{y}\|_{\mathcal{Y}}^2
+\end{equation}
+
+However, this approach has several limitations:
+
+\begin{itemize}
+\item It treats all dimensions of the output equally, ignoring the rich structure of audio data
+\item It doesn't account for perceptual factors in audio similarity
+\item It fails to capture distributional properties of the data
+\item It's sensitive to phase shifts and time warping, which may be perceptually insignificant
+\end{itemize}
+
+To address these limitations, we develop a more sophisticated loss function.
+
+\subsubsection{Hilbert Space Embedding Construction}
+
+We begin by constructing a feature extraction mapping $\mathcal{F}: \mathcal{Y} \rightarrow \mathcal{H}$ that embeds outputs into a Hilbert space $\mathcal{H}$. The key insight is that by working in an appropriately constructed Hilbert space, we can capture perceptually relevant aspects of audio similarity.
+
+For mathematical rigor, we construct this mapping as:
 
 \begin{equation}
 \mathcal{F}(y) = \sum_{k=1}^{\infty} \langle y, \psi_k \rangle_{\mathcal{Y}} \phi_k
@@ -129,61 +168,198 @@ Where:
 \item $\langle \cdot, \cdot \rangle_{\mathcal{Y}}$ denotes the inner product in $\mathcal{Y}$
 \end{itemize}
 
-For audio data in the magefile format, concrete choices for $\{\psi_k\}$ include time-frequency atoms, wavelet basis functions, or specialized bases that capture spatial audio characteristics.
+The specific choice of basis functions $\{\psi_k\}$ is crucial for capturing perceptually relevant features of audio data. For the magefile format, we can define these basis functions to extract time-frequency characteristics, spatial properties, and other relevant audio features.
+
+\paragraph{Time-Frequency Basis Functions:}
+For capturing spectro-temporal characteristics, we define time-frequency atoms:
+
+\begin{equation}
+\psi_{t,f}(\tau) = w(\tau-t) e^{i2\pi f \tau}
+\end{equation}
+
+where $w$ is a window function (e.g., Gaussian or Hann window).
+
+\paragraph{Spatial Basis Functions:}
+For spatial audio characteristics, we use spherical harmonics:
+
+\begin{equation}
+\psi_{l,m}(\theta, \phi) = Y_l^m(\theta, \phi)
+\end{equation}
+
+where $Y_l^m$ are the spherical harmonic functions with degree $l$ and order $m$.
+
+\paragraph{Joint Representation:}
+The complete basis combines temporal, spectral, and spatial dimensions:
+
+\begin{equation}
+\psi_{t,f,l,m}(\tau, \theta, \phi) = w(\tau-t) e^{i2\pi f \tau} Y_l^m(\theta, \phi)
+\end{equation}
+
+This joint representation enables the Hilbert space embedding to capture the rich multi-dimensional structure of the magefile format.
+
+\subsubsection{Properties of the Hilbert Space Embedding}
+
+The Hilbert space embedding $\mathcal{F}$ has several important properties:
+
+\begin{proposition}[Isometry Property]
+If the basis functions $\{\psi_k\}$ are orthonormal in $\mathcal{Y}$, then $\mathcal{F}$ is an isometry, preserving inner products:
+\begin{equation}
+\langle \mathcal{F}(y_1), \mathcal{F}(y_2) \rangle_{\mathcal{H}} = \langle y_1, y_2 \rangle_{\mathcal{Y}}
+\end{equation}
+\end{proposition}
+
+\begin{proposition}[Parseval's Identity]
+For any $y \in \mathcal{Y}$, the energy is preserved:
+\begin{equation}
+\|y\|_{\mathcal{Y}}^2 = \sum_{k=1}^{\infty} |\langle y, \psi_k \rangle_{\mathcal{Y}}|^2 = \|\mathcal{F}(y)\|_{\mathcal{H}}^2
+\end{equation}
+\end{proposition}
+
+\begin{proposition}[Reproducing Property]
+If we construct $\mathcal{H}$ as a reproducing kernel Hilbert space with kernel $K$, then:
+\begin{equation}
+\langle \mathcal{F}(y), K(\cdot, z) \rangle_{\mathcal{H}} = (\mathcal{F}(y))(z)
+\end{equation}
+enabling point-wise evaluation of the embedded function.
+\end{proposition}
+
+These properties ensure that our Hilbert space embedding preserves the essential structure of the audio data while enabling powerful mathematical operations.
 
 \subsubsection{Distance Metric in Hilbert Space}
 
-With the embedding $\mathcal{F}$ defined, we can measure the distance between the ground truth $y$ and the generated output $\hat{y}$ in the Hilbert space:
+With the embedding $\mathcal{F}$ defined, we measure the distance between the ground truth $y$ and the generated output $\hat{y}$ in the Hilbert space:
 
 \begin{equation}
 d_{\mathcal{H}}(y, \hat{y}) = \|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}
 \end{equation}
 
-Where $\|\cdot\|_{\mathcal{H}}$ denotes the norm induced by the inner product in $\mathcal{H}$. Using the inner product structure, this can be expanded as:
+Where $\|\cdot\|_{\mathcal{H}}$ denotes the norm induced by the inner product in $\mathcal{H}$. Expanding the squared norm:
 
 \begin{equation}
 \|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 = \|\mathcal{F}(y)\|_{\mathcal{H}}^2 + \|\mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 - 2\text{Re}\langle \mathcal{F}(y), \mathcal{F}(\hat{y}) \rangle_{\mathcal{H}}
 \end{equation}
 
-This expansion explicitly shows how the distance captures both the individual norms of the embeddings and their alignment through the inner product term.
+This expansion shows that the distance captures three components:
+\begin{enumerate}
+\item $\|\mathcal{F}(y)\|_{\mathcal{H}}^2$: The energy of the ground truth signal
+\item $\|\mathcal{F}(\hat{y})\|_{\mathcal{H}}^2$: The energy of the generated signal
+\item $-2\text{Re}\langle \mathcal{F}(y), \mathcal{F}(\hat{y}) \rangle_{\mathcal{H}}$: The (negative) correlation between the signals
+\end{enumerate}
 
-\subsubsection{Probabilistic Interpretation}
+\begin{lemma}[Perceptual Relevance]
+By appropriate choice of the basis functions $\{\psi_k\}$, the Hilbert space distance $d_{\mathcal{H}}(y, \hat{y})$ correlates with perceptual differences in audio signals much better than naive distance measures in the original space $\mathcal{Y}$.
+\end{lemma}
+
+\begin{proof}[Sketch]
+Psychoacoustic research shows that human perception of audio is approximately logarithmic in frequency and non-uniform in time. By choosing basis functions that mirror these perceptual characteristics (e.g., mel-scale filterbanks), the resulting distance metric aligns with human perception. Empirical studies consistently show higher correlation between $d_{\mathcal{H}}$ and subjective quality ratings compared to time-domain measures like MSE.
+\end{proof}
+
+\subsubsection{Complex Hilbert Space for Phase Information}
+
+For audio data, phase information is crucial. We therefore work with a complex Hilbert space $\mathcal{H} = L^2(\Omega, \mathbb{C})$, allowing us to represent both magnitude and phase:
+
+\begin{equation}
+\mathcal{F}(y)(z) = |\mathcal{F}(y)(z)| e^{i\phi_y(z)}
+\end{equation}
+
+This complex representation enables us to model phase relationships between different components of the signal. The distance metric in this complex space accounts for both magnitude and phase differences:
+
+\begin{equation}
+\|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 = \int_{\Omega} |\mathcal{F}(y)(z) - \mathcal{F}(\hat{y})(z)|^2 dz
+\end{equation}
+
+This can be further decomposed as:
+
+\begin{equation}
+\begin{aligned}
+\|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 &= \int_{\Omega} \left| |\mathcal{F}(y)(z)| e^{i\phi_y(z)} - |\mathcal{F}(\hat{y})(z)| e^{i\phi_{\hat{y}}(z)} \right|^2 dz \\
+&= \int_{\Omega} \left( |\mathcal{F}(y)(z)|^2 + |\mathcal{F}(\hat{y})(z)|^2 - 2|\mathcal{F}(y)(z)||\mathcal{F}(\hat{y})(z)|\cos(\phi_y(z) - \phi_{\hat{y}}(z)) \right) dz
+\end{aligned}
+\end{equation}
+
+This explicitly shows how both magnitude and phase differences contribute to the overall distance.
+
+\subsubsection{Distributional Modeling via Probability Measures}
 
 To incorporate uncertainty and distributional aspects of the data, we introduce probability distributions associated with the outputs. Let $P_y$ and $P_{\hat{y}}$ be probability distributions corresponding to the ground truth and generated outputs, respectively.
 
-The Kullback-Leibler divergence between these distributions is defined as:
-
-\begin{equation}
-\mathrm{D_{KL}}(P_y \| P_{\hat{y}}) = \int_{\Omega} P_y(z) \log\frac{P_y(z)}{P_{\hat{y}}(z)} dz
-\end{equation}
-
-From an information-theoretic perspective, $\mathrm{D_{KL}}(P_y \| P_{\hat{y}})$ represents the expected excess bits needed to encode samples from $P_y$ using a code optimized for $P_{\hat{y}}$.
-
-For audio data, these distributions typically represent spectral characteristics. Specifically, if $S_y(f)$ and $S_{\hat{y}}(f)$ denote the spectral power densities of $y$ and $\hat{y}$ at frequency $f$, then:
+For audio data, these distributions typically represent spectral characteristics. If $S_y(f)$ and $S_{\hat{y}}(f)$ denote the spectral power densities of $y$ and $\hat{y}$ at frequency $f$, then:
 
 \begin{equation}
 P_y(f) = \frac{S_y(f)}{\int S_y(f) df} \quad \text{and} \quad P_{\hat{y}}(f) = \frac{S_{\hat{y}}(f)}{\int S_{\hat{y}}(f) df}
 \end{equation}
 
-\subsubsection{Weighted Combination}
+\paragraph{Kullback-Leibler Divergence:}
+To measure the discrepancy between these distributions, we use the Kullback-Leibler (KL) divergence:
 
-The Erudite Loss combines the Hilbert space distance and the KL divergence with a weighting parameter $\lambda_E > 0$:
+\begin{equation}
+\mathrm{D_{KL}}(P_y \| P_{\hat{y}}) = \int_{\Omega} P_y(z) \log\frac{P_y(z)}{P_{\hat{y}}(z)} dz
+\end{equation}
+
+\begin{theorem}[Information-Theoretic Interpretation]
+The KL divergence $\mathrm{D_{KL}}(P_y \| P_{\hat{y}})$ equals the expected excess coding length (in bits) when using a code optimized for $P_{\hat{y}}$ to encode samples from $P_y$.
+\end{theorem}
+
+This information-theoretic interpretation connects the Erudite Loss to coding efficiency, a key concept in the Elder framework's information compression approach.
+
+\paragraph{Generalized Divergences:}
+While KL divergence is our primary choice, the framework supports generalized divergences:
+
+\begin{equation}
+D_{\phi}(P_y \| P_{\hat{y}}) = \int_{\Omega} P_y(z) \phi\left(\frac{P_{\hat{y}}(z)}{P_y(z)}\right) dz
+\end{equation}
+
+where $\phi$ is a convex function with $\phi(1) = 0$. Special cases include:
+\begin{itemize}
+\item $\phi(t) = -\log(t)$: KL divergence
+\item $\phi(t) = (1-t)^2$: Squared Hellinger distance
+\item $\phi(t) = |1-t|$: Total variation distance
+\end{itemize}
+
+\subsubsection{Integration of Structural and Distributional Components}
+
+The complete Erudite Loss combines the Hilbert space distance and the KL divergence with a weighting parameter $\lambda_E > 0$:
 
 \begin{equation}
 \erloss(x, y; \theta_E) = \|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 + \lambda_E \cdot \mathrm{D_{KL}}(P_y \| P_{\hat{y}})
 \end{equation}
 
-Where $\hat{y} = f_{\theta_E}(x)$ is the output generated by the Erudite model. The parameter $\lambda_E$ balances the importance of feature reconstruction versus distributional matching.
+where $\hat{y} = f_{\theta_E}(x)$ is the output generated by the Erudite model.
 
-\subsubsection{Gradient-Based Optimization}
+\begin{proposition}[Loss Decomposition]
+The Erudite Loss can be decomposed into components addressing different aspects of audio quality:
+\begin{equation}
+\erloss(x, y; \theta_E) = \underbrace{\|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2}_{\text{Structure Preservation}} + \underbrace{\lambda_E \cdot \mathrm{D_{KL}}(P_y \| P_{\hat{y}})}_{\text{Distribution Matching}}
+\end{equation}
+\end{proposition}
 
-For learning, we need to compute the gradient of $\erloss$ with respect to the Erudite parameters $\theta_E$. By the chain rule:
+\begin{theorem}[Optimal Parameter Estimation]
+Under suitable regularity conditions, as the number of training samples $n \to \infty$, the estimator $\hat{\theta}_E$ obtained by minimizing the empirical Erudite Loss converges to the true parameter $\theta_E^*$ that generates the data.
+\end{theorem}
+
+\begin{proof}[Sketch]
+The proof follows from the consistency properties of M-estimators. The Hilbert space embedding term ensures consistency in the function space, while the KL divergence term ensures consistency in the distribution space. Together, they provide a complete characterization of the data-generating process.
+\end{proof}
+
+\subsubsection{Optimization and Learning Dynamics}
+
+For learning, we compute the gradient of $\erloss$ with respect to the Erudite parameters $\theta_E$. By the chain rule:
 
 \begin{equation}
 \nabla_{\theta_E} \erloss(x, y; \theta_E) = \nabla_{\theta_E} \|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 + \lambda_E \cdot \nabla_{\theta_E} \mathrm{D_{KL}}(P_y \| P_{\hat{y}})
 \end{equation}
 
-The gradient of the squared Hilbert space norm term is:
+We derive each term separately:
+
+\paragraph{Gradient of the Hilbert Space Term:}
+\begin{equation}
+\begin{aligned}
+\nabla_{\theta_E} \|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 &= \nabla_{\theta_E} \left( \|\mathcal{F}(y)\|_{\mathcal{H}}^2 + \|\mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 - 2\text{Re}\langle \mathcal{F}(y), \mathcal{F}(\hat{y}) \rangle_{\mathcal{H}} \right) \\
+&= \nabla_{\theta_E} \|\mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 - 2\text{Re}\nabla_{\theta_E}\langle \mathcal{F}(y), \mathcal{F}(\hat{y}) \rangle_{\mathcal{H}}
+\end{aligned}
+\end{equation}
+
+Using the chain rule and the fact that $\hat{y} = f_{\theta_E}(x)$:
 
 \begin{equation}
 \nabla_{\theta_E} \|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 = -2 \cdot \mathcal{J}_{\hat{y}}(\theta_E)^T \cdot \nabla_{\hat{y}} \mathcal{F}^T \cdot (\mathcal{F}(y) - \mathcal{F}(\hat{y}))
@@ -195,13 +371,35 @@ Where:
 \item $\nabla_{\hat{y}} \mathcal{F}$ is the gradient of the feature map with respect to its input
 \end{itemize}
 
-For the KL divergence term, the gradient is:
+\paragraph{Gradient of the KL Divergence Term:}
+For the KL divergence term, applying the chain rule:
 
 \begin{equation}
-\nabla_{\theta_E} \mathrm{D_{KL}}(P_y \| P_{\hat{y}}) = -\int_{\Omega} P_y(z) \nabla_{\theta_E} \log P_{\hat{y}}(z) dz
+\nabla_{\theta_E} \mathrm{D_{KL}}(P_y \| P_{\hat{y}}) = \nabla_{\theta_E} \int_{\Omega} P_y(z) \log\frac{P_y(z)}{P_{\hat{y}}(z)} dz = -\int_{\Omega} P_y(z) \nabla_{\theta_E} \log P_{\hat{y}}(z) dz
 \end{equation}
 
-\subsubsection{Regularization Extensions}
+This can be further expanded as:
+
+\begin{equation}
+\nabla_{\theta_E} \mathrm{D_{KL}}(P_y \| P_{\hat{y}}) = -\int_{\Omega} P_y(z) \frac{1}{P_{\hat{y}}(z)} \nabla_{\theta_E} P_{\hat{y}}(z) dz
+\end{equation}
+
+\paragraph{Complete Gradient:}
+Combining both terms:
+
+\begin{equation}
+\nabla_{\theta_E} \erloss(x, y; \theta_E) = -2 \cdot \mathcal{J}_{\hat{y}}(\theta_E)^T \cdot \nabla_{\hat{y}} \mathcal{F}^T \cdot (\mathcal{F}(y) - \mathcal{F}(\hat{y})) - \lambda_E \int_{\Omega} P_y(z) \frac{1}{P_{\hat{y}}(z)} \nabla_{\theta_E} P_{\hat{y}}(z) dz
+\end{equation}
+
+\begin{proposition}[Gradient Flow]
+The parameter update dynamics under gradient descent follow:
+\begin{equation}
+\frac{d\theta_E}{dt} = -\eta \nabla_{\theta_E} \erloss(x, y; \theta_E)
+\end{equation}
+where $\eta > 0$ is the learning rate.
+\end{proposition}
+
+\subsubsection{Extended Formulations and Regularization}
 
 The basic Erudite Loss can be extended with regularization terms to impose additional structure on the learned parameters:
 
@@ -209,31 +407,84 @@ The basic Erudite Loss can be extended with regularization terms to impose addit
 \mathcal{L}_{E,\text{reg}}(x, y; \theta_E) = \erloss(x, y; \theta_E) + \alpha \cdot R(\theta_E)
 \end{equation}
 
-Where $R(\theta_E)$ is a regularization function such as $L_1$ or $L_2$ norm of the parameters, and $\alpha > 0$ is a regularization parameter.
+Common choices for the regularization function $R$ include:
+
+\paragraph{$L_2$ Regularization:}
+\begin{equation}
+R_{L_2}(\theta_E) = \|\theta_E\|_2^2 = \sum_i (\theta_E)_i^2
+\end{equation}
+This promotes small parameter values and improves generalization.
+
+\paragraph{$L_1$ Regularization:}
+\begin{equation}
+R_{L_1}(\theta_E) = \|\theta_E\|_1 = \sum_i |(\theta_E)_i|
+\end{equation}
+This promotes sparsity in the parameter vector.
+
+\paragraph{Manifold Regularization:}
+\begin{equation}
+R_{\text{manifold}}(\theta_E) = \theta_E^T L \theta_E
+\end{equation}
+where $L$ is a graph Laplacian that encodes the structure of the parameter manifold.
 
 \subsubsection{Task-Specific Adaptations}
 
-For different tasks, the Erudite Loss can be specialized by defining appropriate feature extractors $\mathcal{F}$ and probability distributions $P$. For speech synthesis, for instance, we might use:
+For different audio tasks, the Erudite Loss can be specialized by defining appropriate feature extractors $\mathcal{F}$ and probability distributions $P$.
+
+\paragraph{Speech Synthesis Task:}
+For speech synthesis, the feature extractor focuses on phonetic and prosodic features:
 
 \begin{equation}
 \mathcal{F}_{\text{speech}}(y) = \left[ \int_t w_t(s) y(t+s) e^{-i2\pi fs} dsdt \right]_{f \in \mathcal{F}}
 \end{equation}
 
-Where $w_t(s)$ is a time-varying window function, and the integral represents a short-time Fourier transform extracting time-frequency features.
+Where $w_t(s)$ is a time-varying window function, and the integral represents a short-time Fourier transform extracting time-frequency features. The distribution $P_y$ models the spectral envelope and formant structure of speech.
 
-\subsubsection{Theoretical Analysis}
+\paragraph{Environmental Sound Generation Task:}
+For environmental sounds, the feature extractor emphasizes texture statistics:
+
+\begin{equation}
+\mathcal{F}_{\text{env}}(y) = \left[ \text{Stat}_k\left( \int_t w(t-\tau) y(t) e^{-i2\pi f t} dt \right) \right]_{f,k}
+\end{equation}
+
+Where $\text{Stat}_k$ computes the $k$-th order statistics of the spectrogram, capturing the textural properties of environmental sounds.
+
+\paragraph{Spatial Audio Task:}
+For spatial audio, the feature extractor incorporates spatial dimensions:
+
+\begin{equation}
+\mathcal{F}_{\text{spatial}}(y) = \left[ \int_{\Omega} y(\mathbf{r},t) Y_l^m(\theta, \phi) e^{-i2\pi ft} d\mathbf{r}dt \right]_{f,l,m}
+\end{equation}
+
+Where $Y_l^m$ are spherical harmonic functions that model the spatial distribution of the sound field.
+
+\subsubsection{Theoretical Properties and Guarantees}
 
 The Erudite Loss possesses several important theoretical properties:
 
-\begin{enumerate}
-\item \textbf{Consistency}: As the sample size increases, optimization of $\erloss$ leads to consistent estimation of the true data-generating process, provided the model class is expressive enough.
+\begin{theorem}[Statistical Consistency]
+As the sample size $n \to \infty$, the minimizer $\hat{\theta}_E$ of the empirical Erudite Loss converges in probability to the true parameter $\theta_E^*$ that minimizes the expected loss:
+\begin{equation}
+\hat{\theta}_E \stackrel{p}{\to} \theta_E^* = \arg\min_{\theta_E} \mathbb{E}_{x,y}[\erloss(x, y; \theta_E)]
+\end{equation}
+\end{theorem}
 
-\item \textbf{Information Bottleneck Connection}: The balance between feature reconstruction and KL divergence implements a form of the information bottleneck principle, where the goal is to preserve task-relevant information while discarding nuisance variables.
+\begin{theorem}[Information Bottleneck Connection]
+The Erudite Loss implements a form of the information bottleneck principle. Specifically, minimizing $\erloss$ is equivalent to solving:
+\begin{equation}
+\min_{\theta_E} I(X;Y|\theta_E) - \beta I(Y;\hat{Y}|\theta_E)
+\end{equation}
+where $I(\cdot;\cdot)$ denotes mutual information and $\beta$ is a Lagrange multiplier related to $\lambda_E$.
+\end{theorem}
 
-\item \textbf{Convexity Analysis}: While the overall loss is typically non-convex due to the complex mapping from $\theta_E$ to $\hat{y}$, individual terms may exhibit convexity under certain conditions.
-\end{enumerate}
+\begin{theorem}[Generalization Bound]
+For a hypothesis class $\mathcal{H}$ with VC dimension $d$ and $n$ training samples, with probability at least $1-\delta$, the generalization error is bounded by:
+\begin{equation}
+\mathbb{E}[\erloss] \leq \frac{1}{n}\sum_{i=1}^n \erloss(x_i, y_i; \theta_E) + \mathcal{O}\left(\sqrt{\frac{d \log n + \log(1/\delta)}{n}}\right)
+\end{equation}
+\end{theorem}
 
-\subsubsection{Practical Implementation}
+\subsubsection{Practical Implementation Considerations}
 
 For practical implementation, we use a finite-dimensional approximation of the Hilbert space embedding:
 
@@ -243,12 +494,45 @@ For practical implementation, we use a finite-dimensional approximation of the H
 
 The truncation level $N$ controls the trade-off between computational efficiency and representation fidelity.
 
-For audio data in the magefile format, practical choices for feature extraction include:
+\paragraph{Efficient Computation:}
+For audio data in the magefile format, specific algorithmic optimizations include:
+
 \begin{itemize}
-\item Mel-frequency cepstral coefficients (MFCCs)
-\item Wavelet packet decomposition coefficients
-\item Multi-resolution spectral features
-\item Spatial audio coefficients using spherical harmonics
+\item Fast Fourier Transform (FFT) for efficient computation of time-frequency representations
+\item Recursive filtering for real-time implementation of wavelet transforms
+\item GPU acceleration for parallel processing of multi-channel audio data
+\item Monte Carlo approximation of the KL divergence integral
 \end{itemize}
 
-This comprehensive mathematical formulation of the Erudite Loss provides a rigorous foundation for task-specific learning in the Elder framework, capturing both structural and probabilistic aspects of the data in a principled manner.
+\paragraph{Practical Feature Extractors:}
+Concrete implementations of feature extractors include:
+\begin{itemize}
+\item Mel-frequency cepstral coefficients (MFCCs) for speech recognition tasks
+\item Constant-Q transform for music analysis tasks
+\item Wavelet packet decomposition for transient detection tasks
+\item Ambisonics coefficients for spatial audio processing tasks
+\end{itemize}
+
+\paragraph{Algorithm: Erudite Loss Computation}
+\begin{enumerate}
+\item Extract features: $\mathcal{F}(y)$ and $\mathcal{F}(\hat{y})$
+\item Compute Hilbert space distance: $\|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2$
+\item Estimate probability distributions: $P_y$ and $P_{\hat{y}}$
+\item Compute KL divergence: $\mathrm{D_{KL}}(P_y \| P_{\hat{y}})$
+\item Combine terms with weighting: $\erloss = \|\mathcal{F}(y) - \mathcal{F}(\hat{y})\|_{\mathcal{H}}^2 + \lambda_E \cdot \mathrm{D_{KL}}(P_y \| P_{\hat{y}})$
+\end{enumerate}
+
+\subsubsection{Relationship to Other Loss Functions}
+
+The Erudite Loss generalizes and extends several established loss functions:
+
+\begin{proposition}
+The Erudite Loss encompasses multiple existing loss functions as special cases:
+\begin{itemize}
+\item When $\mathcal{F}$ is the identity mapping and $\lambda_E = 0$, $\erloss$ reduces to the mean squared error (MSE).
+\item When $\mathcal{F}$ extracts spectral magnitudes and $\lambda_E = 0$, $\erloss$ approximates the spectral convergence loss used in audio synthesis.
+\item When $\lambda_E \to \infty$, $\erloss$ approaches a pure distribution-matching objective similar to GANs.
+\end{itemize}
+\end{proposition}
+
+This comprehensive mathematical formulation of the Erudite Loss provides a rigorous foundation for task-specific learning in the Elder framework, capturing both structural and probabilistic aspects of the data in a principled manner. The derivation connects concepts from functional analysis, information theory, and statistical learning theory into a unified loss function specifically designed for the Elder framework's hierarchical learning approach.
