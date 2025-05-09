@@ -790,15 +790,15 @@ The Mentor component implements a meta-learning paradigm that distills common in
 \begin{theorem}[Task-Invariant Information Distillation]
 Mentor distills domain-specific meta-knowledge by optimizing:
 \begin{equation}
-\mathcal{L}_M(\mentorparams; D_j) = \frac{1}{|\tau \in D_j|} \sum_{\tau \in D_j} I(\eruditeparams_{\tau}; \tau | \mentorparams) - \beta \cdot H(\mentorparams)
+\mathcal{L}_M(\mentorparams; D_j) = \frac{1}{|\tau \in D_j|} \sum_{\tau \in D_j} I(\eruditeparams(\tau); \tau | \mentorparams) - \beta \cdot H(\mentorparams)
 \end{equation}
-where $I(\eruditeparams_{\tau}; \tau | \mentorparams)$ is the conditional mutual information between task-specific parameters and task identifiers given Mentor parameters, and $H(\mentorparams)$ is the entropy of Mentor parameters measuring representational complexity.
+where $I(\eruditeparams(\tau); \tau | \mentorparams)$ is the conditional mutual information between task-specific parameters and task identifiers given Mentor parameters, and $H(\mentorparams)$ is the entropy of Mentor parameters measuring representational complexity.
 \end{theorem}
 
 \begin{proposition}[Minimal Sufficient Teaching Statistics]
 The optimal Mentor parameters form a minimal sufficient statistic for teaching within a domain:
 \begin{equation}
-\mentorparams^* = \argmin_{\mentorparams} \{ H(\mentorparams) : I(\{\eruditeparams_{\tau}\}_{\tau \in D_j}; \{\tau\}_{\tau \in D_j} | \mentorparams) \geq (1-\epsilon) \cdot I(\{\eruditeparams_{\tau}\}_{\tau \in D_j}; \{\tau\}_{\tau \in D_j}) \}
+\mentorparams^* = \argmin_{\mentorparams} \{ H(\mentorparams) : I(\{\eruditeparams(\tau)\}_{\tau \in D_j}; \{\tau\}_{\tau \in D_j} | \mentorparams) \geq (1-\epsilon) \cdot I(\{\eruditeparams(\tau)\}_{\tau \in D_j}; \{\tau\}_{\tau \in D_j}) \}
 \end{equation}
 where $\epsilon$ represents the acceptable information loss from the compression.
 \end{proposition}
@@ -840,7 +840,7 @@ The entire Elder-Mentor-Erudite architecture implements a hierarchical coding th
 \begin{theorem}[Hierarchical Minimum Description Length]
 The Elder-Mentor-Erudite system optimizes a hierarchical minimum description length objective:
 \begin{equation}
-\text{MDL}(X, Y, \{\tau\}, \{D\}) = L(\elderparam) + \sum_j L(\mentorparams_j | \elderparam) + \sum_{i,j} L(\eruditeparams_{i,j} | \mentorparams_j) + \sum_{i,j} L(X_{i,j}, Y_{i,j} | \eruditeparams_{i,j})
+\text{MDL}(X, Y, \{\tau\}, \{D\}) = L(\elderparam) + \sum_j L(\mentorparams(j) | \elderparam) + \sum_{i,j} L(\eruditeparams(i,j) | \mentorparams(j)) + \sum_{i,j} L(X_{i,j}, Y_{i,j} | \eruditeparams(i,j))
 \end{equation}
 where $L(\cdot)$ represents description length in bits, and subscripts $i,j$ index tasks and domains.
 \end{theorem}
