@@ -1,0 +1,32 @@
+\chapter*{Definitions}
+
+\begin{description}
+    \item [Consensus Reality] A reality, with laws agreed upon by many observers.
+    \item [Subjective Reality] A reality as perceived by a subject.
+    \item [Objective Reality] A reality recognized as an object.
+    \item [Etheromorphism] The state or quality of geometric morphing with no physical constraint.
+    \item [Etheropersistence] The diametric opposite of etheromorphism.
+    \item [Astromorphism] The state or quality of spatial generation with no physical constraint.
+    \item [Astropersistence] The diametric opposite of astromorphism.
+    \item [Lucidity] A measure of degree of self-awareness.
+    \item [Hyperspace] A higher dimensional space where all spaces may be observed.
+    \item [Consolidation] The tendency to etheropersistence and hence astropersistence.
+    % \item [Dream Scape] An 
+    \item [Dream Space] The model of the behavior of space-time inside the dream. 
+    \item [Entropic Trench] A negative attractor in the manifold that creates potential for the generation of chaos in the form of chaotes in a process called Chaogenesis. It has an upper limit determined by the cross-diagonal product across the zenith of the primary chaote wave.
+    \item [Chaote Wave] A wave of chaotes.
+    \item [The Chaote Tri-wave] The combined tri-wave function of a chaote. 
+    \item [The Alpha-Chaote Wave] The primary wave function of a chaote. Determines its character.
+    \item [The Beta-Chaote Wave] The secondary wave function of a chaote. Determines its path.
+    \item [The Gamma-Chaote Wave] The third and final wave function of a chaote. Determines its influence.
+    \item [Chaogenesis] The generation of chaotes from entropic trenches.
+    \item [Chaote] A primary unit of chaos and an agent of entropic causes.
+    \item [Entropic Cause] An event cause by the generation of a single chaote, it serves as the primary causal event. Prior to the origination of the chaote, there was no cause, and therefore no effect. Entropic Causes fall under Generative Causes and Effects.
+    \item [Generative Causes and Effects] A hierchical node in the study of the nature of chaotes.
+    \item [Prime Causality] The single causal origin.
+    \item [Possibility] Statistical counterpart to Probability.
+    \item [Emergence Potential] The quantified potential of emergence from a state into another of greater lucidity.
+    \item [Belief] An abstraction of pre-supposed tendency to specific observation properties.
+    \item [Belief Instance] Belief, expressed as an instantiate object.
+    
+\end{description}

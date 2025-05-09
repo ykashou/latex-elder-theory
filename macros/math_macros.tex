@@ -1,44 +1,84 @@
-% Math macros for Elder theory
+% Elder Framework Custom Mathematical Commands
+% This file defines all the custom mathematical notation used in the Elder framework
 
-% Core notation
-\newcommand{\arcane}[1]{\mathfrak{A}_{#1}}
+% Common operators and symbols
 \newcommand{\elder}[1]{\mathcal{E}_{#1}}
-\newcommand{\realization}[1]{\mathcal{R}(#1)}
+\newcommand{\mentor}[1]{\mathcal{M}_{#1}}
+\newcommand{\erudite}[1]{\mathcal{R}_{#1}}
+\newcommand{\arcane}[1]{\mathfrak{A}_{#1}}
+\newcommand{\realization}[1]{\mathbf{R}(#1)}
 
 % Loss functions
-\newcommand{\eloss}{\mathcal{L}_{\text{El}}}
-\newcommand{\mloss}{\mathcal{L}_{\text{M}}}
-\newcommand{\erloss}{\mathcal{L}_{\text{E}}}
-\newcommand{\elderloss}{\mathcal{L}_{\text{Elder}}}
+\newcommand{\elderloss}{\mathcal{L}_{\textrm{Elder}}}
+\newcommand{\mentorloss}{\mathcal{L}_{\textrm{Mentor}}}
+\newcommand{\eruditeloss}{\mathcal{L}_{\textrm{Erudite}}}
 
-% Magefile notation
-\newcommand{\magefile}{\mathcal{M}}
-\newcommand{\embedding}{\Psi}
+% Parameter sets
+\newcommand{\elderparam}{\boldsymbol{\theta}_{\textrm{E}}}
+\newcommand{\mentorparams}{\boldsymbol{\theta}_{\textrm{M}}}
+\newcommand{\eruditeparams}{\boldsymbol{\theta}_{\textrm{R}}}
+\newcommand{\celderparams}{\boldsymbol{\theta}_{\textrm{E}}^{\mathbb{C}}}
 
-% Parameter spaces
-\newcommand{\paramspace}{\Theta}
-\newcommand{\mentorparams}{\Theta_{\text{M}}}
-\newcommand{\eruditeparams}{\Theta_{\text{E}}}
-\newcommand{\elderparam}{\Theta_{\text{Elder}}}
-\newcommand{\celderparams}{\mathbb{C}^{\Theta_{\text{Elder}}}}
-
-% Complex spaces
-\newcommand{\complex}{\mathbb{C}}
-\newcommand{\complexn}[1]{\mathbb{C}^{#1}}
-\newcommand{\hermitian}[1]{#1^{\dagger}}
-\newcommand{\complexinner}[2]{\langle #1, #2 \rangle_{\mathbb{C}}}
-\newcommand{\complexnorm}[1]{\|#1\|_{\mathbb{C}}}
-
-% Kernel operations
-\newcommand{\kernel}{\mathcal{K}}
-\newcommand{\elkernel}{\kernel_{\text{Elder}}}
+% Reflection functions
+\newcommand{\mentorreflection}{\rho_{\textrm{M}}}
+\newcommand{\elderreflection}{\rho_{\textrm{E}}}
 \newcommand{\selfmanifold}{\mathcal{S}}
-\newcommand{\complexmap}{\Omega}
+\newcommand{\complexmap}{\mathcal{C}}
 
-% Optimization operators
-\newcommand{\argmin}{\mathop{\mathrm{arg\,min}}}
-\newcommand{\argmax}{\mathop{\mathrm{arg\,max}}}
+% Information theory symbols
+\newcommand{\infomutual}[2]{I(#1;#2)}
+\newcommand{\infocond}[2]{H(#1|#2)}
+\newcommand{\infodiv}[2]{D_{\textrm{KL}}(#1\|#2)}
 
-% MAGE file operations
-\newcommand{\mentorloss}{\mloss}
-\newcommand{\eruditeloss}{\erloss}
+% Kolmogorov complexity
+\newcommand{\kolmogorov}[1]{K(#1)}
+\newcommand{\kolmogorovcond}[2]{K(#1|#2)}
+
+% Fisher information geometry
+\newcommand{\fishermetric}{\mathcal{F}}
+\newcommand{\fisherdistance}{d_{\mathcal{F}}}
+
+% Domain and task notation
+\newcommand{\domain}[1]{D_{#1}}
+\newcommand{\task}[1]{\tau_{#1}}
+\newcommand{\similarity}[2]{\textrm{sim}(#1,#2)}
+\newcommand{\transfermap}[2]{\mathcal{T}_{#1 \to #2}}
+
+% Phase relationships
+\newcommand{\phasediff}[2]{\phi(#1,#2)}
+\newcommand{\phasecoherence}{\Phi}
+
+% Complex space operations
+\newcommand{\complexinner}[2]{\langle #1, #2 \rangle_{\mathbb{C}}}
+\newcommand{\hilbertproj}[1]{P_{#1}}
+
+% Parameter space manifold
+\newcommand{\parammanifold}{\mathcal{M}_{\theta}}
+\newcommand{\tangentspace}[1]{T_{#1}\mathcal{M}}
+\newcommand{\geodesic}[1]{\gamma_{#1}}
+
+% Elder algebra operations
+\newcommand{\elderproduct}[2]{#1 \diamond #2}
+\newcommand{\elderbracket}[2]{[#1, #2]_{\diamond}}
+\newcommand{\elderalgebra}{\mathfrak{E}}
+\newcommand{\eldergroup}{G_{\mathfrak{E}}}
+
+% Information rates and compression
+\newcommand{\infocompression}{\rho}
+\newcommand{\infoamplification}{\alpha}
+\newcommand{\inforates}[1]{R_{#1}}
+
+% MAGE file notation
+\newcommand{\magefile}[1]{\textrm{MAGE}[#1]}
+\newcommand{\magepath}[1]{\textrm{path}(#1)}
+\newcommand{\mageattribute}[2]{#1.#2}
+
+% Elder-specific set theory
+\newcommand{\elderset}[1]{\mathbf{E}(#1)}
+\newcommand{\mentorset}[1]{\mathbf{M}(#1)}
+\newcommand{\eruditeset}[1]{\mathbf{R}(#1)}
+
+% Base symbols without indices (for special contexts)
+\newcommand{\elderbase}{\ensuremath{\mathcal{E}}}
+\newcommand{\arcanebase}{\ensuremath{\mathfrak{A}}}
+\newcommand{\realizationbase}{\ensuremath{\mathbf{R}}}
