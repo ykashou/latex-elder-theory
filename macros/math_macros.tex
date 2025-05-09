@@ -79,26 +79,28 @@
 
 % Logic
 \newcommand{\implies}{\Rightarrow}
-\newcommand{\iff}{\Leftrightarrow}
+\newcommand{\myiff}{\Leftrightarrow}
 \newcommand{\notimplies}{\not\Rightarrow}
 \newcommand{\notiff}{\not\Leftrightarrow}
-\newcommand{\forall}{\forall}
-\newcommand{\exists}{\exists}
+% Using standard commands
+% \newcommand{\forall}{\forall}
+% \newcommand{\exists}{\exists}
 \newcommand{\existsunique}{\exists!}
 
 % Specific to the book 
 \newcommand{\arcane}[1]{\mathfrak{A}_{#1}}
 \newcommand{\elder}[1]{\mathcal{E}_{#1}}
-\newcommand{\realization}[1]{\mathscr{R}(#1)}
+\newcommand{\realization}[1]{\mathcal{R}(#1)}
 \newcommand{\arcanesequence}[1]{\{A_{#1}\}}
 \newcommand{\eldestate}{\mathbf{\Psi}}
 
 % Common operators
 \DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\gcd}{gcd}
+% Use MathOperators that don't conflict with existing commands
+% \DeclareMathOperator{\gcd}{gcd}
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\char}{char}
-\DeclareMathOperator{\deg}{deg}
+\DeclareMathOperator{\charOp}{char}
+\DeclareMathOperator{\degOp}{deg}
 \DeclareMathOperator{\supp}{supp}

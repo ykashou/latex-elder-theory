@@ -82,17 +82,16 @@ The group of Elder Isomorphisms from $\elder{d}$ to itself is isomorphic to $GL(
 Each Elder Isomorphism $T: \elder{d} \to \elder{d}$ can be represented by a $d \times d$ invertible matrix $M$ with respect to the Arcane basis. Conversely, any invertible $d \times d$ real matrix defines an Elder Isomorphism. This establishes the isomorphism with $GL(d, \R)$.
 \end{proof}
 
-\begin{algorithm}{Elder Decomposition Algorithm}
-\caption{Decomposition of an element into Arcane basis}
-\begin{algorithmic}[1]
-\Input Element $x \in \elder{d}$
-\Output Coefficients $\{c_i\}_{i=1}^d$ such that $x = \sum_{i=1}^d c_i \arcane{i}$
-\State Initialize coefficient vector $c = (0, 0, \ldots, 0)$
-\State Compute the inner products: $p_i = \inner{x}{\arcane{i}}$ for $i = 1, 2, \ldots, d$
-\State Form the Gram matrix: $G_{ij} = \inner{\arcane{i}}{\arcane{j}}$ for $i, j = 1, 2, \ldots, d$
-\State Solve the linear system: $G \cdot c = p$
-\State \Return $c$
-\end{algorithmic}
+\begin{algorithm}[H]
+\SetAlgoLined
+\caption{Elder Decomposition Algorithm: Decomposition of an element into Arcane basis}
+\KwIn{Element $x \in \elder{d}$}
+\KwOut{Coefficients $\{c_i\}_{i=1}^d$ such that $x = \sum_{i=1}^d c_i \arcane{i}$}
+Initialize coefficient vector $c = (0, 0, \ldots, 0)$\;
+Compute the inner products: $p_i = \inner{x}{\arcane{i}}$ for $i = 1, 2, \ldots, d$\;
+Form the Gram matrix: $G_{ij} = \inner{\arcane{i}}{\arcane{j}}$ for $i, j = 1, 2, \ldots, d$\;
+Solve the linear system: $G \cdot c = p$\;
+\Return{$c$}\;
 \end{algorithm}
 
 \end{twocolumnlayout}

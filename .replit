@@ -2,6 +2,7 @@ modules = ["bash"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["texliveFull"]
 
 [workflows]
 runButton = "Project"
@@ -33,7 +34,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd /home/runner && pdflatex -interaction=nonstopmode main.tex && biber main && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex && ls -la main.pdf && echo \"Compilation complete. PDF should be available if no errors occurred.\""
+args = "pdflatex -interaction=nonstopmode main.tex && biber main && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex && ls -la main.pdf && echo \"Compilation complete. PDF should be available if no errors occurred.\""
 
 [deployment]
 run = ["sh", "-c", "pdflatex -interaction=nonstopmode main.tex"]

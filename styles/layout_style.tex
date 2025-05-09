@@ -17,7 +17,7 @@
 }
 
 % Side note environment
-\newcommand{\sidenote}[1]{%
+\newcommand{\eldernote}[1]{%
   \marginpar{%
     \begin{tcolorbox}[
       colback=LightGray!30,
@@ -148,9 +148,10 @@
   \begin{quote}
   \itshape
   \color{DarkGray}
+  \def\quoteauthor{#1}
 }{%
-  \ifx\empty#1\else
-  \par\hfill--- \textsc{#1}
+  \ifx\quoteauthor\empty\else
+  \par\hfill--- \textsc{\quoteauthor}
   \fi
   \end{quote}
 }
@@ -173,4 +174,41 @@
           \end{minipage}};
   \end{tikzpicture}
   \clearpage
+}
+
+% Advanced topic environment
+\newenvironment{advancedtopic}[1]{%
+  \bigskip\noindent
+  \begin{quote}
+  \textbf{Advanced Topic: #1}\\
+}{%
+  \end{quote}
+  \bigskip
+}
+
+% Chapter summary environment
+\newenvironment{chaptersummary}{%
+  \bigskip\noindent
+  \begin{quote}
+  \textbf{Chapter Summary}\\
+}{%
+  \end{quote}
+  \bigskip
+}
+
+% Historical note environment
+\newenvironment{historicalnote}[1]{%
+  \bigskip\noindent
+  \begin{quote}
+  \textbf{Historical Note: #1}\\
+}{%
+  \end{quote}
+  \bigskip
+}
+
+% Problem set environment
+\newenvironment{problemset}{%
+  \begin{enumerate}
+}{%
+  \end{enumerate}
 }
