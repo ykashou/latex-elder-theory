@@ -188,8 +188,88 @@ Consider training the system on multiple audio generation tasks:
     \item $\tau_2$: Environmental sound generation
     \item $\tau_3$: Musical instrument simulation
 \end{itemize}
-The Erudite component learns each specific task, while the Mentor accumulates meta-knowledge about teaching audio generation across domains. The Elder component ensures consistent physical principles across all generated audio.
 \end{example}
+
+\subsection{Task-Specific Learning in Erudite}
+
+The Erudite component serves as the task-specific executor in the Elder-Mentor-Erudite framework. For each distinct audio generation task, a specialized Erudite space emerges through training.
+
+\begin{definition}[Task-Specific Erudite Space]
+For each task $\tau_i$, a dedicated Erudite space $\mathcal{E}_i \subset \eruditeparams$ develops, characterized by:
+\begin{equation}
+\mathcal{E}_i = \{\theta_E \in \eruditeparams \mid \erloss(x, y; \theta_E, \tau_i) < \epsilon_i \text{ for } (x,y) \sim \mathcal{D}_{\tau_i}\}
+\end{equation}
+where $\epsilon_i > 0$ is a task-specific error threshold.
+\end{definition}
+
+For instance, in speech synthesis ($\tau_1$), Erudite learns specific phonetic representations, prosodic patterns, and speaker characteristics. Its parameters encode task-specific knowledge like:
+\begin{itemize}
+    \item Phoneme-to-acoustic mapping matrices
+    \item Temporal alignment patterns for natural speech rhythms
+    \item Speaker-dependent vocal tract parameters
+\end{itemize}
+
+Similarly, for environmental sound generation ($\tau_2$), Erudite develops distinct parameter configurations for modeling physical sound propagation, material properties, and spatial characteristics of environments.
+
+\begin{proposition}[Erudite Specialization]
+As training progresses on task $\tau_i$, the corresponding Erudite parameters $\theta_E^{\tau_i}$ increasingly specialize, forming a distinct manifold $\mathcal{E}_i$ in parameter space that optimizes performance exclusively for that task.
+\end{proposition}
+
+\subsection{Meta-Knowledge Accumulation in Mentor}
+
+While Erudite specializes in task execution, the Mentor component accumulates meta-knowledge—knowledge about how to teach Erudite to perform various audio generation tasks efficiently.
+
+\begin{definition}[Mentor Knowledge Space]
+For a family of related tasks $\{\tau_1, \tau_2, \ldots, \tau_k\}$, a Mentor knowledge space $\mathcal{M}_j \subset \mentorparams$ forms, characterized by:
+\begin{equation}
+\mathcal{M}_j = \{\theta_M \in \mentorparams \mid \mloss(\theta_E, \mathcal{D}_{\tau_i}; \theta_M) < \delta_j \text{ for all } i \in \{1,2,\ldots,k\}\}
+\end{equation}
+where $\delta_j > 0$ is a meta-knowledge quality threshold.
+\end{definition}
+
+The Mentor's accumulated knowledge includes:
+\begin{itemize}
+    \item Cross-task feature transfer mappings that identify reusable audio primitives
+    \item Optimization trajectory templates that efficiently guide parameter updates
+    \item Task decomposition strategies that break complex audio generation into manageable subtasks
+    \item Difficulty progression schedules that sequence learning from simple to complex patterns
+\end{itemize}
+
+\begin{theorem}[Mentor Knowledge Transfer]
+A well-trained Mentor with parameters $\theta_M \in \mathcal{M}_j$ can guide an untrained Erudite to learn a new task $\tau_{new}$ in the same family with significantly fewer examples than learning from scratch, bounded by:
+\begin{equation}
+|\mathcal{D}_{\tau_{new}}^{\text{required}}| \leq \rho \cdot \min_i |\mathcal{D}_{\tau_i}^{\text{required}}| \cdot \left(1 - \frac{\text{MI}(\tau_{new}; \{\tau_1,\ldots,\tau_k\})}{\text{H}(\tau_{new})}\right)
+\end{equation}
+where $\text{MI}$ is mutual information, $\text{H}$ is entropy, and $\rho > 0$ is a constant.
+\end{theorem}
+
+\subsection{Physical Consistency Enforcement by Elder}
+
+The Elder component, operating as a singular entity above both Mentor and Erudite, ensures that all generated audio—regardless of task—adheres to consistent physical principles.
+
+\begin{definition}[Physical Consistency Constraints]
+The Elder tensor embedding function $\mathcal{T}$ enforces a set of invariant physical constraints $\Phi = \{\phi_1, \phi_2, \ldots, \phi_n\}$ on all audio generation tasks, where each $\phi_i$ represents a physical law that must be satisfied.
+\end{definition}
+
+The physical principles enforced by Elder include:
+\begin{itemize}
+    \item Energy conservation across frequency bands
+    \item Physically plausible acoustic propagation models
+    \item Temporal causality in sound generation
+    \item Doppler effects for moving sound sources
+    \item Consistent spectral decay patterns based on material properties
+    \item Spatial coherence in 3D audio rendering
+\end{itemize}
+
+\begin{theorem}[Elder Consistency Guarantee]
+For any two tasks $\tau_i$ and $\tau_j$ with corresponding Erudite spaces $\mathcal{E}_i$ and $\mathcal{E}_j$, and parameters $\theta_E^i \in \mathcal{E}_i$ and $\theta_E^j \in \mathcal{E}_j$, the Elder tensor embedding $\mathcal{T}$ ensures that:
+\begin{equation}
+\| \Pi_{\Phi}(\mathcal{T}(\theta_E^i)) - \Pi_{\Phi}(\mathcal{T}(\theta_E^j)) \|_F < \epsilon_{phys}
+\end{equation}
+where $\Pi_{\Phi}$ is a projection onto the subspace of physical principles $\Phi$, and $\epsilon_{phys} > 0$ is a physical consistency tolerance.
+\end{theorem}
+
+This hierarchical structure allows the system to simultaneously maintain task-specific proficiency (through Erudite), efficient cross-task knowledge transfer (through Mentor), and universal physical consistency (through Elder), creating a comprehensive framework for enriched audio generation across multiple domains.
 
 \begin{theorem}[Transfer Efficiency]
 If the Mentor has been trained on tasks $\tau_1, \ldots, \tau_n$, the number of gradient steps required for Erudite to learn a new task $\tau_{n+1}$ is bounded by:
