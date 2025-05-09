@@ -9,8 +9,8 @@
 \newcommand{\F}{\mathbb{F}}  % Generic field
 
 % Set operations
-\newcommand{\union}{\cup}
-\newcommand{\intersection}{\cap}
+\newcommand{\setunion}{\cup}
+\newcommand{\setintersection}{\cap}
 \newcommand{\compose}{\circ}
 \newcommand{\tensor}{\otimes}
 \newcommand{\bigtensor}{\bigotimes}
@@ -24,12 +24,16 @@
 
 % Linear algebra
 \newcommand{\inner}[2]{\langle #1, #2 \rangle}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\abs}[1]{\left|#1\right|}
+% Using \normop instead of \norm (already defined)
+\newcommand{\normop}[1]{\left\lVert#1\right\rVert}
+% Using \absval instead of \abs (already defined)
+\newcommand{\absval}[1]{\left|#1\right|}
 \newcommand{\transpose}{^{\mathsf{T}}}
 \newcommand{\adj}{^{*}}
-\newcommand{\tr}{\operatorname{tr}}
-\newcommand{\rank}{\operatorname{rank}}
+% Using \trace instead of \tr (already defined)
+\newcommand{\trace}{\operatorname{tr}}
+% Using \matrank instead of \rank (already defined)
+\newcommand{\matrank}{\operatorname{rank}}
 \newcommand{\nullity}{\operatorname{nullity}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\vspan}{\operatorname{span}}
@@ -40,8 +44,8 @@
 \newcommand{\normalsubgroup}{\trianglelefteq}
 \newcommand{\quotient}[2]{#1/#2}
 \newcommand{\conj}[2]{#1^{#2}}
-\newcommand{\comm}[2]{[#1,#2]}
-\newcommand{\commutator}[2]{[#1,#2]}
+% Using \gcommutator instead of \comm and \commutator (already defined)
+\newcommand{\gcommutator}[2]{[#1,#2]}
 
 % Category theory
 \newcommand{\cat}[1]{\mathbf{#1}}
@@ -63,8 +67,7 @@
 \newcommand{\covering}{\text{covering}}
 
 % Analysis
-\newcommand{\limsup}{\varlimsup}
-\newcommand{\liminf}{\varliminf}
+% Using builtin \limsup and \liminf instead of redefining
 \newcommand{\tendsto}{\rightarrow}
 \newcommand{\converge}{\xrightarrow{\text{conv.}}}
 \newcommand{\weakconverge}{\xrightarrow{\text{w.}}}
@@ -77,13 +80,10 @@
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\distribution}{\sim}
 
-% Logic
-\newcommand{\implies}{\Rightarrow}
-\newcommand{\iff}{\Leftrightarrow}
+% Logic - using builtin commands instead of redefining
+% \implies, \iff, \forall, \exists are all built-in
 \newcommand{\notimplies}{\not\Rightarrow}
 \newcommand{\notiff}{\not\Leftrightarrow}
-\newcommand{\forall}{\forall}
-\newcommand{\exists}{\exists}
 \newcommand{\existsunique}{\exists!}
 
 % Specific to the book 
@@ -93,12 +93,13 @@
 \newcommand{\arcanesequence}[1]{\{A_{#1}\}}
 \newcommand{\eldestate}{\mathbf{\Psi}}
 
-% Common operators
+% Common operators - using \Declare... only for those not already defined
 \DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\gcd}{gcd}
+% \gcd is already defined, not redefining
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\diag}{diag}
-\DeclareMathOperator{\char}{char}
-\DeclareMathOperator{\deg}{deg}
+% \char is already defined, using \characteristic instead
+\DeclareMathOperator{\characteristic}{char}
+% \deg is already defined, not redefining
 \DeclareMathOperator{\supp}{supp}
