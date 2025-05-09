@@ -1,14 +1,14 @@
 % Algorithm example for "Elder, the Arcane Realization"
 
-% Example of algorithm formatting using algpseudocode
-\begin{algorithm}
+% Example of algorithm formatting
+\begin{algorithm}[H]
 \caption{Arcane Sequence Generation}
 \begin{algorithmic}[1]
-\Require Initial values $\arcane{1}, \arcane{2}, \ldots, \arcane{k}$
-\Ensure Arcane sequence $\arcane{1}, \arcane{2}, \ldots, \arcane{n}$ for $n > k$
-\For{$i = k+1$ \textbf{to} $n$}
+\Input Initial values $\arcane{1}, \arcane{2}, \ldots, \arcane{k}$
+\Output Arcane sequence $\arcane{1}, \arcane{2}, \ldots, \arcane{n}$ for $n > k$
+\For{$i = k+1$ to $n$}
     \State $\arcane{i} \gets 0$
-    \For{$j = 1$ \textbf{to} $i-1$}
+    \For{$j = 1$ to $i-1$}
         \State $\arcane{i} \gets \arcane{i} + \binom{i}{j} \cdot \arcane{j} \cdot \phi(i-j)$
     \EndFor
     \State $\arcane{i} \gets \arcane{i} / (i-1)$
@@ -18,16 +18,16 @@
 \end{algorithm}
 
 % Example of more complex algorithm with conditional logic
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Elder Realization Approximation}
 \begin{algorithmic}[1]
-\Require Mathematical structure $X$, accuracy $\epsilon > 0$
-\Ensure Approximation of $\realization{X}$ within accuracy $\epsilon$
+\Input Mathematical structure $X$, accuracy $\epsilon > 0$
+\Output Approximation of $\realization{X}$ within accuracy $\epsilon$
 \State Initialize $R_0 \gets 0$
 \State $n \gets 1$
 \While{true}
     \State $R_n \gets R_{n-1} + \arcane{n} \tensor X / n!$
-    \If{$\normop{R_n - R_{n-1}} < \epsilon$}
+    \If{$\norm{R_n - R_{n-1}} < \epsilon$}
         \State \textbf{break}
     \EndIf
     \State $n \gets n + 1$
@@ -40,12 +40,12 @@
 \end{algorithm}
 
 % Example of algorithm with functions and procedure calls
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Elder Space Decomposition}
 \begin{algorithmic}[1]
 \Procedure{ElderDecompose}{$x, d$}
     \State Initialize coefficient vector $c = (0, 0, \ldots, 0)$ of length $d$
-    \For{$i = 1$ \textbf{to} $d$}
+    \For{$i = 1$ to $d$}
         \State $c_i \gets \inner{x}{\arcane{i}}$
     \EndFor
     \State $G \gets$ \Call{ComputeGramMatrix}{$d$}
@@ -55,8 +55,8 @@
 
 \Function{ComputeGramMatrix}{$d$}
     \State Initialize $G$ as a $d \times d$ matrix
-    \For{$i = 1$ \textbf{to} $d$}
-        \For{$j = 1$ \textbf{to} $d$}
+    \For{$i = 1$ to $d$}
+        \For{$j = 1$ to $d$}
             \State $G_{ij} \gets \inner{\arcane{i}}{\arcane{j}}$
         \EndFor
     \EndFor

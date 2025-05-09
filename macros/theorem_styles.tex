@@ -1,6 +1,7 @@
 % Theorem style definitions for "Elder, the Arcane Realization"
 
-% Note: tcolorbox libraries are now loaded in preamble.tex
+% Define theorem styles with tcolorbox
+\tcbuselibrary{theorems, skins, breakable}
 
 % Shared options for all theorem environments
 \tcbset{
@@ -29,28 +30,28 @@
 \newtcbtheorem[number within=chapter]{theorem}{Theorem}{
     colback=TheoremBlue!20,
     colframe=TheoremBlue!80,
-    after upper={\hfill\ensuremath{\square}}
+    terminator={\hfill\ensuremath{\square}},
 }{thm}
 
 % Define lemma style
 \newtcbtheorem[number within=chapter]{lemma}{Lemma}{
     colback=LemmaGreen!20,
     colframe=LemmaGreen!80,
-    after upper={\hfill\ensuremath{\square}}
+    terminator={\hfill\ensuremath{\square}},
 }{lem}
 
 % Define proposition style
 \newtcbtheorem[number within=chapter]{proposition}{Proposition}{
     colback=PropositionYellow!20,
     colframe=PropositionYellow!80,
-    after upper={\hfill\ensuremath{\square}}
+    terminator={\hfill\ensuremath{\square}},
 }{prop}
 
 % Define corollary style
 \newtcbtheorem[number within=chapter]{corollary}{Corollary}{
     colback=TheoremBlue!10,
     colframe=TheoremBlue!70,
-    after upper={\hfill\ensuremath{\square}}
+    terminator={\hfill\ensuremath{\square}},
 }{cor}
 
 % Define definition style
