@@ -3,6 +3,7 @@
 
 \documentclass[11pt,twoside]{book}
 
+% Basic packages for styling and math
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -12,6 +13,13 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage[]{geometry}
+
+% Bibliography setup
 \usepackage[style=alphabetic,backend=biber]{biblatex}
 \addbibresource{bibliography.bib}
 
@@ -27,12 +35,43 @@
 \newcommand{\elder}[1]{\mathcal{E}_{#1}}
 \newcommand{\realization}[1]{\mathcal{R}(#1)}
 
-% Theorem-like environments
+% Set up fancy chapter headings
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}
+    {\filleft\begin{minipage}{5cm}
+    \flushright{\fontsize{80}{80}\color{DarkSkyBlue}\selectfont\thechapter}
+    \end{minipage}}
+    {20pt}
+    {\titlerule\vspace{10pt}\filright}
+    [\vspace{10pt}]
+
+% Set up theorem environments
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}{Definition}[chapter]
+
+% Customize page layout
+\geometry{
+    paper=a4paper,
+    inner=2.5cm,
+    outer=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=1cm,
+    footskip=1cm,
+    headheight=14pt
+}
+
+% Set up headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{\leftmark}}
+\fancyhead[LO]{\textit{\rightmark}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
 
 % Begin the document
 \begin{document}

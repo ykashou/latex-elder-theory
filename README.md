@@ -52,11 +52,31 @@ To compile this document, you need:
 Run the following commands in sequence:
 
 ```bash
-pdflatex main.tex
-biber main
-pdflatex main.tex
-pdflatex main.tex
+# Create the output directory if it doesn't exist
+mkdir -p output
+
+# Run LaTeX compilation with output to output directory
+pdflatex -output-directory=output main.tex
+biber --output-directory output main
+pdflatex -output-directory=output main.tex
+pdflatex -output-directory=output main.tex
+
+# Optional: Create a renamed copy
+cp output/main.pdf output/elder_arcane_realization.pdf
 ```
 
 Multiple runs of pdflatex are needed to resolve cross-references, citations, and table of contents entries.
+
+## Output Management
+
+All LaTeX-generated files including the final PDF are stored in the `output/` directory. This keeps the root directory clean and separates source files from generated files.
+
+## Version Control
+
+A `.gitignore` file is included that excludes:
+- All LaTeX temporary and auxiliary files
+- Generated PDFs in the root directory
+- The entire contents of the `output/` directory
+
+This configuration ensures that only source files are tracked in version control, keeping repository size small and avoiding conflicts with binary files.
 
