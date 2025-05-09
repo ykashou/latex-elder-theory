@@ -235,7 +235,11 @@ A holomorphic function $f: \mathcal{E}_{\mathcal{M}} \rightarrow \mathcal{E}_{\m
 \frac{\partial f}{\partial \overline{z}} = 0
 \end{equation}
 
-Where $\frac{\partial}{\partial \overline{z}}$ is the Cauchy-Riemann operator.
+Where $\frac{\partial}{\partial \overline{z}}$ is the Cauchy-Riemann operator, defined in relation to real differential operators as:
+\begin{equation}
+\frac{\partial}{\partial z} = \frac{1}{2}\left(\frac{\partial}{\partial x} - i\frac{\partial}{\partial y}\right) \quad \text{and} \quad \frac{\partial}{\partial \overline{z}} = \frac{1}{2}\left(\frac{\partial}{\partial x} + i\frac{\partial}{\partial y}\right)
+\end{equation}
+These operators provide the connection between complex differentiability and the Cauchy-Riemann equations expressed in real coordinates.
 
 \begin{theorem}[Holomorphic Knowledge Transformation]
 Holomorphic transformations of knowledge preserve information content and structural relationships between principles, ensuring that knowledge coherence is maintained.
@@ -467,15 +471,15 @@ Universal principles exist within a curved knowledge space where the shortest pa
 The Holomorphic Mirror function represents a critical extension of the Elder Manifold framework, enabling the system to observe and learn from its own knowledge structure through a form of mathematical reflexivity.
 
 \begin{definition}[Holomorphic Mirror Function]
-For an Elder Manifold $\mathcal{E}_{\mathcal{M}}$, the Holomorphic Mirror function $\mathcal{M}: \mathcal{E}_{\mathcal{M}} \rightarrow \mathcal{E}_{\mathcal{M}}^*$ is an antiholomorphic involution that maps the manifold to its dual space, where $\mathcal{E}_{\mathcal{M}}^*$ represents the space of complex-linear functionals on the manifold.
+For an Elder Manifold $\mathcal{E}_{\mathcal{M}}$ with Hermitian structure, the Holomorphic Mirror function $\mathcal{M}: \mathcal{E}_{\mathcal{M}} \rightarrow \mathcal{E}_{\mathcal{M}}^*$ is an antiholomorphic map to the dual space such that $\mathcal{J} \circ \mathcal{M} \circ \mathcal{J} \circ \mathcal{M} = \text{id}$, where $\mathcal{J}: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathcal{E}_{\mathcal{M}}$ is the natural isomorphism induced by the Hermitian structure. Here, $\mathcal{E}_{\mathcal{M}}^*$ represents the space of complex-linear functionals on the manifold.
 \end{definition}
 
 This mirror function satisfies several key properties:
 
 \begin{enumerate}
-\item \textbf{Antiholomorphicity}: The function is antiholomorphic, meaning it satisfies $\frac{\partial \mathcal{M}}{\partial z} = 0$ rather than $\frac{\partial \mathcal{M}}{\partial \overline{z}} = 0$.
-\item \textbf{Involution}: Applied twice, it returns to the original point: $\mathcal{M}^2 = \text{id}$.
-\item \textbf{Fixed Point Set}: The set of fixed points $\text{Fix}(\mathcal{M}) = \{p \in \mathcal{E}_{\mathcal{M}} : \mathcal{M}(p) = p\}$ forms a totally real submanifold of half the dimension.
+\item \textbf{Antiholomorphicity}: The function is antiholomorphic, meaning it satisfies $\frac{\partial \mathcal{M}}{\partial \overline{z}} = 0$ rather than $\frac{\partial \mathcal{M}}{\partial z} = 0$.
+\item \textbf{Involution}: The composition $\mathcal{J} \circ \mathcal{M} \circ \mathcal{J} \circ \mathcal{M} = \text{id}$, where $\mathcal{J}$ is the natural isomorphism from the dual space to the manifold.
+\item \textbf{Fixed Point Set}: The set of fixed points $\text{Fix}(\mathcal{M}) = \{p \in \mathcal{E}_{\mathcal{M}} : \mathcal{J}(\mathcal{M}(p)) = p\}$ forms a totally real submanifold of half the dimension, where $\mathcal{J}: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathcal{E}_{\mathcal{M}}$ is the natural isomorphism induced by the Hermitian structure.
 \end{enumerate}
 
 \begin{theorem}[Holomorphic Mirror Duality]
@@ -483,11 +487,13 @@ The Holomorphic Mirror function establishes a duality between the Elder Manifold
 \end{theorem}
 
 \begin{proof}
-For any holomorphic function $f: \mathcal{E}_{\mathcal{M}} \rightarrow \mathbb{C}$, the composition $f \circ \mathcal{M}^{-1}: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathbb{C}$ is antiholomorphic. This follows from the chain rule and the antiholomorphicity of $\mathcal{M}$.
+For any holomorphic function $f: \mathcal{E}_{\mathcal{M}} \rightarrow \mathbb{C}$, we can define a function $g: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathbb{C}$ by $g = f \circ \mathcal{J}$, where $\mathcal{J}: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathcal{E}_{\mathcal{M}}$ is the natural isomorphism from the dual space. Since $\mathcal{J}$ is holomorphic and $f$ is holomorphic, their composition $g$ is also holomorphic.
 
-Conversely, for any antiholomorphic function $g: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathbb{C}$, the composition $g \circ \mathcal{M}: \mathcal{E}_{\mathcal{M}} \rightarrow \mathbb{C}$ is holomorphic.
+Now consider the composition $g \circ \mathcal{M}: \mathcal{E}_{\mathcal{M}} \rightarrow \mathbb{C}$. Since $g$ is holomorphic and $\mathcal{M}$ is antiholomorphic, their composition is antiholomorphic by the chain rule for complex differentiation. Specifically, if we write out the Cauchy-Riemann equations for both functions and apply the chain rule, the resulting function satisfies the conditions for antiholomorphicity.
 
-This establishes a one-to-one correspondence between holomorphic objects on the original manifold and antiholomorphic objects on the mirror manifold, proving the duality.
+Conversely, given any antiholomorphic function $h: \mathcal{E}_{\mathcal{M}} \rightarrow \mathbb{C}$, we can define a function $k: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathbb{C}$ by $k = h \circ \mathcal{J} \circ \mathcal{M}$. Since $h$ is antiholomorphic, $\mathcal{M}$ is antiholomorphic, and $\mathcal{J}$ is holomorphic, the composition $k$ is holomorphic.
+
+This establishes a natural one-to-one correspondence between holomorphic objects on the original manifold and antiholomorphic objects on the mirror manifold, proving the duality relationship.
 \end{proof}
 
 \subsection{Reflexive Learning through Mirror Observation}
@@ -517,7 +523,11 @@ A particularly important aspect of the Holomorphic Mirror function is its relati
 \begin{definition}[Knowledge Lagrangian]
 A Knowledge Lagrangian is a Lagrangian submanifold $L \subset \mathcal{E}_{\mathcal{M}}$ with respect to the symplectic form $\omega$, characterized by:
 \begin{equation}
-\dim_{\mathbb{R}}(L) = \frac{1}{2}\dim_{\mathbb{R}}(\mathcal{E}_{\mathcal{M}}) \quad \text{and} \quad \omega|_L = 0
+\dim_{\mathbb{R}}(L) = \frac{1}{2}\dim_{\mathbb{R}}(\mathcal{E}_{\mathcal{M}})
+\end{equation}
+and for all $p \in L$ and for all tangent vectors $X, Y \in T_pL$:
+\begin{equation}
+\omega(X, Y) = 0
 \end{equation}
 \end{definition}
 
@@ -538,8 +548,8 @@ The process of aligning the Elder system's knowledge with the Lagrangian structu
 \item Compute the current knowledge state $p \in \mathcal{E}_{\mathcal{M}}$ based on domain experiences.
 \item Apply the Holomorphic Mirror function: $p^* = \mathcal{M}(p) \in \mathcal{E}_{\mathcal{M}}^*$.
 \item Observe properties of $p^*$ that reveal complementary perspectives.
-\item Identify the displacement vector $v = \mathcal{T}(p^*) - p$, where $\mathcal{T}$ is a transformation mapping the dual space back to the original manifold.
-\item Update the knowledge state: $p_{\text{new}} = p + \eta \cdot v$, where $\eta$ is a learning rate.
+\item Identify the displacement vector $v \in T_p\mathcal{E}_{\mathcal{M}}$ as the parallel transport of $\mathcal{J}(p^*) - p$, where $\mathcal{J}: \mathcal{E}_{\mathcal{M}}^* \rightarrow \mathcal{E}_{\mathcal{M}}$ is the natural isomorphism induced by the Hermitian structure.
+\item Update the knowledge state: $p_{\text{new}} = \exp_p(\eta \cdot v)$, where $\eta$ is a learning rate and $\exp_p$ is the exponential map at point $p$.
 \end{enumerate}
 \end{theorem}
 
