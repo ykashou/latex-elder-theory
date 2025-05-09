@@ -782,6 +782,151 @@ p(D_{new} | \elderparam) \propto 2^{-K(D_{new} | \elderparam)}
 This prior becomes increasingly informative as Elder learns more domains, enabling effective zero-shot and few-shot learning in new domains.
 \end{proposition}
 
+\section{MAGE File Integration in the Elder Learning System}
+
+A critical aspect of the Elder-Mentor-Erudite system is its ability to learn from standardized multimodal data. The MAGE file format (.mage) serves as the principal data source, providing a unified hierarchical structure for multimodal information processing.
+
+\subsection{MAGE File Structure and Elder Framework Compatibility}
+
+The MAGE file format has been specifically designed to facilitate efficient learning across the Elder framework hierarchy:
+
+\begin{definition}[MAGE Data Node]
+A MAGE data node $\mathcal{N}$ is defined as a tuple:
+\begin{equation}
+\mathcal{N} = (id, \mathcal{P}, \mathcal{T}, \mathcal{D}, \mathcal{C})
+\end{equation}
+where $id$ is the unique identifier, $\mathcal{P}$ is the parent node reference, $\mathcal{T}$ is the data type identifier, $\mathcal{D}$ is the actual data, and $\mathcal{C}$ is the set of child nodes.
+\end{definition}
+
+\begin{definition}[MAGE Path]
+A MAGE path $\mathcal{M}_p$ is defined as an ordered sequence of node names that uniquely identifies a data node in the hierarchical structure:
+\begin{equation}
+\mathcal{M}_p = /n_1/n_2/.../n_k
+\end{equation}
+where each $n_i$ represents a node name in the path hierarchy.
+\end{definition}
+
+The correspondence between MAGE data organization and Elder components is formalized as follows:
+
+\begin{proposition}[MAGE-Elder Correspondence]
+The multimodal data in MAGE files maps to the Elder framework through the following correspondences:
+\begin{align}
+\text{MAGE Nodes} &\mapsto \text{Task Parameter Spaces} \\
+\text{MAGE Paths} &\mapsto \text{Domain-Task Identifiers} \\
+\text{MAGE Types} &\mapsto \text{Modality Specifications}
+\end{align}
+enabling systematic learning across heterogeneous data types and modalities.
+\end{proposition}
+
+\subsection{Multimodal Learning through MAGE}
+
+Each component in the Elder framework processes MAGE data in a specialized manner, optimized for its level in the hierarchy:
+
+\subsubsection{Erudite's MAGE Processing}
+
+Erudite operates directly on task-specific data within MAGE files:
+
+\begin{theorem}[Erudite MAGE Processing]
+For a specific task $\tau_i$ in domain $D_j$, Erudite processes MAGE data through:
+\begin{equation}
+\eruditeparams^{*}(\tau_i) = \argmin_{\eruditeparams} \mathbb{E}_{(x,y) \sim \magefile[\tau_i]} [\erloss(x, y; \eruditeparams)]
+\end{equation}
+where $\magefile[\tau_i]$ represents the subset of MAGE data accessible via paths mapping to task $\tau_i$.
+\end{theorem}
+
+Erudite accesses specific paths in the MAGE hierarchy:
+\begin{align}
+\text{Audio tasks} &: /project/tracks/*/features/* \\
+\text{Visual tasks} &: /project/video/*/analysis/* \\
+\text{Multimodal tasks} &: /project/multimodal/*/aligned/*
+\end{align}
+
+\begin{proposition}[Erudite Type Specialization]
+Erudite develops specialized processing for specific MAGE data types:
+\begin{equation}
+\mathcal{F}_{\tau}^E = \bigoplus_{t \in \mathcal{T}_{\tau}} \mathcal{F}_t
+\end{equation}
+where $\mathcal{T}_{\tau}$ is the set of MAGE data types relevant to task $\tau$, and $\mathcal{F}_t$ is the type-specific processing function.
+\end{proposition}
+
+\subsubsection{Mentor's MAGE Processing}
+
+Mentor processes entire domains within MAGE files, learning meta-knowledge about teaching across tasks:
+
+\begin{theorem}[Mentor MAGE Domain Integration]
+For domain $D_j$, Mentor creates a domain-specific teaching model by processing:
+\begin{equation}
+\mentorparams^{*}(D_j) = \argmin_{\mentorparams} \mathbb{E}_{\tau \sim \magefile[D_j]} [\mloss(\eruditeparams^{*}(\tau), \tau; \mentorparams)]
+\end{equation}
+where $\magefile[D_j]$ represents all MAGE paths associated with domain $D_j$.
+\end{theorem}
+
+The key innovation in Mentor's MAGE processing is its ability to construct teaching strategies by analyzing the structure of related data:
+
+\begin{proposition}[MAGE Structure-Based Teaching]
+Mentor derives teaching strategies by analyzing MAGE node relationships:
+\begin{equation}
+\selfmanifold(D_j) = \embedding\left(\mathcal{G}(\magefile[D_j])\right)
+\end{equation}
+where $\mathcal{G}(\magefile[D_j])$ is the graph structure of MAGE data in domain $D_j$, and $\embedding$ is the teaching strategy extraction function.
+\end{proposition}
+
+\subsubsection{Elder's Cross-Modal MAGE Integration}
+
+Elder operates at the highest level, integrating knowledge across all domains and modalities in MAGE files:
+
+\begin{theorem}[Elder Cross-Modal Learning]
+Elder learns universal principles by maximizing mutual information across domains in the MAGE structure:
+\begin{equation}
+\elderparam^* = \argmax_{\elderparam} \sum_{i \neq j} I(\magefile[D_i]; \magefile[D_j] | \elderparam)
+\end{equation}
+where $I(\magefile[D_i]; \magefile[D_j] | \elderparam)$ is the conditional mutual information between MAGE data from different domains.
+\end{theorem}
+
+The complex representation in Elder enables seamless integration of diverse data types from MAGE files:
+
+\begin{proposition}[Complex MAGE Embedding]
+Elder maps heterogeneous MAGE data types to points in a complex manifold:
+\begin{equation}
+\complexmap(\mathcal{T}): \magefile[D_j, \mathcal{T}] \rightarrow \complexn{d}
+\end{equation}
+where $\magefile[D_j, \mathcal{T}]$ represents MAGE data of type $\mathcal{T}$ from domain $D_j$.
+\end{proposition}
+
+\begin{theorem}[MAGE Holographic Integration]
+Elder integrates information from all MAGE modalities through holographic superposition:
+\begin{equation}
+\complexmap(\magefile) = \bigotimes_{j=1}^k \complexmap(\magefile[D_j])
+\end{equation}
+where $\bigotimes$ represents complex tensor product that preserves phase relationships.
+\end{theorem}
+
+\subsection{Code Rate Analysis in Hierarchical Learning}
+
+The Code Rate Analysis proposition precisely quantifies the information compression achieved at each level of the Elder-Mentor-Erudite hierarchy:
+
+\begin{proposition}[Code Rate Analysis]
+The code rates for representing task knowledge at each level of the Elder-Mentor-Erudite hierarchy satisfy:
+\begin{align}
+R_E &= H(X, Y | \eruditeparams) \\
+R_M &= H(\eruditeparams | \mentorparams) \\
+R_{El} &= H(\mentorparams | \elderparam)
+\end{align}
+with the relationship $R_E \gg R_M \gg R_{El}$ reflecting the progressive compression of knowledge up the hierarchy.
+\end{proposition}
+
+This proposition establishes that:
+
+1. At the Erudite level ($R_E$), the code rate represents the remaining uncertainty about inputs and outputs given task-specific parameters. This rate is highest as it contains detailed task-specific information.
+
+2. At the Mentor level ($R_M$), the code rate represents the uncertainty in Erudite parameters given Mentor's teaching knowledge. This rate is substantially lower than $R_E$ as Mentor distills common patterns across multiple tasks.
+
+3. At the Elder level ($R_{El}$), the code rate represents the uncertainty in Mentor parameters given Elder's universal principles. This is the lowest rate, as Elder compresses knowledge to its most fundamental form.
+
+The strict inequality $R_E \gg R_M \gg R_{El}$ quantifies the dramatic compression of information as it moves up the hierarchy, enabling efficient knowledge transfer and generalization.
+
+\section{Conclusion}
+
 This information-theoretic perspective provides a principled framework for understanding how Elder accumulates, compresses, and transfers knowledge across domains. The ability to maximize mutual information between seemingly disparate domains while minimizing the description length of the shared principles reflects the fundamental objective of discovering universal structures that transcend domain boundaries.
 
 This training methodology allows the system to continually expand its capabilities across diverse domains and tasks, with each new domain benefiting from universal principles accumulated in Elder and each new task benefiting from domain-specific teaching knowledge in the corresponding Mentor component.
