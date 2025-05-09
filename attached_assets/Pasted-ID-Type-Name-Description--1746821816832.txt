@@ -1,0 +1,44 @@
+ID    | Type Name        | Description
+------|------------------|------------------------------------------------
+0x0100| Audio            | Raw audio data
+0x0101| AudioMetadata    | Audio format metadata
+0x0102| Mel              | Mel spectrogram data
+0x0103| MFCC             | Mel-frequency cepstral coefficients
+0x0104| Onset            | Onset detection markers
+0x0105| Pitch            | Pitch analysis data
+0x0106| Spectrum         | Spectral analysis data
+0x0107| Envelope         | Amplitude envelope
+0x0108| Transient        | Transient detection points
+0x0109| Timbre           | Timbre classification data
+0x010A| Harmonic         | Harmonic content analysis
+0x010B| Noise            | Noise profile data
+0x010C| Marker           | Time-based markers
+0x010D| Beat             | Beat and tempo analysis
+0x010E| IRMask           | Impulse response mask
+0x010F| SourceSeparation | Source separation data
+0x0110| Dereverberation  | Dereverberation data
+0x0111| VoicePrint       | Neural network voice fingerprint
+0x0112| EQ               | Equalization curve data
+0x0113| Dynamics         | Dynamic processing data
+0x0114| SpatialAudio     | Spatial audio data (Atmos compatible)
+0x0115| Automation       | Parameter automation data
+Video and Visual Data Types
+ID    | Type Name        | Description
+------|------------------|------------------------------------------------
+0x0200| Video            | Raw video data
+0x0201| VideoMetadata    | Video format metadata
+0x0202| Image            | Still image data
+0x0203| PoseKeypoints    | Body/hand/face keypoints
+0x0204| SkeletonGraph    | Skeletal graph connections
+0x0205| Landmarks        | Facial/object landmarks
+0x0206| SegmentationMask | Object/person segmentation mask
+0x0207| DepthMap         | Depth estimation data
+0x0208| MotionVector     | Motion vector field
+0x0209| OpticalFlow      | Optical flow data
+0x020A| TrackingBox      | Object tracking bounding boxes
+0x020B| SceneGraph       | Hierarchical scene description
+0x020C| Gesture          | Gesture recognition data
+0x020D| Emotion          | Emotion classification data
+0x020E| Gaze             | Eye gaze tracking data
+0x020F| HDRMetadata      | High dynamic range metadata
+0x0210| ColorGrading     | Color grading information

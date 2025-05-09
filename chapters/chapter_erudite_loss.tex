@@ -536,3 +536,215 @@ The Erudite Loss encompasses multiple existing loss functions as special cases:
 \end{proposition}
 
 This comprehensive mathematical formulation of the Erudite Loss provides a rigorous foundation for task-specific learning in the Elder framework, capturing both structural and probabilistic aspects of the data in a principled manner. The derivation connects concepts from functional analysis, information theory, and statistical learning theory into a unified loss function specifically designed for the Elder framework's hierarchical learning approach.
+
+\section{Specialized Formulations for Magefile Data Types}
+
+The Erudite Loss can be specialized to handle various data types contained in the enriched magefile format. This section explores specific implementations for several key data types and demonstrates how they integrate into the overall loss framework.
+
+\subsection{Magefile Type Integration}
+
+Magefiles contain multiple data types with standardized identifiers, each capturing different aspects of multimedia content. We focus on three categories: 3D spatial audio data, 3D tracking boxes, and core audio representations. The table below shows the type identifiers of interest:
+
+\begin{center}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{ID} & \textbf{Type Name} & \textbf{Description} \\
+\hline
+0x0100 & Audio & Raw audio data \\
+0x0106 & Spectrum & Spectral analysis data \\
+0x0114 & SpatialAudio & Spatial audio data (Atmos compatible) \\
+0x020A & TrackingBox & Object tracking bounding boxes \\
+0x0207 & DepthMap & Depth estimation data \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Formulation for 3D Spatial Audio Data}
+
+Spatial audio (Type 0x0114) in magefiles contains multi-channel audio with spatial positioning metadata. We construct a specialized embedding for this data type.
+
+\subsubsection{Ambisonic Representation}
+
+For spatial audio, we employ an ambisonic representation that encodes sound field information through spherical harmonic decomposition:
+
+\begin{equation}
+A_{l,m}(f,t) = \int_{\Omega} p(f,t,\theta,\phi) Y_l^m(\theta,\phi) \sin\theta d\theta d\phi
+\end{equation}
+
+Where:
+\begin{itemize}
+\item $p(f,t,\theta,\phi)$ is the sound pressure at frequency $f$, time $t$, and angular position $(\theta,\phi)$
+\item $Y_l^m(\theta,\phi)$ is the spherical harmonic of degree $l$ and order $m$
+\item $A_{l,m}(f,t)$ is the ambisonic coefficient for degree $l$ and order $m$
+\end{itemize}
+
+\subsubsection{Specialized Hilbert Space Embedding}
+
+For spatial audio data, we define a feature map $\mathcal{F}_{\text{spatial}}$ that captures both spectral and spatial characteristics:
+
+\begin{equation}
+\mathcal{F}_{\text{spatial}}(y) = \left\{ \sum_{l=0}^{L} \sum_{m=-l}^{l} \alpha_{l,m} A_{l,m}(f_k,t_j) \right\}_{j,k}
+\end{equation}
+
+Where:
+\begin{itemize}
+\item $L$ is the maximum spherical harmonic degree (typically 4 for first-order ambisonics)
+\item $\alpha_{l,m}$ are perceptually motivated weights that emphasize localization accuracy
+\item $f_k$ and $t_j$ are discrete frequency and time points
+\end{itemize}
+
+The distance metric in this space becomes:
+
+\begin{equation}
+d_{\text{spatial}}(y, \hat{y}) = \left\| \mathcal{F}_{\text{spatial}}(y) - \mathcal{F}_{\text{spatial}}(\hat{y}) \right\|_{\mathcal{H}}^2
+\end{equation}
+
+This distance captures both timbral differences and spatial localization errors between two spatial audio streams.
+
+\subsubsection{Probabilistic Interpretation via Angular Distribution}
+
+For spatial audio, we also introduce a directional probability distribution $P_{\Omega}(y)$ that characterizes the distribution of sound energy across angular space:
+
+\begin{equation}
+P_{\Omega}(y)(\theta,\phi) = \frac{\int_{f,t} |p(f,t,\theta,\phi)|^2 df dt}{\int_{\Omega} \int_{f,t} |p(f,t,\theta',\phi')|^2 df dt d\theta' d\phi'}
+\end{equation}
+
+The KL divergence between the angular distributions of $y$ and $\hat{y}$ is:
+
+\begin{equation}
+\mathrm{D_{KL}}(P_{\Omega}(y) \| P_{\Omega}(\hat{y})) = \int_{\Omega} P_{\Omega}(y)(\theta,\phi) \log\frac{P_{\Omega}(y)(\theta,\phi)}{P_{\Omega}(\hat{y})(\theta,\phi)} d\theta d\phi
+\end{equation}
+
+This term quantifies spatial mismatch in the energy distribution, ensuring that sound objects are correctly positioned in the reconstructed spatial audio.
+
+\subsection{Formulation for 3D Tracking Box Data}
+
+Tracking box data (Type 0x020A) represents 3D bounding boxes that track objects in space. We develop a specialized loss component for this data type.
+
+\subsubsection{Geometric Representation}
+
+A tracking box is characterized by:
+\begin{itemize}
+\item Center position: $(c_x, c_y, c_z)$
+\item Dimensions: $(w, h, d)$
+\item Orientation: rotation matrix $R \in SO(3)$ or quaternion $q \in \mathbb{H}$
+\item Object identity: $id$
+\item Confidence score: $s \in [0,1]$
+\end{itemize}
+
+\subsubsection{Specialized Distance Metric}
+
+For tracking boxes, we define a composite distance function that accounts for positional, dimensional, and orientational differences:
+
+\begin{equation}
+d_{\text{box}}(B, \hat{B}) = \lambda_p d_{\text{pos}}(B, \hat{B}) + \lambda_d d_{\text{dim}}(B, \hat{B}) + \lambda_r d_{\text{rot}}(B, \hat{B})
+\end{equation}
+
+Where:
+\begin{itemize}
+\item $d_{\text{pos}}(B, \hat{B}) = \|c_B - c_{\hat{B}}\|_2^2$ is the squared Euclidean distance between centers
+\item $d_{\text{dim}}(B, \hat{B}) = \|(w_B, h_B, d_B) - (w_{\hat{B}}, h_{\hat{B}}, d_{\hat{B}})\|_2^2$ is the dimension mismatch
+\item $d_{\text{rot}}(B, \hat{B}) = 1 - |\langle q_B, q_{\hat{B}} \rangle|^2$ is the rotational distance based on quaternion inner product
+\end{itemize}
+
+For sequences of tracking boxes, we define a matching function $M$ that pairs predicted boxes with ground truth boxes, and the overall distance becomes:
+
+\begin{equation}
+d_{\text{track}}(\{B_i\}, \{\hat{B}_j\}) = \sum_{(i,j) \in M} s_{B_i} \cdot d_{\text{box}}(B_i, \hat{B}_j) + \lambda_{\text{FP}} \sum_{j \not\in M} s_{\hat{B}_j} + \lambda_{\text{FN}} \sum_{i \not\in M} s_{B_i}
+\end{equation}
+
+Where $\lambda_{\text{FP}}$ and $\lambda_{\text{FN}}$ are penalties for false positive and false negative detections, respectively.
+
+\subsubsection{Probabilistic Interpretation via Occupancy Maps}
+
+We transform tracking boxes into probabilistic occupancy maps:
+
+\begin{equation}
+P_{\text{occ}}(B)(x,y,z) = \sum_i s_{B_i} \cdot \mathcal{K}((x,y,z), B_i)
+\end{equation}
+
+Where $\mathcal{K}((x,y,z), B_i)$ is a kernel function that maps a point $(x,y,z)$ to a probability of being occupied by box $B_i$, typically using a soft indicator function.
+
+The KL divergence between occupancy distributions provides a probabilistic measure of tracking accuracy:
+
+\begin{equation}
+\mathrm{D_{KL}}(P_{\text{occ}}(B) \| P_{\text{occ}}(\hat{B})) = \int_{\mathbb{R}^3} P_{\text{occ}}(B)(x,y,z) \log\frac{P_{\text{occ}}(B)(x,y,z)}{P_{\text{occ}}(\hat{B})(x,y,z)} dx dy dz
+\end{equation}
+
+\subsection{Formulation for Core Audio Data Types}
+
+We now address the core audio data types (Types 0x0100 and 0x0106) within magefiles.
+
+\subsubsection{Raw Audio Representation}
+
+For raw audio data (Type 0x0100), we define a time-frequency embedding using short-time Fourier transform:
+
+\begin{equation}
+\mathcal{F}_{\text{audio}}(y) = \left\{ \int y(t) w(t-\tau) e^{-i2\pi ft} dt \right\}_{\tau,f}
+\end{equation}
+
+Where $w(t)$ is a window function (e.g., Hann window).
+
+\subsubsection{Spectral Representation}
+
+For spectral data (Type 0x0106), we define a perceptually weighted embedding:
+
+\begin{equation}
+\mathcal{F}_{\text{spectrum}}(y) = \left\{ \beta(f) |Y(f,t)| \right\}_{f,t}
+\end{equation}
+
+Where:
+\begin{itemize}
+\item $Y(f,t)$ is the time-frequency representation
+\item $\beta(f)$ is a frequency-dependent weighting function based on psychoacoustic principles
+\end{itemize}
+
+\subsection{Integration into Unified Erudite Loss}
+
+We integrate these specialized formulations into the unified Erudite Loss:
+
+\begin{equation}
+\begin{aligned}
+\erloss(x, y; \theta_E) = &\gamma_{\text{audio}} \|\mathcal{F}_{\text{audio}}(y) - \mathcal{F}_{\text{audio}}(\hat{y})\|_{\mathcal{H}}^2 + \\
+&\gamma_{\text{spectrum}} \|\mathcal{F}_{\text{spectrum}}(y) - \mathcal{F}_{\text{spectrum}}(\hat{y})\|_{\mathcal{H}}^2 + \\
+&\gamma_{\text{spatial}} \|\mathcal{F}_{\text{spatial}}(y) - \mathcal{F}_{\text{spatial}}(\hat{y})\|_{\mathcal{H}}^2 + \\
+&\gamma_{\text{track}} d_{\text{track}}(B_y, B_{\hat{y}}) + \\
+&\lambda_{\text{KL}} \left( \mathrm{D_{KL}}(P_{\text{audio}}(y) \| P_{\text{audio}}(\hat{y})) + \mathrm{D_{KL}}(P_{\Omega}(y) \| P_{\Omega}(\hat{y})) + \mathrm{D_{KL}}(P_{\text{occ}}(B_y) \| P_{\text{occ}}(B_{\hat{y}})) \right)
+\end{aligned}
+\end{equation}
+
+Where $\gamma_{\text{audio}}$, $\gamma_{\text{spectrum}}$, $\gamma_{\text{spatial}}$, $\gamma_{\text{track}}$, and $\lambda_{\text{KL}}$ are weighting parameters that balance the importance of different components.
+
+\subsubsection{Adaptive Weighting Mechanism}
+
+We implement an adaptive weighting mechanism that adjusts the relative importance of different data types based on task-specific requirements:
+
+\begin{equation}
+\gamma_{\text{type}}(x) = \frac{\exp(v_{\text{type}}^T h(x))}{\sum_{\text{type'}} \exp(v_{\text{type'}}^T h(x))}
+\end{equation}
+
+Where:
+\begin{itemize}
+\item $h(x)$ is a feature vector extracted from the input $x$
+\item $v_{\text{type}}$ is a learned parameter vector for each data type
+\end{itemize}
+
+This allows the Erudite Loss to dynamically focus on the most relevant aspects of the data for each specific input.
+
+\subsection{Theoretical Properties of the Integrated Loss}
+
+We establish several theoretical properties of the integrated Erudite Loss:
+
+\begin{theorem}[Consistency of the Integrated Estimator]
+Under suitable regularity conditions, the minimizer of the integrated Erudite Loss converges to the true data-generating parameters as the sample size increases.
+\end{theorem}
+
+\begin{theorem}[Generalization Bounds for Multi-Type Data]
+For a hypothesis class with VC dimension $d$ and $n$ training samples, with probability at least $1-\delta$, the generalization error of the integrated loss is bounded by:
+\begin{equation}
+\mathbb{E}[\erloss] \leq \frac{1}{n}\sum_{i=1}^n \erloss(x_i, y_i; \theta_E) + \mathcal{O}\left(\sqrt{\frac{(d + \log K) \log n + \log(1/\delta)}{n}}\right)
+\end{equation}
+where $K$ is the number of different data types being integrated.
+\end{theorem}
+
+This multi-type formulation of the Erudite Loss demonstrates how the framework can handle complex, heterogeneous data in a principled manner. By leveraging the rich structure of the Hilbert space formalism, we can integrate data from multiple modalities and types, enabling the Elder framework to learn comprehensive representations across the audio-visual spectrum.
