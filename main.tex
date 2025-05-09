@@ -98,93 +98,9 @@
 % Main matter
 \mainmatter
 
-\chapter{Introduction to Elder Spaces}
-\section{Basic Definitions}
-The Elder space, denoted by $\elder{d}$, is a mathematical structure that generalizes traditional vector spaces. It incorporates the concept of arcane operations, allowing for a richer algebraic structure \cite{elder1995foundations}. The theory was further developed in the groundbreaking work of Chen \cite{chen2005realization}, which established the connection between Elder spaces and complex systems analysis.
+\input{chapters/chapter1.tex}
 
-\begin{definition}[Elder Space]
-An Elder space $\elder{d}$ of dimension $d$ is a set equipped with:
-\begin{enumerate}
-    \item A binary operation $\oplus$ (Elder addition)
-    \item A scalar multiplication $\odot$ (Elder scaling)
-    \item A non-commutative product $\star$ (Arcane multiplication)
-\end{enumerate}
-satisfying a set of axioms that generalize those of a vector space.
-\end{definition}
-
-\section{Arcane Elements}
-The fundamental objects in an Elder space are arcane elements, denoted by $\arcane{n}$. These elements serve as the building blocks for more complex structures.
-
-\begin{figure}[htbp]
-\centering
-\fbox{\begin{minipage}{0.8\textwidth}
-\centering
-\vspace{1cm}
-{\Large Elder Space $\elder{d}$} \quad $\xrightarrow{\realization{X}}$ \quad {\Large $L^2(X)$}
-\vspace{1cm}
-
-\textbf{Arcane Elements:} $\arcane{1}, \arcane{2}, \ldots, \arcane{d}$
-
-\vspace{0.5cm}
-\end{minipage}}
-\caption{Realization mapping from Elder space to $L^2(X)$}
-\label{fig:realization-mapping}
-\end{figure}
-
-\begin{theorem}[Spectral Decomposition]
-Every element $x \in \elder{d}$ admits a unique spectral decomposition:
-\begin{equation}
-x = \sum_{i=1}^{d} \lambda_i \arcane{i}
-\end{equation}
-where $\lambda_i$ are the spectral coefficients of $x$.
-\end{theorem}
-
-\begin{proof}
-Let $x \in \elder{d}$ be arbitrary. We can construct the coefficients $\lambda_i$ by applying the Elder projection operators $P_i : \elder{d} \to \mathbb{R}$ defined by:
-\begin{equation}
-P_i(x) = \text{tr}(x \star \arcane{i}^{-1})
-\end{equation}
-where $\text{tr}$ is the Elder trace function. The properties of the trace ensure that $P_i(\arcane{j}) = \delta_{ij}$ (the Kronecker delta), which establishes the uniqueness of the decomposition \cite{yang2007elder}.
-\end{proof}
-
-\chapter{Realization Mapping}
-\section{Definition and Properties}
-The realization mapping, denoted by $\realization{X}$, provides a bridge between Elder spaces and observable phenomena.
-
-\begin{definition}[Realization Mapping]
-Given an Elder space $\elder{d}$ and a measurable space $(X, \Sigma)$, a realization mapping $\realization{X}: \elder{d} \rightarrow L^2(X)$ is a linear transformation that preserves certain structural properties of the Elder space.
-\end{definition}
-
-\begin{theorem}[Realization Homomorphism]
-If $\realization{X}$ is a complete realization mapping, then:
-\begin{equation}
-\realization{X}(\arcane{n} \star \arcane{m}) = \realization{X}(\arcane{n}) \cdot \realization{X}(\arcane{m})
-\end{equation}
-where $\cdot$ denotes the pointwise product in $L^2(X)$.
-\end{theorem}
-
-\begin{lemma}[Realization Spectrum]
-For any $x \in \elder{d}$ with spectral decomposition $x = \sum_{i=1}^{d} \lambda_i \arcane{i}$, the spectrum of the realized operator $\realization{X}(x)$ is given by:
-\begin{equation}
-\sigma(\realization{X}(x)) = \{\lambda_1, \lambda_2, \ldots, \lambda_d\}
-\end{equation}
-\end{lemma}
-
-\begin{proof}
-This follows directly from the fact that $\realization{X}$ is a homomorphism that preserves the algebraic structure of the Elder space. The eigenvalues of $\realization{X}(x)$ correspond precisely to the spectral coefficients of $x$.
-\end{proof}
-
-\section{Computational Applications}
-Recent advances in numerical methods have made it possible to compute realization mappings efficiently, even for high-dimensional Elder spaces \cite{smith2019numerical}. This has opened up new possibilities for practical applications in areas such as signal processing, cryptography, and complex systems modeling.
-
-\section{Connection to Modern Physics}
-The theoretical framework of Elder spaces has found unexpected connections to quantum field theory \cite{yang2007elder} and non-commutative geometry \cite{connes1994noncommutative}. These connections have led to new interpretations of quantum phenomena and provide a mathematical language for describing complex physical systems at both microscopic and macroscopic scales.
-
-\begin{theorem}[Quantum-Elder Correspondence]
-For any quantum system described by a Hilbert space $\mathcal{H}$, there exists a canonical Elder space $\elder{d}$ and a realization mapping $\realization{X}: \elder{d} \rightarrow \mathcal{B}(\mathcal{H})$ that preserves the algebraic structure of observables.
-\end{theorem}
-
-This theorem, which builds on the work of Witten \cite{witten1988topological}, establishes a deep connection between quantum mechanics and Elder theory, suggesting that the latter may serve as a more general mathematical framework for physics.
+\input{chapters/chapter2.tex}
 
 \input{chapters/chapter3.tex}
 
