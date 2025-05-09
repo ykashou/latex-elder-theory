@@ -115,8 +115,16 @@ where $\bullet$ denotes a tensor contraction operation.
 \end{proposition}
 
 \begin{theorem}[Elder Space Isomorphism]
-The parameter space $\paramspace = \mentorparams \times \eruditeparams$ equipped with the non-commutative product $\star$ is isomorphic to a subspace of the Elder space $\elder{d}$ under the mapping $\mathcal{T}$.
+The unified parameter space $\paramspace = \mentorparams \times \eruditeparams$ equipped with the non-commutative product $\star$ is isomorphic to a subspace of the singular Elder space $\elder{d}$ under the mapping $\mathcal{T}$.
 \end{theorem}
+
+\begin{corollary}[Space Hierarchy]
+The multiple Mentor spaces $\{\mathcal{M}_1, \mathcal{M}_2, \ldots, \mathcal{M}_m\}$ and Erudite spaces $\{\mathcal{E}_1, \mathcal{E}_2, \ldots, \mathcal{E}_n\}$ are all projected into distinct regions of the singular Elder space $\elder{d}$ via the tensor embedding function $\mathcal{T}$, forming a hierarchical structure where:
+\begin{equation}
+\mathcal{E}_j \subset \mathcal{M}_i \subset \elder{d}
+\end{equation}
+for each Erudite space $\mathcal{E}_j$ associated with a Mentor space $\mathcal{M}_i$.
+\end{corollary}
 
 This connection completes the circle of our theoretical development, showing how the concepts of Elder Loss, Mentor Loss, and Erudite Loss are intricately related to the algebraic structures of Elder spaces that we developed in earlier chapters.
 
@@ -147,14 +155,31 @@ As Mentor guides Erudite through multiple tasks $\tau_1, \tau_2, \ldots, \tau_n$
 where $\gamma > 0$ is the Mentor learning rate. This process accumulates teaching knowledge across diverse tasks.
 \end{proposition}
 
+\begin{definition}[Space Production]
+Within the Elder-Mentor-Erudite framework:
+\begin{enumerate}
+    \item \textbf{Elder Space}: A singular, unified space $\elder{d}$ governed by a single Elder model that establishes global constraints.
+    \item \textbf{Mentor Spaces}: Multiple spaces $\{\mathcal{M}_1, \mathcal{M}_2, \ldots, \mathcal{M}_m\}$ where each $\mathcal{M}_i \subset \mentorparams$ represents a specialized teaching strategy for a family of related tasks.
+    \item \textbf{Erudite Spaces}: Multiple task-specific spaces $\{\mathcal{E}_1, \mathcal{E}_2, \ldots, \mathcal{E}_n\}$ where each $\mathcal{E}_j \subset \eruditeparams$ contains parameters optimized for executing specific tasks.
+\end{enumerate}
+\end{definition}
+
 \begin{definition}[Training Protocol]
 The Elder-Mentor-Erudite training protocol consists of three nested optimization loops:
 \begin{enumerate}
-    \item \textbf{Inner Loop (Erudite)}: For fixed Mentor parameters $\theta_M$, optimize Erudite parameters $\theta_E$ on task $\tau$ to minimize $\erloss$.
-    \item \textbf{Middle Loop (Mentor)}: Update Mentor parameters $\theta_M$ based on Erudite's performance to minimize $\mloss$.
-    \item \textbf{Outer Loop (Elder)}: Adjust the tensor embedding function $\mathcal{T}$ to ensure consistency across tasks and minimize $\eloss$.
+    \item \textbf{Inner Loop (Erudite)}: For fixed Mentor parameters $\theta_M$, optimize Erudite parameters $\theta_E$ on task $\tau$ to minimize $\erloss$, producing task-specific Erudite spaces.
+    \item \textbf{Middle Loop (Mentor)}: Update Mentor parameters $\theta_M$ based on Erudite's performance to minimize $\mloss$, generating specialized Mentor spaces for different task families.
+    \item \textbf{Outer Loop (Elder)}: An indefinitely running process that continuously adjusts the tensor embedding function $\mathcal{T}$ to ensure consistency across all Mentor and Erudite spaces while minimizing $\eloss$.
 \end{enumerate}
 \end{definition}
+
+\begin{proposition}[Continual Elder Optimization]
+The Elder optimization process is designed to run indefinitely, with its tensor embedding function $\mathcal{T}$ evolving according to:
+\begin{equation}
+\mathcal{T}_{t+1} = \mathcal{T}_t - \lambda \nabla_{\mathcal{T}} \eloss(\Theta_M^t, \Theta_E^t, \mathcal{D}^t)
+\end{equation}
+where $\Theta_M^t$ and $\Theta_E^t$ represent the collective Mentor and Erudite parameter spaces at time $t$, $\mathcal{D}^t$ is the accumulated dataset of all tasks encountered up to time $t$, and $\lambda > 0$ is the Elder learning rate.
+\end{proposition}
 
 \begin{example}[Multi-domain Audio Generation]
 Consider training the system on multiple audio generation tasks:
