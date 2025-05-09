@@ -1,0 +1,176 @@
+% Layout style definitions for "Elder, the Arcane Realization"
+
+% Two-column environment with custom settings
+\NewDocumentEnvironment{twocolumnlayout}{}{
+    \begin{multicols}{2}
+    \setlength{\columnsep}{20pt}
+    \setlength{\columnseprule}{0.1pt}
+}{
+    \end{multicols}
+}
+
+% Custom margin note styling
+\renewcommand{\marginnote}[1]{%
+  \marginpar{%
+    \raggedright\footnotesize\color{DarkGray}#1%
+  }%
+}
+
+% Side note environment
+\newcommand{\sidenote}[1]{%
+  \marginpar{%
+    \begin{tcolorbox}[
+      colback=LightGray!30,
+      colframe=DarkGray!30,
+      boxrule=0.5pt,
+      arc=0pt,
+      left=5pt,
+      right=5pt,
+      top=5pt,
+      bottom=5pt,
+      boxsep=2pt,
+      fontupper=\footnotesize
+    ]
+    #1
+    \end{tcolorbox}
+  }%
+}
+
+% Margin theorem style
+\newenvironment{margintheorem}[2][\empty]{%
+  \marginpar{%
+    \begin{tcolorbox}[
+      colback=TheoremBlue!20,
+      colframe=TheoremBlue!80,
+      boxrule=0.5pt,
+      arc=0pt,
+      left=3pt,
+      right=3pt,
+      top=3pt,
+      bottom=3pt,
+      boxsep=2pt,
+      fontupper=\footnotesize,
+      title={\footnotesize\textbf{Theorem\ifx\empty#1\else~#1\fi}}
+    ]
+    #2
+    \end{tcolorbox}
+  }%
+}{\par}
+
+% Highlighted text box
+\newcommand{\highlight}[1]{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=DarkSkyBlue!5,
+    colframe=DarkSkyBlue!40,
+    boxrule=0.5pt,
+    arc=0pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    boxsep=5pt
+  ]
+  #1
+  \end{tcolorbox}
+}
+
+% Key concept box
+\newcommand{\keyconcept}[2]{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=LemmaGreen!10,
+    colframe=LemmaGreen!50,
+    boxrule=0.5pt,
+    arc=0pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    boxsep=5pt,
+    title={\textbf{Key Concept: #1}}
+  ]
+  #2
+  \end{tcolorbox}
+}
+
+% Figure environment with custom styling
+\newenvironment{elegantfigure}[3][htbp]{%
+  \begin{figure}[#1]
+    \centering
+    #2
+    \caption{#3}
+}{%
+  \end{figure}
+}
+
+% Table environment with custom styling
+\newenvironment{eleganttable}[3][htbp]{%
+  \begin{table}[#1]
+    \centering
+    \caption{#3}
+    \begin{tabular}{#2}
+}{%
+    \end{tabular}
+  \end{table}
+}
+
+% Full width environment (breaks out of two column format)
+\newenvironment{fullwidth}{%
+  \end{multicols}
+}{%
+  \begin{multicols}{2}
+}
+
+% Double-column equation environment
+\NewDocumentEnvironment{wideequation}{}{
+  \end{multicols}
+  \begin{equation}
+}{
+  \end{equation}
+  \begin{multicols}{2}
+}
+
+% Custom chapter header and footer style
+\fancypagestyle{chapterstyle}{%
+  \fancyhf{}
+  \fancyhead[LE]{\small\textit{\leftmark}}
+  \fancyhead[RO]{\small\textit{\rightmark}}
+  \fancyfoot[LE,RO]{\thepage}
+  \renewcommand{\headrulewidth}{0.5pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Custom quote environment
+\newenvironment{elegantquote}[1][]{%
+  \begin{quote}
+  \itshape
+  \color{DarkGray}
+}{%
+  \ifx\empty#1\else
+  \par\hfill--- \textsc{#1}
+  \fi
+  \end{quote}
+}
+
+% Custom part divider page
+\newcommand{\partdivider}[2]{%
+  \cleardoublepage
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[DarkSkyBlue!20] (current page.north west) rectangle (current page.south east);
+    \node[anchor=center, 
+          inner sep=0pt, 
+          outer sep=0pt] 
+         at (current page.center) 
+         {\begin{minipage}{\textwidth}
+            \centering
+            {\Huge\bfseries\textcolor{DarkSkyBlue}{PART \thepart}}\\[1cm]
+            {\huge\bfseries #1}\\[0.5cm]
+            {\Large #2}
+          \end{minipage}};
+  \end{tikzpicture}
+  \clearpage
+}

@@ -1,0 +1,201 @@
+% Graph example for "Elder, the Arcane Realization"
+
+% Example of a basic 2D plot
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={$x$},
+    ylabel={$\arcane{x}$},
+    width=10cm,
+    height=7cm,
+    grid=major,
+    xmin=0, xmax=5,
+    ymin=0, ymax=8,
+    legend pos=north west
+]
+
+\addplot[color=DarkSkyBlue, thick, domain=0:5, samples=100]{x^2};
+\addlegendentry{$\arcane{1}(x) = x^2$}
+
+\addplot[color=DarkGray, thick, domain=0:5, samples=100]{exp(x/2)};
+\addlegendentry{$\arcane{2}(x) = e^{x/2}$}
+
+\addplot[color=LemmaGreen!80, thick, domain=0:5, samples=100]{x^2*sin(deg(x))};
+\addlegendentry{$\arcane{3}(x) = x^2\sin(x)$}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Behavior of the first three Arcane functions}
+\end{figure}
+
+% Example of a commutative diagram
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[node distance=2.5cm, auto]
+\node (X) {$X$};
+\node (EX) [right of=X] {$\elder{X}$};
+\node (Y) [below of=X] {$Y$};
+\node (EY) [right of=Y] {$\elder{Y}$};
+
+\draw[->] (X) to node {$\realization{}$} (EX);
+\draw[->] (X) to node [left] {$f$} (Y);
+\draw[->] (EX) to node [right] {$\elder{f}$} (EY);
+\draw[->] (Y) to node {$\realization{}$} (EY);
+\end{tikzpicture}
+\caption{Commutative diagram showing the functorial property of Realization}
+\end{figure}
+
+% Example of a 3D surface plot
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=8cm,
+    xlabel={$x$},
+    ylabel={$y$},
+    zlabel={$\realization{z}$},
+    view={30}{30},
+    colormap={arcane}{color(0)=(DarkSkyBlue) color(1)=(LemmaGreen)}
+]
+
+\addplot3[
+    surf,
+    domain=-2:2,
+    domain y=-2:2,
+    samples=30,
+    samples y=30,
+] {exp(-x^2-y^2) * cos(deg(2*x)) * sin(deg(2*y))};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Surface representation of a 2D Elder Realization}
+\end{figure}
+
+% Example of a phase portrait
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=10cm,
+    height=8cm,
+    xlabel={$\arcane{1}$},
+    ylabel={$\arcane{2}$},
+    grid=major,
+    xmin=-2, xmax=2,
+    ymin=-2, ymax=2
+]
+
+% Vector field representing Elder flow
+\addplot[
+    ->,
+    DarkGray,
+    thick,
+    quiver={
+        u={x*y-y},
+        v={-x-y^2},
+        scale arrows=0.2,
+    },
+    samples=15,
+    domain=-2:2,
+    domain y=-2:2
+] {0};
+
+% Critical points
+\addplot[only marks, mark=*, mark size=3pt, DarkSkyBlue] coordinates {
+    (0,0)
+    (1,1)
+    (-1,-1)
+};
+
+% Sample trajectory
+\addplot[TheoremBlue, thick, domain=0:6.28, samples=100, variable=\t]
+    ({cos(\t r) * exp(-\t/3)}, {sin(\t r) * exp(-\t/3)});
+
+\end{axis}
+\end{tikzpicture}
+\caption{Phase portrait of an Elder dynamical system showing critical points and a trajectory}
+\end{figure}
+
+% Example of a bifurcation diagram
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=12cm,
+    height=8cm,
+    xlabel={Parameter $\mu$},
+    ylabel={Equilibrium $\arcane{*}$},
+    grid=major,
+    xmin=0, xmax=4,
+    ymin=-2, ymax=2
+]
+
+% Stable branch
+\addplot[DarkSkyBlue, thick, domain=0:4, samples=100]{sqrt(x-1) * (x>=1)};
+\addplot[DarkSkyBlue, thick, domain=0:4, samples=100]{-sqrt(x-1) * (x>=1)};
+
+% Unstable branch
+\addplot[DarkGray, thick, dashed, domain=0:1, samples=100]{0};
+\addplot[DarkGray, thick, dashed, domain=1:4, samples=100]{0};
+
+% Critical point
+\addplot[only marks, mark=*, mark size=3pt, LemmaGreen!80] coordinates {
+    (1,0)
+};
+
+\node[anchor=north west] at (axis cs:1.1,0.1) {Bifurcation point};
+\node[anchor=north west] at (axis cs:3,1) {Stable branch};
+\node[anchor=north west] at (axis cs:2,-0.1) {Unstable branch};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Bifurcation diagram for the Elder equation $\dot{\arcane{}} = \mu \arcane{} - \arcane{}^3$}
+\end{figure}
+
+% Example of a complex network graph
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[
+    scale=1.2,
+    arcane node/.style={circle, draw=DarkSkyBlue, fill=DarkSkyBlue!20, thick, minimum size=0.8cm},
+    elder node/.style={rectangle, draw=LemmaGreen!80, fill=LemmaGreen!20, thick, minimum size=0.7cm},
+    link/.style={thick},
+    strong link/.style={thick, DarkSkyBlue}
+]
+
+% Nodes
+\node[arcane node] (A1) at (0,0) {$A_1$};
+\node[arcane node] (A2) at (2,1) {$A_2$};
+\node[arcane node] (A3) at (4,0) {$A_3$};
+\node[arcane node] (A4) at (6,1) {$A_4$};
+\node[arcane node] (A5) at (8,0) {$A_5$};
+
+\node[elder node] (E1) at (1,-1.5) {$E_1$};
+\node[elder node] (E2) at (3,-1.5) {$E_2$};
+\node[elder node] (E3) at (5,-1.5) {$E_3$};
+\node[elder node] (E4) at (7,-1.5) {$E_4$};
+
+% Links
+\draw[link] (A1) -- (A2);
+\draw[link] (A2) -- (A3);
+\draw[link] (A3) -- (A4);
+\draw[link] (A4) -- (A5);
+
+\draw[strong link] (A1) -- (E1);
+\draw[strong link] (A2) -- (E1);
+\draw[strong link] (A2) -- (E2);
+\draw[strong link] (A3) -- (E2);
+\draw[strong link] (A3) -- (E3);
+\draw[strong link] (A4) -- (E3);
+\draw[strong link] (A4) -- (E4);
+\draw[strong link] (A5) -- (E4);
+
+\draw[link, dashed] (E1) -- (E2);
+\draw[link, dashed] (E2) -- (E3);
+\draw[link, dashed] (E3) -- (E4);
+
+\end{tikzpicture}
+\caption{Network representation of Arcane-Elder interactions}
+\end{figure}

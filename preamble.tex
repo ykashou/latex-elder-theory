@@ -1,0 +1,214 @@
+% Preamble file containing all package configurations and custom settings
+
+% Basic packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}  % Latin Modern fonts
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{bm}  % Bold math symbols
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{mdframed}
+\usepackage{thmtools}
+\usepackage{thm-restate}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{algorithm2e}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage[]{geometry}
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\usepackage{csquotes}
+\usepackage{makeidx}
+\usepackage{minted}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{etoolbox}
+\usepackage{xparse}
+\usepackage{marginnote}
+\usepackage{sidenotes}
+\usepackage{tcolorbox}
+
+% Define colors
+\definecolor{DarkSkyBlue}{RGB}{0, 102, 204}
+\definecolor{LightGray}{RGB}{240, 240, 240}
+\definecolor{DarkGray}{RGB}{64, 64, 64}
+\definecolor{TheoremBlue}{RGB}{230, 236, 245}
+\definecolor{LemmaGreen}{RGB}{230, 245, 230}
+\definecolor{PropositionYellow}{RGB}{245, 245, 230}
+\definecolor{DefinitionPurple}{RGB}{240, 230, 245}
+\definecolor{ExampleGray}{RGB}{240, 240, 240}
+\definecolor{CodeBackground}{RGB}{248, 248, 248}
+\definecolor{CodeComment}{RGB}{0, 128, 0}
+\definecolor{CodeKeyword}{RGB}{0, 0, 255}
+\definecolor{CodeString}{RGB}{163, 21, 21}
+
+% Page geometry
+\geometry{
+    paper=a4paper,
+    inner=2.5cm,
+    outer=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    marginparwidth=2cm,
+    marginparsep=0.5cm,
+    headsep=1cm,
+    footskip=1cm
+}
+
+% Set line spacing
+\renewcommand{\baselinestretch}{1.3}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=DarkSkyBlue,
+    citecolor=DarkSkyBlue,
+    urlcolor=DarkSkyBlue,
+    pdfauthor={Author Name},
+    pdftitle={Elder, the Arcane Realization},
+    pdfsubject={Mathematical Text},
+    pdfkeywords={mathematics, arcane, realization}
+}
+
+% Configure listings for code
+\lstset{
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{CodeBackground},
+    keywordstyle=\color{CodeKeyword},
+    commentstyle=\color{CodeComment},
+    stringstyle=\color{CodeString},
+    numbers=left,
+    numberstyle=\tiny\color{DarkGray},
+    numbersep=5pt,
+    frame=single,
+    framesep=5pt,
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
+    tabsize=4
+}
+
+% GoLang language definition for listings
+\lstdefinelanguage{golang}{
+  keywords={break, default, func, interface, select, case, defer, go, map, struct, chan, else, goto, package, switch, const, fallthrough, if, range, type, continue, for, import, return, var},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`
+}
+
+% Set the default listing language to GoLang
+\lstset{language=golang}
+
+% Configure algorithm2e
+\SetAlgorithmName{Algorithm}{Algorithm}{List of Algorithms}
+\SetAlgoCaptionLayout{smallcaption}
+\SetAlgoNoLine
+\SetAlgoNoEnd
+\SetArgSty{textnormal}
+\SetDataSty{textsf}
+\SetFuncSty{texttt}
+\SetKwSty{textbf}
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+
+% TikZ and PGFPlots configuration
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{
+    arrows,
+    automata,
+    backgrounds,
+    calc,
+    decorations.pathmorphing,
+    decorations.pathreplacing,
+    fit,
+    matrix,
+    patterns,
+    positioning,
+    shapes.geometric,
+    shapes.misc
+}
+
+% Bibliography file
+\addbibresource{bibliography.bib}
+
+% Set up index
+\makeindex
+
+% Load custom macro files
+\input{macros/math_macros}
+\input{macros/theorem_styles}
+
+% Load custom style files
+\input{styles/chapter_style}
+\input{styles/layout_style}
+
+% Define the two-column layout
+\newenvironment{twocolumns}
+{\begin{multicols}{2}}
+{\end{multicols}}
+
+% Create custom chapter display with margin numbers
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}
+{\filleft\begin{minipage}{5cm}
+\flushright{\fontsize{80}{80}\color{DarkSkyBlue}\selectfont\thechapter}
+\end{minipage}}
+{20pt}
+{\titlerule\vspace{10pt}\filright}
+[\vspace{10pt}]
+
+% Custom section styling
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{DarkSkyBlue}}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}
+{\thesubsubsection}{1em}{}
+
+% Header and footer setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{\leftmark}}
+\fancyhead[LO]{\textit{\rightmark}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Special pages style
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% Custom list of theorems
+\newcommand{\listoftheorems}{
+    \chapter*{List of Theorems}
+    \markboth{LIST OF THEOREMS}{LIST OF THEOREMS}
+    \addcontentsline{toc}{chapter}{List of Theorems}
+    \begingroup
+    \let\clearpage\relax
+    \listoftheorems[ignoreall,show={theorem}]
+    \endgroup
+}

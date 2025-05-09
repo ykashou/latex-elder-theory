@@ -1,0 +1,50 @@
+% Main file for "Elder, the Arcane Realization"
+% A comprehensive mathematical text with custom styling and advanced typesetting
+
+\documentclass[11pt,twoside,openright]{book}
+
+% Load the preamble containing all package configurations and custom settings
+\input{preamble}
+
+% Begin the document
+\begin{document}
+
+% Front matter
+\frontmatter
+
+% Title page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Huge\bfseries \textrm{\textcolor{black}{The }}\textcolor{DarkSkyBlue}{Elder}\textrm{\textcolor{black}{, the Arcane Realization}}\par}
+    \vspace{2cm}
+    {\Large Mathematical Foundations and Applications\par}
+    \vspace{4cm}
+    {\Large\itshape Author Name\par}
+    \vfill
+    {\large \today\par}
+\end{titlepage}
+
+% Table of contents and other front matter
+\tableofcontents
+\listoffigures
+\listoftables
+\listofalgorithms
+\listoftheorems
+
+% Main matter
+\mainmatter
+
+% Include parts
+\input{parts/part1}
+
+% Back matter
+\backmatter
+
+% Bibliography
+\printbibliography[title=References]
+
+% Index
+\printindex
+
+\end{document}

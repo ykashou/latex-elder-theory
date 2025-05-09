@@ -1,0 +1,39 @@
+modules = ["bash"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "LaTeX Compiler"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "latex_compilation"
+
+[[workflows.workflow]]
+name = "LaTeX Compiler"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pdflatex -interaction=nonstopmode main.tex"
+
+[[workflows.workflow]]
+name = "latex_compilation"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd /home/runner && pdflatex -interaction=nonstopmode main.tex && biber main && pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex && ls -la main.pdf && echo \"Compilation complete. PDF should be available if no errors occurred.\""
+
+[deployment]
+run = ["sh", "-c", "pdflatex -interaction=nonstopmode main.tex"]
