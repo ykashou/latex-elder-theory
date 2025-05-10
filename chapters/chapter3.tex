@@ -838,11 +838,66 @@ where $K_{\elderparam}$ is a holomorphic kernel that satisfies the Cauchy-Rieman
 The entire Elder-Mentor-Erudite architecture implements a hierarchical coding theory where each level serves specific informational roles:
 
 \begin{theorem}[Hierarchical Minimum Description Length]
+\label{thm:hierarchical_mdl}
 The Elder-Mentor-Erudite system optimizes a hierarchical minimum description length objective:
 \begin{equation}
-\text{MDL}(X, Y, \{\tau\}, \{D\}) = L(\elderparam) + \sum_j L(\mentorparams(j) | \elderparam) + \sum_{i,j} L(\eruditeparams(i,j) | \mentorparams(j)) + \sum_{i,j} L(X_{i,j}, Y_{i,j} | \eruditeparams(i,j))
+\begin{split}
+\text{MDL}(X, Y, \{\tau\}, \{D\}) = \underbrace{L(\elderparam)}_{\text{Universal principles}} + \underbrace{\sum_j L(\mentorparams(j) | \elderparam)}_{\text{Domain knowledge}} + \\
+\underbrace{\sum_{i,j} L(\eruditeparams(i,j) | \mentorparams(j))}_{\text{Task specialization}} + \underbrace{\sum_{i,j} L(X_{i,j}, Y_{i,j} | \eruditeparams(i,j))}_{\text{Data encoding}}
+\end{split}
 \end{equation}
 where $L(\cdot)$ represents description length in bits, and subscripts $i,j$ index tasks and domains.
+
+This hierarchical objective decomposes the total description length into four components that capture the multi-level nature of knowledge representation across the Elder-Mentor-Erudite system:
+
+\begin{enumerate}
+    \item \textbf{Universal principles:} $L(\elderparam)$ measures the complexity of the Elder's universal knowledge, represented in complex Hilbert space.
+    
+    \item \textbf{Domain knowledge:} $L(\mentorparams(j) | \elderparam)$ quantifies the additional information needed to specify domain $j$'s Mentor given the Elder's knowledge. This conditional encoding leverages the fact that Elder provides a structured prior.
+    
+    \item \textbf{Task specialization:} $L(\eruditeparams(i,j) | \mentorparams(j))$ measures the task-specific parameters conditioned on domain knowledge, reflecting how task learning is facilitated by domain-level abstractions.
+    
+    \item \textbf{Data encoding:} $L(X_{i,j}, Y_{i,j} | \eruditeparams(i,j))$ captures the cost of encoding the actual data samples using task-specific parameters.
+\end{enumerate}
+
+The hierarchical structure creates an information bottleneck at each level, compressing information in a principled way where:
+
+\begin{align}
+    ||\elderparam|| \ll \sum_j ||\mentorparams(j)|| \ll \sum_{i,j} ||\eruditeparams(i,j)||
+\end{align}
+
+This reflects the progressive specialization of knowledge from universal principles (Elder) to domain-specific knowledge (Mentor) to task-specific execution (Erudite).
+
+Furthermore, this hierarchical MDL formulation has several important properties:
+
+\begin{corollary}[Efficient Cross-Domain Transfer]
+\label{cor:efficient_transfer}
+For domains $D_j$ and $D_k$ that share structural similarities captured by Elder parameters $\elderparam$, the conditional description length satisfies:
+\begin{equation}
+    L(\mentorparams(j) | \elderparam) + L(\mentorparams(k) | \elderparam) < L(\mentorparams(j)) + L(\mentorparams(k))
+\end{equation}
+yielding more efficient encoding than treating domains independently.
+\end{corollary}
+
+\begin{corollary}[Information Flow Gradients]
+\label{cor:information_gradients}
+The gradient of the hierarchical MDL with respect to Elder parameters reveals critical cross-domain knowledge:
+\begin{equation}
+    \nabla_{\elderparam}\text{MDL} = \nabla_{\elderparam}L(\elderparam) + \sum_j \nabla_{\elderparam}L(\mentorparams(j) | \elderparam)
+\end{equation}
+where the second term identifies parameters that most efficiently compress information across multiple domains.
+\end{corollary}
+
+\begin{corollary}[Complex-Valued Compression]
+\label{cor:complex_compression}
+The complex-valued representation in Elder provides a more efficient encoding than real-valued alternatives:
+\begin{equation}
+    L_{\mathbb{C}}(\elderparam) < L_{\mathbb{R}}(\elderparam_{\text{real}})
+\end{equation}
+where $L_{\mathbb{C}}$ and $L_{\mathbb{R}}$ represent description lengths in complex and real spaces, respectively, for functionally equivalent parameters.
+\end{corollary}
+
+When implemented in the computational architecture, Theorem \ref{thm:hierarchical_mdl} naturally induces emergence of principles that efficiently compress knowledge across domains, providing a formal justification for the observed capacity of Elder to discover universal patterns that span seemingly unrelated domains.
 \end{theorem}
 
 \begin{proposition}[Code Rate Analysis]
