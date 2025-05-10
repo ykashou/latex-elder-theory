@@ -144,40 +144,48 @@ To efficiently implement the mathematically complex Elder Training Loop, we need
 
 \subsubsection{Elder Kernel Implementation}
 
-The core holomorphic operations of the Elder Training Loop are performed using specialized GPU kernels. The following pseudocode outlines the CUDA kernel implementation for the holomorphic transformations:
+The core heliomorphic operations of the Elder Training Loop are performed using specialized GPU kernels. The following pseudocode outlines the CUDA kernel implementation for the heliomorphic transformations:
 
 \begin{algorithm}
-\caption{GPU Kernel for Holomorphic Operations}
+\caption{GPU Kernel for Heliomorphic Operations}
 \begin{algorithmic}[1]
 \Function{ElderKernelLaunch}{$\mathcal{E}_{\mathcal{M}}$, $\nabla \mathcal{L}_{\text{Elder}}$, $\eta$}
-    \State Allocate GPU memory for manifold points, gradients, and results
-    \State Copy manifold data and gradients to GPU
-    \State Configure grid and block dimensions based on manifold size
-    \State Launch \textproc{HolomorphicUpdateKernel} with parameters
+    \State Allocate GPU memory for manifold points, gradients, shells, and results
+    \State Copy manifold data, shell mappings, and gradients to GPU
+    \State Configure grid and block dimensions based on sun-pattern organization
+    \State Launch \textproc{HeliomorphicUpdateKernel} with parameters
     \State Synchronize device and copy results back to host
     \State \Return Updated manifold points
 \EndFunction
 
 \State
 
-\Function{HolomorphicUpdateKernel}{$p_i$, $\nabla \mathcal{L}_i$, $\eta$}
+\Function{HeliomorphicUpdateKernel}{$p_i$, $\nabla \mathcal{L}_i$, $\eta$, $r_i$, $\phi(r)$}
     \State Get global thread ID: $idx$
     \If{$idx < \text{manifold\_size}$}
-        \State // Compute Wirtinger derivatives for holomorphic update
+        \State // Compute shell index and angular position
+        \State $\text{shell\_idx} \gets \text{ShellIndex}(r_i)$
+        \State $\theta_i \gets \text{ComputeAngularComponent}(p_i)$
+        
+        \State // Compute Heliomorphic derivatives with radial component
         \State $\frac{\partial f}{\partial z} \gets \frac{1}{2}\left(\frac{\partial f}{\partial x} - i\frac{\partial f}{\partial y}\right)$
         \State $\frac{\partial f}{\partial \bar{z}} \gets \frac{1}{2}\left(\frac{\partial f}{\partial x} + i\frac{\partial f}{\partial y}\right)$
+        \State $\frac{\partial f}{\partial r} \gets \frac{x}{r}\frac{\partial f}{\partial x} + \frac{y}{r}\frac{\partial f}{\partial y}$
         
-        \State // Apply holomorphic constraints
-        \State $v_i \gets \frac{\partial f}{\partial z}$ // Ensure gradient is holomorphic
+        \State // Apply heliomorphic constraints with radial weighting
+        \State $v_i \gets \frac{\partial f}{\partial z} + \phi(r_i) \cdot \frac{\partial f}{\partial r}$
         
-        \State // Parallel transport on the manifold
-        \State $v_i^{\text{transported}} \gets \text{ParallelTransport}(p_i, v_i)$
+        \State // Compute shell-aware learning rate
+        \State $\eta_{\text{shell}} \gets \eta \cdot \text{ShellLearningRate}(r_i)$
         
-        \State // Apply exponential map update
-        \State $p_i^{\text{new}} \gets \exp_{p_i}(-\eta \cdot v_i^{\text{transported}})$
+        \State // Parallel transport on the manifold preserving shell structure
+        \State $v_i^{\text{transported}} \gets \text{HeliomorphicTransport}(p_i, v_i, r_i, \theta_i)$
         
-        \State // Store result in output array
-        \State $\text{output}[idx] \gets p_i^{\text{new}}$
+        \State // Apply shell-aware exponential map update
+        \State $p_i^{\text{new}} \gets \exp_{p_i}^{\odot}(-\eta_{\text{shell}} \cdot v_i^{\text{transported}})$
+        
+        \State // Store result in output array by shell index
+        \State $\text{output}[\text{shell\_idx}][idx] \gets p_i^{\text{new}}$
     \EndIf
 \EndFunction
 \end{algorithmic}
