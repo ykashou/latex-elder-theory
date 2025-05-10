@@ -5,26 +5,21 @@
 
 % Basic packages for styling and math
 \usepackage{amsmath}
-\usepackage{amssymb}
+\\usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{hyperref}
+\\usepackage{graphicx}
+\\usepackage{xcolor}
+\\usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{enumitem}
-\usepackage{tikz}
-\usepackage{fancyhdr}
-\usepackage{titlesec}
-\usepackage{multicol}
-\usepackage{caption}
-\usepackage[]{geometry}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{mathtools}
-
-% Complex number command
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\R}{\mathbb{R}}
+\\usepackage{tikz}
+\\usepackage{fancyhdr}
+\\usepackage{titlesec}
+\\usepackage{multicol}
+\\usepackage{caption}
+\\usepackage[]{geometry}
+\\usepackage{algorithm}
+\\usepackage{algpseudoco
 
 % Bibliography setup
 \usepackage[style=alphabetic,backend=biber]{biblatex}
@@ -68,7 +63,7 @@
     bottom=2.5cm,
     headsep=1cm,
     footskip=1cm,
-    headheight=25.2pt
+    headheight=14pt
 }
 
 % Set up headers and footers
@@ -119,8 +114,6 @@
 \input{chapters/chapter_mentor_loss.tex}
 
 \input{chapters/chapter_elder_loss.tex}
-
-\input{chapters/elder_training_loop.tex}
 
 \input{chapters/chapter_elder_manifold.tex}
 
