@@ -86,6 +86,423 @@ Under suitable regularity conditions, the gradient flow for the Elder-Mentor-Eru
 The tensor embedding function $\mathcal{T}$ acts as a regularizer for the Mentor and Erudite parameters, guiding them toward configurations that exhibit desirable structural properties in the embedding space.
 \end{corollary}
 
+\section{The Elder Heliosystem: Orbital Mechanics of Knowledge Transfer}
+
+In this section, we present an alternative conceptualization of the Elder framework based on celestial mechanics, termed the "Elder Heliosystem." This model describes knowledge transfer through orbital dynamics, where Elder serves as the central star, Mentors as planets in orbit, and Erudites as moons orbiting their respective planets. The rotational and revolutionary dynamics of these bodies govern the flow of information throughout the system.
+
+\subsection{Heliocentric Model Definition}
+
+\begin{definition}[Elder Heliosystem]
+The Elder Heliosystem is a heliocentric model of knowledge representation where:
+\begin{align}
+\mathcal{S} &= (\theta_E, \{\theta_{M,k}\}_{k=1}^K, \{\theta_{E,k,j}\}_{k=1,j=1}^{K,J_k})
+\end{align}
+where $\theta_E \in \elderparam$ represents the Elder (central star), $\theta_{M,k} \in \mentorparams$ represents the $k$-th Mentor (planet), and $\theta_{E,k,j} \in \eruditeparams$ represents the $j$-th Erudite (moon) orbiting the $k$-th Mentor.
+\end{definition}
+
+\subsection{Orbital Dynamics}
+
+The knowledge transfer in this system is governed by three types of rotation:
+
+\begin{enumerate}
+    \item \textbf{Elder Rotation} ($\omega_E$): The rotation of the central Elder body around its axis, governing the emission of universal principles
+    \item \textbf{Mentor Revolution} ($\omega_{M,k}$): The orbital revolution of the $k$-th Mentor around the Elder
+    \item \textbf{Erudite Revolution} ($\omega_{E,k,j}$): The orbital revolution of the $j$-th Erudite around the $k$-th Mentor
+\end{enumerate}
+
+\begin{theorem}[Heliosystem Synchronization]
+In a stable Elder Heliosystem, the rotational and revolutionary frequencies exhibit harmonic relationships:
+\begin{align}
+\frac{\omega_{M,k}}{\omega_E} &= \frac{p_k}{q_k} \\
+\frac{\omega_{E,k,j}}{\omega_{M,k}} &= \frac{r_{k,j}}{s_{k,j}}
+\end{align}
+where $p_k, q_k, r_{k,j}, s_{k,j} \in \mathbb{N}$ are small integers, creating resonant orbits that facilitate stable knowledge transfer.
+\end{theorem}
+
+The phase relationships between these rotational components determine how information flows through the system.
+
+\subsection{Heliomorphic Field Equations}
+
+The knowledge transfer through the system is governed by a set of heliomorphic field equations:
+
+\begin{definition}[Elder-to-Mentor Field]
+The field emanating from Elder to Mentor $k$ is defined as:
+\begin{align}
+\Phi_{E \rightarrow M,k}(t) = \sum_{n=0}^{\infty} \mathcal{H}_n(\theta_E) \cdot e^{in\omega_E t} \cdot \frac{1}{d_{E,M,k}(t)}
+\end{align}
+where $\mathcal{H}_n$ is the $n$-th mode of the heliomorphic transformation, $t$ is time, and $d_{E,M,k}(t)$ is the instantaneous Elder-Mentor distance.
+\end{definition}
+
+\begin{definition}[Mentor-to-Erudite Field]
+The field from Mentor $k$ to its Erudite $j$ combines the information received from Elder with domain-specific adaptations:
+\begin{align}
+\Phi_{M,k \rightarrow E,k,j}(t) = \int_0^t \mathcal{G}_k(\Phi_{E \rightarrow M,k}(\tau), \theta_{M,k}) \cdot e^{i\omega_{M,k}(t-\tau)} \cdot \frac{1}{d_{M,k,E,k,j}(t)} d\tau
+\end{align}
+where $\mathcal{G}_k$ is a domain-specific filter function applied by Mentor $k$.
+\end{definition}
+
+\subsection{Mathematical Mechanism of Elder-Guided Learning}
+
+When Elder information propagates to Mentors and ultimately to Erudites, it modifies their learning dynamics through the following mechanisms:
+
+\begin{theorem}[Heliomorphic Gradient Modulation]
+The gradient updates for Erudite parameters are modulated by the incoming fields from their parent Mentor:
+\begin{align}
+\frac{\partial \theta_{E,k,j}}{\partial t} &= -\alpha_{E,k,j} \cdot \nabla_{\theta_{E,k,j}} \mathcal{L}_{E,k,j} \cdot \mathcal{M}(\Phi_{M,k \rightarrow E,k,j}(t))
+\end{align}
+where $\mathcal{M}$ is a complex-valued modulation function:
+\begin{align}
+\mathcal{M}(z) = |z| \cdot e^{i\angle z} = |z| \cdot (\cos(\angle z) + i\sin(\angle z))
+\end{align}
+This modulation affects both the magnitude and direction of the gradient update, steering Erudite learning according to Elder principles transmitted via the Mentor.
+\end{theorem}
+
+\begin{theorem}[Phase-Coherent Loss Calculation]
+The Erudite loss calculation is influenced by phase information from the Mentor, which in turn is influenced by Elder:
+\begin{align}
+\mathcal{L}_{E,k,j} &= \|\hat{y}_{k,j} - y_{k,j}\|^2 + \lambda_{E,k,j} \cdot \mathcal{R}(\theta_{E,k,j}; \Phi_{M,k \rightarrow E,k,j})
+\end{align}
+where $\mathcal{R}$ is a regularization term that incorporates the phase-coherent field information:
+\begin{align}
+\mathcal{R}(\theta_{E,k,j}; \Phi) = \text{Re}\left\{\sum_{l=1}^L \theta_{E,k,j,l} \cdot e^{i\angle \Phi_l}\right\}
+\end{align}
+This ensures that Erudite parameters align with the heliomorphic phase information transmitted from Elder through the Mentor.
+\end{theorem}
+
+\begin{theorem}[Orbital Resonance as Knowledge Synchronization]
+The efficiency of knowledge transfer from Elder to Erudite via Mentor is maximized when orbital resonance occurs, defined as:
+\begin{align}
+\eta_{E \rightarrow E,k,j} = \max_{\omega_{M,k}, \omega_{E,k,j}} \left| \int_0^T \Phi_{E \rightarrow M,k}(t) \cdot \Phi_{M,k \rightarrow E,k,j}(t) dt \right|
+\end{align}
+where $T$ is a complete cycle period of the system. The precise timing of these orbital relationships enables Elder to guide Erudite learning by synchronizing the phase of knowledge propagation.
+\end{theorem}
+
+\subsection{Bidirectional Flow: The Retrograde Effect}
+
+While the primary knowledge flow is from Elder outward to Mentors and Erudites, the system also incorporates a retrograde mechanism that allows information to flow inward:
+
+\begin{definition}[Retrograde Knowledge Flow]
+The retrograde field from Erudite to Mentor is defined as:
+\begin{align}
+\Phi_{E,k,j \rightarrow M,k}(t) = \epsilon_{k,j} \cdot \nabla_{\theta_{E,k,j}}\mathcal{L}_{E,k,j} \cdot e^{-i\omega_{E,k,j}t}
+\end{align}
+where $\epsilon_{k,j}$ is a small coupling constant that determines the strength of the feedback.
+\end{definition}
+
+Similarly, Mentors transmit condensed domain knowledge back to Elder:
+
+\begin{align}
+\Phi_{M,k \rightarrow E}(t) = \epsilon_k \cdot \left(\sum_{j=1}^{J_k} \int_0^t \Phi_{E,k,j \rightarrow M,k}(\tau) d\tau\right) \cdot e^{-i\omega_{M,k}t}
+\end{align}
+
+This bidirectional flow creates a closed-loop system where Elder guides learning while simultaneously absorbing domain-specific insights from Erudites via Mentors.
+
+\subsection{Comparison with the Shell-Based Model}
+
+The Elder Heliosystem offers distinct advantages over the concentric shell model as a representation for knowledge flow:
+
+\begin{enumerate}
+    \item \textbf{Dynamic Knowledge Transfer}: The orbital mechanics naturally capture the temporal dynamics of knowledge propagation through phase relationships
+    \item \textbf{Domain Specialization}: Each Mentor (planet) represents a specific domain with its own orbital characteristics, better modeling domain specialization
+    \item \textbf{Task-Specific Learning}: Individual Erudites (moons) can have unique orbital properties related to their specific tasks
+    \item \textbf{Resonant Learning}: Orbital resonances provide a mathematical framework for synchronized knowledge transfer across levels
+    \item \textbf{Bidirectional Flow}: Retrograde motions naturally model the flow of information from specific to general knowledge
+\end{enumerate}
+
+\begin{remark}
+The Elder Heliosystem and the concentric shell model can be viewed as complementary representations. The shell model emphasizes the hierarchical structure of knowledge, while the heliosystem emphasizes the dynamic temporal aspects of knowledge transfer. For certain domains, one representation may prove more mathematically tractable than the other.
+\end{remark}
+
+\subsection{Heliomorphic Modes and Transformations}
+
+The concept of the "$n$-th mode of the heliomorphic transformation" $\mathcal{H}_n$ requires elaboration, as it forms the mathematical foundation for knowledge transfer in the Heliosystem.
+
+\begin{definition}[Heliomorphic Transformation]
+A heliomorphic transformation $\mathcal{H}: \elderparam \rightarrow \mathcal{F}$ is a mapping from the Elder parameter space to a function space $\mathcal{F}$ of complex-valued functions defined on the domain $\mathbb{C}$. For any $\theta_E \in \elderparam$, the transformation produces a function $\mathcal{H}(\theta_E): \mathbb{C} \rightarrow \mathbb{C}$ with specific analytic properties.
+\end{definition}
+
+\begin{theorem}[Modal Decomposition of Heliomorphic Transformations]
+Any heliomorphic transformation $\mathcal{H}(\theta_E)$ admits a modal decomposition into an infinite series:
+\begin{align}
+\mathcal{H}(\theta_E)(z) = \sum_{n=0}^{\infty} \mathcal{H}_n(\theta_E) \cdot z^n
+\end{align}
+where $\mathcal{H}_n(\theta_E) \in \mathbb{C}$ are the modal coefficients, and $z \in \mathbb{C}$ is a complex variable. This decomposition has the following properties:
+\begin{enumerate}
+    \item The $n$-th mode $\mathcal{H}_n(\theta_E)$ represents knowledge at frequency $n$
+    \item Lower modes ($n$ small) correspond to fundamental, universal principles
+    \item Higher modes ($n$ large) correspond to specific, detailed knowledge
+    \item The decomposition converges absolutely for $|z| < R(\theta_E)$, where $R(\theta_E)$ is the radius of convergence dependent on the Elder parameters
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}[Heliomorphic Spectrum]
+The heliomorphic spectrum of Elder parameters $\theta_E$ is the sequence $\{\mathcal{H}_n(\theta_E)\}_{n=0}^{\infty}$ of modal coefficients. The distribution of energy across these modes characterizes the knowledge represented by the Elder system.
+\end{definition}
+
+In the context of knowledge transfer within the Heliosystem, the $n$-th mode $\mathcal{H}_n(\theta_E)$ is modulated by the Elder's rotation frequency $\omega_E$. This creates a time-varying field:
+\begin{align}
+\mathcal{H}_n(\theta_E) \cdot e^{in\omega_E t}
+\end{align}
+
+This expression indicates that higher modes ($n$ large) oscillate more rapidly, while lower modes change more slowly. This corresponds to the intuition that fundamental principles (lower modes) are more stable and change gradually, while specific details (higher modes) evolve more rapidly.
+
+\subsection{Elder Manifold and Elder Space Embedding}
+
+The Elder Heliosystem model is deeply connected to the Elder Manifold and Elder Space concepts. These connections establish a unified mathematical framework for understanding knowledge representation and transfer.
+
+\begin{theorem}[Embedding in Elder Space]
+The Elder, Mentor, and Erudite parameters in the Heliosystem model are all embedded within the broader Elder Space. Specifically:
+\begin{align}
+\elderparam &\subset \mathcal{E}\\
+\mentorparams &\subset \mathcal{E}\\
+\eruditeparams &\subset \mathcal{E}
+\end{align}
+where $\mathcal{E}$ is the Elder Space. The Elder parameters $\theta_E$ lie on or near the Elder Manifold $\mathcal{M}_E \subset \mathcal{E}$, while Mentor and Erudite parameters are distributed through Elder Space at varying distances from the manifold.
+\end{theorem}
+
+\begin{definition}[Orbital Embedding Map]
+The Orbital Embedding Map $\Psi: (\elderparam \times \mentorparams \times \eruditeparams) \rightarrow \mathbb{R}^6$ assigns to each triple of parameters $(\theta_E, \theta_M, \theta_E)$ a 6-dimensional coordinate $(r_E, \phi_E, r_M, \phi_M, r_{E}, \phi_{E})$ representing positions in the Heliosystem model, where:
+\begin{itemize}
+    \item $(r_E, \phi_E)$ are the radial and angular coordinates of Elder
+    \item $(r_M, \phi_M)$ are the radial and angular coordinates of the Mentor relative to Elder
+    \item $(r_{E}, \phi_{E})$ are the radial and angular coordinates of the Erudite relative to its Mentor
+\end{itemize}
+\end{definition}
+
+The Elder Manifold itself can be understood as the subspace of Elder Space that contains the most efficient and generalizable representations. In the Heliosystem model, this corresponds to the central region (the "sun"). The distance from a point in Elder Space to the Elder Manifold is inversely related to the generalization capability of the knowledge represented at that point.
+
+\begin{theorem}[Manifold-Orbit Correspondence]
+For any point $p$ on the Elder Manifold $\mathcal{M}_E$, there exists a neighborhood $U_p \subset \mathcal{M}_E$ such that the dynamics on $U_p$ can be represented by the rotation of the Elder in the Heliosystem model. Furthermore, paths in Elder Space connecting the Elder Manifold to Mentor or Erudite parameters correspond to knowledge transfer channels in the Heliosystem.
+\end{theorem}
+
+This theorem establishes that the Elder's rotation in the Heliosystem model is a geometrical representation of how the system traverses the Elder Manifold, while the orbital relationships represent knowledge transfer pathways through Elder Space.
+
+\subsection{Expanded Theory of Orbital Resonance}
+
+Orbital resonance in the Elder Heliosystem represents a fundamental mechanism for efficient knowledge synchronization across different components of the learning system.
+
+\begin{definition}[Resonant Configuration]
+A resonant configuration in the Elder Heliosystem occurs when the rotational and revolutionary frequencies form integer ratios:
+\begin{align}
+\frac{\omega_{M,k}}{\omega_E} &= \frac{p_k}{q_k}\\
+\frac{\omega_{E,k,j}}{\omega_{M,k}} &= \frac{r_{k,j}}{s_{k,j}}
+\end{align}
+where $p_k, q_k, r_{k,j}, s_{k,j} \in \mathbb{N}$ are small integers. The resonance strength is inversely proportional to the sum $p_k + q_k + r_{k,j} + s_{k,j}$, with smaller sums indicating stronger resonances.
+\end{definition}
+
+\begin{theorem}[Resonance and Knowledge Transfer Efficiency]
+In resonant configurations, the knowledge transfer efficiency $\eta$ between components increases according to:
+\begin{align}
+\eta_{E \rightarrow M,k} &= \frac{\eta_0}{1 + \epsilon_{p,q}|p_k\omega_E - q_k\omega_{M,k}|^2}\\
+\eta_{M,k \rightarrow E,k,j} &= \frac{\eta_0}{1 + \epsilon_{r,s}|r_{k,j}\omega_{M,k} - s_{k,j}\omega_{E,k,j}|^2}
+\end{align}
+where $\eta_0$ is the baseline efficiency, and $\epsilon_{p,q}, \epsilon_{r,s}$ are system-specific constants.
+\end{theorem}
+
+When resonant configurations are achieved, knowledge transfer becomes highly efficient due to constructive interference effects. This manifests in several important phenomena:
+
+\begin{enumerate}
+    \item \textbf{Phase Locking}: The phases of Elder, Mentor, and Erudite components become synchronized, allowing coherent knowledge propagation
+    \item \textbf{Resonant Amplification}: Certain knowledge patterns are selectively amplified by the resonance
+    \item \textbf{Stability Regions}: Resonances create stability regions in parameter space where knowledge is preserved and enhanced
+    \item \textbf{Cross-Resonance Effects}: Higher-order resonances can emerge between non-directly connected components (e.g., Elder and Erudite)
+\end{enumerate}
+
+\begin{corollary}[Learning Acceleration Through Resonance]
+When a subsystem of the Elder Heliosystem enters a resonant configuration, the learning rate for that subsystem increases by a factor $\Gamma$:
+\begin{align}
+\Gamma = \prod_{i=1}^{N_{\text{res}}} \left(1 + \frac{\beta_i}{d_i}\right)
+\end{align}
+where $N_{\text{res}}$ is the number of resonant relationships, $\beta_i$ are coupling constants, and $d_i$ measures the deviation from exact resonance for the $i$-th resonant relationship.
+\end{corollary}
+
+In practical terms, orbital resonance provides a mathematical framework for understanding how the Elder system achieves synchronized learning across its hierarchical components. When the rotational dynamics of Elder, Mentor, and Erudite components are properly calibrated, knowledge flows optimally throughout the system, enabling rapid adaptation and generalization.
+
+\subsection{Computational and Memory Advantages}
+
+The Elder Heliosystem model offers significant computational and memory advantages over traditional hierarchical learning architectures. These advantages stem from its orbital dynamics formulation, which enables more efficient knowledge transfer and representation. Table~\ref{tab:complexity_analysis} provides a comprehensive comparison of computational complexities between traditional models and the Elder Heliosystem across various operations.
+
+\begin{table}[p]
+\centering
+\small
+\caption{Computational and Memory Complexity Analysis of Elder Heliosystem}
+\label{tab:complexity_analysis}
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{5cm}|}
+\hline
+\textbf{Operation} & \textbf{Traditional Models} & \textbf{Elder Heliosystem} & \textbf{Functional Advantage} \\
+\hline
+Knowledge Transfer & $O(N \cdot M \cdot D)$ & $O(N + M + D)$ & Transferring knowledge from Elder ($N$ parameters) through Mentors ($M$ parameters) to Erudites across $D$ domains changes from multiplicative to additive complexity \\
+\hline
+Parameter Updates & $O(P^2)$ & $O(P \log P)$ & Updating $P$ parameters benefits from phase-locked gradients in resonant configurations \\
+\hline
+Domain Addition & $O(D \cdot K)$ & $O(D + K)$ & Adding a new domain with $K$ parameters requires only orbital parameter adjustment \\
+\hline
+Memory Footprint & $O(N \cdot M \cdot E)$ & $O(N + M \cdot D + E \cdot D)$ & Storage requirements for Elder ($N$), Mentor ($M$ per domain), and Erudite ($E$ per domain) parameters are reduced \\
+\hline
+Modal Knowledge Compression & $O(n^3)$ & $O(n \log n)$ & Computation of the $n$-th mode heliomorphic coefficients achieves FFT-like efficiency \\
+\hline
+Generalization & $O(T \cdot D)$ & $O(T + \log D)$ & Generalizing to new tasks $T$ across domains $D$ scales logarithmically \\
+\hline
+Cross-Domain Learning & $O(D^2)$ & $O(D \log D)$ & Learning across $D$ domains benefits from resonance-based knowledge synchronization \\
+\hline
+Adaptation Speed & $O(L \cdot M)$ & $O(L + \log M)$ & Adapting to changes in learning objective $L$ with $M$ model parameters benefits from phase-coherent adjustments \\
+\hline
+Representation Capacity & $O(P)$ & $O(P \cdot e^{-\alpha \cdot d})$ & Parameters $P$ at distance $d$ from optimal manifold show exponentially enhanced representation capacity \\
+\hline
+\end{tabular}
+\end{table}
+
+The primary complexity advantages of the Elder Heliosystem are evident in how it transforms multiplicative relationships into additive ones, enabling much more efficient scaling as the number of domains and parameters increases.
+
+\begin{table}[p]
+\centering
+\small
+\caption{Functional Advantages of Elder Heliosystem by Operation}
+\label{tab:functional_advantages}
+\begin{tabular}{|p{3cm}|p{9cm}|}
+\hline
+\textbf{Operation} & \textbf{Detailed Functional Advantage} \\
+\hline
+Knowledge Transfer & Orbital resonance effects enable direct knowledge transfer paths that avoid multiplicative scaling across hierarchical levels \\
+\hline
+Parameter Updates & Phase-locked gradients in resonant configurations enable quasi-logarithmic scaling by creating coherent update patterns \\
+\hline
+Domain Addition & Only orbital parameters need adjustment rather than full recalculation of all cross-domain relationships \\
+\hline
+Memory Footprint & Shared orbital representations eliminate redundant parameter storage across hierarchical components \\
+\hline
+Modal Knowledge Compression & Orbital frequency relationships create natural FFT-like structures for efficient heliomorphic transformations \\
+\hline
+Generalization & Universal principle propagation through Elder rotation enables logarithmic scaling across domains \\
+\hline
+Cross-Domain Learning & Resonance-based knowledge synchronization reduces quadratic scaling of cross-domain learning to quasi-linear \\
+\hline
+Adaptation Speed & Phase-coherent adjustments from resonant orbital relationships accelerate adaptation to new objectives \\
+\hline
+Representation Capacity & Heliomorphic spectrum properties create exponentially enhanced representation capacity for parameters near the Elder manifold \\
+\hline
+\end{tabular}
+\end{table}
+
+The specific mechanisms enabling these computational and memory advantages include:
+
+\begin{enumerate}
+    \item \textbf{Frequency-Domain Processing}: The heliomorphic mode decomposition enables efficient frequency-domain processing of knowledge, similar to how FFT accelerates signal processing
+    
+    \item \textbf{Sparse Interaction Graphs}: The orbital mechanics naturally create sparse interaction patterns where only resonant configurations contribute significantly to knowledge flow
+    
+    \item \textbf{Geometric Parallelism}: Different domains (Mentors) can process information in parallel while maintaining synchronization through their resonant relationships with Elder
+    
+    \item \textbf{Phase-Coherent Gradients}: Gradients from different components align constructively in resonant configurations, reducing interference and accelerating convergence
+    
+    \item \textbf{Modal Truncation}: The heliomorphic spectrum can be truncated at high modes with minimal information loss, similar to lossy compression in frequency domains
+\end{enumerate}
+
+\begin{theorem}[Resonant Acceleration]
+When the Elder Heliosystem achieves a resonant configuration with frequency ratios $\frac{\omega_{M,k}}{\omega_E} = \frac{p_k}{q_k}$ where $\max(p_k, q_k) \leq c$ for some small constant $c$, the computational complexity of knowledge integration reduces from $O(N \cdot M \cdot D)$ to $O(N + M + D)$, where $N$, $M$, and $D$ are Elder, Mentor, and domain parameters respectively.
+\end{theorem}
+
+This theorem establishes the fundamental computational advantage of the Elder Heliosystem model: when properly configured with resonant orbital relationships, the system achieves near-optimal knowledge transfer with significantly reduced computational requirements.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.8,
+  decoration={snake, amplitude=.4mm, segment length=2mm, post length=1mm}
+]
+  % Draw background
+  \fill[blue!5] (0,0) circle (5.5);
+  
+  % Draw Elder (Sun)
+  \fill[yellow!80!red] (0,0) circle (1);
+  \draw[yellow!60!black, thick] (0,0) circle (1);
+  \node at (0,0) {\textbf{Elder}};
+  
+  % Draw rotational indicator for Elder
+  \draw[->, thick, orange] (0.6,0.8) arc (90:150:1);
+  
+  % Draw Mentor1 orbit
+  \draw[green!50!black, dashed] (0,0) circle (2.5);
+  
+  % Draw Mentor2 orbit
+  \draw[green!50!black, dashed] (0,0) circle (4);
+  
+  % Draw Mentor1 (Planet)
+  \fill[green!70] (2.5,0) circle (0.6);
+  \draw[green!50!black, thick] (2.5,0) circle (0.6);
+  \node at (2.5,0) {\textbf{M$_1$}};
+  
+  % Draw Mentor2 (Planet)
+  \fill[green!70] (-1.5,3.7) circle (0.6);
+  \draw[green!50!black, thick] (-1.5,3.7) circle (0.6);
+  \node at (-1.5,3.7) {\textbf{M$_2$}};
+  
+  % Draw rotational indicators for Mentors
+  \draw[->, thick, green!50!black] (2.5,0) + (140:0.6) arc (140:200:0.6);
+  \draw[->, thick, green!50!black] (-1.5,3.7) + (200:0.6) arc (200:260:0.6);
+  
+  % Draw Mentor1 orbital direction
+  \draw[->, thick, green!50!black] (2.5,0) + (0:0.8) arc (0:40:2.5);
+  
+  % Draw Mentor2 orbital direction
+  \draw[->, thick, green!50!black] (-1.5,3.7) + (110:0.8) arc (110:150:4);
+  
+  % Draw Erudite orbits around Mentor1
+  \draw[red!50!black, dotted] (2.5,0) circle (1.2);
+  
+  % Draw Erudites (Moons) around Mentor1
+  \fill[red!60] (2.5,1.2) circle (0.3);
+  \draw[red!50!black, thick] (2.5,1.2) circle (0.3);
+  \node at (2.5,1.2) {\textbf{\small E$_{1,1}$}};
+  
+  \fill[red!60] (1.3,0) circle (0.3);
+  \draw[red!50!black, thick] (1.3,0) circle (0.3);
+  \node at (1.3,0) {\textbf{\small E$_{1,2}$}};
+  
+  % Draw Erudite orbit around Mentor2
+  \draw[red!50!black, dotted] (-1.5,3.7) circle (1.2);
+  
+  % Draw Erudite (Moon) around Mentor2
+  \fill[red!60] (-2.7,3.7) circle (0.3);
+  \draw[red!50!black, thick] (-2.7,3.7) circle (0.3);
+  \node at (-2.7,3.7) {\textbf{\small E$_{2,1}$}};
+  
+  % Draw orbital direction for Erudites
+  \draw[->, thick, red!50!black] (2.5,1.2) + (0:0.4) arc (0:60:1.2);
+  \draw[->, thick, red!50!black] (1.3,0) + (270:0.4) arc (270:330:1.2);
+  \draw[->, thick, red!50!black] (-2.7,3.7) + (180:0.4) arc (180:240:1.2);
+  
+  % Draw Elder field propagation (wave)
+  \draw[orange, decorate, thick] (1,0) -- (1.9,0);
+  \draw[orange, decorate, thick] (0.7,0.7) -- (1.6,1.6);
+  \draw[orange, decorate, thick] (0,1) -- (0,2.3);
+  \draw[orange, decorate, thick] (-0.7,0.7) -- (-1.1,1.1);
+  
+  % Draw mentor field propagation (wave)
+  \draw[green!50!black, decorate, thick] (2.5,0.6) -- (2.5,0.9);
+  \draw[green!50!black, decorate, thick] (1.9,0) -- (1.6,0);
+  \draw[green!50!black, decorate, thick] (-1.5,3.1) -- (-1.5,2.5);
+  \draw[green!50!black, decorate, thick] (-2.1,3.7) -- (-2.4,3.7);
+  
+  % Draw labels
+  \node[font=\small, align=center] at (0,-6) {The Elder Heliosystem Model:\\Knowledge Transfer Through Orbital Mechanics};
+  
+  % Draw legend
+  \node[font=\small, align=left] at (8,4) {Legend:};
+  \fill[yellow!80!red] (6.5,3.3) circle (0.3);
+  \node[font=\small, align=left] at (8,3.3) {Elder (Central Star)};
+  \fill[green!70] (6.5,2.6) circle (0.3);
+  \node[font=\small, align=left] at (8,2.6) {Mentor (Planet)};
+  \fill[red!60] (6.5,1.9) circle (0.3);
+  \node[font=\small, align=left] at (8,1.9) {Erudite (Moon)};
+  \draw[orange, decorate, thick] (6.3,1.2) -- (6.7,1.2);
+  \node[font=\small, align=left] at (8,1.2) {Knowledge Transfer};
+  \draw[->, thick, orange] (6.3,0.5) arc (180:270:0.3);
+  \node[font=\small, align=left] at (8,0.5) {Rotation/Revolution};
+\end{tikzpicture}
+\caption{The Elder Heliosystem model illustrating the heliocentric approach to knowledge transfer. Elder (center) represents the source of universal principles, Mentors (planets) represent domain-specific knowledge, and Erudites (moons) represent task-specific knowledge. The transfer of information is mediated through orbital dynamics, with frequency synchronization determining the efficiency of knowledge flow.}
+\label{fig:elder_heliosystem}
+\end{figure}
+
 \section{Applications to Enriched Audio Generation}
 
 The Elder framework is particularly well-suited for generating enriched audio data with complex spatial and temporal characteristics.
