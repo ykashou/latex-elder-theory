@@ -1,8 +1,8 @@
-\chapter{Loss Functions in Elder Spaces}
+\chapter{Hierarchical Knowledge Architecture}
 
-\section{Hierarchical Loss Structure}
+\section{Complete System Architecture}
 
-In this chapter, we develop the mathematical formulation of loss functions that govern the Elder framework. The framework operates on enriched audio data in the magefile format, which contains both spatial and temporal information derived from multiple sources. The hierarchy of loss functions forms a triadic structure consisting of Elder Loss, Mentor Loss, and Erudite Loss.
+In this chapter, we present the complete architectural design of the Elder framework and the Elder-Mentor-Erudite hierarchy. This framework operates on structured data in the magefile format, which contains both spatial and temporal information derived from multiple sources. The hierarchical knowledge structure enables the system to learn at multiple levels of abstraction, from universal principles in the Elder Manifold to domain-specific knowledge in Erudites.
 
 \begin{definition}[Erudite Loss]
 The Erudite Loss function $\erloss: \mathcal{X} \times \mathcal{Y} \rightarrow \mathbb{R}_+$ measures the discrepancy between generated audio data $\hat{y} \in \mathcal{Y}$ and ground truth audio data $y \in \mathcal{Y}$, given input features $x \in \mathcal{X}$. It is defined as:
@@ -892,7 +892,7 @@ where the second term identifies parameters that most efficiently compress infor
 \label{cor:complex_compression}
 The complex-valued representation in Elder provides a more efficient encoding than real-valued alternatives:
 \begin{equation}
-    L_{\mathbb{C}}(\elderparam) < L_{\mathbb{R}}(\elderparam_{\text{real}})
+    L_{\mathbb{C}}(\elderparam) < L_{\mathbb{R}}(\theta_{\text{Elder,real}})
 \end{equation}
 where $L_{\mathbb{C}}$ and $L_{\mathbb{R}}$ represent description lengths in complex and real spaces, respectively, for functionally equivalent parameters.
 \end{corollary}
