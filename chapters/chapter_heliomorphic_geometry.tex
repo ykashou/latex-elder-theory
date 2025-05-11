@@ -8,7 +8,76 @@ Heliomorphic geometry represents a novel mathematical framework for modeling kno
 A \textbf{heliomorphic structure} on a complex manifold $\mathcal{E}_{\mathcal{M}}$ is a geometric configuration that exhibits radial flow characteristics with specific propagation properties, denoted by $\mathcal{H}_{\odot}(\mathcal{E}_{\mathcal{M}})$.
 \end{definition}
 
-The distinguishing feature of heliomorphic geometry is its incorporation of radial flux patterns similar to those observed in solar physics, hence the name. These patterns enable a more nuanced understanding of how knowledge propagates through domains in the Elder system, capturing both direction (angular component) and abstraction level (radial component).
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.1]
+  % Define colors
+  \colorlet{eldershell}{blue!30}
+  \colorlet{mentorshell}{green!40}
+  \colorlet{eruditeshell}{red!30}
+  \colorlet{elderborder}{blue!70}
+  \colorlet{mentorborder}{green!70}
+  \colorlet{eruditeborder}{red!70}
+  
+  % Draw concentric circles for shells
+  \draw[fill=eldershell, draw=elderborder, thick] (0,0) circle (1.5);
+  \draw[fill=mentorshell, draw=mentorborder, thick] (0,0) circle (2.5);
+  \draw[fill=eruditeshell, draw=eruditeborder, thick] (0,0) circle (3.5);
+  
+  % Add Elder, Mentor, Erudite labels
+  \node at (0,0) {\Large Elder};
+  
+  % Mentor text nodes at different angles
+  \node[text width=1.5cm, align=center] at (60:2) {\small Mentor\\Domain 1};
+  \node[text width=1.5cm, align=center] at (180:2) {\small Mentor\\Domain 2};
+  \node[text width=1.5cm, align=center] at (300:2) {\small Mentor\\Domain 3};
+  
+  % Erudite text nodes at different angles
+  \node[text width=1.5cm, align=center] at (30:3) {\small Erudite\\Task 1.1};
+  \node[text width=1.5cm, align=center] at (75:3) {\small Erudite\\Task 1.2};
+  \node[text width=1.5cm, align=center] at (150:3) {\small Erudite\\Task 2.1};
+  \node[text width=1.5cm, align=center] at (210:3) {\small Erudite\\Task 2.2};
+  \node[text width=1.5cm, align=center] at (270:3) {\small Erudite\\Task 3.1};
+  \node[text width=1.5cm, align=center] at (330:3) {\small Erudite\\Task 3.2};
+  
+  % Arrows for Knowledge Flow
+  % Inward propagation (abstraction)
+  \draw[->, thick, dotted, >=stealth, draw=black] (30:3.3) to[bend right] (60:2.3);
+  \draw[->, thick, dotted, >=stealth, draw=black] (60:2.3) to[bend right] (0.8,0.8);
+  
+  % Outward propagation (specialization)
+  \draw[->, thick, dashed, >=stealth, draw=black] (0,-0.8) to[bend right] (300:2.3);
+  \draw[->, thick, dashed, >=stealth, draw=black] (300:2.3) to[bend right] (270:3.3);
+  
+  % Angular dynamics (cross-domain transfer)
+  \draw[->, thick, >=stealth, draw=black] (180:2.3) arc (180:60:2.3);
+  
+  % Legend
+  \node[align=left] at (5,2.5) {Heliomorphic Shells};
+  \draw[thick, dotted, >=stealth, draw=black] (4,2) -- (4.7,2);
+  \node[align=left, font=\small] at (6,2) {Inward Propagation};
+  \draw[thick, dashed, >=stealth, draw=black] (4,1.5) -- (4.7,1.5);
+  \node[align=left, font=\small] at (6,1.5) {Outward Propagation};
+  \draw[thick, >=stealth, draw=black] (4,1) -- (4.7,1);
+  \node[align=left, font=\small] at (6,1) {Angular Transfer};
+  
+  \draw[fill=eldershell, draw=elderborder] (4,0.5) rectangle (4.3,0.7);
+  \node[align=left, font=\small] at (5.6,0.6) {Elder Shell};
+  \draw[fill=mentorshell, draw=mentorborder] (4,0.1) rectangle (4.3,0.3);
+  \node[align=left, font=\small] at (5.7,0.2) {Mentor Shell};
+  \draw[fill=eruditeshell, draw=eruditeborder] (4,-0.3) rectangle (4.3,-0.1);
+  \node[align=left, font=\small] at (5.7,-0.2) {Erudite Shell};
+  
+  % Shell indices
+  \node[font=\small] at (1.5,0.4) {Shell 0};
+  \node[font=\small] at (2.5,0.4) {Shell 1};
+  \node[font=\small] at (3.5,0.4) {Shell 2};
+\end{tikzpicture}
+\caption{Heliomorphic Shell Structure: Elder (inner shell), Mentor (middle shell), and Erudite (outer shell) organized in a concentric hierarchy with knowledge flow illustrated by arrows showing abstraction (inward), specialization (outward), and cross-domain transfer (angular).}
+\label{fig:heliomorphic_shells}
+\end{figure}
+
+The distinguishing feature of heliomorphic geometry is its incorporation of radial flux patterns similar to those observed in solar physics, hence the name. These patterns enable a more nuanced understanding of how knowledge propagates through domains in the Elder system, capturing both direction (angular component) and abstraction level (radial component) as illustrated in Figure~\ref{fig:heliomorphic_shells}.
 
 \section{Heliomorphic Differential Operators}
 
@@ -149,6 +218,75 @@ For any collection of domains $\{D_1, D_2, \ldots, D_M\}$ with associated task p
 \end{theorem}
 
 This representation theorem provides a theoretical foundation for the Elder system's ability to discover universal principles that span multiple domains while accounting for different levels of abstraction.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.9]
+  % Define colors
+  \colorlet{shell0}{orange!80!red}
+  \colorlet{shell1}{orange!60!red}
+  \colorlet{shell2}{orange!40!red}
+  \colorlet{shell3}{orange!20!red}
+  
+  % Define the coordinate system
+  \draw[->, thick] (-4.5,0) -- (4.5,0) node[right] {$\text{Re}(z)$};
+  \draw[->, thick] (0,-4.5) -- (0,4.5) node[above] {$\text{Im}(z)$};
+  
+  % Draw concentric circles representing shells
+  \draw[shell0, thick] (0,0) circle (1);
+  \draw[shell1, thick] (0,0) circle (2);
+  \draw[shell3, thick] (0,0) circle (3);
+  \draw[shell3, thick] (0,0) circle (4);
+  
+  % Domain points at different positions
+  \filldraw[black] (0.866,0.5) circle (2pt) node[above right] {$D_1$};
+  \filldraw[black] (-0.866,0.5) circle (2pt) node[above left] {$D_2$};
+  \filldraw[black] (0,-1) circle (2pt) node[below] {$D_3$};
+  
+  \filldraw[black] (1.732,1) circle (2pt) node[above right] {$D_4$};
+  \filldraw[black] (-1.732,1) circle (2pt) node[above left] {$D_5$};
+  \filldraw[black] (0,-2) circle (2pt) node[below] {$D_6$};
+  
+  \filldraw[black] (2.598,1.5) circle (2pt) node[above right] {$D_7$};
+  \filldraw[black] (-2.598,1.5) circle (2pt) node[above left] {$D_8$};
+  \filldraw[black] (0,-3) circle (2pt) node[below] {$D_9$};
+  
+  % Add radial lines to show domain alignments
+  \draw[dashed, gray] (0,0) -- (3.464,2);
+  \draw[dashed, gray] (0,0) -- (-3.464,2);
+  \draw[dashed, gray] (0,0) -- (0,-4);
+  
+  % Representation of shell function decomposition
+  \begin{scope}[shift={(7,0)}]
+    % Shell decomposition equation
+    \node at (0,3) {$f(z) = \sum_{k=0}^{\infty} f_k(z)$};
+    \node at (0,2) {$f_k(z) = z^k \cdot P_k(z)$};
+    
+    % Function components for each shell
+    \draw[shell0, thick] (-2,1) -- (2,1);
+    \node[right] at (2,1) {$f_0(z)$ (Elder)};
+    
+    \draw[shell1, thick] (-2,0) -- (2,0);
+    \node[right] at (2,0) {$f_1(z)$ (Mentor)};
+    
+    \draw[shell2, thick] (-2,-1) -- (2,-1);
+    \node[right] at (2,-1) {$f_2(z)$ (Erudite)};
+    
+    \draw[shell3, thick] (-2,-2) -- (2,-2);
+    \node[right] at (2,-2) {$f_3(z)$ (Task)};
+  \end{scope}
+  
+  % Shell labels
+  \node at (1.5,0) {Shell 0};
+  \node at (2.5,0) {Shell 1};
+  \node at (3.5,0) {Shell 2};
+  \node at (4.5,0) {Shell 3};
+\end{tikzpicture}
+\caption{Heliomorphic Shell Decomposition: Domains are positioned in the complex plane according to their relatedness (angular proximity) and abstraction level (radial distance). The knowledge function $f(z)$ can be decomposed into shell-specific components $f_k(z)$ corresponding to Elder, Mentor, Erudite, and task-specific knowledge.}
+\label{fig:shell_decomposition}
+\end{figure}
+
+The heliomorphic shell decomposition shown in Figure~\ref{fig:shell_decomposition} illustrates how domains are organized in the complex plane, with related domains having similar angular coordinates and their abstraction level determined by their radial position. The complete knowledge function $f(z)$ is decomposed into shell-specific components, where inner shells represent more abstract, universal principles (Elder knowledge), while outer shells encode more specific knowledge (Mentor and Erudite).
 
 \section{Algorithmic Learning of the Heliomorphic Elder Manifold}
 
