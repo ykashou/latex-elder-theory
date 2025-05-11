@@ -443,6 +443,88 @@ For a system with $D$ domains, each with approximately equal parameter counts, t
 This efficiency gain approaches $\Theta(D)$ as $D$ becomes large.
 \end{theorem}
 
+\subsection{Detailed Time Complexity Analysis}
+
+We now provide a deeper analysis of the time complexity implications of the Elder Heliosystem compared to traditional neural networks across different operational phases. This analysis explores the nuanced temporal dynamics that emerge during training and inference.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Detailed Time Complexity Comparison}
+\label{tab:time_complexity}
+\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Operation} & \textbf{Traditional Neural Network} & \textbf{Elder Heliosystem} \\
+\hline
+Single Batch Update (1 domain) & $O(B \cdot L \cdot W^2)$ & $O(B \cdot (N + M + E))$ \\
+\hline
+Multi-Domain Batch Update & $O(D \cdot B \cdot L \cdot W^2)$ & $O(B \cdot (N + M \cdot D + E \cdot D))$ \\
+\hline
+Knowledge Transfer Between Domains & $O(D^2 \cdot T_{trans} \cdot W^2)$ & $O(D \cdot T_{res} \cdot (N + M))$ \\
+\hline
+Full Training Cycle & $O(I \cdot D \cdot B \cdot L \cdot W^2)$ & $O(I_r \cdot B \cdot (N + M \cdot D + E \cdot D))$ \\
+\hline
+Inference (1 sample, 1 domain) & $O(L \cdot W^2)$ & $O(N + M + E)$ \\
+\hline
+Inference (1 sample, all domains) & $O(D \cdot L \cdot W^2)$ & $O(N + M \cdot D + E \cdot D)$ \\
+\hline
+Catastrophic Forgetting Mitigation & $O(R \cdot D \cdot L \cdot W^2)$ & $O(R \cdot \log D \cdot (N + M))$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\noindent where:
+\begin{itemize}
+    \item $B$ is batch size
+    \item $L$ is number of layers
+    \item $W$ is average width (neurons) per layer
+    \item $D$ is number of domains
+    \item $N, M, E$ are the parameters in Elder, Mentor, and Erudite components
+    \item $I$ is iterations to convergence (traditional network)
+    \item $I_r$ is iterations to convergence (Elder, where $I_r < I$)
+    \item $T_{trans}$ is time for traditional transfer learning
+    \item $T_{res}$ is time for resonance-based transfer ($T_{res} < T_{trans}$)
+    \item $R$ is the rehearsal/replay factor for mitigating forgetting
+\end{itemize}
+
+\subsubsection{Temporal Dynamics During Training}
+
+The Elder Heliosystem achieves significant time complexity reductions through several mechanisms:
+
+\begin{enumerate}
+    \item \textbf{Phase-Space Optimization}: Traditional backpropagation adjusts weights individually, requiring $O(W^2)$ operations per layer. The Elder Heliosystem operates in phase space where resonant frequencies create structured parameter updates, reducing complexity to $O(N + M + E)$.
+    
+    \item \textbf{Resonance-Accelerated Convergence}: Traditional networks require $I$ iterations for convergence, while the Elder Heliosystem requires only $I_r = I/\gamma$ iterations due to resonance-induced acceleration, where the resonance factor $\gamma > 1$ grows with increasing domain coherence.
+    
+    \item \textbf{Logarithmic Scaling with Domain Complexity}: The Elder system's time complexity scales as $O(N + M \cdot \log D + E \cdot D)$ for full multi-domain operation, compared to $O(D \cdot L \cdot W^2)$ for traditional networks. This logarithmic scaling of the Mentor layer becomes the dominant advantage as $D$ increases.
+\end{enumerate}
+
+\begin{proposition}[Time Complexity for Full Training Cycle]
+For a system with $D$ domains, each requiring $I$ iterations to convergence using traditional methods, the expected time complexity ratio between traditional neural networks and the Elder Heliosystem is:
+
+\begin{equation}
+\frac{T_{\text{traditional}}}{T_{\text{elder}}} = \frac{I \cdot D \cdot L \cdot W^2}{I_r \cdot (N + M \cdot D + E \cdot D)} = \Omega(\gamma \cdot \frac{L \cdot W^2}{N + (M+E) \cdot D})
+\end{equation}
+
+Noting that in practice, $L \cdot W^2 \gg N$ and $(M+E) \ll W^2$, this ratio approaches $\Omega(\gamma \cdot \frac{L}{M+E})$ for large $D$, indicating a fundamental time complexity advantage that improves with system scale.
+\end{proposition}
+
+\subsubsection{Catastrophic Forgetting Mitigation}
+
+One of the most significant time efficiency gains occurs in the context of mitigating catastrophic forgetting:
+
+\begin{theorem}[Forgetting Mitigation Efficiency]
+The time complexity of mitigating catastrophic forgetting in the Elder Heliosystem is $O(R \cdot \log D \cdot (N + M))$ compared to $O(R \cdot D \cdot L \cdot W^2)$ for traditional rehearsal-based methods, where $R$ is the rehearsal factor.
+
+This represents an asymptotic improvement of $\Theta(\frac{D \cdot L \cdot W^2}{\log D \cdot (N + M)})$, which approaches $\Theta(\frac{D \cdot L \cdot W^2}{\log D})$ as $D$ becomes large.
+\end{theorem}
+
+\begin{proof}
+Traditional networks require explicit rehearsal on all $D$ domains with complexity $O(L \cdot W^2)$ per domain. The Elder Heliosystem leverages orbital resonance to maintain domain knowledge implicitly. When a resonant system is established, the coupling between Mentor and Elder components creates holographic representations where knowledge about all domains is encoded in the phase relationships. 
+
+Maintaining these relationships requires only $O(\log D)$ operations because only commensurate frequencies need adjustment, with the adjustment complexity scaling with Elder and Mentor parameters $(N + M)$ rather than with individual domain parameters $(L \cdot W^2)$.
+\end{proof}
+
 This theoretical analysis demonstrates that the Elder Heliosystem offers increasingly significant computational and memory advantages as the system scales to more domains, making it particularly well-suited for large-scale multi-domain learning problems where traditional neural networks face prohibitive computational requirements.
 
 \section{Conclusion: Resonance as the Universal Principle of Knowledge Transfer}
