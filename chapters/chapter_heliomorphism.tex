@@ -296,6 +296,73 @@ The key factors contributing to this efficiency gain include:
 
 In practice, these theoretical advantages translate to substantial performance improvements, particularly when scaling to hundreds or thousands of domains, where traditional approaches become computationally intractable.
 
+\subsection{Detailed Memory Analysis}
+
+Memory efficiency is a critical advantage of the heliomorphic approach. The following table provides a detailed breakdown of memory requirements across different aspects of Elder, Mentor, and Erudite systems:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{3.5cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Memory Component} & \textbf{Traditional Approach} & \textbf{Heliomorphic Approach} & \textbf{Analysis} \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Model Parameter Storage}} \\
+\hline
+Elder Parameters & $P_E$ floats & $P_E$ complex numbers & 2× storage overhead, justified by expressivity gain \\
+\hline
+Mentor Parameters & $M \times P_M$ floats & $M \times P_M$ floats & Equivalent storage \\
+\hline
+Erudite Parameters & $M \times N \times P_{E'}$ floats & $M \times N \times P_{E'}$ floats & Equivalent storage \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Gradient and Momentum Storage}} \\
+\hline
+Elder Gradients & $P_E \times M$ floats & $P_E$ complex numbers & Reduction from $O(P_E M)$ to $O(P_E)$ \\
+\hline
+Mentor Gradients & $M \times P_M$ floats & $M \times P_M$ floats & Equivalent storage \\
+\hline
+Erudite Gradients & $M \times N \times P_{E'}$ floats & $M \times N \times P_{E'}$ floats & Equivalent storage \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Intermediate Representations}} \\
+\hline
+Cross-Domain Transfer Tensors & $M^2 \times D$ floats & $M \times D$ floats & Linear vs. quadratic scaling with domains \\
+\hline
+Activation Caches & $O(M \times D \times L)$ & $O(D \times L + M \times L)$ & Separable representations across domains \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Training Data Memory}} \\
+\hline
+Data Buffers & $M \times B \times D$ floats & $M \times B \times D$ floats & Equivalent storage \\
+\hline
+Data Augmentation & $O(M \times B \times D \times A)$ & $O(B \times D \times A) + O(M \times A)$ & Shared augmentation patterns across domains \\
+\hline
+\multicolumn{4}{|c|}{\textbf{System Overhead}} \\
+\hline
+Shell Tracking & N/A & $M$ integers & Minimal overhead \\
+\hline
+Radial Weighting & N/A & $K$ floats (shell count) & Negligible storage impact \\
+\hline
+\multicolumn{4}{|c|}{\textbf{Total Memory Requirements}} \\
+\hline
+Peak Memory & $O(P_E M + M^2 D + MP_M + MNP_{E'})$ & $O(P_E + MD + MP_M + MNP_{E'})$ & Reduction primarily in Elder parameters and cross-domain transfers \\
+\hline
+\end{tabular}
+\caption{Detailed memory analysis comparing traditional and heliomorphic approaches, where $P_E$ is Elder parameter count, $P_M$ is Mentor parameter count, $P_{E'}$ is Erudite parameter count, $M$ is domain count, $N$ is average tasks per domain, $D$ is data dimension, $B$ is batch size, $L$ is network depth, $A$ is augmentation factor, and $K$ is shell count.}
+\label{tab:memory_analysis}
+\end{table}
+
+This analysis demonstrates that the most significant memory savings come from:
+
+\begin{enumerate}
+    \item \textbf{Shell-Based Elder Representations}: By using complex heliomorphic representations for Elder parameters, the storage requirements become independent of the number of domains.
+    
+    \item \textbf{Efficient Cross-Domain Transfer}: The heliomorphic approach reduces the quadratic domain-to-domain memory tensors to linear shell-to-shell transfers.
+    
+    \item \textbf{Separable Activation Representations}: By leveraging the shell structure, activations can be represented more efficiently as the sum of domain-specific and domain-general components.
+    
+    \item \textbf{Shared Augmentation Patterns}: Domain-specific augmentations can inherit from domain-general patterns, reducing redundant storage.
+\end{enumerate}
+
+The combined effect of these memory optimizations is particularly profound as the number of domains increases. At scale (hundreds or thousands of domains), traditional approaches face prohibitive memory limitations, while the heliomorphic approach remains feasible with linear or sublinear memory scaling.
+
 \section{Heliomorphic Manifolds}
 
 Extending heliomorphic functions to manifolds provides the full mathematical framework for Elder systems.
@@ -462,34 +529,8 @@ The heliomorphic framework offers several structural advantages:
     \item \textbf{Stability under Domain Addition}: The system remains stable when new domains are added, with existing principles accommodating and structuring new knowledge.
 \end{enumerate}
 
-\section{Future Directions for Heliomorphic Theory}
-
-\subsection{Theoretical Extensions}
-
-Several promising directions for theoretical development include:
-
-\begin{enumerate}
-    \item \textbf{Higher-Dimensional Heliomorphism}: Extending the theory to complex spaces of dimension $n > 1$, incorporating multiple radial structures.
-    
-    \item \textbf{Quantum Heliomorphism}: Exploring connections between heliomorphic operators and quantum-mechanical operators, particularly in the context of information processing.
-    
-    \item \textbf{Non-Euclidean Heliomorphic Spaces}: Developing heliomorphic theory on more general manifolds with non-Euclidean base spaces.
-\end{enumerate}
-
-\subsection{Practical Applications}
-
-The practical implications of heliomorphic theory extend to numerous fields:
-
-\begin{enumerate}
-    \item \textbf{Multi-Domain Machine Learning}: Building systems that can learn universal principles across thousands of diverse domains simultaneously.
-    
-    \item \textbf{Hierarchical Representation Learning}: Developing representation learning approaches that naturally organize knowledge at appropriate abstraction levels.
-    
-    \item \textbf{Artificial General Intelligence}: Moving toward more general AI systems by enabling seamless knowledge transfer across domains through abstract principles.
-\end{enumerate}
-
 \section{Conclusion: The Heliomorphic Revolution}
 
 The development of heliomorphic theory represents not merely an incremental advancement but a paradigm shift in how we conceptualize, represent, and manipulate hierarchical knowledge structures. By extending complex analysis to incorporate radial dynamics, heliomorphism provides a mathematical framework that naturally aligns with the hierarchical organization of knowledge across abstraction levels.
 
-The Elder-Mentor-Erudite architecture, built upon this heliomorphic foundation, demonstrates the power of this approach by achieving unprecedented capabilities in cross-domain transfer, principle discovery, and knowledge integration. As both the theoretical foundations and practical implementations continue to develop, heliomorphic systems promise to revolutionize our approach to artificial intelligence, machine learning, and knowledge representation.
+The Elder-Mentor-Erudite architecture, built upon this heliomorphic foundation, demonstrates the power of this approach by achieving unprecedented capabilities in cross-domain transfer, principle discovery, and knowledge integration.
