@@ -159,13 +159,13 @@ Across all domains, the Elder system achieves substantial improvements in transf
 
 \subsection{Visualizing Shell Formation}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 \begin{tikzpicture}[scale=0.8]
     % Define colors
-    \colorlet{inner}{blue!40}
-    \colorlet{middle}{green!40}
-    \colorlet{outer}{red!30}
+    \definecolor{inner}{rgb}{0.4,0.4,0.8}
+    \definecolor{middle}{rgb}{0.4,0.8,0.4}
+    \definecolor{outer}{rgb}{0.8,0.4,0.4}
     
     % Draw three panels showing shell formation over time
     % Panel 1: Early training
@@ -174,13 +174,55 @@ Across all domains, the Elder system achieves substantial improvements in transf
         \node at (0,3.5) {Early Training};
         
         % Random points representing parameters
-        \foreach \i in {1,...,50} {
-            \pgfmathsetmacro{\x}{3*rand-1.5}
-            \pgfmathsetmacro{\y}{3*rand-1.5}
-            \pgfmathsetmacro{\r}{sqrt(\x*\x+\y*\y)}
-            \pgfmathsetmacro{\col}{\r < 0.8 ? "inner" : \r < 1.6 ? "middle" : "outer"}
-            \fill[\col] (\x,\y) circle (0.08);
-        }
+        \draw[inner, fill=inner] (-1.2,-0.5) circle (0.08);
+        \draw[inner, fill=inner] (-0.5,0.8) circle (0.08);
+        \draw[inner, fill=inner] (0.3,0.2) circle (0.08);
+        \draw[inner, fill=inner] (0.1,-0.7) circle (0.08);
+        \draw[inner, fill=inner] (-0.8,0.3) circle (0.08);
+        
+        \draw[middle, fill=middle] (-2.1,1.5) circle (0.08);
+        \draw[middle, fill=middle] (-1.5,-1.3) circle (0.08);
+        \draw[middle, fill=middle] (1.3,1.4) circle (0.08);
+        \draw[middle, fill=middle] (0.9,-1.5) circle (0.08);
+        \draw[middle, fill=middle] (1.6,0.2) circle (0.08);
+        
+        \draw[outer, fill=outer] (-2.5,-0.8) circle (0.08);
+        \draw[outer, fill=outer] (-1.9,2.2) circle (0.08);
+        \draw[outer, fill=outer] (2.2,-2.1) circle (0.08);
+        \draw[outer, fill=outer] (2.4,1.8) circle (0.08);
+        \draw[outer, fill=outer] (1.8,-0.9) circle (0.08);
+        
+        % Add more random points with fixed positions
+        % Points in inner shell
+        \draw[inner, fill=inner] (-0.2,0.4) circle (0.08);
+        \draw[inner, fill=inner] (0.1,-0.3) circle (0.08);
+        \draw[inner, fill=inner] (-0.3,-0.2) circle (0.08);
+        \draw[inner, fill=inner] (0.4,0.1) circle (0.08);
+        \draw[inner, fill=inner] (0.0,0.5) circle (0.08);
+        
+        % Points in middle shell
+        \draw[middle, fill=middle] (-1.3,0.9) circle (0.08);
+        \draw[middle, fill=middle] (0.9,-1.3) circle (0.08);
+        \draw[middle, fill=middle] (1.3,0.9) circle (0.08);
+        \draw[middle, fill=middle] (-0.9,-1.3) circle (0.08);
+        \draw[middle, fill=middle] (-1.1,-1.1) circle (0.08);
+        \draw[middle, fill=middle] (1.1,1.1) circle (0.08);
+        \draw[middle, fill=middle] (-1.1,1.1) circle (0.08);
+        \draw[middle, fill=middle] (1.1,-1.1) circle (0.08);
+        
+        % Points in outer shell
+        \draw[outer, fill=outer] (-2.3,0.5) circle (0.08);
+        \draw[outer, fill=outer] (0.5,-2.3) circle (0.08);
+        \draw[outer, fill=outer] (2.3,0.5) circle (0.08);
+        \draw[outer, fill=outer] (-0.5,-2.3) circle (0.08);
+        \draw[outer, fill=outer] (-2.0,-1.0) circle (0.08);
+        \draw[outer, fill=outer] (1.0,2.0) circle (0.08);
+        \draw[outer, fill=outer] (-1.0,-2.0) circle (0.08);
+        \draw[outer, fill=outer] (2.0,1.0) circle (0.08);
+        \draw[outer, fill=outer] (-2.2,1.8) circle (0.08);
+        \draw[outer, fill=outer] (1.8,-2.2) circle (0.08);
+        \draw[outer, fill=outer] (2.2,1.8) circle (0.08);
+        \draw[outer, fill=outer] (-1.8,-2.2) circle (0.08);
         
         % Faint circles showing shell boundaries forming
         \draw[gray!30, dashed] (0,0) circle (0.8);
@@ -194,28 +236,33 @@ Across all domains, the Elder system achieves substantial improvements in transf
         \node at (0,3.5) {Mid Training};
         
         % Points starting to organize into shells
-        \foreach \i in {1,...,20} {
-            \pgfmathsetmacro{\angle}{360*rand}
-            \pgfmathsetmacro{\r}{0.6+0.2*rand}
-            \pgfmathsetmacro{\x}{\r*cos(\angle)}
-            \pgfmathsetmacro{\y}{\r*sin(\angle)}
-            \fill[inner] (\x,\y) circle (0.08);
+        % Inner shell points
+        \foreach \angle/\r in {
+            0/0.7, 30/0.65, 60/0.75, 90/0.7, 120/0.65, 150/0.75,
+            180/0.7, 210/0.65, 240/0.75, 270/0.7, 300/0.65, 330/0.75,
+            15/0.72, 45/0.68, 75/0.73, 105/0.69, 135/0.71, 165/0.67
+        } {
+            \draw[inner, fill=inner] ({\r*cos(\angle)},{\r*sin(\angle)}) circle (0.08);
         }
         
-        \foreach \i in {1,...,30} {
-            \pgfmathsetmacro{\angle}{360*rand}
-            \pgfmathsetmacro{\r}{1.4+0.2*rand}
-            \pgfmathsetmacro{\x}{\r*cos(\angle)}
-            \pgfmathsetmacro{\y}{\r*sin(\angle)}
-            \fill[middle] (\x,\y) circle (0.08);
+        % Middle shell points
+        \foreach \angle/\r in {
+            0/1.5, 20/1.45, 40/1.55, 60/1.5, 80/1.45, 100/1.55,
+            120/1.5, 140/1.45, 160/1.55, 180/1.5, 200/1.45, 220/1.55,
+            240/1.5, 260/1.45, 280/1.55, 300/1.5, 320/1.45, 340/1.55,
+            10/1.52, 30/1.48, 50/1.53, 70/1.47, 90/1.51, 110/1.49
+        } {
+            \draw[middle, fill=middle] ({\r*cos(\angle)},{\r*sin(\angle)}) circle (0.08);
         }
         
-        \foreach \i in {1,...,25} {
-            \pgfmathsetmacro{\angle}{360*rand}
-            \pgfmathsetmacro{\r}{2.2+0.2*rand}
-            \pgfmathsetmacro{\x}{\r*cos(\angle)}
-            \pgfmathsetmacro{\y}{\r*sin(\angle)}
-            \fill[outer] (\x,\y) circle (0.08);
+        % Outer shell points
+        \foreach \angle/\r in {
+            0/2.3, 18/2.25, 36/2.35, 54/2.3, 72/2.25, 90/2.35,
+            108/2.3, 126/2.25, 144/2.35, 162/2.3, 180/2.25, 198/2.35,
+            216/2.3, 234/2.25, 252/2.35, 270/2.3, 288/2.25, 306/2.35,
+            324/2.3, 342/2.25, 9/2.32, 27/2.28, 45/2.33, 63/2.27
+        } {
+            \draw[outer, fill=outer] ({\r*cos(\angle)},{\r*sin(\angle)}) circle (0.08);
         }
         
         % More defined shell boundaries
@@ -230,33 +277,41 @@ Across all domains, the Elder system achieves substantial improvements in transf
         \node at (0,3.5) {Late Training};
         
         % Well-defined shells
-        \draw[inner!50, fill=inner!20] (0,0) circle (0.8);
-        \draw[middle!50, fill=middle!20] (0,0) circle (1.6);
-        \draw[outer!50, fill=outer!20] (0,0) circle (2.4);
+        \fill[inner!20] (0,0) circle (0.8);
+        \draw[inner!50] (0,0) circle (0.8);
+        \fill[middle!20] (0,0) circle (1.6);
+        \draw[middle!50] (0,0) circle (1.6);
+        \fill[outer!20] (0,0) circle (2.4);
+        \draw[outer!50] (0,0) circle (2.4);
         
         % Points clearly organized in shells
-        \foreach \i in {1,...,20} {
-            \pgfmathsetmacro{\angle}{360*rand}
-            \pgfmathsetmacro{\r}{0.7+0.1*rand}
-            \pgfmathsetmacro{\x}{\r*cos(\angle)}
-            \pgfmathsetmacro{\y}{\r*sin(\angle)}
-            \fill[inner] (\x,\y) circle (0.08);
+        % Inner shell points
+        \foreach \angle/\r in {
+            0/0.7, 30/0.7, 60/0.7, 90/0.7, 120/0.7, 150/0.7,
+            180/0.7, 210/0.7, 240/0.7, 270/0.7, 300/0.7, 330/0.7,
+            15/0.7, 45/0.7, 75/0.7, 105/0.7, 135/0.7, 165/0.7
+        } {
+            \draw[inner, fill=inner] ({\r*cos(\angle)},{\r*sin(\angle)}) circle (0.08);
         }
         
-        \foreach \i in {1,...,30} {
-            \pgfmathsetmacro{\angle}{360*rand}
-            \pgfmathsetmacro{\r}{1.5+0.1*rand}
-            \pgfmathsetmacro{\x}{\r*cos(\angle)}
-            \pgfmathsetmacro{\y}{\r*sin(\angle)}
-            \fill[middle] (\x,\y) circle (0.08);
+        % Middle shell points
+        \foreach \angle/\r in {
+            0/1.5, 20/1.5, 40/1.5, 60/1.5, 80/1.5, 100/1.5,
+            120/1.5, 140/1.5, 160/1.5, 180/1.5, 200/1.5, 220/1.5,
+            240/1.5, 260/1.5, 280/1.5, 300/1.5, 320/1.5, 340/1.5,
+            10/1.5, 30/1.5, 50/1.5, 70/1.5, 90/1.5, 110/1.5
+        } {
+            \draw[middle, fill=middle] ({\r*cos(\angle)},{\r*sin(\angle)}) circle (0.08);
         }
         
-        \foreach \i in {1,...,25} {
-            \pgfmathsetmacro{\angle}{360*rand}
-            \pgfmathsetmacro{\r}{2.3+0.1*rand}
-            \pgfmathsetmacro{\x}{\r*cos(\angle)}
-            \pgfmathsetmacro{\y}{\r*sin(\angle)}
-            \fill[outer] (\x,\y) circle (0.08);
+        % Outer shell points
+        \foreach \angle/\r in {
+            0/2.3, 18/2.3, 36/2.3, 54/2.3, 72/2.3, 90/2.3,
+            108/2.3, 126/2.3, 144/2.3, 162/2.3, 180/2.3, 198/2.3,
+            216/2.3, 234/2.3, 252/2.3, 270/2.3, 288/2.3, 306/2.3,
+            324/2.3, 342/2.3, 9/2.3, 27/2.3, 45/2.3, 63/2.3
+        } {
+            \draw[outer, fill=outer] ({\r*cos(\angle)},{\r*sin(\angle)}) circle (0.08);
         }
         
         % Clear shell labels
@@ -732,52 +787,77 @@ The implementation of the Elder Heliosystem requires a carefully designed comput
 
 The atomic mathematical kernels form an interconnected system with specific dependency relationships:
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
-\begin{tikzpicture}[node distance=1.8cm, scale=0.8, transform shape]
-    % Nodes
-    \node[draw, rounded corners, fill=blue!10] (complex) {Complex-Valued Computation};
-    \node[draw, rounded corners, fill=green!10, below left=of complex] (helio) {Heliomorphic Transform};
-    \node[draw, rounded corners, fill=green!10, below right=of complex] (orbital) {Orbital Dynamics};
-    \node[draw, rounded corners, fill=orange!10, below=of helio] (shell) {Shell Operations};
-    \node[draw, rounded corners, fill=orange!10, below=of orbital] (gradient) {Gradient \& Optimization};
-    \node[draw, rounded corners, fill=blue!10, right=of orbital] (field) {Knowledge Field};
-    \node[draw, rounded corners, fill=green!10, right=of field] (spectral) {Spectral Analysis};
-    \node[draw, rounded corners, fill=green!10, below=1cm of spectral] (geometry) {Differential Geometry};
-    \node[draw, rounded corners, fill=orange!10, below=of shell] (loss) {Loss Functions};
-    \node[draw, rounded corners, fill=orange!10, below=of geometry] (info) {Information Theory};
-    \node[draw, rounded corners, fill=red!10, below right=of gradient] (transfer) {Cross-Domain Transfer};
-    \node[draw, rounded corners, fill=red!10, below=of info] (hardware) {Hardware Optimization};
+\begin{tikzpicture}[scale=0.6]
+    % Define basic node style
+    \tikzset{
+        block/.style={
+            rectangle,
+            rounded corners,
+            draw,
+            minimum width=2.5cm,
+            minimum height=0.8cm,
+            align=center
+        }
+    }
     
-    % Connections
-    \draw[->] (complex) -- (helio);
-    \draw[->] (complex) -- (orbital);
-    \draw[->] (complex) -- (field);
-    \draw[->] (helio) -- (shell);
-    \draw[->] (orbital) -- (gradient);
-    \draw[->] (shell) -- (loss);
-    \draw[->] (field) -- (spectral);
-    \draw[->] (field) -- (geometry);
-    \draw[->] (spectral) -- (info);
-    \draw[->] (geometry) -- (gradient);
-    \draw[->] (loss) -- (transfer);
-    \draw[->] (orbital) -- (transfer);
-    \draw[->] (info) -- (transfer);
-    \draw[->] (gradient) -- (hardware);
-    \draw[->] (shell) -- (hardware);
-    \draw[->] (complex) -- (hardware);
+    % Low-level kernels (blue)
+    \node[block, fill=blue!20] (complex) at (0,8) {Complex-Valued\\Computation};
+    \node[block, fill=blue!20] (field) at (6,8) {Knowledge Field\\Operations};
     
-    % Group high-level algorithms
-    \draw[dashed, rounded corners, thick] (-3,-5.5) rectangle (3,-8.5);
-    \node at (0,-5.2) {High-Level Training Algorithms};
+    % Mid-level kernels (green)
+    \node[block, fill=green!20] (helio) at (-5,5) {Heliomorphic\\Transform};
+    \node[block, fill=green!20] (orbital) at (0,5) {Orbital\\Dynamics};
+    \node[block, fill=green!20] (spectral) at (5,5) {Spectral\\Analysis};
+    \node[block, fill=green!20] (geometry) at (10,5) {Differential\\Geometry};
     
-    % Group mid-level operators
-    \draw[dashed, rounded corners, thick] (-4,-0.2) rectangle (7,-5);
-    \node at (1.5,0.1) {Mid-Level Mathematical Operators};
+    % High-level kernels (orange)
+    \node[block, fill=orange!20] (shell) at (-7,2) {Shell\\Operations};
+    \node[block, fill=orange!20] (gradient) at (-2,2) {Gradient\\Optimization};
+    \node[block, fill=orange!20] (loss) at (3,2) {Loss\\Functions};
+    \node[block, fill=orange!20] (info) at (8,2) {Information\\Theory};
     
-    % Group low-level primitives
-    \draw[dashed, rounded corners, thick] (-4.5,0.3) rectangle (7.5,1.8);
-    \node at (1.5,2.1) {Low-Level Computational Primitives};
+    % Application-level kernels (red)
+    \node[block, fill=red!20] (transfer) at (0,-1) {Cross-Domain\\Transfer};
+    \node[block, fill=red!20] (hardware) at (6,-1) {Hardware\\Optimization};
+    
+    % Connections between low-level and mid-level
+    \draw[->, thick] (complex) -- (helio);
+    \draw[->, thick] (complex) -- (orbital);
+    \draw[->, thick] (field) -- (spectral);
+    \draw[->, thick] (field) -- (geometry);
+    \draw[->, thick] (complex) -- (geometry);
+    
+    % Connections between mid-level and high-level
+    \draw[->, thick] (helio) -- (shell);
+    \draw[->, thick] (orbital) -- (gradient);
+    \draw[->, thick] (orbital) -- (loss);
+    \draw[->, thick] (spectral) -- (info);
+    \draw[->, thick] (geometry) -- (gradient);
+    
+    % Connections to application level
+    \draw[->, thick] (shell) -- (transfer);
+    \draw[->, thick] (gradient) -- (transfer);
+    \draw[->, thick] (loss) -- (transfer);
+    \draw[->, thick] (info) -- (transfer);
+    
+    \draw[->, thick] (shell) -- (hardware);
+    \draw[->, thick] (gradient) -- (hardware);
+    \draw[->, thick] (complex) -- (hardware);
+    
+    % Layer boundaries
+    \draw[dashed, rounded corners, thick] (-9,6.7) rectangle (12,9.3);
+    \node at (-7,9) {Low-Level Computational Primitives};
+    
+    \draw[dashed, rounded corners, thick] (-9,3.7) rectangle (12,6.3);
+    \node at (-7,6) {Mid-Level Mathematical Operators};
+    
+    \draw[dashed, rounded corners, thick] (-9,0.7) rectangle (12,3.3);
+    \node at (-7,3) {High-Level Mathematical Algorithms};
+    
+    \draw[dashed, rounded corners, thick] (-9,-2.3) rectangle (12,-0.3);
+    \node at (-7,-0.7) {Application-Level Operations};
 \end{tikzpicture}
 \caption{Kernel dependency hierarchy for the Elder Heliosystem implementation}
 \label{fig:kernel_dependencies}
