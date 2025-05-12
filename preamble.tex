@@ -41,16 +41,54 @@
 \usepackage{xparse}
 \usepackage{marginnote}
 \usepackage{sidenotes}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings,skins,breakable}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{listings,skins,breakable,theorems,raster,minted}
 
 % Define observation environment
 \newenvironment{observation}[1][]{\begin{tcolorbox}[
+  enhanced,
   colback=LightGray,
   colframe=DarkGray,
   fonttitle=\bfseries,
   title=Observation #1]
 }{\end{tcolorbox}}
+
+% Define custom tcolorbox environments for different use cases
+\newtcolorbox{examplebox}[1][]{
+  enhanced,
+  colback=ExampleGray!30!white,
+  colframe=DarkGray,
+  fonttitle=\bfseries,
+  title={Example #1},
+  breakable
+}
+
+\newtcolorbox{notebox}[1][]{
+  enhanced,
+  colback=LightGray!50!white,
+  colframe=DarkGray,
+  fonttitle=\bfseries,
+  title={Note #1},
+  breakable
+}
+
+\newtcolorbox{importantbox}[1][]{
+  enhanced,
+  colback=LemmaGreen!30!white,
+  colframe=DarkGray,
+  fonttitle=\bfseries,
+  title={Important #1},
+  breakable
+}
+
+\newtcolorbox{warningbox}[1][]{
+  enhanced,
+  colback=PropositionYellow!30!white,
+  colframe=DarkGray,
+  fonttitle=\bfseries,
+  title={Warning #1},
+  breakable
+}
 
 % Define tcolorbox styles for code listings
 \newtcolorbox{codeblock}[1][]{
@@ -189,8 +227,24 @@
     patterns,
     positioning,
     shapes.geometric,
-    shapes.misc
+    shapes.misc,
+    arrows.meta,
+    decorations.markings,
+    plotmarks
 }
+
+% Enable pgfplots axis environment with all needed libraries
+\usepgfplotslibrary{groupplots,fillbetween,colorbrewer,polar,statistics,dateplot,patchplots,external}
+
+% Define a tikzpicture-like environment that wraps axis environment for convenience
+\newenvironment{axisfigure}[1][]{%
+\begin{tikzpicture}
+\begin{axis}[#1]
+}{%
+\end{axis}
+\end{tikzpicture}
+
+
 
 % Bibliography file
 \addbibresource{bibliography.bib}
