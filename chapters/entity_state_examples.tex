@@ -8,7 +8,8 @@ In the Elder Heliosystem, each entity maintains a specific state configuration t
 
 Each entity (Elder, Mentor, or Erudite) maintains the following state information:
 
-\begin{lstlisting}[language=Go, caption=Entity State Data Structure in Go]
+\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Entity State Data Structure in Go, fonttitle=\bfseries]
+\begin{verbatim}
 // Vector3 represents a 3D vector
 type Vector3 struct {
     X, Y, Z float32  // 3 × 32-bit float = 12 bytes
@@ -43,7 +44,8 @@ type EntityState struct {
     
     // Total: 68 bytes per entity
 }
-\end{lstlisting}
+\end{verbatim}
+\end{tcolorbox}
 
 \subsection{Example: Elder Entity State}
 
@@ -124,7 +126,8 @@ Entity phases evolve over time according to:
 
 where $\omega_E$ is the angular velocity and $\Delta \phi_{\text{interaction}}$ represents phase adjustments from interactions.
 
-\begin{lstlisting}[language=Go, caption=Phase Evolution Code in Go]
+\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Phase Evolution Code in Go, fonttitle=\bfseries]
+\begin{verbatim}
 // UpdateEntityPhases updates the phases of all entities based on their angular velocities
 // and interactions with audio input
 func UpdateEntityPhases(entities []EntityState, audioFrame []float32, deltaTime float32) {
@@ -177,7 +180,8 @@ func normalizePhase(phase float32) float32 {
     }
     return phase
 }
-\end{lstlisting}
+\end{verbatim}
+\end{tcolorbox}
 
 For example, processing a drum beat pattern might cause the following phase adjustments:
 
@@ -227,7 +231,8 @@ For a specific audio frame processing $a(t)$ (e.g., a 20ms segment containing th
 
 With 1.2 billion parameters and a sparsity factor $s = 10^{-4}$, approximately 120,000 parameters are active at any given time point. 
 
-\begin{lstlisting}[language=Go, caption=Parameter Activation Function in Go]
+\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Parameter Activation Function in Go, fonttitle=\bfseries]
+\begin{verbatim}
 // CalculateParameterActivation determines which parameters are active based on Elder's phase
 func CalculateParameterActivation(params *ComplexTensor, elderPhase float32, threshold float32) []bool {
     activation := make([]bool, params.Size())
@@ -259,7 +264,8 @@ func CalculateParameterActivation(params *ComplexTensor, elderPhase float32, thr
     
     return activation
 }
-\end{lstlisting}
+\end{verbatim}
+\end{tcolorbox}
 
 For example:
 
