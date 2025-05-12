@@ -42,6 +42,32 @@
 \usepackage{marginnote}
 \usepackage{sidenotes}
 \usepackage{tcolorbox}
+\tcbuselibrary{listings,skins,breakable}
+
+% Define tcolorbox styles for code listings
+\newtcolorbox{codeblock}[1][]{
+  colback=CodeBackground,
+  colframe=DarkGray,
+  arc=2mm,
+  boxrule=0.5pt,
+  left=5pt,
+  right=5pt,
+  top=5pt,
+  bottom=5pt,
+  listing only,
+  listing options={
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{CodeKeyword},
+    commentstyle=\color{CodeComment},
+    stringstyle=\color{CodeString},
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=2,
+    language=C++
+  },
+  title=#1,
+  fonttitle=\bfseries
+}
 
 % Define colors
 \definecolor{DarkSkyBlue}{RGB}{0, 51, 153}
