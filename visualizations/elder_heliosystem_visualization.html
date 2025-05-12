@@ -140,6 +140,42 @@
         @keyframes dash {
             to { stroke-dashoffset: -10; }
         }
+        
+        .entity-controls {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .entity-controls h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #6a7eff;
+        }
+        
+        .control-group {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        select {
+            background-color: #2a2a4a;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .entity-fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -151,6 +187,30 @@
             <div>
                 <label for="speed">Simulation Speed:</label>
                 <input type="range" id="speed" min="0.1" max="2" step="0.1" value="1">
+            </div>
+            <div class="entity-controls">
+                <h3>Entity Management</h3>
+                <div class="control-group">
+                    <button id="add-mentor">Add Mentor</button>
+                    <select id="mentor-domain">
+                        <option value="random">Random Domain</option>
+                        <option value="Audio Processing">Audio Processing</option>
+                        <option value="Visual Analysis">Visual Analysis</option>
+                        <option value="Semantic Understanding">Semantic Understanding</option>
+                        <option value="Spatial Relations">Spatial Relations</option>
+                        <option value="Multimodal Fusion">Multimodal Fusion</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button id="add-erudite">Add Erudite</button>
+                    <select id="mentor-select">
+                        <option value="random">Random Mentor</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Mentors: <span id="mentor-count">0</span></span> | 
+                    <span>Erudites: <span id="erudite-count">0</span></span>
+                </div>
             </div>
         </div>
         
