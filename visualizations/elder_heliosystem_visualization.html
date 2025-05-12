@@ -361,6 +361,9 @@
             // Create entities
             createEntities(center);
             
+            // Update the mentor select dropdown
+            updateMentorSelectDropdown();
+            
             // Create parameters activation visualization
             createActivationGraph();
             
@@ -368,9 +371,192 @@
             document.getElementById("play-pause").addEventListener("click", toggleSimulation);
             document.getElementById("reset").addEventListener("click", resetSimulation);
             document.getElementById("speed").addEventListener("input", updateSpeed);
+            document.getElementById("add-mentor").addEventListener("click", addNewMentor);
+            document.getElementById("add-erudite").addEventListener("click", addNewErudite);
+            
+            // Update entity counts
+            updateEntityCountsDisplay();
             
             // Start animation loop
             requestAnimationFrame(animate);
+        }
+        
+        // Function to add a new Mentor to the system
+        function addNewMentor() {
+            const svg = d3.select("#visualization");
+            const container = document.querySelector(".container");
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const center = { x: width / 2, y: height / 2 };
+            
+            // Get the Elder entity (always the first one)
+            const elder = simulationState.entities.find(e => e.type === "elder");
+            
+            // Get the domain selection
+            const domainSelect = document.getElementById("mentor-domain");
+            let domain = domainSelect.value;
+            
+            // If random is selected, get a random domain
+            if (domain === "random") {
+                const randomIndex = Math.floor(Math.random() * 32);
+                domain = getMentorDomain(randomIndex);
+            }
+            
+            // Count existing mentors to determine the index
+            const mentorCount = simulationState.entities.filter(e => e.type === "mentor").length;
+            const mentorIndex = mentorCount;
+            
+            // Calculate position angle - distribute new mentors evenly around Elder
+            const angle = (mentorIndex / (mentorCount + 1)) * Math.PI * 2;
+            const orbitRadius = config.mentors.orbitRadius;
+            
+            // Create new Mentor entity
+            const mentor = {
+                id: `mentor-${mentorIndex}`,
+                type: "mentor",
+                orbitRadius: orbitRadius,
+                orbitCenter: { x: center.x, y: center.y },
+                radius: config.mentors.radius,
+                color: config.mentors.colors(mentorIndex / (mentorCount + 1)),
+                phase: simulationState.elderPhase + mentorIndex * config.phases.mentorPhaseOffset,
+                phaseVelocity: config.phases.elderPhaseVelocity * (0.8 + Math.random() * 0.4),
+                x: center.x + orbitRadius * Math.cos(angle),
+                y: center.y + orbitRadius * Math.sin(angle),
+                parent: elder,
+                domain: domain,
+                description: `Specializes in ${domain} processing`,
+                isNew: true
+            };
+            
+            // Add the new mentor to the simulation
+            simulationState.entities.push(mentor);
+            
+            // Update the mentor select dropdown
+            updateMentorSelectDropdown();
+            
+            // Render the new entity
+            renderEntities();
+            
+            // Update entity count display
+            updateEntityCountsDisplay();
+        }
+        
+        // Function to add a new Erudite to the system
+        function addNewErudite() {
+            const container = document.querySelector(".container");
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const center = { x: width / 2, y: height / 2 };
+            
+            // Get mentor selection
+            const mentorSelect = document.getElementById("mentor-select");
+            let selectedMentorId = mentorSelect.value;
+            
+            // Get all mentors
+            const mentors = simulationState.entities.filter(e => e.type === "mentor");
+            if (mentors.length === 0) {
+                // Can't add an erudite without a mentor
+                alert("Please add at least one Mentor first.");
+                return;
+            }
+            
+            // If random is selected, choose a random mentor
+            let selectedMentor;
+            if (selectedMentorId === "random") {
+                const randomIndex = Math.floor(Math.random() * mentors.length);
+                selectedMentor = mentors[randomIndex];
+            } else {
+                selectedMentor = mentors.find(m => m.id === selectedMentorId);
+            }
+            
+            if (!selectedMentor) {
+                selectedMentor = mentors[0]; // Fallback to first mentor
+            }
+            
+            // Count existing erudites for this mentor
+            const eruditeCount = simulationState.entities.filter(
+                e => e.type === "erudite" && e.parent.id === selectedMentor.id
+            ).length;
+            
+            // Calculate position
+            const mentorAngle = Math.atan2(
+                selectedMentor.y - center.y,
+                selectedMentor.x - center.x
+            );
+            
+            const eruditeAngle = mentorAngle + (eruditeCount / 8) * Math.PI * 0.5 - Math.PI * 0.25;
+            const eruditeOrbitRadius = config.erudites.orbitRadiusMin + 
+                (config.erudites.orbitRadiusMax - config.erudites.orbitRadiusMin) * Math.random();
+            
+            const eruditeOrbitCenter = {
+                x: selectedMentor.x,
+                y: selectedMentor.y
+            };
+            
+            // Create the new Erudite
+            const erudite = {
+                id: `erudite-${selectedMentor.id.split('-')[1]}-${eruditeCount}`,
+                type: "erudite",
+                orbitRadius: eruditeOrbitRadius,
+                orbitCenter: eruditeOrbitCenter,
+                radius: config.erudites.radius,
+                color: config.erudites.colors(eruditeCount / 8),
+                phase: selectedMentor.phase + eruditeCount * config.phases.eruditePhaseOffset,
+                phaseVelocity: selectedMentor.phaseVelocity * (0.9 + Math.random() * 0.2),
+                x: eruditeOrbitCenter.x + eruditeOrbitRadius * Math.cos(eruditeAngle),
+                y: eruditeOrbitCenter.y + eruditeOrbitRadius * Math.sin(eruditeAngle),
+                parent: selectedMentor,
+                domain: getEruditeTask(selectedMentor.domain, eruditeCount),
+                description: `Processes specific aspects of ${selectedMentor.domain}`,
+                isNew: true
+            };
+            
+            // Add the new erudite to the simulation
+            simulationState.entities.push(erudite);
+            
+            // Render the new entity
+            renderEntities();
+            
+            // Update entity count display
+            updateEntityCountsDisplay();
+        }
+        
+        // Function to update the mentor select dropdown
+        function updateMentorSelectDropdown() {
+            const mentorSelect = document.getElementById("mentor-select");
+            const mentors = simulationState.entities.filter(e => e.type === "mentor");
+            
+            // Clear existing options except the first one (Random)
+            while (mentorSelect.options.length > 1) {
+                mentorSelect.remove(1);
+            }
+            
+            // Add options for each mentor
+            mentors.forEach(mentor => {
+                const option = document.createElement("option");
+                option.value = mentor.id;
+                option.text = `${mentor.domain} (${mentor.id})`;
+                mentorSelect.add(option);
+            });
+        }
+        
+        // Function to update entity counts display
+        function updateEntityCountsDisplay() {
+            const mentorCount = simulationState.entities.filter(e => e.type === "mentor").length;
+            const eruditeCount = simulationState.entities.filter(e => e.type === "erudite").length;
+            
+            document.getElementById("mentor-count").textContent = mentorCount;
+            document.getElementById("erudite-count").textContent = eruditeCount;
+        }
+        
+        // Update Erudite orbit centers when Mentors move
+        function updateEruditeOrbitCenters() {
+            simulationState.entities.forEach(entity => {
+                if (entity.type === "erudite" && entity.parent) {
+                    entity.orbitCenter.x = entity.parent.x;
+                    entity.orbitCenter.y = entity.parent.y;
+                }
+            });
         }
         
         function createEntities(center) {
@@ -467,7 +653,10 @@
                 .data(simulationState.entities)
                 .enter()
                 .append("g")
-                .attr("class", "entity")
+                .attr("class", d => {
+                    // Add fade-in animation class for new entities
+                    return d.isNew ? "entity entity-fade-in" : "entity";
+                })
                 .attr("transform", d => `translate(${d.x}, ${d.y})`)
                 .on("mouseover", showEntityInfo)
                 .on("mouseout", hideEntityInfo);
@@ -489,6 +678,23 @@
                 .attr("stroke-width", 10)
                 .attr("opacity", 0.2)
                 .attr("class", "elder-glow");
+                
+            // Add special effect for new Mentors
+            entityElements.filter(d => d.type === "mentor" && d.isNew)
+                .append("circle")
+                .attr("r", d => d.radius * 2.0)
+                .attr("fill", "none")
+                .attr("stroke", d => d.color)
+                .attr("stroke-width", 3)
+                .attr("opacity", 0.5)
+                .attr("class", "mentor-glow")
+                .style("animation", "pulse 2s ease-out")
+                .style("animation-iteration-count", "2");
+                
+            // Remove the isNew flag after rendering
+            simulationState.entities.forEach(entity => {
+                if (entity.isNew) entity.isNew = false;
+            });
                 
             // Add visual indicator of phase
             entityElements.filter(d => d.type !== "erudite")
