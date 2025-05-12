@@ -506,6 +506,11 @@
             
             // Update memory fields for new mentor
             createMemoryFields();
+            
+            // Emit a celebratory gravitational wave
+            const timestamp = performance.now();
+            simulationState.lastWaveTime = timestamp - config.parameters.gravitationalWaves.waveInterval;
+            emitGravitationalWave(timestamp);
         }
         
         // Function to add a new Erudite to the system
@@ -586,6 +591,14 @@
             
             // Update entity count display
             updateEntityCountsDisplay();
+            
+            // Update memory fields for new erudite
+            createMemoryFields();
+            
+            // Emit a celebratory gravitational wave
+            const timestamp = performance.now();
+            simulationState.lastWaveTime = timestamp - config.parameters.gravitationalWaves.waveInterval;
+            emitGravitationalWave(timestamp);
         }
         
         // Function to update the mentor select dropdown
