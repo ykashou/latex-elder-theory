@@ -126,6 +126,7 @@
             <h2>Parameter Activation</h2>
             <div>Active Parameters: <span id="active-count" class="highlight">0</span> / <span id="total-count">1,200,000,000</span></div>
             <div>Memory Usage: <span id="memory-usage" class="highlight">121.34</span> MB</div>
+            <div>System-Determined Sparsity: <span id="sparsity-factor" class="highlight">0.0001</span>%</div>
             <div id="activation-graph" style="height: 60px; margin-top: 10px;"></div>
         </div>
         
@@ -164,8 +165,11 @@
             },
             parameters: {
                 totalCount: 1200000000,
-                activationThreshold: 0.1,
-                peakMemoryMB: 121.34
+                peakMemoryMB: 121.34,
+                // Sparsity calculation parameters
+                sparsityBase: 0.0001, // Base sparsity factor
+                phaseToleranceBase: 0.025, // Base phase tolerance
+                adaptiveFactors: true // Whether sparsity adapts to system state
             }
         };
         
@@ -186,6 +190,10 @@
             const container = document.querySelector(".container");
             const width = container.clientWidth;
             const height = container.clientHeight;
+            
+            // Update parameter display
+            document.getElementById("total-count").textContent = config.parameters.totalCount.toLocaleString();
+            document.getElementById("sparsity-factor").textContent = (config.parameters.sparsityBase * 100).toFixed(6);
             
             svg.attr("width", width)
                 .attr("height", height);
@@ -434,17 +442,12 @@
         }
         
         function calculateParameterActivation(elderPhase) {
-            // Simulate parameter activation with a bell curve around the Elder phase
-            // with some random noise to make it look more natural
-            const threshold = config.parameters.activationThreshold;
+            // Calculate sparsity factor from the system state itself
+            const sparsityFactor = calculateSystemDeterminedSparsity();
             let activeCount = 0;
             
-            // Simple model: active count peaks at specific phases
-            const baseFactor = 0.5 + 0.5 * Math.sin(elderPhase * 5);
-            const randomFactor = 0.7 + 0.3 * Math.random();
-            const activeRatio = baseFactor * randomFactor * threshold;
-            
-            activeCount = Math.floor(config.parameters.totalCount * activeRatio);
+            // Calculate active parameter count based on determined sparsity
+            activeCount = Math.floor(config.parameters.totalCount * sparsityFactor);
             
             simulationState.activeParameters = activeCount;
             document.getElementById("active-count").textContent = activeCount.toLocaleString();
@@ -455,9 +458,105 @@
             document.getElementById("memory-usage").textContent = (memoryUsage / 1000).toFixed(2);
             
             // Update activation history for graph
-            simulationState.activationHistory.push(activeRatio);
+            simulationState.activationHistory.push(sparsityFactor);
             simulationState.activationHistory.shift();
             updateActivationGraph();
+            
+            // Show sparsity factor
+            const sparsityDisplay = document.getElementById("sparsity-factor");
+            if (sparsityDisplay) {
+                sparsityDisplay.textContent = (sparsityFactor * 100).toFixed(6);
+            }
+        }
+        
+        function calculateSystemDeterminedSparsity() {
+            // This function calculates the sparsity factor from the system's state
+            // rather than using a predetermined value
+            
+            // Get the Elder entity
+            const elder = simulationState.entities[0];
+            const mentors = simulationState.entities.filter(e => e.type === "mentor");
+            
+            // Base sparsity factor from config
+            let baseFactor = config.parameters.sparsityBase;
+            
+            // Phase concentration factor - measures how concentrated the Mentors
+            // are around the Elder in phase space
+            let phaseConcentrationSum = 0;
+            let phaseConcentrationCount = 0;
+            
+            mentors.forEach(mentor => {
+                // Calculate phase difference between Mentor and Elder
+                const phaseDiff = Math.abs(calculatePhaseDifference(mentor.phase, elder.phase));
+                
+                // Normalize to [0, 1] where 0 means perfect alignment and 1 means maximum difference
+                const normalizedDiff = phaseDiff / Math.PI;
+                
+                // Inverse relationship - closer phases mean higher contribution to sparsity
+                const contributionFactor = Math.exp(-5 * normalizedDiff);
+                
+                phaseConcentrationSum += contributionFactor;
+                phaseConcentrationCount++;
+            });
+            
+            // Average phase concentration factor (0 to 1)
+            const avgPhaseConcentration = phaseConcentrationCount > 0 ? 
+                phaseConcentrationSum / phaseConcentrationCount : 0;
+                
+            // Orbital harmony factor - measures the regularity of orbital positions
+            // Higher harmony means more regular spacing, which reduces sparsity
+            let orbitalHarmonyFactor = 0;
+            
+            // Count Mentors in each phase quadrant
+            const quadrants = [0, 0, 0, 0];
+            mentors.forEach(mentor => {
+                const quadrant = Math.floor((mentor.phase / (Math.PI * 2)) * 4) % 4;
+                quadrants[quadrant]++;
+            });
+            
+            // Calculate variance in quadrant distribution
+            const avgQuadrantCount = mentors.length / 4;
+            let quadrantVariance = 0;
+            
+            quadrants.forEach(count => {
+                quadrantVariance += Math.pow(count - avgQuadrantCount, 2);
+            });
+            
+            quadrantVariance /= 4;
+            
+            // Normalize to [0, 1] where 0 means perfect distribution (low variance)
+            // and 1 means highly imbalanced (high variance)
+            const maxPossibleVariance = Math.pow(mentors.length, 2) / 4;
+            orbitalHarmonyFactor = 1 - (quadrantVariance / maxPossibleVariance);
+            
+            // Dynamic phase tolerance - decreases with higher concentration and harmony
+            let phaseTolerance = config.parameters.phaseToleranceBase;
+            
+            if (config.parameters.adaptiveFactors) {
+                // Phase tolerance decreases when concentration is high (more selective)
+                // but increases when harmony is high (more inclusive of structured patterns)
+                phaseTolerance *= (0.5 + 0.5 * (1 - avgPhaseConcentration)) * (0.5 + 0.5 * orbitalHarmonyFactor);
+            }
+            
+            // System state-determined sparsity factor
+            // Base factor * adaptive modulation based on concentration and harmony
+            let sparsityFactor = baseFactor;
+            
+            if (config.parameters.adaptiveFactors) {
+                // Higher phase concentration leads to lower sparsity (more selective)
+                // Higher orbital harmony leads to higher sparsity (more inclusive)
+                sparsityFactor *= (0.4 + 0.6 * (1 - avgPhaseConcentration)) * (0.4 + 0.6 * orbitalHarmonyFactor);
+                
+                // Add some intentional variability based on Elder phase
+                // This creates patterns in memory usage over time
+                const cyclicalComponent = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(elder.phase * 3));
+                sparsityFactor *= cyclicalComponent;
+            }
+            
+            // Ensure sparsity stays within reasonable bounds
+            sparsityFactor = Math.max(baseFactor * 0.1, Math.min(baseFactor * 10, sparsityFactor));
+            
+            return sparsityFactor;
         }
         
         function createActivationGraph() {
