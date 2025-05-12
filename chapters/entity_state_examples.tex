@@ -8,30 +8,41 @@ In the Elder Heliosystem, each entity maintains a specific state configuration t
 
 Each entity (Elder, Mentor, or Erudite) maintains the following state information:
 
-\begin{lstlisting}[language=C++, caption=Entity State Data Structure]
-struct EntityState {
+\begin{lstlisting}[language=Go, caption=Entity State Data Structure in Go]
+// Vector3 represents a 3D vector
+type Vector3 struct {
+    X, Y, Z float32  // 3 × 32-bit float = 12 bytes
+}
+
+// Quaternion represents rotation in 3D space
+type Quaternion struct {
+    X, Y, Z, W float32  // 4 × 32-bit float = 16 bytes
+}
+
+// EntityState represents the complete state of an entity in the Elder system
+type EntityState struct {
     // Position in 3D space (relative to parent entity)
-    Vector3 position;        // 3 × 32-bit float = 12 bytes
+    Position Vector3        // 12 bytes
     
     // Velocity vector
-    Vector3 velocity;        // 3 × 32-bit float = 12 bytes
+    Velocity Vector3        // 12 bytes
     
     // Orientation quaternion
-    Quaternion orientation;  // 4 × 32-bit float = 16 bytes
+    Orientation Quaternion  // 16 bytes
     
     // Angular velocity
-    Vector3 angularVelocity; // 3 × 32-bit float = 12 bytes
+    AngularVelocity Vector3 // 12 bytes
     
     // Rotational phase
-    float phase;             // 32-bit float = 4 bytes
+    Phase float32           // 4 bytes
     
     // Entity-specific parameters
-    float mass;              // 32-bit float = 4 bytes
-    float influence_radius;  // 32-bit float = 4 bytes
-    float learning_rate;     // 32-bit float = 4 bytes
+    Mass float32            // 4 bytes
+    InfluenceRadius float32 // 4 bytes
+    LearningRate float32    // 4 bytes
     
     // Total: 68 bytes per entity
-};
+}
 \end{lstlisting}
 
 \subsection{Example: Elder Entity State}
@@ -113,6 +124,61 @@ Entity phases evolve over time according to:
 
 where $\omega_E$ is the angular velocity and $\Delta \phi_{\text{interaction}}$ represents phase adjustments from interactions.
 
+\begin{lstlisting}[language=Go, caption=Phase Evolution Code in Go]
+// UpdateEntityPhases updates the phases of all entities based on their angular velocities
+// and interactions with audio input
+func UpdateEntityPhases(entities []EntityState, audioFrame []float32, deltaTime float32) {
+    // Update Elder phase (index 0 is always the Elder)
+    elder := &entities[0]
+    baseElderRotation := elder.AngularVelocity.Z * deltaTime
+    
+    // Calculate phase adjustment from audio features
+    audioEnergy := calculateFrameEnergy(audioFrame)
+    spectralCentroid := calculateSpectralCentroid(audioFrame)
+    
+    // Elder's phase is primarily affected by global audio features
+    elderInteraction := audioEnergy * 0.001 * spectralCentroid * 0.0002
+    elder.Phase += baseElderRotation + elderInteraction
+    
+    // Normalize phase to [0, 2π)
+    elder.Phase = normalizePhase(elder.Phase)
+    
+    // Update Mentor phases (indices 1-32 are Mentors)
+    for i := 1; i <= 32; i++ {
+        mentor := &entities[i]
+        
+        // Base rotation from angular velocity
+        baseRotation := mentor.AngularVelocity.Z * deltaTime
+        
+        // Calculate mentor-specific audio features 
+        // (e.g., energy in frequency band this mentor specializes in)
+        bandEnergy := calculateBandEnergy(audioFrame, i)
+        
+        // Interaction term depends on audio features and Elder phase
+        interaction := bandEnergy * 0.005 * 
+                      math.Sin(float64(mentor.Phase - elder.Phase)) * 0.02
+        
+        mentor.Phase += baseRotation + float32(interaction)
+        mentor.Phase = normalizePhase(mentor.Phase)
+    }
+    
+    // Similarly update Erudite phases (remaining indices)
+    // [Code omitted for brevity]
+}
+
+// normalizePhase ensures phase stays within [0, 2π)
+func normalizePhase(phase float32) float32 {
+    const twoPi = 2 * math.Pi
+    for phase >= twoPi {
+        phase -= twoPi
+    }
+    for phase < 0 {
+        phase += twoPi
+    }
+    return phase
+}
+\end{lstlisting}
+
 For example, processing a drum beat pattern might cause the following phase adjustments:
 
 \begin{table}[h]
@@ -159,7 +225,43 @@ For a specific audio frame processing $a(t)$ (e.g., a 20ms segment containing th
 \end{cases}
 \end{equation}
 
-With 1.2 billion parameters and a sparsity factor $s = 10^{-4}$, approximately 120,000 parameters are active at any given time point. For example:
+With 1.2 billion parameters and a sparsity factor $s = 10^{-4}$, approximately 120,000 parameters are active at any given time point. 
+
+\begin{lstlisting}[language=Go, caption=Parameter Activation Function in Go]
+// CalculateParameterActivation determines which parameters are active based on Elder's phase
+func CalculateParameterActivation(params *ComplexTensor, elderPhase float32, threshold float32) []bool {
+    activation := make([]bool, params.Size())
+    activeCount := 0
+    
+    // Efficiently calculate activations with SIMD operations where available
+    for i := 0; i < params.Size(); i++ {
+        paramPhase := params.Phase(i)
+        phaseDiff := math.Abs(float64(paramPhase - elderPhase))
+        
+        // Account for circular phase (wrap around 2π)
+        if phaseDiff > math.Pi {
+            phaseDiff = 2*math.Pi - phaseDiff
+        }
+        
+        // Determine if parameter is active
+        isActive := phaseDiff < float64(threshold)
+        activation[i] = isActive
+        
+        if isActive {
+            activeCount++
+        }
+    }
+    
+    // Log sparsity statistics
+    sparsity := float64(activeCount) / float64(params.Size())
+    log.Printf("Active parameters: %d/%d (sparsity: %.6f)", 
+               activeCount, params.Size(), sparsity)
+    
+    return activation
+}
+\end{lstlisting}
+
+For example:
 
 \begin{table}[h]
 \centering
