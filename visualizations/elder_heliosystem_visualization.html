@@ -923,8 +923,23 @@
             // Create Mentors
             for (let i = 0; i < config.mentors.count; i++) {
                 const angle = (i / config.mentors.count) * Math.PI * 2;
-                const orbitRadius = config.mentors.orbitRadius;
+                
+                // Calculate orbit radius using resonance ratios for more stable orbits
+                // Use Fibonacci-like resonance ratios to distribute mentors at harmonically stable distances
+                const resonanceRatios = [1, 2, 3, 5, 8, 13];
+                const ratioIndex = i % resonanceRatios.length;
+                const resonanceFactor = resonanceRatios[ratioIndex] / resonanceRatios[0];
+                
+                // Apply a slight jitter to prevent exact overlaps while maintaining resonance
+                const jitter = 0.95 + (Math.random() * 0.1);
+                const orbitRadius = config.mentors.orbitRadius * Math.sqrt(resonanceFactor) * jitter;
+                
                 const domain = getMentorDomain(i);
+                
+                // Calculate phase velocity based on Kepler's Third Law: P² ∝ a³
+                // Adjusting for resonance in the Elder Heliosystem
+                const orbitalPeriodFactor = Math.pow(resonanceFactor, 1.5); // T² ∝ r³
+                const baseVelocity = config.phases.elderPhaseVelocity * 3 / orbitalPeriodFactor;
                 
                 const mentor = {
                     id: `mentor-${i}`,
@@ -934,12 +949,16 @@
                     radius: config.mentors.radius,
                     color: config.mentors.colors(i / config.mentors.count),
                     phase: config.phases.initElderPhase + i * config.phases.mentorPhaseOffset,
-                    phaseVelocity: config.phases.elderPhaseVelocity * (0.8 + Math.random() * 0.4),
+                    phaseVelocity: baseVelocity,
+                    resonanceFactor: resonanceFactor,
+                    stabilityFactor: 0,  // Will be updated during simulation
+                    orbitalPeriod: Math.round(2 * Math.PI / baseVelocity),
                     x: center.x + orbitRadius * Math.cos(angle),
                     y: center.y + orbitRadius * Math.sin(angle),
                     parent: elder,
                     domain: domain,
-                    description: `Specializes in ${domain} processing`
+                    description: `Specializes in ${domain} processing`,
+                    rotationAngle: 0 // Starting rotation angle
                 };
                 
                 simulationState.entities.push(mentor);
@@ -947,14 +966,29 @@
                 // Create Erudites for this Mentor
                 const eruditeCount = Math.floor(config.erudites.count / config.mentors.count);
                 for (let j = 0; j < eruditeCount; j++) {
-                    const eruditeAngle = angle + (j / eruditeCount) * Math.PI * 0.5 - Math.PI * 0.25;
-                    const eruditeOrbitRadius = config.erudites.orbitRadiusMin + 
-                        (config.erudites.orbitRadiusMax - config.erudites.orbitRadiusMin) * Math.random();
+                    // Use golden ratio for angular distribution to avoid clustering
+                    const goldenRatio = 1.618033988749895;
+                    const eruditeAngle = angle + j * goldenRatio * Math.PI;
+                    
+                    // Use resonance ratios for orbital radii
+                    const resonanceRatios = [1, 1.618, 2.618, 4.236]; // Fibonacci ratio based
+                    const ratioIndex = j % resonanceRatios.length;
+                    const eruditeResonanceFactor = resonanceRatios[ratioIndex];
+                    
+                    // Calculate radius with resonance factor and small jitter for natural appearance
+                    const baseRadius = config.erudites.orbitRadiusMin;
+                    const jitter = 0.95 + (Math.random() * 0.1);
+                    const eruditeOrbitRadius = baseRadius * Math.sqrt(eruditeResonanceFactor) * jitter;
                     
                     const eruditeOrbitCenter = {
                         x: center.x + orbitRadius * Math.cos(angle),
                         y: center.y + orbitRadius * Math.sin(angle)
                     };
+                    
+                    // Calculate phase velocity based on orbital mechanics principles
+                    // Erudites further from their Mentor move slower
+                    const orbitalPeriodFactor = Math.pow(eruditeResonanceFactor, 1.5);
+                    const baseEruditeVelocity = mentor.phaseVelocity * 2.5 / orbitalPeriodFactor;
                     
                     const erudite = {
                         id: `erudite-${i}-${j}`,
@@ -964,12 +998,16 @@
                         radius: config.erudites.radius,
                         color: config.erudites.colors(j / eruditeCount),
                         phase: mentor.phase + j * config.phases.eruditePhaseOffset,
-                        phaseVelocity: mentor.phaseVelocity * (0.9 + Math.random() * 0.2),
+                        phaseVelocity: baseEruditeVelocity,
+                        resonanceFactor: eruditeResonanceFactor,
+                        stabilityFactor: 0, // Will be updated during simulation
+                        orbitalPeriod: Math.round(2 * Math.PI / baseEruditeVelocity),
                         x: eruditeOrbitCenter.x + eruditeOrbitRadius * Math.cos(eruditeAngle),
                         y: eruditeOrbitCenter.y + eruditeOrbitRadius * Math.sin(eruditeAngle),
                         parent: mentor,
                         domain: getEruditeTask(domain, j),
-                        description: `Processes specific aspects of ${domain}`
+                        description: `Processes specific aspects of ${domain}`,
+                        rotationAngle: 0 // Starting rotation angle
                     };
                     
                     simulationState.entities.push(erudite);
@@ -999,14 +1037,70 @@
                 .on("mouseover", showEntityInfo)
                 .on("mouseout", hideEntityInfo);
                 
-            // Add entity circles
+            // Add entity circles with rotation patterns
             entityElements.append("circle")
                 .attr("r", d => d.radius)
                 .attr("fill", d => d.color)
                 .attr("stroke", "#ffffff")
                 .attr("stroke-width", 2)
                 .attr("opacity", 0.9);
+            
+            // Add rotation indicators - different for each entity type
+            entityElements.each(function(d) {
+                const entityGroup = d3.select(this);
+                const rotationAngle = d.rotationAngle || 0;
                 
+                if (d.type === "elder") {
+                    // Elder has solar flare-like patterns
+                    const flareCount = 8;
+                    for (let i = 0; i < flareCount; i++) {
+                        const angle = (i / flareCount) * Math.PI * 2 + rotationAngle;
+                        const x = Math.cos(angle) * d.radius;
+                        const y = Math.sin(angle) * d.radius;
+                        
+                        entityGroup.append("path")
+                            .attr("d", `M 0,0 L ${x * 0.7},${y * 0.7}`)
+                            .attr("stroke", "#ffdd00")
+                            .attr("stroke-width", d.radius * 0.2)
+                            .attr("opacity", 0.5);
+                    }
+                } else if (d.type === "mentor") {
+                    // Mentors have equatorial bands
+                    entityGroup.append("ellipse")
+                        .attr("rx", d.radius * 0.8)
+                        .attr("ry", d.radius * 0.3)
+                        .attr("transform", `rotate(${rotationAngle * (180/Math.PI)})`)
+                        .attr("fill", d3.rgb(d.color).brighter(0.5).toString())
+                        .attr("opacity", 0.6);
+                } else if (d.type === "erudite") {
+                    // Erudites have meridional markers
+                    entityGroup.append("line")
+                        .attr("x1", -d.radius * 0.7)
+                        .attr("y1", 0)
+                        .attr("x2", d.radius * 0.7)
+                        .attr("y2", 0)
+                        .attr("transform", `rotate(${rotationAngle * (180/Math.PI)})`)
+                        .attr("stroke", "#ffffff")
+                        .attr("stroke-width", 1.5)
+                        .attr("opacity", 0.8);
+                }
+                
+                // Add stability indicators for entities that have been through stability calculation
+                if (d.stabilityFactor !== undefined) {
+                    // Color indicates stability level
+                    const stabilityColor = d.stabilityFactor > 0.85 ? "#88ff88" : 
+                                          d.stabilityFactor > 0.5 ? "#ffff88" : "#ff8888";
+                    
+                    entityGroup.append("circle")
+                        .attr("r", d.radius * 1.2)
+                        .attr("fill", "none")
+                        .attr("stroke", stabilityColor)
+                        .attr("stroke-width", 1.5)
+                        .attr("opacity", 0.3 + 0.5 * d.stabilityFactor)
+                        .attr("stroke-dasharray", d.stabilityFactor > 0.85 ? "none" : "2,2");
+                }
+            });
+            
             // Add glow effect for Elder
             entityElements.filter(d => d.type === "elder")
                 .append("circle")
@@ -1080,6 +1174,9 @@
             // Normalize to [0, 2π)
             elder.phase = normalizePhase(elder.phase);
             
+            // Update Elder rotation - the central entity also rotates on its axis
+            elder.rotationAngle = (elder.rotationAngle || 0) + (elder.phaseVelocity * 0.2 * deltaTime * simulationState.speed);
+            
             // Update display
             document.getElementById("current-phase").textContent = elder.phase.toFixed(2);
             document.getElementById("phase-circle").style.backgroundColor = 
@@ -1090,21 +1187,54 @@
             let eruditeStabilitySum = 0;
             let mentorCount = 0;
             let eruditeCount = 0;
+            
+            // Constants for stable revolution
+            const ELDER_INFLUENCE = 0.05; // How strongly Elder asserts revolution of Mentors
+            const MENTOR_INFLUENCE = 0.08; // How strongly Mentors assert revolution of Erudites
+            const STABILITY_THRESHOLD = 0.85; // Threshold for considering orbits stable
+            const STABILITY_EMPHASIS = 0.8; // How much to emphasize stability vs natural orbital velocity
+            
+            // Time-based stability increase - system stabilizes over time
+            const runTime = (performance.now() - simulationState.startTime) / 1000;
+            const timeStabilityBoost = Math.min(0.5, runTime / 60); // Max boost of 0.5 after 1 minute
                 
             // Update Mentor phases with Elder influence ensuring continuous revolutions
             simulationState.entities.filter(e => e.type === "mentor").forEach(mentor => {
                 // Elder influence asserts continuous revolution of Mentors
+                // Phase difference between Elder and Mentor
                 const phaseDiff = calculatePhaseDifference(mentor.phase, elder.phase);
-                const attraction = 0.1 * phaseDiff;
+                
+                // Calculate how strongly the Elder's phase should influence the Mentor
+                // The influence is stronger when the Mentor is further from the ideal phase relationship
+                const baseAttraction = ELDER_INFLUENCE * phaseDiff;
+                
+                // Stabilization effect increases over time
+                const timeBoost = timeStabilityBoost * Math.sign(phaseDiff) * Math.abs(phaseDiff);
+                const attraction = baseAttraction + timeBoost;
                 
                 // Calculate mentor orbital stability (inverse of phase difference)
+                // Perfect stability (1.0) when phase difference is 0
+                // Minimum stability (0.0) when phase difference is π (completely opposite)
                 const stabilityFactor = Math.max(0, 1 - Math.abs(phaseDiff) / Math.PI);
                 mentorStabilitySum += stabilityFactor;
                 mentorCount++;
                 
+                // Store stability factor in the entity for visualization purposes
+                mentor.stabilityFactor = stabilityFactor;
+                
                 // Update mentor phase with Elder influence
-                mentor.phase += (mentor.phaseVelocity - attraction) * deltaTime * simulationState.speed;
+                // The greater the phase difference, the stronger the Elder's influence
+                // When stability is high, natural orbital velocity dominates
+                // When stability is low, Elder's influence is stronger
+                const velocityComponent = mentor.phaseVelocity * (STABILITY_EMPHASIS + (1 - STABILITY_EMPHASIS) * stabilityFactor);
+                const influenceComponent = -attraction * (1 - stabilityFactor * STABILITY_EMPHASIS);
+                
+                mentor.phase += (velocityComponent + influenceComponent) * deltaTime * simulationState.speed;
                 mentor.phase = normalizePhase(mentor.phase);
+                
+                // Update rotation - Mentors also rotate on their axes
+                // Rotation speed is related to orbital period for visual interest
+                mentor.rotationAngle = (mentor.rotationAngle || 0) + (mentor.phaseVelocity * 0.5 * deltaTime * simulationState.speed);
             });
             
             // Update Erudite phases with Mentor influence ensuring continuous revolutions
@@ -1112,17 +1242,39 @@
                 const parent = erudite.parent;
                 
                 // Mentor influence asserts continuous revolution of Erudites
+                // Phase difference between Mentor and Erudite
                 const phaseDiff = calculatePhaseDifference(erudite.phase, parent.phase);
-                const attraction = 0.2 * phaseDiff;
+                
+                // Calculate how strongly the Mentor's phase should influence the Erudite
+                // The influence is stronger when the Erudite is further from the ideal phase relationship
+                const baseAttraction = MENTOR_INFLUENCE * phaseDiff;
+                
+                // Stabilization effect increases over time
+                const timeBoost = timeStabilityBoost * Math.sign(phaseDiff) * Math.abs(phaseDiff);
+                const attraction = baseAttraction + timeBoost;
                 
                 // Calculate erudite orbital stability (inverse of phase difference)
                 const stabilityFactor = Math.max(0, 1 - Math.abs(phaseDiff) / Math.PI);
                 eruditeStabilitySum += stabilityFactor;
                 eruditeCount++;
                 
+                // Store stability factor in the entity for visualization purposes
+                erudite.stabilityFactor = stabilityFactor;
+                
                 // Update erudite phase with Mentor influence
-                erudite.phase += (erudite.phaseVelocity - attraction) * deltaTime * simulationState.speed;
+                // Similar to Mentor update but with different parameters
+                const velocityComponent = erudite.phaseVelocity * (STABILITY_EMPHASIS + (1 - STABILITY_EMPHASIS) * stabilityFactor);
+                const influenceComponent = -attraction * (1 - stabilityFactor * STABILITY_EMPHASIS);
+                
+                erudite.phase += (velocityComponent + influenceComponent) * deltaTime * simulationState.speed;
                 erudite.phase = normalizePhase(erudite.phase);
+                
+                // Update rotation - Erudites also rotate on their axes
+                erudite.rotationAngle = (erudite.rotationAngle || 0) + (erudite.phaseVelocity * 1.5 * deltaTime * simulationState.speed);
+                
+                // Update Erudite position relative to parent Mentor
+                erudite.orbitCenter.x = parent.x;
+                erudite.orbitCenter.y = parent.y;
             });
             
             // Update orbital stability metrics
@@ -1133,6 +1285,10 @@
             if (eruditeCount > 0) {
                 simulationState.orbitalStability.erudites = Math.round((eruditeStabilitySum / eruditeCount) * 100);
             }
+            
+            // Check if we've achieved stable revolution (high stability values)
+            const averageStability = (simulationState.orbitalStability.mentors + simulationState.orbitalStability.erudites) / 2;
+            simulationState.stableRevolution = averageStability >= 85; // Consider stable when > 85%
             
             // Calculate radial resonance
             calculateRadialResonance();
