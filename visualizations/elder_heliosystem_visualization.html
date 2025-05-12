@@ -302,8 +302,21 @@
             <div>Mentor Stability: <span id="mentor-stability" class="highlight">0</span>%</div>
             <div>Erudite Stability: <span id="erudite-stability" class="highlight">0</span>%</div>
             <div>Radial Resonance: <span id="radial-resonance" class="highlight">0</span>%</div>
+            <div>Rotation Stability: <span id="rotation-stability" class="highlight">0</span>%</div>
+            <div>Stable Revolution: <span id="revolution-stability" class="status-pending">Forming</span></div>
             <div>System Convergence: <span id="system-convergence" class="highlight">Forming</span></div>
         </div>
+        
+        <style>
+            .status-pending {
+                color: #ffcc00;
+                font-weight: bold;
+            }
+            .status-good {
+                color: #88ff88;
+                font-weight: bold;
+            }
+        </style>
         
         <svg id="visualization"></svg>
         
@@ -408,8 +421,11 @@
                 erudites: 0  // 0-100% stability measure for erudites
             },
             radialResonance: 0, // System-wide resonance measure (0-100%)
+            rotationStability: 0, // Stability of rotation vs. orbit periods (0-100%)
+            stableRevolution: false, // Whether system has achieved stable revolution
             influenceLines: [], // Visual indicators of Elder→Mentor and Mentor→Erudite influence
-            lastInfluenceUpdate: 0 // Time of last influence lines update
+            lastInfluenceUpdate: 0, // Time of last influence lines update
+            startTime: performance.now() // Reference time for time-based stability improvements
         };
         
         // Initialize the visualization
@@ -1366,17 +1382,66 @@
             let convergenceState = "Forming";
             const averageStability = (simulationState.orbitalStability.mentors + simulationState.orbitalStability.erudites) / 2;
             
-            if (averageStability > 90 && simulationState.radialResonance > 90) {
+            // Track if we have achieved stable revolution (high stability values)
+            const stableRevolution = averageStability >= 85;
+            simulationState.stableRevolution = stableRevolution;
+            
+            // Calculate rotation stability - the variance in rotation speeds relative to orbital period
+            // For each entity, calculate the ratio of rotation speed to orbital period
+            let rotationStability = 0;
+            
+            // Only calculate for non-Elder entities that have completed at least one orbit
+            const rotatingEntities = simulationState.entities.filter(e => 
+                e.type !== "elder" && e.rotationAngle && e.rotationAngle > Math.PI * 2);
+                
+            if (rotatingEntities.length > 0) {
+                const idealRatio = 1.0; // One rotation per orbit is ideal
+                let ratioSum = 0;
+                
+                rotatingEntities.forEach(entity => {
+                    // Calculate rotation to orbit ratio
+                    const orbitalPeriod = entity.orbitalPeriod || 100;
+                    const rotationSpeed = entity.phaseVelocity * (entity.type === "mentor" ? 0.5 : 1.5);
+                    const rotationPeriod = 2 * Math.PI / rotationSpeed;
+                    const ratio = rotationPeriod / orbitalPeriod;
+                    
+                    // Store for visualization
+                    entity.rotationRatio = ratio;
+                    
+                    // Calculate how close to ideal
+                    const ratioDistance = Math.abs(ratio - idealRatio);
+                    const normalizedRatio = Math.max(0, 1 - ratioDistance);
+                    ratioSum += normalizedRatio;
+                });
+                
+                rotationStability = Math.round((ratioSum / rotatingEntities.length) * 100);
+            }
+            
+            simulationState.rotationStability = rotationStability;
+            document.getElementById("rotation-stability").textContent = rotationStability;
+            
+            // Determine convergence state using stability, resonance and rotation stability
+            if (averageStability > 90 && simulationState.radialResonance > 90 && rotationStability > 90) {
                 convergenceState = "Harmonic Convergence";
-            } else if (averageStability > 75 && simulationState.radialResonance > 75) {
-                convergenceState = "Strong Convergence";
-            } else if (averageStability > 50 && simulationState.radialResonance > 50) {
+            } else if (averageStability > 80 && simulationState.radialResonance > 80 && rotationStability > 70) {
+                convergenceState = "Stable Heliosystem";
+            } else if (averageStability > 65 && simulationState.radialResonance > 65 && rotationStability > 50) {
                 convergenceState = "Converging";
-            } else if (averageStability > 25 || simulationState.radialResonance > 25) {
+            } else if (averageStability > 40 || simulationState.radialResonance > 40 || rotationStability > 30) {
                 convergenceState = "Stabilizing";
             }
             
             document.getElementById("system-convergence").textContent = convergenceState;
+            
+            // Update the revolution stability status
+            const revolutionElement = document.getElementById("revolution-stability");
+            if (stableRevolution) {
+                revolutionElement.textContent = "Achieved";
+                revolutionElement.className = "status-good";
+            } else {
+                revolutionElement.textContent = "Forming";
+                revolutionElement.className = "status-pending";
+            }
             
             // Update influence lines visualization based on orbital metrics
             updateInfluenceLines();
