@@ -16,9 +16,7 @@ The Elder Heliosystem for multimodal audio generation uses a hierarchical orbita
 \hline
 Elder & 1 & Maintains global coherence across all modalities \\
 \hline
-Primary Mentors & 5 & Audio, visual, semantic, temporal, and spatial domains \\
-\hline
-Secondary Mentors & 32 & Specialized sub-domains (e.g., harmonic structure, vocal timbre) \\
+Mentors & 32 & Domain specialists (audio, visual, semantic, temporal, spatial, etc.) \\
 \hline
 Erudites & 4,096 & Feature-specific processing units \\
 \hline
@@ -36,39 +34,36 @@ The orbital arrangement of this specialized Elder Heliosystem follows a multimod
 % Elder at center
 \filldraw[red] (0,0) circle (0.3) node[below=0.4cm] {Elder};
 
-% Primary domain orbits
-\draw[dashed] (0,0) circle (2);
-\draw[dashed] (0,0) circle (4);
+% Mentor orbits
+\draw[dashed] (0,0) circle (3);
 
-% Primary Mentors (inner orbit)
-\filldraw[blue] (0,2) circle (0.25) node[above] {Audio};
-\filldraw[blue] (1.9,0.62) circle (0.25) node[right] {Visual};
-\filldraw[blue] (1.17,-1.62) circle (0.25) node[below right] {Semantic};
-\filldraw[blue] (-1.17,-1.62) circle (0.25) node[below left] {Temporal};
-\filldraw[blue] (-1.9,0.62) circle (0.25) node[left] {Spatial};
+% Core domain Mentors (on main orbit)
+\filldraw[blue] (0,3) circle (0.25) node[above] {Audio};
+\filldraw[blue] (2.85,0.93) circle (0.25) node[right] {Visual};
+\filldraw[blue] (1.76,-2.43) circle (0.25) node[below right] {Semantic};
+\filldraw[blue] (-1.76,-2.43) circle (0.25) node[below left] {Temporal};
+\filldraw[blue] (-2.85,0.93) circle (0.25) node[left] {Spatial};
 
-% Secondary Mentors (selected)
-\filldraw[cyan] (0,4) circle (0.2) node[above] {Harmonics};
-\filldraw[cyan] (3.8,1.24) circle (0.2) node[right] {Object Recognition};
-\filldraw[cyan] (-3.8,1.24) circle (0.2) node[left] {Room Acoustics};
+% Other specialized Mentors
+\filldraw[blue] (2.12,2.12) circle (0.25) node[above right] {Harmonics};
+\filldraw[blue] (-2.12,2.12) circle (0.25) node[above left] {Room Acoustics};
 
 % Erudites (selected)
-\filldraw[green!60!black] (0,4.6) circle (0.15);
-\filldraw[green!60!black] (0.3,4.5) circle (0.15);
-\filldraw[green!60!black] (-0.3,4.5) circle (0.15);
-\filldraw[green!60!black] (4.3,1.4) circle (0.15);
-\filldraw[green!60!black] (4.4,1.0) circle (0.15);
+\filldraw[green!60!black] (0,3.5) circle (0.15);
+\filldraw[green!60!black] (0.3,3.4) circle (0.15);
+\filldraw[green!60!black] (-0.3,3.4) circle (0.15);
+\filldraw[green!60!black] (3.2,1.05) circle (0.15);
+\filldraw[green!60!black] (2.9,1.3) circle (0.15);
 
-% Labeled orbits
-\node at (3,0) {Primary Domain Orbit};
-\node at (5,0) {Secondary Domain Orbit};
+% Labeled orbit
+\node at (4,0) {Mentor Orbit};
 
 % Cross-modal connections
-\draw[dotted, ->] (0,2) to[bend right=15] (1.9,0.62);
-\draw[dotted, ->] (1.9,0.62) to[bend right=15] (1.17,-1.62);
-\draw[dotted, ->] (1.17,-1.62) to[bend right=15] (-1.17,-1.62);
-\draw[dotted, ->] (-1.17,-1.62) to[bend right=15] (-1.9,0.62);
-\draw[dotted, ->] (-1.9,0.62) to[bend right=15] (0,2);
+\draw[dotted, ->] (0,3) to[bend right=15] (2.85,0.93);
+\draw[dotted, ->] (2.85,0.93) to[bend right=15] (1.76,-2.43);
+\draw[dotted, ->] (1.76,-2.43) to[bend right=15] (-1.76,-2.43);
+\draw[dotted, ->] (-1.76,-2.43) to[bend right=15] (-2.85,0.93);
+\draw[dotted, ->] (-2.85,0.93) to[bend right=15] (0,3);
 
 \end{tikzpicture}
 \caption{Elder Heliosystem Orbital Configuration for Multimodal Audio Generation}
@@ -107,13 +102,13 @@ Cross-modal integration is facilitated by precise phase relationships between th
 \phi_{E \to M_i} = \phi_E + \frac{2\pi \cdot i}{N_M} \quad \text{for } i \in \{0,1,\ldots,N_M-1\}
 \end{equation}
 
-where $N_M = 5$ is the number of primary domain Mentors, and the Elder phase $\phi_E$ evolves according to:
+where $N_M = 32$ is the total number of Mentors, with core modality Mentors at specific phase positions. The Elder phase $\phi_E$ evolves according to:
 
 \begin{equation}
 \frac{d\phi_E}{dt} = \omega_E + \sum_{i=0}^{N_M-1} \alpha_i \cdot \mathcal{F}_i(t) \cdot \sin(\phi_{M_i} - \phi_E)
 \end{equation}
 
-where $\mathcal{F}_i(t)$ represents the feature salience for domain $i$ at time $t$, and $\alpha_i$ is the coupling strength for that domain.
+where $\mathcal{F}_i(t)$ represents the feature salience for Mentor $i$ at time $t$, and $\alpha_i$ is the coupling strength for that Mentor's domain.
 
 \subsection{Entity State Configuration for Enriched Audio}
 
@@ -128,7 +123,7 @@ type MultimodalEntityState struct {
     OptimizedEntityState
     
     // Domain specialization
-    DomainID        uint8      // Primary domain identifier
+    DomainID        uint8      // Domain identifier
     FeatureType     uint16     // Specific feature type within domain
     
     // Feature integration parameters
@@ -220,9 +215,8 @@ The process flow for generating high-fidelity audio from enriched multimodal fea
 
 \For{each time step $t$}
     \State Update Elder phase according to global audio features
-    \For{each Primary Domain Mentor $M_i$}
+    \For{each Mentor $M_i$}
         \State Calculate $\phi_{M_i}$ based on $\phi_E$ and domain-specific features
-        \State Activate relevant Secondary Mentors based on feature salience
     \EndFor
     
     \State Identify active feature subset based on current phase configuration
