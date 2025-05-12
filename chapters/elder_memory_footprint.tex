@@ -93,7 +93,26 @@ M_{batched} &= M_{params} + B \times (M_{entities} + M_{meta}) \\
 
 \section{Memory Scaling with Context Length}
 
-The critical insight is that this total memory footprint remains constant regardless of context length. The following table compares memory usage for different content generation tasks between the Elder Heliosystem and a comparable transformer model:
+The critical insight is that this total memory footprint remains constant regardless of context length. This becomes particularly significant when working with high-resolution audio formats.
+
+\subsection{High-Fidelity Audio Memory Requirements}
+
+For professional audio production with 96kHz, 7.1 channel Dolby Atmos content, we can calculate precise memory requirements. A 96kHz Dolby Atmos stream with 7.1 channels uses:
+
+\begin{itemize}
+    \item Sample rate: 96,000 Hz
+    \item Bit depth: 24 bits per sample
+    \item Channels: 7.1 configuration (8 discrete channels) + 2 height channels = 10 total channels
+    \item Data rate: $96,000 \times 24 \times 10 / 8 = 2,880,000$ bytes/second ≈ 2.75 MB/s
+\end{itemize}
+
+To convert this to token representation for transformers, we need to consider:
+\begin{itemize}
+    \item Each audio frame (typically 10-50ms) is represented as one or more tokens
+    \item For 20ms frames: 50 frames per second
+    \item With 10 tokens per frame for high-quality encoding: 500 tokens per second
+    \item 1 hour = 3,600 seconds = 1.8 million tokens
+\end{itemize}
 
 \begin{table}[h]
 \centering
@@ -101,14 +120,26 @@ The critical insight is that this total memory footprint remains constant regard
 \hline
 \textbf{Content Length} & \textbf{Elder Memory} & \textbf{Transformer Memory} & \textbf{Ratio} \\
 \hline
-1 hour audio (15,000 tokens) & 2.5 GB & 30 GB & 12× \\
-10 hours audio (150,000 tokens) & 2.5 GB & 300 GB & 120× \\
-100 hours audio (1.5M tokens) & 2.5 GB & 3 TB & 1,200× \\
-1,000 hours audio (15M tokens) & 2.5 GB & 30 TB & 12,000× \\
+1 hour Dolby Atmos (1.8M tokens) & 2.5 GB & 360 GB & 144× \\
+10 hours Dolby Atmos (18M tokens) & 2.5 GB & 3.6 TB & 1,440× \\
+100 hours Dolby Atmos (180M tokens) & 2.5 GB & 36 TB & 14,400× \\
+1,000 hours Dolby Atmos (1.8B tokens) & 2.5 GB & 360 TB & 144,000× \\
 \hline
 \end{tabular}
-\caption{Memory Requirements for Audio Generation Tasks}
+\caption{Memory Requirements for 96kHz, 7.1 Dolby Atmos Audio Generation}
 \end{table}
+
+\subsection{Context Length for Audio Production}
+
+For professional audio production, context requirements are substantial:
+\begin{itemize}
+    \item Full film score: 2+ hours of orchestral music with thematic coherence
+    \item Complete albums: 40-80 minutes with consistent sonic qualities
+    \item Game soundtracks: 10+ hours of dynamically related music
+    \item Audiobooks: 10-30 hours requiring consistent narrator voice
+\end{itemize}
+
+For these applications, the constant memory scaling of the Elder Heliosystem provides not just a quantitative advantage but a qualitative one—enabling applications that would be infeasible with traditional architectures.
 
 \section{Practical Implementation Considerations}
 
