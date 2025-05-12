@@ -141,6 +141,37 @@
             to { stroke-dashoffset: -10; }
         }
         
+        .gravitational-wave {
+            fill: none;
+            stroke-width: 0.5;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .memory-field {
+            fill-opacity: 0.05;
+            stroke: none;
+            pointer-events: none;
+        }
+        
+        .memory-field-elder {
+            fill: rgba(255, 85, 0, 0.1);
+        }
+        
+        .memory-field-mentor {
+            fill: rgba(100, 150, 255, 0.1);
+        }
+        
+        .wave-pulse {
+            animation: wavePulse 3s ease-out infinite;
+        }
+        
+        @keyframes wavePulse {
+            0% { opacity: 0; stroke-width: 0.2; }
+            50% { opacity: 0.4; stroke-width: 1; }
+            100% { opacity: 0; stroke-width: 0.2; }
+        }
+        
         .entity-controls {
             margin-top: 15px;
             padding-top: 10px;
@@ -284,7 +315,29 @@
                 // Syzygy configuration
                 syzygyDetection: true, // Whether to detect syzygy alignments
                 syzygyAngleTolerance: 0.05, // Angular tolerance in radians for syzygy detection
-                syzygyBoostFactor: 5.0 // How much to boost parameter efficiency during syzygy
+                syzygyBoostFactor: 5.0, // How much to boost parameter efficiency during syzygy
+                
+                // Memory fields configuration
+                memoryFields: {
+                    enabled: true,
+                    elderRadius: 350,
+                    mentorRadius: 100,
+                    opacity: 0.1,
+                    pulseFrequency: 0.2  // How often to pulse (0-1)
+                },
+                
+                // Gravitational waves configuration
+                gravitationalWaves: {
+                    enabled: true,
+                    maxWaves: 8,  // Maximum number of waves displayed at once
+                    waveInterval: 2000,  // Milliseconds between wave emissions
+                    waveSpeed: 0.5,  // Wave propagation speed
+                    waveColors: {
+                        elder: "rgba(255, 85, 0, 0.3)",
+                        mentor: "rgba(100, 150, 255, 0.3)",
+                        erudite: "rgba(0, 255, 150, 0.2)"
+                    }
+                }
             }
         };
         
@@ -301,7 +354,13 @@
             activeSyzygies: [], // Array of current syzygy triplets (Elder-Mentor-Erudite)
             syzygyCounts: {}, // Counts of syzygies by Mentor-Erudite pair
             syzygyHistory: [], // Array of recent syzygy events
-            lastSyzygyTime: 0 // Time of last syzygy event
+            lastSyzygyTime: 0, // Time of last syzygy event
+            
+            // Memory and gravitational wave tracking
+            memoryFields: [], // Memory fields data
+            gravitationalWaves: [], // Active gravitational waves data
+            lastWaveTime: 0, // Time of last wave emission
+            waveId: 0 // Counter for unique wave IDs
         };
         
         // Initialize the visualization
@@ -315,7 +374,9 @@
             document.getElementById("total-count").textContent = config.parameters.totalCount.toLocaleString();
             document.getElementById("sparsity-factor").textContent = (config.parameters.sparsityBase * 100).toFixed(6);
             
-            // Create a group for syzygy lines
+            // Create groups for various visualization elements
+            svg.append("g").attr("class", "memory-fields");
+            svg.append("g").attr("class", "gravitational-waves");
             svg.append("g").attr("class", "syzygy-lines");
             
             svg.attr("width", width)
@@ -376,6 +437,9 @@
             
             // Update entity counts
             updateEntityCountsDisplay();
+            
+            // Create memory fields
+            createMemoryFields();
             
             // Start animation loop
             requestAnimationFrame(animate);
@@ -557,6 +621,214 @@
                     entity.orbitCenter.y = entity.parent.y;
                 }
             });
+        }
+        
+        // Create and update memory fields
+        function createMemoryFields() {
+            if (!config.parameters.memoryFields.enabled) return;
+            
+            const elderEntity = simulationState.entities.find(e => e.type === "elder");
+            const mentorEntities = simulationState.entities.filter(e => e.type === "mentor");
+            
+            // Clear existing memory fields
+            simulationState.memoryFields = [];
+            
+            // Create Elder memory field
+            simulationState.memoryFields.push({
+                type: "elder",
+                entity: elderEntity,
+                radius: config.parameters.memoryFields.elderRadius,
+                x: elderEntity.x,
+                y: elderEntity.y,
+                opacity: config.parameters.memoryFields.opacity
+            });
+            
+            // Create Mentor memory fields
+            mentorEntities.forEach(mentor => {
+                simulationState.memoryFields.push({
+                    type: "mentor",
+                    entity: mentor,
+                    radius: config.parameters.memoryFields.mentorRadius,
+                    x: mentor.x,
+                    y: mentor.y,
+                    opacity: config.parameters.memoryFields.opacity * 0.8
+                });
+            });
+            
+            renderMemoryFields();
+        }
+        
+        // Render memory fields
+        function renderMemoryFields() {
+            const svg = d3.select("#visualization");
+            const memoryFieldsGroup = svg.select(".memory-fields");
+            
+            // Remove existing memory fields
+            memoryFieldsGroup.selectAll("*").remove();
+            
+            // Add memory fields
+            memoryFieldsGroup.selectAll(".memory-field")
+                .data(simulationState.memoryFields)
+                .enter()
+                .append("circle")
+                .attr("class", d => `memory-field memory-field-${d.type}`)
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("r", d => d.radius)
+                .attr("fill-opacity", d => d.opacity)
+                .attr("fill", d => {
+                    if (d.type === "elder") return "url(#elderGradient)";
+                    return "url(#mentorGradient)";
+                });
+            
+            // Add gradients if they don't exist yet
+            const defs = svg.select("defs");
+            if (defs.empty()) {
+                svg.append("defs")
+                    .html(`
+                        <radialGradient id="elderGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="0%" style="stop-color:rgb(255,100,50);stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:rgb(255,80,0);stop-opacity:0" />
+                        </radialGradient>
+                        <radialGradient id="mentorGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="0%" style="stop-color:rgb(100,150,255);stop-opacity:0.15" />
+                            <stop offset="100%" style="stop-color:rgb(70,120,255);stop-opacity:0" />
+                        </radialGradient>
+                    `);
+            }
+        }
+        
+        // Update memory fields positions
+        function updateMemoryFields() {
+            if (!config.parameters.memoryFields.enabled) return;
+            
+            simulationState.memoryFields.forEach(field => {
+                field.x = field.entity.x;
+                field.y = field.entity.y;
+            });
+            
+            // Update positions in visualization
+            const memoryFieldsGroup = d3.select(".memory-fields");
+            memoryFieldsGroup.selectAll(".memory-field")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+                
+            // Occasionally pulse the fields for visual effect
+            if (Math.random() < config.parameters.memoryFields.pulseFrequency) {
+                const randomField = memoryFieldsGroup.selectAll(".memory-field")
+                    .filter((d, i) => i === Math.floor(Math.random() * simulationState.memoryFields.length));
+                    
+                randomField
+                    .transition()
+                    .duration(1000)
+                    .attr("fill-opacity", d => d.opacity * 2)
+                    .transition()
+                    .duration(1000)
+                    .attr("fill-opacity", d => d.opacity);
+            }
+        }
+        
+        // Create gravitational waves
+        function emitGravitationalWave(timestamp) {
+            if (!config.parameters.gravitationalWaves.enabled) return;
+            
+            // Check if it's time to emit a new wave
+            if (timestamp - simulationState.lastWaveTime < config.parameters.gravitationalWaves.waveInterval) {
+                return;
+            }
+            
+            // Update last wave time
+            simulationState.lastWaveTime = timestamp;
+            
+            // Choose random entity to emit wave
+            const entitiesWeighted = [
+                ...simulationState.entities.filter(e => e.type === "elder"),
+                ...simulationState.entities.filter(e => e.type === "elder"), // Add elder twice to increase probability
+                ...simulationState.entities.filter(e => e.type === "mentor").slice(0, 3) // Limit to 3 random mentors
+            ];
+            
+            if (entitiesWeighted.length === 0) return;
+            
+            const sourceEntity = entitiesWeighted[Math.floor(Math.random() * entitiesWeighted.length)];
+            
+            // Create wave
+            const newWave = {
+                id: `wave-${simulationState.waveId++}`,
+                sourceType: sourceEntity.type,
+                sourceX: sourceEntity.x,
+                sourceY: sourceEntity.y,
+                currentRadius: 10, // Start with small radius
+                color: config.parameters.gravitationalWaves.waveColors[sourceEntity.type],
+                createdAt: timestamp,
+                speed: config.parameters.gravitationalWaves.waveSpeed *
+                       (sourceEntity.type === "elder" ? 1.2 : 0.8) // Elder waves move faster
+            };
+            
+            // Add to waves array
+            simulationState.gravitationalWaves.push(newWave);
+            
+            // Limit number of waves
+            if (simulationState.gravitationalWaves.length > config.parameters.gravitationalWaves.maxWaves) {
+                simulationState.gravitationalWaves.shift(); // Remove oldest wave
+            }
+            
+            // Render waves
+            renderGravitationalWaves();
+        }
+        
+        // Update gravitational waves
+        function updateGravitationalWaves(deltaTime) {
+            if (!config.parameters.gravitationalWaves.enabled) return;
+            
+            // Update wave radii
+            let hasUpdates = false;
+            simulationState.gravitationalWaves = simulationState.gravitationalWaves.filter(wave => {
+                // Expand the wave
+                wave.currentRadius += wave.speed * 100 * deltaTime;
+                
+                // Remove waves that have grown too large
+                const maxRadius = 800; // Maximum wave radius before it fades out
+                if (wave.currentRadius > maxRadius) {
+                    return false;
+                }
+                
+                hasUpdates = true;
+                return true;
+            });
+            
+            // Update visualization if needed
+            if (hasUpdates) {
+                const wavesGroup = d3.select(".gravitational-waves");
+                
+                // Update each wave
+                wavesGroup.selectAll(".gravitational-wave")
+                    .data(simulationState.gravitationalWaves, d => d.id)
+                    .attr("r", d => d.currentRadius)
+                    .attr("opacity", d => Math.max(0, 0.4 - d.currentRadius / 800)); // Fade out as it expands
+            }
+        }
+        
+        // Render gravitational waves
+        function renderGravitationalWaves() {
+            const svg = d3.select("#visualization");
+            const wavesGroup = svg.select(".gravitational-waves");
+            
+            // Add new waves
+            const waves = wavesGroup.selectAll(".gravitational-wave")
+                .data(simulationState.gravitationalWaves, d => d.id);
+                
+            // Enter new waves
+            waves.enter()
+                .append("circle")
+                .attr("class", "gravitational-wave wave-pulse")
+                .attr("cx", d => d.sourceX)
+                .attr("cy", d => d.sourceY)
+                .attr("r", d => d.currentRadius)
+                .attr("stroke", d => d.color)
+                .attr("opacity", 0.4);
+                
+            // Exit old waves
+            waves.exit().remove();
         }
         
         function createEntities(center) {
@@ -1108,6 +1380,15 @@
                 if (config.parameters.syzygyDetection) {
                     detectSyzygies();
                 }
+                
+                // Update memory fields positions
+                updateMemoryFields();
+                
+                // Update gravitational waves
+                updateGravitationalWaves(deltaTime);
+                
+                // Emit new gravitational waves occasionally
+                emitGravitationalWave(timestamp);
             }
             
             requestAnimationFrame(animate);
