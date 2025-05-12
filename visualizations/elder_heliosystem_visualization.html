@@ -1928,6 +1928,11 @@
                 
                 // Emit new gravitational waves occasionally
                 emitGravitationalWave(timestamp);
+                
+                // Show stable revolution effect if achieved
+                if (simulationState.stableRevolution) {
+                    showStableRevolutionEffect(timestamp);
+                }
             }
             
             requestAnimationFrame(animate);
@@ -1938,9 +1943,97 @@
             const elder = simulationState.entities[0];
             const pulseFactor = 1.6 + 0.4 * Math.sin(Date.now() / 1000);
             
-            d3.select(".elder-glow")
-                .attr("r", elder.radius * pulseFactor)
-                .attr("opacity", 0.1 + 0.1 * Math.sin(Date.now() / 500));
+            // For stable revolution, use a different color and larger glow
+            if (simulationState.stableRevolution) {
+                d3.select(".elder-glow")
+                    .attr("r", elder.radius * (pulseFactor + 0.3))
+                    .attr("opacity", 0.15 + 0.15 * Math.sin(Date.now() / 500))
+                    .attr("stroke", "rgba(120, 255, 120, 0.6)") // Green glow for stable system
+                    .attr("stroke-width", 15);
+            } else {
+                d3.select(".elder-glow")
+                    .attr("r", elder.radius * pulseFactor)
+                    .attr("opacity", 0.1 + 0.1 * Math.sin(Date.now() / 500))
+                    .attr("stroke", elder.color)
+                    .attr("stroke-width", 10);
+            }
+        }
+        
+        // Function to display visual effects when stable revolution is achieved
+        function showStableRevolutionEffect(timestamp) {
+            const svg = d3.select("#visualization");
+            
+            // Check if we're already showing the effect
+            if (svg.select(".stable-revolution-effect").size() > 0) {
+                return;
+            }
+            
+            // Get the Elder entity
+            const elder = simulationState.entities[0];
+            
+            // Create orbital harmony indicator
+            const harmonyGroup = svg.append("g")
+                .attr("class", "stable-revolution-effect")
+                .style("pointer-events", "none");
+            
+            // Add a series of concentric circles to indicate orbital harmony
+            const harmonicRings = 3;
+            const baseRadius = elder.radius * 3;
+            const maxOpacity = 0.2;
+            
+            for (let i = 0; i < harmonicRings; i++) {
+                // Create orbital harmony circles
+                const radius = baseRadius + (i * elder.radius * 2);
+                
+                harmonyGroup.append("circle")
+                    .attr("cx", elder.x)
+                    .attr("cy", elder.y)
+                    .attr("r", radius)
+                    .attr("fill", "none")
+                    .attr("stroke", "rgba(100, 255, 150, 0.6)")
+                    .attr("stroke-width", 3)
+                    .attr("opacity", maxOpacity * (1 - i / harmonicRings))
+                    .attr("stroke-dasharray", "5, 5")
+                    .classed("harmony-ring", true);
+            }
+            
+            // Add circular wave effects that propagate outward
+            const emitHarmonyWave = () => {
+                const waveRadius = elder.radius * 2;
+                
+                const wave = harmonyGroup.append("circle")
+                    .attr("cx", elder.x)
+                    .attr("cy", elder.y)
+                    .attr("r", waveRadius)
+                    .attr("fill", "none")
+                    .attr("stroke", "rgba(180, 255, 180, 0.8)")
+                    .attr("stroke-width", 2)
+                    .attr("opacity", 0.6);
+                    
+                // Animate the wave outward and fade it
+                wave.transition()
+                    .duration(5000)  // 5 seconds
+                    .attr("r", waveRadius * 5)
+                    .attr("opacity", 0)
+                    .on("end", function() {
+                        d3.select(this).remove();
+                    });
+            };
+            
+            // Emit harmony waves periodically
+            simulationState.harmonyWaveInterval = setInterval(emitHarmonyWave, 10000);
+            
+            // Emit initial wave
+            emitHarmonyWave();
+            
+            // Update the orbital harmonics periodically
+            const updateOrbitalHarmonics = () => {
+                d3.selectAll(".harmony-ring")
+                    .attr("cx", elder.x)
+                    .attr("cy", elder.y);
+            };
+            
+            simulationState.orbitalHarmonicsInterval = setInterval(updateOrbitalHarmonics, 100);
         }
         
         function showEntityInfo(event, d) {
@@ -2103,11 +2196,40 @@
         }
         
         function resetSimulation() {
+            // Clear any harmony effect intervals
+            if (simulationState.harmonyWaveInterval) {
+                clearInterval(simulationState.harmonyWaveInterval);
+                simulationState.harmonyWaveInterval = null;
+            }
+            
+            if (simulationState.orbitalHarmonicsInterval) {
+                clearInterval(simulationState.orbitalHarmonicsInterval);
+                simulationState.orbitalHarmonicsInterval = null;
+            }
+            
+            // Remove stable revolution effects
+            d3.select(".stable-revolution-effect").remove();
+            
+            // Reset the phase and recreate entities
             simulationState.elderPhase = config.phases.initElderPhase;
             const center = { 
                 x: document.querySelector(".container").clientWidth / 2, 
                 y: document.querySelector(".container").clientHeight / 2 
             };
+            
+            // Reset stability tracking
+            simulationState.orbitalStability = {
+                mentors: 0,
+                erudites: 0
+            };
+            simulationState.radialResonance = 0;
+            simulationState.rotationStability = 0;
+            simulationState.stableRevolution = false;
+            
+            // Reset the simulation start time
+            simulationState.startTime = performance.now();
+            
+            // Recreate all entities
             createEntities(center);
         }
         
