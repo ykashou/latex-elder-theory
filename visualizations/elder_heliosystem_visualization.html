@@ -507,13 +507,28 @@
         function calculateParameterActivation(elderPhase) {
             // Calculate sparsity factor from the system state itself
             const sparsityFactor = calculateSystemDeterminedSparsity();
+            
+            // Apply syzygy efficiency multiplier if applicable
+            const syzygyMultiplier = getSyzygyEfficiencyFactor();
+            const effectiveSparsity = sparsityFactor;
+            const effectiveParameterCount = config.parameters.totalCount * syzygyMultiplier;
             let activeCount = 0;
             
             // Calculate active parameter count based on determined sparsity
-            activeCount = Math.floor(config.parameters.totalCount * sparsityFactor);
+            // Note: With syzygy, we get more "effective parameters" with the same actual parameter count
+            // This models how syzygy alignment creates more efficient use of the same parameters
+            activeCount = Math.floor(config.parameters.totalCount * effectiveSparsity);
+            const effectiveActiveCount = Math.floor(activeCount * syzygyMultiplier);
             
             simulationState.activeParameters = activeCount;
-            document.getElementById("active-count").textContent = activeCount.toLocaleString();
+            simulationState.effectiveActiveParameters = effectiveActiveCount;
+            
+            // Display the effective parameter count with syzygy boost if active
+            const displayCount = syzygyMultiplier > 1.0 ? 
+                `${activeCount.toLocaleString()} (${effectiveActiveCount.toLocaleString()} effective)` : 
+                activeCount.toLocaleString();
+                
+            document.getElementById("active-count").textContent = displayCount;
             
             // Calculate memory usage (proportional to active parameters)
             const memoryUsage = (activeCount / config.parameters.totalCount) * 
@@ -521,15 +536,159 @@
             document.getElementById("memory-usage").textContent = (memoryUsage / 1000).toFixed(2);
             
             // Update activation history for graph
-            simulationState.activationHistory.push(sparsityFactor);
+            simulationState.activationHistory.push(effectiveSparsity);
             simulationState.activationHistory.shift();
             updateActivationGraph();
             
             // Show sparsity factor
             const sparsityDisplay = document.getElementById("sparsity-factor");
             if (sparsityDisplay) {
-                sparsityDisplay.textContent = (sparsityFactor * 100).toFixed(6);
+                sparsityDisplay.textContent = (effectiveSparsity * 100).toFixed(6);
             }
+        }
+        
+        // Syzygy detection and handling functions
+        function detectSyzygies() {
+            if (!config.parameters.syzygyDetection) return;
+            
+            const elder = simulationState.entities[0]; // The Elder entity
+            const mentors = simulationState.entities.filter(e => e.type === "mentor");
+            const erudites = simulationState.entities.filter(e => e.type === "erudite");
+            
+            // Clear previous syzygies
+            simulationState.activeSyzygies = [];
+            
+            // Check for alignments between Elder, Mentors, and Erudites
+            mentors.forEach(mentor => {
+                const mentorErudites = erudites.filter(e => e.parent === mentor);
+                
+                mentorErudites.forEach(erudite => {
+                    // Calculate vectors for alignment checking
+                    const v1 = {
+                        x: mentor.x - elder.x,
+                        y: mentor.y - elder.y
+                    };
+                    
+                    const v2 = {
+                        x: erudite.x - mentor.x,
+                        y: erudite.y - mentor.y
+                    };
+                    
+                    // Normalize vectors
+                    const mag1 = Math.sqrt(v1.x * v1.x + v1.y * v1.y);
+                    const mag2 = Math.sqrt(v2.x * v2.x + v2.y * v2.y);
+                    
+                    if (mag1 === 0 || mag2 === 0) return; // Skip if any magnitude is zero
+                    
+                    const n1 = { x: v1.x / mag1, y: v1.y / mag1 };
+                    const n2 = { x: v2.x / mag2, y: v2.y / mag2 };
+                    
+                    // Calculate dot product for alignment check
+                    const dotProduct = n1.x * n2.x + n1.y * n2.y;
+                    
+                    // Angle between vectors in radians
+                    const angle = Math.acos(Math.min(Math.max(dotProduct, -1), 1));
+                    
+                    // Check if the angle is close to 0 or π (aligned or anti-aligned)
+                    const isAligned = angle < config.parameters.syzygyAngleTolerance || 
+                                      Math.abs(angle - Math.PI) < config.parameters.syzygyAngleTolerance;
+                    
+                    if (isAligned) {
+                        const syzygyId = `${mentor.id}-${erudite.id}`;
+                        
+                        // Add to active syzygies
+                        simulationState.activeSyzygies.push({
+                            id: syzygyId,
+                            elder: elder,
+                            mentor: mentor,
+                            erudite: erudite,
+                            time: Date.now(),
+                            isAntiAligned: angle > Math.PI / 2
+                        });
+                        
+                        // Update count for this pair
+                        if (!simulationState.syzygyCounts[syzygyId]) {
+                            simulationState.syzygyCounts[syzygyId] = 0;
+                        }
+                        simulationState.syzygyCounts[syzygyId]++;
+                        
+                        // Record timestamp of most recent syzygy
+                        simulationState.lastSyzygyTime = Date.now();
+                        
+                        // Add to history (limit to 10 most recent)
+                        simulationState.syzygyHistory.unshift({
+                            id: syzygyId,
+                            mentorDomain: mentor.domain,
+                            eruditeId: erudite.id,
+                            time: Date.now()
+                        });
+                        
+                        if (simulationState.syzygyHistory.length > 10) {
+                            simulationState.syzygyHistory.pop();
+                        }
+                    }
+                });
+            });
+            
+            // Update the visualization
+            updateSyzygyVisuals();
+        }
+        
+        function updateSyzygyVisuals() {
+            const svg = d3.select("#visualization");
+            
+            // Update syzygy lines
+            const syzygyLines = svg.select(".syzygy-lines").selectAll(".syzygy-line")
+                .data(simulationState.activeSyzygies, d => d.id);
+            
+            // Remove old lines
+            syzygyLines.exit().remove();
+            
+            // Add new lines
+            syzygyLines.enter()
+                .append("path")
+                .attr("class", "syzygy-line")
+                .merge(syzygyLines)
+                .attr("d", d => {
+                    // Draw line from Elder through Mentor to Erudite
+                    return `M ${d.elder.x} ${d.elder.y} L ${d.mentor.x} ${d.mentor.y} L ${d.erudite.x} ${d.erudite.y}`;
+                });
+                
+            // Update UI elements
+            document.getElementById("syzygy-count").textContent = simulationState.activeSyzygies.length;
+            
+            // Update the latest syzygy info
+            if (simulationState.syzygyHistory.length > 0) {
+                const latest = simulationState.syzygyHistory[0];
+                document.getElementById("syzygy-latest").textContent = `${latest.mentorDomain}`;
+            } else {
+                document.getElementById("syzygy-latest").textContent = "None";
+            }
+            
+            // Calculate efficiency boost
+            const syzygyBoost = getSyzygyEfficiencyFactor();
+            document.getElementById("syzygy-efficiency").textContent = syzygyBoost.toFixed(2);
+            
+            // Update indicator
+            const indicator = document.getElementById("syzygy-indicator");
+            if (simulationState.activeSyzygies.length > 0) {
+                indicator.className = "syzygy-active";
+            } else {
+                indicator.className = "syzygy-inactive";
+            }
+        }
+        
+        function getSyzygyEfficiencyFactor() {
+            if (!config.parameters.syzygyDetection || simulationState.activeSyzygies.length === 0) {
+                return 1.0;
+            }
+            
+            // Calculate efficiency boost based on number of active syzygies
+            // More syzygies = higher efficiency (up to a cap)
+            const maxBoost = config.parameters.syzygyBoostFactor;
+            const saturationPoint = 10; // Maximum number of syzygies for full boost
+            
+            return 1.0 + (Math.min(simulationState.activeSyzygies.length, saturationPoint) / saturationPoint) * (maxBoost - 1.0);
         }
         
         function calculateSystemDeterminedSparsity() {
@@ -678,6 +837,11 @@
                 updatePhases(deltaTime);
                 updateEntitiesPosition();
                 updateGlowEffect();
+                
+                // Detect and update syzygies
+                if (config.parameters.syzygyDetection) {
+                    detectSyzygies();
+                }
             }
             
             requestAnimationFrame(animate);
