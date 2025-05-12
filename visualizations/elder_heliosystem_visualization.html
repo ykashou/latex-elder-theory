@@ -109,6 +109,17 @@
             z-index: 10;
         }
         
+        .orbital-dynamics {
+            position: absolute;
+            top: 280px;
+            right: 20px;
+            background-color: rgba(30, 30, 50, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 10;
+        }
+        
         .syzygy-inactive {
             color: #555555;
             font-size: 24px;
@@ -272,6 +283,14 @@
             <div id="syzygy-indicator" class="syzygy-inactive">●</div>
         </div>
         
+        <div class="orbital-dynamics">
+            <h2>Orbital Mechanics</h2>
+            <div>Mentor Stability: <span id="mentor-stability" class="highlight">0</span>%</div>
+            <div>Erudite Stability: <span id="erudite-stability" class="highlight">0</span>%</div>
+            <div>Radial Resonance: <span id="radial-resonance" class="highlight">0</span>%</div>
+            <div>System Convergence: <span id="system-convergence" class="highlight">Forming</span></div>
+        </div>
+        
         <svg id="visualization"></svg>
         
         <div class="tooltip" style="display: none;"></div>
@@ -387,6 +406,7 @@
             svg.append("g").attr("class", "memory-fields");
             svg.append("g").attr("class", "gravitational-waves");
             svg.append("g").attr("class", "syzygy-lines");
+            svg.append("g").attr("class", "influence-lines");
             
             svg.attr("width", width)
                 .attr("height", height);
@@ -1043,28 +1063,232 @@
             document.getElementById("current-phase").textContent = elder.phase.toFixed(2);
             document.getElementById("phase-circle").style.backgroundColor = 
                 `hsl(${(elder.phase / (Math.PI * 2)) * 360}, 100%, 50%)`;
+            
+            // Track orbital stability metrics for Mentors and Erudites
+            let mentorStabilitySum = 0;
+            let eruditeStabilitySum = 0;
+            let mentorCount = 0;
+            let eruditeCount = 0;
                 
-            // Update Mentor phases with some gravitation toward Elder's phase
+            // Update Mentor phases with Elder influence ensuring continuous revolutions
             simulationState.entities.filter(e => e.type === "mentor").forEach(mentor => {
+                // Elder influence asserts continuous revolution of Mentors
                 const phaseDiff = calculatePhaseDifference(mentor.phase, elder.phase);
                 const attraction = 0.1 * phaseDiff;
                 
+                // Calculate mentor orbital stability (inverse of phase difference)
+                const stabilityFactor = Math.max(0, 1 - Math.abs(phaseDiff) / Math.PI);
+                mentorStabilitySum += stabilityFactor;
+                mentorCount++;
+                
+                // Update mentor phase with Elder influence
                 mentor.phase += (mentor.phaseVelocity - attraction) * deltaTime * simulationState.speed;
                 mentor.phase = normalizePhase(mentor.phase);
             });
             
-            // Update Erudite phases with attraction to their Mentor's phase
+            // Update Erudite phases with Mentor influence ensuring continuous revolutions
             simulationState.entities.filter(e => e.type === "erudite").forEach(erudite => {
                 const parent = erudite.parent;
+                
+                // Mentor influence asserts continuous revolution of Erudites
                 const phaseDiff = calculatePhaseDifference(erudite.phase, parent.phase);
                 const attraction = 0.2 * phaseDiff;
                 
+                // Calculate erudite orbital stability (inverse of phase difference)
+                const stabilityFactor = Math.max(0, 1 - Math.abs(phaseDiff) / Math.PI);
+                eruditeStabilitySum += stabilityFactor;
+                eruditeCount++;
+                
+                // Update erudite phase with Mentor influence
                 erudite.phase += (erudite.phaseVelocity - attraction) * deltaTime * simulationState.speed;
                 erudite.phase = normalizePhase(erudite.phase);
             });
             
+            // Update orbital stability metrics
+            if (mentorCount > 0) {
+                simulationState.orbitalStability.mentors = Math.round((mentorStabilitySum / mentorCount) * 100);
+            }
+            
+            if (eruditeCount > 0) {
+                simulationState.orbitalStability.erudites = Math.round((eruditeStabilitySum / eruditeCount) * 100);
+            }
+            
+            // Calculate radial resonance
+            calculateRadialResonance();
+            
             // Calculate parameter activation based on Elder phase
             calculateParameterActivation(elder.phase);
+            
+            // Update orbital dynamics display
+            updateOrbitalDynamicsDisplay();
+        }
+        
+        function calculateRadialResonance() {
+            // Radial resonance is determined by the harmonic relationship between orbital radii
+            const mentors = simulationState.entities.filter(e => e.type === "mentor");
+            const erudites = simulationState.entities.filter(e => e.type === "erudite");
+            
+            if (mentors.length === 0) {
+                simulationState.radialResonance = 0;
+                return;
+            }
+            
+            // Calculate resonance based on mentor orbit ratios
+            // Ideal ratios are integer multiples or simple fractions (1:2, 2:3, 3:4, etc.)
+            let resonanceSum = 0;
+            if (mentors.length > 1) {
+                for (let i = 0; i < mentors.length - 1; i++) {
+                    for (let j = i + 1; j < mentors.length; j++) {
+                        const ratio = mentors[i].orbitRadius / mentors[j].orbitRadius;
+                        const normalizedRatio = ratio > 1 ? 1 / ratio : ratio;
+                        
+                        // Calculate how close this is to a "perfect" ratio (1/2, 2/3, 3/4, etc.)
+                        // Closer to a perfect ratio = higher resonance
+                        const idealRatios = [1, 1/2, 2/3, 3/4, 4/5, 5/6];
+                        const closestRatio = idealRatios.reduce((prev, curr) => 
+                            Math.abs(curr - normalizedRatio) < Math.abs(prev - normalizedRatio) ? curr : prev
+                        );
+                        
+                        const resonanceFactor = 1 - Math.min(1, Math.abs(normalizedRatio - closestRatio) * 10);
+                        resonanceSum += resonanceFactor;
+                    }
+                }
+                
+                const pairCount = (mentors.length * (mentors.length - 1)) / 2;
+                const mentorResonance = resonanceSum / pairCount;
+                
+                // Further adjust based on erudite orbital relationships
+                let eruditeResonanceFactor = 1;
+                if (erudites.length > 0) {
+                    // Similar calculation for erudites could be added here
+                    // For now we'll use a simplified approach
+                    eruditeResonanceFactor = 0.5 + (Math.min(erudites.length, 5) / 10);
+                }
+                
+                // Combine mentor and erudite resonance factors
+                simulationState.radialResonance = Math.round(mentorResonance * eruditeResonanceFactor * 100);
+            } else {
+                // With just one mentor, resonance is determined by Elder-Mentor harmony
+                const elder = simulationState.entities.find(e => e.type === "elder");
+                const mentor = mentors[0];
+                
+                const phaseDiff = calculatePhaseDifference(elder.phase, mentor.phase);
+                const normalizedDiff = Math.abs(phaseDiff) / Math.PI;
+                
+                simulationState.radialResonance = Math.round((1 - normalizedDiff) * 100);
+            }
+        }
+        
+        function updateOrbitalDynamicsDisplay() {
+            // Update orbital dynamics display
+            document.getElementById("mentor-stability").textContent = simulationState.orbitalStability.mentors;
+            document.getElementById("erudite-stability").textContent = simulationState.orbitalStability.erudites;
+            document.getElementById("radial-resonance").textContent = simulationState.radialResonance;
+            
+            // Calculate system convergence state based on stability and resonance
+            let convergenceState = "Forming";
+            const averageStability = (simulationState.orbitalStability.mentors + simulationState.orbitalStability.erudites) / 2;
+            
+            if (averageStability > 90 && simulationState.radialResonance > 90) {
+                convergenceState = "Harmonic Convergence";
+            } else if (averageStability > 75 && simulationState.radialResonance > 75) {
+                convergenceState = "Strong Convergence";
+            } else if (averageStability > 50 && simulationState.radialResonance > 50) {
+                convergenceState = "Converging";
+            } else if (averageStability > 25 || simulationState.radialResonance > 25) {
+                convergenceState = "Stabilizing";
+            }
+            
+            document.getElementById("system-convergence").textContent = convergenceState;
+            
+            // Update influence lines visualization based on orbital metrics
+            updateInfluenceLines();
+        }
+        
+        function updateInfluenceLines() {
+            const currentTime = performance.now();
+            // Only update influence lines periodically for performance
+            if (currentTime - simulationState.lastInfluenceUpdate < 1000) return;
+            
+            simulationState.lastInfluenceUpdate = currentTime;
+            simulationState.influenceLines = [];
+            
+            const elder = simulationState.entities.find(e => e.type === "elder");
+            if (!elder) return;
+            
+            // Create influence lines from Elder to each Mentor
+            simulationState.entities.filter(e => e.type === "mentor").forEach(mentor => {
+                // Calculate intensity based on orbital stability
+                const stability = simulationState.orbitalStability.mentors / 100;
+                const intensity = Math.max(0.1, Math.min(0.8, stability));
+                
+                simulationState.influenceLines.push({
+                    id: `elder-${mentor.id}`,
+                    sourceX: elder.x,
+                    sourceY: elder.y,
+                    targetX: mentor.x,
+                    targetY: mentor.y,
+                    type: 'elder-mentor',
+                    intensity: intensity
+                });
+            });
+            
+            // Create influence lines from each Mentor to its Erudites
+            simulationState.entities.filter(e => e.type === "erudite").forEach(erudite => {
+                const mentor = erudite.parent;
+                
+                // Calculate intensity based on orbital stability
+                const stability = simulationState.orbitalStability.erudites / 100;
+                const intensity = Math.max(0.1, Math.min(0.8, stability));
+                
+                simulationState.influenceLines.push({
+                    id: `mentor-${mentor.id}-${erudite.id}`,
+                    sourceX: mentor.x,
+                    sourceY: mentor.y,
+                    targetX: erudite.x,
+                    targetY: erudite.y,
+                    type: 'mentor-erudite',
+                    intensity: intensity
+                });
+            });
+            
+            renderInfluenceLines();
+        }
+        
+        function renderInfluenceLines() {
+            const svg = d3.select("#visualization");
+            const linesGroup = svg.select(".influence-lines");
+            
+            // Update lines with the latest data
+            const lines = linesGroup.selectAll(".influence-line")
+                .data(simulationState.influenceLines, d => d.id);
+                
+            // Remove old lines
+            lines.exit().remove();
+            
+            // Add new lines
+            lines.enter()
+                .append("line")
+                .attr("class", d => `influence-line ${d.type}`)
+                .attr("x1", d => d.sourceX)
+                .attr("y1", d => d.sourceY)
+                .attr("x2", d => d.targetX)
+                .attr("y2", d => d.targetY)
+                .attr("stroke", d => d.type === "elder-mentor" ? "rgba(255, 215, 0, " + d.intensity + ")" : "rgba(100, 200, 255, " + d.intensity + ")")
+                .attr("stroke-width", d => 1 + d.intensity * 2)
+                .attr("stroke-dasharray", "4, 2")
+                .attr("opacity", d => d.intensity)
+                .style("pointer-events", "none");
+                
+            // Update existing lines
+            lines
+                .attr("x1", d => d.sourceX)
+                .attr("y1", d => d.sourceY)
+                .attr("x2", d => d.targetX)
+                .attr("y2", d => d.targetY)
+                .attr("stroke", d => d.type === "elder-mentor" ? "rgba(255, 215, 0, " + d.intensity + ")" : "rgba(100, 200, 255, " + d.intensity + ")")
+                .attr("stroke-width", d => 1 + d.intensity * 2)
+                .attr("opacity", d => d.intensity);
         }
         
         function calculateParameterActivation(elderPhase) {
