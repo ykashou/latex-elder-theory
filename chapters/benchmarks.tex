@@ -44,7 +44,7 @@ Phase Coherence Scaling & Knowledge integration vs. system size & Attention mech
 \cline{2-4}
 & Parameter Efficiency & Performance vs. parameter count & Parameter-scaled transformer models \\
 \cline{2-4}
-& Hardware Scaling & Performance vs. GPU/TPU count & Distributed transformer training \\
+& Hardware Scaling & Performance vs. compute node count & Distributed training systems \\
 \hline
 \multirow{6}{3cm}{\textbf{Task Performance}} & 
 Audio Generation Quality & MUSHRA scores, FVD, IS, FID & AudioLM, MusicGen, Jukebox \\
@@ -73,7 +73,7 @@ This benchmark measures how memory usage scales with increasing sequence length,
     \item \textbf{Methodology:} Process increasingly longer sequences (1K, 10K, 100K, 1M, 10M tokens) and measure peak memory usage
     \item \textbf{Test Dataset:} Books corpus concatenated to desired length
     \item \textbf{Expected Outcome:} Memory usage remains nearly constant for Elder Heliosystem while growing linearly for transformer models
-    \item \textbf{Implementation Details:} System instrumentation via \texttt{torch.cuda.max\_memory\_allocated()}
+    \item \textbf{Implementation Details:} System instrumentation via low-level memory tracking APIs
 \end{itemize}
 
 \subsection{Audio Duration Scaling}
@@ -208,8 +208,8 @@ Evaluates coherence over extended generations.
 To ensure reproducibility and fair comparisons, all benchmarks follow a standardized implementation protocol:
 
 \begin{enumerate}
-    \item \textbf{Hardware Standardization:} All tests run on identical hardware configurations (NVIDIA H100, AMD EPYC 9654)
-    \item \textbf{Software Environment:} Fixed software stack with identical dependencies
+    \item \textbf{Hardware Standardization:} All tests run on identical high-performance computing environments
+    \item \textbf{Software Environment:} Fixed computational stack with consistent dependencies
     \item \textbf{Seed Control:} Fixed random seeds for reproducibility
     \item \textbf{Baseline Selection:} Current state-of-the-art systems as baselines
     \item \textbf{Multiple Runs:} Minimum 5 runs with different seeds to establish confidence intervals
