@@ -97,6 +97,49 @@
             color: #ffcc00;
             font-weight: bold;
         }
+        
+        .syzygy-monitor {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(30, 30, 50, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 10;
+        }
+        
+        .syzygy-inactive {
+            color: #555555;
+            font-size: 24px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        .syzygy-active {
+            color: #ff00ff;
+            font-size: 24px;
+            text-align: center;
+            margin-top: 5px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1.0; transform: scale(1.2); }
+            100% { opacity: 0.3; transform: scale(0.8); }
+        }
+        
+        .syzygy-line {
+            stroke: rgba(255, 0, 255, 0.6);
+            stroke-width: 2;
+            stroke-dasharray: 5, 5;
+            animation: dash 1s linear infinite;
+        }
+        
+        @keyframes dash {
+            to { stroke-dashoffset: -10; }
+        }
     </style>
 </head>
 <body>
@@ -128,6 +171,14 @@
             <div>Memory Usage: <span id="memory-usage" class="highlight">121.34</span> MB</div>
             <div>System-Determined Sparsity: <span id="sparsity-factor" class="highlight">0.0001</span>%</div>
             <div id="activation-graph" style="height: 60px; margin-top: 10px;"></div>
+        </div>
+        
+        <div class="syzygy-monitor">
+            <h2>Syzygy Alignment</h2>
+            <div>Active Syzygies: <span id="syzygy-count" class="highlight">0</span></div>
+            <div>Latest: <span id="syzygy-latest" class="highlight">None</span></div>
+            <div>Parameter Efficiency: <span id="syzygy-efficiency" class="highlight">1.0</span>×</div>
+            <div id="syzygy-indicator" class="syzygy-inactive">●</div>
         </div>
         
         <svg id="visualization"></svg>
@@ -169,7 +220,11 @@
                 // Sparsity calculation parameters
                 sparsityBase: 0.0001, // Base sparsity factor
                 phaseToleranceBase: 0.025, // Base phase tolerance
-                adaptiveFactors: true // Whether sparsity adapts to system state
+                adaptiveFactors: true, // Whether sparsity adapts to system state
+                // Syzygy configuration
+                syzygyDetection: true, // Whether to detect syzygy alignments
+                syzygyAngleTolerance: 0.05, // Angular tolerance in radians for syzygy detection
+                syzygyBoostFactor: 5.0 // How much to boost parameter efficiency during syzygy
             }
         };
         
@@ -181,7 +236,12 @@
             entities: [],
             activeParameters: 0,
             activationHistory: Array(100).fill(0),
-            selectedEntity: null
+            selectedEntity: null,
+            // Syzygy tracking
+            activeSyzygies: [], // Array of current syzygy triplets (Elder-Mentor-Erudite)
+            syzygyCounts: {}, // Counts of syzygies by Mentor-Erudite pair
+            syzygyHistory: [], // Array of recent syzygy events
+            lastSyzygyTime: 0 // Time of last syzygy event
         };
         
         // Initialize the visualization
@@ -194,6 +254,9 @@
             // Update parameter display
             document.getElementById("total-count").textContent = config.parameters.totalCount.toLocaleString();
             document.getElementById("sparsity-factor").textContent = (config.parameters.sparsityBase * 100).toFixed(6);
+            
+            // Create a group for syzygy lines
+            svg.append("g").attr("class", "syzygy-lines");
             
             svg.attr("width", width)
                 .attr("height", height);
