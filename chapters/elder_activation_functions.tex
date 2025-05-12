@@ -574,120 +574,22 @@ Detailed ablation studies highlight the contribution of different activation fun
 
 The ablation studies reveal that phase-preserving mechanisms (HAF, EMCF, METF) are critical to performance, while quantum-inspired activations (QPA) provide more modest but still significant benefits.
 
-\section{Gravitational Stabilization Through Activation Functions}
+\section{Relationship to the Elder Heliosystem's Gravitational Model}
 
-At the core of the Elder Heliosystem lies a fundamental principle: Elder entities maintain Mentors in stable revolutionary orbit, and Mentors similarly maintain Erudites in stable revolutionary orbit. This hierarchical gravitational influence forms the foundation of stable learning in the system. The activation functions described in this chapter play critical roles in implementing this gravitational stabilization mechanism.
+The activation functions presented in this chapter implement critical aspects of the Elder Heliosystem's fundamental gravitational model. While the gravitational stabilization mechanism is fully explained in Chapter 6 (The Elder Heliosystem: A Unified Closed System), these activation functions provide the mathematical operations necessary to implement this mechanism in practice.
 
-\subsection{Activation Functions as Gravitational Field Mediators}
-
-The specialized activation functions of the Elder Heliosystem can be understood as mathematical operators that mediate gravitational fields between hierarchical entities:
-
-\begin{definition}[Gravitational Field Mediation]
-Elder, Mentor, and Erudite activation functions collectively implement a hierarchical gravitational field system where:
-\begin{align}
-\mathcal{G}_{\text{Elder} \to \text{Mentor}}(z_E, z_M) &= \text{EMCF}(z_E, z_M) \\
-\mathcal{G}_{\text{Mentor} \to \text{Erudite}}(z_M, z_E) &= \text{METF}(z_M, z_E)
-\end{align}
-These gravitational field mediators ensure orbital stability while allowing information to flow between hierarchical levels.
-\end{definition}
-
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}[scale=3.0]
-    % Elder - sun
-    \node[circle, fill=yellow!80!orange, minimum size=2cm] (elder) at (0,0) {Elder};
-    
-    % Mentor orbits - planets
-    \draw[dashed] (0,0) circle (1.5cm);
-    \node[circle, fill=blue!60, minimum size=0.8cm] (mentor1) at (30:1.5cm) {M1};
-    \node[circle, fill=blue!60, minimum size=0.8cm] (mentor2) at (150:1.5cm) {M2};
-    \node[circle, fill=blue!60, minimum size=0.8cm] (mentor3) at (270:1.5cm) {M3};
-    
-    % Erudite orbits - moons
-    \draw[dashed] (mentor1) circle (0.5cm);
-    \node[circle, fill=gray!40, minimum size=0.4cm] (erudite1) at ($(mentor1) + (60:0.5cm)$) {E1};
-    \node[circle, fill=gray!40, minimum size=0.4cm] (erudite2) at ($(mentor1) + (180:0.5cm)$) {E2};
-    
-    % Gravitational field lines from Elder to Mentors
-    \draw[->, thick, orange!80, decorate, decoration={snake, amplitude=0.3mm, segment length=3mm}] (elder) -- (mentor1) node[midway, above] {\small EMCF};
-    \draw[->, thick, orange!80, decorate, decoration={snake, amplitude=0.3mm, segment length=3mm}] (elder) -- (mentor2);
-    \draw[->, thick, orange!80, decorate, decoration={snake, amplitude=0.3mm, segment length=3mm}] (elder) -- (mentor3);
-    
-    % Gravitational field lines from Mentor to Erudites
-    \draw[->, thick, blue!60, decorate, decoration={snake, amplitude=0.2mm, segment length=2mm}] (mentor1) -- (erudite1) node[midway, right] {\small METF};
-    \draw[->, thick, blue!60, decorate, decoration={snake, amplitude=0.2mm, segment length=2mm}] (mentor1) -- (erudite2);
-\end{tikzpicture}
-\caption{Gravitational field mediation through EMCF and METF activation functions ensuring stable hierarchical orbits in the Elder Heliosystem}
-\end{figure}
-
-\subsection{Orbital Stability Mechanisms}
-
-The complex-valued activation functions implement several mechanisms that ensure orbital stability:
-
-\begin{enumerate}
-    \item \textbf{Phase Synchronization}: EMCF and METF functions apply corrective forces that prevent orbital decay by synchronizing phases when they begin to drift
-    \item \textbf{Resonance Maintenance}: Harmonic Basis Activation (HBA) preserves the natural resonance ratios between orbits that follow Fibonacci-based patterns
-    \item \textbf{Energy Conservation}: Helical Activation Function (HAF) preserves the energy (magnitude) of signals while allowing phase evolution, maintaining consistent orbital distances
-    \item \textbf{Selective Activation}: Orbital Activation Function (OAF) ensures that only entities in proper orbital alignment participate in computation, enforcing well-formed gravitational interactions
-\end{enumerate}
-
-\begin{theorem}[Orbital Stability Through Activation Functions]
-A system employing the Elder Heliosystem activation functions will maintain stable orbital relationships between Elder, Mentor, and Erudite entities if and only if:
-\begin{equation}
-\frac{||\nabla_{\phi_E} \mathcal{L}||}{||\nabla_{\phi_M} \mathcal{L}||} \approx \frac{\phi}{\sqrt{5}}
-\end{equation}
-where $\phi$ is the golden ratio, $\nabla_{\phi_E} \mathcal{L}$ and $\nabla_{\phi_M} \mathcal{L}$ are the gradients of the loss function with respect to Elder and Mentor phases.
-\end{theorem}
-
-This orbital stability directly corresponds to learning stability. When Elder maintains Mentors in stable revolutionary orbits, and Mentors maintain Erudites in stable revolutionary orbits, the entire hierarchical learning process converges to optimal solutions.
-
-\subsection{Gravitational Coupling and Information Flow}
-
-The Elder-Mentor-Erudite gravitational coupling provides bidirectional information flow:
-
-\begin{enumerate}
-    \item \textbf{Downward Information Flow}: Elder gravitational influence guides Mentors, which in turn guide Erudites, implementing top-down transfer of universal principles.
-    \item \textbf{Upward Information Flow}: Erudite experiences create orbital perturbations that propagate to Mentors and eventually to the Elder, allowing domain-specific insights to influence universal principles.
-\end{enumerate}
-
-\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Gravitational Coupling Implementation, fonttitle=\bfseries]
-\begin{verbatim}
-def update_coupled_orbits(elder_state, mentor_states, erudite_states, alpha, beta):
-    # Downward gravitational influence (Elder → Mentors)
-    for i in range(len(mentor_states)):
-        # EMCF: Elder-Mentor Coupling Function
-        phase_diff = arg(elder_state) - arg(mentor_states[i])
-        correction = alpha * abs(elder_state) * sin(phase_diff)
-        mentor_states[i] += complex(
-            correction * cos(arg(mentor_states[i])),
-            correction * sin(arg(mentor_states[i]))
-        )
-    
-    # Downward gravitational influence (Mentors → Erudites)
-    for i in range(len(mentor_states)):
-        for j in range(len(erudite_states[i])):
-            # METF: Mentor-Erudite Transfer Function
-            phase_diff = arg(mentor_states[i]) - arg(erudite_states[i][j])
-            modulation = 1 + beta * cos(phase_diff)
-            erudite_states[i][j] *= modulation
-            
-    # Return stabilized states with preserved gravitational influence
-    return elder_state, mentor_states, erudite_states
-\end{verbatim}
-\end{tcolorbox}
-
-The bidirectional nature of this gravitational coupling ensures that the system achieves a balance between maintaining established knowledge (orbital stability) and incorporating new insights (controlled orbital perturbations), which is critical for optimal learning.
+The Elder-Mentor Coupling Function (EMCF) and Mentor-Erudite Transfer Function (METF) are particularly important as they directly implement the gravitational influence that maintains stable orbital relationships between hierarchical entities. These functions apply corrective forces that prevent orbital decay by synchronizing phases when they begin to drift, enabling the perpetuation of stable revolutionary orbits essential to the system's learning ability.
 
 \section{Future Directions}
 
 Research into Elder Heliosystem activation functions continues to explore several promising directions:
 
 \begin{enumerate}
-    \item \textbf{Higher-dimensional Gravitational Fields}: Extending to quaternion and octonion spaces for modeling more complex gravitational interactions
-    \item \textbf{Phase-Adaptive Gravitational Constants}: Self-modifying gravitational coupling strengths that adapt based on system state
-    \item \textbf{Non-Euclidean Orbital Spaces}: Incorporating hyperbolic and spherical geometries for modeling curved spacetime effects in information propagation
-    \item \textbf{Gravitational Wave Activation}: Implementing wave-like perturbations that propagate through the system as information carriers
-    \item \textbf{Quantum Gravitational Entanglement}: Using quantum-inspired activation functions to model entangled gravitational relationships between distant entities
+    \item \textbf{Higher-dimensional Complex Functions}: Extending to quaternion and octonion spaces for richer representations
+    \item \textbf{Phase-Adaptive Activations}: Self-modifying functions that adapt their parameters based on system state
+    \item \textbf{Geometric Activation Functions}: Incorporating non-Euclidean geometries like hyperbolic and spherical spaces
+    \item \textbf{Spiking Neural Network Inspiration}: Drawing from neuromorphic computing to implement energy-efficient phase-coded activations
+    \item \textbf{Quantum Circuit Emulation}: Using complex activations to emulate aspects of quantum circuits for specialized tasks
 \end{enumerate}
 
 These directions promise to further enhance the Elder Heliosystem's capabilities across diverse application domains, from multimodal integration to uncertainty quantification and causal reasoning.
