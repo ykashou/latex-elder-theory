@@ -1,4 +1,4 @@
-modules = ["bash"]
+modules = ["bash", "python-3.11"]
 
 [nix]
 channel = "stable-24_05"
@@ -16,6 +16,10 @@ author = "agent"
 task = "workflow.run"
 args = "latex_compilation"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "visualization_server"
+
 [[workflows.workflow]]
 name = "latex_compilation"
 author = "agent"
@@ -24,5 +28,18 @@ author = "agent"
 task = "shell.exec"
 args = "mkdir -p output && pdflatex -interaction=nonstopmode -output-directory=output main.tex && biber --output-directory output main && pdflatex -interaction=nonstopmode -output-directory=output main.tex && pdflatex -interaction=nonstopmode -output-directory=output main.tex && cp output/main.pdf output/elder_arcane_realization.pdf && echo \"Compilation complete. PDF is available in the output directory.\""
 
+[[workflows.workflow]]
+name = "visualization_server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd visualizations && python -m http.server 5000"
+waitForPort = 5000
+
 [deployment]
 run = ["sh", "-c", "pdflatex -interaction=nonstopmode main.tex"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80

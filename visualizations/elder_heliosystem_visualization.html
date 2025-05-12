@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elder Heliosystem Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a1a;
+            color: #eee;
+            overflow: hidden;
+        }
+        
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(30, 30, 50, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 10;
+        }
+        
+        button {
+            background-color: #4a5eff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #6a7eff;
+        }
+        
+        .entity-info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(30, 30, 50, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 10;
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: #6a7eff;
+        }
+        
+        .phase-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(30, 30, 50, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            z-index: 10;
+        }
+        
+        .parameter-activation {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(30, 30, 50, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 300px;
+            z-index: 10;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            pointer-events: none;
+            font-size: 12px;
+            z-index: 100;
+        }
+        
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <h2>Elder Heliosystem</h2>
+            <button id="play-pause">Pause</button>
+            <button id="reset">Reset</button>
+            <div>
+                <label for="speed">Simulation Speed:</label>
+                <input type="range" id="speed" min="0.1" max="2" step="0.1" value="1">
+            </div>
+        </div>
+        
+        <div class="entity-info">
+            <h2>Entity Information</h2>
+            <p>Hover over an entity to see details</p>
+            <div id="entity-details"></div>
+        </div>
+        
+        <div class="phase-indicator">
+            <h2>Elder Phase: <span id="current-phase">0.00</span></h2>
+            <div id="phase-circle" style="width: 40px; height: 40px; border-radius: 50%; background-color: hsl(210, 100%, 50%); margin: 10px auto;"></div>
+        </div>
+        
+        <div class="parameter-activation">
+            <h2>Parameter Activation</h2>
+            <div>Active Parameters: <span id="active-count" class="highlight">0</span> / <span id="total-count">1,200,000,000</span></div>
+            <div>Memory Usage: <span id="memory-usage" class="highlight">121.34</span> MB</div>
+            <div id="activation-graph" style="height: 60px; margin-top: 10px;"></div>
+        </div>
+        
+        <svg id="visualization"></svg>
+        
+        <div class="tooltip" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Configuration
+        const config = {
+            elder: {
+                count: 1,
+                radius: 30,
+                color: "#ff5500",
+                orbitRadius: 0
+            },
+            mentors: {
+                count: 32,
+                radius: 12,
+                colors: d3.scaleSequential(d3.interpolateRainbow),
+                orbitRadius: 200
+            },
+            erudites: {
+                count: 128, // Showing a subset for visualization performance
+                radius: 4,
+                colors: d3.scaleSequential(d3.interpolateCool),
+                orbitRadiusMin: 40,
+                orbitRadiusMax: 80
+            },
+            phases: {
+                initElderPhase: 0,
+                elderPhaseVelocity: 0.005,
+                mentorPhaseOffset: Math.PI / 16,
+                eruditePhaseOffset: Math.PI / 32
+            },
+            parameters: {
+                totalCount: 1200000000,
+                activationThreshold: 0.1,
+                peakMemoryMB: 121.34
+            }
+        };
+        
+        // Simulation state
+        let simulationState = {
+            running: true,
+            speed: 1,
+            elderPhase: config.phases.initElderPhase,
+            entities: [],
+            activeParameters: 0,
+            activationHistory: Array(100).fill(0),
+            selectedEntity: null
+        };
+        
+        // Initialize the visualization
+        function init() {
+            const svg = d3.select("#visualization");
+            const container = document.querySelector(".container");
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            
+            svg.attr("width", width)
+                .attr("height", height);
+            
+            // Create starfield background
+            const starCount = 500;
+            const stars = [];
+            
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5,
+                    opacity: Math.random() * 0.8 + 0.2
+                });
+            }
+            
+            svg.selectAll(".star")
+                .data(stars)
+                .enter()
+                .append("circle")
+                .attr("class", "star")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("r", d => d.radius)
+                .attr("fill", "#ffffff")
+                .attr("opacity", d => d.opacity);
+                
+            // Create orbit paths
+            const center = { x: width / 2, y: height / 2 };
+            
+            // Mentor orbit
+            svg.append("circle")
+                .attr("cx", center.x)
+                .attr("cy", center.y)
+                .attr("r", config.mentors.orbitRadius)
+                .attr("fill", "none")
+                .attr("stroke", "#334466")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", "3,3");
+                
+            // Create entities
+            createEntities(center);
+            
+            // Create parameters activation visualization
+            createActivationGraph();
+            
+            // Set up event listeners
+            document.getElementById("play-pause").addEventListener("click", toggleSimulation);
+            document.getElementById("reset").addEventListener("click", resetSimulation);
+            document.getElementById("speed").addEventListener("input", updateSpeed);
+            
+            // Start animation loop
+            requestAnimationFrame(animate);
+        }
+        
+        function createEntities(center) {
+            const svg = d3.select("#visualization");
+            simulationState.entities = [];
+            
+            // Create Elder
+            const elder = {
+                id: "elder-0",
+                type: "elder",
+                x: center.x,
+                y: center.y,
+                radius: config.elder.radius,
+                color: config.elder.color,
+                phase: config.phases.initElderPhase,
+                phaseVelocity: config.phases.elderPhaseVelocity,
+                orbitRadius: 0,
+                orbitCenter: { x: center.x, y: center.y },
+                parent: null,
+                domain: "Global",
+                description: "Central entity governing the entire system through phase coordination"
+            };
+            
+            simulationState.entities.push(elder);
+            
+            // Create Mentors
+            for (let i = 0; i < config.mentors.count; i++) {
+                const angle = (i / config.mentors.count) * Math.PI * 2;
+                const orbitRadius = config.mentors.orbitRadius;
+                const domain = getMentorDomain(i);
+                
+                const mentor = {
+                    id: `mentor-${i}`,
+                    type: "mentor",
+                    orbitRadius: orbitRadius,
+                    orbitCenter: { x: center.x, y: center.y },
+                    radius: config.mentors.radius,
+                    color: config.mentors.colors(i / config.mentors.count),
+                    phase: config.phases.initElderPhase + i * config.phases.mentorPhaseOffset,
+                    phaseVelocity: config.phases.elderPhaseVelocity * (0.8 + Math.random() * 0.4),
+                    x: center.x + orbitRadius * Math.cos(angle),
+                    y: center.y + orbitRadius * Math.sin(angle),
+                    parent: elder,
+                    domain: domain,
+                    description: `Specializes in ${domain} processing`
+                };
+                
+                simulationState.entities.push(mentor);
+                
+                // Create Erudites for this Mentor
+                const eruditeCount = Math.floor(config.erudites.count / config.mentors.count);
+                for (let j = 0; j < eruditeCount; j++) {
+                    const eruditeAngle = angle + (j / eruditeCount) * Math.PI * 0.5 - Math.PI * 0.25;
+                    const eruditeOrbitRadius = config.erudites.orbitRadiusMin + 
+                        (config.erudites.orbitRadiusMax - config.erudites.orbitRadiusMin) * Math.random();
+                    
+                    const eruditeOrbitCenter = {
+                        x: center.x + orbitRadius * Math.cos(angle),
+                        y: center.y + orbitRadius * Math.sin(angle)
+                    };
+                    
+                    const erudite = {
+                        id: `erudite-${i}-${j}`,
+                        type: "erudite",
+                        orbitRadius: eruditeOrbitRadius,
+                        orbitCenter: eruditeOrbitCenter,
+                        radius: config.erudites.radius,
+                        color: config.erudites.colors(j / eruditeCount),
+                        phase: mentor.phase + j * config.phases.eruditePhaseOffset,
+                        phaseVelocity: mentor.phaseVelocity * (0.9 + Math.random() * 0.2),
+                        x: eruditeOrbitCenter.x + eruditeOrbitRadius * Math.cos(eruditeAngle),
+                        y: eruditeOrbitCenter.y + eruditeOrbitRadius * Math.sin(eruditeAngle),
+                        parent: mentor,
+                        domain: getEruditeTask(domain, j),
+                        description: `Processes specific aspects of ${domain}`
+                    };
+                    
+                    simulationState.entities.push(erudite);
+                }
+            }
+            
+            // Render entities
+            renderEntities();
+        }
+        
+        function renderEntities() {
+            const svg = d3.select("#visualization");
+            
+            // Remove existing entities
+            svg.selectAll(".entity").remove();
+            
+            // Add entities
+            const entityElements = svg.selectAll(".entity")
+                .data(simulationState.entities)
+                .enter()
+                .append("g")
+                .attr("class", "entity")
+                .attr("transform", d => `translate(${d.x}, ${d.y})`)
+                .on("mouseover", showEntityInfo)
+                .on("mouseout", hideEntityInfo);
+                
+            // Add entity circles
+            entityElements.append("circle")
+                .attr("r", d => d.radius)
+                .attr("fill", d => d.color)
+                .attr("stroke", "#ffffff")
+                .attr("stroke-width", 2)
+                .attr("opacity", 0.9);
+                
+            // Add glow effect for Elder
+            entityElements.filter(d => d.type === "elder")
+                .append("circle")
+                .attr("r", d => d.radius * 1.8)
+                .attr("fill", "none")
+                .attr("stroke", d => d.color)
+                .attr("stroke-width", 10)
+                .attr("opacity", 0.2)
+                .attr("class", "elder-glow");
+                
+            // Add visual indicator of phase
+            entityElements.filter(d => d.type !== "erudite")
+                .append("line")
+                .attr("x1", 0)
+                .attr("y1", 0)
+                .attr("x2", d => d.radius * Math.cos(d.phase))
+                .attr("y2", d => d.radius * Math.sin(d.phase))
+                .attr("stroke", "#ffffff")
+                .attr("stroke-width", 2)
+                .attr("opacity", 0.8);
+        }
+        
+        function updateEntitiesPosition() {
+            simulationState.entities.forEach(entity => {
+                if (entity.type === "elder") return; // Elder doesn't move
+                
+                // Update entity's parent position if it's an Erudite
+                if (entity.type === "erudite") {
+                    const parent = entity.parent;
+                    entity.orbitCenter.x = parent.x;
+                    entity.orbitCenter.y = parent.y;
+                }
+                
+                // Calculate new position based on phase
+                entity.x = entity.orbitCenter.x + entity.orbitRadius * Math.cos(entity.phase);
+                entity.y = entity.orbitCenter.y + entity.orbitRadius * Math.sin(entity.phase);
+            });
+            
+            // Update the DOM
+            d3.selectAll(".entity")
+                .attr("transform", d => `translate(${d.x}, ${d.y})`);
+                
+            // Update phase indicators
+            d3.selectAll(".entity line")
+                .attr("x2", d => d.radius * Math.cos(d.phase))
+                .attr("y2", d => d.radius * Math.sin(d.phase));
+        }
+        
+        function updatePhases(deltaTime) {
+            // Update Elder phase
+            const elder = simulationState.entities[0];
+            elder.phase += elder.phaseVelocity * deltaTime * simulationState.speed;
+            
+            // Normalize to [0, 2π)
+            elder.phase = normalizePhase(elder.phase);
+            
+            // Update display
+            document.getElementById("current-phase").textContent = elder.phase.toFixed(2);
+            document.getElementById("phase-circle").style.backgroundColor = 
+                `hsl(${(elder.phase / (Math.PI * 2)) * 360}, 100%, 50%)`;
+                
+            // Update Mentor phases with some gravitation toward Elder's phase
+            simulationState.entities.filter(e => e.type === "mentor").forEach(mentor => {
+                const phaseDiff = calculatePhaseDifference(mentor.phase, elder.phase);
+                const attraction = 0.1 * phaseDiff;
+                
+                mentor.phase += (mentor.phaseVelocity - attraction) * deltaTime * simulationState.speed;
+                mentor.phase = normalizePhase(mentor.phase);
+            });
+            
+            // Update Erudite phases with attraction to their Mentor's phase
+            simulationState.entities.filter(e => e.type === "erudite").forEach(erudite => {
+                const parent = erudite.parent;
+                const phaseDiff = calculatePhaseDifference(erudite.phase, parent.phase);
+                const attraction = 0.2 * phaseDiff;
+                
+                erudite.phase += (erudite.phaseVelocity - attraction) * deltaTime * simulationState.speed;
+                erudite.phase = normalizePhase(erudite.phase);
+            });
+            
+            // Calculate parameter activation based on Elder phase
+            calculateParameterActivation(elder.phase);
+        }
+        
+        function calculateParameterActivation(elderPhase) {
+            // Simulate parameter activation with a bell curve around the Elder phase
+            // with some random noise to make it look more natural
+            const threshold = config.parameters.activationThreshold;
+            let activeCount = 0;
+            
+            // Simple model: active count peaks at specific phases
+            const baseFactor = 0.5 + 0.5 * Math.sin(elderPhase * 5);
+            const randomFactor = 0.7 + 0.3 * Math.random();
+            const activeRatio = baseFactor * randomFactor * threshold;
+            
+            activeCount = Math.floor(config.parameters.totalCount * activeRatio);
+            
+            simulationState.activeParameters = activeCount;
+            document.getElementById("active-count").textContent = activeCount.toLocaleString();
+            
+            // Calculate memory usage (proportional to active parameters)
+            const memoryUsage = (activeCount / config.parameters.totalCount) * 
+                                config.parameters.peakMemoryMB * 1000;
+            document.getElementById("memory-usage").textContent = (memoryUsage / 1000).toFixed(2);
+            
+            // Update activation history for graph
+            simulationState.activationHistory.push(activeRatio);
+            simulationState.activationHistory.shift();
+            updateActivationGraph();
+        }
+        
+        function createActivationGraph() {
+            const graphContainer = document.getElementById("activation-graph");
+            const svg = d3.select(graphContainer).append("svg")
+                .attr("width", "100%")
+                .attr("height", "100%");
+                
+            // Add a path for the activation curve
+            svg.append("path")
+                .attr("class", "activation-path")
+                .attr("fill", "none")
+                .attr("stroke", "#ffcc00")
+                .attr("stroke-width", 2);
+                
+            // Add grid lines
+            svg.append("line")
+                .attr("x1", 0)
+                .attr("x2", "100%")
+                .attr("y1", "50%")
+                .attr("y2", "50%")
+                .attr("stroke", "#334466")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", "3,3");
+        }
+        
+        function updateActivationGraph() {
+            const svg = d3.select("#activation-graph svg");
+            const width = svg.node().clientWidth;
+            const height = svg.node().clientHeight;
+            
+            const x = d3.scaleLinear()
+                .domain([0, simulationState.activationHistory.length - 1])
+                .range([0, width]);
+                
+            const y = d3.scaleLinear()
+                .domain([0, Math.max(0.001, d3.max(simulationState.activationHistory) * 1.2)])
+                .range([height, 0]);
+                
+            const line = d3.line()
+                .x((d, i) => x(i))
+                .y(d => y(d))
+                .curve(d3.curveBasis);
+                
+            svg.select(".activation-path")
+                .attr("d", line(simulationState.activationHistory));
+        }
+        
+        let lastTimestamp = 0;
+        function animate(timestamp) {
+            if (lastTimestamp === 0) lastTimestamp = timestamp;
+            const deltaTime = (timestamp - lastTimestamp) / 1000; // in seconds
+            lastTimestamp = timestamp;
+            
+            if (simulationState.running) {
+                updatePhases(deltaTime);
+                updateEntitiesPosition();
+                updateGlowEffect();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        function updateGlowEffect() {
+            // Pulsating glow effect for Elder
+            const elder = simulationState.entities[0];
+            const pulseFactor = 1.6 + 0.4 * Math.sin(Date.now() / 1000);
+            
+            d3.select(".elder-glow")
+                .attr("r", elder.radius * pulseFactor)
+                .attr("opacity", 0.1 + 0.1 * Math.sin(Date.now() / 500));
+        }
+        
+        function showEntityInfo(event, d) {
+            simulationState.selectedEntity = d;
+            
+            const detailsDiv = document.getElementById("entity-details");
+            detailsDiv.innerHTML = `
+                <div>
+                    <strong>Type:</strong> ${capitalize(d.type)}
+                </div>
+                <div>
+                    <strong>Domain:</strong> ${d.domain}
+                </div>
+                <div>
+                    <strong>Phase:</strong> ${d.phase.toFixed(3)}
+                </div>
+                <div>
+                    <strong>Description:</strong> ${d.description}
+                </div>
+            `;
+            
+            // Highlight the entity
+            d3.select(this).select("circle")
+                .attr("stroke", "#ffcc00")
+                .attr("stroke-width", 3);
+        }
+        
+        function hideEntityInfo() {
+            simulationState.selectedEntity = null;
+            
+            // Reset entity highlight
+            d3.select(this).select("circle")
+                .attr("stroke", "#ffffff")
+                .attr("stroke-width", 2);
+        }
+        
+        // Helper functions
+        function normalizePhase(phase) {
+            while (phase >= Math.PI * 2) phase -= Math.PI * 2;
+            while (phase < 0) phase += Math.PI * 2;
+            return phase;
+        }
+        
+        function calculatePhaseDifference(phase1, phase2) {
+            let diff = phase2 - phase1;
+            
+            // Normalize to [-π, π]
+            while (diff > Math.PI) diff -= Math.PI * 2;
+            while (diff < -Math.PI) diff += Math.PI * 2;
+            
+            return diff;
+        }
+        
+        function getMentorDomain(index) {
+            const domains = [
+                "Audio Processing", "Visual Analysis", "Semantic Understanding", 
+                "Temporal Patterns", "Spatial Relations", "Harmonic Structures",
+                "Rhythmic Patterns", "Timbral Analysis", "Melodic Structures",
+                "Dynamic Patterns", "Textural Analysis", "Formal Structures",
+                "Phonetic Analysis", "Syntactic Structures", "Semantic Networks",
+                "Pragmatic Context", "Emotional Content", "Narrative Flow",
+                "Visual Textures", "Color Relationships", "Spatial Composition",
+                "Temporal Dynamics", "Cross-modal Binding", "Feature Extraction",
+                "Statistical Patterns", "Contextual Relations", "Environmental Sounds",
+                "Speech Recognition", "Musical Genres", "Cultural Contexts",
+                "Acoustic Properties", "Auditory Scene Analysis"
+            ];
+            
+            return domains[index % domains.length];
+        }
+        
+        function getEruditeTask(mentorDomain, index) {
+            const audioTasks = [
+                "Onset Detection", "Pitch Tracking", "Timbre Classification", 
+                "Beat Detection", "Harmonic Analysis", "Envelope Tracking",
+                "Transient Detection", "Spectral Analysis", "Dynamic Processing"
+            ];
+            
+            const visualTasks = [
+                "Edge Detection", "Object Recognition", "Motion Tracking",
+                "Color Analysis", "Texture Classification", "Spatial Composition",
+                "Depth Estimation", "Form Recognition", "Illumination Analysis"
+            ];
+            
+            const semanticTasks = [
+                "Word Sense", "Entity Recognition", "Relation Extraction",
+                "Sentiment Analysis", "Topic Classification", "Contextual Mapping",
+                "Metaphor Detection", "Narrative Structure", "Semantic Roles"
+            ];
+            
+            if (mentorDomain.includes("Audio") || mentorDomain.includes("Harmon") || 
+                mentorDomain.includes("Rhythm") || mentorDomain.includes("Timb")) {
+                return audioTasks[index % audioTasks.length];
+            } 
+            else if (mentorDomain.includes("Visual") || mentorDomain.includes("Color") || 
+                    mentorDomain.includes("Spatial")) {
+                return visualTasks[index % visualTasks.length];
+            }
+            else {
+                return semanticTasks[index % semanticTasks.length];
+            }
+        }
+        
+        function toggleSimulation() {
+            simulationState.running = !simulationState.running;
+            document.getElementById("play-pause").textContent = 
+                simulationState.running ? "Pause" : "Play";
+        }
+        
+        function resetSimulation() {
+            simulationState.elderPhase = config.phases.initElderPhase;
+            const center = { 
+                x: document.querySelector(".container").clientWidth / 2, 
+                y: document.querySelector(".container").clientHeight / 2 
+            };
+            createEntities(center);
+        }
+        
+        function updateSpeed(event) {
+            simulationState.speed = parseFloat(event.target.value);
+        }
+        
+        function capitalize(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+        
+        // Initialize the visualization when the page loads
+        window.addEventListener("load", init);
+        
+        // Handle window resize
+        window.addEventListener("resize", function() {
+            const svg = d3.select("#visualization");
+            const container = document.querySelector(".container");
+            svg.attr("width", container.clientWidth)
+                .attr("height", container.clientHeight);
+                
+            // Recenter the system
+            const center = { x: container.clientWidth / 2, y: container.clientHeight / 2 };
+            simulationState.entities[0].x = center.x;
+            simulationState.entities[0].y = center.y;
+            simulationState.entities[0].orbitCenter = center;
+            
+            // Update mentor orbit centers
+            simulationState.entities.filter(e => e.type === "mentor").forEach(mentor => {
+                mentor.orbitCenter = center;
+            });
+        });
+    </script>
+</body>
+</html>
