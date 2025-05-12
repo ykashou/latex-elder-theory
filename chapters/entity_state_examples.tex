@@ -350,23 +350,24 @@ The entity state attributes require different precision levels for optimal memor
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|l|c|c|c|l|}
+\small
+\begin{tabular}{|l|c|c|c|p{4.5cm}|}
 \hline
-\textbf{Attribute Type} & \textbf{Standard} & \textbf{Optimized} & \textbf{Savings} & \textbf{Justification} \\
+\textbf{Attribute} & \textbf{Standard} & \textbf{Optimized} & \textbf{Savings} & \textbf{Justification} \\
 \hline
-Position coordinates & float32 (12B) & float16 (6B) & 50\% & Orbital positions require modest precision \\
+Position & float32 (12B) & float16 (6B) & 50\% & Orbital geometry has modest precision needs \\
 \hline
-Velocity vectors & float32 (12B) & float16 (6B) & 50\% & Gradual orbital changes are well-captured \\
+Velocity & float32 (12B) & float16 (6B) & 50\% & Gradual changes well-represented \\
 \hline
-Orientation & float32 (16B) & Q-format (8B) & 50\% & Fixed-point Q16.16 sufficient for rotations \\
+Orientation & float32 (16B) & Q-format (8B) & 50\% & Q16.16 sufficient for rotations \\
 \hline
-Angular velocity & float32 (12B) & int16 + scale (4B) & 67\% & Limited range with fixed scaling factor \\
+Angular vel. & float32 (12B) & int8 + scale (3B) & 75\% & Limited rotation range \\
 \hline
-Phase & float32 (4B) & uint16 (2B) & 50\% & $2^{16}$ values map [0, $2\pi$] at 0.0001 rad precision \\
+Phase & float32 (4B) & uint16 (2B) & 50\% & 0.0001 rad precision sufficient \\
 \hline
-Mass/Influence & float32 (8B) & uint8 (2B) & 75\% & Discrete levels (256) are adequate \\
+Mass/Influence & float32 (8B) & uint8 (2B) & 75\% & 256 discrete levels adequate \\
 \hline
-Learning rate & float32 (4B) & log2-encoded (1B) & 75\% & Exponential representation covers range \\
+Learning rate & float32 (4B) & log2 (1B) & 75\% & Exponential scale works well \\
 \hline
 \end{tabular}
 \caption{Precision Optimization Strategy for Entity State Data}
