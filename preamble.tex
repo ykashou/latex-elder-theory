@@ -44,6 +44,14 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{listings,skins,breakable}
 
+% Define observation environment
+\newenvironment{observation}[1][]{\begin{tcolorbox}[
+  colback=LightGray,
+  colframe=DarkGray,
+  fonttitle=\bfseries,
+  title=Observation #1]
+}{\end{tcolorbox}}
+
 % Define tcolorbox styles for code listings
 \newtcolorbox{codeblock}[1][]{
   colback=CodeBackground,
