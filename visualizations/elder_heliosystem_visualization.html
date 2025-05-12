@@ -360,7 +360,16 @@
             memoryFields: [], // Memory fields data
             gravitationalWaves: [], // Active gravitational waves data
             lastWaveTime: 0, // Time of last wave emission
-            waveId: 0 // Counter for unique wave IDs
+            waveId: 0, // Counter for unique wave IDs
+            
+            // Orbital mechanics tracking
+            orbitalStability: {
+                mentors: 0,  // 0-100% stability measure for mentors
+                erudites: 0  // 0-100% stability measure for erudites
+            },
+            radialResonance: 0, // System-wide resonance measure (0-100%)
+            influenceLines: [], // Visual indicators of Elder→Mentor and Mentor→Erudite influence
+            lastInfluenceUpdate: 0 // Time of last influence lines update
         };
         
         // Initialize the visualization
