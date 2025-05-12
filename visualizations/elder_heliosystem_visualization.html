@@ -336,7 +336,14 @@
                 initElderPhase: 0,
                 elderPhaseVelocity: 0.005,
                 mentorPhaseOffset: Math.PI / 16,
-                eruditePhaseOffset: Math.PI / 32
+                eruditePhaseOffset: Math.PI / 32,
+                // Orbital stability parameters for stable revolution
+                mentorBaseVelocity: 0.015,  // Base velocity for mentors
+                eruditeBaseVelocity: 0.025, // Base velocity for erudites
+                elderInfluence: 0.08,       // How strongly Elder influences Mentor orbits (0-1)
+                mentorInfluence: 0.15,      // How strongly Mentors influence Erudite orbits (0-1)
+                stabilityThreshold: 0.85,   // Threshold for considering orbits stable (0-1)
+                resonanceRatios: [1, 2, 3, 5, 8] // Fibonacci-like sequence for orbital resonance
             },
             parameters: {
                 totalCount: 1200000000,
