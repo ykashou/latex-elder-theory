@@ -1458,11 +1458,23 @@
             const elder = simulationState.entities.find(e => e.type === "elder");
             if (!elder) return;
             
+            // Get system stability metrics
+            const mentorStability = simulationState.orbitalStability.mentors / 100;
+            const eruditeStability = simulationState.orbitalStability.erudites / 100;
+            const rotationStability = simulationState.rotationStability / 100;
+            const stableRevolution = simulationState.stableRevolution;
+            
             // Create influence lines from Elder to each Mentor
             simulationState.entities.filter(e => e.type === "mentor").forEach(mentor => {
                 // Calculate intensity based on orbital stability
-                const stability = simulationState.orbitalStability.mentors / 100;
-                const intensity = Math.max(0.1, Math.min(0.8, stability));
+                const intensity = Math.max(0.1, Math.min(0.8, mentorStability));
+                
+                // Color intensity for stable vs unstable orbits
+                const isStable = mentor.stabilityFactor > 0.8;
+                
+                // For stable revolutions, use a more solid connection 
+                const strokeDasharray = stableRevolution ? "none" : "5,3";
+                const lineWidth = stableRevolution ? 2.5 : 1.5;
                 
                 simulationState.influenceLines.push({
                     id: `elder-${mentor.id}`,
@@ -1471,7 +1483,10 @@
                     targetX: mentor.x,
                     targetY: mentor.y,
                     type: 'elder-mentor',
-                    intensity: intensity
+                    intensity: intensity,
+                    stable: isStable,
+                    strokeDasharray: strokeDasharray,
+                    strokeWidth: lineWidth
                 });
             });
             
@@ -1480,8 +1495,14 @@
                 const mentor = erudite.parent;
                 
                 // Calculate intensity based on orbital stability
-                const stability = simulationState.orbitalStability.erudites / 100;
-                const intensity = Math.max(0.1, Math.min(0.8, stability));
+                const intensity = Math.max(0.1, Math.min(0.8, eruditeStability));
+                
+                // Determine if this erudite has a stable orbit
+                const isStable = erudite.stabilityFactor > 0.8;
+                
+                // For stable revolutions, use a more solid connection
+                const strokeDasharray = stableRevolution ? "none" : "3,2";
+                const lineWidth = stableRevolution ? 1.5 : 1;
                 
                 simulationState.influenceLines.push({
                     id: `mentor-${mentor.id}-${erudite.id}`,
@@ -1490,7 +1511,10 @@
                     targetX: erudite.x,
                     targetY: erudite.y,
                     type: 'mentor-erudite',
-                    intensity: intensity
+                    intensity: intensity,
+                    stable: isStable,
+                    strokeDasharray: strokeDasharray, 
+                    strokeWidth: lineWidth
                 });
             });
             
@@ -1511,25 +1535,49 @@
             // Add new lines
             lines.enter()
                 .append("line")
-                .attr("class", d => `influence-line ${d.type}`)
+                .attr("class", d => `influence-line ${d.type} ${d.stable ? 'stable' : 'unstable'}`)
                 .attr("x1", d => d.sourceX)
                 .attr("y1", d => d.sourceY)
                 .attr("x2", d => d.targetX)
                 .attr("y2", d => d.targetY)
-                .attr("stroke", d => d.type === "elder-mentor" ? "rgba(255, 215, 0, " + d.intensity + ")" : "rgba(100, 200, 255, " + d.intensity + ")")
-                .attr("stroke-width", d => 1 + d.intensity * 2)
-                .attr("stroke-dasharray", "4, 2")
+                .attr("stroke", d => {
+                    // Determine color based on type and stability
+                    if (d.type === "elder-mentor") {
+                        return d.stable ? 
+                            `rgba(255, 215, 0, ${d.intensity * 1.2})` : // Golden for stable Elder-Mentor
+                            `rgba(255, 180, 0, ${d.intensity})`;        // Amber for unstable Elder-Mentor
+                    } else {
+                        return d.stable ? 
+                            `rgba(100, 215, 255, ${d.intensity * 1.2})` : // Bright blue for stable Mentor-Erudite
+                            `rgba(100, 180, 255, ${d.intensity})`;        // Softer blue for unstable Mentor-Erudite
+                    }
+                })
+                .attr("stroke-width", d => d.strokeWidth || (1 + d.intensity * 2))
+                .attr("stroke-dasharray", d => d.strokeDasharray || "4, 2")
                 .attr("opacity", d => d.intensity)
                 .style("pointer-events", "none");
                 
             // Update existing lines
             lines
+                .attr("class", d => `influence-line ${d.type} ${d.stable ? 'stable' : 'unstable'}`)
                 .attr("x1", d => d.sourceX)
                 .attr("y1", d => d.sourceY)
                 .attr("x2", d => d.targetX)
                 .attr("y2", d => d.targetY)
-                .attr("stroke", d => d.type === "elder-mentor" ? "rgba(255, 215, 0, " + d.intensity + ")" : "rgba(100, 200, 255, " + d.intensity + ")")
-                .attr("stroke-width", d => 1 + d.intensity * 2)
+                .attr("stroke", d => {
+                    // Determine color based on type and stability
+                    if (d.type === "elder-mentor") {
+                        return d.stable ? 
+                            `rgba(255, 215, 0, ${d.intensity * 1.2})` : // Golden for stable Elder-Mentor
+                            `rgba(255, 180, 0, ${d.intensity})`;        // Amber for unstable Elder-Mentor
+                    } else {
+                        return d.stable ? 
+                            `rgba(100, 215, 255, ${d.intensity * 1.2})` : // Bright blue for stable Mentor-Erudite
+                            `rgba(100, 180, 255, ${d.intensity})`;        // Softer blue for unstable Mentor-Erudite
+                    }
+                })
+                .attr("stroke-width", d => d.strokeWidth || (1 + d.intensity * 2))
+                .attr("stroke-dasharray", d => d.strokeDasharray || "4, 2")
                 .attr("opacity", d => d.intensity);
         }
         
@@ -1899,7 +1947,9 @@
             simulationState.selectedEntity = d;
             
             const detailsDiv = document.getElementById("entity-details");
-            detailsDiv.innerHTML = `
+            
+            // Build entity-specific information
+            let entityHtml = `
                 <div>
                     <strong>Type:</strong> ${capitalize(d.type)}
                 </div>
@@ -1909,10 +1959,60 @@
                 <div>
                     <strong>Phase:</strong> ${d.phase.toFixed(3)}
                 </div>
-                <div>
-                    <strong>Description:</strong> ${d.description}
-                </div>
             `;
+            
+            // Add orbital information for non-Elder entities
+            if (d.type !== "elder") {
+                // Calculate orbital period in frames
+                const orbitalPeriod = d.orbitalPeriod || Math.round(2 * Math.PI / d.phaseVelocity);
+                
+                // Format resonance factor if available
+                const resonanceInfo = d.resonanceFactor ? 
+                    `<div><strong>Resonance Ratio:</strong> ${d.resonanceFactor.toFixed(3)}</div>` : '';
+                
+                // Format stability if calculated
+                const stabilityInfo = d.stabilityFactor !== undefined ? 
+                    `<div><strong>Orbital Stability:</strong> ${Math.round(d.stabilityFactor * 100)}%</div>` : '';
+                
+                // Calculate rotation information
+                let rotationInfo = '';
+                if (d.rotationAngle !== undefined) {
+                    const rotationVelocity = d.type === "mentor" ? 
+                        d.phaseVelocity * 0.5 : d.phaseVelocity * 1.5;
+                    const rotationPeriod = Math.round(2 * Math.PI / rotationVelocity);
+                    
+                    rotationInfo = `
+                        <div><strong>Rotation Period:</strong> ${rotationPeriod} frames</div>
+                        <div><strong>Orbital Period:</strong> ${orbitalPeriod} frames</div>
+                    `;
+                    
+                    // Add rotation to orbit ratio if calculated
+                    if (d.rotationRatio !== undefined) {
+                        const rotationQuality = d.rotationRatio > 0.9 && d.rotationRatio < 1.1 ? 
+                            "Stable" : "Developing";
+                        rotationInfo += `
+                            <div><strong>Rotation Ratio:</strong> ${d.rotationRatio.toFixed(2)}</div>
+                            <div><strong>Rotation Status:</strong> <span style="color: ${d.rotationRatio > 0.9 && d.rotationRatio < 1.1 ? '#88ff88' : '#ffcc00'}">${rotationQuality}</span></div>
+                        `;
+                    }
+                }
+                
+                entityHtml += resonanceInfo + stabilityInfo + rotationInfo;
+            } else {
+                // Elder-specific information
+                entityHtml += `
+                    <div><strong>Role:</strong> Provides hierarchical guidance to Mentors</div>
+                    <div><strong>Status:</strong> ${simulationState.stableRevolution ? 
+                        '<span style="color: #88ff88">Stable Heliosystem</span>' : 
+                        '<span style="color: #ffcc00">Forming Heliosystem</span>'}
+                    </div>
+                `;
+            }
+            
+            // Add description as the last item
+            entityHtml += `<div><strong>Description:</strong> ${d.description}</div>`;
+            
+            detailsDiv.innerHTML = entityHtml;
             
             // Highlight the entity
             d3.select(this).select("circle")
