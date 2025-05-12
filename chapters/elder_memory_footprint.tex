@@ -106,13 +106,37 @@ For professional audio production with 96kHz, 7.1 channel Dolby Atmos content, w
     \item Data rate: $96,000 \times 24 \times 10 / 8 = 2,880,000$ bytes/second ≈ 2.75 MB/s
 \end{itemize}
 
-To convert this to token representation for transformers, we need to consider:
+For transformer models, we convert audio to token representation:
 \begin{itemize}
     \item Each audio frame (typically 10-50ms) is represented as one or more tokens
     \item For 20ms frames: 50 frames per second
     \item With 10 tokens per frame for high-quality encoding: 500 tokens per second
     \item 1 hour = 3,600 seconds = 1.8 million tokens
 \end{itemize}
+
+The Elder Heliosystem, however, processes audio fundamentally differently:
+\begin{itemize}
+    \item Audio is not tokenized in the traditional sense, but converted directly into field perturbations
+    \item Instead of storing discrete tokens, the system encodes audio as continuous modifications to the gravitational and rotational fields
+    \item Each audio frame modulates the phase components of active parameters according to:
+    \begin{equation}
+    \Delta\phi_i(t) = f_{\text{encode}}(a(t), \phi_E(t), \rho_i)
+    \end{equation}
+    where $a(t)$ is the audio frame at time $t$, $\phi_E(t)$ is the rotational phase of the Elder entity, and $\rho_i$ is the magnitude of parameter $\theta_i$.
+    
+    \item The encoding function $f_{\text{encode}}$ maps spectral properties of the audio to specific regions of the parameter field, creating a distributed representation
+    
+    \item For decoding, the inverse process reconstructs audio from the field configuration:
+    \begin{equation}
+    \hat{a}(t) = f_{\text{decode}}(\{\phi_i(t), \rho_i\}, \phi_E(t))
+    \end{equation}
+    
+    \item Crucially, this field-based representation requires no additional memory regardless of audio duration or complexity
+\end{itemize}
+
+\subsection{Comparative Token Processing Rates}
+
+For a direct comparison at the same 96kHz Dolby Atmos specification:
 
 \begin{table}[h]
 \centering
