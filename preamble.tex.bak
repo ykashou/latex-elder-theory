@@ -243,8 +243,7 @@
     shapes.misc,
     arrows.meta,
     decorations.markings,
-    plotmarks,
-    calc
+    plotmarks
 }
 
 % Enable pgfplots axis environment with all needed libraries
