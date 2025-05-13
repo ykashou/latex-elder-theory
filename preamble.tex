@@ -128,6 +128,20 @@
   fonttitle=\bfseries
 }
 
+% Define observation environment
+\newtcolorbox{observation}[1][]{%
+  enhanced,
+  colback=LightGray,
+  colframe=DarkGray,
+  fonttitle=\bfseries,
+  title={Observation #1},
+  breakable
+}
+
+% Define axis environment if needed
+\providecommand{\axis}{\begin{tikzpicture}\begin{axis}}
+\providecommand{\endaxis}{\end{axis}\end{tikzpicture}}
+
 % Define colors
 \definecolor{DarkSkyBlue}{RGB}{0, 51, 153}
 \definecolor{LightGray}{RGB}{240, 240, 240}
@@ -243,8 +257,7 @@
     shapes.misc,
     arrows.meta,
     decorations.markings,
-    plotmarks,
-    calc
+    plotmarks
 }
 
 % Enable pgfplots axis environment with all needed libraries
