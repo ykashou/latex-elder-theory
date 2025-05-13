@@ -45,13 +45,18 @@
 \tcbuselibrary{listings,skins,breakable,theorems,raster,minted}
 
 % Define observation environment
-\newenvironment{observation}[1][]{\begin{tcolorbox}[
+\newtcolorbox{observation}[1][]{%
   enhanced,
   colback=LightGray,
   colframe=DarkGray,
   fonttitle=\bfseries,
-  title=Observation #1]
-}{\end{tcolorbox}}
+  title={Observation #1},
+  breakable
+}
+
+% Define axis environment for compatibility
+\let\axis\pgfplotsaxis
+\let\endaxis\endpgfplotsaxis
 
 % Define custom tcolorbox environments for different use cases
 \newtcolorbox{examplebox}[1][]{
