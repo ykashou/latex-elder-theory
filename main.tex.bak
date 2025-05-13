@@ -5,21 +5,27 @@
 
 % Basic packages for styling and math
 \usepackage{amsmath}
-\\usepackage{amssymb}
+\usepackage{amssymb}
 \usepackage{amsthm}
-\\usepackage{graphicx}
-\\usepackage{xcolor}
-\\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{enumitem}
-\\usepackage{tikz}
-\\usepackage{fancyhdr}
-\\usepackage{titlesec}
-\\usepackage{multicol}
-\\usepackage{caption}
-\\usepackage[]{geometry}
-\\usepackage{algorithm}
-\\usepackage{algpseudoco
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing, decorations.markings, decorations.pathreplacing}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage[]{geometry}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{mathtools}
+
+% Complex number command
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
 
 % Bibliography setup
 \usepackage[style=alphabetic,backend=biber]{biblatex}
@@ -63,7 +69,7 @@
     bottom=2.5cm,
     headsep=1cm,
     footskip=1cm,
-    headheight=14pt
+    headheight=25.2pt
 }
 
 % Set up headers and footers
@@ -85,7 +91,7 @@
 \begin{titlepage}
     \centering
     \vspace*{2cm}
-    {\Huge\bfseries \textcolor{DarkSkyBlue}{Elder}\textrm{\textcolor{black}{, the Arcane Realization}}\par}
+    {\Huge\bfseries \textcolor{DarkSkyBlue}{Elder }\textrm{\textcolor{black}{Theory}}\par}
     \vspace{2cm}
     {\Large The arcane singularity, benchmarked and mathematically-proven\par}
     \vspace{4cm}
@@ -103,19 +109,68 @@
 % Nomenclature section
 \input{nomenclature.tex}
 
-\input{chapters/chapter1.tex}
+\part{Theory}
 
-\input{chapters/chapter2.tex}
+%%% I. FOUNDATION LAYER %%%
+\section*{I. Foundation Layer}
+% Starting with the abstract mathematical foundation and vocabulary
+\input{chapters/introduction_to_elder_spaces.tex} % Introduction to Elder Spaces
+\input{chapters/introduction_to_elder_topology.tex} % Introduction to Elder Topology (Realization Mapping)
 
-\input{chapters/chapter3.tex}
+%%% II. CORE MATHEMATICAL FRAMEWORK %%%
+\section*{II. Core Mathematical Framework}
+% Theoretical foundation and mathematical basis
+\input{chapters/elder_manifold.tex} % Elder Manifold - theoretical foundation
+\input{chapters/heliomorphic_geometry.tex} % Mathematical basis with heliomorphic geometry
+\input{chapters/heliomorphism.tex} % Heliomorphism as applied to learning systems
 
-\input{chapters/chapter_erudite_loss.tex}
+%%% III. HIERARCHICAL LEARNING STRUCTURE %%%
+\section*{III. Hierarchical Learning Structure}
+% System components and their interactions
+\input{chapters/hierarchical_knowledge_architecture.tex} % Complete System Architecture with Elder-Mentor-Erudite Overview
 
-\input{chapters/chapter_mentor_loss.tex}
+%%% IV. LOSS FUNCTIONS BY COMPONENT %%%
+\section*{IV. Loss Functions by Component}
+% The learning mechanisms from abstract to specific
+\input{chapters/elder_loss.tex} % Elder Loss - Universal Principles
+\input{chapters/mentor_loss.tex} % Mentor Loss - Meta-Knowledge
+\input{chapters/erudite_loss.tex} % Erudite Loss - Domain-specific Knowledge
 
-\input{chapters/chapter_elder_loss.tex}
+%%% V. COMPLETE ALGORITHM %%%
+\section*{V. Complete Algorithm}
+% Bringing everything together from theory to practice
+\input{chapters/elder_training_loop.tex} % Elder Training Loop - from Elder Manifold to Magefiles
+\input{chapters/elder_resonance_algorithm.tex} % Elder Heliosystem Resonance Algorithm
+\input{chapters/gradient_topology.tex} % Gradient Topology in the Elder Heliosystem
 
-\input{chapters/chapter_elder_manifold.tex}
+%%% VI. UNIFIED SYSTEM THEORY %%%
+\section*{VI. The Elder Heliosystem as a Unified Closed System}
+% A consolidated explanation of how the entire system works together
+\input{chapters/elder_heliosystem_unified.tex} % Comprehensive overview of the Elder Heliosystem as a closed system
+\input{chapters/elder_orbital_mechanics.tex} % Elder Orbital Mechanics with hierarchical momentum transfer
+\input{chapters/rotational_information_dynamics.tex} % Detailed mathematical formalism on rotational dynamics and "learn by teaching"
+\input{chapters/gravitational_field_dynamics.tex} % Reframing the system in terms of gravitational fields rather than shells
+\input{chapters/infinite_memory_dynamics.tex} % Mathematical foundation for unbounded memory and continuous audio generation
+\input{chapters/table_memory_efficiency_comparison.tex} % Comparative analysis of memory efficiency against modern transformer models
+\input{chapters/memory_complexity_proofs.tex} % Rigorous mathematical proofs of memory and computational complexity claims
+\input{chapters/elder_memory_footprint.tex} % Concrete memory footprint calculations with practical implementation details
+\input{chapters/entity_state_examples.tex} % Concrete examples of entity state data structures and values
+\input{chapters/elder_memory_map.tex} % Detailed memory map of the Elder Heliosystem
+\input{chapters/elder_gradient_tape.tex} % Inherent gradient tape properties of the Elder Heliosystem
+\input{chapters/elder_set_theory.tex} % Set-theoretic foundations of Elder Theory
+\input{chapters/elder_orbital_thermodynamics.tex} % Orbital thermodynamics and reverse diffusion learning
+
+%%% VII. DOMAIN APPLICATIONS %%%
+\section*{VII. Domain Applications}
+% Applications of the Elder Heliosystem to specific domains
+\input{chapters/audio_understanding.tex} % Audio Understanding at the Mentor Level
+\input{chapters/multimodal_audio_generation.tex} % Multimodal Enriched Audio Generation
+\input{chapters/elder_activation_functions.tex} % Elder Heliosystem Activation Functions
+
+\part{Experiment}
+
+\input{chapters/experiment.tex}
+\input{chapters/benchmarks.tex}
 
 \backmatter
 \printbibliography[title={References}]
