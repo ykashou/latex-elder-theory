@@ -38,10 +38,13 @@ The critical insight of field-mass encoding is that complex data structures can 
   \node[draw, circle, fill=orange!20, minimum size=1.5cm] (coord) at (6,-3) {Coordinate Space};
   
   % Field visualization
-  \draw[dotted] (elder) circle (1.8cm);
-  \draw[dotted] (mentor) circle (1.8cm);
+  \draw[dotted] (coord) circle (2.8cm);
   
-  % Erudite entities with field masses - using specific coordinates instead of calc library
+  % Spatial regions for field masses
+  \node[draw, circle, fill=orange!10, minimum size=2cm] (region1) at (3,-3) {};
+  \node[draw, circle, fill=orange!10, minimum size=2cm] (region2) at (9,-3) {};
+  
+  % Erudite entities with field masses in first region
   \node[draw, circle, fill=red!20, minimum size=0.4cm] (e1) at (3.85,-2.15) {$m_1$};
   \node[draw, circle, fill=red!20, minimum size=0.4cm] (e2) at (4.2,-3) {$m_2$};
   \node[draw, circle, fill=red!20, minimum size=0.4cm] (e3) at (3.85,-3.85) {$m_3$};
@@ -51,6 +54,7 @@ The critical insight of field-mass encoding is that complex data structures can 
   \node[draw, circle, fill=red!20, minimum size=0.4cm] (e7) at (2.15,-2.15) {$m_7$};
   \node[draw, circle, fill=red!20, minimum size=0.4cm] (e8) at (3,-1.8) {$m_8$};
   
+  % Erudite entities with field masses in second region
   \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m1) at (9.85,-2.15) {$m_1$};
   \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m2) at (10.2,-3) {$m_2$};
   \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m3) at (9.85,-3.85) {$m_3$};
@@ -79,28 +83,31 @@ The critical insight of field-mass encoding is that complex data structures can 
   \draw[blue!40, thick, decoration={snake}, decorate] (m7) circle (0.25cm);
   \draw[blue!40, thick, decoration={snake}, decorate] (m8) circle (0.25cm);
   
-  % Field lines - connect to specific Erudites
-  \draw[<->, dashed, red!30] (elder) -- (e1);
-  \draw[<->, dashed, red!30] (elder) -- (e2);
-  \draw[<->, dashed, red!30] (elder) -- (e3);
-  \draw[<->, dashed, red!30] (elder) -- (e4);
-  \draw[<->, dashed, red!30] (elder) -- (e5);
-  \draw[<->, dashed, red!30] (elder) -- (e6);
-  \draw[<->, dashed, red!30] (elder) -- (e7);
-  \draw[<->, dashed, red!30] (elder) -- (e8);
+  % Field lines - connect to coordinate space
+  \draw[<->, dashed, red!30] (region1) -- (e1);
+  \draw[<->, dashed, red!30] (region1) -- (e2);
+  \draw[<->, dashed, red!30] (region1) -- (e3);
+  \draw[<->, dashed, red!30] (region1) -- (e4);
+  \draw[<->, dashed, red!30] (region1) -- (e5);
+  \draw[<->, dashed, red!30] (region1) -- (e6);
+  \draw[<->, dashed, red!30] (region1) -- (e7);
+  \draw[<->, dashed, red!30] (region1) -- (e8);
   
-  \draw[<->, dashed, blue!30] (mentor) -- (m1);
-  \draw[<->, dashed, blue!30] (mentor) -- (m2);
-  \draw[<->, dashed, blue!30] (mentor) -- (m3);
-  \draw[<->, dashed, blue!30] (mentor) -- (m4);
-  \draw[<->, dashed, blue!30] (mentor) -- (m5);
-  \draw[<->, dashed, blue!30] (mentor) -- (m6);
-  \draw[<->, dashed, blue!30] (mentor) -- (m7);
-  \draw[<->, dashed, blue!30] (mentor) -- (m8);
+  \draw[<->, dashed, blue!30] (region2) -- (m1);
+  \draw[<->, dashed, blue!30] (region2) -- (m2);
+  \draw[<->, dashed, blue!30] (region2) -- (m3);
+  \draw[<->, dashed, blue!30] (region2) -- (m4);
+  \draw[<->, dashed, blue!30] (region2) -- (m5);
+  \draw[<->, dashed, blue!30] (region2) -- (m6);
+  \draw[<->, dashed, blue!30] (region2) -- (m7);
+  \draw[<->, dashed, blue!30] (region2) -- (m8);
   
-  % Connect data to field system with explicit coordinates
-  \draw[->, dashed] (params) -- (3,-1.2);
-  \draw[->, dashed] (params) -- (9,-1.2);
+  % Connect central coordinate space to regions
+  \draw[<->, dashed, orange!40] (coord) -- (region1);
+  \draw[<->, dashed, orange!40] (coord) -- (region2);
+  
+  % Connect parameters to coordinate space
+  \draw[->, dashed] (params) -- (coord);
 
 \end{tikzpicture}
 \caption{Overview of the field-mass encoding and decoding process. Data is transformed into parameters defining the field mass distribution of Erudite entities. The precise field mass distribution enables exact reconstruction of the original data through the field equations.}
@@ -493,10 +500,10 @@ For a video sequence with temporal coherence, field-mass encoding can achieve co
 \end{proposition}
 
 \begin{proof}
-The key insight is that video data exhibits both spatial and temporal redundancy, which align naturally with the Elder and Mentor reference frames. By treating these frames as orthogonal coordinates, Erudite field masses can efficiently represent:
+The key insight is that video data exhibits both spatial and temporal redundancy, which can be effectively captured in a single coordinate space. Erudite field masses can efficiently represent:
 
-1. Elder frame: spatial coordinates and persistent visual elements
-2. Mentor frame: temporal coordinates and motion dynamics
+1. Spatial dimensions: persistent visual elements and spatial structure
+2. Temporal dimensions: motion dynamics and temporal patterns
 3. Field masses: actual content through magnitude-phase relationships
 
 The field mass coherence factor $\xi$ provides additional improvement over hierarchical approaches by eliminating redundant parameters between reference frames, resulting in the square root improvement in the denominator.
@@ -525,7 +532,7 @@ The state vector $|\psi\rangle$ of a quantum system can be encoded through Erudi
 |\psi\rangle = \sum_{i=1}^{m} \sqrt{|M_i|} e^{i\phi_i} |b_i\rangle
 \end{equation}
 
-where $|b_i\rangle$ are basis states defined by Elder and Mentor reference frames, $|M_i|$ represents field mass magnitude, and $\phi_i$ represents field mass phase.
+where $|b_i\rangle$ are basis states defined in the coordinate space, $|M_i|$ represents field mass magnitude, and $\phi_i$ represents field mass phase.
 \end{proposition}
 
 This formulation naturally preserves essential quantum properties:
@@ -542,7 +549,7 @@ Quantum circuit simulations encoded with this technique demonstrate 85-95\% redu
 While field-mass encoding offers remarkable storage efficiency, several challenges remain:
 
 \begin{itemize}
-    \item \textbf{Reference Frame Selection:} Optimal choice of Elder and Mentor frames depends on data characteristics
+    \item \textbf{Coordinate Space Selection:} Optimal choice of coordinate basis depends on data characteristics
     \item \textbf{Field Mass Optimization:} Finding optimal field mass distributions requires solving complex variational problems
     \item \textbf{Random Data:} Truly random data with no structure shows minimal compression
     \item \textbf{Real-time Decoding:} Fast field equation evaluation methods are needed for time-sensitive applications
@@ -559,8 +566,8 @@ Future research directions include:
 
 \section{Conclusion}
 
-Field-mass encoding represents a paradigm shift in data representation, leveraging independent reference frames and Erudite field mass distributions to achieve dramatic storage efficiency. By encoding information in the Erudite field masses rather than in hierarchical orbital relationships, this approach opens new possibilities for handling the ever-increasing volumes of data in modern computing while maintaining precise reversibility.
+Field-mass encoding represents a paradigm shift in data representation, leveraging optimal coordinate spaces and Erudite field mass distributions to achieve dramatic storage efficiency. By encoding all information directly in the Erudite field masses themselves rather than in hierarchical relationships, this approach opens new possibilities for handling the ever-increasing volumes of data in modern computing while maintaining precise reversibility.
 
-The demonstrated compression ratios of 40-110x compared to conventional methods, coupled with the guarantee of exact reconstruction, position field-mass encoding as a transformative approach for data-intensive applications. The key insight—that Elder and Mentor frames serve as independent reference systems while Erudite field masses contain the actual information content—enables this approach to consistently outperform hierarchical encoding methods.
+The demonstrated compression ratios of 40-110x compared to conventional methods, coupled with the guarantee of exact reconstruction, position field-mass encoding as a transformative approach for data-intensive applications. The key insight—that all information is directly encoded in the Erudite field masses themselves, distributed in an optimal coordinate space—enables this approach to consistently outperform hierarchical encoding methods.
 
 As datasets continue to grow in size and complexity, field-mass encoding provides a mathematically rigorous foundation for efficient data management across domains, from scientific computing and multimedia to artificial intelligence and quantum information processing.
