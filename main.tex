@@ -67,7 +67,8 @@
     {\fontsize{36}{40}\selectfont \unitname~\theunit}\\[10pt]%
     {\fontsize{24}{30}\selectfont #1}\\[20pt]%
     \hrule\vspace{50pt}}%
-    \addcontentsline{toc}{unit}{\protect\numberline{\theunit}#1}%
+    \phantomsection%
+    \addcontentsline{toc}{part}{\unitname~\theunit: #1}%
 }
 
 % Add unit to the TOC format
@@ -179,13 +180,7 @@
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_orbital_thermodynamics.tex} % Orbital thermodynamics and reverse diffusion learning
 
 %%% IV. LOSS FUNCTIONS AND TRAINING ALGORITHMS %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit IV: Loss Functions and Training Algorithms}{}{}}
-\begin{center}
-\Large\bfseries Unit IV: Loss Functions and Training Algorithms
-\end{center}
-\vspace{1em}
+\unit{Loss Functions and Training Algorithms}
 % The learning mechanisms and algorithms
 \input{chapters/part1_theory/loss_functions/elder_loss.tex} % Elder Loss - Universal Principles
 \input{chapters/part1_theory/loss_functions/mentor_loss.tex} % Mentor Loss - Meta-Knowledge
@@ -195,13 +190,7 @@
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_resonance_algorithm.tex} % Elder Heliosystem Resonance Algorithm
 
 %%% V. SYSTEM INTEGRATION AND APPLICATIONS %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit V: System Integration and Applications}{}{}}
-\begin{center}
-\Large\bfseries Unit V: System Integration and Applications
-\end{center}
-\vspace{1em}
+\unit{System Integration and Applications}
 % The complete system and its applications
 \input{chapters/part1_theory/applications/model_unification.tex} % Unification of heliomorphic and orbital mechanics models
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_heliosystem_unified.tex} % Comprehensive overview of the Elder Heliosystem as a closed system
@@ -219,23 +208,11 @@
 \part{Experiment}
 
 %%% UNIT I. EXPERIMENTAL SETUP AND METHODOLOGY %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit I: Experimental Setup and Methodology}{}{}}
-\begin{center}
-\Large\bfseries Unit I: Experimental Setup and Methodology
-\end{center}
-\vspace{1em}
+\unit{Experimental Setup and Methodology}
 \input{chapters/part2_experiment/experiment.tex}
 
 %%% UNIT II. PERFORMANCE EVALUATION %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit II: Performance Evaluation}{}{}}
-\begin{center}
-\Large\bfseries Unit II: Performance Evaluation
-\end{center}
-\vspace{1em}
+\unit{Performance Evaluation}
 \input{chapters/part2_experiment/benchmarks.tex}
 
 \backmatter
