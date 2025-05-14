@@ -198,24 +198,17 @@
 
 \part{Experiment}
 
-%%% UNIT I. EXPERIMENTAL SETUP AND METHODOLOGY %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit I: Experimental Setup and Methodology}{}{}}
-\begin{center}
-\Large\bfseries Unit I: Experimental Setup and Methodology
-\end{center}
-\vspace{1em}
+% Reset section counter for the Experiment part
+\setcounter{section}{0}
+
+%%% UNIT I: EXPERIMENTAL SETUP AND METHODOLOGY %%%
+\section*{Experimental Setup and Methodology}
+\addcontentsline{toc}{section}{Unit I: Experimental Setup and Methodology}
 \input{chapters/part2_experiment/experiment.tex}
 
-%%% UNIT II. PERFORMANCE EVALUATION %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit II: Performance Evaluation}{}{}}
-\begin{center}
-\Large\bfseries Unit II: Performance Evaluation
-\end{center}
-\vspace{1em}
+%%% UNIT II: PERFORMANCE EVALUATION %%%
+\section*{Performance Evaluation}
+\addcontentsline{toc}{section}{Unit II: Performance Evaluation}
 \input{chapters/part2_experiment/benchmarks.tex}
 
 \backmatter
