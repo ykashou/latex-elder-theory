@@ -422,6 +422,99 @@ The field-mass encoding approach relies entirely on Erudite field masses to repr
 
 Unlike hierarchical models that depend on relationships between different entity types, the field-mass approach encodes all information directly in the field masses themselves. This non-hierarchical structure allows for more efficient encoding and precise reconstruction.
 
+\subsection{Asteroid-Based Magefile Dataset Representation}
+
+A powerful extension to the field-mass encoding framework involves conceptualizing magefile datasets as asteroids within the mass field. This provides an elegant mechanism for encoding structured information:
+
+\begin{definition}[Asteroid-Based Magefile]
+An asteroid-based magefile is a discrete data entity with the following properties:
+\begin{enumerate}
+    \item It possesses a specific field mass concentration that influences the surrounding coordinate space
+    \item It maintains a stable orbital trajectory around larger field mass centers
+    \item Its orbital parameters directly encode information content
+    \item Multiple asteroids can form belts or clusters representing related data collections
+\end{enumerate}
+\end{definition}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+  % Coordinate space 
+  \draw[thick] (-5,-5) rectangle (5,5);
+  \node at (0,-5.5) {Coordinate Space};
+  
+  % Central mass (primary attractor)
+  \filldraw[fill=orange!70] (0,0) circle (0.8cm);
+  \node at (0,0) {Primary Mass};
+  
+  % Asteroid belt (magefile datasets)
+  \foreach \angle in {0,30,...,330} {
+    \filldraw[fill=blue!50] ({\angle+10}:3) circle (0.3cm);
+    \draw[dashed, blue!50] ({\angle+10}:3) circle (0.05cm);
+    % Orbital path
+    \draw[dotted] (0,0) circle (3cm);
+  }
+  
+  % Secondary masses with their own asteroid fields
+  \filldraw[fill=red!60] (3.5,0) circle (0.5cm);
+  \foreach \angle in {0,45,...,315} {
+    \filldraw[fill=purple!40] ({3.5+\angle/40+0.9*cos(\angle)},{0+0.9*sin(\angle)}) circle (0.15cm);
+    \draw[dotted] (3.5,0) circle (0.9cm);
+  }
+  
+  \filldraw[fill=green!60] (-2,-3) circle (0.5cm);
+  \foreach \angle in {0,60,...,300} {
+    \filldraw[fill=purple!40] ({-2+\angle/30+1.1*cos(\angle)},{-3+1.1*sin(\angle)}) circle (0.15cm);
+    \draw[dotted] (-2,-3) circle (1.1cm);
+  }
+  
+  % Data flow/encoding indications
+  \draw[->, thick, orange!70] (1.2,0.3) -- (2.5,0.3);
+  \draw[->, thick, orange!70] (-1.2,-0.3) -- (-1.8,-2.5);
+  
+  % Labels
+  \node at (4,4) {Asteroid-based Magefiles};
+  \node[text width=3cm] at (-4,4) {Stable Orbital Trajectories Encode Information};
+  
+\end{tikzpicture}
+\caption{Asteroid-based magefile datasets in the field-mass encoding framework. Each asteroid has a specific mass and maintains a stable orbital trajectory that encodes information content. Orbital parameters such as eccentricity, inclination, and phase directly correspond to data attributes.}
+\label{fig:asteroid_magefile}
+\end{figure}
+
+\begin{theorem}[Orbital Stability for Information Encoding]
+For a system of asteroid-based magefiles $\{A_1, A_2, \ldots, A_n\}$ with masses $\{m_1, m_2, \ldots, m_n\}$ and orbital trajectories $\{T_1, T_2, \ldots, T_n\}$ around a primary field mass $M_c$, there exists a stable configuration that minimizes the orbital energy while maximizing information density:
+
+\begin{equation}
+E_{total} = \sum_{i=1}^{n} \left( -\frac{G M_c m_i}{2 a_i} + \lambda \cdot H(T_i) \right)
+\end{equation}
+
+where $a_i$ is the semi-major axis of the orbit, $G$ is the gravitational constant, $H(T_i)$ is the information entropy encoded in trajectory $T_i$, and $\lambda$ is a balance parameter between stability and information content.
+\end{theorem}
+
+\begin{proof}
+The stability of the orbital configuration depends on several factors:
+
+1. The gravitational potential energy between the primary mass and each asteroid, given by $-\frac{G M_c m_i}{r_i}$, where $r_i$ is the distance.
+
+2. The virial theorem, which states that for a stable orbit, the time-averaged kinetic energy is half the time-averaged negative potential energy.
+
+3. The information content encoded in each orbit, represented by the entropy term $H(T_i)$.
+
+When these factors are balanced according to the equation above, the system achieves a stable configuration that optimally encodes information. The orbital parameters (eccentricity, inclination, etc.) directly map to specific data attributes, while maintaining long-term stability.
+
+The encoding efficiency is maximized when orbital resonances between asteroids are leveraged to create interdependent encoding patterns, analogous to resonant orbits in celestial mechanics.
+\end{proof}
+
+The asteroid-based approach offers several unique advantages:
+
+\begin{itemize}
+    \item \textbf{Natural Clustering:} Related data elements naturally form asteroid belts or clusters
+    \item \textbf{Dynamic Updates:} New data can be incorporated as new asteroids without disrupting existing orbits
+    \item \textbf{Orbital Resonance:} Complex relationships between data elements can be encoded through orbital resonances
+    \item \textbf{Mass-Dependent Influence:} More important data receives higher mass, creating stronger gravitational effects
+    \item \textbf{Trajectory-Based Access:} Data retrieval follows natural orbital paths, enabling efficient sequential access
+\end{itemize}
+
 \subsection{Field-Mass Progressive Reconstruction}
 
 \begin{proposition}[Field-Mass Progressive Fidelity]
