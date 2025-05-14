@@ -148,21 +148,23 @@ The encoding of data into a field-mass representation follows these mathematical
 \caption{Field-Mass Data Encoding}
 \begin{algorithmic}[1]
 \State \textbf{Input:} Dataset $\mathcal{D}$, precision level $\epsilon$
-\State \textbf{Output:} Field mass parameters $\mathcal{E}, \mathcal{M}_{\mathcal{E}}$
+\State \textbf{Output:} Erudite field mass parameters $\mathcal{M}_{\mathcal{E}}$
 
 \State Perform spectral analysis of $\mathcal{D}$ to extract frequency components
 \State Apply wavelet decomposition to identify information density regions
-\State Establish Elder reference frame $\mathcal{F}_E$ as principal basis vectors
-\State Establish Mentor reference frame $\mathcal{F}_M$ as complementary basis vectors orthogonal to $\mathcal{F}_E$
-\State Verify that $\langle \mathcal{F}_E, \mathcal{F}_M \rangle = 0$ (no interaction between reference frames)
-\State Position Erudite entities $e_1, \ldots, e_i$ within both reference frames
-\State Compute field mass tensor $M_i$ for each Erudite entity using Hilbert space projection:
-\State \hspace{1em} $M_i = \sum_{j=1}^d \alpha_{ij} \ket{\psi_{ij}} \bra{\psi_{ij}}$
+\State Construct independent basis systems for coordinate representation
+\State Compute optimal positions for Erudite entities within coordinate space
+\State Determine field mass magnitude $|M_i|$ for each Erudite entity based on information content:
+\State \hspace{1em} $|M_i| = \sqrt{\frac{\int_{\Omega_i} |\mathcal{D}(x)|^2 dx}{\int_\Omega |\mathcal{D}(x)|^2 dx}}$
+\State Calculate field mass phase $\phi_i$ to encode pattern relationships:
+\State \hspace{1em} $\phi_i = \arg\left(\frac{\int_{\Omega_i} \mathcal{D}(x) e^{i\theta(x)} dx}{|\int_{\Omega_i} \mathcal{D}(x) e^{i\theta(x)} dx|}\right)$
 \State Optimize field mass distribution to minimize reconstruction error:
 \State \hspace{1em} $\min_{\mathcal{M}} \int_\Omega \left| \mathcal{D}(x) - \sum_{i=1}^m M_i \cdot G(x, x_i, \omega_i) \right|^2 dx$
-\State \Return $\mathcal{E}, \mathcal{M}_{\mathcal{E}}$
+\State \Return $\mathcal{M}_{\mathcal{E}}$
 \end{algorithmic}
 \end{algorithm}
+
+The key insight of this approach is that all information is directly encoded in the Erudite field masses themselves, with their magnitudes and phases capturing the essential structure of the data. Unlike hierarchical approaches, this method does not rely on relationships between different entity types, leading to more efficient encoding and precise reconstruction.
 
 \subsection{The Field-Mass Decoding Process}
 
@@ -395,24 +397,24 @@ This equation reveals that:
 
 This enhanced quantization stability is a direct result of encoding information in Erudite field masses rather than in hierarchical orbital relationships.
 
-\section{Non-Hierarchical Reference Frame Encoding}
+\section{Non-Hierarchical Field-Mass Encoding}
 
-\subsection{Independent Reference Frame Structure}
+\subsection{Field-Mass Information Structure}
 
-The field-mass encoding approach leverages independent reference frames to create a powerful framework for multi-resolution data encoding:
+The field-mass encoding approach relies entirely on Erudite field masses to represent information:
 
 \begin{itemize}
-    \item \textbf{Elder reference frame} provides a coordinate system for global feature mapping
-    \item \textbf{Mentor reference frame} provides an orthogonal coordinate system for complementary feature mapping
-    \item \textbf{Erudite field masses} encode the actual information content through their distribution in both reference frames
+    \item \textbf{Field mass magnitudes} encode information density and importance
+    \item \textbf{Field mass phases} encode pattern relationships and coherence
+    \item \textbf{Field mass positions} establish the spatial organization of information
 \end{itemize}
 
-Unlike hierarchical models, Elder and Mentor frames do not interact directly and serve only as independent coordinate systems where Erudite field masses are positioned. This non-hierarchical structure allows for more efficient encoding and precise reconstruction.
+Unlike hierarchical models that depend on relationships between different entity types, the field-mass approach encodes all information directly in the field masses themselves. This non-hierarchical structure allows for more efficient encoding and precise reconstruction.
 
 \subsection{Field-Mass Progressive Reconstruction}
 
 \begin{proposition}[Field-Mass Progressive Fidelity]
-Given a field-mass encoding with reference frames $\mathcal{F}_E$, $\mathcal{F}_M$ and Erudite field masses $\mathcal{M}_\mathcal{E}$, the reconstruction fidelity $F$ is determined by the field mass resolution:
+Given Erudite field masses $\mathcal{M}_\mathcal{E}$, the reconstruction fidelity $F$ is determined by the field mass resolution:
 
 \begin{equation}
 F(\mathcal{M}_\mathcal{E}^{(r)}) = 1 - \frac{\kappa}{r^2} \sum_{i=1}^m \frac{1}{|M_i|}
@@ -422,9 +424,9 @@ where $\mathcal{M}_\mathcal{E}^{(r)}$ represents field masses at resolution leve
 \end{proposition}
 
 \begin{proof}
-In field-mass encoding, reconstruction fidelity depends not on hierarchical relationships but on field mass resolution. When field masses are represented at different resolutions, information content is preserved proportionally to the square of the resolution. The error is inversely proportional to the magnitude of field masses, as smaller field masses contribute less to the overall field intensity.
+In field-mass encoding, reconstruction fidelity depends solely on field mass resolution. When field masses are represented at different resolutions, information content is preserved proportionally to the square of the resolution. The error is inversely proportional to the magnitude of field masses, as smaller field masses contribute less to the overall field intensity.
 
-Because Elder and Mentor frames are fixed reference systems that do not contain information directly, they do not affect reconstruction fidelity. The reconstruction quality depends solely on the resolution and precision of Erudite field masses.
+Unlike hierarchical approaches that distribute information across different entity types, the field-mass approach concentrates all information in the Erudite field masses themselves. This concentration provides more efficient progressive reconstruction, as each increase in resolution directly improves fidelity without needing to incorporate additional entity types.
 \end{proof}
 
 This property enables adaptive reconstruction based on available computational resources or required detail level, with the critical insight that all reconstruction information is contained within the Erudite field masses themselves.
