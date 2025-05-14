@@ -299,7 +299,7 @@ where $\phi_E(t)$ is the Elder phase at time $t$, and $\mathcal{F}_{osc}$ is the
 
 Feature storage efficiency is further enhanced through hierarchical phase-space quantization. Features are organized in a multi-resolution phase grid with differential precision:
 
-\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Hierarchical Phase Quantization, fonttitle=\bfseries]
+\begin{codeblock}[title=Hierarchical Phase Quantization]
 \begin{verbatim}
 // PhaseQuantization implements the multi-resolution phase grid
 struct PhaseQuantization {
@@ -307,7 +307,7 @@ struct PhaseQuantization {
     basePrecision: uint16,
     
     // High-importance regions with enhanced precision (24-bit)
-    highPrecisionRegions: [(φ_start, φ_end, precision)],
+    highPrecisionRegions: [(phi_start, phi_end, precision)],
     
     // Domain-specific precision levels
     domainPrecision: {
@@ -325,7 +325,7 @@ struct PhaseQuantization {
     phaseHashTable: SparsePhaseLookup
 }
 \end{verbatim}
-\end{tcolorbox}
+\end{codeblock}
 
 This multi-resolution approach reduces storage requirements by up to 75\% compared to uniform phase quantization, while preserving precision for critical features.
 
