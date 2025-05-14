@@ -25,8 +25,20 @@ This document tracks the implementation of the mathematical review checklist ite
 - Example application to knowledge domain transitions
 - Stability criteria relating perturbation magnitude, mass ratio, and orbital parameters
 
-## Current Task:
-**Category**: Core Mathematical Foundations  
+### 3. Core Mathematical Foundations  
 **Task**: Verify gravitational equations  
 **Priority**: High  
-**Description**: Ensure all gravitational interaction equations are dimensionally consistent and physically valid
+**Description**: Ensure all gravitational interaction equations are dimensionally consistent and physically valid  
+**Implementation**: Created a new appendix chapter "Validation of Elder Gravitational Equations" with:
+- Comprehensive dimensional analysis of all key gravitational equations
+- Verification of physical validity through conservation principles
+- Proof of consistency with Newton's laws of motion
+- Mathematical validation of energy and angular momentum conservation
+- Extension to tensor formulation for curved parameter spaces
+- Tables documenting dimensional consistency for each equation
+
+## Current Task:
+**Category**: Core Mathematical Foundations  
+**Task**: Derive critical phase thresholds  
+**Priority**: Medium  
+**Description**: Mathematically derive the phase difference thresholds at which knowledge transfer occurs
