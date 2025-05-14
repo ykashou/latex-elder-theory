@@ -4,6 +4,13 @@
 \documentclass[11pt,twoside]{book}
 
 % Basic packages for styling and math
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{ρ}{\ensuremath{\rho}}
+\newunicodechar{φ}{\ensuremath{\phi}}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -22,6 +29,8 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{mathtools}
+\usepackage{tcolorbox}
+\usepackage{listings}
 
 % Complex number command
 \newcommand{\C}{\mathbb{C}}
@@ -37,6 +46,8 @@
 \definecolor{LemmaGreen}{RGB}{230, 245, 230}
 \definecolor{PropositionYellow}{RGB}{245, 245, 230}
 \definecolor{DefinitionPurple}{RGB}{240, 230, 245}
+\definecolor{LightGray}{RGB}{240, 240, 240}
+\definecolor{DarkGray}{RGB}{80, 80, 80}
 
 % Include math macros
 \input{macros/math_macros.tex}
