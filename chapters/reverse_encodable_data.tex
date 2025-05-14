@@ -257,7 +257,7 @@ Audio Waveforms & 10:1 & 112:1 & 11.20x \\
 \label{tab:compression_ratios}
 \end{table}
 
-The dramatic improvement in compression ratios is directly attributable to the Erudite field mass approach, where the field masses contain the essential information while the independent reference frames provide the coordinate system for reconstruction. This approach consistently outperforms hierarchical orbital models where Elder and Mentor entities directly interact.
+The dramatic improvement in compression ratios is directly attributable to the Erudite field mass approach, where the field masses themselves contain all essential information. This non-hierarchical approach consistently outperforms hierarchical models that rely on complex interactions between different entity types.
 
 \subsection{Asymptotic Efficiency}
 
@@ -276,7 +276,7 @@ where $\alpha$ and $\beta$ are constants related to field mass coherence propert
 \begin{proof}
 Field-mass encoding provides an additional efficiency factor compared to hierarchical orbital encoding due to:
 
-1. Elimination of redundant parameters from hierarchical relationships between Elder and Mentor entities
+1. Elimination of redundant parameters required to maintain hierarchical relationships
 2. Improved phase space utilization through orthogonal reference frames
 3. Information concentration in Erudite field masses rather than in orbital relationships
 
@@ -348,10 +348,10 @@ The precision of data reconstruction depends on the accuracy of Erudite field ma
 Given field mass parameters with precision $\epsilon$, the maximum reconstruction error $E_{max}$ is bounded by:
 
 \begin{equation}
-E_{max} \leq \kappa \epsilon \cdot \frac{1}{\min_i |M_i|} \cdot \frac{1}{\sqrt{1 - |\langle \mathcal{F}_E|\mathcal{F}_M \rangle|^2}}
+E_{max} \leq \kappa \epsilon \cdot \frac{1}{\min_i |M_i|} \cdot \frac{1}{\sqrt{1 - |\langle \phi_i|\phi_j \rangle|^2}}
 \end{equation}
 
-where $\kappa$ is a system-specific constant, $M_i$ represents the field mass of Erudite entity $i$, and $\langle \mathcal{F}_E|\mathcal{F}_M \rangle$ represents the overlap between Elder and Mentor reference frames.
+where $\kappa$ is a system-specific constant, $M_i$ represents the field mass of Erudite entity $i$, and $\langle \phi_i|\phi_j \rangle$ represents the overlap between basis functions in the coordinate space.
 \end{theorem}
 
 \begin{proof}
@@ -361,12 +361,12 @@ The error propagation in field-mass encoding depends on three critical factors:
 
 2. The minimum field mass magnitude $\min_i |M_i|$, as smaller field masses are more sensitive to perturbations, creating a hyperbolic relationship between field mass magnitude and error sensitivity.
 
-3. The orthogonality of Elder and Mentor reference frames, where perfect orthogonality ($\langle \mathcal{F}_E|\mathcal{F}_M \rangle = 0$) provides optimal error resilience.
+3. The orthogonality of basis functions in the coordinate space, where perfect orthogonality ($\langle \phi_i|\phi_j \rangle = 0$ for $i \neq j$) provides optimal error resilience.
 
 When these factors are combined, the error bound takes the form shown in the theorem, demonstrating that field-mass encoding achieves optimal precision when:
 \begin{itemize}
     \item Erudite field masses have significant magnitude
-    \item Elder and Mentor reference frames are precisely orthogonal
+    \item Basis functions in the coordinate space are precisely orthogonal
     \item Field mass parameters are stored with sufficient precision
 \end{itemize}
 \end{proof}
