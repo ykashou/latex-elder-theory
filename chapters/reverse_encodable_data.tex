@@ -1,8 +1,8 @@
-\chapter{Reverse-Encodable Data via Orbital Mechanics}
+\chapter{Reverse-Encodable Data via Field-Mass Encoding}
 
-\section{Introduction to Field-Mass Orbital Data Encoding}
+\section{Introduction to Field-Mass Data Encoding}
 
-The Elder system's orbital mechanics principles provide a mathematical framework for a novel approach to data encoding and compression. This chapter introduces Field-Mass Orbital Data Encoding (FMODE), a method that leverages the field mass of Erudite entities to create data representations that are both compact and precisely reversible.
+This chapter introduces Field-Mass Data Encoding (FMDE), a novel approach to data encoding and compression that leverages the field mass of Erudite entities to create data representations that are both compact and precisely reversible.
 
 \begin{definition}[Field-Mass Reverse-Encodable Data]
 A data encoding scheme is field-mass reverse-encodable if it satisfies the following conditions:
@@ -14,9 +14,9 @@ A data encoding scheme is field-mass reverse-encodable if it satisfies the follo
 \end{enumerate}
 \end{definition}
 
-The critical insight of field-mass encoding is that complex data structures can be represented through the mass field distribution of Erudite entities within a non-hierarchical system. Contrary to traditional orbital models, Elder and Mentor entities exist as independent reference frames that do not directly interact but provide the coordinate systems within which Erudite field masses are defined.
+The critical insight of field-mass encoding is that complex data structures can be represented through the mass field distribution of Erudite entities within a non-hierarchical system. Unlike hierarchical approaches, field-mass encoding encodes all information directly in the Erudite field masses themselves, distributed across an optimal coordinate space.
 
-\section{Mathematical Foundation of Field-Mass Orbital Encoding}
+\section{Mathematical Foundation of Field-Mass Encoding}
 
 \begin{figure}[h]
 \centering
@@ -35,8 +35,7 @@ The critical insight of field-mass encoding is that complex data structures can 
   \draw[->, thick] (params) -- node[above] {Field Decoding} node[below] {$\Phi$} (recon);
   
   % Independent reference frames
-  \node[draw, circle, fill=orange!20, minimum size=1.5cm] (elder) at (3,-3) {Elder Frame};
-  \node[draw, circle, fill=orange!10, minimum size=1.5cm] (mentor) at (9,-3) {Mentor Frame};
+  \node[draw, circle, fill=orange!20, minimum size=1.5cm] (coord) at (6,-3) {Coordinate Space};
   
   % Field visualization
   \draw[dotted] (elder) circle (1.8cm);
