@@ -25,10 +25,10 @@ The critical insight of field-mass encoding is that complex data structures can 
   \node[draw, rounded corners, fill=blue!10, minimum width=3cm, minimum height=1.5cm] (data) at (0,0) {Original Data $\mathcal{D}$};
   
   % Field Mass Parameters
-  \node[draw, rounded corners, fill=yellow!10, minimum width=3cm, minimum height=1.5cm] (params) at (6,0) {Field Mass Parameters\\$\mathcal{M}_{\mathcal{E}}$};
+  \node[draw, rounded corners, fill=yellow!10, minimum width=3cm, minimum height=1.5cm] (params) at (6,0) {Field Mass Parameters $\mathcal{M}_{\mathcal{E}}$};
   
   % Reconstructed Data
-  \node[draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=1.5cm] (recon) at (12,0) {Reconstructed Data\\$\mathcal{D}'$};
+  \node[draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=1.5cm] (recon) at (12,0) {Reconstructed Data $\mathcal{D}'$};
   
   % Arrows and labels
   \draw[->, thick] (data) -- node[above] {Field Encoding} node[below] {$\Phi^{-1}$} (params);
@@ -42,28 +42,66 @@ The critical insight of field-mass encoding is that complex data structures can 
   \draw[dotted] (elder) circle (1.8cm);
   \draw[dotted] (mentor) circle (1.8cm);
   
-  % Erudite entities with field masses
-  \foreach \i in {0,45,...,315} {
-    \node[draw, circle, fill=red!20, minimum size=0.4cm] (e\i) at ($(elder) + (\i:1.2cm)$) {};
-    \draw[red!40, thick, decoration={snake}, decorate] (e\i) circle (0.3cm);
-    \node[scale=0.6] at (e\i) {$m_{\i}$};
-  }
+  % Erudite entities with field masses - using specific coordinates instead of calc library
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e1) at (3.85,-2.15) {$m_1$};
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e2) at (4.2,-3) {$m_2$};
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e3) at (3.85,-3.85) {$m_3$};
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e4) at (3,-4.2) {$m_4$};
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e5) at (2.15,-3.85) {$m_5$};
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e6) at (1.8,-3) {$m_6$};
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e7) at (2.15,-2.15) {$m_7$};
+  \node[draw, circle, fill=red!20, minimum size=0.4cm] (e8) at (3,-1.8) {$m_8$};
   
-  \foreach \i in {0,45,...,315} {
-    \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m\i) at ($(mentor) + (\i:1.2cm)$) {};
-    \draw[blue!40, thick, decoration={snake}, decorate] (m\i) circle (0.3cm);
-    \node[scale=0.6] at (m\i) {$m_{\i}$};
-  }
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m1) at (9.85,-2.15) {$m_1$};
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m2) at (10.2,-3) {$m_2$};
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m3) at (9.85,-3.85) {$m_3$};
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m4) at (9,-4.2) {$m_4$};
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m5) at (8.15,-3.85) {$m_5$};
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m6) at (7.8,-3) {$m_6$};
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m7) at (8.15,-2.15) {$m_7$};
+  \node[draw, circle, fill=blue!20, minimum size=0.4cm] (m8) at (9,-1.8) {$m_8$};
   
-  % Field lines
-  \foreach \i in {0,45,...,315} {
-    \draw[<->, dashed, red!30] (elder) -- ($(elder) + (\i:1.2cm)$);
-    \draw[<->, dashed, blue!30] (mentor) -- ($(mentor) + (\i:1.2cm)$);
-  }
+  % Wavy field visualizations
+  \draw[red!40, thick, decoration={snake}, decorate] (e1) circle (0.25cm);
+  \draw[red!40, thick, decoration={snake}, decorate] (e2) circle (0.25cm);
+  \draw[red!40, thick, decoration={snake}, decorate] (e3) circle (0.25cm);
+  \draw[red!40, thick, decoration={snake}, decorate] (e4) circle (0.25cm);
+  \draw[red!40, thick, decoration={snake}, decorate] (e5) circle (0.25cm);
+  \draw[red!40, thick, decoration={snake}, decorate] (e6) circle (0.25cm);
+  \draw[red!40, thick, decoration={snake}, decorate] (e7) circle (0.25cm);
+  \draw[red!40, thick, decoration={snake}, decorate] (e8) circle (0.25cm);
   
-  % Connect data to field system
-  \draw[->, dashed] (params) -- ($(elder) + (0,1.5)$);
-  \draw[->, dashed] (params) -- ($(mentor) + (0,1.5)$);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m1) circle (0.25cm);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m2) circle (0.25cm);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m3) circle (0.25cm);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m4) circle (0.25cm);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m5) circle (0.25cm);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m6) circle (0.25cm);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m7) circle (0.25cm);
+  \draw[blue!40, thick, decoration={snake}, decorate] (m8) circle (0.25cm);
+  
+  % Field lines - connect to specific Erudites
+  \draw[<->, dashed, red!30] (elder) -- (e1);
+  \draw[<->, dashed, red!30] (elder) -- (e2);
+  \draw[<->, dashed, red!30] (elder) -- (e3);
+  \draw[<->, dashed, red!30] (elder) -- (e4);
+  \draw[<->, dashed, red!30] (elder) -- (e5);
+  \draw[<->, dashed, red!30] (elder) -- (e6);
+  \draw[<->, dashed, red!30] (elder) -- (e7);
+  \draw[<->, dashed, red!30] (elder) -- (e8);
+  
+  \draw[<->, dashed, blue!30] (mentor) -- (m1);
+  \draw[<->, dashed, blue!30] (mentor) -- (m2);
+  \draw[<->, dashed, blue!30] (mentor) -- (m3);
+  \draw[<->, dashed, blue!30] (mentor) -- (m4);
+  \draw[<->, dashed, blue!30] (mentor) -- (m5);
+  \draw[<->, dashed, blue!30] (mentor) -- (m6);
+  \draw[<->, dashed, blue!30] (mentor) -- (m7);
+  \draw[<->, dashed, blue!30] (mentor) -- (m8);
+  
+  % Connect data to field system with explicit coordinates
+  \draw[->, dashed] (params) -- (3,-1.2);
+  \draw[->, dashed] (params) -- (9,-1.2);
 
 \end{tikzpicture}
 \caption{Overview of the field-mass orbital encoding and decoding process. Data is transformed into parameters defining the field mass distribution of Erudite entities. Elder and Mentor frames exist as independent reference systems that do not interact. The precise field mass distribution enables exact reconstruction of the original data.}
@@ -250,23 +288,21 @@ This property makes field-mass encoding particularly valuable for massive datase
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}
-  % Define axes
-  \begin{axis}[
-    width=12cm,
-    height=8cm,
-    xlabel={Data Size (GB)},
-    ylabel={Storage Required (GB)},
-    xmin=0, xmax=110,
-    ymin=0, ymax=110,
-    xtick={0,20,40,60,80,100},
-    ytick={0,20,40,60,80,100},
-    legend pos=north west,
-    grid=both,
-    grid style={line width=.1pt, draw=gray!10},
-    major grid style={line width=.2pt,draw=gray!50},
-    axis lines=middle
-  ]
+\begin{axisfigure}[
+  width=12cm,
+  height=8cm,
+  xlabel={Data Size (GB)},
+  ylabel={Storage Required (GB)},
+  xmin=0, xmax=110,
+  ymin=0, ymax=110,
+  xtick={0,20,40,60,80,100},
+  ytick={0,20,40,60,80,100},
+  legend pos=north west,
+  grid=both,
+  grid style={line width=.1pt, draw=gray!10},
+  major grid style={line width=.2pt,draw=gray!50},
+  axis lines=middle
+]
   
   % Raw storage (linear)
   \addplot[color=red,thick,domain=0:100,samples=100]{x};
@@ -276,26 +312,25 @@ This property makes field-mass encoding particularly valuable for massive datase
   \addplot[color=blue,thick,domain=0:100,samples=100]{0.25*x};
   \addlegendentry{Conventional Compression (4:1)}
   
-  % Orbital encoding (logarithmic growth)
-  \addplot[color=green!60!black,thick,domain=0:100,samples=100]{2*ln(x+1) + 0.5*x^(1/3)};
-  \addlegendentry{Orbital Encoding}
+  % Field-mass encoding (logarithmic growth)
+  \addplot[color=green!60!black,thick,domain=0:100,samples=100]{1.5*ln(x+1) + 0.4*x^(1/3)};
+  \addlegendentry{Field-Mass Encoding}
   
   % Add points for specific dataset sizes
   \addplot[color=black,only marks,mark=*] coordinates {
     (10, 10)
     (10, 2.5)
-    (10, 1.2)
+    (10, 0.9)
     (50, 50)
     (50, 12.5)
-    (50, 3.1)
+    (50, 2.6)
     (100, 100)
     (100, 25)
-    (100, 4.7)
+    (100, 3.8)
   };
   
-  \end{axis}
-\end{tikzpicture}
-\caption{Storage efficiency comparison between raw data storage, conventional compression, and orbital encoding. As data size increases, orbital encoding demonstrates logarithmic-like growth in storage requirements compared to the linear growth of conventional approaches.}
+\end{axisfigure}
+\caption{Storage efficiency comparison between raw data storage, conventional compression, and field-mass encoding. As data size increases, field-mass encoding demonstrates logarithmic-like growth in storage requirements compared to the linear growth of conventional approaches.}
 \label{fig:compression_comparison}
 \end{figure}
 
@@ -403,13 +438,13 @@ This property enables adaptive reconstruction based on available computational r
   \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (original) at (0,0) {Original Data};
   
   % Level 1 reconstruction (Low resolution field masses)
-  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level1) at (4,0) {Low Resolution\\Field Masses\\(Coarse Structure)};
+  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level1) at (4,0) {Low Resolution Field Masses (Coarse Structure)};
   
   % Level 2 reconstruction (Medium resolution field masses)
-  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level2) at (8,0) {Medium Resolution\\Field Masses\\(Intermediate Detail)};
+  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level2) at (8,0) {Medium Resolution Field Masses (Intermediate Detail)};
   
   % Level 3 reconstruction (Full resolution field masses)
-  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level3) at (12,0) {Full Resolution\\Field Masses\\(Complete Detail)};
+  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level3) at (12,0) {Full Resolution Field Masses (Complete Detail)};
   
   % Reconstruction quality indicators
   \node[below] at (level1.south) {Fidelity: 72\%};
@@ -427,14 +462,14 @@ This property enables adaptive reconstruction based on available computational r
   \draw[->,thick] (level1) -- (level2);
   \draw[->,thick] (level2) -- (level3);
   
-  % Frame indicators (reference frames stay constant)
-  \draw[<->, dashed] ($(original.north) + (0,0.8)$) -- node[above] {Elder Reference Frame $\mathcal{F}_E$ (fixed)} ($(level3.north) + (0,0.8)$);
-  \draw[<->, dashed] ($(original.south) + (0,-0.8)$) -- node[below] {Mentor Reference Frame $\mathcal{F}_M$ (fixed)} ($(level3.south) + (0,-0.8)$);
+  % Frame indicators (reference frames stay constant) - using explicit coordinates
+  \draw[<->, dashed] (0,2) -- node[above] {Elder Reference Frame $\mathcal{F}_E$ (fixed)} (12,2);
+  \draw[<->, dashed] (0,-2) -- node[below] {Mentor Reference Frame $\mathcal{F}_M$ (fixed)} (12,-2);
   
   % Field mass resolution labels
-  \node[above, text width=3cm, align=center] at (2,0) {Field Masses\\$\mathcal{M}_{\mathcal{E}}^{(r=1)}$};
-  \node[above, text width=3cm, align=center] at (6,0) {Field Masses\\$\mathcal{M}_{\mathcal{E}}^{(r=2)}$};
-  \node[above, text width=3cm, align=center] at (10,0) {Field Masses\\$\mathcal{M}_{\mathcal{E}}^{(r=3)}$};
+  \node[above, text width=3cm, align=center] at (2,0) {Field Masses $\mathcal{M}_{\mathcal{E}}^{(r=1)}$};
+  \node[above, text width=3cm, align=center] at (6,0) {Field Masses $\mathcal{M}_{\mathcal{E}}^{(r=2)}$};
+  \node[above, text width=3cm, align=center] at (10,0) {Field Masses $\mathcal{M}_{\mathcal{E}}^{(r=3)}$};
   
 \end{tikzpicture}
 \caption{Progressive data reconstruction using field-mass parameters at increasing resolutions. Unlike hierarchical approaches, both Elder and Mentor reference frames remain fixed as independent coordinate systems. Reconstruction fidelity increases with field mass resolution, with all information content contained within the Erudite field masses distributed in both reference frames.}
