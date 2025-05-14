@@ -1,16 +1,31 @@
-% Chapter summary template for consistent chapter endings
+% Chapter Summary Template
+% A consistent format for summarizing key points at the end of each chapter
+% Usage: \chaptersummary{Title}{Key Points}{Core Insights}
+% Where:
+%   - Title is the summary title
+%   - Key Points is a bullet list of main concepts
+%   - Core Insights is a numbered list of takeaways
 
 \newcommand{\chaptersummary}[3]{%
-    \begin{tcolorbox}[
-        colback=blue!5,
-        colframe=blue!40!black,
-        title=Chapter Summary: #1,
-        sharp corners,
-        boxrule=0.5pt
-    ]
-    \textbf{Key Concepts:} #2
-    
-    \vspace{0.5em}
-    \textbf{Key Takeaways:} #3
-    \end{tcolorbox}
+  \begin{tcolorbox}[
+    colback=ElderLight!10!white,
+    colframe=ElderMid,
+    arc=0mm,
+    title={\large\textbf{Chapter Summary: #1}},
+    fonttitle=\sffamily\bfseries,
+    boxrule=0.5mm,
+    enhanced,
+    breakable,
+    top=2mm,
+    bottom=2mm
+  ]
+  
+  \textbf{Key Points:}
+  #2
+  
+  \vspace{0.5em}
+  \textbf{Core Insights:}
+  #3
+  
+  \end{tcolorbox}
 }

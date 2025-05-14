@@ -1,18 +1,57 @@
-# LaTeX build artifacts
+# LaTeX compilation artifacts
 *.aux
 *.bbl
 *.bcf
 *.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
 *.log
+*.lot
 *.out
+*.pdf
+*.ps
 *.run.xml
+*.synctex
 *.synctex.gz
 *.toc
+*.xdv
 
-# Build directory
-build/artifacts/
+# Bibliography generation
+*.brf
 
-# Temporary files
+# Build directory contents except .gitkeep
+build/*
+!build/.gitkeep
+!build/pdf/
+build/pdf/*
+!build/pdf/.gitkeep
+
+# Replit specific
+.replit
+replit.nix
+
+# Backup files
 *~
+*.backup
 *.bak
-*.tmp
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
