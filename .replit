@@ -16,6 +16,10 @@ author = "agent"
 task = "workflow.run"
 args = "latex_compilation"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "visualization_server"
+
 [[workflows.workflow]]
 name = "latex_compilation"
 author = "agent"
@@ -31,6 +35,7 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd assets/web && python -m http.server 5000"
+waitForPort = 5000
 
 [deployment]
 run = ["sh", "-c", "pdflatex -interaction=nonstopmode main.tex"]
