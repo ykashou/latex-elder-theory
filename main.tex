@@ -53,6 +53,28 @@
 % Include math macros
 \input{macros/math_macros.tex}
 
+% Define the unit counter (between part and chapter)
+\newcounter{unit}
+\renewcommand{\theunit}{\Roman{unit}}
+\newcommand{\unitname}{Unit}
+
+% Define the unit command
+\newcommand{\unit}[1]{%
+    \refstepcounter{unit}%
+    \cleardoublepage%
+    {\centering\normalfont\Large\bfseries\color{DarkSkyBlue}%
+    \vspace*{20pt}%
+    {\fontsize{36}{40}\selectfont \unitname~\theunit}\\[10pt]%
+    {\fontsize{24}{30}\selectfont #1}\\[20pt]%
+    \hrule\vspace{50pt}}%
+    \addcontentsline{toc}{unit}{\protect\numberline{\theunit}#1}%
+}
+
+% Add unit to the TOC format
+\makeatletter
+\newcommand*\l@unit{\@dottedtocline{0}{0em}{2.5em}}
+\makeatother
+
 % Set up fancy chapter headings
 \titleformat{\chapter}[display]
     {\normalfont\huge\bfseries}
@@ -131,26 +153,14 @@
 \part{Theory}
 
 %%% I. FOUNDATION LAYER %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit I: Foundation Layer}{}{}}
-\begin{center}
-\Large\bfseries Unit I: Foundation Layer
-\end{center}
-\vspace{1em}
+\unit{Foundation Layer}
 % Starting with a concrete example followed by the abstract mathematical foundation and vocabulary
 \input{chapters/part1_theory/core_concepts/concrete_example.tex} % Concrete example of Elder Theory in practice
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_spaces.tex} % Introduction to Elder Spaces
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_topology.tex} % Introduction to Elder Topology (Realization Mapping)
 
 %%% II. CORE MATHEMATICAL FRAMEWORK %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit II: Core Mathematical Framework}{}{}}
-\begin{center}
-\Large\bfseries Unit II: Core Mathematical Framework
-\end{center}
-\vspace{1em}
+\unit{Core Mathematical Framework}
 % Theoretical foundation and mathematical basis
 \input{chapters/part1_theory/functions_and_geometry/heliomorphic_functions.tex} % Formal definition of heliomorphic functions
 \input{chapters/part1_theory/functions_and_geometry/elder_manifold.tex} % Elder Manifold - theoretical foundation
@@ -160,13 +170,7 @@
 \input{chapters/part1_theory/functions_and_geometry/gradient_topology.tex} % Gradient Topology in the Elder Heliosystem
 
 %%% III. HIERARCHICAL LEARNING STRUCTURE %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit III: Hierarchical Learning Structure}{}{}}
-\begin{center}
-\Large\bfseries Unit III: Hierarchical Learning Structure
-\end{center}
-\vspace{1em}
+\unit{Hierarchical Learning Structure}
 % System components and their interactions
 \input{chapters/part1_theory/functions_and_geometry/hierarchical_knowledge_architecture.tex} % Complete System Architecture with Elder-Mentor-Erudite Overview
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_orbital_mechanics.tex} % Elder Orbital Mechanics with hierarchical momentum transfer
