@@ -26,7 +26,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "mkdir -p output && pdflatex -interaction=nonstopmode -output-directory=output main.tex && biber --output-directory output main && pdflatex -interaction=nonstopmode -output-directory=output main.tex && pdflatex -interaction=nonstopmode -output-directory=output main.tex && cp output/main.pdf output/elder_arcane_realization.pdf && echo \"Compilation complete. PDF is available in the output directory.\""
+args = "mkdir -p build/pdf && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && biber --output-directory build/pdf main && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf && echo \"Compilation complete. PDF is available in the build/pdf directory.\""
 
 [[workflows.workflow]]
 name = "visualization_server"
@@ -34,8 +34,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd visualizations && python -m http.server 5000"
-waitForPort = 5000
+args = "cd assets/web && python -m http.server 5000"
 
 [deployment]
 run = ["sh", "-c", "pdflatex -interaction=nonstopmode main.tex"]
