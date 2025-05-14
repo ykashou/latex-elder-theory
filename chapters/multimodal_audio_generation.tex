@@ -114,7 +114,9 @@ where $\mathcal{F}_i(t)$ represents the feature salience for Mentor $i$ at time 
 
 The optimized entity state configuration for multimodal audio generation includes:
 
-\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Extended Entity State for Multimodal Processing, fonttitle=\bfseries]
+\begin{figure}[h]
+\begin{center}
+\begin{minipage}{0.95\textwidth}
 \begin{verbatim}
 // MultimodalEntityState extends the optimized entity state
 // for cross-modal feature processing
@@ -141,7 +143,10 @@ type MultimodalEntityState struct {
     // Total: 29B (base) + 24B (multimodal) = 53B per entity
 }
 \end{verbatim}
-\end{tcolorbox}
+\end{minipage}
+\caption{Extended Entity State for Multimodal Processing}
+\end{center}
+\end{figure}
 
 \subsection{Modal Coupling Tensors}
 
@@ -163,7 +168,9 @@ This representation enables efficient storage and computation, as only non-zero 
 
 For high-fidelity audio generation, the system performs phase-based feature selection to determine which multimodal features influence the current audio frame:
 
-\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Multimodal Feature Selection, fonttitle=\bfseries]
+\begin{figure}[h]
+\begin{center}
+\begin{minipage}{0.95\textwidth}
 \begin{verbatim}
 // SelectActiveFeatures determines which multimodal features are active
 // based on the current Elder phase
@@ -194,11 +201,13 @@ func SelectActiveFeatures(elderPhase float32, features []FeatureVector) []bool {
         AdjustThresholds(activeCount)
         return SelectActiveFeatures(elderPhase, features)
     }
-    
-    return activeFeatures
-}
 \end{verbatim}
-\end{tcolorbox}
+\end{minipage}
+\caption{Multimodal Feature Selection Algorithm}
+\end{center}
+\end{figure}
+    
+
 
 \subsection{Cross-Modal Audio Generation Flow}
 
