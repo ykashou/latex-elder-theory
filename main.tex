@@ -109,14 +109,21 @@
 % Nomenclature section
 \input{nomenclature.tex}
 
+% Notation guide
+\input{chapters/notation_guide.tex}
+
 % Glossary of terms
 \input{glossary.tex}
+
+% Section roadmaps
+\input{chapters/section_roadmaps.tex}
 
 \part{Theory}
 
 %%% I. FOUNDATION LAYER %%%
 \section*{I. Foundation Layer}
-% Starting with the abstract mathematical foundation and vocabulary
+% Starting with a concrete example followed by the abstract mathematical foundation and vocabulary
+\input{chapters/concrete_example.tex} % Concrete example of Elder Theory in practice
 \input{chapters/introduction_to_elder_spaces.tex} % Introduction to Elder Spaces
 \input{chapters/introduction_to_elder_topology.tex} % Introduction to Elder Topology (Realization Mapping)
 
@@ -171,6 +178,7 @@
 \input{chapters/audio_understanding.tex} % Audio Understanding at the Mentor Level
 \input{chapters/multimodal_audio_generation.tex} % Multimodal Enriched Audio Generation
 \input{chapters/elder_activation_functions.tex} % Elder Heliosystem Activation Functions
+\input{chapters/additional_domain_applications.tex} % Applications beyond audio processing
 
 \part{Experiment}
 
