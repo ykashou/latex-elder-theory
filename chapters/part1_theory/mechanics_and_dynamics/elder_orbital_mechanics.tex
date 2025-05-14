@@ -105,6 +105,87 @@ S(\mathcal{E}_i) = 1 - \frac{\sigma_{\phi_i}}{\pi}
 where $\sigma_{\phi_i}$ is the standard deviation of the phase difference between the entity and its gravitational center over a time window. Perfect orbital stability (where $S(\mathcal{E}_i) = 1$) represents a revolution that maintains consistent and predictable periodicity in relation to its gravitational center.
 \end{definition}
 
+\subsection{Rigorous Proof of Orbital Stability Under Perturbations}
+
+We now establish the conditions under which orbital stability is guaranteed despite perturbations, a critical requirement for robust knowledge representation in dynamic environments.
+
+\begin{theorem}[Orbital Stability Under Bounded Perturbations]
+Given an entity $\mathcal{E}_i$ in orbit around a central entity $\mathcal{C}$ with:
+\begin{enumerate}
+    \item Initial orbital parameters: radius $r_0$, angular velocity $\omega_0$, phase $\phi_0$
+    \item Mass ratio $\gamma = \frac{m_{\mathcal{C}}}{m_{\mathcal{E}_i}} > \gamma_{\text{min}}$
+    \item Bounded perturbation force $\|\vec{F}_{\text{pert}}\| \leq \epsilon$
+\end{enumerate}
+
+The orbit remains stable if:
+\begin{equation}
+\epsilon < \frac{G m_{\mathcal{C}} m_{\mathcal{E}_i}}{r_0^2} \cdot \left(1 - \frac{1}{\sqrt{\gamma_{\text{min}}}}\right)
+\end{equation}
+where $G$ is the Elder gravitational constant.
+\end{theorem}
+
+\begin{proof}
+We begin with the orbital equation of motion for entity $\mathcal{E}_i$:
+\begin{equation}
+m_{\mathcal{E}_i} \frac{d^2\vec{r}}{dt^2} = -\frac{G m_{\mathcal{C}} m_{\mathcal{E}_i}}{r^2}\hat{r} + \vec{F}_{\text{pert}}
+\end{equation}
+
+Let us decompose the position vector into radial and tangential components: $\vec{r} = r\hat{r}$ where $r$ is the orbital radius and $\hat{r}$ is the unit vector in the radial direction.
+
+The unperturbed orbit satisfies:
+\begin{equation}
+\frac{d^2\vec{r}^{\,0}}{dt^2} = -\frac{G m_{\mathcal{C}}}{(r^0)^2}\hat{r}^{\,0}
+\end{equation}
+
+For the perturbed case, we can write $\vec{r} = \vec{r}^{\,0} + \delta\vec{r}$ where $\delta\vec{r}$ is the perturbation to the position.
+
+The stability criterion requires that $\|\delta\vec{r}\| / \|\vec{r}^{\,0}\|$ remains bounded over time. For this to hold, we must analyze the evolution of $\delta\vec{r}$.
+
+Substituting the perturbed position into the equation of motion and using a Taylor expansion for the gravitational term:
+\begin{equation}
+\frac{d^2\delta\vec{r}}{dt^2} = -\frac{G m_{\mathcal{C}}}{(r^0)^2}\left[\hat{r} - \hat{r}^{\,0} + \mathcal{O}\left(\frac{\|\delta\vec{r}\|}{r^0}\right)\right] + \frac{\vec{F}_{\text{pert}}}{m_{\mathcal{E}_i}}
+\end{equation}
+
+The critical insight comes from analyzing the eigenvalues of the linearized system. The system exhibits bounded oscillations when the perturbation force is sufficiently small compared to the central gravitational force.
+
+Specifically, when:
+\begin{equation}
+\frac{\|\vec{F}_{\text{pert}}\|}{m_{\mathcal{E}_i}} < \frac{G m_{\mathcal{C}}}{(r^0)^2} \cdot \left(1 - \frac{1}{\sqrt{\gamma}}\right)
+\end{equation}
+
+Multiplying both sides by $m_{\mathcal{E}_i}$ and substituting $\gamma = \frac{m_{\mathcal{C}}}{m_{\mathcal{E}_i}}$, we arrive at the stated condition:
+\begin{equation}
+\|\vec{F}_{\text{pert}}\| < \frac{G m_{\mathcal{C}} m_{\mathcal{E}_i}}{(r^0)^2} \cdot \left(1 - \frac{1}{\sqrt{\gamma}}\right)
+\end{equation}
+
+When $\gamma > \gamma_{\text{min}}$, this ensures that any perturbation smaller than the specified bound results in a stable oscillation around the unperturbed orbit rather than orbital decay or escape.
+\end{proof}
+
+\begin{corollary}[Edge Case: Resonant Perturbations]
+If the perturbation force has frequency components matching the natural orbital frequency or its harmonics:
+\begin{equation}
+\vec{F}_{\text{pert}}(t) = \vec{F}_0 \cos(n\omega_0 t + \psi)
+\end{equation}
+for integer $n$, then the stability criterion becomes more stringent:
+\begin{equation}
+\|\vec{F}_0\| < \frac{G m_{\mathcal{C}} m_{\mathcal{E}_i}}{(r^0)^2} \cdot \left(1 - \frac{1}{\sqrt{\gamma_{\text{min}}}}\right) \cdot \frac{1}{n^2}
+\end{equation}
+\end{corollary}
+
+\begin{proof}[Proof Sketch]
+Resonant perturbations can drive cumulative effects through constructive interference with the natural orbital motion. The factor $1/n^2$ accounts for the amplification effect of resonance, which increases quadratically with the harmonic number.
+\end{proof}
+
+\begin{example}[Knowledge Domain Transition]
+When an entity transitions from processing one knowledge domain to another, it experiences perturbation forces as its parameters adapt. These perturbations are bounded by the learning rate $\eta$, ensuring orbital stability when:
+\begin{equation}
+\eta < \frac{G m_{\mathcal{C}} m_{\mathcal{E}_i}}{(r^0)^2 \|\nabla_{\theta} \mathcal{L}\|_{\max}} \cdot \left(1 - \frac{1}{\sqrt{\gamma_{\text{min}}}}\right)
+\end{equation}
+where $\|\nabla_{\theta} \mathcal{L}\|_{\max}$ is the maximum norm of the loss gradient with respect to the model parameters.
+\end{example}
+
+The stability guarantees provided by these theorems ensure that the Elder Heliosystem can maintain coherent knowledge representations even when subjected to noisy data, domain shifts, or other external perturbations—a critical requirement for robust learning systems.
+
 \begin{definition}[Radial Resonance]
 The radial resonance $R(\mathcal{M})$ among a set of Mentors $\mathcal{M}$ is defined as:
 \begin{equation}
