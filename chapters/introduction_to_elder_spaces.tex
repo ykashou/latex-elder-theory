@@ -2,7 +2,7 @@
 
 \section{Basic Definitions}
 
-The Elder space, denoted by $\elder{d}$, is a mathematical structure that generalizes traditional vector spaces. It incorporates the concept of arcane operations, allowing for a richer algebraic structure \cite{elder1995foundations}. The theory was further developed in the groundbreaking work of Chen \cite{chen2005realization}, which established the connection between Elder spaces and complex systems analysis.
+The Elder space, denoted by $\elder{d}$, is a mathematical structure that generalizes traditional vector spaces. It incorporates advanced structural operations, allowing for a richer algebraic structure \cite{elder1995foundations}. The theory was further developed in the groundbreaking work of Chen \cite{chen2005realization}, which established the connection between Elder spaces and complex systems analysis.
 
 \begin{definition}[Elder Space]
 An Elder space $\elder{d}$ of dimension $d$ is a set equipped with:
@@ -18,9 +18,9 @@ satisfying a set of axioms that generalize those of a vector space.
 The Elder-Mentor-Erudite system, which we will explore more fully in Chapter 3, operates within Elder spaces. The parameter spaces $\mentorparams$ and $\eruditeparams$ can be embedded into $\elder{d}$ through appropriate tensor mappings.
 \end{remark}
 
-\section{Arcane Elements}
+\section{Elder Structural Elements}
 
-The fundamental objects in an Elder space are arcane elements, denoted by $\arcane{n}$. These elements serve as the building blocks for more complex structures.
+The fundamental objects in an Elder space are structural elements, denoted by $\elderstructure{n}$. These elements serve as the building blocks for more complex structures.
 
 \begin{figure}[htbp]
 \centering
@@ -30,7 +30,7 @@ The fundamental objects in an Elder space are arcane elements, denoted by $\arca
 {\Large Elder Space $\elder{d}$} \quad $\xrightarrow{\realization{X}}$ \quad {\Large $L^2(X)$}
 \vspace{1cm}
 
-\textbf{Arcane Elements:} $\arcane{1}, \arcane{2}, \ldots, \arcane{d}$
+\textbf{Structural Elements:} $\elderstructure{1}, \elderstructure{2}, \ldots, \elderstructure{d}$
 
 \vspace{0.5cm}
 \end{minipage}}
@@ -41,7 +41,7 @@ The fundamental objects in an Elder space are arcane elements, denoted by $\arca
 \begin{theorem}[Spectral Decomposition]
 Every element $x \in \elder{d}$ admits a unique spectral decomposition:
 \begin{equation}
-x = \sum_{i=1}^{d} \lambda_i \arcane{i}
+x = \sum_{i=1}^{d} \lambda_i \elderstructure{i}
 \end{equation}
 where $\lambda_i$ are the spectral coefficients of $x$.
 \end{theorem}
@@ -49,9 +49,9 @@ where $\lambda_i$ are the spectral coefficients of $x$.
 \begin{proof}
 Let $x \in \elder{d}$ be arbitrary. We can construct the coefficients $\lambda_i$ by applying the Elder projection operators $P_i : \elder{d} \to \mathbb{R}$ defined by:
 \begin{equation}
-P_i(x) = \text{tr}(x \star \arcane{i}^{-1})
+P_i(x) = \text{tr}(x \star \elderstructure{i}^{-1})
 \end{equation}
-where $\text{tr}$ is the Elder trace function. The properties of the trace ensure that $P_i(\arcane{j}) = \delta_{ij}$ (the Kronecker delta), which establishes the uniqueness of the decomposition \cite{yang2007elder}.
+where $\text{tr}$ is the Elder trace function. The properties of the trace ensure that $P_i(\elderstructure{j}) = \delta_{ij}$ (the Kronecker delta), which establishes the uniqueness of the decomposition \cite{yang2007elder}.
 \end{proof}
 
 \section{Elder Dynamics and Learning}
@@ -81,7 +81,7 @@ This hierarchical structure makes Elder spaces particularly suited for modeling 
 The algebraic structure of Elder spaces exhibits several important properties that distinguish it from classical vector spaces.
 
 \begin{proposition}
-The arcane product $\star$ satisfies the following properties:
+The Elder structural product $\star$ satisfies the following properties:
 \begin{enumerate}
     \item Distributivity over Elder addition: $(x \oplus y) \star z = (x \star z) \oplus (y \star z)$
     \item Associativity: $(x \star y) \star z = x \star (y \star z)$
@@ -89,4 +89,4 @@ The arcane product $\star$ satisfies the following properties:
 \end{enumerate}
 \end{proposition}
 
-However, unlike standard vector spaces, the arcane product is generally non-commutative, meaning $x \star y \neq y \star x$. This non-commutativity is crucial for capturing the hierarchical nature of the Elder-Mentor-Erudite interactions in enriched audio processing.
+However, unlike standard vector spaces, the Elder structural product is generally non-commutative, meaning $x \star y \neq y \star x$. This non-commutativity is crucial for capturing the hierarchical nature of the Elder-Mentor-Erudite interactions in enriched audio processing.
