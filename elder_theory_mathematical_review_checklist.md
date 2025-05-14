@@ -3,7 +3,7 @@
 | Category | Task | Priority | Status | Description |
 |----------|------|----------|--------|-------------|
 | **Core Mathematical Foundations** | | | | |
-| | Formalize Elder-Mentor-Erudite mass ratio requirements | High | Pending | Establish precise bounds on mass ratios needed for system stability (e.g., m₁/m₂ > 100) with mathematical justification |
+| | Derive Elder-Mentor-Erudite mass ratio requirements | High | Pending | Demonstrate how optimal mass ratios emerge naturally from acquired system knowledge rather than being arbitrarily prescribed, with mathematical proof of self-organization |
 | | Complete orbital stability proofs | Critical | Pending | Provide rigorous proof of orbital stability under bounded perturbations, including edge cases |
 | | Verify gravitational equations | High | Pending | Ensure all gravitational interaction equations are dimensionally consistent and physically valid |
 | | Derive critical phase thresholds | Medium | Pending | Mathematically derive the phase difference thresholds at which knowledge transfer occurs |
