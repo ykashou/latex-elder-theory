@@ -31,20 +31,10 @@
 \usepackage{mathtools}
 \usepackage{tcolorbox}
 \usepackage{listings}
-\usepackage{abstract}
-
-% Custom abstract styling
-\newenvironment{abstract}{%
-  \small
-  \begin{center}%
-    \bfseries Abstract\vspace{-.5em}\vspace{0pt}%
-  \end{center}%
-  \list{}{%
-    \setlength{\leftmargin}{1.5cm}%
-    \setlength{\rightmargin}{\leftmargin}%
-  }%
-  \item\relax\itshape}
-  {\endlist}
+% Abstract styling through custom environment
+\newenvironment{chapterabstract}
+  {\par\small\itshape}
+  {\par\vspace{1em}}
 
 % Complex number command
 \newcommand{\C}{\mathbb{C}}
@@ -212,6 +202,7 @@
 \input{chapters/part1_theory/loss_functions/elder_activation_functions.tex} % Elder Heliosystem Activation Functions
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex} % Elder Training Loop - from Elder Manifold to Magefiles
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_resonance_algorithm.tex} % Elder Heliosystem Resonance Algorithm
+\input{chapters/part1_theory/mechanics_and_dynamics/data_mass_orbital_disruption.tex} % Data-Mass Coupling and Autonomous Learning
 
 %%% V. THEORETICAL UNIFICATION AND CLOSURE %%%
 \unit{Theoretical Unification and Closure}
