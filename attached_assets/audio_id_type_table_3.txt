@@ -1,0 +1,24 @@
+## Elder Audio Signal Types (Level 3: High-Level Abstractions)
+
+| ID      | Type Name                | Description                                         | Domain ID | Parent Type |
+|---------|--------------------------|-----------------------------------------------------|-----------|-------------|
+| 0x100001 | SemioticAudioUnit       | Meaning-bearing audio unit                          | 7         | 0x14        |
+| 0x100002 | NarrativeAudioArc       | Temporal development of meaning                     | 7         | 0x15        |
+| 0x100003 | CrossModalAssociation   | Connection to non-auditory modalities               | 7         | 0x14        |
+| 0x100004 | IntertextualReference   | Connection to other audio contexts                  | 7         | 0x14        |
+| 0x100005 | AestheticJudgment       | Quality or appeal assessment                        | 7         | 0x14        |
+| 0x100006 | CulturalSignifier       | Socio-cultural meaning extraction                   | 7         | 0x14        |
+| 0x100007 | TemporalCohesion        | Continuity and coherence over time                  | 7         | 0x15        |
+| 0x100008 | IntentionRecognition    | Purpose or intent of sound creator                  | 7         | 0x14        |
+| 0x100009 | AuditoryAffordance      | Action possibilities suggested by sound             | 7         | 0x14        |
+| 0x10000A | ListenerState           | Effect on listener's cognitive/emotional state      | 7         | 0x14        |
+| 0x10000B | AttentionalFocus        | Attention-directing properties                      | 7         | 0x07        |
+| 0x10000C | MemoryAssociation       | Connection to episodic or semantic memory           | 7         | 0x14        |
+| 0x10000D | AudioSymbol             | Symbolic representation in sound                    | 7         | 0x14        |
+| 0x10000E | AudioMetaphor           | Metaphorical content in sound                       | 7         | 0x14        |
+| 0x10000F | AudioIrony              | Contradictory or subversive meaning                 | 7         | 0x14        |
+| 0x100010 | SoundIdentity           | Unique identifying characteristics                  | 7         | 0x14        |
+| 0x100011 | HyperresonantForm       | Elder-specific knowledge representation             | 8         | 0x12        |
+| 0x100012 | PhaseSynchronicity      | Global pattern of Elder entity alignment            | 8         | 0x13        |
+| 0x100013 | NodalConvergence        | Critical points in Elder knowledge space            | 8         | 0x12        |
+| 0x100014 | ElderUniversal          | Cross-domain invariant form                         | 9         | 0x100011    |

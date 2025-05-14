@@ -1,0 +1,25 @@
+## Elder Audio Signal Types (Level 1: Base Categories)
+
+| ID   | Type Name           | Description                                        | Domain ID | Dimensionality |
+|------|--------------------|----------------------------------------------------|-----------|----------------|
+| 0x01 | RawPCM             | Time-domain audio samples                          | 0         | 1D per channel |
+| 0x02 | SpectralMagnitude  | FFT magnitude components                           | 0         | 1D             |
+| 0x03 | SpectralPhase      | FFT phase components                               | 0         | 1D             |
+| 0x04 | MelSpectrogram     | Mel-scaled spectral representation                 | 0         | 2D             |
+| 0x05 | MFCC               | Mel-frequency cepstral coefficients                | 0         | 1D             |
+| 0x06 | ChromaFeatures     | Pitch class distribution                           | 0         | 1D             |
+| 0x07 | Onset              | Transient onset detection                          | 0         | Sparse 1D      |
+| 0x08 | BeatPositions      | Temporal beat markers                              | 0         | Sparse 1D      |
+| 0x09 | Loudness           | Perceptual loudness measurement                    | 0         | 1D             |
+| 0x0A | Pitch              | Fundamental frequency estimation                   | 0         | 1D             |
+| 0x0B | Harmonics          | Harmonic partial series                            | 0         | 2D             |
+| 0x0C | SpectralCentroid   | Spectral center of mass                            | 0         | 1D             |
+| 0x0D | SpectralRolloff    | Spectral energy distribution                       | 0         | 1D             |
+| 0x0E | SpectralFlux       | Frame-to-frame spectral change                     | 0         | 1D             |
+| 0x0F | ZeroCrossingRate   | Time-domain zero crossings                         | 0         | 1D             |
+| 0x10 | AutoCorrelation    | Time-domain self-similarity                        | 0         | 1D             |
+| 0x11 | CQT                | Constant-Q transform                               | 0         | 2D             |
+| 0x12 | ElderPhaseSpace    | Elder system phase space representation            | 0         | Variable       |
+| 0x13 | MentorTrajectory   | Mentor orbital trajectory                          | 1         | 2D per Mentor  |
+| 0x14 | EruditeFeatures    | Erudite-extracted features                         | 1         | Variable       |
+| 0x15 | ElderHarmonogram   | Harmonic relationships between entities            | 2         | 2D             |
