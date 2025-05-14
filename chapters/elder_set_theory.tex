@@ -419,13 +419,13 @@ Optimal parameter selection in the Elder Heliosystem should maximize phase coher
 \begin{algorithm}[h]
 \caption{Phase-Coherent Parameter Selection}
 \begin{algorithmic}[1]
-\STATE Initialize parameters $\theta$ randomly
-\STATE Define phase coherence measure $C(\theta)$
-\WHILE{not converged}
-\STATE Compute gradient $\nabla_{\theta} C(\theta)$
-\STATE Update parameters: $\theta \leftarrow \theta + \eta \nabla_{\theta} C(\theta)$
-\ENDWHILE
-\RETURN $\theta$
+\State Initialize parameters $\theta$ randomly
+\State Define phase coherence measure $C(\theta)$
+\While{not converged}
+\State Compute gradient $\nabla_{\theta} C(\theta)$
+\State Update parameters: $\theta \leftarrow \theta + \eta \nabla_{\theta} C(\theta)$
+\EndWhile
+\State \Return $\theta$
 \end{algorithmic}
 \end{algorithm}
 

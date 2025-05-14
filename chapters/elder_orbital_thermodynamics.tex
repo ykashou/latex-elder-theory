@@ -438,19 +438,19 @@ where $\eta$ is the learning rate, $D$ is the diffusion coefficient, $s(\mu_t)$ 
 \begin{algorithm}[h]
 \caption{Elder Reverse Diffusion Learning}
 \begin{algorithmic}[1]
-\STATE Initialize Elder, Mentor, and Erudite entities with random phases
-\STATE Set diffusion coefficient $D$ and learning rate $\eta$
-\WHILE{not converged}
-\STATE Sample batch of data $\{x_i, y_i\}_{i=1}^B$
-\STATE Compute current system microstate $\mu$
-\STATE Elder computes global score component $s_{\text{global}}(\mu)$
-\STATE Each Mentor $j$ computes domain score $s_{\text{domain},j}(\mu)$
-\STATE Each Erudite $j,k$ computes local score $s_{\text{local},j,k}(\mu)$
-\STATE Combine scores: $s(\mu) = s_{\text{global}}(\mu) + \sum_j s_{\text{domain},j}(\mu) + \sum_{j,k} s_{\text{local},j,k}(\mu)$
-\STATE Sample noise $\xi \sim \mathcal{N}(0, I)$
-\STATE Update microstate: $\mu \leftarrow \mu + \eta D s(\mu) + \sqrt{2\eta D} \xi$
-\STATE Update entity phases and magnitudes according to $\mu$
-\ENDWHILE
+\State Initialize Elder, Mentor, and Erudite entities with random phases
+\State Set diffusion coefficient $D$ and learning rate $\eta$
+\While{not converged}
+\State Sample batch of data $\{x_i, y_i\}_{i=1}^B$
+\State Compute current system microstate $\mu$
+\State Elder computes global score component $s_{\text{global}}(\mu)$
+\State Each Mentor $j$ computes domain score $s_{\text{domain},j}(\mu)$
+\State Each Erudite $j,k$ computes local score $s_{\text{local},j,k}(\mu)$
+\State Combine scores: $s(\mu) = s_{\text{global}}(\mu) + \sum_j s_{\text{domain},j}(\mu) + \sum_{j,k} s_{\text{local},j,k}(\mu)$
+\State Sample noise $\xi \sim \mathcal{N}(0, I)$
+\State Update microstate: $\mu \leftarrow \mu + \eta D s(\mu) + \sqrt{2\eta D} \xi$
+\State Update entity phases and magnitudes according to $\mu$
+\EndWhile
 \end{algorithmic}
 \end{algorithm}
 
