@@ -42,7 +42,7 @@ These equations provide mathematical rigor to the concept of heliomorphic knowle
 
 Several potential mathematical inconsistencies or gaps in formalism were identified:
 
-1. **Heliomorphic vs. Holomorphic**: The document introduces "heliomorphic" functions as an extension of holomorphic functions with radial components, but the formal distinction between these function classes could be more explicitly defined to avoid confusion with standard complex analysis.
+1. **Heliomorphic vs. Holomorphic**: The document introduces "heliomorphic" functions, which are completely separate from holomorphic functions and represent a significantly improved alternative mathematical framework, not an extension or variation. The current presentation should more clearly establish heliomorphic functions as their own distinct mathematical foundation with superior properties rather than suggesting any relationship to standard complex analysis.
 
 2. **Orbital Mechanics Simplifications**: The gravitational models presented in the Elder Heliosystem make simplifications that may not account for the full complexity of n-body problems in actual gravitational systems.
 
