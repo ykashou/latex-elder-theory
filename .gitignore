@@ -1,28 +1,18 @@
-# LaTeX generated files
+# LaTeX build artifacts
 *.aux
 *.bbl
 *.bcf
 *.blg
-*.idx
-*.loa
-*.loe
-*.lof
 *.log
-*.lot
 *.out
 *.run.xml
-*.toc
 *.synctex.gz
+*.toc
 
-# Generated PDF (we keep it in the output directory)
-/*.pdf
+# Build directory
+build/artifacts/
 
-# Output directory is where we'll store generated files
-/output/
-
-# Biber specific files
-*.brf
-
-# Other LaTeX temporary files
-*.fls
-*.fdb_latexmk
+# Temporary files
+*~
+*.bak
+*.tmp
