@@ -129,27 +129,27 @@
 
 \part{Theory}
 
-%%% I. FOUNDATION LAYER %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit I: Foundation Layer}{}{}}
-\begin{center}
-\Large\bfseries Unit I: Foundation Layer
-\end{center}
-\vspace{1em}
+% Define titlesec format for units
+\titleformat{\section}[display]
+  {\normalfont\Large\bfseries\filcenter}
+  {Unit \thesection}
+  {0.5em}
+  {}
+
+% Reset section counter for each part
+\setcounter{section}{0}
+
+%%% UNIT I: FOUNDATION LAYER %%%
+\section*{Foundation Layer}
+\addcontentsline{toc}{section}{Unit I: Foundation Layer}
 % Starting with a concrete example followed by the abstract mathematical foundation and vocabulary
 \input{chapters/part1_theory/core_concepts/concrete_example.tex} % Concrete example of Elder Theory in practice
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_spaces.tex} % Introduction to Elder Spaces
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_topology.tex} % Introduction to Elder Topology (Realization Mapping)
 
-%%% II. CORE MATHEMATICAL FRAMEWORK %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit II: Core Mathematical Framework}{}{}}
-\begin{center}
-\Large\bfseries Unit II: Core Mathematical Framework
-\end{center}
-\vspace{1em}
+%%% UNIT II: CORE MATHEMATICAL FRAMEWORK %%%
+\section*{Core Mathematical Framework}
+\addcontentsline{toc}{section}{Unit II: Core Mathematical Framework}
 % Theoretical foundation and mathematical basis
 \input{chapters/part1_theory/functions_and_geometry/heliomorphic_functions.tex} % Formal definition of heliomorphic functions
 \input{chapters/part1_theory/functions_and_geometry/elder_manifold.tex} % Elder Manifold - theoretical foundation
@@ -158,14 +158,9 @@
 \input{chapters/part1_theory/functions_and_geometry/elder_set_theory.tex} % Set-theoretic foundations of Elder Theory
 \input{chapters/part1_theory/functions_and_geometry/gradient_topology.tex} % Gradient Topology in the Elder Heliosystem
 
-%%% III. HIERARCHICAL LEARNING STRUCTURE %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit III: Hierarchical Learning Structure}{}{}}
-\begin{center}
-\Large\bfseries Unit III: Hierarchical Learning Structure
-\end{center}
-\vspace{1em}
+%%% UNIT III: HIERARCHICAL LEARNING STRUCTURE %%%
+\section*{Hierarchical Learning Structure}
+\addcontentsline{toc}{section}{Unit III: Hierarchical Learning Structure}
 % System components and their interactions
 \input{chapters/part1_theory/functions_and_geometry/hierarchical_knowledge_architecture.tex} % Complete System Architecture with Elder-Mentor-Erudite Overview
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_orbital_mechanics.tex} % Elder Orbital Mechanics with hierarchical momentum transfer
@@ -173,14 +168,9 @@
 \input{chapters/part1_theory/mechanics_and_dynamics/gravitational_field_dynamics.tex} % Reframing the system in terms of gravitational fields rather than shells
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_orbital_thermodynamics.tex} % Orbital thermodynamics and reverse diffusion learning
 
-%%% IV. LOSS FUNCTIONS AND TRAINING ALGORITHMS %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit IV: Loss Functions and Training Algorithms}{}{}}
-\begin{center}
-\Large\bfseries Unit IV: Loss Functions and Training Algorithms
-\end{center}
-\vspace{1em}
+%%% UNIT IV: LOSS FUNCTIONS AND TRAINING ALGORITHMS %%%
+\section*{Loss Functions and Training Algorithms}
+\addcontentsline{toc}{section}{Unit IV: Loss Functions and Training Algorithms}
 % The learning mechanisms and algorithms
 \input{chapters/part1_theory/loss_functions/elder_loss.tex} % Elder Loss - Universal Principles
 \input{chapters/part1_theory/loss_functions/mentor_loss.tex} % Mentor Loss - Meta-Knowledge
@@ -189,14 +179,9 @@
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex} % Elder Training Loop - from Elder Manifold to Magefiles
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_resonance_algorithm.tex} % Elder Heliosystem Resonance Algorithm
 
-%%% V. SYSTEM INTEGRATION AND APPLICATIONS %%%
-% Add to TOC as a unit without numbering (between part and section levels)
-\phantomsection % Ensure proper link anchoring
-\addtocontents{toc}{\protect\contentsline{part}{Unit V: System Integration and Applications}{}{}}
-\begin{center}
-\Large\bfseries Unit V: System Integration and Applications
-\end{center}
-\vspace{1em}
+%%% UNIT V: SYSTEM INTEGRATION AND APPLICATIONS %%%
+\section*{System Integration and Applications}
+\addcontentsline{toc}{section}{Unit V: System Integration and Applications}
 % The complete system and its applications
 \input{chapters/part1_theory/applications/model_unification.tex} % Unification of heliomorphic and orbital mechanics models
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_heliosystem_unified.tex} % Comprehensive overview of the Elder Heliosystem as a closed system
