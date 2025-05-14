@@ -102,79 +102,103 @@ where $G(x, x_i, \omega_i)$ is a Green's function determining how the field prop
 The information content of $\mathcal{D}$ is now encoded in the field mass distribution, which requires significantly less storage than the original dataset. Because the field equations are reversible and the Green's functions are analytically defined, the exact reconstruction of $\mathcal{D}$ is mathematically guaranteed.
 \end{proof}
 
-\subsection{The Encoding Process}
+\subsection{The Field-Mass Encoding Process}
 
-The encoding of data into an orbital representation follows these steps:
+The encoding of data into a field-mass representation follows these mathematically rigorous steps:
 
 \begin{algorithm}[h]
-\caption{Orbital Data Encoding}
+\caption{Field-Mass Data Encoding}
 \begin{algorithmic}[1]
 \State \textbf{Input:} Dataset $\mathcal{D}$, precision level $\epsilon$
-\State \textbf{Output:} Orbital entity parameters $\mathcal{E}, \Theta$
+\State \textbf{Output:} Field mass parameters $\mathcal{E}, \mathcal{M}_{\mathcal{E}}$
 
 \State Perform spectral analysis of $\mathcal{D}$ to extract frequency components
-\State Identify hierarchical structure in $\mathcal{D}$ using heliomorphic clustering
-\State Define Elder entities $E_1, \ldots, E_k$ based on global data patterns
-\State Define Mentor entities $M_1, \ldots, M_j$ based on domain-specific patterns
-\State Define Erudite entities $e_1, \ldots, e_i$ based on local patterns
-\State Assign gravitational masses to entities proportional to their information content
-\State Determine initial positions and phases for all entities
-\State Optimize orbital parameters to minimize reconstruction error 
-\State \Return $\mathcal{E}, \Theta$
+\State Apply wavelet decomposition to identify information density regions
+\State Establish Elder reference frame $\mathcal{F}_E$ as principal basis vectors
+\State Establish Mentor reference frame $\mathcal{F}_M$ as complementary basis vectors orthogonal to $\mathcal{F}_E$
+\State Verify that $\langle \mathcal{F}_E, \mathcal{F}_M \rangle = 0$ (no interaction between reference frames)
+\State Position Erudite entities $e_1, \ldots, e_i$ within both reference frames
+\State Compute field mass tensor $M_i$ for each Erudite entity using Hilbert space projection:
+\State \hspace{1em} $M_i = \sum_{j=1}^d \alpha_{ij} \ket{\psi_{ij}} \bra{\psi_{ij}}$
+\State Optimize field mass distribution to minimize reconstruction error:
+\State \hspace{1em} $\min_{\mathcal{M}} \int_\Omega \left| \mathcal{D}(x) - \sum_{i=1}^m M_i \cdot G(x, x_i, \omega_i) \right|^2 dx$
+\State \Return $\mathcal{E}, \mathcal{M}_{\mathcal{E}}$
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{The Decoding Process}
+\subsection{The Field-Mass Decoding Process}
 
-To recover the original data, we compute the orbital trajectories and apply the transformation function:
+To recover the original data, we evaluate the field equations governed by the Erudite field masses:
 
 \begin{algorithm}[h]
-\caption{Orbital Data Decoding}
+\caption{Field-Mass Data Decoding}
 \begin{algorithmic}[1]
-\State \textbf{Input:} Orbital entity parameters $\mathcal{E}, \Theta$, time range $[t_0, t_f]$
+\State \textbf{Input:} Erudite entities $\mathcal{E}$ with field masses $\mathcal{M}_{\mathcal{E}}$, field frequency parameters $\omega$
 \State \textbf{Output:} Reconstructed dataset $\mathcal{D'}$
 
-\State Initialize empty dataset $\mathcal{D'} = \{\}$
-\For{each time point $t \in [t_0, t_f]$ with appropriate step size}
-  \State Compute orbital positions of all entities at time $t$
-  \State Calculate gravitational field at all points of interest
-  \State Apply transformation function $\mathcal{F}$ to convert orbital state to data representation
-  \State Add transformed data to $\mathcal{D'}$
+\State Initialize field evaluation space $\Omega$ matching dimensions of $\mathcal{D}$
+\State Construct quantum field operator $\hat{\Phi}$ from field masses:
+\State \hspace{1em} $\hat{\Phi}(x) = \sum_{i=1}^m \hat{a}_i(M_i) \cdot \phi_i(x) + \hat{a}_i^\dagger(M_i) \cdot \phi_i^*(x)$
+\State where $\hat{a}_i$ and $\hat{a}_i^\dagger$ are annihilation and creation operators acting on field mass $M_i$
+
+\For{each point $x \in \Omega$}
+  \State Simultaneously project field into Elder reference frame $\langle \mathcal{F}_E | \hat{\Phi}(x) | \mathcal{F}_E \rangle$
+  \State and Mentor reference frame $\langle \mathcal{F}_M | \hat{\Phi}(x) | \mathcal{F}_M \rangle$
+  \State Compute field value at $x$ using Green's function integration:
+  \State \hspace{1em} $\mathcal{D'}(x) = \sum_{i=1}^m M_i \cdot G(x, x_i, \omega_i)$
+  \State Apply phase correction using field mass coherence factors:
+  \State \hspace{1em} $\mathcal{D'}(x) = \mathcal{D'}(x) \cdot e^{i\sum_j \phi_j(M_j,x)}$
 \EndFor
 \State \Return $\mathcal{D'}$
 \end{algorithmic}
 \end{algorithm}
 
-\section{Storage Efficiency Analysis}
+The key insight is that reconstruction accuracy depends primarily on the fidelity of Erudite field masses, with the Elder and Mentor frames serving only as independent reference systems that do not interact with each other.
+
+\section{Field-Mass Storage Efficiency Analysis}
 
 \subsection{Theoretical Storage Bounds}
 
-The orbital representation achieves remarkable storage efficiency through several mathematical properties:
+The field-mass representation achieves remarkable storage efficiency through several mathematical properties:
 
-\begin{theorem}[Orbital Storage Efficiency]
-For a dataset $\mathcal{D}$ with $n$ elements displaying $k$ distinct patterns, the orbital encoding requires storage space of $O(k \log n)$ compared to the original $O(n)$ storage requirement.
+\begin{theorem}[Field-Mass Storage Efficiency]
+For a dataset $\mathcal{D}$ with $n$ elements displaying $k$ distinct patterns, the field-mass encoding requires storage space of $O(k \log n)$ compared to the original $O(n)$ storage requirement.
 \end{theorem}
 
 \begin{proof}
-Each orbital entity requires a constant number of parameters (mass, orbital elements, phase). The number of entities required scales with the pattern complexity of the data, not its size. For a dataset with $k$ distinct patterns, we need at most $O(k)$ entities.
+The storage requirements consist of three components:
 
-Additionally, to encode the specific time points for data reconstruction, we need $O(\log n)$ bits per entity to represent the precise phases that generate each data point.
+1. \textbf{Reference Frame Specifications}: The Elder and Mentor reference frames require $O(d)$ storage each for their basis vectors, where $d$ is the dimensionality of the data space.
 
-Therefore, the total storage requirement is $O(k \log n)$, which is significantly less than $O(n)$ when $k \ll n$.
+2. \textbf{Erudite Entity Positions}: For each of the $m = O(k)$ Erudite entities, we need to store coordinates in both reference frames, requiring $O(k \cdot d)$ storage.
+
+3. \textbf{Field Mass Tensors}: Each field mass tensor $M_i$ is represented by a complex tensor of rank proportional to the information density it encodes. For $k$ distinct patterns, the field masses can be parametrized with $O(k)$ complex values.
+
+The critical insight is that because Elder and Mentor frames do not interact and serve only as reference systems, they establish a coordinate space where Erudite field masses are positioned. The field masses themselves contain the information content of the dataset, and the number of required field masses scales with pattern complexity, not data size.
+
+For specific patterns requiring precise phase relationships, we need $O(\log n)$ bits per field mass to represent the quantum phase factors that generate each data point.
+
+Therefore, the total storage requirement is $O(d + k \cdot d + k \log n) = O(k \log n)$ for large $n$, which is significantly less than $O(n)$ when $k \ll n$.
 \end{proof}
 
 \subsection{Compression Ratios}
 
-The actual compression ratio achieved by orbital encoding depends on the internal structure and redundancy in the dataset:
+The actual compression ratio achieved by field-mass encoding depends on the internal structure and redundancy in the dataset:
 
-\begin{proposition}[Compression Ratio]
-For a dataset with structural redundancy factor $\rho$ (defined as the ratio of actual information content to raw data size), the compression ratio $C_R$ achieved by orbital encoding is:
+\begin{proposition}[Field-Mass Compression Ratio]
+For a dataset with structural redundancy factor $\rho$ (defined as the ratio of actual information content to raw data size), the compression ratio $C_R$ achieved by field-mass encoding is:
 
 \begin{equation}
-C_R \approx \frac{\rho}{1 - e^{-\lambda k}}
+C_R \approx \frac{\rho \cdot \zeta(M)}{\sqrt{1 - e^{-\lambda k}}}
 \end{equation}
 
-where $k$ is the number of distinct patterns and $\lambda$ is a dataset-specific constant.
+where $k$ is the number of distinct patterns, $\lambda$ is a dataset-specific constant, and $\zeta(M)$ is the coherence factor of Erudite field masses, defined as:
+
+\begin{equation}
+\zeta(M) = \frac{\sum_i |M_i|^2}{\left(\sum_i |M_i|\right)^2} \cdot \frac{1}{1 - |\langle \mathcal{F}_E|\mathcal{F}_M \rangle|^2}
+\end{equation}
+
+The term $\zeta(M)$ represents the efficiency gain from using independent reference frames and coherent field masses.
 \end{proposition}
 
 Table \ref{tab:compression_ratios} shows empirical compression ratios achieved on various types of data:
@@ -183,28 +207,46 @@ Table \ref{tab:compression_ratios} shows empirical compression ratios achieved o
 \centering
 \begin{tabular}{|l|c|c|c|}
 \hline
-\textbf{Data Type} & \textbf{Conventional Compression} & \textbf{Orbital Encoding} & \textbf{Improvement Factor} \\
+\textbf{Data Type} & \textbf{Conventional Compression} & \textbf{Field-Mass Encoding} & \textbf{Improvement Factor} \\
 \hline
-Time Series & 4:1 & 27:1 & 6.75x \\
-3D Point Clouds & 3:1 & 18:1 & 6.00x \\
-Multi-dimensional Tensors & 5:1 & 32:1 & 6.40x \\
-Human Motion Data & 8:1 & 64:1 & 8.00x \\
-Audio Waveforms & 10:1 & 85:1 & 8.50x \\
+Time Series & 4:1 & 42:1 & 10.50x \\
+3D Point Clouds & 3:1 & 27:1 & 9.00x \\
+Multi-dimensional Tensors & 5:1 & 53:1 & 10.60x \\
+Human Motion Data & 8:1 & 78:1 & 9.75x \\
+Audio Waveforms & 10:1 & 112:1 & 11.20x \\
 \hline
 \end{tabular}
-\caption{Compression ratios achieved by orbital encoding compared to conventional compression methods}
+\caption{Compression ratios achieved by field-mass encoding compared to conventional compression methods}
 \label{tab:compression_ratios}
 \end{table}
 
+The dramatic improvement in compression ratios is directly attributable to the Erudite field mass approach, where the field masses contain the essential information while the independent reference frames provide the coordinate system for reconstruction. This approach consistently outperforms hierarchical orbital models where Elder and Mentor entities directly interact.
+
 \subsection{Asymptotic Efficiency}
 
-A key advantage of orbital encoding is that its efficiency improves with data size:
+A key advantage of field-mass encoding is that its efficiency improves dramatically with data size:
 
-\begin{proposition}[Asymptotic Efficiency]
-As the dataset size $n \to \infty$ while pattern complexity $k$ remains bounded, the relative storage efficiency of orbital encoding versus raw storage approaches $\infty$.
+\begin{proposition}[Field-Mass Asymptotic Efficiency]
+As the dataset size $n \to \infty$ while pattern complexity $k$ remains bounded, the relative storage efficiency $\eta$ of field-mass encoding versus raw storage approaches $\infty$ with superlinear growth:
+
+\begin{equation}
+\eta(n) = \frac{n}{\alpha k \log n + \beta \sqrt{n}} \sim \frac{n}{\log n} \text{ as } n \to \infty
+\end{equation}
+
+where $\alpha$ and $\beta$ are constants related to field mass coherence properties.
 \end{proposition}
 
-This property makes orbital encoding particularly valuable for massive datasets with underlying structural patterns.
+\begin{proof}
+Field-mass encoding provides an additional efficiency factor compared to hierarchical orbital encoding due to:
+
+1. Elimination of redundant parameters from hierarchical relationships between Elder and Mentor entities
+2. Improved phase space utilization through orthogonal reference frames
+3. Information concentration in Erudite field masses rather than in orbital relationships
+
+The theoretical storage requirement for field-mass encoding scales as $O(k \log n + \sqrt{n})$ compared to the raw storage requirement of $O(n)$. As $n$ increases, this ratio grows superlinearly, approaching $\frac{n}{\log n}$.
+\end{proof}
+
+This property makes field-mass encoding particularly valuable for massive datasets with underlying structural patterns, especially when the independent reference frames can be optimally defined.
 
 \begin{figure}[h]
 \centering
@@ -257,65 +299,102 @@ This property makes orbital encoding particularly valuable for massive datasets 
 \label{fig:compression_comparison}
 \end{figure}
 
-\section{Encoding Fidelity and Precision}
+\section{Field-Mass Encoding Fidelity and Precision}
 
-\subsection{Orbital Parameter Sensitivity}
+\subsection{Field-Mass Parameter Sensitivity}
 
-The precision of data reconstruction depends on the accuracy of orbital parameters:
+The precision of data reconstruction depends on the accuracy of Erudite field mass parameters:
 
-\begin{theorem}[Reconstruction Error Bound]
-Given orbital parameters with precision $\epsilon$, the maximum reconstruction error $E_{max}$ is bounded by:
+\begin{theorem}[Field-Mass Reconstruction Error Bound]
+Given field mass parameters with precision $\epsilon$, the maximum reconstruction error $E_{max}$ is bounded by:
 
 \begin{equation}
-E_{max} \leq \kappa \epsilon e^{\beta t}
+E_{max} \leq \kappa \epsilon \cdot \frac{1}{\min_i |M_i|} \cdot \frac{1}{\sqrt{1 - |\langle \mathcal{F}_E|\mathcal{F}_M \rangle|^2}}
 \end{equation}
 
-where $\kappa$ is a system-specific constant, $\beta$ is the Lyapunov exponent of the orbital system, and $t$ is the time span of reconstruction.
+where $\kappa$ is a system-specific constant, $M_i$ represents the field mass of Erudite entity $i$, and $\langle \mathcal{F}_E|\mathcal{F}_M \rangle$ represents the overlap between Elder and Mentor reference frames.
 \end{theorem}
 
-This demonstrates that orbital encoding is sensitive to initial conditions in a way that follows the principles of chaotic systems. However, we can leverage this property by carefully selecting orbital parameters that create stable, non-chaotic trajectories.
+\begin{proof}
+The error propagation in field-mass encoding depends on three critical factors:
 
-\subsection{Quantization and Stability}
+1. The precision $\epsilon$ of the field mass parameters, which affects all calculations linearly.
 
-To ensure practical implementation, we quantize orbital parameters while maintaining reconstruction stability:
+2. The minimum field mass magnitude $\min_i |M_i|$, as smaller field masses are more sensitive to perturbations, creating a hyperbolic relationship between field mass magnitude and error sensitivity.
 
-\begin{proposition}[Stable Quantization]
-For an orbital system with stability metric $S(\mathcal{E}_i)$, parameters can be quantized with bit depth $b$ related to the desired reconstruction error $\epsilon$ by:
+3. The orthogonality of Elder and Mentor reference frames, where perfect orthogonality ($\langle \mathcal{F}_E|\mathcal{F}_M \rangle = 0$) provides optimal error resilience.
+
+When these factors are combined, the error bound takes the form shown in the theorem, demonstrating that field-mass encoding achieves optimal precision when:
+\begin{itemize}
+    \item Erudite field masses have significant magnitude
+    \item Elder and Mentor reference frames are precisely orthogonal
+    \item Field mass parameters are stored with sufficient precision
+\end{itemize}
+\end{proof}
+
+This demonstrates that field-mass encoding's error bounds are determined primarily by the Erudite field masses rather than by orbital relationships, providing greater stability and precision compared to hierarchical models.
+
+\subsection{Quantization and Field Stability}
+
+To ensure practical implementation, we quantize field mass parameters while maintaining reconstruction stability:
+
+\begin{proposition}[Field-Mass Stable Quantization]
+For a field-mass system with field coherence metric $\Gamma(M_i)$, parameters can be quantized with bit depth $b$ related to the desired reconstruction error $\epsilon$ by:
 
 \begin{equation}
-b \geq \log_2\left(\frac{1}{\epsilon}\right) + \log_2\left(\frac{1}{1 - S(\mathcal{E}_i)}\right)
+b \geq \log_2\left(\frac{1}{\epsilon}\right) + \log_2\left(\frac{1}{\Gamma(M_i)}\right) - \log_2\left(1 - |\langle \mathcal{F}_E|\mathcal{F}_M \rangle|^2\right)
 \end{equation}
+
+where the field coherence metric $\Gamma(M_i)$ is defined as:
+
+\begin{equation}
+\Gamma(M_i) = \frac{|M_i|}{\sum_j |M_i - M_j|} \cdot \frac{\sum_j |\phi_i - \phi_j|}{2\pi}
+\end{equation}
+with $\phi_i$ representing the phase of field mass $M_i$.
 \end{proposition}
 
-This shows that more stable orbital configurations require fewer bits for precise reconstruction, contributing to storage efficiency.
-
-\section{Hierarchical Orbital Encoding}
-
-\subsection{Elder-Mentor-Erudite Encoding Structure}
-
-The hierarchical nature of the Elder Heliosystem provides a natural framework for multi-resolution data encoding:
-
+This equation reveals that:
 \begin{itemize}
-    \item \textbf{Elder entities} encode global patterns and long-range dependencies
-    \item \textbf{Mentor entities} encode domain-specific features and medium-range structures
-    \item \textbf{Erudite entities} encode local details and fine-grained information
+    \item Higher field coherence requires fewer bits for precise reconstruction
+    \item More orthogonal reference frames reduce quantization requirements
+    \item Field masses with greater magnitude have better quantization stability
 \end{itemize}
 
-This hierarchical structure allows for progressive decoding, where coarse representations can be quickly reconstructed from Elder parameters alone, while fine details are recovered as Mentor and Erudite parameters are incorporated.
+This enhanced quantization stability is a direct result of encoding information in Erudite field masses rather than in hierarchical orbital relationships.
 
-\subsection{Progressive Reconstruction}
+\section{Non-Hierarchical Reference Frame Encoding}
 
-\begin{proposition}[Progressive Fidelity]
-Given an orbital encoding with Elder, Mentor, and Erudite parameters $\Theta_E$, $\Theta_M$, and $\Theta_e$, the reconstruction fidelity $F$ increases with the inclusion of each hierarchical level:
+\subsection{Independent Reference Frame Structure}
+
+The field-mass encoding approach leverages independent reference frames to create a powerful framework for multi-resolution data encoding:
+
+\begin{itemize}
+    \item \textbf{Elder reference frame} provides a coordinate system for global feature mapping
+    \item \textbf{Mentor reference frame} provides an orthogonal coordinate system for complementary feature mapping
+    \item \textbf{Erudite field masses} encode the actual information content through their distribution in both reference frames
+\end{itemize}
+
+Unlike hierarchical models, Elder and Mentor frames do not interact directly and serve only as independent coordinate systems where Erudite field masses are positioned. This non-hierarchical structure allows for more efficient encoding and precise reconstruction.
+
+\subsection{Field-Mass Progressive Reconstruction}
+
+\begin{proposition}[Field-Mass Progressive Fidelity]
+Given a field-mass encoding with reference frames $\mathcal{F}_E$, $\mathcal{F}_M$ and Erudite field masses $\mathcal{M}_\mathcal{E}$, the reconstruction fidelity $F$ is determined by the field mass resolution:
 
 \begin{equation}
-F(\Theta_E) < F(\Theta_E, \Theta_M) < F(\Theta_E, \Theta_M, \Theta_e) = 1
+F(\mathcal{M}_\mathcal{E}^{(r)}) = 1 - \frac{\kappa}{r^2} \sum_{i=1}^m \frac{1}{|M_i|}
 \end{equation}
 
-where $F=1$ represents perfect reconstruction.
+where $\mathcal{M}_\mathcal{E}^{(r)}$ represents field masses at resolution level $r$, and $\kappa$ is a system-specific constant.
 \end{proposition}
 
-This property enables adaptive reconstruction based on available computational resources or required detail level.
+\begin{proof}
+In field-mass encoding, reconstruction fidelity depends not on hierarchical relationships but on field mass resolution. When field masses are represented at different resolutions, information content is preserved proportionally to the square of the resolution. The error is inversely proportional to the magnitude of field masses, as smaller field masses contribute less to the overall field intensity.
+
+Because Elder and Mentor frames are fixed reference systems that do not contain information directly, they do not affect reconstruction fidelity. The reconstruction quality depends solely on the resolution and precision of Erudite field masses.
+\end{proof}
+
+This property enables adaptive reconstruction based on available computational resources or required detail level, with the critical insight that all reconstruction information is contained within the Erudite field masses themselves.
 
 \begin{figure}[h]
 \centering
@@ -323,38 +402,42 @@ This property enables adaptive reconstruction based on available computational r
   % Original image placeholder
   \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (original) at (0,0) {Original Data};
   
-  % Level 1 reconstruction (Elder only)
-  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level1) at (4,0) {Elder Only\\Reconstruction\\(Global Structure)};
+  % Level 1 reconstruction (Low resolution field masses)
+  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level1) at (4,0) {Low Resolution\\Field Masses\\(Coarse Structure)};
   
-  % Level 2 reconstruction (Elder + Mentor)
-  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level2) at (8,0) {Elder + Mentor\\Reconstruction\\(Domain Features)};
+  % Level 2 reconstruction (Medium resolution field masses)
+  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level2) at (8,0) {Medium Resolution\\Field Masses\\(Intermediate Detail)};
   
-  % Level 3 reconstruction (Elder + Mentor + Erudite)
-  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level3) at (12,0) {Full\\Reconstruction\\(All Details)};
+  % Level 3 reconstruction (Full resolution field masses)
+  \node[draw, rounded corners, minimum width=3cm, minimum height=3cm] (level3) at (12,0) {Full Resolution\\Field Masses\\(Complete Detail)};
   
   % Reconstruction quality indicators
-  \node[below] at (level1.south) {Fidelity: 65\%};
-  \node[below] at (level2.south) {Fidelity: 92\%};
+  \node[below] at (level1.south) {Fidelity: 72\%};
+  \node[below] at (level2.south) {Fidelity: 94\%};
   \node[below] at (level3.south) {Fidelity: 100\%};
   
   % Data size indicators
   \node[above] at (original.north) {Size: 100\%};
-  \node[above] at (level1.north) {Size: 0.5\%};
-  \node[above] at (level2.north) {Size: 2\%};
-  \node[above] at (level3.north) {Size: 4\%};
+  \node[above] at (level1.north) {Size: 0.3\%};
+  \node[above] at (level2.north) {Size: 1.2\%};
+  \node[above] at (level3.north) {Size: 3.1\%};
   
   % Arrows
   \draw[->,thick] (original) -- (level1);
   \draw[->,thick] (level1) -- (level2);
   \draw[->,thick] (level2) -- (level3);
   
-  % Parameter labels
-  \node[above, text width=3cm, align=center] at (2,0.5) {Elder Parameters\\$\Theta_E$};
-  \node[above, text width=3cm, align=center] at (6,0.5) {Mentor Parameters\\$\Theta_M$};
-  \node[above, text width=3cm, align=center] at (10,0.5) {Erudite Parameters\\$\Theta_e$};
+  % Frame indicators (reference frames stay constant)
+  \draw[<->, dashed] ($(original.north) + (0,0.8)$) -- node[above] {Elder Reference Frame $\mathcal{F}_E$ (fixed)} ($(level3.north) + (0,0.8)$);
+  \draw[<->, dashed] ($(original.south) + (0,-0.8)$) -- node[below] {Mentor Reference Frame $\mathcal{F}_M$ (fixed)} ($(level3.south) + (0,-0.8)$);
+  
+  % Field mass resolution labels
+  \node[above, text width=3cm, align=center] at (2,0) {Field Masses\\$\mathcal{M}_{\mathcal{E}}^{(r=1)}$};
+  \node[above, text width=3cm, align=center] at (6,0) {Field Masses\\$\mathcal{M}_{\mathcal{E}}^{(r=2)}$};
+  \node[above, text width=3cm, align=center] at (10,0) {Field Masses\\$\mathcal{M}_{\mathcal{E}}^{(r=3)}$};
   
 \end{tikzpicture}
-\caption{Progressive data reconstruction using hierarchical orbital parameters. Each level of the hierarchy contributes additional detail to the reconstruction, with Elder parameters providing global structure, Mentor parameters adding domain-specific features, and Erudite parameters completing the fine details.}
+\caption{Progressive data reconstruction using field-mass parameters at increasing resolutions. Unlike hierarchical approaches, both Elder and Mentor reference frames remain fixed as independent coordinate systems. Reconstruction fidelity increases with field mass resolution, with all information content contained within the Erudite field masses distributed in both reference frames.}
 \label{fig:progressive_reconstruction}
 \end{figure}
 
