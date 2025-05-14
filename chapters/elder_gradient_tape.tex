@@ -113,10 +113,10 @@ The orbital paths of Mentors around the Elder and Erudites around Mentors physic
     % Erudite positions
     \foreach \angle/\time in {0/t_0, 45/t_1, 90/t_2, 135/t_3, 180/t_4, 225/t_5}{
         \ifnum\angle=90
-            \node[circle, fill=gray!40, minimum size=0.7cm] (erudite\angle) at ($(mentor90) + (\angle:1cm)$) {$\mathcal{E}r$};
+            \node[circle, fill=gray!40, minimum size=0.7cm] (erudite\angle) at (\angle:1cm) {$\mathcal{E}r$};
             \draw[dotted, thick] (mentor90) -- (erudite\angle);
         \else
-            \filldraw[gray!40] ($(mentor90) + (\angle:1cm)$) circle (0.07cm);
+            \filldraw[gray!40] (\angle:1cm) circle (0.07cm);
         \fi
     }
     
@@ -229,7 +229,9 @@ This sparse structure allows efficient gradient propagation despite the potentia
 
 The inherent gradient tape property of the Elder Heliosystem can be implemented in practical systems through a Phase-Aware Backpropagation algorithm:
 
-\begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Phase-Aware Backpropagation Algorithm, fonttitle=\bfseries]
+\begin{figure}[h]
+\begin{center}
+\begin{minipage}{0.95\textwidth}
 \begin{verbatim}
 def phase_aware_backpropagation(elder, mentors, erudites, loss):
     # Forward pass is already completed through orbital dynamics
@@ -278,7 +280,10 @@ def phase_aware_backpropagation(elder, mentors, erudites, loss):
         'erudite_grads': erudite_grads
     }
 \end{verbatim}
-\end{tcolorbox}
+\end{minipage}
+\caption{Phase-Aware Backpropagation Algorithm}
+\end{center}
+\end{figure}
 
 \subsection{Hardware Implications}
 
