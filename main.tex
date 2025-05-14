@@ -24,13 +24,27 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{multicol}
-\usepackage{caption}
-\usepackage[]{geometry}
-\usepackage{algorithm}
+\\usepackage{caption}
+\\usepackage[]{geometry}
+\\usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{mathtools}
-\usepackage{tcolorbox}
-\usepackage{listings}
+\\usepackage{mathtools}
+\\usepackage{tcolorbox}
+\\usepackage{listings}
+\\usepackage{abstract}
+
+% Custom abstract styling
+\renewenvironment{abstract}{%
+  \small
+  \begin{center}%
+    \bfseries\abstractname\vspace{-.5em}\vspace{0pt}%
+  \end{center}%
+  \list{}{%
+    \setlength{\leftmargin}{1.5cm}%
+    \setlength{\rightmargin}{\leftmargin}%
+  }%
+  \item\relax\itshape}
+  {\endlist
 
 % Complex number command
 \newcommand{\C}{\mathbb{C}}
@@ -62,14 +76,22 @@
 \newcommand{\unit}[1]{%
     \refstepcounter{unit}%
     \cleardoublepage%
+    \thispagestyle{empty}%
     {\centering\normalfont\Large\bfseries\color{DarkSkyBlue}%
-    \vspace*{20pt}%
-    {\fontsize{36}{40}\selectfont \unitname~\theunit}\\[10pt]%
-    {\fontsize{24}{30}\selectfont #1}\\[20pt]%
-    \hrule\vspace{50pt}}%
+    \vspace*{40pt}%
+    {\fontsize{36}{40}\selectfont \unitname~\theunit}\\[20pt]%
+    {\fontsize{24}{30}\selectfont #1}\\[30pt]%
+    {\large \textit{Elder, the Arcane Realization}}\\[10pt]%
+    {\normalsize E. Arcantis \textbullet{} J. Mentor \textbullet{} S. Erudite}\\[15pt]%
+    \rule{0.6\textwidth}{1pt}\\[50pt]%
+    \includegraphics[width=2.5cm]{figures/elder_symbol.pdf}\\[20pt]%
+    \vfill%
+    {\normalsize\rmfamily\itshape Heliomorphic Press, 2025}\\[10pt]%
+    }%
     \phantomsection%
     \addcontentsline{toc}{part}{\unitname~\theunit: #1}%
-}
+    \clearpage%
+
 
 % Add unit to the TOC format
 \makeatletter
