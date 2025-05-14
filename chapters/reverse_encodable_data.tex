@@ -103,14 +103,14 @@ The critical insight of field-mass encoding is that complex data structures can 
   \draw[->, dashed] (params) -- (9,-1.2);
 
 \end{tikzpicture}
-\caption{Overview of the field-mass orbital encoding and decoding process. Data is transformed into parameters defining the field mass distribution of Erudite entities. Elder and Mentor frames exist as independent reference systems that do not interact. The precise field mass distribution enables exact reconstruction of the original data.}
+\caption{Overview of the field-mass encoding and decoding process. Data is transformed into parameters defining the field mass distribution of Erudite entities. The precise field mass distribution enables exact reconstruction of the original data through the field equations.}
 \label{fig:orbital_encoding}
 \end{figure}
 
 \subsection{The Field-Mass Representation Theorem}
 
 \begin{theorem}[Field-Mass Representation]
-Any dataset $\mathcal{D} = \{x_1, x_2, \ldots, x_n\}$ with internal structure can be represented as a collection of Erudite entities $\mathcal{E} = \{E_1, E_2, \ldots, E_m\}$ where $m \ll n$, each with an associated field mass distribution $\mathcal{M}_{\mathcal{E}} = \{M_1, M_2, \ldots, M_m\}$ defined in non-interacting Elder and Mentor reference frames such that:
+Any dataset $\mathcal{D} = \{x_1, x_2, \ldots, x_n\}$ with internal structure can be represented as a collection of Erudite entities $\mathcal{E} = \{E_1, E_2, \ldots, E_m\}$ where $m \ll n$, each with an associated field mass $\mathcal{M}_{\mathcal{E}} = \{M_1, M_2, \ldots, M_m\}$ distributed in an optimal coordinate space such that:
 \begin{equation}
 \mathcal{D} = \Phi(\mathcal{E}, \mathcal{M}_{\mathcal{E}}, \omega)
 \end{equation}
@@ -190,7 +190,7 @@ To recover the original data, we evaluate the field equations governed by the Er
 \end{algorithmic}
 \end{algorithm}
 
-The key insight is that reconstruction depends entirely on the field mass distribution of Erudite entities. Elder and Mentor reference frames are only used during the encoding process to establish the coordinate systems in which Erudite entities are positioned, but they play no direct role in the decoding process, as all information is contained within the field masses themselves.
+The key insight is that reconstruction depends entirely on the field mass distribution of Erudite entities. The coordinate space only serves as a reference system to position Erudite entities, but plays no direct role in the decoding process, as all information is contained within the field masses themselves.
 
 \section{Field-Mass Storage Efficiency Analysis}
 
@@ -205,13 +205,13 @@ For a dataset $\mathcal{D}$ with $n$ elements displaying $k$ distinct patterns, 
 \begin{proof}
 The storage requirements consist of three components:
 
-1. \textbf{Reference Frame Specifications}: The Elder and Mentor reference frames require $O(d)$ storage each for their basis vectors, where $d$ is the dimensionality of the data space.
+1. \textbf{Coordinate Space Basis}: The coordinate space basis requires $O(d)$ storage for its basis vectors, where $d$ is the dimensionality of the data space.
 
-2. \textbf{Erudite Entity Positions}: For each of the $m = O(k)$ Erudite entities, we need to store coordinates in both reference frames, requiring $O(k \cdot d)$ storage.
+2. \textbf{Erudite Entity Positions}: For each of the $m = O(k)$ Erudite entities, we need to store coordinates in the coordinate space, requiring $O(k \cdot d)$ storage.
 
-3. \textbf{Field Mass Tensors}: Each field mass tensor $M_i$ is represented by a complex tensor of rank proportional to the information density it encodes. For $k$ distinct patterns, the field masses can be parametrized with $O(k)$ complex values.
+3. \textbf{Field Mass Parameters}: Each field mass $M_i$ is represented by complex parameters proportional to the information density it encodes. For $k$ distinct patterns, the field masses can be parametrized with $O(k)$ complex values.
 
-The critical insight is that because Elder and Mentor frames do not interact and serve only as reference systems, they establish a coordinate space where Erudite field masses are positioned. The field masses themselves contain the information content of the dataset, and the number of required field masses scales with pattern complexity, not data size.
+The critical insight is that all information is encoded directly in the Erudite field masses themselves. The coordinate space only serves as a reference system where field masses are positioned. The number of required field masses scales with pattern complexity, not data size.
 
 For specific patterns requiring precise phase relationships, we need $O(\log n)$ bits per field mass to represent the quantum phase factors that generate each data point.
 
