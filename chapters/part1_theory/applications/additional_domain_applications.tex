@@ -40,19 +40,19 @@ This is achieved through gravitational field encoding of temporal context rather
 \centering
 \begin{tikzpicture}[scale=0.8]
     % Central concepts
-    \filldraw[yellow!80!orange] (0,0) circle (0.8cm) node {Motion\\ Principles};
+    \filldraw[yellow!80!orange] (0,0) circle (0.8cm) node[text width=1.5cm, align=center] {Motion Principles};
     
     % Mentor orbits and entities
     \draw[dashed] (0,0) circle (3cm);
-    \filldraw[blue!60] (45:3cm) circle (0.6cm) node {Human\\ Motion};
-    \filldraw[green!60] (165:3cm) circle (0.6cm) node {Camera\\ Motion};
-    \filldraw[purple!60] (285:3cm) circle (0.6cm) node {Object\\ Physics};
+    \filldraw[blue!60] (45:3cm) circle (0.6cm) node[text width=1.2cm, align=center] {Human Motion};
+    \filldraw[green!60] (165:3cm) circle (0.6cm) node[text width=1.2cm, align=center] {Camera Motion};
+    \filldraw[purple!60] (285:3cm) circle (0.6cm) node[text width=1.2cm, align=center] {Object Physics};
     
     % Erudite orbits
     \draw[dashed] (45:3cm) circle (1.2cm);
-    \filldraw[blue!30] ($(45:3cm) + (0:1.2cm)$) circle (0.4cm) node {\small Walking};
-    \filldraw[blue!30] ($(45:3cm) + (120:1.2cm)$) circle (0.4cm) node {\small Facial\\ Expr.};
-    \filldraw[blue!30] ($(45:3cm) + (240:1.2cm)$) circle (0.4cm) node {\small Hand\\ Gesture};
+    \filldraw[blue!30] ($(45:3cm) + (0:1.2cm)$) circle (0.4cm) node[text width=1cm, align=center] {\small Walking};
+    \filldraw[blue!30] ($(45:3cm) + (120:1.2cm)$) circle (0.4cm) node[text width=1cm, align=center] {\small Facial Expr.};
+    \filldraw[blue!30] ($(45:3cm) + (240:1.2cm)$) circle (0.4cm) node[text width=1cm, align=center] {\small Hand Gesture};
     
     \draw[dashed] (165:3cm) circle (1.2cm);
     \filldraw[green!30] ($(165:3cm) + (45:1.2cm)$) circle (0.4cm) node {\small Pan};
