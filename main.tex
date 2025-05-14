@@ -44,6 +44,10 @@
 \usepackage[style=alphabetic,backend=biber]{biblatex}
 \addbibresource{bibliography.bib}
 
+% Index package
+\usepackage{imakeidx}
+\makeindex[title=Index of Terms]
+
 % Define colors
 \definecolor{DarkSkyBlue}{RGB}{0, 51, 153}
 \definecolor{TheoremBlue}{RGB}{230, 236, 245}
@@ -56,6 +60,9 @@
 
 % Include math macros
 \input{macros/math_macros.tex}
+
+% Include chapter summary template
+\input{macros/chapter_summary.tex}
 
 % Define the unit counter (between part and chapter)
 \newcounter{unit}
@@ -210,6 +217,12 @@ First Printing, \today
 % Table of contents
 \tableofcontents
 
+% List of figures
+\listoffigures
+
+% List of tables
+\listoftables
+
 % Foreword
 \chapter*{Foreword}
 \addcontentsline{toc}{chapter}{Foreword}
@@ -284,6 +297,9 @@ While acknowledging these contributions, I take full responsibility for any erro
 
 % Glossary of terms
 \input{glossary.tex}
+
+% Index entries
+\input{chapters/index_entries.tex}
 
 % Section roadmaps
 \input{chapters/part1_theory/core_concepts/section_roadmaps.tex}
@@ -370,5 +386,8 @@ While acknowledging these contributions, I take full responsibility for any erro
 
 % Bibliography
 \printbibliography[title={References}]
+
+% Print the index
+\printindex
 
 \end{document}
