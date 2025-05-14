@@ -1,82 +1,65 @@
-# Elder, the Arcane Realization - LaTeX Book Template
+# Elder, the Arcane Realization
 
-This is a comprehensive LaTeX template for the mathematical text "Elder, the Arcane Realization". The template is designed to handle extensive mathematical content with advanced typesetting features and custom styling.
+An advanced mathematical modeling framework for hierarchical knowledge representation, focusing on precise and adaptable notation systems. The project leverages sophisticated techniques to transform complex mathematical concepts into intuitive, interactive representations.
 
-## Features
+## Core Technologies
+- LaTeX-based knowledge transformation system
+- Advanced semantic notation techniques  
+- Complex-valued neural network architectures
+- Interactive notation visualization
 
-- Structured hierarchy with parts, units, and chapters
-- Support for complex mathematical notation, algorithms, tables, and graphs
-- Pre-configured packages for mathematical typesetting
-- Two-column layout with chapter numbers in margin
-- Theorem boxes with proper styling
-- Latin Modern Math for mathematical content and Latin Modern Roman for body text
-- GoLang syntax highlighting for code examples
-- Custom color scheme with Dark Sky Blue for "Elder" in the title
+## Project Structure
 
-## Directory Structure
+- **assets/** - All assets for the document
+  - **data/** - Data files and tables
+  - **diagrams/** - Diagrams and illustrations
+  - **images/** - Images and figures
+  - **specifications/** - Specification documents
+  - **web/** - Web-based visualizations
+  
+- **build/** - Compilation artifacts
+  - **pdf/** - Generated PDF documents
+  
+- **chapters/** - LaTeX chapters organized by sections
+  - **part1_theory/** - Theory chapters
+    - **core_concepts/** - Fundamental concepts and definitions
+    - **functions_and_geometry/** - Mathematical foundations
+    - **mechanics_and_dynamics/** - System dynamics and orbital mechanics
+    - **memory_and_efficiency/** - Memory complexity and efficiency
+    - **loss_functions/** - Loss functions for learning
+    - **applications/** - Domain applications
+  - **part2_experiment/** - Experiment results and benchmarks
+  
+- **docs/** - Documentation files
+  
+- **examples/** - Code and algorithm examples
+  
+- **figures/** - TikZ figure definitions
+  
+- **macros/** - LaTeX macros and styles
+  
+- **scripts/** - Utility scripts
+
+## Compiling the Document
+
+Run the LaTeX compilation workflow:
 
 ```
-.
-├── chapters/                # Chapter content files
-│   ├── chapter1.tex         # Chapter 1: Fundamentals of Arcane Notation
-│   └── chapter2.tex         # Chapter 2: Structure Theory of Elder Spaces
-├── examples/                # Example files for demonstration
-│   ├── algorithm_example.tex # Algorithm examples
-│   ├── code_example.tex     # GoLang code examples
-│   └── graph_example.tex    # TikZ graph examples
-├── macros/                  # Custom macro definitions
-│   ├── math_macros.tex      # Mathematical notation macros
-│   └── theorem_styles.tex   # Theorem environment styling macros
-├── parts/                   # Part structure files
-│   └── part1.tex            # Part 1: Foundations of Arcane Realization
-├── styles/                  # Custom style files
-│   ├── chapter_style.tex    # Chapter styling
-│   └── layout_style.tex     # Page layout styling
-├── units/                   # Unit files (intermediary between parts and chapters)
-│   └── unit1.tex            # Unit 1: Basic Structures and Notation
-├── bibliography.bib         # Bibliography entries in BibTeX format
-├── main.tex                 # Main document file
-└── preamble.tex             # Package imports and global settings
+pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex
+biber --output-directory build/pdf main
+pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex
+pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex
 ```
 
-## Compilation Requirements
+The final document will be available in `build/pdf/elder_arcane_realization.pdf`.
 
-To compile this document, you need:
+## Web Visualizations
 
-1. A complete LaTeX distribution (TeX Live, MikTeX, etc.)
-2. The Biber bibliography processor
-3. Required LaTeX packages (most are included in standard distributions)
+To view the interactive visualizations, run:
 
-## How to Compile
-
-Run the following commands in sequence:
-
-```bash
-# Create the output directory if it doesn't exist
-mkdir -p output
-
-# Run LaTeX compilation with output to output directory
-pdflatex -output-directory=output main.tex
-biber --output-directory output main
-pdflatex -output-directory=output main.tex
-pdflatex -output-directory=output main.tex
-
-# Optional: Create a renamed copy
-cp output/main.pdf output/elder_arcane_realization.pdf
+```
+cd assets/web
+python -m http.server 5000
 ```
 
-Multiple runs of pdflatex are needed to resolve cross-references, citations, and table of contents entries.
-
-## Output Management
-
-All LaTeX-generated files including the final PDF are stored in the `output/` directory. This keeps the root directory clean and separates source files from generated files.
-
-## Version Control
-
-A `.gitignore` file is included that excludes:
-- All LaTeX temporary and auxiliary files
-- Generated PDFs in the root directory
-- The entire contents of the `output/` directory
-
-This configuration ensures that only source files are tracked in version control, keeping repository size small and avoiding conflicts with binary files.
-
+Then open a web browser to http://localhost:5000/
