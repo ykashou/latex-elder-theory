@@ -16,17 +16,17 @@
 ]
 
 \addplot[color=DarkSkyBlue, thick, domain=0:5, samples=100]{x^2};
-\addlegendentry{$\arcane{1}(x) = x^2$}
+\addlegendentry{$\elderstructure{1}(x) = x^2$}
 
 \addplot[color=DarkGray, thick, domain=0:5, samples=100]{exp(x/2)};
-\addlegendentry{$\arcane{2}(x) = e^{x/2}$}
+\addlegendentry{$\elderstructure{2}(x) = e^{x/2}$}
 
 \addplot[color=LemmaGreen!80, thick, domain=0:5, samples=100]{x^2*sin(deg(x))};
-\addlegendentry{$\arcane{3}(x) = x^2\sin(x)$}
+\addlegendentry{$\elderstructure{3}(x) = x^2\sin(x)$}
 
 \end{axis}
 \end{tikzpicture}
-\caption{Behavior of the first three Arcane functions}
+\caption{Behavior of the first three Elder structural functions}
 \end{figure}
 
 % Example of a commutative diagram
@@ -57,7 +57,7 @@
     ylabel={$y$},
     zlabel={$\realization{z}$},
     view={30}{30},
-    colormap={arcane}{color(0)=(DarkSkyBlue) color(1)=(LemmaGreen)}
+    colormap={elder}{color(0)=(DarkSkyBlue) color(1)=(LemmaGreen)}
 ]
 
 \addplot3[
@@ -80,8 +80,8 @@
 \begin{axis}[
     width=10cm,
     height=8cm,
-    xlabel={$\arcane{1}$},
-    ylabel={$\arcane{2}$},
+    xlabel={$\elderstructure{1}$},
+    ylabel={$\elderstructure{2}$},
     grid=major,
     xmin=-2, xmax=2,
     ymin=-2, ymax=2
@@ -126,7 +126,7 @@
     width=12cm,
     height=8cm,
     xlabel={Parameter $\mu$},
-    ylabel={Equilibrium $\arcane{*}$},
+    ylabel={Equilibrium $\elderstructure{*}$},
     grid=major,
     xmin=0, xmax=4,
     ymin=-2, ymax=2
@@ -151,7 +151,7 @@
 
 \end{axis}
 \end{tikzpicture}
-\caption{Bifurcation diagram for the Elder equation $\dot{\arcane{}} = \mu \arcane{} - \arcane{}^3$}
+\caption{Bifurcation diagram for the Elder equation $\dot{\elderstructure{}} = \mu \elderstructure{} - \elderstructure{}^3$}
 \end{figure}
 
 % Example of a complex network graph
@@ -159,18 +159,18 @@
 \centering
 \begin{tikzpicture}[
     scale=1.2,
-    arcane node/.style={circle, draw=DarkSkyBlue, fill=DarkSkyBlue!20, thick, minimum size=0.8cm},
+    structure node/.style={circle, draw=DarkSkyBlue, fill=DarkSkyBlue!20, thick, minimum size=0.8cm},
     elder node/.style={rectangle, draw=LemmaGreen!80, fill=LemmaGreen!20, thick, minimum size=0.7cm},
     link/.style={thick},
     strong link/.style={thick, DarkSkyBlue}
 ]
 
 % Nodes
-\node[arcane node] (A1) at (0,0) {$A_1$};
-\node[arcane node] (A2) at (2,1) {$A_2$};
-\node[arcane node] (A3) at (4,0) {$A_3$};
-\node[arcane node] (A4) at (6,1) {$A_4$};
-\node[arcane node] (A5) at (8,0) {$A_5$};
+\node[structure node] (A1) at (0,0) {$A_1$};
+\node[structure node] (A2) at (2,1) {$A_2$};
+\node[structure node] (A3) at (4,0) {$A_3$};
+\node[structure node] (A4) at (6,1) {$A_4$};
+\node[structure node] (A5) at (8,0) {$A_5$};
 
 \node[elder node] (E1) at (1,-1.5) {$E_1$};
 \node[elder node] (E2) at (3,-1.5) {$E_2$};
@@ -197,5 +197,5 @@
 \draw[link, dashed] (E3) -- (E4);
 
 \end{tikzpicture}
-\caption{Network representation of Arcane-Elder interactions}
+\caption{Network representation of Structure-Elder interactions}
 \end{figure}
