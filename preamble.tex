@@ -3,6 +3,11 @@
 % Basic packages
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath,amssymb}
+
+% Define common Unicode symbols
+\DeclareUnicodeCharacter{2248}{\ensuremath{\approx}}
 \usepackage{lmodern}  % Latin Modern fonts
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,amsfonts}
@@ -122,18 +127,24 @@
 }
 
 % Define observation environment
-\newtcolorbox{observation}[1][]{%
-  enhanced,
-  colback=LightGray,
-  colframe=DarkGray,
-  fonttitle=\bfseries,
-  title={Observation #1},
-  breakable
-}
+% Commented out to avoid conflicts with simpler definition below
+% \newtcolorbox{observation}[1][]{%
+%   enhanced,
+%   colback=LightGray,
+%   colframe=DarkGray,
+%   fonttitle=\bfseries,
+%   title={Observation #1},
+%   breakable
+% }
 
 % Define axis environment if needed
 \providecommand{\axis}{\begin{tikzpicture}\begin{axis}}
 \providecommand{\endaxis}{\end{axis}\end{tikzpicture}}
+
+% Define observation environment (simple version that doesn't depend on tcolorbox)
+\newenvironment{observation}
+{\begin{quote}\itshape\noindent\textbf{Observation:} }
+{\end{quote}}
 
 % Define colors
 \definecolor{DarkSkyBlue}{RGB}{0, 51, 153}
