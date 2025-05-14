@@ -175,23 +175,21 @@ To recover the original data, we evaluate the field equations governed by the Er
 \State \textbf{Output:} Reconstructed dataset $\mathcal{D'}$
 
 \State Initialize field evaluation space $\Omega$ matching dimensions of $\mathcal{D}$
-\State Construct quantum field operator $\hat{\Phi}$ from field masses:
-\State \hspace{1em} $\hat{\Phi}(x) = \sum_{i=1}^m \hat{a}_i(M_i) \cdot \phi_i(x) + \hat{a}_i^\dagger(M_i) \cdot \phi_i^*(x)$
-\State where $\hat{a}_i$ and $\hat{a}_i^\dagger$ are annihilation and creation operators acting on field mass $M_i$
+\State Construct field function from Erudite field masses:
+\State \hspace{1em} $\Phi(x) = \sum_{i=1}^m |M_i| e^{i\phi_i} \cdot \psi_i(x, \omega_i)$
+\State where $|M_i|$ and $\phi_i$ are the magnitude and phase of each field mass, and $\psi_i$ are basis functions
 
 \For{each point $x \in \Omega$}
-  \State Simultaneously project field into Elder reference frame $\langle \mathcal{F}_E | \hat{\Phi}(x) | \mathcal{F}_E \rangle$
-  \State and Mentor reference frame $\langle \mathcal{F}_M | \hat{\Phi}(x) | \mathcal{F}_M \rangle$
-  \State Compute field value at $x$ using Green's function integration:
+  \State Compute field value at $x$ directly from Erudite field masses using Green's function:
   \State \hspace{1em} $\mathcal{D'}(x) = \sum_{i=1}^m M_i \cdot G(x, x_i, \omega_i)$
-  \State Apply phase correction using field mass coherence factors:
+  \State Apply phase coherence correction:
   \State \hspace{1em} $\mathcal{D'}(x) = \mathcal{D'}(x) \cdot e^{i\sum_j \phi_j(M_j,x)}$
 \EndFor
 \State \Return $\mathcal{D'}$
 \end{algorithmic}
 \end{algorithm}
 
-The key insight is that reconstruction accuracy depends primarily on the fidelity of Erudite field masses, with the Elder and Mentor frames serving only as independent reference systems that do not interact with each other.
+The key insight is that reconstruction depends entirely on the field mass distribution of Erudite entities. Elder and Mentor reference frames are only used during the encoding process to establish the coordinate systems in which Erudite entities are positioned, but they play no direct role in the decoding process, as all information is contained within the field masses themselves.
 
 \section{Field-Mass Storage Efficiency Analysis}
 
