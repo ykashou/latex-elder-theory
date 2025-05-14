@@ -24,27 +24,27 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{multicol}
-\\usepackage{caption}
-\\usepackage[]{geometry}
-\\usepackage{algorithm}
+\usepackage{caption}
+\usepackage[]{geometry}
+\usepackage{algorithm}
 \usepackage{algpseudocode}
-\\usepackage{mathtools}
-\\usepackage{tcolorbox}
-\\usepackage{listings}
-\\usepackage{abstract}
+\usepackage{mathtools}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{abstract}
 
 % Custom abstract styling
-\renewenvironment{abstract}{%
+\newenvironment{abstract}{%
   \small
   \begin{center}%
-    \bfseries\abstractname\vspace{-.5em}\vspace{0pt}%
+    \bfseries Abstract\vspace{-.5em}\vspace{0pt}%
   \end{center}%
   \list{}{%
     \setlength{\leftmargin}{1.5cm}%
     \setlength{\rightmargin}{\leftmargin}%
   }%
   \item\relax\itshape}
-  {\endlist
+  {\endlist}
 
 % Complex number command
 \newcommand{\C}{\mathbb{C}}
@@ -77,7 +77,8 @@
     \refstepcounter{unit}%
     \cleardoublepage%
     \thispagestyle{empty}%
-    {\centering\normalfont\Large\bfseries\color{DarkSkyBlue}%
+    \begin{center}%
+    \normalfont\Large\bfseries\color{DarkSkyBlue}%
     \vspace*{40pt}%
     {\fontsize{36}{40}\selectfont \unitname~\theunit}\\[20pt]%
     {\fontsize{24}{30}\selectfont #1}\\[30pt]%
@@ -87,10 +88,11 @@
     \includegraphics[width=2.5cm]{figures/elder_symbol.pdf}\\[20pt]%
     \vfill%
     {\normalsize\rmfamily\itshape Heliomorphic Press, 2025}\\[10pt]%
-    }%
+    \end{center}%
     \phantomsection%
     \addcontentsline{toc}{part}{\unitname~\theunit: #1}%
     \clearpage%
+}
 
 
 % Add unit to the TOC format
