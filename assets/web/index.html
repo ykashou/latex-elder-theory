@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elder Theory Visualization</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f8;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #3a4a6a;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            font-style: italic;
+            color: #ddd;
+        }
+        .visualization {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #elder-canvas {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 200px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #3a4a6a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #526b9a;
+        }
+        .data-panel {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .data-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            width: calc(33% - 20px);
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        .entity-info {
+            margin-top: 10px;
+        }
+        h3 {
+            margin-top: 0;
+            color: #3a4a6a;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .info-label {
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .data-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Elder Theory Visualization</h1>
+            <div class="subtitle">Orbital Dynamics of Hierarchical Knowledge</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="visualization">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="elder-mass">Elder Mass</label>
+                    <input type="range" id="elder-mass" min="500" max="2000" value="1000" />
+                </div>
+                <div class="control-group">
+                    <label for="mentor-count">Mentor Count</label>
+                    <input type="range" id="mentor-count" min="3" max="12" value="7" />
+                </div>
+                <div class="control-group">
+                    <label for="erudite-per-mentor">Erudites per Mentor</label>
+                    <input type="range" id="erudite-per-mentor" min="3" max="15" value="8" />
+                </div>
+                <div class="control-group">
+                    <label for="simulation-speed">Simulation Speed</label>
+                    <input type="range" id="simulation-speed" min="0.1" max="3" step="0.1" value="1" />
+                </div>
+            </div>
+            <button id="start-simulation">Start Simulation</button>
+            <canvas id="elder-canvas" width="800" height="600"></canvas>
+            
+            <div class="data-panel">
+                <div class="data-card">
+                    <h3>Elder Entity</h3>
+                    <div class="entity-info">
+                        <div class="info-row">
+                            <span class="info-label">Phase:</span>
+                            <span id="elder-phase">0.00 rad</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Angular Velocity:</span>
+                            <span id="elder-velocity">0.01 rad/s</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Mass:</span>
+                            <span id="elder-mass-display">1000.00</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Influence Radius:</span>
+                            <span id="elder-influence">280.00</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Active Parameters:</span>
+                            <span id="elder-parameters">12 / 128</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <h3>Mentor Entities</h3>
+                    <div class="entity-info">
+                        <div class="info-row">
+                            <span class="info-label">Active Mentors:</span>
+                            <span id="active-mentors">7</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Average Orbital Radius:</span>
+                            <span id="mentor-avg-radius">120.00</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Phase Coherence:</span>
+                            <span id="mentor-coherence">0.72</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Knowledge Domains:</span>
+                            <span id="knowledge-domains">4</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Resonant Pairs:</span>
+                            <span id="resonant-mentors">3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-card">
+                    <h3>Erudite Entities</h3>
+                    <div class="entity-info">
+                        <div class="info-row">
+                            <span class="info-label">Total Erudites:</span>
+                            <span id="total-erudites">56</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Average Mass:</span>
+                            <span id="erudite-avg-mass">0.85</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Learning Rate:</span>
+                            <span id="learning-rate">0.003</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Knowledge Capacity:</span>
+                            <span id="knowledge-capacity">87%</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Specialization Index:</span>
+                            <span id="specialization-index">0.64</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            Elder Theory Visualization v1.0 | From "Elder, the Arcane Realization" | © 2025
+        </div>
+    </footer>
+
+    <script>
+        // Basic visualization - to be extended with full orbital mechanics
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('elder-canvas');
+            const ctx = canvas.getContext('2d');
+            let animationId;
+            let running = false;
+            
+            // Configuration
+            const config = {
+                elderMass: 1000,
+                mentorCount: 7,
+                eruditePerMentor: 8,
+                simulationSpeed: 1
+            };
+            
+            // Entity colors
+            const colors = {
+                background: '#f0f0f8',
+                elder: '#3a4a6a',
+                mentors: ['#e63946', '#2a9d8f', '#e9c46a', '#f4a261', '#264653', '#6a994e', '#bc6c25', '#006d77', '#7209b7', '#f72585', '#4cc9f0', '#560bad'],
+                erudites: ['#d8e2dc', '#ffe5d9', '#ffcad4', '#f4acb7', '#9d8189']
+            };
+            
+            // Entities
+            let elder = {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                radius: 25,
+                mass: config.elderMass,
+                phase: 0,
+                angularVelocity: 0.01
+            };
+            
+            let mentors = [];
+            let erudites = [];
+            
+            // Initialize entities
+            function initializeEntities() {
+                // Clear existing entities
+                mentors = [];
+                erudites = [];
+                
+                // Update elder mass
+                elder.mass = config.elderMass;
+                
+                // Create mentors
+                for (let i = 0; i < config.mentorCount; i++) {
+                    const angle = (i / config.mentorCount) * Math.PI * 2;
+                    const distance = 100 + Math.random() * 60;
+                    const mentor = {
+                        x: elder.x + Math.cos(angle) * distance,
+                        y: elder.y + Math.sin(angle) * distance,
+                        radius: 10 + Math.random() * 5,
+                        mass: 5 + Math.random() * 10,
+                        orbitRadius: distance,
+                        phase: angle,
+                        angularVelocity: 0.02 + Math.random() * 0.01,
+                        color: colors.mentors[i % colors.mentors.length],
+                        domainId: i % 4
+                    };
+                    mentors.push(mentor);
+                    
+                    // Create erudites for this mentor
+                    for (let j = 0; j < config.eruditePerMentor; j++) {
+                        const eruditeAngle = (j / config.eruditePerMentor) * Math.PI * 2 + angle;
+                        const eruditeDistance = 30 + Math.random() * 20;
+                        const erudite = {
+                            x: mentor.x + Math.cos(eruditeAngle) * eruditeDistance,
+                            y: mentor.y + Math.sin(eruditeAngle) * eruditeDistance,
+                            radius: 3 + Math.random() * 2,
+                            mass: 0.5 + Math.random() * 0.7,
+                            mentorId: i,
+                            orbitRadius: eruditeDistance,
+                            phase: eruditeAngle,
+                            angularVelocity: 0.05 + Math.random() * 0.03,
+                            color: colors.erudites[j % colors.erudites.length],
+                            domainId: mentor.domainId
+                        };
+                        erudites.push(erudite);
+                    }
+                }
+                
+                // Update UI
+                updateDataDisplay();
+            }
+            
+            // Draw entities
+            function drawEntities() {
+                // Clear canvas
+                ctx.fillStyle = colors.background;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw elder
+                ctx.beginPath();
+                ctx.arc(elder.x, elder.y, elder.radius, 0, Math.PI * 2);
+                ctx.fillStyle = colors.elder;
+                ctx.fill();
+                
+                // Draw mentor orbits
+                for (const mentor of mentors) {
+                    ctx.beginPath();
+                    ctx.arc(elder.x, elder.y, mentor.orbitRadius, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(58, 74, 106, 0.2)`;
+                    ctx.stroke();
+                }
+                
+                // Draw mentors
+                for (const mentor of mentors) {
+                    ctx.beginPath();
+                    ctx.arc(mentor.x, mentor.y, mentor.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = mentor.color;
+                    ctx.fill();
+                    
+                    // Draw erudite orbits for this mentor
+                    const eruditeForMentor = erudites.filter(e => e.mentorId === mentors.indexOf(mentor));
+                    for (const erudite of eruditeForMentor) {
+                        ctx.beginPath();
+                        ctx.arc(mentor.x, mentor.y, erudite.orbitRadius, 0, Math.PI * 2);
+                        ctx.strokeStyle = `rgba(58, 74, 106, 0.1)`;
+                        ctx.stroke();
+                    }
+                }
+                
+                // Draw erudites
+                for (const erudite of erudites) {
+                    ctx.beginPath();
+                    ctx.arc(erudite.x, erudite.y, erudite.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = erudite.color;
+                    ctx.fill();
+                }
+            }
+            
+            // Update entity positions
+            function updateEntities(deltaTime) {
+                // Update elder
+                elder.phase += elder.angularVelocity * deltaTime * config.simulationSpeed;
+                elder.phase %= Math.PI * 2;
+                
+                // Update mentors
+                for (let i = 0; i < mentors.length; i++) {
+                    const mentor = mentors[i];
+                    mentor.phase += mentor.angularVelocity * deltaTime * config.simulationSpeed;
+                    mentor.phase %= Math.PI * 2;
+                    
+                    mentor.x = elder.x + Math.cos(mentor.phase) * mentor.orbitRadius;
+                    mentor.y = elder.y + Math.sin(mentor.phase) * mentor.orbitRadius;
+                }
+                
+                // Update erudites
+                for (const erudite of erudites) {
+                    const mentor = mentors[erudite.mentorId];
+                    erudite.phase += erudite.angularVelocity * deltaTime * config.simulationSpeed;
+                    erudite.phase %= Math.PI * 2;
+                    
+                    erudite.x = mentor.x + Math.cos(erudite.phase) * erudite.orbitRadius;
+                    erudite.y = mentor.y + Math.sin(erudite.phase) * erudite.orbitRadius;
+                }
+                
+                // Update UI occasionally
+                if (Math.random() < 0.05) {
+                    updateDataDisplay();
+                }
+            }
+            
+            // Animation loop
+            let lastTime = 0;
+            function animate(time) {
+                const deltaTime = (time - lastTime) / 1000;
+                lastTime = time;
+                
+                updateEntities(deltaTime);
+                drawEntities();
+                
+                if (running) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+            
+            // Handle start button
+            document.getElementById('start-simulation').addEventListener('click', function() {
+                if (running) {
+                    cancelAnimationFrame(animationId);
+                    this.textContent = 'Start Simulation';
+                    running = false;
+                } else {
+                    lastTime = performance.now();
+                    animationId = requestAnimationFrame(animate);
+                    this.textContent = 'Pause Simulation';
+                    running = true;
+                }
+            });
+            
+            // Handle slider inputs
+            document.getElementById('elder-mass').addEventListener('input', function() {
+                config.elderMass = parseInt(this.value);
+                initializeEntities();
+            });
+            
+            document.getElementById('mentor-count').addEventListener('input', function() {
+                config.mentorCount = parseInt(this.value);
+                initializeEntities();
+            });
+            
+            document.getElementById('erudite-per-mentor').addEventListener('input', function() {
+                config.eruditePerMentor = parseInt(this.value);
+                initializeEntities();
+            });
+            
+            document.getElementById('simulation-speed').addEventListener('input', function() {
+                config.simulationSpeed = parseFloat(this.value);
+            });
+            
+            // Update data display
+            function updateDataDisplay() {
+                // Elder information
+                document.getElementById('elder-phase').textContent = elder.phase.toFixed(2) + ' rad';
+                document.getElementById('elder-velocity').textContent = elder.angularVelocity.toFixed(3) + ' rad/s';
+                document.getElementById('elder-mass-display').textContent = elder.mass.toFixed(2);
+                document.getElementById('elder-influence').textContent = (elder.radius * 8).toFixed(2);
+                
+                const activeParams = Math.floor(10 + Math.random() * 20);
+                document.getElementById('elder-parameters').textContent = `${activeParams} / 128`;
+                
+                // Mentor information
+                document.getElementById('active-mentors').textContent = mentors.length;
+                
+                const avgRadius = mentors.reduce((sum, m) => sum + m.orbitRadius, 0) / mentors.length;
+                document.getElementById('mentor-avg-radius').textContent = avgRadius.toFixed(2);
+                
+                const coherence = 0.5 + Math.random() * 0.5;
+                document.getElementById('mentor-coherence').textContent = coherence.toFixed(2);
+                
+                const domains = new Set(mentors.map(m => m.domainId)).size;
+                document.getElementById('knowledge-domains').textContent = domains;
+                
+                const resonantPairs = Math.floor(Math.random() * mentors.length / 2) + 1;
+                document.getElementById('resonant-mentors').textContent = resonantPairs;
+                
+                // Erudite information
+                document.getElementById('total-erudites').textContent = erudites.length;
+                
+                const avgMass = erudites.reduce((sum, e) => sum + e.mass, 0) / erudites.length;
+                document.getElementById('erudite-avg-mass').textContent = avgMass.toFixed(2);
+                
+                document.getElementById('learning-rate').textContent = (0.001 + Math.random() * 0.004).toFixed(3);
+                document.getElementById('knowledge-capacity').textContent = Math.floor(70 + Math.random() * 30) + '%';
+                document.getElementById('specialization-index').textContent = (0.4 + Math.random() * 0.6).toFixed(2);
+            }
+            
+            // Initialize
+            initializeEntities();
+            drawEntities();
+        });
+    </script>
+</body>
+</html>
