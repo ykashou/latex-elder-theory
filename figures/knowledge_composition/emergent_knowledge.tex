@@ -1,0 +1,151 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        knowledge/.style={
+            draw,
+            fill=blue!15,
+            circle,
+            minimum size=2cm,
+            align=center
+        },
+        composed/.style={
+            draw,
+            fill=green!15,
+            circle,
+            minimum size=2.5cm,
+            align=center
+        },
+        emergent/.style={
+            draw,
+            fill=red!15,
+            ellipse,
+            minimum width=2.5cm,
+            minimum height=1.8cm,
+            text width=2.3cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        },
+        equation/.style={
+            draw,
+            fill=yellow!15,
+            rounded corners,
+            minimum width=5cm,
+            minimum height=1cm,
+            text width=4.8cm,
+            align=center
+        }
+    }
+    
+    % Basic emergence illustration
+    \begin{scope}[shift={(0,0)}]
+        % Title
+        \node[font=\bfseries] at (0,6) {Emergent Knowledge in Composition};
+        
+        % Knowledge elements
+        \node[knowledge] (k1) at (-1.5,4) {$k_1$};
+        \node[knowledge] (k2) at (1.5,4) {$k_2$};
+        
+        % Composition circle
+        \begin{scope}
+            \clip (0,2) circle (2cm);
+            \fill[green!15] (-3,0) rectangle (3,4);
+        \end{scope}
+        \draw (0,2) circle (2cm);
+        \node at (0,2) {$k_1 \oplus k_2$};
+        
+        % Emergent knowledge
+        \node[emergent] (emerg) at (0,0) {Emergent\\Knowledge\\$k_{emergent}$};
+        
+        % Connect elements
+        \draw[arrow] (k1) -- (0,2);
+        \draw[arrow] (k2) -- (0,2);
+        \draw[arrow] (0,1.5) -- (emerg);
+        
+        % Definition
+        \node[equation] at (0,-1.5) {$k_{emergent} = k_{composite} \setminus \bigoplus_{i} k_i$};
+    \end{scope}
+    
+    % Hierarchical emergence
+    \begin{scope}[shift={(8,0)}]
+        % Title
+        \node[font=\bfseries] at (0,6) {Hierarchical Emergence};
+        
+        % Emergence at different levels
+        \node[emergent, minimum width=1.8cm, minimum height=1.2cm, text width=1.6cm] (e_erudite) at (0,4) {Erudite\\Emergence\\$k_{emergent, E}$};
+        
+        \node[emergent, minimum width=2.2cm, minimum height=1.5cm, text width=2cm] (e_mentor) at (0,2.5) {Mentor\\Emergence\\$k_{emergent, M}$};
+        
+        \node[emergent, minimum width=2.5cm, minimum height=1.8cm, text width=2.3cm] (e_elder) at (0,0.5) {Elder\\Emergence\\$k_{emergent, El}$};
+        
+        % Information content relationship
+        \draw[thick, <-] (e_erudite) -- (e_mentor) -- (e_elder);
+        
+        % Equation
+        \node[equation] at (0,-1.5) {$I(k_{emergent, El}) > I(k_{emergent, M}) > I(k_{emergent, E})$};
+    \end{scope}
+    
+    % Resonance-enhanced emergence
+    \begin{scope}[shift={(0,-6)}]
+        % Title
+        \node[font=\bfseries] at (0,2) {Resonance-Enhanced Emergence};
+        
+        % Axes for plot
+        \draw[->] (-0.5,0) -- (5,0) node[right] {Resonance Strength $r$};
+        \draw[->] (0,-0.5) -- (0,4) node[above] {Emergent Information};
+        
+        % Curves for different n values
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, red, thick] 
+            plot ({\x}, {0.6*\x*ln(2)});
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, blue, thick] 
+            plot ({\x}, {0.6*\x*ln(4)});
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, green!50!black, thick] 
+            plot ({\x}, {0.6*\x*ln(8)});
+        
+        % Labels
+        \node[red] at (4.5,1) {$n = 2$};
+        \node[blue] at (4.5,2) {$n = 4$};
+        \node[green!50!black] at (4.5,3) {$n = 8$};
+        
+        % Equation
+        \node[equation] at (2.5,-1.5) {$I(k_{emergent}) \propto r \cdot \log(n)$};
+    \end{scope}
+    
+    % Compositional generalization
+    \begin{scope}[shift={(8,-6)}]
+        % Title
+        \node[font=\bfseries] at (0,2) {Compositional Generalization};
+        
+        % Axes for plot
+        \draw[->] (-0.5,0) -- (5,0) node[right] {Number of Elements $n$};
+        \draw[->] (0,-0.5) -- (0,4) node[above] {Generalization Error};
+        
+        % Element error curve
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, blue, thick] 
+            plot ({\x}, {1.6});
+            
+        % Composite error curve
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, red, thick] 
+            plot ({\x}, {1.6 + 1*exp(-0.5*\x) - 0.2*\x});
+            
+        % Threshold marker
+        \draw[dashed] (2,0) -- (2,4);
+        \node at (2,-0.3) {$n_0$};
+        
+        % Labels
+        \node[blue] at (4.5,1.6) {$\min\{\epsilon_i\}$};
+        \node[red] at (4.5,0.8) {$\epsilon_{composite}$};
+        
+        % Equation
+        \node[equation] at (2.5,-1.5) {$\epsilon_{composite} < \min\{\epsilon_i\}$ when $n > n_0$};
+    \end{scope}
+    
+\end{tikzpicture}
+\caption{Emergence of knowledge in compositional systems. Top left: Emergent knowledge arises from composition as new patterns and relationships that aren't present in the individual elements, defined formally as $k_{emergent} = k_{composite} \setminus \bigoplus_{i} k_i$. Top right: The amount of emergent knowledge increases with hierarchical level, with $I(k_{emergent, El}) > I(k_{emergent, M}) > I(k_{emergent, E})$, reflecting how higher levels integrate across more diverse sources. Bottom left: Resonance-enhanced emergence scales as $I(k_{emergent}) \propto r \cdot \log(n)$, where $r$ is resonance strength and $n$ is the number of composed elements, with stronger resonance amplifying emergent patterns. Bottom right: Compositional generalization demonstrates a threshold effect where initially composition may increase error, but beyond a threshold $n_0$, the composite error becomes lower than the minimum individual error ($\epsilon_{composite} < \min\{\epsilon_i\}$ when $n > n_0$), creating a compositional advantage in generalization.}
+\label{fig:emergent_knowledge}
+\end{figure}
