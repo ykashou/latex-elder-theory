@@ -16,7 +16,7 @@ This document provides a structured checklist for the contraction phase of Elder
 
 | Task | Status | Priority | Notes |
 |------|--------|----------|-------|
-| ☑ Formalize proof of system closedness | ✅ | High | Created formal proof document covering transformation, learning, information flow, and system completeness |
+| ☑ Formalize proof of system closedness | ✅ | High | Integrated formal proof with theorems directly into elder_heliosystem_unified.tex covering transformation, learning, information flow, and system completeness |
 | □ Verify axiomatic completeness | ⬜ | High | Ensure all theorems derive from axioms |
 | □ Establish consistency proof | ⬜ | High | Demonstrate no contradictions exist |
 | □ Formalize transition mechanisms between hierarchy levels | ⬜ | High | Elder → Mentor → Erudite |
