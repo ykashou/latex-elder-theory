@@ -1425,21 +1425,21 @@ By operating well within a desired stability phase and away from phase boundarie
 \begin{algorithm}[H]
 \caption{Stability Assessment Algorithm for Elder Heliosystems}
 \begin{algorithmic}[1]
-\REQUIRE System configuration $\mathcal{C}$, simulation time $T$, perturbation set $\mathcal{P}$
-\ENSURE Stability scores for different aspects
-\STATE Initialize stability scores: $S_{\text{orbital}} \gets 0$, $S_{\text{dynamical}} \gets 0$, $S_{\text{info}} \gets 0$, $S_{\text{learning}} \gets 0$
-\FOR{each perturbation $p \in \mathcal{P}$}
-    \STATE Apply perturbation $p$ to system $\mathcal{C}$
-    \STATE Simulate system dynamics for time $T$
-    \STATE Measure orbital stability metrics (hierarchy preservation, resonance maintenance)
-    \STATE Measure dynamical stability metrics (energy bounds, phase space confinement)
-    \STATE Measure informational stability metrics (transfer fidelity, processing accuracy)
-    \STATE Measure learning stability metrics (convergence, generalization)
-    \STATE Update stability scores based on measurements
-\ENDFOR
-\STATE Normalize stability scores to $[0, 1]$ range
-\STATE Calculate composite score: $S_{\text{composite}} \gets S_{\text{orbital}}^{w_1} \cdot S_{\text{dynamical}}^{w_2} \cdot S_{\text{info}}^{w_3} \cdot S_{\text{learning}}^{w_4}$
-\RETURN All stability scores
+\Require System configuration $\mathcal{C}$, simulation time $T$, perturbation set $\mathcal{P}$
+\Ensure Stability scores for different aspects
+\State Initialize stability scores: $S_{\text{orbital}} \gets 0$, $S_{\text{dynamical}} \gets 0$, $S_{\text{info}} \gets 0$, $S_{\text{learning}} \gets 0$
+\For{each perturbation $p \in \mathcal{P}$}
+    \State Apply perturbation $p$ to system $\mathcal{C}$
+    \State Simulate system dynamics for time $T$
+    \State Measure orbital stability metrics (hierarchy preservation, resonance maintenance)
+    \State Measure dynamical stability metrics (energy bounds, phase space confinement)
+    \State Measure informational stability metrics (transfer fidelity, processing accuracy)
+    \State Measure learning stability metrics (convergence, generalization)
+    \State Update stability scores based on measurements
+\EndFor
+\State Normalize stability scores to $[0, 1]$ range
+\State Calculate composite score: $S_{\text{composite}} \gets S_{\text{orbital}}^{w_1} \cdot S_{\text{dynamical}}^{w_2} \cdot S_{\text{info}}^{w_3} \cdot S_{\text{learning}}^{w_4}$
+\State \Return All stability scores
 \end{algorithmic}
 \end{algorithm}
 
