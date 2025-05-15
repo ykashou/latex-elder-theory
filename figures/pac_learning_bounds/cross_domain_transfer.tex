@@ -1,0 +1,107 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        domain/.style={
+            draw,
+            fill=blue!15,
+            circle,
+            minimum size=2.5cm,
+            align=center
+        },
+        transfer/.style={
+            ->,
+            thick,
+            >=latex,
+            bend left=20
+        },
+        knowledge/.style={
+            draw,
+            fill=green!15,
+            rounded corners,
+            minimum width=2.8cm,
+            minimum height=1cm,
+            text width=2.6cm,
+            align=center
+        },
+        isomorphism/.style={
+            draw,
+            fill=orange!15,
+            rounded corners,
+            minimum width=2.8cm,
+            minimum height=0.8cm,
+            text width=2.6cm,
+            align=center
+        },
+        bound/.style={
+            draw,
+            fill=red!10,
+            rounded corners,
+            minimum width=5cm,
+            minimum height=1.2cm,
+            text width=4.8cm,
+            align=center
+        }
+    }
+    
+    % Source domain
+    \node[domain] (d1) at (0,5) {Domain $d_1$\\(Source)};
+    \node[knowledge] (k1) at (0,3) {Knowledge $\mathcal{K}_{d_1}$};
+    \node[bound] (bd1) at (0,1) {Sample Complexity:\\$m_{d_1}(\epsilon, \delta) = \mathcal{O}\left(\frac{\text{VC}(\mathcal{C}_{d_1}) + \log(1/\delta)}{\epsilon^2}\right)$};
+    
+    % Target domain
+    \node[domain] (d2) at (9,5) {Domain $d_2$\\(Target)};
+    \node[knowledge] (k2) at (9,3) {Knowledge $\mathcal{K}_{d_2}$};
+    \node[bound] (bd2) at (9,1) {Transfer Sample Complexity:\\$m_{transfer}(\epsilon, \delta) = \mathcal{O}\left(\frac{\text{VC}(\mathcal{C}_{d_2}) \cdot (1 - \sigma(\alpha)) + \log(1/\delta)}{(\epsilon - \alpha)^2}\right)$};
+    
+    % Isomorphism
+    \node[isomorphism] (iso) at (4.5,4) {$\alpha$-Isomorphism $\phi$};
+    
+    % Error bound
+    \node[draw, fill=red!15, ellipse, minimum width=5cm, minimum height=1.2cm, text width=4.5cm, align=center] (error) at (4.5,6.5) {Transfer Error Bound:\\$\epsilon_{transfer} \leq \epsilon_{source} + \alpha$};
+    
+    % Connections
+    \draw (d1) -- (k1) -- (bd1);
+    \draw (d2) -- (k2) -- (bd2);
+    \draw[transfer] (d1) to node[above] {Knowledge Transfer} (d2);
+    \draw[transfer] (k1) to node[below] {Structure Mapping} (k2);
+    \draw (iso) -- (4.5,3) -- (k2);
+    \draw (iso) -- (4.5,3) -- (k1);
+    
+    % Efficiency factor
+    \node[draw, fill=yellow!15, rounded corners, text width=8cm, align=center] (efficiency) at (4.5,-1) {
+        \textbf{Transfer Efficiency Factor $\sigma(\alpha)$:}\\
+        $\sigma(\alpha) = 1 - \mathcal{O}(\alpha \cdot \log(1/\alpha))$\\
+        As $\alpha \to 0$ (perfect isomorphism), $\sigma(\alpha) \to 1$ (maximum efficiency)
+    };
+    
+    \draw[dotted, thick] (bd1) -- (efficiency);
+    \draw[dotted, thick] (bd2) -- (efficiency);
+    
+    % Multi-domain region
+    \begin{scope}[on background layer]
+        \node[draw, dashed, rounded corners, fill=blue!5, minimum width=12cm, minimum height=9cm] at (4.5,3) {};
+    \end{scope}
+    
+    % Title
+    \node[align=center, font=\bfseries, scale=1.2] at (4.5,8) {PAC-Learning Bounds for Cross-Domain Knowledge Transfer};
+    
+    % Additional domains hint
+    \node[domain, scale=0.6] (d3) at (2,7) {Domain $d_3$};
+    \node[domain, scale=0.6] (d4) at (7,7) {Domain $d_4$};
+    \draw[transfer, scale=0.6] (d3) to (d1);
+    \draw[transfer, scale=0.6] (d3) to (d2);
+    \draw[transfer, scale=0.6] (d4) to (d2);
+    
+    % Multi-domain note
+    \node[draw, fill=blue!10, rounded corners, scale=0.8, text width=5cm, align=center] at (12.5,5) {
+        \textbf{Multi-Domain Transfers:}\\
+        For $k$ source domains with isomorphisms $\{\alpha_i\}_{i=1}^k$, efficiency increases to:\\
+        $\lambda(\{\alpha_i\}) > \max_i \sigma(\alpha_i)$
+    };
+    
+\end{tikzpicture}
+\caption{PAC-Learning bounds for cross-domain knowledge transfer in the Elder system. Knowledge transfer between domains is formalized through $\alpha$-approximate isomorphisms, which map knowledge structures between domains with distortion at most $\alpha$. The transfer error is bounded by the sum of the source error and isomorphism distortion. Sample complexity in the target domain is reduced by a factor dependent on the transfer efficiency factor $\sigma(\alpha)$, which approaches 1 as the isomorphism approaches perfection ($\alpha \to 0$). With multiple source domains, the efficiency factor $\lambda$ provides even greater reduction in sample complexity.}
+\label{fig:cross_domain_pac}
+\end{figure}
