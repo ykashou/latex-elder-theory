@@ -24,7 +24,7 @@
   \draw[traditional, thick] plot[smooth, domain=0:10, samples=100] (\x, {0.008*\x*\x});
   
   % Heliomorphic approach curve (log-linear)
-  \draw[heliomorphic, thick] plot[smooth, domain=0:10, samples=100] (\x, {0.4*\x*ln(\x+1)});
+  \draw[heliomorphic, thick] plot[smooth, domain=1:10, samples=100] (\x, {0.4*\x*ln(\x+1)});
   
   % Points marking specific values
   \filldraw[traditional] (2, {0.008*2*2}) circle (2pt) node[above right] {$O(M^2)$};
