@@ -955,7 +955,7 @@ This provides a principled upper bound on learning rates based on the system's r
 \draw[->] (0,0) -- (10,0) node[below] {Phase Coherence $\langle\cos(\Psi)\rangle$};
 \draw[->] (0,0) -- (0,7) node[left] {Optimal Learning Rate $\eta^*$};
 
-\draw[domain=0:9, smooth, variable=\x, blue, thick] plot ({\x}, {3*exp(\x/9)/(1+0.3*\x)});
+\draw[domain=0:9, smooth, variable=\x, blue, thick] plot ({\x}, {3*exp(\x/9)/(max(0.1, 1+0.3*\x))});
 \draw[domain=0:9, smooth, variable=\x, red, thick, dashed] plot ({\x}, {2.5});
 
 \node at (9,1.5) {Traditional networks};
