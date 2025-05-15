@@ -2,11 +2,13 @@
 \centering
 \begin{tikzpicture}[scale=0.85, transform shape]
     % Define styles
-    \tikzstyle{invariant} = [draw, fill=red!20, rounded corners, minimum width=3cm, minimum height=1cm, align=center]
-    \tikzstyle{principle} = [draw, fill=violet!20, rounded corners, minimum width=3cm, minimum height=1cm, text width=2.8cm, align=center]
-    \tikzstyle{generalized} = [draw, fill=teal!20, rounded corners, minimum width=4cm, minimum height=1.2cm, text width=3.8cm, align=center]
-    \tikzstyle{arrow} = [->, >=latex, thick]
-    \tikzstyle{process} = [draw, dashed, fill=green!10, rounded corners, minimum width=3.5cm, minimum height=1.5cm, text width=3.3cm, align=center]
+    \tikzset{
+        invariant/.style={draw, fill=red!20, rounded corners, minimum width=3cm, minimum height=1cm, align=center},
+        principle/.style={draw, fill=violet!20, rounded corners, minimum width=3cm, minimum height=1cm, text width=2.8cm, align=center},
+        generalized/.style={draw, fill=teal!20, rounded corners, minimum width=4cm, minimum height=1.2cm, text width=3.8cm, align=center},
+        arrow/.style={->, >=latex, thick},
+        process/.style={draw, dashed, fill=green!10, rounded corners, minimum width=3.5cm, minimum height=1.5cm, text width=3.3cm, align=center}
+    }
     
     % Original invariants from domains
     \node[invariant] (i1) at (0,5) {Invariant from $\mathcal{D}_1$};

@@ -2,12 +2,14 @@
 \centering
 \begin{tikzpicture}[scale=0.85, transform shape]
     % Define styles
-    \tikzstyle{domain} = [draw, rounded corners, fill=blue!10, minimum width=6cm, minimum height=2.5cm, text width=5.8cm, align=center]
-    \tikzstyle{knowledge} = [draw, fill=yellow!20, rounded corners, minimum width=1.2cm, minimum height=0.8cm]
-    \tikzstyle{invariant} = [draw, fill=red!20, rounded corners, minimum width=1.2cm, minimum height=0.8cm]
-    \tikzstyle{arrow} = [->, >=latex, thick]
-    \tikzstyle{dashed} = [dashed, thick]
-    \tikzstyle{extraction} = [draw, fill=green!15, rounded corners, minimum width=7cm, minimum height=2cm]
+    \tikzset{
+        domain/.style={draw, rounded corners, fill=blue!10, minimum width=6cm, minimum height=2.5cm, text width=5.8cm, align=center},
+        knowledge/.style={draw, fill=yellow!20, rounded corners, minimum width=1.2cm, minimum height=0.8cm},
+        invariant/.style={draw, fill=red!20, rounded corners, minimum width=1.2cm, minimum height=0.8cm},
+        arrow/.style={->, >=latex, thick},
+        dashed/.style={dashed, thick},
+        extraction/.style={draw, fill=green!15, rounded corners, minimum width=7cm, minimum height=2cm}
+    }
     
     % Domain 1
     \node[domain] (d1) at (0,5) {Domain $\mathcal{D}_1$};

@@ -2,11 +2,13 @@
 \centering
 \begin{tikzpicture}[scale=0.85, transform shape]
     % Define styles
-    \tikzstyle{principle} = [draw, fill=violet!20, rounded corners, minimum width=2.5cm, minimum height=1cm, text width=2.3cm, align=center]
-    \tikzstyle{metaprinciple} = [draw, fill=teal!20, rounded corners, minimum width=3cm, minimum height=1.2cm, text width=2.8cm, align=center]
-    \tikzstyle{highprinciple} = [draw, fill=red!20, rounded corners, minimum width=3.5cm, minimum height=1.4cm, text width=3.3cm, align=center]
-    \tikzstyle{arrow} = [->, >=latex, thick]
-    \tikzstyle{composition} = [circle, draw, fill=yellow!20, minimum size=0.8cm, align=center]
+    \tikzset{
+        principle/.style={draw, fill=violet!20, rounded corners, minimum width=2.5cm, minimum height=1cm, text width=2.3cm, align=center},
+        metaprinciple/.style={draw, fill=teal!20, rounded corners, minimum width=3cm, minimum height=1.2cm, text width=2.8cm, align=center},
+        highprinciple/.style={draw, fill=red!20, rounded corners, minimum width=3.5cm, minimum height=1.4cm, text width=3.3cm, align=center},
+        arrow/.style={->, >=latex, thick},
+        composition/.style={circle, draw, fill=yellow!20, minimum size=0.8cm, align=center}
+    }
     
     % Base principles (level 1)
     \node[principle] (p1) at (0,0) {Principle $\mathcal{P}_1$};
