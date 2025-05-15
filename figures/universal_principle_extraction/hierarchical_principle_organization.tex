@@ -3,57 +3,57 @@
 \begin{tikzpicture}[scale=0.85, transform shape]
     % Define styles
     \tikzset{
-        principle/.style={draw, fill=violet!20, rounded corners, minimum width=2.5cm, minimum height=1cm, text width=2.3cm, align=center},
-        metaprinciple/.style={draw, fill=teal!20, rounded corners, minimum width=3cm, minimum height=1.2cm, text width=2.8cm, align=center},
-        highprinciple/.style={draw, fill=red!20, rounded corners, minimum width=3.5cm, minimum height=1.4cm, text width=3.3cm, align=center},
-        arrow/.style={->, >=latex, thick},
-        composition/.style={circle, draw, fill=yellow!20, minimum size=0.8cm, align=center}
+        principlebox/.style={draw, fill=violet!20, rounded corners, minimum width=2.5cm, minimum height=1cm, text width=2.3cm, align=center},
+        metaprinciplebox/.style={draw, fill=teal!20, rounded corners, minimum width=3cm, minimum height=1.2cm, text width=2.8cm, align=center},
+        highprinciplebox/.style={draw, fill=red!20, rounded corners, minimum width=3.5cm, minimum height=1.4cm, text width=3.3cm, align=center},
+        thickarrow/.style={->, >=latex, thick},
+        compositioncircle/.style={circle, draw, fill=yellow!20, minimum size=0.8cm, align=center}
     }
     
     % Base principles (level 1)
-    \node[principle] (p1) at (0,0) {Principle $\mathcal{P}_1$};
-    \node[principle] (p2) at (3,0) {Principle $\mathcal{P}_2$};
-    \node[principle] (p3) at (6,0) {Principle $\mathcal{P}_3$};
-    \node[principle] (p4) at (9,0) {Principle $\mathcal{P}_4$};
-    \node[principle] (p5) at (12,0) {Principle $\mathcal{P}_5$};
+    \node[principlebox] (p1) at (0,0) {Principle $\mathcal{P}_1$};
+    \node[principlebox] (p2) at (3,0) {Principle $\mathcal{P}_2$};
+    \node[principlebox] (p3) at (6,0) {Principle $\mathcal{P}_3$};
+    \node[principlebox] (p4) at (9,0) {Principle $\mathcal{P}_4$};
+    \node[principlebox] (p5) at (12,0) {Principle $\mathcal{P}_5$};
     
     % Meta-principles (level 2)
-    \node[metaprinciple] (mp1) at (1.5,3) {Meta-Principle $\mathcal{MP}_1$};
-    \node[metaprinciple] (mp2) at (6,3) {Meta-Principle $\mathcal{MP}_2$};
-    \node[metaprinciple] (mp3) at (10.5,3) {Meta-Principle $\mathcal{MP}_3$};
+    \node[metaprinciplebox] (mp1) at (1.5,3) {Meta-Principle $\mathcal{MP}_1$};
+    \node[metaprinciplebox] (mp2) at (6,3) {Meta-Principle $\mathcal{MP}_2$};
+    \node[metaprinciplebox] (mp3) at (10.5,3) {Meta-Principle $\mathcal{MP}_3$};
     
     % Higher-order principle (level 3)
-    \node[highprinciple] (hp1) at (6,6) {Higher-Order Principle $\mathcal{HP}_1$};
+    \node[highprinciplebox] (hp1) at (6,6) {Higher-Order Principle $\mathcal{HP}_1$};
     
     % Composition operators
-    \node[composition] (c1) at (1.5,1.5) {$\circ_1$};
-    \node[composition] (c2) at (7.5,1.5) {$\circ_2$};
-    \node[composition] (c3) at (10.5,1.5) {$\circ_3$};
-    \node[composition] (c4) at (4,4.5) {$\circ_4$};
-    \node[composition] (c5) at (8,4.5) {$\circ_5$};
+    \node[compositioncircle] (c1) at (1.5,1.5) {$\circ_1$};
+    \node[compositioncircle] (c2) at (7.5,1.5) {$\circ_2$};
+    \node[compositioncircle] (c3) at (10.5,1.5) {$\circ_3$};
+    \node[compositioncircle] (c4) at (4,4.5) {$\circ_4$};
+    \node[compositioncircle] (c5) at (8,4.5) {$\circ_5$};
     
     % Arrows from level 1 to composition operators
-    \draw[arrow] (p1) -- (c1);
-    \draw[arrow] (p2) -- (c1);
-    \draw[arrow] (p3) -- (c2);
-    \draw[arrow] (p4) -- (c2);
-    \draw[arrow] (p4) -- (c3);
-    \draw[arrow] (p5) -- (c3);
+    \draw[thickarrow] (p1) -- (c1);
+    \draw[thickarrow] (p2) -- (c1);
+    \draw[thickarrow] (p3) -- (c2);
+    \draw[thickarrow] (p4) -- (c2);
+    \draw[thickarrow] (p4) -- (c3);
+    \draw[thickarrow] (p5) -- (c3);
     
     % Arrows from composition operators to level 2
-    \draw[arrow] (c1) -- (mp1);
-    \draw[arrow] (c2) -- (mp2);
-    \draw[arrow] (c3) -- (mp3);
+    \draw[thickarrow] (c1) -- (mp1);
+    \draw[thickarrow] (c2) -- (mp2);
+    \draw[thickarrow] (c3) -- (mp3);
     
     % Arrows from level 2 to composition operators
-    \draw[arrow] (mp1) -- (c4);
-    \draw[arrow] (mp2) -- (c4);
-    \draw[arrow] (mp2) -- (c5);
-    \draw[arrow] (mp3) -- (c5);
+    \draw[thickarrow] (mp1) -- (c4);
+    \draw[thickarrow] (mp2) -- (c4);
+    \draw[thickarrow] (mp2) -- (c5);
+    \draw[thickarrow] (mp3) -- (c5);
     
     % Arrows from composition operators to level 3
-    \draw[arrow] (c4) -- (hp1);
-    \draw[arrow] (c5) -- (hp1);
+    \draw[thickarrow] (c4) -- (hp1);
+    \draw[thickarrow] (c5) -- (hp1);
     
     % Level labels
     \node[align=left] at (-2,0) {Level 1:\\Base Principles};
@@ -61,7 +61,7 @@
     \node[align=left] at (-2,6) {Level 3:\\Higher-Order\\Principles};
     
     % Legend for composition operators
-    \node[composition, scale=0.8] at (12.5,5) {$\circ_i$};
+    \node[compositioncircle, scale=0.8] at (12.5,5) {$\circ_i$};
     \node[align=left, scale=0.8] at (13.5,5) {Composition\\Operator};
     
     % Title
