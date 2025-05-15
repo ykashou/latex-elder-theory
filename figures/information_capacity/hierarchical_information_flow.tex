@@ -1,0 +1,120 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.8, transform shape]
+    % Define styles
+    \tikzset{
+        level/.style={
+            draw,
+            fill=blue!20,
+            rounded corners,
+            minimum width=3.5cm,
+            minimum height=1.4cm,
+            text width=3.3cm,
+            align=center
+        },
+        channel/.style={
+            draw,
+            fill=orange!20,
+            rounded corners,
+            minimum width=2.8cm,
+            minimum height=1cm,
+            text width=2.6cm,
+            align=center
+        },
+        capacity/.style={
+            draw,
+            fill=green!20,
+            rounded corners,
+            minimum width=4.5cm,
+            minimum height=1cm,
+            text width=4.3cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        },
+        infotag/.style={
+            draw,
+            circle,
+            fill=red!10,
+            minimum size=1.2cm,
+            text width=1.1cm,
+            align=center
+        }
+    }
+    
+    % Hierarchical levels
+    \node[level] (elder) at (0,6) {Elder Level\\Universal Principles};
+    \node[level] (mentor) at (0,3) {Mentor Level\\Meta-Knowledge};
+    \node[level] (erudite) at (0,0) {Erudite Level\\Domain Knowledge};
+    
+    % Vertical connections
+    \draw[arrow] (elder) -- (mentor);
+    \draw[arrow] (mentor) -- (erudite);
+    
+    % Channels
+    \node[channel] (e2m) at (3,4.5) {Elder-Mentor\\Channel\\$C_{El \to M}$};
+    \node[channel] (m2e) at (3,1.5) {Mentor-Erudite\\Channel\\$C_{M \to E}$};
+    
+    % Capacity equations
+    \node[capacity] (e2m_eq) at (7,4.5) {$\frac{D_{El}}{2} \log_2\left(1 + \frac{P_{El}}{N_0}\right)$};
+    \node[capacity] (m2e_eq) at (7,1.5) {$\frac{D_M}{2} \log_2\left(1 + \frac{P_M}{N_0}\right)$};
+    
+    % Connecting channels to equations
+    \draw[arrow] (e2m) -- (e2m_eq);
+    \draw[arrow] (m2e) -- (m2e_eq);
+    
+    % Information content
+    \node[infotag] (i_elder) at (-3,6) {$I(e_{El})$};
+    \node[infotag] (i_mentor) at (-3,3) {$I(e_M)$};
+    \node[infotag] (i_erudite) at (-3,0) {$I(e_E)$};
+    
+    \draw[arrow, dashed] (i_elder) -- (elder);
+    \draw[arrow, dashed] (i_mentor) -- (mentor);
+    \draw[arrow, dashed] (i_erudite) -- (erudite);
+    
+    % Bottleneck
+    \node[draw, fill=yellow!20, rounded corners, minimum width=10cm, text width=9.8cm, align=center] (bottleneck) at (3.5,-2) {
+        \textbf{End-to-End Channel Capacity:}\\
+        $C_{El \to E} \leq \min(C_{El \to M}, C_{M \to E})$\\
+        \small Identifies information flow bottlenecks in the hierarchy
+    };
+    
+    \draw[arrow, dotted, thick] (e2m_eq) -- (bottleneck);
+    \draw[arrow, dotted, thick] (m2e_eq) -- (bottleneck);
+    
+    % Total information
+    \node[draw, fill=red!15, ellipse, minimum width=8cm, minimum height=1.8cm, text width=7.5cm, align=center] (total) at (3.5,8) {
+        \textbf{Total Information Content:}\\
+        $I_{total} = \sum_{i} I(e_{El,i}) + \sum_{j} I(e_{M,j}) + \sum_{k} I(e_{E,k}) + I_{synergy}$
+    };
+    
+    \draw[arrow, dotted, thick] (elder) -- (total);
+    \draw[arrow, dotted, thick] (i_elder) -- (total);
+    
+    % Synergy
+    \node[draw, fill=purple!15, rounded corners, text width=5cm, align=center] (synergy) at (8,6) {
+        \textbf{Synergistic Information:}\\
+        $I_{synergy} = \Omega\left(\log(N_{total}) \cdot \sum_{i,j,k} I(e_{El,i}, e_{M,j}, e_{E,k})\right)$
+    };
+    
+    \draw[arrow, dashed] (synergy) -- (total);
+    
+    % Resonance effect
+    \begin{scope}[shift={(7,3)}]
+        \draw[ultra thick, blue, decorate, decoration={coil, amplitude=2pt, segment length=3pt}] 
+            (0,0) circle (0.8cm);
+        \node at (0,0) {Resonance};
+        \node[above=0.9cm] {Enhances};
+        \draw[arrow, blue] (0,0.8) -- (0,2);
+    \end{scope}
+    
+    % Add title
+    \node[font=\bfseries, scale=1.2] at (3.5,9.5) {Hierarchical Information Flow in the Elder System};
+    
+\end{tikzpicture}
+\caption{Information flow and capacity in the Elder system's hierarchical structure. Information content at each level (Elder, Mentor, Erudite) is represented by the Shannon mutual information between entity states and parameters. Information flows between hierarchical levels through channels with specific capacities determined by signal-to-noise ratios and dimensionality. The end-to-end capacity from Elder to Erudite is bounded by the minimum capacity of the individual channels, identifying potential bottlenecks. Resonance mechanisms enhance channel capacity by improving signal quality. The system exhibits synergistic information that scales superlinearly with the number of entities, contributing to the total information content beyond the sum of individual entity information.}
+\label{fig:hierarchical_information}
+\end{figure}
