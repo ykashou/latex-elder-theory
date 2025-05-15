@@ -76,6 +76,7 @@ This document provides a structured checklist for the contraction phase of Elder
 | □ Update all theorems to reference axiom system | ⬜ | High | Use minimal set of axioms; create reference table linking theorems to axioms |
 | □ Ensure consistent citation of prior results | ⬜ | Medium | Standardize on theorem number references; use uniform citation format |
 | □ Standardize theorem-proof structure | ⬜ | Medium | Adopt simple statement-proof format with consistent indentation |
+| ☑ Reorganize document structure | ✅ | High | Moved Unified Parameter Space to Unit I (Foundation Layer) and Elder Training Loop to Part II (Experiment) sections |
 | □ Harmonize figure and diagram notation | ⬜ | Low | Use consistent symbol sizes, colors, and labeling conventions |
 | □ Verify index entries are consistent | ⬜ | Low | Create master terminology list; ensure index covers all key concepts |
 | □ Add reconciliation appendix | ⬜ | Medium | Create appendix showing explicit mappings between different mathematical formulations |

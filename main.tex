@@ -314,9 +314,6 @@ While acknowledging these contributions, I take full responsibility for any erro
 % Comprehensive notation guide
 \input{chapters/part1_theory/core_concepts/consolidated_notation.tex}
 
-% Unified parameter space definition
-\input{chapters/part1_theory/core_concepts/unified_parameter_space.tex}
-
 % Glossary of terms
 \input{glossary.tex}
 
@@ -332,6 +329,7 @@ While acknowledging these contributions, I take full responsibility for any erro
 \unit{Foundation Layer}
 % Starting with a concrete example followed by the abstract mathematical foundation and vocabulary
 \input{chapters/part1_theory/core_concepts/concrete_example.tex} % Concrete example of Elder Theory in practice
+\input{chapters/part1_theory/core_concepts/unified_parameter_space.tex} % Parameter Space definition
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_spaces.tex} % Introduction to Elder Spaces
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_topology.tex} % Introduction to Elder Topology (Realization Mapping)
 
@@ -372,7 +370,7 @@ While acknowledging these contributions, I take full responsibility for any erro
 \input{chapters/part1_theory/loss_functions/hierarchical_backpropagation.tex} % Hierarchical Backpropagation in the Elder Heliosystem
 \input{chapters/part1_theory/loss_functions/optimization_dynamics.tex} % Optimization Dynamics and Stability Analysis
 \input{chapters/part1_theory/loss_functions/elder_activation_functions.tex} % Elder Heliosystem Activation Functions
-\input{chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex} % Elder Training Loop - from Elder Manifold to Magefiles
+% Elder Training Loop moved to Part II (Experiment) section
 \input{chapters/part1_theory/mechanics_and_dynamics/unified_resonance_mechanism.tex} % Unified Resonance Mechanism Definition
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_resonance_algorithm.tex} % Elder Heliosystem Resonance Algorithm
 \input{chapters/part1_theory/mechanics_and_dynamics/detailed_resonance_mechanism.tex} % Detailed Resonance Mechanism for Information Transfer
@@ -435,7 +433,11 @@ While acknowledging these contributions, I take full responsibility for any erro
 \unit{Experimental Setup and Methodology}
 \input{chapters/part2_experiment/experiment.tex}
 
-%%% UNIT II. PERFORMANCE EVALUATION %%%
+%%% UNIT II. ELDER THEORY IN PRACTICE %%%
+\unit{Elder Theory in Practice}
+\input{chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex} % Complete Elder Training System
+
+%%% UNIT III. PERFORMANCE EVALUATION %%%
 \unit{Performance Evaluation}
 \input{chapters/part2_experiment/benchmarks.tex}
 \input{chapters/part2_experiment/benchmark_comparison.tex}
