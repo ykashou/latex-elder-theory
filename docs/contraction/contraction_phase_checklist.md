@@ -6,7 +6,7 @@ This document provides a structured checklist for the contraction phase of Elder
 
 | Task | Status | Priority | Notes |
 |------|--------|----------|-------|
-| □ Fix notation inconsistencies across all chapters | ⬜ | High | Start with elder_training_loop.tex (double subscript errors) |
+| ☑ Fix notation inconsistencies across all chapters | ✅ | High | Fixed elder_training_loop.tex double subscript errors by reformatting mentor/elder reflection functions |
 | □ Standardize mathematical symbology in all equations | ⬜ | High | Ensure alignment with consolidated_notation.tex |
 | □ Verify consistent use of complex-valued parameter notation | ⬜ | Medium | Check $\theta = \rho e^{i\phi}$ vs alternative forms |
 | □ Harmonize tensor notation across documents | ⬜ | Medium | Focus on radial-phase coupling tensor $\mathcal{T}_f$ |
@@ -87,13 +87,13 @@ The contraction phase will be considered complete when:
 
 | Section | Tasks Completed | Total Tasks | Progress |
 |---------|-----------------|------------|----------|
-| Mathematical Consistency | 0 | 5 | 0% |
+| Mathematical Consistency | 1 | 5 | 20% |
 | System Closure | 0 | 5 | 0% |
 | Theoretical Integration | 0 | 5 | 0% |
 | Hierarchical Structure | 0 | 5 | 0% |
 | Algorithm and Implementation | 0 | 5 | 0% |
 | Cross-Domain Applications | 0 | 5 | 0% |
 | Document Standardization | 0 | 5 | 0% |
-| **Overall Progress** | **0** | **35** | **0%** |
+| **Overall Progress** | **1** | **35** | **2.9%** |
 
 *Last updated: May 15, 2025*

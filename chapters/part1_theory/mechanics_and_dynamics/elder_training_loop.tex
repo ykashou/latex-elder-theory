@@ -169,12 +169,12 @@ Below, we present the complete mathematical formulation of the Elder training al
                 \State $\nabla_{\theta_{\text{E},i,j}} \mathcal{L}_{\text{E}} \mathrel{+}= \frac{1}{B} \nabla_{\theta_{\text{E},i,j}} \mathcal{L}_{\text{E},k}$ \Comment{Accumulate Erudite gradient}
             \EndFor
             
-            \State $p_{\text{M},i,j} \gets \mentorreflection_{\theta_{\text{M},i}}(\theta_{\text{E},i,j})$ \Comment{Mentor reflection on Erudite}
+            \State $p_{\text{M},i,j} \gets \mentorreflection(\theta_{\text{M},i}, \theta_{\text{E},i,j})$ \Comment{Mentor reflection on Erudite}
             \State $\mathcal{L}_{\text{M},i,j} \gets \mentorloss(p_{\text{M},i,j}, \{\theta_{\text{E},i,l}\}_{l=1}^{N_i})$ \Comment{Compute Mentor loss}
             \State $\nabla_{\theta_{\text{M},i}} \mathcal{L}_{\text{M}} \mathrel{+}= \frac{1}{N_i} \nabla_{\theta_{\text{M},i}} \mathcal{L}_{\text{M},i,j}$ \Comment{Accumulate Mentor gradient}
         \EndFor
         
-        \State $p_{\text{Elder},i} \gets \elderreflection_{\theta_{\text{Elder}}}(\theta_{\text{M},i})$ \Comment{Elder reflection on Mentor}
+        \State $p_{\text{Elder},i} \gets \elderreflection(\theta_{\text{Elder}}, \theta_{\text{M},i})$ \Comment{Elder reflection on Mentor}
         \State $\mathcal{L}_{\text{Elder},i} \gets \elderloss(p_{\text{Elder},i}, \{\theta_{\text{M},l}\}_{l=1}^{M})$ \Comment{Compute Elder loss}
         \State $\nabla_{\theta_{\text{Elder}}} \mathcal{L}_{\text{Elder}} \mathrel{+}= \frac{1}{M} \nabla_{\theta_{\text{Elder}}} \mathcal{L}_{\text{Elder},i}$ \Comment{Accumulate Elder gradient}
     \EndFor
