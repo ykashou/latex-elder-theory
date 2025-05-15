@@ -2,7 +2,7 @@ modules = ["bash", "python-3.11"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["texliveFull", "poppler"]
+packages = ["texliveFull", "poppler", "imagemagick"]
 
 [workflows]
 runButton = "Project"
