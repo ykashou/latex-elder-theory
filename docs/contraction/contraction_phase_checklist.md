@@ -8,12 +8,12 @@ This document provides a structured checklist for the contraction phase of Elder
 |------|--------|----------|-------|
 | ☑ Fix notation inconsistencies across all chapters | ✅ | High | Fixed elder_training_loop.tex double subscript errors by reformatting mentor/elder reflection functions |
 | □ Standardize mathematical symbology in all equations | ⬜ | High | Ensure alignment with consolidated_notation.tex |
-| □ Unify parameter space definitions across chapters | ⬜ | High | Resolve Hilbert space vs. Banach space vs. field theory formulations |
-| □ Standardize resonance mechanism definitions | ⬜ | High | Reconcile coupled oscillator equations vs. frequency response functions vs. Arnold tongues |
-| □ Unify heliomorphic function definitions | ⬜ | High | Ensure consistent domain/range properties across all chapters |
-| □ Verify consistent use of complex-valued parameter notation | ⬜ | Medium | Check $\theta = \rho e^{i\phi}$ vs alternative forms |
-| □ Harmonize tensor notation across documents | ⬜ | Medium | Focus on radial-phase coupling tensor $\mathcal{T}_f$ |
-| □ Consolidate operator definitions | ⬜ | Medium | Especially heliomorphic operators |
+| □ Unify parameter space definitions across chapters | ⬜ | High | Adopt Hilbert space formulation as standard; add bridging theorems to connect with other formulations |
+| □ Standardize resonance mechanism definitions | ⬜ | High | Use coupled oscillator equations as primary definition; demonstrate how other formulations derive from this |
+| □ Unify heliomorphic function definitions | ⬜ | High | Establish single canonical definition with clear domain/range; introduce special cases as corollaries |
+| □ Verify consistent use of complex-valued parameter notation | ⬜ | Medium | Standardize on $\theta = \rho e^{i\phi}$ notation throughout |
+| □ Harmonize tensor notation across documents | ⬜ | Medium | Focus on radial-phase coupling tensor $\mathcal{T}_f$; use consistent indexing convention |
+| □ Consolidate operator definitions | ⬜ | Medium | Especially heliomorphic operators; create canonical reference in appendix |
 
 ## 2. System Closure
 
@@ -22,62 +22,63 @@ This document provides a structured checklist for the contraction phase of Elder
 | ☑ Formalize proof of system closedness | ✅ | High | Integrated formal proof with theorems directly into elder_heliosystem_unified.tex covering transformation, learning, information flow, and system completeness |
 | □ Verify axiomatic completeness | ⬜ | High | Ensure all theorems derive from axioms |
 | □ Establish consistency proof | ⬜ | High | Demonstrate no contradictions exist |
-| □ Formalize transition mechanisms between hierarchy levels | ⬜ | High | Elder → Mentor → Erudite |
-| □ Develop unified memory complexity proof | ⬜ | High | Reconcile field equations vs. hierarchical compression vs. orbital parameter encoding |
-| □ Validate mathematical closure in knowledge transfer | ⬜ | Medium | Cross-domain transfer must preserve structure |
-| □ Standardize transfer theorem boundary conditions | ⬜ | Medium | Ensure consistent conditions across theoretical and experimental chapters |
+| □ Formalize transition mechanisms between hierarchy levels | ⬜ | High | Elder → Mentor → Erudite; use simple propagation equations |
+| □ Develop unified memory complexity proof | ⬜ | High | Base primary proof on field equations; show how other approaches are special cases |
+| □ Validate mathematical closure in knowledge transfer | ⬜ | Medium | Cross-domain transfer must preserve structure; define minimal preservation criteria |
+| □ Standardize transfer theorem boundary conditions | ⬜ | Medium | Adopt experimental boundary conditions as canonical; retroactively update theoretical statements |
 
 ## 3. Theoretical Integration
 
 | Task | Status | Priority | Notes |
 |------|--------|----------|-------|
-| □ Reconcile heliomorphic shell model with orbital mechanics | ⬜ | High | Address structural inconsistencies |
-| □ Integrate information theory with heliomorphic axioms | ⬜ | High | Connect mutual information to core framework |
-| □ Standardize knowledge representation spaces | ⬜ | High | Reconcile metric space vs. vector space vs. tensor product space formulations |
-| □ Unify hierarchical structure formalisms | ⬜ | High | Reconcile graph-theoretical vs. dynamical systems vs. nested function approaches |
-| □ Harmonize thermodynamic analogies with information theory | ⬜ | High | Reconcile statistical mechanics vs. information theory vs. quantum mechanical approaches |
-| □ Formalize relationship between manifold and orbital representations | ⬜ | Medium | Establish mathematical equivalence |
-| □ Unify phase-space and parameter-space representations | ⬜ | Medium | Show transformations between spaces |
+| □ Reconcile heliomorphic shell model with orbital mechanics | ⬜ | High | Establish orbital mechanics as fundamental; derive shell model as geometric interpretation |
+| □ Integrate information theory with heliomorphic axioms | ⬜ | High | Connect mutual information to core framework through simple mapping theorems |
+| □ Standardize knowledge representation spaces | ⬜ | High | Adopt metric space as primary formalism; show how vector and tensor spaces embed within it |
+| □ Unify hierarchical structure formalisms | ⬜ | High | Use graph-theoretical approach as foundation; demonstrate dynamical systems as behavioral description |
+| □ Harmonize thermodynamic analogies with information theory | ⬜ | High | Standardize on information-theoretic framework; present statistical mechanics as physical interpretation |
+| □ Formalize relationship between manifold and orbital representations | ⬜ | Medium | Establish simple bijective mapping between representations |
+| □ Unify phase-space and parameter-space representations | ⬜ | Medium | Define canonical transformation equations between spaces |
 
 ## 4. Hierarchical Structure Completion
 
 | Task | Status | Priority | Notes |
 |------|--------|----------|-------|
-| □ Complete Elder entity mathematical formalization | ⬜ | High | Focus on cross-domain principle encoding |
-| □ Complete Mentor entity mathematical formalization | ⬜ | Medium | Focus on domain-specific knowledge encoding |
-| □ Complete Erudite entity mathematical formalization | ⬜ | Medium | Focus on task-specific knowledge encoding |
-| □ Formalize resonance mechanisms between levels | ⬜ | High | Especially syzygy effects |
-| □ Complete gravitational analogy with mathematical rigor | ⬜ | Medium | Ensure consistent physics parallels |
+| □ Complete Elder entity mathematical formalization | ⬜ | High | Focus on cross-domain principle encoding; use simplified parameter representations |
+| □ Complete Mentor entity mathematical formalization | ⬜ | Medium | Focus on domain-specific knowledge encoding; derive from Elder formalization |
+| □ Complete Erudite entity mathematical formalization | ⬜ | Medium | Focus on task-specific knowledge encoding; derive from Mentor formalization |
+| □ Formalize resonance mechanisms between levels | ⬜ | High | Use basic coupled oscillator model; define syzygy effects as special cases |
+| □ Complete gravitational analogy with mathematical rigor | ⬜ | Medium | Treat as pedagogical metaphor; clearly delineate where analogy breaks down |
 
 ## 5. Algorithm and Implementation
 
 | Task | Status | Priority | Notes |
 |------|--------|----------|-------|
-| □ Finalize Elder training loop algorithm | ⬜ | High | Fix notation errors in elder_training_loop.tex |
-| □ Validate activation functions' mathematical properties | ⬜ | Medium | Ensure consistency with heliomorphic axioms |
-| □ Complete loss function mathematical derivations | ⬜ | High | Connect to information theory principles |
-| □ Formalize complexity guarantees | ⬜ | Medium | Especially O(1) memory complexity claims |
-| □ Verify convergence proofs | ⬜ | High | For all learning algorithms |
+| □ Finalize Elder training loop algorithm | ⬜ | High | Fix notation errors; simplify to core steps with optional extensions |
+| □ Validate activation functions' mathematical properties | ⬜ | Medium | Select minimal set of required properties; standardize on complex-valued exponential forms |
+| □ Complete loss function mathematical derivations | ⬜ | High | Derive all variant forms from single canonical loss function |
+| □ Formalize complexity guarantees | ⬜ | Medium | Provide simple proof for O(1) memory complexity using field theory approach |
+| □ Verify convergence proofs | ⬜ | High | Use standard Lyapunov function approach for all convergence proofs |
 
 ## 6. Cross-Domain Applications
 
 | Task | Status | Priority | Notes |
 |------|--------|----------|-------|
-| □ Formalize domain-specific knowledge transfer | ⬜ | Medium | With mathematical rigor |
-| □ Complete knowledge composition mechanisms | ⬜ | Medium | Formal definition and properties |
-| □ Finalize universal principle extraction formalism | ⬜ | High | As Elder entity's primary function |
-| □ Validate multi-domain learning mathematics | ⬜ | Medium | Ensure consistent framework application |
-| □ Verify transfer theorem completeness | ⬜ | Medium | Connect to information theory |
+| □ Formalize domain-specific knowledge transfer | ⬜ | Medium | Use simple isomorphism mapping; define minimal success criteria |
+| □ Complete knowledge composition mechanisms | ⬜ | Medium | Base on standard operator algebra; limit to essential operations |
+| □ Finalize universal principle extraction formalism | ⬜ | High | Use invariant manifold approach; simplify detection criteria |
+| □ Validate multi-domain learning mathematics | ⬜ | Medium | Demonstrate as straightforward extension of single-domain case |
+| □ Verify transfer theorem completeness | ⬜ | Medium | Base on information-theoretic bounds; implement standard Shannon framework |
 
 ## 7. Document Standardization
 
 | Task | Status | Priority | Notes |
 |------|--------|----------|-------|
-| □ Update all theorems to reference axiom system | ⬜ | High | Explicit connections |
-| □ Ensure consistent citation of prior results | ⬜ | Medium | Within the document |
-| □ Standardize theorem-proof structure | ⬜ | Medium | Consistent formatting |
-| □ Harmonize figure and diagram notation | ⬜ | Low | Follow conventions in notation guide |
-| □ Verify index entries are consistent | ⬜ | Low | For key terms and concepts |
+| □ Update all theorems to reference axiom system | ⬜ | High | Use minimal set of axioms; create reference table linking theorems to axioms |
+| □ Ensure consistent citation of prior results | ⬜ | Medium | Standardize on theorem number references; use uniform citation format |
+| □ Standardize theorem-proof structure | ⬜ | Medium | Adopt simple statement-proof format with consistent indentation |
+| □ Harmonize figure and diagram notation | ⬜ | Low | Use consistent symbol sizes, colors, and labeling conventions |
+| □ Verify index entries are consistent | ⬜ | Low | Create master terminology list; ensure index covers all key concepts |
+| □ Add reconciliation appendix | ⬜ | Medium | Create appendix showing explicit mappings between different mathematical formulations |
 
 ## Completion Criteria
 
@@ -89,18 +90,19 @@ The contraction phase will be considered complete when:
 4. There are no contradictions or inconsistencies between sections
 5. All theorems are properly derived from the axiom system
 6. The entire framework operates as a unified mathematical system
+7. Each mathematical concept has a single canonical definition with clear relationships to alternative formulations
 
 ## Progress Tracking
 
 | Section | Tasks Completed | Total Tasks | Progress |
 |---------|-----------------|------------|----------|
-| Mathematical Consistency | 1 | 5 | 20% |
-| System Closure | 1 | 5 | 20% |
-| Theoretical Integration | 0 | 5 | 0% |
+| Mathematical Consistency | 1 | 8 | 12.5% |
+| System Closure | 1 | 7 | 14.3% |
+| Theoretical Integration | 0 | 7 | 0% |
 | Hierarchical Structure | 0 | 5 | 0% |
 | Algorithm and Implementation | 0 | 5 | 0% |
 | Cross-Domain Applications | 0 | 5 | 0% |
-| Document Standardization | 0 | 5 | 0% |
-| **Overall Progress** | **2** | **35** | **5.7%** |
+| Document Standardization | 0 | 6 | 0% |
+| **Overall Progress** | **2** | **43** | **4.7%** |
 
 *Last updated: May 15, 2025*
