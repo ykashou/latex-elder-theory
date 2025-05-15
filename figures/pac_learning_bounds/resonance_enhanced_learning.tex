@@ -76,8 +76,8 @@
         \draw[->] (0,0) -- (0,3) node[above] {Efficiency};
         
         % Sample curves
-        \draw[domain=0:2.5, samples=50, smooth, variable=\x, red, thick] 
-            plot ({\x}, {0.2 + 2.5 * exp(-2*\x)});
+        \draw[domain=0.1:2.5, samples=50, smooth, variable=\x, red, thick] 
+            plot ({\x}, {0.2 + 2.5 * exp(-2*min(\x,2))});
         \draw[domain=0:2.5, samples=50, smooth, variable=\x, blue, thick] 
             plot ({\x}, {0.2 + 2.5 / (1 + 2*\x*\x)});
         \draw[domain=0:2.5, samples=50, smooth, variable=\x, green, thick] 
