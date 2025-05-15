@@ -450,18 +450,8 @@ While acknowledging these contributions, I take full responsibility for any erro
 % Print the index
 \printindex
 
-% Force any pending figures to be processed
+% Properly end document (removing conditional figure closure)
 \clearpage
-
-% Process any remaining floats
-\clearpage
-
-% End any potentially unclosed environments
-\iffalse
-\end{figure}
-\end{table}
-\end{equation}
-\fi
 
 % End the document
 \end{document}
