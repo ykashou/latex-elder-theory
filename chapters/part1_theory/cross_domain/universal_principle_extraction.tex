@@ -38,29 +38,30 @@ where:
 
 Identifying invariant substructures requires systematically comparing knowledge representations across domains to isolate components that maintain consistent relationships.
 
-\begin{algorithm}[Invariant Substructure Extraction]
+\begin{algorithm}
+\caption{Invariant Substructure Extraction}
 \begin{algorithmic}[1]
-\REQUIRE Knowledge sets $\{K_{\mathcal{D}_1}, K_{\mathcal{D}_2}, \ldots, K_{\mathcal{D}_n}\}$ from $n$ distinct domains
-\REQUIRE Minimum similarity threshold $\tau \in [0,1]$
-\REQUIRE Minimum domain coverage $\delta \in [0,1]$
-\ENSURE Set of invariant substructures $\mathcal{I} = \{I_1, I_2, \ldots, I_m\}$
+\Require Knowledge sets $\{K_{\mathcal{D}_1}, K_{\mathcal{D}_2}, \ldots, K_{\mathcal{D}_n}\}$ from $n$ distinct domains
+\Require Minimum similarity threshold $\tau \in [0,1]$
+\Require Minimum domain coverage $\delta \in [0,1]$
+\Ensure Set of invariant substructures $\mathcal{I} = \{I_1, I_2, \ldots, I_m\}$
 
-\STATE Initialize empty set of candidate invariants $\mathcal{C} \gets \emptyset$
-\FOR{each pair of domains $(\mathcal{D}_i, \mathcal{D}_j)$ where $i \neq j$}
-    \STATE Extract common substructures $S_{ij} \gets \text{CommonSubstructures}(K_{\mathcal{D}_i}, K_{\mathcal{D}_j})$
-    \STATE Filter by similarity: $S_{ij}^{\tau} \gets \{s \in S_{ij} \mid \Sigma(s_i, s_j) \geq \tau\}$
-    \STATE Add to candidates: $\mathcal{C} \gets \mathcal{C} \cup S_{ij}^{\tau}$
-\ENDFOR
+\State Initialize empty set of candidate invariants $\mathcal{C} \gets \emptyset$
+\For{each pair of domains $(\mathcal{D}_i, \mathcal{D}_j)$ where $i \neq j$}
+    \State Extract common substructures $S_{ij} \gets \text{CommonSubstructures}(K_{\mathcal{D}_i}, K_{\mathcal{D}_j})$
+    \State Filter by similarity: $S_{ij}^{\tau} \gets \{s \in S_{ij} \mid \Sigma(s_i, s_j) \geq \tau\}$
+    \State Add to candidates: $\mathcal{C} \gets \mathcal{C} \cup S_{ij}^{\tau}$
+\EndFor
 
-\STATE Initialize empty set of invariants $\mathcal{I} \gets \emptyset$
-\FOR{each candidate $c \in \mathcal{C}$}
-    \STATE Count domains with manifestation: $d_c \gets |\{\mathcal{D}_i \mid \exists s \in K_{\mathcal{D}_i}, \Sigma(c, s) \geq \tau\}|$
-    \IF{$d_c / n \geq \delta$}
-        \STATE Add to invariants: $\mathcal{I} \gets \mathcal{I} \cup \{c\}$
-    \ENDIF
-\ENDFOR
+\State Initialize empty set of invariants $\mathcal{I} \gets \emptyset$
+\For{each candidate $c \in \mathcal{C}$}
+    \State Count domains with manifestation: $d_c \gets |\{\mathcal{D}_i \mid \exists s \in K_{\mathcal{D}_i}, \Sigma(c, s) \geq \tau\}|$
+    \If{$d_c / n \geq \delta$}
+        \State Add to invariants: $\mathcal{I} \gets \mathcal{I} \cup \{c\}$
+    \EndIf
+\EndFor
 
-\RETURN $\mathcal{I}$
+\State \Return $\mathcal{I}$
 \end{algorithmic}
 \end{algorithm}
 
@@ -176,27 +177,28 @@ Having established the mathematical foundation for identifying, abstracting, and
 
 The Elder extracts universal principles through a hierarchical distillation process that progressively refines knowledge received from Mentors across multiple domains.
 
-\begin{algorithm}[Elder's Principle Extraction]
+\begin{algorithm}
+\caption{Elder's Principle Extraction}
 \begin{algorithmic}[1]
-\REQUIRE Mentor knowledge sets $\{K_{\mathcal{M}_1}, K_{\mathcal{M}_2}, \ldots, K_{\mathcal{M}_k}\}$ from $k$ Mentors
-\REQUIRE Domain specifications $\{\mathcal{D}_1, \mathcal{D}_2, \ldots, \mathcal{D}_n\}$ covered by the Mentors
-\ENSURE Set of universal principles $\mathcal{P} = \{P_1, P_2, \ldots, P_m\}$
+\Require Mentor knowledge sets $\{K_{\mathcal{M}_1}, K_{\mathcal{M}_2}, \ldots, K_{\mathcal{M}_k}\}$ from $k$ Mentors
+\Require Domain specifications $\{\mathcal{D}_1, \mathcal{D}_2, \ldots, \mathcal{D}_n\}$ covered by the Mentors
+\Ensure Set of universal principles $\mathcal{P} = \{P_1, P_2, \ldots, P_m\}$
 
-\STATE Align representations: $\{K'_{\mathcal{M}_1}, K'_{\mathcal{M}_2}, \ldots, K'_{\mathcal{M}_k}\} \gets \text{Align}(\{K_{\mathcal{M}_1}, K_{\mathcal{M}_2}, \ldots, K_{\mathcal{M}_k}\})$
-\STATE Extract domain-spanning invariants: $\mathcal{I} \gets \text{ExtractInvariants}(\{K'_{\mathcal{M}_1}, K'_{\mathcal{M}_2}, \ldots, K'_{\mathcal{M}_k}\})$
-\STATE Cluster related invariants: $\{\mathcal{C}_1, \mathcal{C}_2, \ldots, \mathcal{C}_l\} \gets \text{ClusterInvariants}(\mathcal{I})$
-\STATE Initialize empty set of principles: $\mathcal{P} \gets \emptyset$
+\State Align representations: $\{K'_{\mathcal{M}_1}, K'_{\mathcal{M}_2}, \ldots, K'_{\mathcal{M}_k}\} \gets \text{Align}(\{K_{\mathcal{M}_1}, K_{\mathcal{M}_2}, \ldots, K_{\mathcal{M}_k}\})$
+\State Extract domain-spanning invariants: $\mathcal{I} \gets \text{ExtractInvariants}(\{K'_{\mathcal{M}_1}, K'_{\mathcal{M}_2}, \ldots, K'_{\mathcal{M}_k}\})$
+\State Cluster related invariants: $\{\mathcal{C}_1, \mathcal{C}_2, \ldots, \mathcal{C}_l\} \gets \text{ClusterInvariants}(\mathcal{I})$
+\State Initialize empty set of principles: $\mathcal{P} \gets \emptyset$
 
-\FOR{each cluster $\mathcal{C}_j$}
-    \STATE Abstract principle: $P_j \gets \alpha(\mathcal{C}_j)$
-    \STATE Generalize principle: $P'_j \gets \gamma(P_j)$
-    \STATE Validate principle: valid $\gets \text{ValidatePrinciple}(P'_j, \{\mathcal{D}_1, \mathcal{D}_2, \ldots, \mathcal{D}_n\})$
-    \IF{valid}
-        \STATE Add to principles: $\mathcal{P} \gets \mathcal{P} \cup \{P'_j\}$
-    \ENDIF
-\ENDFOR
+\For{each cluster $\mathcal{C}_j$}
+    \State Abstract principle: $P_j \gets \alpha(\mathcal{C}_j)$
+    \State Generalize principle: $P'_j \gets \gamma(P_j)$
+    \State Validate principle: valid $\gets \text{ValidatePrinciple}(P'_j, \{\mathcal{D}_1, \mathcal{D}_2, \ldots, \mathcal{D}_n\})$
+    \If{valid}
+        \State Add to principles: $\mathcal{P} \gets \mathcal{P} \cup \{P'_j\}$
+    \EndIf
+\EndFor
 
-\RETURN $\mathcal{P}$
+\State \Return $\mathcal{P}$
 \end{algorithmic}
 \end{algorithm}
 
