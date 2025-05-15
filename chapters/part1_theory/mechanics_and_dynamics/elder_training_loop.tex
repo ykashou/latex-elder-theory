@@ -696,17 +696,17 @@ The heliomorphic algorithm reduces the gradient computation bottleneck by 91.3\%
   
   % Points marking specific values
   \filldraw[traditional] (2, {0.008*2*2}) circle (2pt) node[above right] {$O(M^2)$};
-  \filldraw[heliomorphic] (2, {0.4*2*ln(2+1)}) circle (2pt) node[below right] {$O(M \log M)$};
+  \filldraw[heliomorphic] (2, {0.4*max(0.1,2)*ln(max(1.1,2+1))}) circle (2pt) node[below right] {$O(M \log M)$};
   
   \filldraw[traditional] (5, {0.008*5*5}) circle (2pt) node[above right] {};
-  \filldraw[heliomorphic] (5, {0.4*5*ln(5+1)}) circle (2pt) node[below right] {};
+  \filldraw[heliomorphic] (5, {0.4*max(0.1,5)*ln(max(1.1,5+1))}) circle (2pt) node[below right] {};
   
   \filldraw[traditional] (8, {0.008*8*8}) circle (2pt) node[above right] {};
-  \filldraw[heliomorphic] (8, {0.4*8*ln(8+1)}) circle (2pt) node[below right] {};
+  \filldraw[heliomorphic] (8, {0.4*max(0.1,8)*ln(max(1.1,8+1))}) circle (2pt) node[below right] {};
   
   % Annotation of efficiency gap
-  \draw[dashed] (8, {0.008*8*8}) -- (8, {0.4*8*ln(8+1)});
-  \draw[<->, thick] (8.2, {0.008*8*8}) -- (8.2, {0.4*8*ln(8+1)}) 
+  \draw[dashed] (8, {0.008*8*8}) -- (8, {0.4*max(0.1,8)*ln(max(1.1,8+1))});
+  \draw[<->, thick] (8.2, {0.008*8*8}) -- (8.2, {0.4*max(0.1,8)*ln(max(1.1,8+1))}) 
     node[midway, right] {68.1\% reduction};
   
   % Legend

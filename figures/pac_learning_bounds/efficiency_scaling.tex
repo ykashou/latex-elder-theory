@@ -36,7 +36,7 @@
     \draw[domain=1:9, samples=50, smooth, variable=\x, blue, thick] plot ({\x}, {5.5 - 0.05*\x});
     
     % Sample points for Elder system
-    \draw[domain=1:9, samples=50, smooth, variable=\x, red, thick] plot ({\x}, {5.5 - 1.5*ln(\x+1)});
+    \draw[domain=1:9, samples=50, smooth, variable=\x, red, thick] plot ({\x}, {5.5 - 1.5*ln(max(1.1,\x+1))});
     
     % Asymptotic bound
     \draw[domain=1:9, samples=50, smooth, variable=\x, gray, dashed] plot ({\x}, {5.5 - 0.45*\x});
