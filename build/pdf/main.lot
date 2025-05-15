@@ -1,0 +1,72 @@
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Performance comparison between traditional and Elder approaches in the example system}}{18}{table.caption.18}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {11.1}{\ignorespaces Computational complexity comparison between traditional gradient descent and heliomorphic Elder-Mentor-Erudite gradient descent, where $P$ is the total number of parameters, $P_E$ is Elder parameter count, $P_M$ is Mentor parameter count, $P_{E'}$ is Erudite parameter count, $M$ is the number of domains, $D$ is the average data dimension, and $B$ is the batch size.}}{100}{table.caption.23}%
+\contentsline {table}{\numberline {11.2}{\ignorespaces Detailed memory analysis comparing traditional and heliomorphic approaches, where $P_E$ is Elder parameter count, $P_M$ is Mentor parameter count, $P_{E'}$ is Erudite parameter count, $M$ is domain count, $N$ is average tasks per domain, $D$ is data dimension, $B$ is batch size, $L$ is network depth, $A$ is augmentation factor, and $K$ is shell count.}}{101}{table.caption.24}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {14.1}{\ignorespaces Computational and Memory Complexity Analysis of Elder Heliosystem}}{131}{table.caption.35}%
+\contentsline {table}{\numberline {14.2}{\ignorespaces Functional Advantages of Elder Heliosystem by Operation}}{153}{table.caption.36}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {17.1}{\ignorespaces Critical Phase Thresholds for Knowledge Transfer}}{171}{table.caption.40}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {19.1}{\ignorespaces Empirical observations of thermodynamic quantities during Elder learning, showing patterns consistent with reverse diffusion}}{189}{table.caption.46}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {20.1}{\ignorespaces Performance changes relative to baseline when removing components}}{199}{table.caption.48}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {28.1}{\ignorespaces Computational complexity of Elder Heliosystem activation functions}}{300}{table.caption.59}%
+\contentsline {table}{\numberline {28.2}{\ignorespaces Comparison between traditional activation functions and Elder Heliosystem equivalents}}{302}{table.caption.60}%
+\contentsline {table}{\numberline {28.3}{\ignorespaces Performance comparison on benchmark tasks}}{302}{table.caption.61}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {29.1}{\ignorespaces Performance comparison between baseline, holomorphic optimization, and heliomorphic optimization approaches}}{314}{table.caption.65}%
+\contentsline {table}{\numberline {29.2}{\ignorespaces Elder-MAGE Correspondence}}{323}{table.caption.69}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {30.1}{\ignorespaces Computational and Memory Complexity: Elder Heliosystem vs. Traditional 3-Layer Neural Network}}{338}{table.caption.72}%
+\contentsline {table}{\numberline {30.2}{\ignorespaces Detailed Time Complexity Comparison}}{339}{table.caption.73}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {37.1}{\ignorespaces Recommended Parameter Ranges for Continuous Learning Operation}}{469}{table.caption.79}%
+\contentsline {table}{\numberline {37.2}{\ignorespaces Emergent Mass Ratios by Knowledge Domain}}{470}{table.caption.80}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {43.1}{\ignorespaces Experimental Results for Long-Form Audio Generation}}{545}{table.caption.97}%
+\contentsline {table}{\numberline {43.2}{\ignorespaces Comparison of Long-Form Audio Generation Approaches}}{546}{table.caption.98}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {44.1}{\ignorespaces Comparison of Token-Based and Field-Based Memory Approaches}}{550}{table.caption.99}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
