@@ -1,0 +1,54 @@
+% TikZ styles for Elder Theory diagrams
+\tikzset{
+    % Domain style with fill parameter
+    domain/.style={
+        draw,
+        fill=blue!15,
+        rounded corners,
+        minimum width=3cm,
+        minimum height=1.5cm,
+        text width=2.8cm,
+        align=center
+    },
+    % Standard styles for entities and concepts
+    entity/.style={
+        draw,
+        fill=green!15,
+        circle,
+        minimum size=1.8cm,
+        align=center
+    },
+    knowledge/.style={
+        draw,
+        fill=purple!15,
+        ellipse,
+        minimum width=2.5cm,
+        minimum height=1.3cm,
+        align=center
+    },
+    process/.style={
+        draw,
+        fill=orange!15,
+        rectangle,
+        rounded corners,
+        minimum width=3cm,
+        minimum height=1cm,
+        text width=2.8cm,
+        align=center
+    },
+    arrow/.style={
+        ->,
+        thick,
+        >=latex
+    },
+    bidirectional/.style={
+        <->,
+        thick,
+        >=latex
+    }
+}
+
+% Load additional libraries needed for diagrams
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{fit}
