@@ -8,6 +8,9 @@ This document provides a structured checklist for the contraction phase of Elder
 |------|--------|----------|-------|
 | ☑ Fix notation inconsistencies across all chapters | ✅ | High | Fixed elder_training_loop.tex double subscript errors by reformatting mentor/elder reflection functions |
 | □ Standardize mathematical symbology in all equations | ⬜ | High | Ensure alignment with consolidated_notation.tex |
+| □ Unify parameter space definitions across chapters | ⬜ | High | Resolve Hilbert space vs. Banach space vs. field theory formulations |
+| □ Standardize resonance mechanism definitions | ⬜ | High | Reconcile coupled oscillator equations vs. frequency response functions vs. Arnold tongues |
+| □ Unify heliomorphic function definitions | ⬜ | High | Ensure consistent domain/range properties across all chapters |
 | □ Verify consistent use of complex-valued parameter notation | ⬜ | Medium | Check $\theta = \rho e^{i\phi}$ vs alternative forms |
 | □ Harmonize tensor notation across documents | ⬜ | Medium | Focus on radial-phase coupling tensor $\mathcal{T}_f$ |
 | □ Consolidate operator definitions | ⬜ | Medium | Especially heliomorphic operators |
@@ -20,7 +23,9 @@ This document provides a structured checklist for the contraction phase of Elder
 | □ Verify axiomatic completeness | ⬜ | High | Ensure all theorems derive from axioms |
 | □ Establish consistency proof | ⬜ | High | Demonstrate no contradictions exist |
 | □ Formalize transition mechanisms between hierarchy levels | ⬜ | High | Elder → Mentor → Erudite |
+| □ Develop unified memory complexity proof | ⬜ | High | Reconcile field equations vs. hierarchical compression vs. orbital parameter encoding |
 | □ Validate mathematical closure in knowledge transfer | ⬜ | Medium | Cross-domain transfer must preserve structure |
+| □ Standardize transfer theorem boundary conditions | ⬜ | Medium | Ensure consistent conditions across theoretical and experimental chapters |
 
 ## 3. Theoretical Integration
 
@@ -28,8 +33,10 @@ This document provides a structured checklist for the contraction phase of Elder
 |------|--------|----------|-------|
 | □ Reconcile heliomorphic shell model with orbital mechanics | ⬜ | High | Address structural inconsistencies |
 | □ Integrate information theory with heliomorphic axioms | ⬜ | High | Connect mutual information to core framework |
+| □ Standardize knowledge representation spaces | ⬜ | High | Reconcile metric space vs. vector space vs. tensor product space formulations |
+| □ Unify hierarchical structure formalisms | ⬜ | High | Reconcile graph-theoretical vs. dynamical systems vs. nested function approaches |
+| □ Harmonize thermodynamic analogies with information theory | ⬜ | High | Reconcile statistical mechanics vs. information theory vs. quantum mechanical approaches |
 | □ Formalize relationship between manifold and orbital representations | ⬜ | Medium | Establish mathematical equivalence |
-| □ Harmonize thermodynamic analogies with information theory | ⬜ | Medium | Especially entropy dynamics |
 | □ Unify phase-space and parameter-space representations | ⬜ | Medium | Show transformations between spaces |
 
 ## 4. Hierarchical Structure Completion
