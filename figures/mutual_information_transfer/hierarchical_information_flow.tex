@@ -1,0 +1,113 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        level/.style={
+            draw,
+            fill=blue!20,
+            rounded corners,
+            minimum width=3.5cm,
+            minimum height=1.4cm,
+            text width=3.3cm,
+            align=center
+        },
+        transfer/.style={
+            draw,
+            fill=green!20,
+            rounded corners,
+            minimum width=5cm,
+            minimum height=1cm,
+            text width=4.8cm,
+            align=center
+        },
+        equation/.style={
+            draw,
+            fill=orange!20,
+            rounded corners,
+            minimum width=4cm,
+            minimum height=1cm,
+            text width=3.8cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        },
+        info/.style={
+            draw,
+            fill=red!10,
+            ellipse,
+            minimum width=3.5cm,
+            minimum height=1.8cm,
+            text width=3.3cm,
+            align=center
+        }
+    }
+    
+    % Hierarchical levels
+    \node[level] (elder) at (0,6) {Elder Level\\Universal Principles};
+    \node[level] (mentor) at (0,3) {Mentor Level\\Meta-Knowledge};
+    \node[level] (erudite) at (0,0) {Erudite Level\\Domain Knowledge};
+    
+    % Information measures
+    \node[info] (iem) at (-3.5,4.5) {$I(X_{El}; X_M)$};
+    \node[info] (ime) at (-3.5,1.5) {$I(X_M; X_E)$};
+    \node[info] (iee) at (-5,3) {$I(X_{El}; X_E)$};
+    
+    % Transfer equations
+    \node[transfer] (td) at (5,4.5) {Top-Down Transfer:\\$I(X_{El}; X_E) \leq \min(I(X_{El}; X_M), I(X_M; X_E))$};
+    
+    \node[transfer] (bu) at (5,1.5) {Bottom-Up Transfer:\\$I(X_E; X_{El}) \leq \min(I(X_E; X_M), I(X_M; X_{El}))$};
+    
+    % Connect information measures to levels
+    \draw[arrow, dashed] (elder) -- (iem);
+    \draw[arrow, dashed] (mentor) -- (iem);
+    \draw[arrow, dashed] (mentor) -- (ime);
+    \draw[arrow, dashed] (erudite) -- (ime);
+    \draw[arrow, dashed] (elder) to[bend right] (iee);
+    \draw[arrow, dashed] (erudite) to[bend left] (iee);
+    
+    % Connect information measures to transfer equations
+    \draw[arrow, dotted] (iem) -- ($(iem.east)+(0.5,0)$) |- (td);
+    \draw[arrow, dotted] (ime) -- ($(ime.east)+(0.5,0)$) |- (td);
+    \draw[arrow, dotted] (iee) -- ($(iee.west)+(-0.5,0)$) |- (td);
+    
+    \draw[arrow, dotted] (iem) -- ($(iem.east)+(0.5,0)$) |- (bu);
+    \draw[arrow, dotted] (ime) -- ($(ime.east)+(0.5,0)$) |- (bu);
+    \draw[arrow, dotted] (iee) -- ($(iee.west)+(-0.5,0)$) |- (bu);
+    
+    % Hierarchical information flow
+    \draw[arrow, blue, ultra thick] (elder) -- node[right] {Top-Down} (mentor);
+    \draw[arrow, blue, ultra thick] (mentor) -- node[right] {Top-Down} (erudite);
+    
+    \draw[arrow, red, ultra thick] (erudite) to[bend right=30] node[left] {Bottom-Up} (mentor);
+    \draw[arrow, red, ultra thick] (mentor) to[bend right=30] node[left] {Bottom-Up} (elder);
+    
+    % Bottleneck
+    \node[draw, fill=yellow!15, ellipse, text width=3cm, align=center] at (mentor.east) {Information Bottleneck};
+    
+    % Resonance enhancement
+    \begin{scope}[shift={(6,3)}]
+        \draw[ultra thick, purple, decorate, decoration={coil, aspect=0.5}] 
+            (0,0) ellipse (1.2cm and 0.6cm);
+        \node[align=center] at (0,0) {Resonance\\Enhancement};
+        
+        \node[equation] at (0,-1.5) {$I_{res} = I \cdot (1 + \gamma \cdot R)$};
+    \end{scope}
+    
+    % Multivariate mutual information
+    \node[draw, fill=purple!10, rounded corners, text width=7cm, align=center] at (0,-2) {
+        \textbf{Multivariate Mutual Information:}\\
+        $I(X_E; X_M; X_{El}) = I(X_E; X_M) + I(X_E; X_{El}|X_M) - I(X_E; X_{El})$\\
+        \small{Decomposes into synergistic and redundant components}
+    };
+    
+    % Title
+    \node[align=center, font=\bfseries, scale=1.2] at (0,8) {Mutual Information Transfer in the Elder Hierarchy};
+    
+\end{tikzpicture}
+\caption{Information flow in the Elder hierarchical system. Mutual information between hierarchical levels quantifies the amount of shared information, with pairwise measures $I(X_{El}; X_M)$, $I(X_M; X_E)$, and $I(X_{El}; X_E)$ characterizing vertical information relationships. Information flows in both top-down (blue arrows) and bottom-up (red arrows) directions, with the Mentor level potentially serving as an information bottleneck. The data processing inequality constrains information flow such that $I(X_{El}; X_E) \leq \min(I(X_{El}; X_M), I(X_M; X_E))$ in the top-down direction and similarly for bottom-up transfer. Resonance mechanisms enhance mutual information by a factor of $(1 + \gamma \cdot R)$, where $R$ is the resonance strength. Multivariate mutual information $I(X_E; X_M; X_{El})$ captures three-way information relationships, decomposing into synergistic and redundant components.}
+\label{fig:hierarchical_mutual_information}
+\end{figure}

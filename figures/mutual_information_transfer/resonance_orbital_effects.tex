@@ -1,0 +1,170 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        entity/.style={
+            draw,
+            circle,
+            fill=blue!15,
+            minimum size=1.8cm,
+            align=center
+        },
+        info/.style={
+            draw,
+            fill=red!15,
+            ellipse,
+            minimum width=3cm,
+            minimum height=1.2cm,
+            text width=2.8cm,
+            align=center
+        },
+        channel/.style={
+            draw,
+            fill=green!15,
+            rounded corners,
+            minimum width=3.5cm,
+            minimum height=1cm,
+            text width=3.3cm,
+            align=center
+        },
+        equation/.style={
+            draw,
+            fill=orange!15,
+            rounded corners,
+            minimum width=5cm,
+            minimum height=1.2cm,
+            text width=4.8cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        }
+    }
+    
+    % Phase encoding diagram
+    \begin{scope}[shift={(0,0)}]
+        % Title
+        \node[font=\bfseries] at (0,5) {Phase-Encoded Information Transfer};
+        
+        % Entities with phases
+        \node[entity] (a1) at (-2,3) {Entity A\\$\Phi_A$};
+        \node[entity] (b1) at (2,3) {Entity B\\$\Phi_B$};
+        
+        % Phase relationship
+        \node[draw, fill=purple!15, rounded corners, text width=3cm, align=center] (phase) at (0,1.5) {
+            Phase Relationship\\$\Phi_A : \Phi_B$\\(e.g., 2:3, 3:5)
+        };
+        
+        % Information capacity
+        \node[equation] (phase_info) at (0,0) {$I_{phase}(\Phi_A; \Phi_B) = \log_2(M_{rel})$};
+        
+        % Connect
+        \draw[arrow] (a1) -- (phase);
+        \draw[arrow] (b1) -- (phase);
+        \draw[arrow] (phase) -- (phase_info);
+        
+        % State information
+        \node[info] (info_a1) at (-4,3) {State Info\\$X_A$};
+        \node[info] (info_b1) at (4,3) {State Info\\$X_B$};
+        
+        \draw[arrow, dashed] (info_a1) -- (a1);
+        \draw[arrow, dashed] (info_b1) -- (b1);
+        
+        % Total information
+        \node[equation] (total) at (0,-1.5) {
+            $I_{total}(X_A,\Phi_A; X_B,\Phi_B) = I_{res}(X_A; X_B) + I_{phase}(\Phi_A; \Phi_B) - \delta$
+        };
+        
+        \draw[arrow] (phase_info) -- (total);
+        \draw[arrow, dashed] (info_a1) to[bend right] (total);
+        \draw[arrow, dashed] (info_b1) to[bend left] (total);
+    \end{scope}
+    
+    % Orbital coupling and information
+    \begin{scope}[shift={(10,0)}]
+        % Title
+        \node[font=\bfseries] at (0,5) {Orbital Coupling and Information};
+        
+        % Orbital diagram
+        \draw[thick] (0,3) circle (1.5cm);
+        \node[entity] (center) at (0,3) {Entity A};
+        
+        % Orbiting entity
+        \node[entity] (orbiter) at (1.5,3) {Entity B};
+        
+        % Orbital parameters
+        \node[draw, fill=cyan!15, rounded corners, text width=2.5cm, align=center] at (0,1) {
+            Coupling Strength\\$\kappa_{AB}$
+        };
+        
+        % Information bound
+        \node[equation] at (0,0) {
+            $I(X_A; X_B) \leq C \cdot \log_2(1 + \kappa_{AB})$
+        };
+        
+        % Conservation principle
+        \node[draw, fill=yellow!15, rounded corners, text width=5cm, align=center] at (0,-1.5) {
+            \textbf{Information Conservation:}\\
+            $\sum_{i \in \text{levels}} \frac{d}{dt}I(X_i; X_{system}) = 0$
+        };
+    \end{scope}
+    
+    % Resonance enhancement curves
+    \begin{scope}[shift={(0,-8)}]
+        % Title
+        \node[font=\bfseries] at (0,2) {Resonance Enhancement of Mutual Information};
+        
+        % Axes
+        \draw[->] (-0.5,0) -- (5,0) node[right] {Resonance Strength $r$};
+        \draw[->] (0,-0.5) -- (0,4) node[above] {Information Transfer};
+        
+        % Curves for different gamma values
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, red, thick] 
+            plot ({\x}, {1 + 0.5*\x});
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, blue, thick] 
+            plot ({\x}, {1 + 1*\x});
+        \draw[domain=0:4.5, samples=100, smooth, variable=\x, green!50!black, thick] 
+            plot ({\x}, {1 + 1.5*\x});
+        
+        % Labels
+        \node[red] at (4.5,3.5) {$\gamma = 0.5$};
+        \node[blue] at (4.5,5.5) {$\gamma = 1.0$};
+        \node[green!50!black] at (4.5,7.5) {$\gamma = 1.5$};
+        
+        % Equation
+        \node[equation] at (2.5,-1.5) {
+            $I_{res}(X_A; X_B) = I(X_A; X_B) \cdot (1 + \gamma \cdot r)$
+        };
+    \end{scope}
+    
+    % Cross-domain transfer
+    \begin{scope}[shift={(10,-8)}]
+        % Title
+        \node[font=\bfseries] at (0,2) {Cross-Domain Information Transfer};
+        
+        % Domains
+        \node[draw, fill=blue!15, circle, minimum size=2cm] (d1) at (-1.5,0) {Domain 1};
+        \node[draw, fill=blue!15, circle, minimum size=2cm] (d2) at (1.5,0) {Domain 2};
+        
+        % Isomorphism
+        \draw[<->, blue, thick] (-0.5,0) -- (0.5,0) node[midway, above] {$\alpha$};
+        
+        % Transfer equation
+        \node[equation] at (0,-1.5) {
+            $I_{transfer}(d_1 \to d_2) = (1 - \alpha) \cdot I_{d_1}(X)$
+        };
+        
+        % Multi-domain gain
+        \node[draw, fill=purple!10, rounded corners, text width=5cm, align=center] at (0,-3) {
+            \textbf{Multi-Domain Gain:}\\
+            $I_{gain} = \sum_{i=1}^{D} I_{d_i}(X) \cdot (1 - (1 - \bar{\alpha})^{i-1})$
+        };
+    \end{scope}
+    
+\end{tikzpicture}
+\caption{Resonance and orbital effects on mutual information transfer in the Elder system. Top left: Phase-encoded information transfer, where information is encoded in phase relationships between entities ($\Phi_A : \Phi_B$), providing an additional channel beyond state-based information transfer. The capacity of this channel is $\log_2(M_{rel})$, where $M_{rel}$ is the number of distinguishable phase relationships. Top right: Orbital coupling strength $\kappa_{AB}$ bounds the mutual information between entities according to $I(X_A; X_B) \leq C \cdot \log_2(1 + \kappa_{AB})$, with a conservation law ensuring that total information flow remains constant in a stable system. Bottom left: Resonance enhancement of mutual information follows $I_{res}(X_A; X_B) = I(X_A; X_B) \cdot (1 + \gamma \cdot r)$, where $r$ is resonance strength and $\gamma$ is the amplification factor. Bottom right: Cross-domain information transfer is bounded by isomorphism quality $\alpha$, with transfer efficiency $(1 - \alpha)$ and multi-domain learning yielding cumulative information gain across domains.}
+\label{fig:resonance_orbital_effects}
+\end{figure}
