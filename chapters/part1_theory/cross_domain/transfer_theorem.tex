@@ -61,6 +61,13 @@ T_{\Phi}(K_{D_1}) = \Phi(K_{D_1})
 \end{equation}
 \end{definition}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/transfer_theorem/isomorphism_transfer.pdf}
+    \caption{Isomorphism-based knowledge transfer between domains. A knowledge isomorphism $\Phi = (\phi_X, \phi_Y, \phi_F, \phi_R, \phi_M)$ preserves the structural relationships between knowledge elements while mapping between domains. The distortion measures $d_M$ and $d_R$ quantify how well the isomorphism preserves metrics and relational properties.}
+    \label{fig:isomorphism_transfer}
+\end{figure}
+
 The transfer loss for isomorphism-based transfer depends on how well the isomorphism captures the relationship between domains:
 
 \begin{theorem}[Isomorphism Transfer Loss]
@@ -357,6 +364,13 @@ L_{E}(K_{D_1}, K_{D_2}) \leq (1 - \gamma_{D_1,E}) \cdot d(K_{D_1}, \emptyset_{D_
 \end{equation}
 where $\gamma_{D_1,E}$ is the similarity between domain $D_1$ and the Elder's universal domain $E$, $\gamma_{E,D_2}$ is the similarity between the Elder's domain and domain $D_2$, and $K_E$ is the Elder's knowledge state.
 \end{theorem}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/transfer_theorem/elder_mediated_transfer.pdf}
+    \caption{Elder-Mediated Knowledge Transfer. The Elder entity's universal domain $E$ serves as a hub for knowledge transfer between multiple domains. This mediated transfer achieves lower loss compared to direct transfer when the Elder's universal representations have high similarity to multiple domains.}
+    \label{fig:elder_mediated_transfer}
+\end{figure}
 
 \begin{proof}
 Elder-mediated transfer involves two steps:
