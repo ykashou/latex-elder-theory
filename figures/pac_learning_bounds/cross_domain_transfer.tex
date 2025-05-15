@@ -51,7 +51,7 @@
     \node[bound] (bd1) at (0,1) {Sample Complexity:\\$m_{d_1}(\epsilon, \delta) = \mathcal{O}\left(\frac{\text{VC}(\mathcal{C}_{d_1}) + \log(1/\delta)}{\epsilon^2}\right)$};
     
     % Target domain
-    \node[domain] (d2) at (9,5) {Domain $d_2$\\(Target)};
+    \node[draw, fill=blue!15, rounded corners, minimum width=3cm, minimum height=1.5cm, text width=2.8cm, align=center] (d2) at (9,5) {Domain $d_2$\\(Target)};
     \node[knowledge] (k2) at (9,3) {Knowledge $\mathcal{K}_{d_2}$};
     \node[bound] (bd2) at (9,1) {Transfer Sample Complexity:\\$m_{transfer}(\epsilon, \delta) = \mathcal{O}\left(\frac{\text{VC}(\mathcal{C}_{d_2}) \cdot (1 - \sigma(\alpha)) + \log(1/\delta)}{(\epsilon - \alpha)^2}\right)$};
     
