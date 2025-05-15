@@ -303,7 +303,7 @@ We analyze memory usage for increasingly long audio recordings:
     \draw[gray!20] (0,0) grid (9,6);
     
     % Plot logarithmic growth
-    \draw[domain=0.1:9, smooth, variable=\x, blue, thick] plot ({\x}, {6*ln(\x+0.1)});
+    \draw[domain=0.5:9, smooth, variable=\x, blue, thick] plot ({\x}, {6*ln(max(0.5,\x+0.1))});
     
     % Plot linear growth
     \draw[domain=0:9, smooth, variable=\x, red, thick] plot ({\x}, {0.7*\x});
