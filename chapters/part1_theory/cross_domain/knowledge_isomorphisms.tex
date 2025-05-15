@@ -486,28 +486,38 @@ These heliomorphic invariants provide a deeper understanding of the geometric an
 
 \subsection{Finding Isomorphisms Between Domains}
 
-\begin{algorithm}[H]
-\caption{Knowledge Isomorphism Construction}
-\begin{algorithmic}[1]
-\REQUIRE Source domain $D_1$, target domain $D_2$, knowledge state $K_{D_1}$
-\ENSURE Knowledge isomorphism $\Phi: D_1 \to D_2$ (if one exists)
-\STATE Extract knowledge structure $S_{D_1} = (G_{D_1}, \Phi_{D_1}, \Psi_{D_1})$ from $K_{D_1}$
-\STATE Identify candidate knowledge structures $\{S_{D_2}^{(i)}\}$ in $D_2$
-\FORALL{candidate structures $S_{D_2}^{(i)}$}
-    \STATE Check if $G_{D_1}$ and $G_{D_2}^{(i)}$ are graph isomorphic
-    \IF{graph isomorphism exists}
-        \STATE Construct mappings $\phi_X, \phi_Y, \phi_F, \phi_R, \phi_M$ based on the graph isomorphism
-        \STATE Verify consistency condition: $\phi_F(f)(x) = \phi_Y(f(\phi_X^{-1}(x)))$
-        \STATE Evaluate metric distortion: $d_M = \max_{f,g} |m_2(\phi_F(f), \phi_F(g)) - m_1(f, g)|$
-        \STATE Evaluate relational distortion: $d_R = \max_{f,g} d(r_2(\phi_F(f), \phi_F(g)), r_1(f, g))$
-        \IF{$d_M \leq \epsilon_M$ and $d_R \leq \epsilon_R$}
-            \RETURN Knowledge isomorphism $\Phi = (\phi_X, \phi_Y, \phi_F, \phi_R, \phi_M)$
-        \ENDIF
-    \ENDIF
-\ENDFOR
-\RETURN "No suitable isomorphism found"
-\end{algorithmic}
-\end{algorithm}
+\begin{figure}[ht]
+\centering
+\fbox{
+\begin{minipage}{0.95\textwidth}
+\textbf{Algorithm:} Knowledge Isomorphism Construction \\
+\textbf{Input:} Source domain $D_1$, target domain $D_2$, knowledge state $K_{D_1}$ \\
+\textbf{Output:} Knowledge isomorphism $\Phi: D_1 \to D_2$ (if one exists) \\
+\begin{enumerate}
+    \item Extract knowledge structure $S_{D_1} = (G_{D_1}, \Phi_{D_1}, \Psi_{D_1})$ from $K_{D_1}$
+    \item Identify candidate knowledge structures $\{S_{D_2}^{(i)}\}$ in $D_2$
+    \item For each candidate structure $S_{D_2}^{(i)}$:
+    \begin{enumerate}
+        \item Check if $G_{D_1}$ and $G_{D_2}^{(i)}$ are graph isomorphic
+        \item If graph isomorphism exists:
+        \begin{enumerate}
+            \item Construct mappings $\phi_X, \phi_Y, \phi_F, \phi_R, \phi_M$ based on the graph isomorphism
+            \item Verify consistency condition: $\phi_F(f)(x) = \phi_Y(f(\phi_X^{-1}(x)))$
+            \item Evaluate metric distortion: $d_M = \max_{f,g} |m_2(\phi_F(f), \phi_F(g)) - m_1(f, g)|$
+            \item Evaluate relational distortion: $d_R = \max_{f,g} d(r_2(\phi_F(f), \phi_F(g)), r_1(f, g))$
+            \item If $d_M \leq \epsilon_M$ and $d_R \leq \epsilon_R$:
+            \begin{enumerate}
+                \item Return knowledge isomorphism $\Phi = (\phi_X, \phi_Y, \phi_F, \phi_R, \phi_M)$
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+    \item If no isomorphism found, return "No suitable isomorphism found"
+\end{enumerate}
+\end{minipage}
+}
+\caption{Algorithm for constructing knowledge isomorphisms between domains}
+\label{alg:knowledge_isomorphism}
+\end{figure}
 
 \begin{theorem}[Isomorphism Construction Complexity]
 The problem of finding a knowledge isomorphism between domains $D_1$ and $D_2$ is generally NP-hard, but becomes polynomial-time solvable when the knowledge structures have bounded treewidth.
