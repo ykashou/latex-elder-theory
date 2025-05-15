@@ -46,7 +46,7 @@
     }
     
     % Source domain
-    \node[domain] (d1) at (0,5) {Domain $d_1$\\(Source)};
+    \node[draw, fill=blue!15, rounded corners, minimum width=3cm, minimum height=1.5cm, text width=2.8cm, align=center] (d1) at (0,5) {Domain $d_1$\\(Source)};
     \node[knowledge] (k1) at (0,3) {Knowledge $\mathcal{K}_{d_1}$};
     \node[bound] (bd1) at (0,1) {Sample Complexity:\\$m_{d_1}(\epsilon, \delta) = \mathcal{O}\left(\frac{\text{VC}(\mathcal{C}_{d_1}) + \log(1/\delta)}{\epsilon^2}\right)$};
     
