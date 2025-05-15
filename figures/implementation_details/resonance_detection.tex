@@ -1,0 +1,194 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        block/.style={
+            draw,
+            fill=blue!15,
+            rectangle,
+            rounded corners,
+            minimum width=3cm,
+            minimum height=1cm,
+            text width=2.8cm,
+            align=center
+        },
+        process/.style={
+            draw,
+            fill=green!15,
+            rectangle,
+            rounded corners,
+            minimum width=3cm,
+            minimum height=1cm,
+            text width=2.8cm,
+            align=center
+        },
+        decision/.style={
+            draw,
+            fill=red!15,
+            diamond,
+            minimum width=3cm,
+            minimum height=1.5cm,
+            text width=2cm,
+            align=center
+        },
+        resonance/.style={
+            draw,
+            fill=purple!15,
+            ellipse,
+            minimum width=2.5cm,
+            minimum height=1.3cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        },
+        signal/.style={
+            decorate,
+            decoration={snake, amplitude=0.3mm, segment length=2mm}
+        },
+        wave/.style={
+            decorate,
+            decoration={snake, amplitude=0.5mm, segment length=2mm},
+            thick
+        }
+    }
+    
+    % Resonance detection diagram
+    % Title
+    \node[align=center, font=\bfseries, scale=1.2] at (0,10) {Resonance Detection Algorithm};
+    
+    % Input signals
+    \node[block] (elder_signal) at (-4,8) {Elder Angular\\Velocity $\omega_{El}$};
+    \node[block] (mentor_signal) at (0,8) {Mentor Angular\\Velocity $\omega_{M}$};
+    \node[block] (erudite_signal) at (4,8) {Erudite Angular\\Velocity $\omega_{E}$};
+    
+    % Signal visualization
+    \draw[wave] (-6,7) -- (-2,7);
+    \draw[wave] (-2,7) -- (2,7);
+    \draw[wave] (2,7) -- (6,7);
+    \node at (-4,7) {$\sim$};
+    \node at (0,7) {$\sim$};
+    \node at (4,7) {$\sim$};
+    
+    % Resonance checks
+    \node[decision] (check_em) at (-4,5) {$p\omega_E \approx q\omega_M$?};
+    \node[decision] (check_mel) at (0,5) {$p\omega_M \approx q\omega_{El}$?};
+    \node[decision] (check_eel) at (4,5) {$p\omega_E \approx q\omega_{El}$?};
+    
+    % Quality factor computation
+    \node[process] (quality_em) at (-4,3) {Compute $Q_{E,M}$ Quality Factor};
+    \node[process] (quality_mel) at (0,3) {Compute $Q_{M,El}$ Quality Factor};
+    \node[process] (quality_eel) at (4,3) {Compute $Q_{E,El}$ Quality Factor};
+    
+    % Quality threshold checks
+    \node[decision] (threshold_em) at (-4,1) {$Q_{E,M} > Q_{threshold}$?};
+    \node[decision] (threshold_mel) at (0,1) {$Q_{M,El} > Q_{threshold}$?};
+    \node[decision] (threshold_eel) at (4,1) {$Q_{E,El} > Q_{threshold}$?};
+    
+    % Resonance registry
+    \node[block] (registry) at (0,-1) {Resonance Registry $\mathcal{R}$};
+    
+    % Active resonances
+    \node[resonance] (res_em) at (-6,-3) {Erudite-Mentor\\Resonance 3:1};
+    \node[resonance] (res_mel) at (0,-3) {Mentor-Elder\\Resonance 2:1};
+    \node[resonance] (res_eel) at (6,-3) {Erudite-Elder\\Resonance 6:1};
+    
+    % Amplification factors
+    \node[block] (amp_em) at (-6,-5) {$\eta_{res} = 1.37$};
+    \node[block] (amp_mel) at (0,-5) {$\eta_{res} = 1.45$};
+    \node[block] (amp_eel) at (6,-5) {$\eta_{res} = 1.21$};
+    
+    % Connect nodes with arrows
+    \draw[arrow] (elder_signal) -- (check_mel);
+    \draw[arrow] (elder_signal) to[bend right] (check_eel);
+    
+    \draw[arrow] (mentor_signal) -- (check_em);
+    \draw[arrow] (mentor_signal) -- (check_mel);
+    
+    \draw[arrow] (erudite_signal) -- (check_em);
+    \draw[arrow] (erudite_signal) to[bend left] (check_eel);
+    
+    \draw[arrow] (check_em) -- node[left] {Yes} (quality_em);
+    \draw[arrow] (check_mel) -- node[left] {Yes} (quality_mel);
+    \draw[arrow] (check_eel) -- node[left] {Yes} (quality_eel);
+    
+    \draw[arrow] (quality_em) -- (threshold_em);
+    \draw[arrow] (quality_mel) -- (threshold_mel);
+    \draw[arrow] (quality_eel) -- (threshold_eel);
+    
+    \draw[arrow] (threshold_em) -- node[left] {Yes} (registry);
+    \draw[arrow] (threshold_mel) -- node[left] {Yes} (registry);
+    \draw[arrow] (threshold_eel) -- node[left] {Yes} (registry);
+    
+    \draw[arrow] (registry) -- (res_em);
+    \draw[arrow] (registry) -- (res_mel);
+    \draw[arrow] (registry) -- (res_eel);
+    
+    \draw[arrow] (res_em) -- (amp_em);
+    \draw[arrow] (res_mel) -- (amp_mel);
+    \draw[arrow] (res_eel) -- (amp_eel);
+    
+    % Skip arrows
+    \draw[arrow, dashed] (check_em) to[bend left] node[right] {No} (-4,6);
+    \draw[arrow, dashed] (check_mel) to[bend left] node[right] {No} (0,6);
+    \draw[arrow, dashed] (check_eel) to[bend left] node[right] {No} (4,6);
+    
+    \draw[arrow, dashed] (threshold_em) to[bend left] node[right] {No} (-4,2);
+    \draw[arrow, dashed] (threshold_mel) to[bend left] node[right] {No} (0,2);
+    \draw[arrow, dashed] (threshold_eel) to[bend left] node[right] {No} (4,2);
+    
+    % Formula box for quality factor
+    \node[draw, fill=yellow!15, rounded corners, align=center] at (-8,3) {
+        $Q_{i,j} = \frac{\omega_0}{\Delta \omega} \cdot \frac{1}{|p| + |q|}$
+    };
+    
+    % Formula box for resonance enhancement
+    \node[draw, fill=yellow!15, rounded corners, align=center] at (-8,-5) {
+        $\eta_{res} = 1 + \alpha(Q - Q_{critical})^\beta$
+    };
+    
+    % Resonance examples box
+    \node[draw, fill=purple!10, rounded corners, align=center] at (8,0) {
+        \textbf{Resonance Examples:}\\
+        \begin{tabular}{ccc}
+        \textbf{Type} & \textbf{Ratio} & \textbf{$Q$} \\
+        \hline
+        E-M & 3:1 & 1.85 \\
+        M-El & 2:1 & 2.10 \\
+        E-El & 6:1 & 1.42 \\
+        E-M & 4:3 & 0.82 \\
+        M-El & 5:3 & 0.76 \\
+        \end{tabular}
+    };
+    
+    % Frequency spectrum visualization
+    \begin{scope}[shift={(8,6)}]
+        \draw[->] (0,0) -- (4,0) node[right] {$\omega$};
+        \draw[->] (0,0) -- (0,2) node[above] {Amplitude};
+        
+        % Elder frequency spike
+        \draw[thick, red] (1,0) -- (1,1.5);
+        \node[below] at (1,0) {$\omega_{El}$};
+        
+        % Mentor frequency spike
+        \draw[thick, blue] (2,0) -- (2,1.2);
+        \node[below] at (2,0) {$\omega_M$};
+        
+        % Erudite frequency spike
+        \draw[thick, green!50!black] (3,0) -- (3,0.9);
+        \node[below] at (3,0) {$\omega_E$};
+        
+        % Resonance indicators
+        \draw[dashed] (1,1.5) -- (2,1.2);
+        \node[above] at (1.5,1.3) {2:1};
+        
+        \draw[dashed] (2,1.2) -- (3,0.9);
+        \node[above] at (2.5,1.0) {3:1};
+    \end{scope}
+\end{tikzpicture}
+\caption{The resonance detection algorithm identifies frequency relationships between hierarchical entities. The algorithm extracts angular velocities from each entity's phase-space representation and examines potential resonance relationships defined by ratios $p:q$ where $p$ and $q$ are small integers. For each potential resonance, a quality factor $Q$ is computed based on the resonant frequency, frequency difference, and resonance complexity. Resonances with quality factors above a threshold are registered and used to compute resonance enhancement factors $\eta_{res}$, which amplify gradient flow during backpropagation. The algorithm prioritizes simple resonance relationships (smaller $p+q$ values) as they typically provide stronger resonance effects. In this example, three active resonances are detected: Erudite-Mentor (3:1), Mentor-Elder (2:1), and Erudite-Elder (6:1), with enhancement factors of 1.37, 1.45, and 1.21 respectively. The frequency spectrum visualization (top right) shows the relationship between entity frequencies, while the resonance examples table shows typical quality factors for various resonance ratios.}
+\label{fig:resonance_detection}
+\end{figure}

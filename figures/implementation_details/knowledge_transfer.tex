@@ -1,0 +1,152 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        domain/.style={
+            draw,
+            fill=blue!15,
+            rounded corners,
+            minimum width=3cm,
+            minimum height=1.2cm,
+            text width=2.8cm,
+            align=center
+        },
+        entity/.style={
+            draw,
+            fill=green!15,
+            circle,
+            minimum size=1.8cm,
+            align=center
+        },
+        process/.style={
+            draw,
+            fill=orange!15,
+            rectangle,
+            rounded corners,
+            minimum width=3cm,
+            minimum height=1cm,
+            text width=2.8cm,
+            align=center
+        },
+        knowledge/.style={
+            draw,
+            fill=purple!15,
+            ellipse,
+            minimum width=2.5cm,
+            minimum height=1.3cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        },
+        bidirectional/.style={
+            <->,
+            thick,
+            >=latex
+        }
+    }
+    
+    % Domains
+    \node[domain] (source) at (-5,8) {Source Domain\\$\mathcal{D}_{source}$};
+    \node[domain] (target) at (5,8) {Target Domain\\$\mathcal{D}_{target}$};
+    
+    % Entity parameters in source domain
+    \node[entity] (erudite_source) at (-7,6) {$\theta_E^{source}$};
+    \node[entity] (mentor_source) at (-5,6) {$\theta_M$};
+    \node[entity] (elder_source) at (-3,6) {$\theta_{El}$};
+    
+    % Hierarchical connections in source
+    \draw[bidirectional] (erudite_source) -- (mentor_source);
+    \draw[bidirectional] (mentor_source) -- (elder_source);
+    \draw[bidirectional, dashed] (erudite_source) to[bend left] (elder_source);
+    
+    % Domain similarity computation
+    \node[process] (similarity) at (0,8) {Domain Similarity\\Computation $S$};
+    \draw[arrow] (source) -- (similarity);
+    \draw[arrow] (target) -- (similarity);
+    
+    % Knowledge extraction
+    \node[process] (extract_universal) at (-3,4) {Extract Universal\\Principles $P_{universal}$};
+    \node[process] (extract_meta) at (-5,4) {Extract Meta\\Knowledge $K_{meta}$};
+    
+    \draw[arrow] (elder_source) -- (extract_universal);
+    \draw[arrow] (mentor_source) -- (extract_meta);
+    
+    % Knowledge mapping
+    \node[process] (mapping) at (0,3) {Create Isomorphism\\Mapping $\mathcal{M}$};
+    
+    \draw[arrow] (extract_universal) -- (mapping);
+    \draw[arrow] (extract_meta) -- (mapping);
+    \draw[arrow] (similarity) to[bend right] (mapping);
+    
+    % Knowledge adaptation
+    \node[process] (adaptation) at (5,3) {Adapt To Target\\Domain};
+    
+    % Entity parameters in target domain
+    \node[entity] (erudite_target) at (3,1) {$\theta_E^{target}$};
+    \node[entity] (mentor_target) at (5,1) {$\theta_M$};
+    \node[entity] (elder_target) at (7,1) {$\theta_{El}$};
+    
+    % Hierarchical connections in target
+    \draw[bidirectional] (erudite_target) -- (mentor_target);
+    \draw[bidirectional] (mentor_target) -- (elder_target);
+    \draw[bidirectional, dashed] (erudite_target) to[bend left] (elder_target);
+    
+    % Apply mapping
+    \draw[arrow] (mapping) -- (adaptation);
+    \draw[arrow] (erudite_source) to[bend right] (mapping);
+    \draw[arrow] (adaptation) -- (erudite_target);
+    \draw[arrow] (target) to[bend left] (adaptation);
+    
+    % Fine-tuning
+    \node[process] (fine_tuning) at (5,-1) {Fine-tune on\\Target Domain};
+    
+    \draw[arrow] (erudite_target) -- (fine_tuning);
+    \draw[arrow] (mentor_target) -- (fine_tuning);
+    \draw[arrow] (elder_target) -- (fine_tuning);
+    
+    % Shared knowledge
+    \node[knowledge] (shared_universal) at (0,-2) {Universal Principles\\(shared across domains)};
+    \node[knowledge] (shared_meta) at (0,-3.5) {Meta-Knowledge\\(partially shared)};
+    
+    \draw[bidirectional] (elder_source) to[bend right] (shared_universal);
+    \draw[bidirectional] (elder_target) to[bend left] (shared_universal);
+    
+    \draw[bidirectional] (mentor_source) to[bend right] (shared_meta);
+    \draw[bidirectional] (mentor_target) to[bend left] (shared_meta);
+    
+    % Title
+    \node[align=center, font=\bfseries, scale=1.2] at (0,10) {Knowledge Transfer Process in the Elder System};
+    
+    % Domain-specific data
+    \node[knowledge] (source_data) at (-8,3) {Domain-Specific\\Knowledge};
+    \node[knowledge] (target_data) at (8,3) {Domain-Specific\\Knowledge};
+    
+    \draw[arrow] (source_data) -- (erudite_source);
+    \draw[arrow] (target_data) -- (adaptation);
+    
+    % Cross-domain mappings
+    \node[draw, fill=yellow!15, rounded corners, text width=4cm, align=center] at (-7,-2) {
+        \textbf{Knowledge Mappings:}\\
+        $\mathcal{M}(k_{source}) \rightarrow k_{target}$\\
+        $\mathcal{M}(x_{source}) \rightarrow x_{target}$\\
+        $\mathcal{M}(f_{source}) \rightarrow f_{target}$
+    };
+    
+    % Similarity matrix
+    \node[draw, fill=yellow!15, rounded corners, text width=4cm, align=center] at (7,-2) {
+        \textbf{Domain Similarity Matrix $S$:}\\
+        \begin{tabular}{ccc}
+        & $\mathcal{D}_1$ & $\mathcal{D}_2$ \\
+        $\mathcal{D}_1$ & 1.0 & 0.35 \\
+        $\mathcal{D}_2$ & 0.35 & 1.0 \\
+        \end{tabular}
+    };
+    
+\end{tikzpicture}
+\caption{Knowledge transfer process in the Elder system. The process begins with computing similarity between source and target domains. From the source domain, universal principles are extracted from the Elder entity, while meta-knowledge is extracted from the Mentor entity. These, along with domain similarity information, are used to create an isomorphism mapping between domains. This mapping is then applied to transform source domain Erudite parameters into appropriate initial parameters for the target domain. The transformed parameters are adapted to the target domain's specific characteristics, and then the entire system is fine-tuned on target domain data. Throughout this process, the universal principles in the Elder entity remain largely invariant across domains, while the meta-knowledge in the Mentor entity is partially shared. This hierarchical knowledge transfer mechanism allows the Elder system to leverage knowledge from previously learned domains to accelerate learning in new domains, with transfer efficiency proportional to domain similarity. The knowledge mapping formally defines how knowledge structures, input features, and functions are transformed between domains.}
+\label{fig:knowledge_transfer}
+\end{figure}

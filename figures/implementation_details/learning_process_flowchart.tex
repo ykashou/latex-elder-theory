@@ -1,0 +1,167 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        block/.style={
+            draw,
+            fill=blue!15,
+            rectangle,
+            rounded corners,
+            minimum width=2.5cm,
+            minimum height=1cm,
+            text width=2.3cm,
+            align=center
+        },
+        process/.style={
+            draw,
+            fill=green!15,
+            rectangle,
+            rounded corners,
+            minimum width=2.5cm,
+            minimum height=1cm,
+            text width=2.3cm,
+            align=center
+        },
+        data/.style={
+            draw,
+            fill=yellow!15,
+            trapezium,
+            trapezium left angle=70,
+            trapezium right angle=110,
+            minimum width=2.5cm,
+            minimum height=1cm,
+            text width=2.3cm,
+            align=center
+        },
+        decision/.style={
+            draw,
+            fill=red!15,
+            diamond,
+            minimum width=2.5cm,
+            minimum height=1.5cm,
+            text width=2.3cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        },
+        bidirectional/.style={
+            <->,
+            thick,
+            >=latex
+        },
+        resonance/.style={
+            draw,
+            fill=purple!15,
+            ellipse,
+            minimum width=2.2cm,
+            minimum height=1.2cm,
+            align=center
+        }
+    }
+    
+    % Learning process flowchart
+    % Input data
+    \node[data] (data) at (0,9) {Training Data\\$\mathcal{D}$};
+    
+    % Forward pass
+    \node[process] (erudite_forward) at (0,7) {Erudite\\Forward Pass};
+    \node[process] (mentor_forward) at (0,5) {Mentor\\Forward Pass};
+    \node[process] (elder_forward) at (0,3) {Elder\\Forward Pass};
+    
+    % Loss computation
+    \node[process] (erudite_loss) at (4,7) {Erudite Loss\\$\mathcal{L}_E$};
+    \node[process] (mentor_loss) at (4,5) {Mentor Loss\\$\mathcal{L}_M$};
+    \node[process] (elder_loss) at (4,3) {Elder Loss\\$\mathcal{L}_{El}$};
+    
+    % Resonance detection
+    \node[resonance] (resonance) at (-4,5) {Resonance\\Detection};
+    
+    % Backpropagation
+    \node[process] (elder_backprop) at (0,1) {Elder\\Backpropagation};
+    \node[process] (mentor_backprop) at (0,-1) {Mentor\\Backpropagation};
+    \node[process] (erudite_backprop) at (0,-3) {Erudite\\Backpropagation};
+    
+    % Orbital parameter update
+    \node[process] (orbital_update) at (-4,0) {Orbital\\Parameter\\Update};
+    
+    % Convergence check
+    \node[decision] (converged) at (0,-5) {Converged?};
+    
+    % Parameter updates
+    \node[process] (param_update) at (4,0) {Parameter\\Updates};
+    
+    % End
+    \node[block] (end) at (3,-7) {Return Trained\\Parameters};
+    
+    % Next epoch
+    \node[process] (next_epoch) at (-3,-7) {Next Epoch};
+    
+    % Connect nodes with arrows
+    \draw[arrow] (data) -- (erudite_forward);
+    \draw[arrow] (erudite_forward) -- (mentor_forward);
+    \draw[arrow] (mentor_forward) -- (elder_forward);
+    
+    \draw[arrow] (erudite_forward) -- (erudite_loss);
+    \draw[arrow] (mentor_forward) -- (mentor_loss);
+    \draw[arrow] (elder_forward) -- (elder_loss);
+    
+    % Orbital dynamics
+    \draw[bidirectional, dashed] (erudite_forward) to[bend left] node[midway, above] {Orbital} (mentor_forward);
+    \draw[bidirectional, dashed] (mentor_forward) to[bend left] node[midway, above] {Orbital} (elder_forward);
+    
+    % Resonance detection
+    \draw[arrow] (erudite_forward) to[bend right] (resonance);
+    \draw[arrow] (mentor_forward) -- (resonance);
+    \draw[arrow] (elder_forward) to[bend left] (resonance);
+    
+    % Backpropagation
+    \draw[arrow] (elder_loss) -- (elder_backprop);
+    \draw[arrow] (elder_backprop) -- (mentor_backprop);
+    \draw[arrow] (mentor_loss) to[bend left] (mentor_backprop);
+    \draw[arrow] (mentor_backprop) -- (erudite_backprop);
+    \draw[arrow] (erudite_loss) to[bend left] (erudite_backprop);
+    
+    % Resonance impact on backprop
+    \draw[arrow, dashed] (resonance) to[bend right] node[midway, left] {Amplify} (elder_backprop);
+    \draw[arrow, dashed] (resonance) to[bend right] node[midway, left] {Amplify} (mentor_backprop);
+    \draw[arrow, dashed] (resonance) to[bend right] node[midway, left] {Amplify} (erudite_backprop);
+    
+    % Parameter and orbital updates
+    \draw[arrow] (elder_backprop) -- (param_update);
+    \draw[arrow] (mentor_backprop) to[bend left] (param_update);
+    \draw[arrow] (erudite_backprop) to[bend left] (param_update);
+    
+    \draw[arrow] (resonance) -- (orbital_update);
+    \draw[arrow] (elder_backprop) to[bend right] (orbital_update);
+    \draw[arrow] (mentor_backprop) to[bend right] (orbital_update);
+    \draw[arrow] (erudite_backprop) to[bend right] (orbital_update);
+    
+    % Convergence check
+    \draw[arrow] (erudite_backprop) -- (converged);
+    \draw[arrow] (orbital_update) to[bend right] (converged);
+    
+    % End or next epoch
+    \draw[arrow] (converged) -- node[right] {Yes} (end);
+    \draw[arrow] (converged) -- node[left] {No} (next_epoch);
+    \draw[arrow] (next_epoch) to[bend left] (data);
+    
+    % Labels
+    \node[align=center, font=\bfseries, scale=1.2] at (0,10.5) {Elder System Learning Process};
+    
+    % Forward pass label
+    \node[align=center, draw, fill=cyan!10, rounded corners] at (-6,7) {Forward Pass Phase};
+    
+    % Backprop pass label
+    \node[align=center, draw, fill=cyan!10, rounded corners] at (-6,-3) {Backward Pass Phase};
+    
+    % Resonance influence
+    \node[align=center, draw, fill=purple!10, rounded corners] at (-6,3) {Resonance Influence};
+    
+\end{tikzpicture}
+\caption{Flowchart of the Elder system learning process. The process begins with forward propagation through the hierarchical structure (Erudite → Mentor → Elder). Loss is computed at each level, and resonance detection identifies potential amplification opportunities. During backpropagation, gradients flow from Elder to Mentor to Erudite, with influence from both the direct loss at each level and the upper-level gradients. Resonance mechanisms amplify specific gradient pathways based on detected resonance relationships. Orbital parameters and model parameters are updated in parallel, and convergence is checked based on both loss stability and orbital stability criteria. This process continues until convergence or a maximum number of epochs is reached. The unique aspects of this learning process are the orbital dynamics, resonance detection and amplification, and hierarchical gradient flow, which together enable the Elder system's enhanced learning capabilities.}
+\label{fig:learning_process_flowchart}
+\end{figure}
