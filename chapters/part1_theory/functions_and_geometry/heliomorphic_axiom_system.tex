@@ -1,10 +1,6 @@
-\chapter{Heliomorphic Functions: Complete Axiom System}
+\chapter{Heliomorphic Function Theory}
 
-\textit{This chapter establishes the complete mathematical foundation of heliomorphic functions, which serve as the analytical backbone of Elder Theory. We present a rigorous axiomatization consisting of seven fundamental axioms that define the existence, uniqueness, compositional properties, and analytical structure of these specialized functions. Unlike standard complex analysis, heliomorphic functions incorporate radial-phase coupling that creates hierarchical shells of knowledge representation, enabling the mathematical expression of Elder Theory's orbital mechanics. The axioms presented here provide the necessary closure properties to ensure a consistent mathematical system, establish inheritance principles across knowledge hierarchies, and guarantee completeness for theoretical and practical applications. This axiom system represents a novel mathematical contribution that extends complex analysis to address the unique requirements of hierarchical knowledge representation.}
-
-\section{Introduction to the Axiomatization}
-
-Building upon our previous definition of heliomorphic functions, we now establish a complete axiom system that formalizes their mathematical properties and ensures consistency with broader mathematical theory. This axiomatization serves to place heliomorphic functions on a rigorous foundation comparable to that of holomorphic functions in complex analysis, while maintaining their distinct identity and superior representational capabilities.
+\textit{This chapter builds upon the core definition of heliomorphic functions to develop a complete mathematical theory with practical applications for knowledge representation. We present key theorems, establish foundational properties, and explore the analytical structure that emerges from the axiom system. This theoretical framework provides the necessary tools for working with heliomorphic functions in practice, enabling precise mathematical analysis of the Elder Heliosystem's knowledge representation capabilities.}
 
 \begin{definition}[Heliomorphic Domain]
 A heliomorphic domain $\mathcal{H}$ is a connected open subset of $\mathbb{C}^n$ equipped with a radial structure tensor $\mathcal{R}: \mathcal{H} \rightarrow \mathbb{R}^{n \times n}$ that is positive definite at every point.
@@ -12,114 +8,7 @@ A heliomorphic domain $\mathcal{H}$ is a connected open subset of $\mathbb{C}^n$
 
 The radial structure tensor $\mathcal{R}$ defines the notion of "radial direction" at each point in the domain, generalizing the concept of distance from the origin in the standard polar coordinate system.
 
-\section{The Seven Axioms of Heliomorphic Functions}
-
-\begin{axiom}[Existence and Uniqueness]
-For any heliomorphic domain $\mathcal{H}$ and any collection of values and derivatives specified on a set of radial shells $\{S_1, S_2, \ldots, S_k\}$ subject to the compatibility conditions defined by the heliomorphic differential equations, there exists a unique heliomorphic function $f: \mathcal{H} \rightarrow \mathbb{C}^m$ satisfying these constraints.
-\end{axiom}
-
-This axiom establishes the well-posedness of the heliomorphic function definition, ensuring that functions specified by appropriate boundary conditions are uniquely determined.
-
-\begin{axiom}[Composition Closure]
-If $f: \mathcal{H}_1 \rightarrow \mathcal{H}_2$ and $g: \mathcal{H}_2 \rightarrow \mathbb{C}^m$ are heliomorphic functions with compatible radial structure tensors, then their composition $g \circ f: \mathcal{H}_1 \rightarrow \mathbb{C}^m$ is also a heliomorphic function.
-\end{axiom}
-
-This axiom ensures that heliomorphic functions form a closed category under composition, a property essential for building complex knowledge transformations from simpler ones.
-
-\begin{axiom}[Differential Heritage]
-The derivative of a heliomorphic function $f: \mathcal{H} \rightarrow \mathbb{C}^m$ at any point $z \in \mathcal{H}$ preserves the radial-phase coupling characteristics in the sense that:
-\begin{equation}
-Df(z)[\mathcal{R}(z)v] = \mathcal{S}(f(z))Df(z)[v]
-\end{equation}
-for all vectors $v$, where $\mathcal{S}$ is the radial structure tensor on the target space.
-\end{axiom}
-
-This axiom formalizes how the distinctive radial-phase coupling of heliomorphic functions is preserved through differentiation, ensuring consistency across all levels of analysis.
-
-\begin{axiom}[Radial-Phase Duality]
-For every heliomorphic function $f(re^{i\theta}) = \rho(r,\theta)e^{i\phi(r,\theta)}$, there exists a dual heliomorphic function $\tilde{f}(\rho e^{i\phi}) = re^{i\theta}$ such that $\tilde{f} \circ f$ is the identity map on its domain.
-\end{axiom}
-
-This axiom establishes a fundamental duality between the domain and range of heliomorphic functions, analogous to but distinct from the conformal mapping properties of holomorphic functions.
-
-\begin{axiom}[Radial Analyticity]
-Every heliomorphic function is analytic with respect to the radial coordinate, meaning for each fixed angle $\theta$, the function $r \mapsto f(re^{i\theta})$ has a convergent power series expansion in a neighborhood of every point.
-\end{axiom}
-
-This axiom ensures that heliomorphic functions inherit important analytic properties along radial directions, which is essential for their mathematical tractability.
-
-\begin{axiom}[Phase Continuity]
-The phase derivatives of a heliomorphic function satisfy the continuity equation:
-\begin{equation}
-\frac{\partial^2 \phi}{\partial r \partial \theta} = \frac{\partial^2 \phi}{\partial \theta \partial r}
-\end{equation}
-where $\phi(r,\theta)$ is the phase component in $f(re^{i\theta}) = \rho(r,\theta)e^{i\phi(r,\theta)}$.
-\end{axiom}
-
-This axiom ensures the consistency of phase evolution across different paths in the domain, preventing contradictions in the phase structure of heliomorphic functions.
-
-\begin{axiom}[Completeness]
-The space of heliomorphic functions on a domain $\mathcal{H}$ is complete with respect to the norm:
-\begin{equation}
-\|f\|_{\mathcal{H}} = \sup_{z \in \mathcal{H}} |f(z)| + \sup_{z \in \mathcal{H}} \|\mathcal{T}_f(z)\|
-\end{equation}
-where $\mathcal{T}_f$ is the radial-phase coupling tensor of $f$.
-\end{axiom}
-
-This axiom establishes that the space of heliomorphic functions has the analytical completeness necessary for developing a rigorous function theory, enabling constructions like limits, infinite series, and function spaces.
-
-\section{Consistency and Independence of the Axiom System}
-
-\begin{theorem}[Consistency of Heliomorphic Axioms]
-The seven axioms of heliomorphic functions form a consistent mathematical system.
-\end{theorem}
-
-\begin{proof}
-To prove consistency, we must demonstrate the existence of at least one model satisfying all seven axioms. We construct such a model using a subclass of complex functions defined in polar coordinates.
-
-Consider the family of functions $\mathcal{F}$ on the punctured complex plane $\mathbb{C} \setminus \{0\}$ defined by:
-\begin{equation}
-f(re^{i\theta}) = r^{\gamma}e^{i(\alpha\theta + \beta\ln r)}
-\end{equation}
-where $\gamma$, $\alpha$, and $\beta$ are real constants with $\alpha \neq 0$.
-
-It can be verified through direct calculation that:
-
-1. These functions satisfy the definition of heliomorphic functions with constant coupling parameters.
-2. For any specified values on multiple radial shells, a unique function in this family can be determined.
-3. The composition of two such functions yields another function in the same family.
-4. The derivative preserves the radial-phase coupling characteristics.
-5. The dual function exists within the same family.
-6. Each function is analytic with respect to $r$ for fixed $\theta$.
-7. The phase derivatives satisfy the continuity equation.
-8. The function space is complete under the defined norm.
-
-Therefore, we have constructed a non-empty model satisfying all seven axioms, proving consistency.
-\end{proof}
-
-\begin{theorem}[Independence of Heliomorphic Axioms]
-Each of the seven axioms of heliomorphic functions is independent, meaning none can be derived from the others.
-\end{theorem}
-
-\begin{proof}
-To prove independence, we demonstrate for each axiom a model that satisfies the other six axioms but violates the axiom in question.
-
-1. To violate Axiom 1 (Existence and Uniqueness): Consider functions where values on radial shells are specified with incompatible derivatives, creating an overdetermined system with no solution.
-
-2. To violate Axiom 2 (Composition Closure): Define a restricted class of heliomorphic functions with fixed $\gamma(r) = 1$ whose composition produces functions with varying $\gamma(r)$.
-
-3. To violate Axiom 3 (Differential Heritage): Construct functions where the derivative transforms radial directions into non-radial directions in the target space.
-
-4. To violate Axiom 4 (Radial-Phase Duality): Define heliomorphic functions on non-simply-connected domains where the dual function does not exist due to topological obstructions.
-
-5. To violate Axiom 5 (Radial Analyticity): Construct functions with non-analytic dependence on $r$ while maintaining the other properties.
-
-6. To violate Axiom 6 (Phase Continuity): Define functions where phase derivatives fail to commute, creating path dependence in phase accumulation.
-
-7. To violate Axiom 7 (Completeness): Construct a sequence of heliomorphic functions that converges pointwise but not uniformly with respect to the radial-phase coupling tensor.
-
-Since we can construct models that satisfy six axioms while violating any single one, all seven axioms are mutually independent.
-\end{proof}
+\section{Key Theorems of Heliomorphic Functions}
 
 \section{Fundamental Theorems of Heliomorphic Functions}
 

@@ -8,9 +8,9 @@ This document provides a structured checklist for the contraction phase of Elder
 |------|--------|----------|-------|
 | ☑ Fix notation inconsistencies across all chapters | ✅ | High | Fixed elder_training_loop.tex double subscript errors by reformatting mentor/elder reflection functions |
 | □ Standardize mathematical symbology in all equations | ⬜ | High | Ensure alignment with consolidated_notation.tex |
-| ☑ Unify parameter space definitions across chapters | ✅ | High | Created unified_parameter_space.tex, adopting Hilbert space as standard with bridging theorems to connect with other formulations |
-| ☑ Standardize resonance mechanism definitions | ✅ | High | Created unified_resonance_mechanism.tex, using coupled oscillator model as primary definition with formal connections to frequency ratio and Arnold tongues formulations |
-| □ Unify heliomorphic function definitions | ⬜ | High | Establish single canonical definition with clear domain/range; introduce special cases as corollaries |
+| ☑ Unify parameter space definitions across chapters | ✅ | High | Created unified_parameter_space.tex, adopting Hilbert space as standard |
+| ☑ Standardize resonance mechanism definitions | ✅ | High | Created concise resonance_mechanism.tex using coupled oscillator model as primary definition; removed deprecated approaches from related files |
+| ☑ Unify heliomorphic function definitions | ✅ | High | Created concise heliomorphic_functions.tex with clear definition and core axioms; removed comparison to holomorphic functions |
 | □ Verify consistent use of complex-valued parameter notation | ⬜ | Medium | Standardize on $\theta = \rho e^{i\phi}$ notation throughout |
 | □ Harmonize tensor notation across documents | ⬜ | Medium | Focus on radial-phase coupling tensor $\mathcal{T}_f$; use consistent indexing convention |
 | □ Consolidate operator definitions | ⬜ | Medium | Especially heliomorphic operators; create canonical reference in appendix |
