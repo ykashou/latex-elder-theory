@@ -28,12 +28,23 @@
 \usepackage{titlesec}
 \usepackage{multicol}
 \usepackage{caption}
-\usepackage[]{geometry}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{mathtools}
 \usepackage[most]{tcolorbox}
 \usepackage{listings}
+\usepackage{morefloats}
+\usepackage{placeins}
+
+% Increase the float size limit to handle larger figures
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{4}
+\setcounter{totalnumber}{10} 
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.85}
 % Abstract styling through custom environment
 \newenvironment{chapterabstract}
   {\par\small\itshape}
