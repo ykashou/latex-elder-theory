@@ -35,7 +35,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "mkdir -p build/pdf && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && biber --output-directory build/pdf main && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf && echo \"Compilation complete. PDF is available in the build/pdf directory.\""
+args = "mkdir -p build/pdf && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && biber --output-directory build/pdf main && makeindex build/pdf/main.idx && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf && echo \"Compilation complete. PDF is available in the build/pdf directory.\""
 
 [deployment]
 run = ["sh", "-c", "pdflatex -interaction=nonstopmode main.tex"]
