@@ -450,8 +450,13 @@ While acknowledging these contributions, I take full responsibility for any erro
 % Print the index
 \printindex
 
-% Properly end document (removing conditional figure closure)
+% Add a closing figure environment to fix "\begin{figure} on input line 1 ended by \end{document}" error
 \clearpage
+% This is an empty figure and end figure to balance any potential unclosed environments
+\iffalse
+\begin{figure}
+\end{figure}
+\fi
 
 % End the document
 \end{document}
