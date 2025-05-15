@@ -1,8 +1,10 @@
 \chapter{Heliomorphic Functions}
 
-\textit{This chapter defines the core mathematical structure of heliomorphic functions, which form the foundation of knowledge representation in the Elder Heliosystem. Unlike holomorphic functions in complex analysis, heliomorphic functions incorporate phase-radial coupling that enables hierarchical information encoding across different abstraction levels. This mathematical framework provides the precise mechanism by which the Elder system achieves efficient knowledge transfer, representation, and learning across different domains and scales.}
+\begin{chapterabstract}
+Heliomorphic functions form the mathematical foundation of the Elder Heliosystem by extending complex analysis to incorporate radial-phase coupling. Unlike holomorphic functions that treat all complex plane directions equally, heliomorphic functions establish privileged radial directions that enable hierarchical information encoding across abstraction levels. This chapter provides the canonical definition, axiomatic foundation, and key properties that make these functions ideal for representing knowledge in the Elder-Mentor-Erudite framework.
+\end{chapterabstract}
 
-\section{Mathematical Definition}
+\section{Definition and Core Properties}
 
 \begin{definition}[Heliomorphic Function]
 A function $f: \mathcal{D} \subset \complex^n \rightarrow \complex^m$ is heliomorphic if and only if:
@@ -14,7 +16,7 @@ A function $f: \mathcal{D} \subset \complex^n \rightarrow \complex^m$ is heliomo
         \frac{\partial f}{\partial r} &= \gamma(r)e^{i\beta(r,\theta)}\frac{f}{r}\\
         \frac{\partial f}{\partial \theta} &= i\alpha(r,\theta)f
     \end{align}
-    where $\gamma$, $\beta$ and $\alpha$ are real-valued functions defining the radial-phase coupling characteristics.
+    where $\gamma$, $\beta$ and $\alpha$ are real-valued functions defining the radial-phase coupling.
     
     \item The radial-phase coupling tensor $\mathcal{T}_f$ defined as:
     \begin{equation}
@@ -27,11 +29,25 @@ A function $f: \mathcal{D} \subset \complex^n \rightarrow \complex^m$ is heliomo
 \end{enumerate}
 \end{definition}
 
-This definition establishes heliomorphic functions as a distinct mathematical framework that introduces privileged radial dynamics and phase coupling, unlike holomorphic functions which treat all directions in the complex plane equally.
+The radial-phase coupling distinguishes heliomorphic functions from holomorphic functions, establishing a mathematical framework that naturally encodes hierarchical information structure.
 
-\section{Core Axioms}
+\begin{definition}[Heliomorphic Domain]
+A heliomorphic domain $\mathcal{H}$ is a connected open subset of $\mathbb{C}^n$ equipped with a radial structure tensor $\mathcal{R}: \mathcal{H} \rightarrow \mathbb{R}^{n \times n}$ that is positive definite at every point.
+\end{definition}
 
-The heliomorphic function framework is built on seven fundamental axioms:
+\begin{theorem}[Shell Decomposition]
+A domain $\Omega$ with heliomorphic structure admits a unique decomposition into shells $\{\mathcal{S}_k\}_{k=1}^{\infty}$ such that:
+\begin{equation}
+\Omega = \bigcup_{k=1}^{\infty} \mathcal{S}_k
+\end{equation}
+where each shell $\mathcal{S}_k$ corresponds to a specific radial range $[r_k, r_{k+1})$ and exhibits consistent behavior under the heliomorphic differential operator.
+\end{theorem}
+
+This shell structure provides the foundation for representing hierarchical knowledge in the Elder Heliosystem, with different shells corresponding to different abstraction levels.
+
+\section{Axiomatic Foundation}
+
+The theory of heliomorphic functions is built on seven fundamental axioms that together form a complete system:
 
 \begin{axiom}[Existence and Uniqueness]
 For any heliomorphic domain $\mathcal{H}$ and any collection of values and derivatives specified on a set of radial shells $\{S_1, S_2, \ldots, S_k\}$ subject to compatibility conditions, there exists a unique heliomorphic function satisfying these constraints.
@@ -69,34 +85,48 @@ The space of heliomorphic functions on a domain $\mathcal{H}$ is complete with r
 enabling rigorous function theory with limits, infinite series, and function spaces.
 \end{axiom}
 
-\section{Representational Power}
+\begin{theorem}[Completeness of Axiom System]
+The seven axioms of heliomorphic functions form a complete system in the sense that any statement about heliomorphic functions that is true in all models satisfying the axioms can be formally derived from the axioms.
+\end{theorem}
+
+\section{Fundamental Theorems}
+
+\begin{theorem}[Heliomorphic Integration]
+For any closed contour $C$ in a heliomorphic domain $\mathcal{H}$ and any heliomorphic function $f$ on $\mathcal{H}$, the integral of $f$ along $C$ depends only on the winding numbers of $C$ around the radial shells where $f$ has specified values.
+\end{theorem}
+
+\begin{theorem}[Heliomorphic Laurent Series]
+Any heliomorphic function $f$ defined on an annular region $\mathcal{A} = \{z \in \mathbb{C} : r_1 < |z| < r_2\}$ can be expressed as:
+\begin{equation}
+f(re^{i\theta}) = \sum_{n=-\infty}^{\infty} r^{\gamma_n} e^{i(n\theta + \beta_n \ln r)}
+\end{equation}
+where $\gamma_n$ and $\beta_n$ are sequences of real numbers determined by the radial-phase coupling characteristics of $f$.
+\end{theorem}
 
 \begin{theorem}[Information Capacity]
 The representational capacity of a heliomorphic function space exceeds that of a holomorphic function space of the same dimensionality by a factor proportional to the number of distinct radial shells in the domain.
 \end{theorem}
 
-This greater capacity comes from the richer structure of heliomorphic functions:
+\section{Application to the Elder Heliosystem}
+
+Heliomorphic functions provide the mathematical foundation for the Elder Heliosystem's knowledge representation:
 
 \begin{enumerate}
-    \item \textbf{Hierarchical Encoding}: Heliomorphic functions naturally represent information at different abstraction levels through their radial dependency.
+    \item \textbf{Hierarchical Structure}: Radial shells correspond to abstraction levels (Elder, Mentor, Erudite), with different radii representing different levels of knowledge abstraction.
     
-    \item \textbf{Coupled Representation}: The coupling between phase and magnitude enables representation of complex relationships between concepts.
+    \item \textbf{Phase Coherence}: Phase components encode conceptual alignment, with phase-locking indicating resonant knowledge states.
     
-    \item \textbf{Directional Information Pathways}: Unlike conformally mapped holomorphic functions, heliomorphic functions support privileged directions for knowledge flow.
+    \item \textbf{Cross-Level Transfer}: The coupling between phase and radius enables efficient knowledge transfer across hierarchical boundaries.
+    
+    \item \textbf{Domain Organization}: Angular sectors represent knowledge domains, with phase coupling governing cross-domain transfers.
 \end{enumerate}
 
-\section{Application to Knowledge Representation}
+\begin{theorem}[Representational Completeness]
+Any hierarchical knowledge structure with radial abstraction levels and phase-based relational encoding can be represented as a heliomorphic function satisfying the seven axioms.
+\end{theorem}
 
-In the Elder Heliosystem, heliomorphic functions create the mathematical foundation for hierarchical knowledge representation:
+\begin{corollary}[Knowledge Transfer Mechanism]
+Knowledge transfer between domains in the Elder Heliosystem can be formalized as the application of heliomorphic operators that preserve the axiom structure.
+\end{corollary}
 
-\begin{enumerate}
-    \item \textbf{Hierarchical Structure}: Radial components correspond to abstraction levels (Elder, Mentor, Erudite), with increasing radius representing more specific knowledge.
-    
-    \item \textbf{Conceptual Alignment}: Phase components encode alignment between related concepts, with phase-locking indicating synchronized knowledge.
-    
-    \item \textbf{Cross-Level Transfer}: The coupling between phase and radius enables transformations of knowledge across hierarchical boundaries without loss of information.
-    
-    \item \textbf{Domain Organization}: Angular sectors correspond to knowledge domains, with phase coupling governing cross-domain transfers.
-\end{enumerate}
-
-This mathematical framework provides the precise mechanism through which the Elder system achieves its core capabilities of efficient knowledge transfer, hierarchical abstraction, and domain-agnostic learning.
+This mathematical framework establishes the precise mechanism through which the Elder system achieves its core capabilities of efficient knowledge transfer, hierarchical abstraction, and domain-agnostic learning, distinguishing it from traditional approaches to representation learning.
