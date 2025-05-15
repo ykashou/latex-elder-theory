@@ -1,6 +1,7 @@
 % Efficiency Scaling Figure for PAC Learning Bounds
 \begin{figure}[htbp]
 \centering
+% Using a simple approach without pgfplots to avoid dimension issues
 \begin{tikzpicture}[scale=0.85]
     % Define styles
     \tikzset{
@@ -24,12 +25,12 @@
         \draw (0.1,\y) -- (-0.1,\y) node[left] {$\y$};
     }
     
-    % Draw traditional learning curve
-    \draw[traditional] (0,5) to[out=-5, in=180] (10,3) 
+    % Draw traditional learning curve - using explicit coordinates to avoid computational errors
+    \draw[traditional] (0,5) -- (2,4.7) -- (4,4.2) -- (6,3.8) -- (8,3.3) -- (10,3)
         node[right] {Traditional Learning};
     
-    % Draw Elder system learning curve
-    \draw[elder] (0,5) to[out=-30, in=180] (10,1) 
+    % Draw Elder system learning curve - using explicit coordinates
+    \draw[elder] (0,5) -- (2,4) -- (4,3) -- (6,2.2) -- (8,1.5) -- (10,1)
         node[right] {Elder System};
     
     % Add annotations
@@ -37,7 +38,7 @@
     \node[annotation, align=center] at (3,2.5) {$O\left(\frac{VC(\mathcal{C}) \cdot \eta(d)}{\epsilon^2}\right)$\\$\eta(d) \to 0$ as $d \to \infty$};
     
     % Add efficiency gain illustration
-    \draw[<->, dashed] (8,3) -- (8,1) node[midway, right] {Efficiency Gain};
+    \draw[<->, dashed] (8,3.3) -- (8,1.5) node[midway, right] {Efficiency Gain};
     
     % Add asymptotic behavior
     \node[annotation, align=left] at (7,0.5) {Asymptotic Behavior:\\$\Theta(\log d)$ improvement};
