@@ -26,30 +26,12 @@ The phase coherence between two components $A$ and $B$ with phases $\phi_A$ and 
 where $T$ is the measurement period. Perfect phase-locking yields $\mathcal{C}_{A,B} = 1$, while uncorrelated phases yield $\mathcal{C}_{A,B} \approx 0$.
 \end{definition}
 
-\subsection{Precise Mathematical Conditions for Resonance}
+\subsection{The Elder Resonance Algorithm in Practice}
 
-Resonance in the Elder Heliosystem is a critical phenomenon that enables efficient knowledge transfer across hierarchical levels. We now develop the complete mathematical theory of when and how resonance occurs.
+Resonance in the Elder Heliosystem is a critical phenomenon that enables efficient knowledge transfer across hierarchical levels. As established in the Unified Resonance Mechanism chapter, this is fundamentally described by a hierarchical Kuramoto model with phase-locking behavior.
 
-\begin{definition}[Orbital Parameter Dynamics]
-The phase evolution of each component in the Elder Heliosystem follows the coupled differential equations:
-\begin{align}
-\dot{\phi}_E &= \omega_E + \sum_{k=1}^M \kappa_{E,M,k} \sin(\phi_{M,k} - q_k\phi_E/p_k) \\
-\dot{\phi}_{M,k} &= \omega_{M,k} + \kappa_{M,E,k} \sin(p_k\phi_E/q_k - \phi_{M,k}) + \sum_{j=1}^{N_k} \kappa_{M,E,k,j} \sin(\phi_{E,k,j} - s_{k,j}\phi_{M,k}/r_{k,j}) \\
-\dot{\phi}_{E,k,j} &= \omega_{E,k,j} + \kappa_{E,M,k,j} \sin(r_{k,j}\phi_{M,k}/s_{k,j} - \phi_{E,k,j})
-\end{align}
-where $\kappa$ parameters represent coupling strengths between components.
-\end{definition}
+This algorithm adapts the canonical resonance mechanism to implement a practical training procedure. We focus here on the algorithmic implementation rather than the mathematical foundations.
 
-\begin{theorem}[Resonance Condition]
-A resonant configuration in the Elder Heliosystem occurs when the rotational frequencies of Elder ($\omega_E$), Mentors ($\omega_{M,k}$), and Erudites ($\omega_{E,k,j}$) satisfy:
-\begin{align}
-\frac{\omega_{M,k}}{\omega_E} &= \frac{p_k}{q_k} \\
-\frac{\omega_{E,k,j}}{\omega_{M,k}} &= \frac{r_{k,j}}{s_{k,j}}
-\end{align}
-with small integers $p_k, q_k, r_{k,j}, s_{k,j} \in \mathbb{N}$.
-\end{theorem}
-
-\begin{proof}
 In classical orbital mechanics, the resonance condition corresponds to periodic alignments of orbiting bodies. For periodic alignment to occur, the ratio of orbital frequencies must be expressible as a ratio of integers.
 
 If we define the relative phase between Elder and Mentor $k$ as $\Psi_{E,M,k} = p_k\phi_E - q_k\phi_{M,k}$, its time derivative is:
