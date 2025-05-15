@@ -27,7 +27,7 @@
     \draw[standard] plot[domain=0:9, samples=100] (\x, {min(7, 0.08*\x*\x)});
     
     % Hierarchical optimization: O(N·log N)
-    \draw[hierarchical] plot[domain=0:9, samples=100] (\x, {min(7, 0.3*\x*ln(\x+1))});
+    \draw[hierarchical] plot[domain=0.5:9, samples=100] (\x, {min(7, 0.3*\x*ln(\x+1))});
     
     % Parallel implementation: O(N²/P)
     \draw[parallel] plot[domain=0:9, samples=100] (\x, {min(7, 0.08*\x*\x/4)});
