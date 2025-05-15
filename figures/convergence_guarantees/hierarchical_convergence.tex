@@ -1,0 +1,167 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.85, transform shape]
+    % Define styles
+    \tikzset{
+        level/.style={
+            draw,
+            fill=blue!15,
+            rounded corners,
+            minimum width=2.8cm,
+            minimum height=1cm,
+            text width=2.6cm,
+            align=center
+        },
+        metric/.style={
+            draw,
+            fill=green!15,
+            rounded corners,
+            minimum width=2.5cm,
+            minimum height=0.8cm,
+            text width=2.3cm,
+            align=center
+        },
+        arrow/.style={
+            ->,
+            thick,
+            >=latex
+        },
+        equation/.style={
+            draw,
+            fill=yellow!15,
+            rounded corners,
+            minimum width=5cm,
+            minimum height=1cm,
+            text width=4.8cm,
+            align=center
+        },
+        phase/.style={
+            draw,
+            fill=purple!15,
+            ellipse,
+            minimum width=2.2cm,
+            minimum height=1.2cm,
+            align=center
+        }
+    }
+    
+    % Hierarchical levels and convergence metrics
+    \begin{scope}[shift={(0,0)}]
+        % Title
+        \node[font=\bfseries] at (0,6) {Hierarchical Convergence Metrics};
+        
+        % Hierarchical levels
+        \node[level] (elder) at (0,4) {Elder Level\\Universal Principles};
+        \node[level] (mentor) at (0,2) {Mentor Level\\Meta-Knowledge};
+        \node[level] (erudite) at (0,0) {Erudite Level\\Domain-Specific};
+        
+        % Connect levels
+        \draw[arrow] (erudite) -- (mentor);
+        \draw[arrow] (mentor) -- (elder);
+        
+        % Convergence metrics
+        \node[metric] (l_elder) at (4,4) {Loss Stability\\$\varepsilon_{El}$};
+        \node[metric] (l_mentor) at (4,2) {Loss Stability\\$\varepsilon_{M}$};
+        \node[metric] (l_erudite) at (4,0) {Loss Stability\\$\varepsilon_{E}$};
+        
+        % Connect metrics to levels
+        \draw[arrow] (elder) -- (l_elder);
+        \draw[arrow] (mentor) -- (l_mentor);
+        \draw[arrow] (erudite) -- (l_erudite);
+        
+        % Orbital metrics
+        \node[metric] (o_em) at (-4,3) {Orbital Stability\\$\delta_{M,El}$};
+        \node[metric] (o_me) at (-4,1) {Orbital Stability\\$\delta_{E,M}$};
+        
+        % Connect orbital metrics
+        \draw[arrow] (elder) to[bend right] (o_em);
+        \draw[arrow] (mentor) to[bend left] (o_em);
+        \draw[arrow] (mentor) to[bend right] (o_me);
+        \draw[arrow] (erudite) to[bend left] (o_me);
+        
+        % Hierarchical convergence equation
+        \node[equation] at (0,-2) {
+            System has converged iff:\\
+            $\forall$ levels: Loss stability AND\\
+            $\forall$ orbital pairs: Orbital stability
+        };
+        
+        % Threshold values
+        \node[draw, fill=red!15, text width=3cm, align=center, rounded corners] at (7.5, 2) {
+            \textbf{Typical Thresholds:}\\
+            $\varepsilon_{El} = 10^{-4}$\\
+            $\varepsilon_{M} = 10^{-3}$\\
+            $\varepsilon_{E} = 10^{-2}$\\
+            $\delta_{M,El} = 10^{-3}$\\
+            $\delta_{E,M} = 10^{-3}$
+        };
+    \end{scope}
+    
+    % Orbital stability visualization
+    \begin{scope}[shift={(0,-7)}]
+        % Title
+        \node[font=\bfseries] at (0,2) {Orbital Stability and Convergence};
+        
+        % Center point (Elder)
+        \node[level] (el_center) at (0,0) {Elder};
+        
+        % Orbital path before convergence
+        \draw[gray, dashed] (0,0) circle (2cm);
+        \draw[gray, dashed] (0,0) circle (3.5cm);
+        
+        % Orbital path after convergence
+        \draw[blue] (0,0) circle (1.8cm);
+        \draw[blue] (0,0) circle (3.3cm);
+        
+        % Stable positions
+        \node[phase] (mentor_stable) at (0:1.8cm) {Mentor};
+        \node[phase] (erudite_stable) at (0:3.3cm) {Erudite};
+        
+        % Unstable positions
+        \node[phase, fill=red!15] (mentor_unstable1) at (60:2.1cm) {Mentor};
+        \node[phase, fill=red!15] (mentor_unstable2) at (180:1.5cm) {Mentor};
+        \node[phase, fill=red!15] (erudite_unstable1) at (120:3.8cm) {Erudite};
+        \node[phase, fill=red!15] (erudite_unstable2) at (240:3.0cm) {Erudite};
+        
+        % Arrows showing convergence to stable orbit
+        \draw[arrow] (mentor_unstable1) -- (mentor_stable);
+        \draw[arrow] (mentor_unstable2) -- (mentor_stable);
+        \draw[arrow] (erudite_unstable1) -- (erudite_stable);
+        \draw[arrow] (erudite_unstable2) -- (erudite_stable);
+        
+        % Orbital radius labels
+        \draw[<->] (0,0) -- node[above] {$r_{M,El} \pm \delta_{M,El}$} (mentor_stable);
+        \draw[<->] (0,0) -- node[below] {$r_{E,M} \pm \delta_{E,M}$} (3.3cm,0);
+    \end{scope}
+    
+    % Resonance quality factor visualization
+    \begin{scope}[shift={(9,-7)}]
+        % Title
+        \node[font=\bfseries] at (0,2) {Resonance Quality Factor};
+        
+        % Axes for plot
+        \draw[->] (-0.5,0) -- (4,0) node[right] {$|p| + |q|$};
+        \draw[->] (0,-0.5) -- (0,4) node[above] {$Q_{i,j}$};
+        
+        % Quality factor curve
+        \draw[domain=1:3.9, samples=100, smooth, variable=\x, blue, thick] 
+            plot ({\x}, {3/\x});
+        
+        % Critical threshold
+        \draw[dashed] (0,1) -- (4,1) node[right] {$Q_{critical}$};
+        
+        % Resonance examples
+        \node[draw, fill=green!15, circle] at (2,1.5) {$3:1$};
+        \node[draw, fill=green!15, circle] at (3,1) {$2:1$};
+        \node[draw, fill=red!15, circle] at (5,0.6) {$4:3$};
+        \node[draw, fill=red!15, circle] at (7,0.43) {$4:4$};
+        
+        % Annotations
+        \node[align=center] at (2,3) {High quality\\resonance};
+        \node[align=center] at (3.5,0.5) {Low quality\\resonance};
+    \end{scope}
+    
+\end{tikzpicture}
+\caption{Hierarchical convergence metrics in the Elder system. Top: The three hierarchical levels (Elder, Mentor, Erudite) each have their own loss stability metrics ($\varepsilon_{El}$, $\varepsilon_{M}$, $\varepsilon_{E}$), while pairs of adjacent levels have orbital stability metrics ($\delta_{M,El}$, $\delta_{E,M}$). System convergence requires both loss stability at each level and orbital stability between levels. Bottom left: Orbital stability visualization showing how orbital parameters converge to stable values (blue circles) from unstable initial positions (red entities), with tolerance bands of $\pm\delta$ around ideal orbital radii. Bottom right: Resonance quality factor decreases with increasing resonance complexity ($|p|+|q|$). Simple resonances like 3:1 and 2:1 have quality factors above the critical threshold and enhance convergence, while complex resonances like 4:3 have quality factors below threshold and may impede convergence.}
+\label{fig:hierarchical_convergence}
+\end{figure}
