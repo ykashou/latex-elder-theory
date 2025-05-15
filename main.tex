@@ -4,6 +4,7 @@
 \documentclass[11pt,twoside]{book}
 
 % Basic packages for styling and math
+\errorcontextlines=999 % For more detailed error messages
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
 \usepackage{newunicodechar}
@@ -452,18 +453,9 @@ While acknowledging these contributions, I take full responsibility for any erro
 % Force any pending figures to be processed and close any unclosed environments
 \clearpage
 
-% Process any remaining floats
-\suppressfloats[t]
-\suppressfloats[b]
-
-% Final clearpage to ensure everything is processed
+% Try another approach to handle unclosed environments
+\newpage
 \clearpage
-
-% Add a dummy figure that will balance any unclosed figure environments
-\begin{figure}[h]
-\centering
-% Empty figure content
-\caption*{Document End}
-\end{figure}
+\endinput
 
 \end{document}
