@@ -451,7 +451,19 @@ While acknowledging these contributions, I take full responsibility for any erro
 
 % Force any pending figures to be processed and close any unclosed environments
 \clearpage
+
+% Process any remaining floats
+\suppressfloats[t]
+\suppressfloats[b]
+
+% Final clearpage to ensure everything is processed
 \clearpage
-\clearpage
+
+% Add a dummy figure that will balance any unclosed figure environments
+\begin{figure}[h]
+\centering
+% Empty figure content
+\caption*{Document End}
+\end{figure}
 
 \end{document}
