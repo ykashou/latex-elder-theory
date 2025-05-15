@@ -68,11 +68,11 @@ func (a *ElderElement) ElderProduct(b *ElderElement) *ElderElement {
         }
     }
     
-    return NewArcaneElement(result)
+    return NewElderElement(result)
 }
 
-// Norm calculates the Elder norm of an Arcane element
-func (a *ArcaneElement) Norm() float64 {
+// Norm calculates the Elder norm of an Elder element
+func (a *ElderElement) Norm() float64 {
     sum := 0.0
     for i := range a.Coefficients {
         for j := range a.Coefficients {
@@ -130,7 +130,7 @@ type Point2D struct {
 }
 
 // MapElderToEuclidean maps a 2D Elder space element to Euclidean coordinates
-func MapElderToEuclidean(element *elder.ArcaneElement) (Point2D, error) {
+func MapElderToEuclidean(element *elder.ElderElement) (Point2D, error) {
     if len(element.Coefficients) != 2 {
         return Point2D{}, errors.New("element must be in 2D Elder space")
     }
@@ -144,7 +144,7 @@ func MapElderToEuclidean(element *elder.ArcaneElement) (Point2D, error) {
 }
 
 // GenerateElderTrajectory generates a trajectory in Elder space
-func GenerateElderTrajectory(start *elder.ArcaneElement, steps int) []Point2D {
+func GenerateElderTrajectory(start *elder.ElderElement, steps int) []Point2D {
     trajectory := make([]Point2D, steps)
     
     current := start
@@ -161,7 +161,7 @@ func GenerateElderTrajectory(start *elder.ArcaneElement, steps int) []Point2D {
 }
 
 // ElderEvolution applies one step of the Elder evolution operator
-func ElderEvolution(element *elder.ArcaneElement) *elder.ArcaneElement {
+func ElderEvolution(element *elder.ElderElement) *elder.ElderElement {
     // A simple evolution rule for demonstration purposes
     // In a real application, this would implement the actual Elder dynamics
     a := element.Coefficients[0]
@@ -170,11 +170,11 @@ func ElderEvolution(element *elder.ArcaneElement) *elder.ArcaneElement {
     newA := a + 0.1*b - 0.01*a*a
     newB := b - 0.1*a - 0.01*b*b
     
-    return elder.NewArcaneElement([]float64{newA, newB})
+    return elder.NewElderElement([]float64{newA, newB})
 }
 
 // ColorMapElder maps Elder space coordinate to a color
-func ColorMapElder(element *elder.ArcaneElement) color.RGBA {
+func ColorMapElder(element *elder.ElderElement) color.RGBA {
     norm := element.Norm()
     
     // Map the norm to a color (blue to red gradient)
