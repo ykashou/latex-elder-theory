@@ -55,3 +55,8 @@ Thumbs.db
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# Latex builds
+build
+attached_assets
+output
