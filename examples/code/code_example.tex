@@ -9,20 +9,20 @@ import (
     "errors"
 )
 
-// ArcaneElement represents an element in the Elder algebra
-type ArcaneElement struct {
+// ElderElement represents an element in the Elder algebra
+type ElderElement struct {
     Coefficients []float64  // Coefficients in the standard basis
 }
 
-// NewArcaneElement creates a new Arcane element with the given coefficients
-func NewArcaneElement(coeffs []float64) *ArcaneElement {
-    return &ArcaneElement{
+// NewElderElement creates a new Elder element with the given coefficients
+func NewElderElement(coeffs []float64) *ElderElement {
+    return &ElderElement{
         Coefficients: coeffs,
     }
 }
 
-// Add performs addition of two Arcane elements
-func (a *ArcaneElement) Add(b *ArcaneElement) (*ArcaneElement, error) {
+// Add performs addition of two Elder elements
+func (a *ElderElement) Add(b *ElderElement) (*ElderElement, error) {
     if len(a.Coefficients) != len(b.Coefficients) {
         return nil, errors.New("dimensions must match for addition")
     }
@@ -32,21 +32,21 @@ func (a *ArcaneElement) Add(b *ArcaneElement) (*ArcaneElement, error) {
         result[i] = a.Coefficients[i] + b.Coefficients[i]
     }
     
-    return NewArcaneElement(result), nil
+    return NewElderElement(result), nil
 }
 
-// ScalarMultiply multiplies an Arcane element by a scalar
-func (a *ArcaneElement) ScalarMultiply(scalar float64) *ArcaneElement {
+// ScalarMultiply multiplies an Elder element by a scalar
+func (a *ElderElement) ScalarMultiply(scalar float64) *ElderElement {
     result := make([]float64, len(a.Coefficients))
     for i := range a.Coefficients {
         result[i] = scalar * a.Coefficients[i]
     }
     
-    return NewArcaneElement(result)
+    return NewElderElement(result)
 }
 
-// ElderProduct computes the Elder product of two Arcane elements
-func (a *ArcaneElement) ElderProduct(b *ArcaneElement) *ArcaneElement {
+// ElderProduct computes the Elder product of two Elder elements
+func (a *ElderElement) ElderProduct(b *ElderElement) *ElderElement {
     n := len(a.Coefficients)
     m := len(b.Coefficients)
     
