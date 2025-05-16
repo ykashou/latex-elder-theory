@@ -20,6 +20,19 @@ The composite parameter space of the entire system is defined as:
 \begin{equation}
 \boldsymbol{\Theta} = \Theta_E \times \prod_{d=1}^D \Theta_M^{(d)} \times \prod_{d=1}^D \Theta_e^{(d)}
 \end{equation}
+
+\textbf{Mathematical Justification}: The Cartesian product structure is essential for several fundamental reasons:
+\begin{enumerate}
+    \item \textbf{Dimension Preservation}: The product structure ensures the dimensionality is $\dim(\Theta_E) + \sum_{d=1}^D \dim(\Theta_M^{(d)}) + \sum_{d=1}^D \dim(\Theta_e^{(d)})$, preserving all degrees of freedom needed for complete knowledge representation.
+    
+    \item \textbf{Parameter Independence}: Each component in the hierarchical structure maintains its uniqueness and can be manipulated independently, allowing for targeted modifications at specific abstraction levels.
+    
+    \item \textbf{Hierarchical Organization}: The product formalism naturally supports the hierarchical organization of Elder, Mentor, and Erudite levels, enabling effective information flow between them.
+    
+    \item \textbf{Domain Separation}: Distinct domain-specific parameter spaces allow specialized knowledge to develop without interference, while still enabling cross-domain transfer through phase relationships.
+    
+    \item \textbf{Transfer Operations}: The transformation mappings between levels are well-defined under a product structure as $T: \Theta_E \times \Theta_M^{(d)} \rightarrow \Theta_e^{(d)}$, which would not be possible with a direct sum formulation.
+\end{enumerate}
 \end{definition}
 
 \section{Complex-Valued Representation}
