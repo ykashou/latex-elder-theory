@@ -23,15 +23,21 @@ The composite parameter space of the entire system is defined as:
 
 \textbf{Mathematical Justification}: The Cartesian product structure is essential for several fundamental reasons:
 \begin{enumerate}
+    \item \textbf{Parameter Count Decomposition}: The Cartesian product directly determines the total number of learnable parameters $N$ as:
+    \begin{equation}
+    N = |\Theta_E| + \sum_{d=1}^D |\Theta_M^{(d)}| + \sum_{d=1}^D |\Theta_e^{(d)}|
+    \end{equation}
+    This decomposition enables precise analysis of computational complexity and memory requirements for each level.
+    
     \item \textbf{Dimension Preservation}: The product structure ensures the dimensionality is $\dim(\Theta_E) + \sum_{d=1}^D \dim(\Theta_M^{(d)}) + \sum_{d=1}^D \dim(\Theta_e^{(d)})$, preserving all degrees of freedom needed for complete knowledge representation.
     
-    \item \textbf{Parameter Independence}: Each component in the hierarchical structure maintains its uniqueness and can be manipulated independently, allowing for targeted modifications at specific abstraction levels.
+    \item \textbf{Parameter Independence}: Each component in the hierarchical structure maintains its uniqueness and can be manipulated independently, allowing for targeted modifications at specific abstraction levels without affecting other levels.
     
-    \item \textbf{Hierarchical Organization}: The product formalism naturally supports the hierarchical organization of Elder, Mentor, and Erudite levels, enabling effective information flow between them.
+    \item \textbf{Hierarchical Organization}: The product formalism naturally supports the Elder-Mentor-Erudite organization, enabling effective information flow between levels while maintaining clear boundaries. This would be impossible with a direct sum, which would blend parameters across levels.
     
     \item \textbf{Domain Separation}: Distinct domain-specific parameter spaces allow specialized knowledge to develop without interference, while still enabling cross-domain transfer through phase relationships.
     
-    \item \textbf{Transfer Operations}: The transformation mappings between levels are well-defined under a product structure as $T: \Theta_E \times \Theta_M^{(d)} \rightarrow \Theta_e^{(d)}$, which would not be possible with a direct sum formulation.
+    \item \textbf{Transfer Operations}: The transformation mappings between levels are well-defined under a product structure as $T: \Theta_E \times \Theta_M^{(d)} \rightarrow \Theta_e^{(d)}$, which would be mathematically inconsistent in a direct sum formulation where dimensions would collapse.
 \end{enumerate}
 \end{definition}
 
