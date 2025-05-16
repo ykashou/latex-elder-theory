@@ -21,11 +21,11 @@ A subset $\mathcal{M}$ of an Elder space is a resonance manifold if it represent
 \end{definition}
 
 \begin{theorem}[Stratification]
-Every Elder space admits a canonical stratification into phase-coherent manifolds:
+Every Elder space can be organized into layers of resonance manifolds that represent different levels of knowledge abstraction:
 \begin{equation}
-\elder{d} = \bigcup_{k=0}^{d} \mathcal{S}_k
+\mathcal{E} = \bigcup_{k=0}^{d} \mathcal{S}_k
 \end{equation}
-where each $\mathcal{S}_k$ is a disjoint union of $k$-dimensional phase-coherent manifolds.
+where each $\mathcal{S}_k$ represents a collection of related knowledge structures at a particular level of abstraction.
 \end{theorem}
 
 \begin{figure}[ht]
@@ -50,55 +50,56 @@ where each $\mathcal{S}_k$ is a disjoint union of $k$-dimensional phase-coherent
 \filldraw (2.6, 1.5) circle (0.1) node[right] {$\mathcal{S}_0$};
 \filldraw (-2.6, -1.5) circle (0.1) node[left] {$\mathcal{S}_0$};
 \end{tikzpicture}
-\caption{Stratification of Elder space into phase-coherent manifolds}
+\caption{Stratification of Elder space into resonance manifolds. Each layer ($\mathcal{S}_0$, $\mathcal{S}_1$, $\mathcal{S}_2$) represents knowledge structures at different levels of abstraction.}
 \label{fig:elder-stratification}
 \end{figure}
 
-This stratification is fundamental to understanding the dynamics of Elder learning processes, as each stratum corresponds to states with similar structural properties.
+This stratification is important for understanding the organization of knowledge in the Elder Theory framework, as each layer corresponds to information with similar structural properties and abstraction levels.
 
-\section{Realization Mappings}
+\section{Domain Mappings}
 
-Realization mappings connect abstract Elder spaces to measurable phenomena in specific domains.
+Domain mappings connect abstract knowledge in Elder spaces to concrete applications across different fields of study.
 
-\begin{definition}[Realization Mapping]
-A realization mapping $\realization{X}: \elder{d} \rightarrow \mathcal{F}(X)$ from an Elder space to a function space over domain $X$ is a continuous mapping that preserves phase and spectral structure.
+\begin{definition}[Domain Mapping]
+A domain mapping connects knowledge within the Elder framework to practical applications in a specific field or domain, allowing theoretical principles to be applied to real-world problems.
 \end{definition}
 
-\begin{theorem}[Universal Realization]
-For any Elder space $\elder{d}$, there exists a canonical realization mapping $\realization{U}: \elder{d} \rightarrow L^2(U_d)$ that is:
+\begin{theorem}[Knowledge Transfer]
+The Elder framework facilitates knowledge transfer across domains through mappings that preserve essential relationships and structural patterns:
 \begin{enumerate}
-    \item Injective: $\realization{U}(x) = \realization{U}(y) \implies x = y$
-    \item Additive: $\realization{U}(x \oplus y) = \realization{U}(x) + \realization{U}(y)$
-    \item Multiplicative: $\realization{U}(x \star y) = \realization{U}(x) \cdot \realization{U}(y)$
-    \item Phase-preserving: $\Phi(x) = \Phi_{\mathcal{F}}(\realization{U}(x))$
+    \item Conservation of structure: Key relationships are maintained across domain boundaries
+    \item Adaptability: Knowledge can be applied to new domains while preserving essential patterns
+    \item Phase alignment: Related concepts across domains naturally align through resonance
+    \item Hierarchical preservation: Knowledge maintains its hierarchical organization across domains
 \end{enumerate}
 \end{theorem}
 
-This theorem establishes that every abstract Elder space can be faithfully represented in a concrete functional space, preserving all relevant algebraic and phase properties.
+This approach enables knowledge discovered in one field to be meaningfully applied to different domains while preserving the core structural patterns and relationships.
 
-\section{Spectral Properties}
+\section{Phase Properties}
 
-The spectral properties of Elder spaces provide deep insights into their structure and behavior.
+The phase properties of Elder spaces provide important insights into how knowledge components interact and align.
 
-\begin{definition}[Spectral Bundle]
-The spectral bundle of an Elder space is $\mathcal{E}_d = \elder{d} \times_{\Phi} \mathbb{S}^1$, whose fiber over each point of $\mathbb{S}^1$ consists of all elements with the corresponding phase.
+\begin{definition}[Phase Alignment]
+Phase alignment in Elder Theory refers to the synchronization of related knowledge components across different domains, enabling effective knowledge transfer and integration.
 \end{definition}
 
-\begin{lemma}[Spectral Realization]
-For any $x \in \elder{d}$ with spectral decomposition $x = \sum_{i=1}^{d} \lambda_i e^{i\theta_i} \odot \elderstructure{i}$, the realized function $\realization{X}(x)$ has:
+\begin{theorem}[Knowledge Resonance]
+When knowledge structures from different domains share underlying principles, they exhibit resonance properties that facilitate their integration:
 \begin{enumerate}
-    \item Norm: $\|\realization{X}(x)\|_{L^2} = \sqrt{\sum_{i=1}^{d} \lambda_i^2}$
-    \item Phase: Weighted combination of the phases $\theta_i$ at each point
-    \item Resonance: Amplification where phases $\theta_i$ align coherently
+    \item Common patterns become amplified through phase alignment
+    \item Domain-specific details that don't align are naturally filtered
+    \item Integrated knowledge maintains essential structural relationships
+    \item Cross-domain insights emerge from the resonance patterns
 \end{enumerate}
-\end{lemma}
+\end{theorem}
 
-\begin{theorem}[Topological Invariants]
-The spectral bundle $\mathcal{E}_d$ admits topological invariants that completely characterize its structure:
+\begin{theorem}[Knowledge Transfer Properties]
+The Elder framework facilitates knowledge transfer through structural correspondence:
 \begin{enumerate}
-    \item Chern classes $c_k(\mathcal{E}_d) \in H^{2k}(\mathbb{S}^1, \mathbb{Z})$
-    \item A canonical flat connection $\nabla_E$ with holonomy group $U(1)^d$
-    \item The characteristic Elder class $\chi_E(\mathcal{E}_d)$
+    \item Similar structures in different domains can be mapped to each other
+    \item The mapping preserves essential relationships between components
+    \item Knowledge from one domain can guide learning in another domain
 \end{enumerate}
 \end{theorem}
 
