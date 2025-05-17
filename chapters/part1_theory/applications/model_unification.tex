@@ -93,10 +93,10 @@ The relationship between the models can be visualized as follows:
     % Central entity
     \filldraw[yellow!80!orange] (0,0) circle (0.3cm) node[black] {Elder};
     
-    % Shell perspective entities
-    \filldraw[blue!60] (30:1cm) circle (0.15cm) node[black, font=\tiny] {$S_1$};
-    \filldraw[blue!60] (150:2cm) circle (0.15cm) node[black, font=\tiny] {$S_2$};
-    \filldraw[blue!60] (-90:3cm) circle (0.15cm) node[black, font=\tiny] {$S_3$};
+    % Field perspective entities
+    \filldraw[blue!60] (30:1cm) circle (0.15cm) node[black, font=\tiny] {$F_1$};
+    \filldraw[blue!60] (150:2cm) circle (0.15cm) node[black, font=\tiny] {$F_2$};
+    \filldraw[blue!60] (-90:3cm) circle (0.15cm) node[black, font=\tiny] {$F_3$};
     
     % Orbital perspective entities
     \filldraw[red!60] (60:1cm) circle (0.15cm) node[black, font=\tiny] {$O_1$};
@@ -109,11 +109,11 @@ The relationship between the models can be visualized as follows:
     \draw[<->, dashed, black] (-90:3cm) -- (330:3cm);
     
     % Annotations
-    \node[blue, font=\small] at (0,-4) {Heliomorphic Shell Perspective};
+    \node[blue, font=\small] at (0,-4) {Heliomorphic Field Perspective};
     \node[red, font=\small] at (0,-4.5) {Orbital Mechanics Perspective};
     \node[black, font=\small] at (0,-5) {Equivalent Mathematical Frameworks};
 \end{tikzpicture}
-\caption{Unified visualization showing the equivalence between heliomorphic shells and orbital paths}
+\caption{Unified visualization showing the equivalence between heliomorphic field theory and orbital paths}
 \label{fig:model_unification}
 \end{figure}
 
@@ -126,13 +126,13 @@ The unification of these models has profound practical implications:
     
     \item \textbf{Implementation Guidance}: Different implementation strategies may be more natural in one model versus the other, but will produce equivalent results.
     
-    \item \textbf{Intuitive Understanding}: Complex systems concepts can be understood either through spatial organization (shells) or dynamic processes (orbits).
+    \item \textbf{Intuitive Understanding}: Complex systems concepts can be understood either through spatial organization (gravitational fields) or dynamic processes (orbits).
     
     \item \textbf{Parameter Transfer}: Mathematical results derived in one model can be directly transferred to the other through the equivalence mapping.
 \end{enumerate}
 
 \begin{observation}
-When implementing the Elder framework in practice, engineers often find it helpful to use the heliomorphic shell model for parameter organization and storage, while using the orbital mechanics model for update rules and dynamics.
+When implementing the Elder framework in practice, engineers often find it helpful to use the heliomorphic field theory for parameter organization and storage, while using the orbital mechanics model for update rules and dynamics.
 \end{observation}
 
 \section{Conservation Laws Across Models}
@@ -142,9 +142,9 @@ A key benefit of understanding the equivalence between these models is the abili
 \begin{theorem}[Cross-Model Conservation]
 The following quantities are conserved across both model perspectives:
 \begin{enumerate}
-    \item \textbf{Total Energy}: $E = \sum_i \rho_i^2\omega_i$ (Shell) $\equiv \sum_i E_{kinetic,i} + E_{potential,i}$ (Orbital)
+    \item \textbf{Total Energy}: $E = \sum_i \rho_i^2\omega_i$ (Field) $\equiv \sum_i E_{kinetic,i} + E_{potential,i}$ (Orbital)
     
-    \item \textbf{Angular Momentum}: $L = \sum_i \rho_i^2 r_i^2 \omega_i$ (Shell) $\equiv \sum_i m_i r_i^2 \omega_i$ (Orbital)
+    \item \textbf{Angular Momentum}: $L = \sum_i \rho_i^2 r_i^2 \omega_i$ (Field) $\equiv \sum_i m_i r_i^2 \omega_i$ (Orbital)
     
     \item \textbf{Information Entropy}: $S = -\sum_i \frac{\rho_i^2}{\sum_j \rho_j^2}\ln\frac{\rho_i^2}{\sum_j \rho_j^2}$ (Shell) $\equiv -\sum_i \frac{m_i}{\sum_j m_j}\ln\frac{m_i}{\sum_j m_j}$ (Orbital)
 \end{enumerate}
