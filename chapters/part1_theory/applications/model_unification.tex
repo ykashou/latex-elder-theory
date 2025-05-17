@@ -1,13 +1,13 @@
-\chapter{Model Unification: Heliomorphic Shells and Orbital Mechanics}
+\chapter{Model Unification: Heliomorphic Field Theory and Orbital Mechanics}
 
-\textit{This chapter examines the unification of the two primary mathematical models of the Elder framework: the Heliomorphic Shell Model and the Orbital Mechanics Model. We develop formal correspondences between these complementary perspectives, establish direct mappings between their respective mathematical formalisms, and demonstrate their equivalence for describing knowledge dynamics in hierarchical systems. The chapter presents transformation rules for converting between shell-based and orbital representations, explores the conditions under which one model might offer computational or analytical advantages over the other, and illustrates how these dual perspectives provide complementary insights into the same underlying phenomena. Through mathematical analysis and computational examples, we establish that these formulations represent different viewpoints of the same fundamental system, with specific mathematical correspondences between key parameters and operations across both representations.}
+\textit{This chapter examines the unification of the two primary mathematical models of the Elder framework: the Heliomorphic Field Theory and the Orbital Mechanics Model. We develop formal correspondences between these complementary perspectives, establish direct mappings between their respective mathematical formalisms, and demonstrate their equivalence for describing knowledge dynamics in hierarchical systems. The chapter presents transformation rules for converting between gravitational field-based and orbital representations, explores the conditions under which one model might offer computational or analytical advantages over the other, and illustrates how these dual perspectives provide complementary insights into the same underlying phenomena. Through mathematical analysis and computational examples, we establish that these formulations represent different viewpoints of the same fundamental system, with specific mathematical correspondences between key parameters and operations across both representations.}
 
 \section{Two Complementary Perspectives}
 
 Throughout this work, we have presented two primary mathematical models for the Elder framework:
 
 \begin{enumerate}
-    \item The \textbf{Heliomorphic Shell Model}, which organizes knowledge in concentric shells with complex-valued parameters and radial dynamics.
+    \item The \textbf{Heliomorphic Field Theory}, which organizes knowledge in a continuous gravitational field with complex-valued parameters and radial dynamics.
     
     \item The \textbf{Orbital Mechanics Model}, which represents knowledge entities as celestial bodies with gravitational interactions and revolutionary motion.
 \end{enumerate}
@@ -16,11 +16,11 @@ While these models may initially appear to be distinct analogies, they are in fa
 
 \section{Formal Equivalence Mapping}
 
-\begin{theorem}[Shell-Orbit Equivalence]
-The heliomorphic shell model and orbital mechanics model are mathematically equivalent under the following mapping:
+\begin{theorem}[Field-Orbit Equivalence]
+The heliomorphic field theory and orbital mechanics model are mathematically equivalent under the following mapping:
 \begin{align}
-    r_{\text{shell}} &= \sqrt{\frac{\gamma_E}{\omega^2}} \quad \text{(Shell radius $\leftrightarrow$ Orbital radius)}\\
-    \phi_{\text{shell}} &= \phi_{\text{orbit}} \quad \text{(Angular position in shell $\leftrightarrow$ Orbital phase)} \\
+    r_{\text{field}} &= \sqrt{\frac{\gamma_E}{\omega^2}} \quad \text{(Field radial distance $\leftrightarrow$ Orbital radius)}\\
+    \phi_{\text{field}} &= \phi_{\text{orbit}} \quad \text{(Angular position in field $\leftrightarrow$ Orbital phase)} \\
     \rho_{\text{param}} &= \sqrt{m} \quad \text{(Parameter magnitude $\leftrightarrow$ Square root of mass)} \\
     \nabla_{\helio}f &= \mathbf{F}_{\text{grav}} \quad \text{(Heliomorphic gradient $\leftrightarrow$ Gravitational force)}
 \end{align}
@@ -28,7 +28,7 @@ where $\gamma_E$ is the gravitational parameter and $\omega$ is the angular velo
 \end{theorem}
 
 \begin{proof}
-Begin with the heliomorphic shell model where a parameter at position $(r,\phi)$ with magnitude $\rho$ has dynamics governed by:
+Begin with the heliomorphic field theory where a parameter at position $(r,\phi)$ with magnitude $\rho$ has dynamics governed by:
 \begin{equation}
     \frac{d}{dt}\begin{pmatrix} r \\ \phi \\ \rho \end{pmatrix} = \begin{pmatrix} 
     \alpha(r-r_0) \\ 
@@ -81,7 +81,7 @@ The relationship between the models can be visualized as follows:
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[scale=0.9]
-    % Draw heliomorphic shells
+    % Draw heliomorphic field regions
     \foreach \r in {1, 2, 3}
         \draw[dashed, thick, blue!50] (0,0) circle (\r cm);
     
