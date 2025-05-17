@@ -15,18 +15,26 @@ A \textbf{heliomorphic structure} on a complex manifold $\mathcal{E}_{\mathcal{M
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[scale=1.1]
-  % Define colors
-  \colorlet{eldershell}{blue!30}
-  \colorlet{mentorshell}{green!40}
-  \colorlet{eruditeshell}{red!30}
+  % Define colors for gravitational field gradient
+  \colorlet{eldercenter}{blue!50}
+  \colorlet{elderouter}{blue!10}
+  \colorlet{mentorinner}{green!10}
+  \colorlet{mentorouter}{green!40}
+  \colorlet{eruditeinner}{red!10}
+  \colorlet{eruditeouter}{red!30}
   \colorlet{elderborder}{blue!70}
   \colorlet{mentorborder}{green!70}
   \colorlet{eruditeborder}{red!70}
   
-  % Draw concentric circles for shells
-  \draw[fill=eldershell, draw=elderborder, thick] (0,0) circle (1.5);
-  \draw[fill=mentorshell, draw=mentorborder, thick] (0,0) circle (2.5);
-  \draw[fill=eruditeshell, draw=eruditeborder, thick] (0,0) circle (3.5);
+  % Draw gravitational field with gradient shading
+  \shade[inner color=eldercenter, outer color=elderouter] (0,0) circle (1.5);
+  \shade[inner color=mentorinner, outer color=mentorouter] (0,0) circle (2.5);
+  \shade[inner color=eruditeinner, outer color=eruditeouter] (0,0) circle (3.5);
+  
+  % Draw dashed field boundaries to indicate continuous transition
+  \draw[dashed, draw=elderborder] (0,0) circle (1.5);
+  \draw[dashed, draw=mentorborder] (0,0) circle (2.5);
+  \draw[dashed, draw=eruditeborder] (0,0) circle (3.5);
   
   % Add Elder, Mentor, Erudite labels
   \node at (0,0) {\Large Elder};
@@ -57,7 +65,7 @@ A \textbf{heliomorphic structure} on a complex manifold $\mathcal{E}_{\mathcal{M
   \draw[->, thick, >=stealth, draw=black] (180:2.3) arc (180:60:2.3);
   
   % Legend
-  \node[align=left] at (5,2.5) {Heliomorphic Shells};
+  \node[align=left] at (5,2.5) {Gravitational Influence Fields};
   \draw[thick, dotted, >=stealth, draw=black] (4,2) -- (4.7,2);
   \node[align=left, font=\small] at (6,2) {Inward Propagation};
   \draw[thick, dashed, >=stealth, draw=black] (4,1.5) -- (4.7,1.5);
@@ -65,17 +73,17 @@ A \textbf{heliomorphic structure} on a complex manifold $\mathcal{E}_{\mathcal{M
   \draw[thick, >=stealth, draw=black] (4,1) -- (4.7,1);
   \node[align=left, font=\small] at (6,1) {Angular Transfer};
   
-  \draw[fill=eldershell, draw=elderborder] (4,0.5) rectangle (4.3,0.7);
-  \node[align=left, font=\small] at (5.6,0.6) {Elder Shell};
-  \draw[fill=mentorshell, draw=mentorborder] (4,0.1) rectangle (4.3,0.3);
-  \node[align=left, font=\small] at (5.7,0.2) {Mentor Shell};
-  \draw[fill=eruditeshell, draw=eruditeborder] (4,-0.3) rectangle (4.3,-0.1);
-  \node[align=left, font=\small] at (5.7,-0.2) {Erudite Shell};
+  \shade[inner color=eldercenter, outer color=elderouter, draw=elderborder, dashed] (4,0.5) rectangle (4.3,0.7);
+  \node[align=left, font=\small] at (5.8,0.6) {Elder Field};
+  \shade[inner color=mentorinner, outer color=mentorouter, draw=mentorborder, dashed] (4,0.1) rectangle (4.3,0.3);
+  \node[align=left, font=\small] at (5.9,0.2) {Mentor Field};
+  \shade[inner color=eruditeinner, outer color=eruditeouter, draw=eruditeborder, dashed] (4,-0.3) rectangle (4.3,-0.1);
+  \node[align=left, font=\small] at (5.9,-0.2) {Erudite Field};
   
-  % Shell indices
-  \node[font=\small] at (1.5,0.4) {Shell 0};
-  \node[font=\small] at (2.5,0.4) {Shell 1};
-  \node[font=\small] at (3.5,0.4) {Shell 2};
+  % Field radius markers
+  \node[font=\small] at (1.5,0.4) {$r=1.5$};
+  \node[font=\small] at (2.5,0.4) {$r=2.5$};
+  \node[font=\small] at (3.5,0.4) {$r=3.5$};
 \end{tikzpicture}
 \caption{Heliomorphic Shell Structure: Elder (inner shell), Mentor (middle shell), and Erudite (outer shell) organized in a concentric hierarchy with knowledge flow illustrated by arrows showing abstraction (inward), specialization (outward), and cross-domain transfer (angular).}
 \label{fig:heliomorphic_shells}
