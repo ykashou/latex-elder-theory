@@ -14,9 +14,9 @@ The Elder training loop represents the highest level of learning in our hierarch
 \centering
 \begin{tikzpicture}[scale=0.8]
   % Define colors
-  \colorlet{elderfield}{blue!30}
-  \colorlet{mentorfield}{green!40}
-  \colorlet{eruditefield}{red!30}
+  \colorlet{eldershell}{blue!30}
+  \colorlet{mentorshell}{green!40}
+  \colorlet{eruditeshell}{red!30}
   \colorlet{elderborder}{blue!70}
   \colorlet{mentorborder}{green!70}
   \colorlet{eruditeborder}{red!70}
@@ -82,10 +82,10 @@ The Elder training loop represents the highest level of learning in our hierarch
   
   % Heliomorphic approach
   \begin{scope}[shift={(5,0)}]
-    % Draw gravitational field regions
-    \draw[elderborder, thick, fill=elderfield] (0,0) circle (1);
-    \draw[mentorborder, thick, fill=mentorfield] (0,0) circle (2);
-    \draw[eruditeborder, thick, fill=eruditefield] (0,0) circle (3);
+    % Draw concentric shells
+    \draw[elderborder, thick, fill=eldershell] (0,0) circle (1);
+    \draw[mentorborder, thick, fill=mentorshell] (0,0) circle (2);
+    \draw[eruditeborder, thick, fill=eruditeshell] (0,0) circle (3);
     
     % Domain points
     \filldraw (60:3) circle (2pt) node[right] {D1};
@@ -1052,9 +1052,9 @@ As a concluding visualization, we present a comprehensive diagram showing how th
 \centering
 \begin{tikzpicture}[scale=0.8, every node/.style={align=center}]
   % Define colors
-  \colorlet{elderfield}{blue!30}
-  \colorlet{mentorfield}{green!40}
-  \colorlet{eruditefield}{red!30}
+  \colorlet{eldershell}{blue!30}
+  \colorlet{mentorshell}{green!40}
+  \colorlet{eruditeshell}{red!30}
   \colorlet{elderborder}{blue!70}
   \colorlet{mentorborder}{green!70}
   \colorlet{eruditeborder}{red!70}
@@ -1073,47 +1073,47 @@ As a concluding visualization, we present a comprehensive diagram showing how th
   \node[font=\large\bfseries] at (8,6) {Implementation};
   
   % Elder Manifold (Core)
-  \fill[elderfield] (-4,3) circle (1.5);
+  \fill[eldershell] (-4,3) circle (1.5);
   \draw[elderborder, thick] (-4,3) circle (1.5);
   \node[font=\bfseries] at (-4,3) {Elder\\ Manifold};
   
   % Heliomorphic Geometry
-  \fill[elderfield] (-4,0) circle (1.2);
+  \fill[eldershell] (-4,0) circle (1.2);
   \draw[elderborder, thick] (-4,0) circle (1.2);
   \node[font=\bfseries] at (-4,0) {Heliomorphic\\ Geometry};
   
   % Loss Functions
-  \fill[mentorfield] (-4,-3) circle (1.2);
+  \fill[mentorshell] (-4,-3) circle (1.2);
   \draw[mentorborder, thick] (-4,-3) circle (1.2);
   \node[font=\bfseries] at (-4,-3) {Loss\\ Functions};
   
   % Training algorithms
-  \fill[elderfield] (2,3) circle (1.5);
+  \fill[eldershell] (2,3) circle (1.5);
   \draw[elderborder, thick] (2,3) circle (1.5);
   \node[font=\bfseries] at (2,3) {Indefinite\\ Training\\ Loop};
   
   % Heliomorphic Flow
-  \fill[mentorfield] (2,0) circle (1.2);
+  \fill[mentorshell] (2,0) circle (1.2);
   \draw[mentorborder, thick] (2,0) circle (1.2);
   \node[font=\bfseries] at (2,0) {Heliomorphic\\ Flow};
   
   % Knowledge Integration
-  \fill[eruditefield] (2,-3) circle (1.2);
+  \fill[eruditeshell] (2,-3) circle (1.2);
   \draw[eruditeborder, thick] (2,-3) circle (1.2);
   \node[font=\bfseries] at (2,-3) {Cross-Domain\\ Integration};
   
   % Go-Elder Implementation
-  \fill[elderfield] (8,3) circle (1.5);
+  \fill[eldershell] (8,3) circle (1.5);
   \draw[elderborder, thick] (8,3) circle (1.5);
   \node[font=\bfseries] at (8,3) {Go-Elder\\ Framework};
   
   % Magefile Processing
-  \fill[mentorfield] (8,0) circle (1.2);
+  \fill[mentorshell] (8,0) circle (1.2);
   \draw[mentorborder, thick] (8,0) circle (1.2);
   \node[font=\bfseries] at (8,0) {Magefile\\ Processing};
   
   % Applications
-  \fill[eruditefield] (8,-3) circle (1.2);
+  \fill[eruditeshell] (8,-3) circle (1.2);
   \draw[eruditeborder, thick] (8,-3) circle (1.2);
   \node[font=\bfseries] at (8,-3) {Domain\\ Applications};
   
