@@ -66,20 +66,20 @@ If $f$ is heliomorphic in a simply connected domain $\Omega$ containing a simple
 \end{equation}
 \end{theorem}
 
-This formula generalizes Cauchy's integral theorem and has profound implications for understanding how knowledge propagates across shells in a heliomorphic system.
+This formula generalizes Cauchy's integral theorem and has profound implications for understanding how knowledge propagates across the gravitational field in a heliomorphic system.
 
-\section{The Mathematics of Heliomorphic Shells}
+\section{The Mathematics of Heliomorphic Gravitational Fields}
 
-The most distinctive feature of heliomorphic functions is their natural organization into concentric shells. This section provides a comprehensive mathematical analysis of these shells, their properties, and their interactions.
+The most distinctive feature of heliomorphic functions is their natural organization into a continuous gravitational field with varying influence by radial distance. This section provides a comprehensive mathematical analysis of this field structure, its properties, and the interactions within it.
 
-\subsection{Formal Shell Decomposition}
+\subsection{Formal Gravitational Field Decomposition}
 
-\begin{theorem}[Shell Decomposition]
-A domain $\Omega$ equipped with a heliomorphic structure admits a unique decomposition into shells $\{\mathcal{S}_k\}_{k=1}^{\infty}$ such that:
+\begin{theorem}[Gravitational Field Decomposition]
+A domain $\Omega$ equipped with a heliomorphic structure admits a unique decomposition into gravitational field regions $\{\mathcal{S}_k\}_{k=1}^{\infty}$ such that:
 \begin{equation}
 \Omega = \bigcup_{k=1}^{\infty} \mathcal{S}_k
 \end{equation}
-where each shell $\mathcal{S}_k$ is characterized by a specific radial distance range $[r_k, r_{k+1})$ and consistent behavior under the heliomorphic differential operator.
+where each field region $\mathcal{S}_k$ is characterized by a specific radial distance range $[r_k, r_{k+1})$ and consistent behavior under the heliomorphic differential operator.
 \end{theorem}
 
 The proof of this theorem relies on the properties of the radial weighting function $\phi(r)$ in the heliomorphic differential operator. Specifically, we can show that:
@@ -90,19 +90,19 @@ Define the critical points of $\phi(r)$ as $\{r_k\}_{k=1}^{\infty}$ such that $\
 \mathcal{S}_k = \{z \in \Omega : r_k \leq |z| < r_{k+1}\}
 \end{equation}
 
-For any function $f$ that is heliomorphic in $\Omega$, we can show that the behavior of $f$ within each $\mathcal{S}_k$ is governed by a consistent set of partial differential equations derived from the modified Cauchy-Riemann equations. The uniqueness of this decomposition follows from the uniqueness of the critical points of $\phi(r)$.
+For any function $f$ that is heliomorphic in $\Omega$, we can show that the behavior of $f$ within each field region $\mathcal{S}_k$ is governed by a consistent set of partial differential equations derived from the modified Cauchy-Riemann equations. The uniqueness of this decomposition follows from the uniqueness of the critical points of $\phi(r)$.
 \end{proof}
 
-\subsection{Shell Geometry and Topology}
+\subsection{Gravitational Field Geometry and Topology}
 
-Each heliomorphic shell $\mathcal{S}_k$ possesses distinct geometric and topological properties:
+Each heliomorphic field region $\mathcal{S}_k$ possesses distinct geometric and topological properties:
 
-\begin{proposition}[Shell Geometry]
-A heliomorphic shell $\mathcal{S}_k$ has the following properties:
+\begin{proposition}[Gravitational Field Geometry]
+A heliomorphic field region $\mathcal{S}_k$ has the following properties:
 \begin{enumerate}
     \item $\mathcal{S}_k$ is topologically equivalent to an annulus in $\mathbb{C}$.
-    \item The inner boundary of $\mathcal{S}_k$ connects to $\mathcal{S}_{k-1}$ (except for $\mathcal{S}_1$, which may contain the origin).
-    \item The outer boundary of $\mathcal{S}_k$ connects to $\mathcal{S}_{k+1}$.
+    \item The inner boundary of $\mathcal{S}_k$ transitions to $\mathcal{S}_{k-1}$ (except for $\mathcal{S}_1$, which may contain the origin).
+    \item The outer boundary of $\mathcal{S}_k$ transitions to $\mathcal{S}_{k+1}$.
     \item The heliomorphic metric on $\mathcal{S}_k$ induces a Riemannian structure with non-constant curvature given by:
     \begin{equation}
     K(r) = -\frac{1}{\rho(r)}\left(\frac{d^2\rho}{dr^2} + \phi(r)\frac{d\rho}{dr}\right)
@@ -111,49 +111,49 @@ A heliomorphic shell $\mathcal{S}_k$ has the following properties:
 \end{enumerate}
 \end{proposition}
 
-The behavior at shell boundaries is particularly important:
+The behavior at gravitational transition boundaries is particularly important:
 
-\begin{theorem}[Shell Boundary Behavior]
-At the boundary between shells $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ (i.e., when $r = r_{k+1}$), heliomorphic functions exhibit the following behavior:
+\begin{theorem}[Gravitational Transition Behavior]
+At the transition boundary between field regions $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ (i.e., when $r = r_{k+1}$), heliomorphic functions exhibit the following behavior:
 \begin{enumerate}
     \item Continuity: $\lim_{r \to r_{k+1}^-} f(re^{i\theta}) = \lim_{r \to r_{k+1}^+} f(re^{i\theta})$ for all $\theta$.
     \item Directional derivative discontinuity: The radial derivative $\frac{\partial f}{\partial r}$ may exhibit a jump discontinuity at $r = r_{k+1}$.
-    \item Phase preservation: The angular component of $f$ varies continuously across shell boundaries.
+    \item Phase preservation: The angular component of $f$ varies continuously across gravitational field transitions.
 \end{enumerate}
 \end{theorem}
 
-\subsection{Mathematical Structure of Shell Interaction}
+\subsection{Mathematical Structure of Gravitational Field Interaction}
 
-\begin{corollary}[Shell Coupling]
-Adjacent shells $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ are coupled through the radial component of the heliomorphic differential operator, allowing knowledge to propagate between abstraction levels while preserving the heliomorphic structure.
+\begin{corollary}[Field-Phase Coupling]
+Adjacent field regions $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ are coupled through the radial component of the heliomorphic differential operator, allowing knowledge to propagate between abstraction levels while preserving the heliomorphic structure.
 \end{corollary}
 
-We can formalize the shell coupling mechanism through the intershell coupling tensor:
+We can formalize the field coupling mechanism through the field-phase coupling tensor:
 
-\begin{definition}[Intershell Coupling Tensor]
-The coupling between shells $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ is characterized by the intershell coupling tensor $\mathcal{T}_{k,k+1}$ defined as:
+\begin{definition}[Field-Phase Coupling Tensor]
+The coupling between field regions $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ is characterized by the field-phase coupling tensor $\mathcal{T}_{k,k+1}$ defined as:
 \begin{equation}
 \mathcal{T}_{k,k+1} = \phi(r_{k+1}) \cdot \nabla_{\odot} \otimes \nabla_{\odot}
 \end{equation}
-where $\otimes$ denotes the tensor product, and $\nabla_{\odot}$ is the heliomorphic gradient evaluated at the boundary radius $r_{k+1}$.
+where $\otimes$ denotes the tensor product, and $\nabla_{\odot}$ is the heliomorphic gradient evaluated at the transition radius $r_{k+1}$.
 \end{definition}
 
-This tensor determines how perturbations in one shell propagate to adjacent shells:
+This tensor determines how perturbations in one field region propagate to adjacent regions:
 
-\begin{theorem}[Intershell Propagation]
-Let $\delta K_k$ be a perturbation to the knowledge state in shell $\mathcal{S}_k$. The induced perturbation in shell $\mathcal{S}_{k+1}$ is given by:
+\begin{theorem}[Gravitational Field Propagation]
+Let $\delta K_k$ be a perturbation to the knowledge state in field region $\mathcal{S}_k$. The induced perturbation in field region $\mathcal{S}_{k+1}$ is given by:
 \begin{equation}
 \delta K_{k+1} = \mathcal{T}_{k,k+1} \cdot \delta K_k + O(||\delta K_k||^2)
 \end{equation}
 where $\cdot$ denotes tensor contraction.
 \end{theorem}
 
-\subsection{Spectral Properties of Heliomorphic Shells}
+\subsection{Spectral Properties of Heliomorphic Field Regions}
 
-Each shell $\mathcal{S}_k$ has characteristic spectral properties that determine how knowledge is represented and processed within that shell:
+Each field region $\mathcal{S}_k$ has characteristic spectral properties that determine how knowledge is represented and processed within that region:
 
-\begin{theorem}[Shell Spectrum]
-The heliomorphic Laplacian $\nabla_{\odot}^2$ restricted to shell $\mathcal{S}_k$ admits a discrete spectrum of eigenvalues $\{\lambda_{k,n}\}_{n=1}^{\infty}$ with corresponding eigenfunctions $\{\psi_{k,n}\}_{n=1}^{\infty}$ such that:
+\begin{theorem}[Field Region Spectrum]
+The heliomorphic Laplacian $\nabla_{\odot}^2$ restricted to field region $\mathcal{S}_k$ admits a discrete spectrum of eigenvalues $\{\lambda_{k,n}\}_{n=1}^{\infty}$ with corresponding eigenfunctions $\{\psi_{k,n}\}_{n=1}^{\infty}$ such that:
 \begin{equation}
 \nabla_{\odot}^2 \psi_{k,n} = \lambda_{k,n} \psi_{k,n}
 \end{equation}
@@ -161,10 +161,10 @@ The heliomorphic Laplacian $\nabla_{\odot}^2$ restricted to shell $\mathcal{S}_k
 These eigenfunctions form a complete orthonormal basis for the space of heliomorphic functions on $\mathcal{S}_k$.
 \end{theorem}
 
-The spectral gap between shells determines the difficulty of knowledge transfer:
+The spectral gap between field regions determines the difficulty of knowledge transfer:
 
 \begin{proposition}[Spectral Gap]
-The spectral gap between adjacent shells $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ is defined as:
+The spectral gap between adjacent field regions $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ is defined as:
 \begin{equation}
 \Delta_{k,k+1} = \min_{m,n} |\lambda_{k,m} - \lambda_{k+1,n}|
 \end{equation}
