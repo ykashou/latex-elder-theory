@@ -268,7 +268,7 @@ This representation theorem provides a theoretical foundation for the Elder syst
   \draw[dashed, gray] (0,0) -- (-3.464,2);
   \draw[dashed, gray] (0,0) -- (0,-4);
   
-  % Representation of shell function decomposition
+  % Representation of gravitational field function decomposition
   \begin{scope}[shift={(7,0)}]
     % Gravitational field decomposition equation
     \node at (0,3) {$f(z) = \sum_{k=0}^{\infty} f_k(z)$};
@@ -330,10 +330,10 @@ The process of discovering the Heliomorphic Elder manifold follows a specialized
         \State // Update manifold through heliomorphic flow
         \State $\mathcal{M}_{\text{Elder}} \gets \text{HeliomorphicFlowUpdate}(\mathcal{M}_{\text{Elder}}, \{\nabla_{\odot} \Psi_j\}, \eta_t)$
         
-        \State // Enforce shell structure through radial reorganization
+        \State // Enforce gravitational field structure through radial reorganization
         \State $\mathcal{M}_{\text{Elder}} \gets \text{EnforceShellStructure}(\mathcal{M}_{\text{Elder}})$
         
-        \State // Measure convergence through shell coherence
+        \State // Measure convergence through gravitational field coherence
         \State $\{\mathcal{S}_k\}_{k=1}^K \gets \text{ExtractShells}(\mathcal{M}_{\text{Elder}})$
         \State $C_t \gets \sum_{k=1}^K \text{MeasureShellCoherence}(\mathcal{S}_k)$
         
