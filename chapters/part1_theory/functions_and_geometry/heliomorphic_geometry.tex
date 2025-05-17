@@ -168,7 +168,7 @@ The \textbf{heliomorphic duality principle} establishes a natural correspondence
 for all heliomorphic functions $f$ on $\mathcal{E}_{\mathcal{M}}$.
 \end{definition}
 
-This duality principle creates a natural correspondence between abstract and concrete knowledge representations across the spherical shells of the heliosystem, facilitating both knowledge abstraction and application.
+This duality principle creates a natural correspondence between abstract and concrete knowledge representations across the continuous gravitational field of the heliosystem, facilitating both knowledge abstraction and application.
 
 \section{Computational Implications of Heliomorphic Geometry}
 
@@ -235,20 +235,20 @@ This representation theorem provides a theoretical foundation for the Elder syst
 \centering
 \begin{tikzpicture}[scale=0.9]
   % Define colors
-  \colorlet{shell0}{orange!80!red}
-  \colorlet{shell1}{orange!60!red}
-  \colorlet{shell2}{orange!40!red}
-  \colorlet{shell3}{orange!20!red}
+  \colorlet{field0}{orange!80!red}
+  \colorlet{field1}{orange!60!red}
+  \colorlet{field2}{orange!40!red}
+  \colorlet{field3}{orange!20!red}
   
   % Define the coordinate system
   \draw[->, thick] (-4.5,0) -- (4.5,0) node[right] {$\text{Re}(z)$};
   \draw[->, thick] (0,-4.5) -- (0,4.5) node[above] {$\text{Im}(z)$};
   
-  % Draw concentric circles representing shells
-  \draw[shell0, thick] (0,0) circle (1);
-  \draw[shell1, thick] (0,0) circle (2);
-  \draw[shell3, thick] (0,0) circle (3);
-  \draw[shell3, thick] (0,0) circle (4);
+  % Draw concentric circles representing gravitational field boundaries
+  \draw[field0, thick] (0,0) circle (1);
+  \draw[field1, thick] (0,0) circle (2);
+  \draw[field2, thick] (0,0) circle (3);
+  \draw[field3, thick] (0,0) circle (4);
   
   % Domain points at different positions
   \filldraw[black] (0.866,0.5) circle (2pt) node[above right] {$D_1$};
@@ -270,35 +270,35 @@ This representation theorem provides a theoretical foundation for the Elder syst
   
   % Representation of shell function decomposition
   \begin{scope}[shift={(7,0)}]
-    % Shell decomposition equation
+    % Gravitational field decomposition equation
     \node at (0,3) {$f(z) = \sum_{k=0}^{\infty} f_k(z)$};
     \node at (0,2) {$f_k(z) = z^k \cdot P_k(z)$};
     
-    % Function components for each shell
-    \draw[shell0, thick] (-2,1) -- (2,1);
+    % Function components for each gravitational field region
+    \draw[field0, thick] (-2,1) -- (2,1);
     \node[right] at (2,1) {$f_0(z)$ (Elder)};
     
-    \draw[shell1, thick] (-2,0) -- (2,0);
+    \draw[field1, thick] (-2,0) -- (2,0);
     \node[right] at (2,0) {$f_1(z)$ (Mentor)};
     
-    \draw[shell2, thick] (-2,-1) -- (2,-1);
+    \draw[field2, thick] (-2,-1) -- (2,-1);
     \node[right] at (2,-1) {$f_2(z)$ (Erudite)};
     
-    \draw[shell3, thick] (-2,-2) -- (2,-2);
+    \draw[field3, thick] (-2,-2) -- (2,-2);
     \node[right] at (2,-2) {$f_3(z)$ (Task)};
   \end{scope}
   
-  % Shell labels
-  \node at (1.5,0) {Shell 0};
-  \node at (2.5,0) {Shell 1};
-  \node at (3.5,0) {Shell 2};
-  \node at (4.5,0) {Shell 3};
+  % Gravitational field region labels
+  \node at (1.5,0) {Field 0};
+  \node at (2.5,0) {Field 1};
+  \node at (3.5,0) {Field 2};
+  \node at (4.5,0) {Field 3};
 \end{tikzpicture}
-\caption{Heliomorphic Shell Decomposition: Domains are positioned in the complex plane according to their relatedness (angular proximity) and abstraction level (radial distance). The knowledge function $f(z)$ can be decomposed into shell-specific components $f_k(z)$ corresponding to Elder, Mentor, Erudite, and task-specific knowledge.}
-\label{fig:shell_decomposition}
+\caption{Heliomorphic Field Decomposition: Domains are positioned in the complex plane according to their relatedness (angular proximity) and abstraction level (radial distance). The knowledge function $f(z)$ can be decomposed into field-specific components $f_k(z)$ corresponding to Elder, Mentor, Erudite, and task-specific knowledge.}
+\label{fig:gravitational_field_decomposition}
 \end{figure}
 
-The heliomorphic shell decomposition shown in Figure~\ref{fig:shell_decomposition} illustrates how domains are organized in the complex plane, with related domains having similar angular coordinates and their abstraction level determined by their radial position. The complete knowledge function $f(z)$ is decomposed into shell-specific components, where inner shells represent more abstract, universal principles (Elder knowledge), while outer shells encode more specific knowledge (Mentor and Erudite).
+The heliomorphic field decomposition shown in Figure~\ref{fig:gravitational_field_decomposition} illustrates how domains are organized in the complex plane, with related domains having similar angular coordinates and their abstraction level determined by their radial position. The complete knowledge function $f(z)$ is decomposed into field-specific components, where inner regions of the gravitational field represent more abstract, universal principles (Elder knowledge), while outer regions encode more specific knowledge (Mentor and Erudite).
 
 \section{Algorithmic Learning of the Heliomorphic Elder Manifold}
 
