@@ -354,7 +354,7 @@ Peak Memory & $O(P_E M + M^2 D + MP_M + MNP_{E'})$ & $O(P_E + MD + MP_M + MNP_{E
 This analysis demonstrates that the most significant memory savings come from:
 
 \begin{enumerate}
-    \item \textbf{Shell-Based Elder Representations}: By using complex heliomorphic representations for Elder parameters, the storage requirements become independent of the number of domains.
+    \item \textbf{Field-Based Elder Representations}: By using complex heliomorphic representations for Elder parameters, the storage requirements become independent of the number of domains.
     
     \item \textbf{Efficient Cross-Domain Transfer}: The heliomorphic approach reduces the quadratic domain-to-domain memory tensors to linear field-phase transfers.
     
@@ -381,7 +381,7 @@ Heliomorphic manifolds carry a natural metric that respects their gravitational 
 ds^2 = g_{z\bar{z}}|dz|^2 + g_{rr}|dr|^2 + g_{z r}dz d\bar{r} + g_{\bar{z}r}d\bar{z}dr
 \end{equation}
 
-where the metric coefficients depend on both position and shell membership:
+where the metric coefficients depend on both position and field position:
 
 \begin{equation}
 g_{z\bar{z}} = \rho(r), \quad g_{rr} = \sigma(r), \quad g_{z r} = g_{\bar{z}r} = \tau(r)
@@ -393,14 +393,14 @@ with $\rho, \sigma, \tau$ being continuous functions of the radial coordinate.
 
 The curvature of a heliomorphic manifold reveals important information about knowledge flow:
 
-\begin{proposition}[Shell Curvature]
-The Gaussian curvature $K$ of a heliomorphic manifold varies with the shell radius according to:
+\begin{proposition}[Field Curvature]
+The Gaussian curvature $K$ of a heliomorphic manifold varies with the radial distance from field center according to:
 \begin{equation}
 K(r) = -\frac{1}{\rho(r)}\left(\frac{d^2\rho}{dr^2} + \phi(r)\frac{d\rho}{dr}\right)
 \end{equation}
 \end{proposition}
 
-Geodesics on heliomorphic manifolds follow paths that balance minimal distance with shell-aligned travel, producing characteristic spiral patterns when crossing between shells.
+Geodesics on heliomorphic manifolds follow paths that balance minimal distance with field-aligned travel, producing characteristic spiral patterns when crossing between field regions.
 
 \section{The Heliomorphic Heat Equation}
 
@@ -416,16 +416,16 @@ where $K: \mathcal{M} \times \mathbb{R} \rightarrow \mathbb{C}$ represents the k
 \nabla_{\odot}^2 = 4\frac{\partial^2}{\partial z \partial \bar{z}} + \phi(r)\left(\frac{\partial}{\partial r} + \frac{1}{r}\right) + \phi(r)^2\frac{\partial^2}{\partial r^2}
 \end{equation}
 
-\subsection{Knowledge Diffusion Across Shells}
+\subsection{Knowledge Diffusion Across Field Regions}
 
-The heliomorphic heat equation governs how knowledge diffuses across shells:
+The heliomorphic heat equation governs how knowledge diffuses across gravitational field regions:
 
-\begin{theorem}[Shell Diffusion]
-Knowledge propagation between adjacent shells follows the diffusion equation:
+\begin{theorem}[Field Diffusion]
+Knowledge propagation between adjacent field regions follows the diffusion equation:
 \begin{equation}
 \frac{\partial K_k}{\partial t} = D_k \Delta K_k + \phi(r_k) \left(\frac{\partial K_{k-1}}{\partial r} - \frac{\partial K_{k+1}}{\partial r}\right)
 \end{equation}
-where $K_k$ is the knowledge state in shell $\mathcal{S}_k$, $D_k$ is the diffusion coefficient within that shell, and $\phi(r_k)$ controls the coupling strength between shells.
+where $K_k$ is the knowledge state in field region $\mathcal{F}_k$, $D_k$ is the diffusion coefficient within that field region, and $\phi(r_k)$ controls the coupling strength between field regions.
 \end{theorem}
 
 \subsection{Stationary Solutions and Knowledge Equilibrium}
