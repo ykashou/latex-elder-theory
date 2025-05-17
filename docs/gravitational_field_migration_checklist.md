@@ -9,15 +9,15 @@ This document tracks the migration from the shell-based model to the continuous 
 
 ## Primary Theory Files
 
-- [ ] `chapters/part1_theory/functions_and_geometry/heliomorphism.tex` - Replace ~25+ shell references, "shell decomposition," "intershell coupling tensor," etc.
+- [x] `chapters/part1_theory/functions_and_geometry/heliomorphism.tex` - Replace ~25+ shell references, "shell decomposition," "intershell coupling tensor," etc.
 - [ ] `chapters/part1_theory/functions_and_geometry/heliomorphic_geometry.tex` - Replace "spherical shells" and algorithmic shell determination
 - [ ] `chapters/part1_theory/functions_and_geometry/heliomorphic_axiom_system.tex` - Remove references to "discrete shells"
 
 ## Mechanics and Dynamics
 
-- [ ] `chapters/part1_theory/mechanics_and_dynamics/elder_heliosystem_unified.tex`
+- [x] `chapters/part1_theory/mechanics_and_dynamics/elder_heliosystem_unified.tex`
 - [ ] `chapters/part1_theory/mechanics_and_dynamics/gravitational_field_dynamics.tex`
-- [ ] `chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex`
+- [x] `chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex`
 
 ## Memory and Loss Functions
 
