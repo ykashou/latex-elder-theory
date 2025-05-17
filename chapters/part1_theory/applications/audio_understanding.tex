@@ -203,34 +203,34 @@ The Audio Mentor domain organizes knowledge in a continuous gravitational field 
 \end{itemize}
 \end{definition}
 
-\begin{proposition}[Shell Distance-Abstraction Correspondence]
-The radial distance $r_k$ of shell $S_k$ from the center of the Audio Mentor sphere corresponds to the level of abstraction, with:
+\begin{proposition}[Field Distance-Abstraction Correspondence]
+The radial distance $r_k$ of field region $F_k$ from the center of the Audio Mentor sphere corresponds to the level of abstraction, with:
 \begin{equation}
 r_k = r_0 + k \Delta r
 \end{equation}
-where $r_0$ is the core radius and $\Delta r$ is the shell width constant.
+where $r_0$ is the core radius and $\Delta r$ is the field gradient parameter.
 \end{proposition}
 
-The key innovation in the Elder Heliosystem is that knowledge flows bidirectionally across these shells through orbital resonance, allowing for instance low-level spectral features to inform semantic interpretation and vice versa.
+The key innovation in the Elder Heliosystem is that knowledge flows bidirectionally across these gravitational field regions through orbital resonance, allowing for instance low-level spectral features to inform semantic interpretation and vice versa.
 
 \subsection{Orbital Resonance for Audio Pattern Recognition}
 
-The Audio Mentor leverages orbital resonance to create synchronized patterns of activation across different shells, establishing correspondences between low-level acoustic features and high-level semantic concepts.
+The Audio Mentor leverages orbital resonance to create synchronized patterns of activation across different gravitational field regions, establishing correspondences between low-level acoustic features and high-level semantic concepts.
 
 \begin{theorem}[Audio Pattern Resonance]
-Pattern recognition in the Audio Mentor occurs through resonant activation where a pattern $P$ in shell $S_i$ induces a corresponding pattern $P'$ in shell $S_j$ when their orbital frequencies satisfy:
+Pattern recognition in the Audio Mentor occurs through resonant activation where a pattern $P$ in field region $F_i$ induces a corresponding pattern $P'$ in field region $F_j$ when their orbital frequencies satisfy:
 \begin{equation}
-\frac{\omega_{S_i}}{\omega_{S_j}} = \frac{p_{i,j}}{q_{i,j}}
+\frac{\omega_{F_i}}{\omega_{F_j}} = \frac{p_{i,j}}{q_{i,j}}
 \end{equation}
 where $p_{i,j}$ and $q_{i,j}$ are small integers that characterize the harmonic relationship.
 \end{theorem}
 
-For example, the fundamental frequency of speech (shell $S_1$) resonates with phonemic categories (shell $S_2$) which in turn resonate with word recognition (shell $S_3$).
+For example, the fundamental frequency of speech (field region $F_1$) resonates with phonemic categories (field region $F_2$) which in turn resonate with word recognition (field region $F_3$).
 
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}[scale=0.8]
-    % Concentric shells
+    % Gravitational field regions
     \draw[fill=blue!5] (0,0) circle (5);
     \draw[fill=blue!10] (0,0) circle (4);
     \draw[fill=blue!15] (0,0) circle (3);
@@ -238,11 +238,11 @@ For example, the fundamental frequency of speech (shell $S_1$) resonates with ph
     \draw[fill=blue!25] (0,0) circle (1);
     
     % Labels
-    \node at (0,0) {$S_1$};
-    \node at (0,1.5) {$S_2$};
-    \node at (0,2.5) {$S_3$};
-    \node at (0,3.5) {$S_4$};
-    \node at (0,4.5) {$S_5$};
+    \node at (0,0) {$F_1$};
+    \node at (0,1.5) {$F_2$};
+    \node at (0,2.5) {$F_3$};
+    \node at (0,3.5) {$F_4$};
+    \node at (0,4.5) {$F_5$};
     
     % Orbital paths for specific audio patterns
     % Speech trajectory
@@ -282,12 +282,12 @@ where:
 \begin{align}
 \mathcal{L}_{mag} &= \mathbb{E}_{x \sim \mathcal{X}} \left[ \| |\hat{y}| - |y| \|_2^2 \right] \\
 \mathcal{L}_{phase} &= \mathbb{E}_{x \sim \mathcal{X}} \left[ 1 - \cos(\angle\hat{y} - \angle y) \right] \\
-\mathcal{L}_{resonance} &= \sum_{i,j} \left| \frac{\omega_{S_i}}{\omega_{S_j}} - \frac{p_{i,j}}{q_{i,j}} \right|
+\mathcal{L}_{resonance} &= \sum_{i,j} \left| \frac{\omega_{F_i}}{\omega_{F_j}} - \frac{p_{i,j}}{q_{i,j}} \right|
 \end{align}
 and $\lambda_{\phi}$ and $\lambda_{res}$ are weighting factors.
 \end{definition}
 
-This loss function guides the Audio Mentor to learn representations that preserve both magnitude and phase information while enforcing orbital resonance constraints across knowledge shells.
+This loss function guides the Audio Mentor to learn representations that preserve both magnitude and phase information while enforcing orbital resonance constraints across gravitational field regions.
 
 \subsection{Cross-Domain Alignment with Other Mentors}
 
