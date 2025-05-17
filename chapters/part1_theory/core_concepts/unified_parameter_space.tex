@@ -70,7 +70,7 @@ Three fundamental parameters govern the interactions between knowledge structure
     
     \item $\beta \in [-1,1]$: The phase alignment parameter that measures coherence between knowledge representations in different domains. Values of $\beta = 1$ indicate perfect alignment, while $\beta = -1$ indicates complete phase opposition.
     
-    \item $\gamma \in \mathbb{R}^+$: The knowledge evolution rate that controls how quickly the system incorporates new information and adapts its internal representations. Higher values accelerate learning but may reduce stability.
+    \item $\gamma \in \mathbb{R}^+$: The knowledge evolution rate that controls how quickly the system incorporates new information and adapts its internal representations. This parameter is inversely proportional to system stability - when orbital stability decreases, $\gamma$ increases to accelerate adaptation and restore equilibrium; conversely, as stability increases, $\gamma$ decreases, allowing for more stable learning.
 \end{itemize}
 \end{definition}
 
