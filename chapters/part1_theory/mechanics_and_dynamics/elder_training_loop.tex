@@ -136,7 +136,7 @@ The Elder training loop represents the highest level of learning in our hierarch
   \draw[->, ultra thick] (0,-4) -- (3,-4);
   \node[align=center] at (0,-4.5) {Gradient Alignment Improvement};
 \end{tikzpicture}
-\caption{Comparison of traditional and heliomorphic training approaches. The traditional approach (left) treats each domain as a separate layer with gradients flowing in various directions, creating interference. The heliomorphic approach (right) organizes domains in concentric shells by abstraction level, creating radially aligned gradients that reinforce rather than interfere with each other, leading to more efficient training and better principle extraction.}
+\caption{Comparison of traditional and heliomorphic training approaches. The traditional approach (left) treats each domain as a separate layer with gradients flowing in various directions, creating interference. The heliomorphic approach (right) organizes domains in gravitational field regions by abstraction level, creating radially aligned gradients that reinforce rather than interfere with each other, leading to more efficient training and better principle extraction.}
 \label{fig:training_comparison}
 \end{figure}
 
@@ -152,7 +152,7 @@ Below, we present the complete mathematical formulation of the Elder training al
 \State \textbf{Input:} Initial Erudite parameters $\{\theta_{\text{E},i,j}^{(0)}\}_{i=1,j=1}^{M,N_i} \subset \eruditeparams$
 \State \textbf{Input:} Adaptive learning rates $\eta_{\text{Elder}}, \eta_{\text{M}}, \eta_{\text{E}}$
 \State \textbf{Input:} Batch size $B$
-\State \textbf{Input:} Heliomorphic Manifold $\mathcal{E}_{\mathcal{M}}$ with shell structure
+\State \textbf{Input:} Heliomorphic Manifold $\mathcal{E}_{\mathcal{M}}$ with gravitational field structure
 
 \While{True} \Comment{Indefinite operation}
     \State $\nabla_{\theta_{\text{Elder}}} \mathcal{L}_{\text{Elder}} \gets \mathbf{0}$ \Comment{Initialize Elder gradient}
@@ -196,7 +196,7 @@ Below, we present the complete mathematical formulation of the Elder training al
     \If{$\mathcal{D}^{\text{new}} \neq \emptyset$}
         \State $\mathcal{D} \gets \mathcal{D} \cup \mathcal{D}^{\text{new}}$ \Comment{Add new domains}
         \For{each new domain $D_k \in \mathcal{D}^{\text{new}}$}
-            \State Initialize new shell in heliomorphic manifold $\mathcal{E}_{\mathcal{M}}$
+            \State Initialize new field region in heliomorphic manifold $\mathcal{E}_{\mathcal{M}}$
             \State $\theta_{\text{M},k}^{(t)} \gets \text{InitializeMentor}(\theta_{\text{Elder}}^{(t)})$ \Comment{Initialize from Elder knowledge}
             \State $N_k \gets \text{DetermineEruditeCount}(D_k)$
             \For{$j = 1$ to $N_k$}
@@ -227,7 +227,7 @@ Below, we present the complete mathematical formulation of the Elder training al
 
 \subsection{Elder Manifold Update Phase}
 
-A critical aspect of the Elder training loop is the manifold update phase, which occurs after gradient computation but before parameter updates. This phase ensures that the knowledge state maintains its heliomorphic structure on the Elder Manifold $\mathcal{E}_{\mathcal{M}}$. The heliomorphic structure is essential for preserving the shell-based organization and allowing proper radial dynamics between Elder, Mentors, and Erudites.
+A critical aspect of the Elder training loop is the manifold update phase, which occurs after gradient computation but before parameter updates. This phase ensures that the knowledge state maintains its heliomorphic structure on the Elder Manifold $\mathcal{E}_{\mathcal{M}}$. The heliomorphic structure is essential for preserving the gravitational field organization and allowing proper radial dynamics between Elder, Mentors, and Erudites.
 
 \begin{algorithm}
 \caption{Elder Manifold Update}
