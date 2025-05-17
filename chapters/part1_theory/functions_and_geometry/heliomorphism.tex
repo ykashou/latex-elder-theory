@@ -172,60 +172,60 @@ The spectral gap between adjacent field regions $\mathcal{S}_k$ and $\mathcal{S}
 This gap determines the energy required for knowledge to propagate between abstraction levels, with larger gaps requiring more energy.
 \end{proposition}
 
-\subsection{Shell-Aware Function Spaces}
+\subsection{Gravitationally-Aware Function Spaces}
 
-Heliomorphic theory introduces specialized function spaces that respect gravitational field structure:
+Heliomorphic theory introduces specialized function spaces that explicitly account for the continuous nature of the gravitational field:
 
-\begin{definition}[Shell-Adaptive Function Space]
-The shell-adaptive Sobolev space $\mathcal{H}_{\odot}^s(\Omega)$ consists of functions $f: \Omega \rightarrow \mathbb{C}$ such that:
+\begin{definition}[Gravitational-Adaptive Function Space]
+The gravitational-adaptive Sobolev space $\mathcal{H}_{\odot}^s(\Omega)$ consists of functions $f: \Omega \rightarrow \mathbb{C}$ such that:
 \begin{equation}
 ||f||_{\mathcal{H}_{\odot}^s}^2 = \sum_{k=1}^{\infty} \int_{\mathcal{S}_k} |\nabla_{\odot}^s f|^2 \, dA < \infty
 \end{equation}
-where $\nabla_{\odot}^s$ denotes the $s$-th power of the heliomorphic differential operator.
+where $\nabla_{\odot}^s$ denotes the $s$-th power of the heliomorphic differential operator, and the integral accounts for varying gravitational influence across the domain.
 \end{definition}
 
-These function spaces provide the mathematical foundation for representing knowledge across multiple abstraction levels:
+These function spaces provide the mathematical foundation for representing knowledge that varies continuously with gravitational influence:
 
-\begin{theorem}[Shell-Adaptive Representation]
-Any knowledge state $K \in \mathcal{H}_{\odot}^s(\Omega)$ can be expressed as a sum of shell-localized components:
+\begin{theorem}[Gravitational Field Representation]
+Any knowledge state $K \in \mathcal{H}_{\odot}^s(\Omega)$ can be expressed according to its gravitational stratification:
 \begin{equation}
 K = \sum_{k=1}^{\infty} K_k
 \end{equation}
-where each $K_k$ is primarily supported on shell $\mathcal{S}_k$ with exponentially decaying influence on other shells.
+where each $K_k$ corresponds to field region $\mathcal{S}_k$ but with influence that decays continuously according to inverse-square principles rather than stopping abruptly at region boundaries.
 \end{theorem}
 
-\subsection{Shell Dynamics and Evolution}
+\subsection{Gravitational Field Dynamics and Evolution}
 
-The evolution of knowledge across shells is governed by shell-specific dynamics:
+The evolution of knowledge within the gravitational field is governed by position-dependent dynamics:
 
-\begin{proposition}[Shell Evolution Equations]
-The temporal evolution of knowledge within shell $\mathcal{S}_k$ follows the shell-restricted heliomorphic heat equation:
+\begin{proposition}[Gravitational Field Evolution Equations]
+The temporal evolution of knowledge at position $r$ within the field follows the gravitational diffusion equation:
 \begin{equation}
-\frac{\partial K_k}{\partial t} = D_k \nabla_{\odot}^2 K_k + \mathcal{F}_{k-1 \to k} - \mathcal{F}_{k \to k+1}
+\frac{\partial K(r,t)}{\partial t} = D(r) \nabla_{\odot}^2 K(r,t) - \nabla \cdot \mathbf{J}(r,t)
 \end{equation}
-where $D_k$ is the shell-specific diffusion coefficient, and $\mathcal{F}_{j \to j+1}$ represents the knowledge flux from shell $\mathcal{S}_j$ to $\mathcal{S}_{j+1}$.
+where $D(r)$ is the position-dependent diffusion coefficient that varies with gravitational field strength, and $\mathbf{J}(r,t)$ represents the knowledge flux vector field.
 \end{proposition}
 
-The knowledge flux between shells takes a specific form:
+This continuous description can be discretized into regions for computational purposes, where the knowledge flux between regions follows the inverse-square law:
 
 \begin{equation}
-\mathcal{F}_{k \to k+1} = -\phi(r_{k+1}) \cdot \frac{\partial K_k}{\partial r}\bigg|_{r=r_{k+1}}
+\mathcal{F}_{k \to k+1} = -\phi(r_{k+1}) \cdot \frac{\partial K_k}{\partial r}\bigg|_{r=r_{k+1}} \cdot \frac{1}{r_{k+1}^2}
 \end{equation}
 
-\subsection{Computational Aspects of Shell Structure}
+\subsection{Computational Aspects of the Gravitational Field Structure}
 
-The gravitational field structure induces efficient computational algorithms:
+The gravitational field structure enables efficient computational algorithms that leverage the continuous nature of the field:
 
-\begin{theorem}[Shell Complexity]
-Computational operations on heliomorphic shells have the following complexity characteristics:
+\begin{theorem}[Gravitational Field Computational Complexity]
+Computational operations on the heliomorphic gravitational field have the following complexity characteristics:
 \begin{enumerate}
-    \item Within-shell operations: $O(N_k \log N_k)$ where $N_k$ is the dimensionality of shell $\mathcal{S}_k$.
-    \item Cross-shell operations: $O(N_k + N_{k+1})$ for adjacent shells.
-    \item Global operations: $O(\sum_{k=1}^{K} N_k \log N_k)$ for a system with $K$ shells.
+    \item Position-dependent operations: $O(N(r) \log N(r))$ where $N(r)$ is the effective dimensionality at radius $r$.
+    \item Field propagation operations: $O(N(r_1) + N(r_2))$ for propagation between radii $r_1$ and $r_2$.
+    \item Global operations: $O(\int_0^R N(r) \log N(r) \, dr)$ for a field with maximum radius $R$.
 \end{enumerate}
 \end{theorem}
 
-This computational efficiency stems from the natural decomposition of operations according to gravitational field structure, allowing parallel processing within field regions and sequential dependencies between regions of different field strengths.
+This computational efficiency emerges naturally from the gravitational field structure, which allows parallel processing of information at similar field strengths while accounting for the continuous influence gradients between different regions of the field.
 
 \subsection{Complexity Analysis: Elder-Mentor-Erudite vs. Traditional Gradient Descent}
 
@@ -235,7 +235,7 @@ The following table provides a comprehensive comparison of computational complex
 \centering
 \begin{tabular}{|p{3cm}|p{4.5cm}|p{4.5cm}|p{3cm}|}
 \hline
-\textbf{Component} & \textbf{Traditional Approach} & \textbf{Heliomorphic Approach} & \textbf{Efficiency Gain} \\
+\textbf{Component} & \textbf{Traditional Approach} & \textbf{Gravitational Field Approach} & \textbf{Efficiency Gain} \\
 \hline
 \multicolumn{4}{|c|}{\textbf{Single-Domain Update Complexity}} \\
 \hline
@@ -253,21 +253,21 @@ Gradient Accumulation & $O(PM^2)$ & $O(PM)$ & $O(M)$ \\
 \hline
 Cross-Domain Transfer & $O(M^2D)$ & $O(MD)$ & $O(M)$ \\
 \hline
-\multicolumn{4}{|c|}{\textbf{Hierarchy-Specific Operations}} \\
+\multicolumn{4}{|c|}{\textbf{Field-Stratified Operations}} \\
 \hline
-Elder Update & $O(P_E M^2 \log M)$ & $O(P_E M \log M)$ & $O(M)$ \\
+Central Field (Elder) & $O(P_E M^2 \log M)$ & $O(P_E M \log M)$ & $O(M)$ \\
 \hline
-Mentor Update (per domain) & $O(P_M M D)$ & $O(P_M D + P_M \log M)$ & $O(M/\log M)$ \\
+Intermediate Field (Mentor) & $O(P_M M D)$ & $O(P_M D + P_M \log M)$ & $O(M/\log M)$ \\
 \hline
-Erudite Update (per task) & $O(P_{E'} D)$ & $O(P_{E'} D)$ & None \\
+Peripheral Field (Erudite) & $O(P_{E'} D)$ & $O(P_{E'} D)$ & None \\
 \hline
-\multicolumn{4}{|c|}{\textbf{Knowledge Transfer Operations}} \\
+\multicolumn{4}{|c|}{\textbf{Gravitational Knowledge Propagation}} \\
 \hline
-Elder $\to$ Mentor & $O(P_E P_M M)$ & $O(P_E + P_M)$ & $O(P_E P_M M)$ \\
+Center $\to$ Intermediate & $O(P_E P_M M)$ & $O(P_E + P_M)$ & $O(P_E P_M M)$ \\
 \hline
-Mentor $\to$ Erudite & $O(P_M P_{E'} D)$ & $O(P_M + P_{E'})$ & $O(P_M P_{E'} D)$ \\
+Intermediate $\to$ Peripheral & $O(P_M P_{E'} D)$ & $O(P_M + P_{E'})$ & $O(P_M P_{E'} D)$ \\
 \hline
-Cross-Domain (Mentor $\to$ Mentor) & $O(P_M^2 M^2)$ & $O(P_M M \log M)$ & $O(P_M M^2/\log M)$ \\
+Cross-Domain (Field Angular) & $O(P_M^2 M^2)$ & $O(P_M M \log M)$ & $O(P_M M^2/\log M)$ \\
 \hline
 \multicolumn{4}{|c|}{\textbf{Memory Requirements}} \\
 \hline
@@ -278,7 +278,7 @@ Gradient Storage & $O(P_E M + MP_M + MD P_{E'})$ & $O(P_E + MP_M + MD P_{E'})$ &
 Temporary Variables & $O(M^2D)$ & $O(MD)$ & $O(M)$ \\
 \hline
 \end{tabular}
-\caption{Computational complexity comparison between traditional gradient descent and heliomorphic Elder-Mentor-Erudite gradient descent, where $P$ is the total number of parameters, $P_E$ is Elder parameter count, $P_M$ is Mentor parameter count, $P_{E'}$ is Erudite parameter count, $M$ is the number of domains, $D$ is the average data dimension, and $B$ is the batch size.}
+\caption{Computational complexity comparison between traditional gradient descent and gravitational field-based Elder-Mentor-Erudite approach, where $P$ is the total number of parameters, $P_E$ is central field parameter count, $P_M$ is intermediate field parameter count, $P_{E'}$ is peripheral field parameter count, $M$ is the number of domains, $D$ is the average data dimension, and $B$ is the batch size.}
 \label{tab:complexity_comparison}
 \end{table}
 
@@ -517,18 +517,18 @@ C_{\text{heliomorphic}} &= O(M \log M)
 \end{align}
 \end{proposition}
 
-This improved efficiency stems from the shell-based organization of parameters, which allows more direct gradient paths across the hierarchy.
+This improved efficiency stems from the gravitational field organization of parameters, which allows continuous influence propagation through the field with intensity that naturally follows inverse-square principles.
 
 \subsection{Structural Advantages}
 
-The heliomorphic framework offers several structural advantages:
+The heliomorphic gravitational field framework offers several structural advantages:
 
 \begin{enumerate}
-    \item \textbf{Natural Hierarchical Representation}: The shell structure naturally accommodates hierarchical knowledge at different abstraction levels.
+    \item \textbf{Continuous Hierarchical Representation}: The gravitational field structure naturally accommodates hierarchical knowledge with smooth transitions between abstraction levels.
     
-    \item \textbf{Coherent Cross-Domain Transfer}: Knowledge transfers more effectively between domains through the intermediary of abstract principles.
+    \item \textbf{Field-Mediated Cross-Domain Transfer}: Knowledge transfers more effectively between domains through continuous gravitational influence from central field regions.
     
-    \item \textbf{Stability under Domain Addition}: The system remains stable when new domains are added, with existing principles accommodating and structuring new knowledge.
+    \item \textbf{Gravitational Stability}: The system remains stable when new domains are added, with existing gravitational influence patterns automatically extending to accommodate and structure new knowledge.
 \end{enumerate}
 
 \section{Conclusion}
