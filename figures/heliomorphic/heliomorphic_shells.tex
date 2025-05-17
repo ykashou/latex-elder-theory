@@ -1,16 +1,21 @@
 \begin{tikzpicture}[scale=1.1]
   % Define colors
-  \colorlet{eldershell}{blue!30}
-  \colorlet{mentorshell}{green!40}
-  \colorlet{eruditeshell}{red!30}
-  \colorlet{elderborder}{blue!70}
-  \colorlet{mentorborder}{green!70}
-  \colorlet{eruditeborder}{red!70}
+  \colorlet{eldercore}{blue!50}
+  \colorlet{elderfield}{blue!10}
+  \colorlet{mentorfield}{green!30}
+  \colorlet{eruditefield}{red!20}
+  \colorlet{elderborder}{blue!50}
+  \colorlet{mentorborder}{green!50}
+  \colorlet{eruditeborder}{red!50}
   
-  % Draw concentric circles for shells
-  \draw[fill=eldershell, draw=elderborder, thick] (0,0) circle (1.5);
-  \draw[fill=mentorshell, draw=mentorborder, thick] (0,0) circle (2.5);
-  \draw[fill=eruditeshell, draw=eruditeborder, thick] (0,0) circle (3.5);
+  % Draw gravitational field using gradient shading
+  \shade[inner color=eldercore, outer color=elderfield, opacity=0.8] (0,0) circle (1.5);
+  \shade[inner color=elderfield, outer color=mentorfield, opacity=0.7] (0,0) circle (2.5);
+  \shade[inner color=mentorfield, outer color=eruditefield, opacity=0.6] (0,0) circle (3.5);
+  
+  % Add subtle field lines for gravitational effect
+  \foreach \r in {0.5,1.0,1.5,2.0,2.5,3.0,3.5}
+    \draw[elderborder!30, dashed, very thin] (0,0) circle (\r);
   
   % Add Elder, Mentor, Erudite labels
   \node at (0,0) {\Large Elder};
@@ -41,7 +46,7 @@
   \draw[->, thick, >=stealth, draw=black] (180:2.3) arc (180:60:2.3);
   
   % Legend
-  \node[align=left] at (5,2.5) {Heliomorphic Shells};
+  \node[align=left] at (5,2.5) {Heliomorphic Gravitational Field};
   \draw[thick, dotted, >=stealth, draw=black] (4,2) -- (4.7,2);
   \node[align=left, font=\small] at (6,2) {Inward Propagation};
   \draw[thick, dashed, >=stealth, draw=black] (4,1.5) -- (4.7,1.5);
@@ -49,15 +54,15 @@
   \draw[thick, >=stealth, draw=black] (4,1) -- (4.7,1);
   \node[align=left, font=\small] at (6,1) {Angular Transfer};
   
-  \draw[fill=eldershell, draw=elderborder] (4,0.5) rectangle (4.3,0.7);
-  \node[align=left, font=\small] at (5.6,0.6) {Elder Shell};
-  \draw[fill=mentorshell, draw=mentorborder] (4,0.1) rectangle (4.3,0.3);
-  \node[align=left, font=\small] at (5.7,0.2) {Mentor Shell};
-  \draw[fill=eruditeshell, draw=eruditeborder] (4,-0.3) rectangle (4.3,-0.1);
-  \node[align=left, font=\small] at (5.7,-0.2) {Erudite Shell};
+  \shade[inner color=eldercore, outer color=elderfield] (4,0.5) rectangle (4.3,0.7);
+  \node[align=left, font=\small] at (5.9,0.6) {Elder Field Region};
+  \shade[inner color=elderfield, outer color=mentorfield] (4,0.1) rectangle (4.3,0.3);
+  \node[align=left, font=\small] at (6.0,0.2) {Mentor Field Region};
+  \shade[inner color=mentorfield, outer color=eruditefield] (4,-0.3) rectangle (4.3,-0.1);
+  \node[align=left, font=\small] at (6.0,-0.2) {Erudite Field Region};
   
-  % Shell indices
-  \node[font=\small] at (1.5,0.4) {Shell 0};
-  \node[font=\small] at (2.5,0.4) {Shell 1};
-  \node[font=\small] at (3.5,0.4) {Shell 2};
+  % Field radius markers
+  \node[font=\small] at (1.5,0.4) {Radius 1.5};
+  \node[font=\small] at (2.5,0.4) {Radius 2.5};
+  \node[font=\small] at (3.5,0.4) {Radius 3.5};
 \end{tikzpicture}
