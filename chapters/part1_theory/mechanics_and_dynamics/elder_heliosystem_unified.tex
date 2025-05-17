@@ -512,7 +512,7 @@ The Elder Heliosystem's implementation relies on a complete set of mathematical 
     \node[block, fill=green!20] (geometry) at (10,5) {Differential\\Geometry};
     
     % High-level kernels (orange)
-    \node[block, fill=orange!20] (shell) at (-7,2) {Gravitational\\Field Operations};
+    \node[block, fill=orange!20] (field) at (-7,2) {Gravitational\\Field Operations};
     \node[block, fill=orange!20] (gradient) at (-2,2) {Gradient\\Optimization};
     \node[block, fill=orange!20] (loss) at (3,2) {Loss\\Functions};
     \node[block, fill=orange!20] (info) at (8,2) {Information\\Theory};
@@ -529,19 +529,19 @@ The Elder Heliosystem's implementation relies on a complete set of mathematical 
     \draw[->, thick] (complex) -- (geometry);
     
     % Connections between mid-level and high-level
-    \draw[->, thick] (helio) -- (shell);
+    \draw[->, thick] (helio) -- (field);
     \draw[->, thick] (orbital) -- (gradient);
     \draw[->, thick] (orbital) -- (loss);
     \draw[->, thick] (spectral) -- (info);
     \draw[->, thick] (geometry) -- (gradient);
     
     % Connections to application level
-    \draw[->, thick] (shell) -- (transfer);
+    \draw[->, thick] (field) -- (transfer);
     \draw[->, thick] (gradient) -- (transfer);
     \draw[->, thick] (loss) -- (transfer);
     \draw[->, thick] (info) -- (transfer);
     
-    \draw[->, thick] (shell) -- (hardware);
+    \draw[->, thick] (field) -- (hardware);
     \draw[->, thick] (gradient) -- (hardware);
     \draw[->, thick] (complex) -- (hardware);
     
