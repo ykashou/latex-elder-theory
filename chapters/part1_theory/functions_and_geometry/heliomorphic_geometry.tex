@@ -331,11 +331,11 @@ The process of discovering the Heliomorphic Elder manifold follows a specialized
         \State $\mathcal{M}_{\text{Elder}} \gets \text{HeliomorphicFlowUpdate}(\mathcal{M}_{\text{Elder}}, \{\nabla_{\odot} \Psi_j\}, \eta_t)$
         
         \State // Enforce gravitational field structure through radial reorganization
-        \State $\mathcal{M}_{\text{Elder}} \gets \text{EnforceShellStructure}(\mathcal{M}_{\text{Elder}})$
+        \State $\mathcal{M}_{\text{Elder}} \gets \text{EnforceGravitationalStructure}(\mathcal{M}_{\text{Elder}})$
         
         \State // Measure convergence through gravitational field coherence
-        \State $\{\mathcal{S}_k\}_{k=1}^K \gets \text{ExtractShells}(\mathcal{M}_{\text{Elder}})$
-        \State $C_t \gets \sum_{k=1}^K \text{MeasureShellCoherence}(\mathcal{S}_k)$
+        \State $\{\mathcal{S}_k\}_{k=1}^K \gets \text{ExtractGravitationalRegions}(\mathcal{M}_{\text{Elder}})$
+        \State $C_t \gets \sum_{k=1}^K \text{MeasureFieldCoherence}(\mathcal{S}_k)$
         
         \If{$|C_t - C_{t-1}| < \epsilon$}
             \State \textbf{break}
@@ -349,22 +349,22 @@ The process of discovering the Heliomorphic Elder manifold follows a specialized
 
 The key innovation in this algorithm is the manifold update step via heliomorphic flow, which differs significantly from traditional manifold learning approaches. Instead of using geodesic distances or Euclidean projections, the algorithm leverages the heliomorphic gradient field $\nabla_{\odot} \Psi$ to guide the manifold evolution.
 
-\subsection{Shell Formation and Abstraction Hierarchy}
+\subsection{Gravitational Field Formation and Abstraction Hierarchy}
 
-The spherical knowledge shells $\{\mathcal{S}_k\}$ emerge naturally during the learning process through the \textsc{EnforceShellStructure} procedure, which implements the following optimization:
+The gravitational field regions $\{\mathcal{S}_k\}$ emerge naturally during the learning process through the \textsc{EnforceGravitationalStructure} procedure, which implements the following optimization:
 
 \begin{equation}
 \mathcal{S}_k = \{\underset{p \in \mathcal{M}_{\text{Elder}}}{\arg\min} \, |~|p| - r_k~| : p \in \mathcal{M}_{\text{Elder}} \text{ and } \nabla_r \Psi_{\odot}(p) = 0\}
 \end{equation}
 
-where $r_k$ represents the radial distance of the $k$-th shell from the origin, and $\nabla_r \Psi_{\odot}$ is the radial component of the heliomorphic gradient.
+where $r_k$ represents the radial distance of the $k$-th gravitational field region from the origin, and $\nabla_r \Psi_{\odot}$ is the radial component of the heliomorphic gradient.
 
 This process results in a hierarchical organization of knowledge where:
 
 \begin{enumerate}
-    \item The innermost shell $\mathcal{S}_1$ contains the most abstract, universal principles.
-    \item Middle shells $\mathcal{S}_k$ for moderate $k$ contain domain-general knowledge applicable across multiple domains.
-    \item Outer shells $\mathcal{S}_K$ for large $K$ contain domain-specific knowledge with limited transfer potential.
+    \item The innermost gravitational field region $\mathcal{S}_1$ contains the most abstract, universal principles.
+    \item Middle gravitational field regions $\mathcal{S}_k$ for moderate $k$ contain domain-general knowledge applicable across multiple domains.
+    \item Outer gravitational field regions $\mathcal{S}_K$ for large $K$ contain domain-specific knowledge with limited transfer potential.
 \end{enumerate}
 
 \subsection{Heliomorphic Navigation for Knowledge Access}
@@ -415,7 +415,7 @@ Moreover, the rate of convergence is $O(M \log M)$, which is faster than the $O(
 \end{theorem}
 
 \begin{proof}[Proof Sketch]
-The key insight is that heliomorphic flow accelerates convergence by organizing points into shells early in the learning process, effectively reducing the dimensionality of the search space. The angular components within each shell then converge in parallel, yielding the improved asymptotic performance.
+The key insight is that heliomorphic flow accelerates convergence by organizing points into gravitational field regions early in the learning process, effectively reducing the dimensionality of the search space. The angular components within each gravitational field region then converge in parallel, yielding the improved asymptotic performance.
 
 The Lyapunov function $V(t) = \int_{\mathcal{M}_{\text{Elder}}} \Psi_{\odot}(p) \, dp$ strictly decreases under heliomorphic flow updates, ensuring convergence to a stationary manifold where $\nabla_{\odot} \Psi_{\odot}(p) = 0$ for all points $p$ on the manifold.
 \end{proof}
@@ -439,7 +439,7 @@ This spectral view enables efficient compression of Elder knowledge, as the coef
 Implementing the Heliomorphic Elder manifold learning algorithm requires specialized numerical techniques:
 
 \begin{enumerate}
-    \item \textbf{Adaptive Shell Resolution:} The shells $\mathcal{S}_k$ should adapt their density based on the distribution of knowledge points, with more shells in regions of high knowledge density.
+    \item \textbf{Adaptive Field Resolution:} The gravitational field regions $\mathcal{S}_k$ should adapt their density based on the distribution of knowledge points, with more detailed field gradients in regions of high knowledge density.
     
     \item \textbf{Curvature-Aware Integration:} The heliomorphic field integration must account for the curvature of the manifold, using adaptive step sizes in regions of high curvature.
     
