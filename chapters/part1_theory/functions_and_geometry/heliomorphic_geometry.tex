@@ -445,7 +445,7 @@ Implementing the Heliomorphic Elder manifold learning algorithm requires special
     
     \item \textbf{Singularity Handling:} Special care must be taken near singular points where the heliomorphic gradient vanishes, using regularization techniques to ensure stable navigation.
     
-    \item \textbf{GPU-Accelerated Shell Operations:} The shell structure enables highly parallel computation on GPUs, with each shell processed independently and results combined hierarchically.
+    \item \textbf{GPU-Accelerated Field Operations:} The gravitational field structure enables highly parallel computation on GPUs, with each field region processed independently and results combined hierarchically.
 \end{enumerate}
 
 \section{Hierarchical Heliomorphic Learning in the Elder-Mentor-Erudite System}\label{sec:hierarchical_heliomorphic_learning}
@@ -457,17 +457,17 @@ Heliomorphic learning within the Elder Heliosystem produces a carefully orchestr
 The hierarchical organization of knowledge in the heliomorphic framework naturally aligns with the Elder-Mentor-Erudite structure:
 
 \begin{theorem}[Heliomorphic Knowledge Hierarchy]
-In the Elder Heliosystem $(\mathcal{E}_{\mathcal{M}}, \mathcal{H}_{\odot})$, knowledge is organized in concentric spherical shells $\{\mathcal{S}_k\}_{k=1}^K$ where:
+In the Elder Heliosystem $(\mathcal{E}_{\mathcal{M}}, \mathcal{H}_{\odot})$, knowledge is organized in a continuous gravitational field with equipotential regions $\{\mathcal{S}_k\}_{k=1}^K$ where:
 \begin{align}
 \mathcal{S}_k &= \{p \in \mathcal{E}_{\mathcal{M}} : |p| = r_k\}\\
 \mathcal{S}_{\text{Elder}} &= \mathcal{S}_1 \cup \mathcal{S}_2 \cup \ldots \cup \mathcal{S}_{k_E}\\
 \mathcal{S}_{\text{Mentor}} &= \mathcal{S}_{k_E+1} \cup \ldots \cup \mathcal{S}_{k_M}\\
 \mathcal{S}_{\text{Erudite}} &= \mathcal{S}_{k_M+1} \cup \ldots \cup \mathcal{S}_K
 \end{align}
-where $r_k$ is the radius of shell $k$, with $r_1 < r_2 < \ldots < r_K$.
+where $r_k$ is the radius of gravitational field region $k$, with $r_1 < r_2 < \ldots < r_K$.
 \end{theorem}
 
-This spatial organization creates a natural knowledge flow from specific (outer shells) to abstract (inner shells) during learning, and from abstract to specific during application.
+This spatial organization creates a natural knowledge flow from specific (outer gravitational field regions) to abstract (inner gravitational field regions) during learning, and from abstract to specific during application.
 
 \subsection{Elder-Mentor Heliomorphic Interaction}
 
@@ -478,7 +478,7 @@ For each domain $i$ with Mentor parameters $\theta_{\text{M},i}$, the Elder-Ment
 \begin{equation}
 \frac{\partial \theta_{\text{Elder}}}{\partial t} = \sum_{i=1}^M \int_{\mathcal{S}_{\text{Mentor}}} \eta(r) \cdot \nabla_{\odot} \mathcal{L}_i(p) \cdot \phi_i(p) \, d\sigma(p)
 \end{equation}
-where $\eta(r)$ is a radius-dependent learning rate, $\nabla_{\odot} \mathcal{L}_i$ is the heliomorphic gradient of the loss for domain $i$, and $\phi_i$ is a domain-specific projection function mapping Mentor knowledge to Elder shells.
+where $\eta(r)$ is a radius-dependent learning rate, $\nabla_{\odot} \mathcal{L}_i$ is the heliomorphic gradient of the loss for domain $i$, and $\phi_i$ is a domain-specific projection function mapping Mentor knowledge to Elder gravitational field regions.
 \end{proposition}
 
 This exchange mechanism enables Elder to extract domain-invariant principles from Mentors while preserving the unique characteristics of each domain through the angular components of the heliomorphic representation.
@@ -495,7 +495,7 @@ For domain $i$ and task $j$, the Mentor-Erudite heliomorphic guidance manifests 
 where $K_{\text{M},i}$ is the Mentor's knowledge function for domain $i$, and $\psi_{i,j}$ is a task-specific heliomorphic selection function that extracts relevant knowledge for task $j$.
 \end{proposition}
 
-The heliomorphic selection function $\psi_{i,j}$ operates by tracing radial paths through the shell structure, ensuring that general principles from inner shells and specific knowledge from outer shells are appropriately combined for each task.
+The heliomorphic selection function $\psi_{i,j}$ operates by tracing radial paths through the gravitational field structure, ensuring that general principles from inner field regions and specific knowledge from outer field regions are appropriately combined for each task.
 
 \subsection{Cross-Domain Heliomorphic Learning}
 
@@ -509,7 +509,7 @@ Knowledge transfer between domains $i$ and $j$ is facilitated by heliomorphic tr
 where $\exp_{p}^{\odot}$ is the heliomorphic exponential map at $p$, and $\mathcal{T}_{i,j}$ is the transfer potential between domains.
 \end{theorem}
 
-These transfer paths follow helical trajectories that move inward toward the Elder shells before moving outward to the target domain, ensuring that knowledge is abstracted before being specialized for new domains.
+These transfer paths follow helical trajectories that move inward toward the Elder gravitational field regions before moving outward to the target domain, ensuring that knowledge is abstracted before being specialized for new domains.
 
 \subsection{Heliomorphic Adaptation Mechanisms}
 
@@ -554,13 +554,13 @@ This adaptation mechanism allows new domains to benefit from existing knowledge 
 The practical implementation of heliomorphic learning in the Elder-Mentor-Erudite system requires specialized techniques:
 
 \begin{enumerate}
-    \item \textbf{Shell-Aware Parameter Updates:} Parameters are updated differently depending on their shell location, with larger learning rates for outer shells (Erudite) and smaller rates for inner shells (Elder).
+    \item \textbf{Field-Aware Parameter Updates:} Parameters are updated differently depending on their gravitational field position, with larger learning rates for outer field regions (Erudite) and smaller rates for inner field regions (Elder).
     
     \item \textbf{Angular Momentum Conservation:} During learning, the angular components of knowledge (domain characteristics) are preserved while the radial components (abstraction level) are modified.
     
-    \item \textbf{Heliomorphic Batch Normalization:} Statistical normalization in the heliomorphic system occurs along concentric shells rather than across feature dimensions as in traditional batch normalization.
+    \item \textbf{Heliomorphic Batch Normalization:} Statistical normalization in the heliomorphic system occurs along gravitational equipotential surfaces rather than across feature dimensions as in traditional batch normalization.
     
-    \item \textbf{Task-Specific Shell Sampling:} For task-specific learning, the Erudite samples knowledge from specific angular regions along multiple shells, following radial trajectories.
+    \item \textbf{Task-Specific Field Sampling:} For task-specific learning, the Erudite samples knowledge from specific angular regions along multiple gravitational field regions, following radial trajectories.
 \end{enumerate}
 
 These techniques ensure that the Elder, Mentors, and Erudites coordinate effectively within the heliomorphic framework, maintaining the integrity of knowledge at each level while enabling efficient transfer across levels and domains.
