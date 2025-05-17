@@ -4,15 +4,15 @@
 
 \section{Introduction to Gravitational Field Parameters}
 
-\begin{definition}[Elder Heliosystem Parameter Spaces]
-The Elder Heliosystem operates with three principal parameter spaces, organized according to a continuous gravitational field model:
+\begin{definition}[Gravitational Field Parameters (GFPs)]
+The Elder Heliosystem operates with three principal categories of Gravitational Field Parameters (GFPs), distributed according to their position in the continuous gravitational field:
 
 \begin{itemize}
-    \item $\boldsymbol{\Theta_E} \subset \mathbb{H}_E$: The Elder parameter space, a complex separable Hilbert space with inner product $\langle \cdot, \cdot \rangle_E$
+    \item $\boldsymbol{\Theta_E} \subset \mathbb{H}_E$: Central Field GFPs - located in the highest gravitational influence region at the center of the field, these parameters form a complex separable Hilbert space with inner product $\langle \cdot, \cdot \rangle_E$ and represent universal knowledge principles
     
-    \item $\boldsymbol{\Theta_M} = \{\Theta_M^{(d)}\}_{d=1}^D$: The collection of Mentor parameter spaces, where each $\Theta_M^{(d)} \subset \mathbb{H}_M$ is a complex separable Hilbert space corresponding to domain $d$
+    \item $\boldsymbol{\Theta_M} = \{\Theta_M^{(d)}\}_{d=1}^D$: Intermediate Field GFPs - positioned in moderate gravitational influence regions, where each $\Theta_M^{(d)} \subset \mathbb{H}_M$ forms a complex separable Hilbert space corresponding to domain $d$ and represents domain-general knowledge
     
-    \item $\boldsymbol{\Theta_e} = \{\Theta_e^{(d)}\}_{d=1}^D$: The collection of Erudite parameter spaces, where each $\Theta_e^{(d)} \subset \mathbb{H}_e$ is a complex separable Hilbert space corresponding to domain $d$
+    \item $\boldsymbol{\Theta_e} = \{\Theta_e^{(d)}\}_{d=1}^D$: Peripheral Field GFPs - situated in areas of diminishing gravitational influence, where each $\Theta_e^{(d)} \subset \mathbb{H}_e$ is a complex separable Hilbert space corresponding to domain $d$ and represents domain-specific knowledge
 \end{itemize}
 
 The composite parameter space of the entire system is defined as:
@@ -21,67 +21,67 @@ The composite parameter space of the entire system is defined as:
 \boldsymbol{\Theta} = \Theta_E \times \prod_{d=1}^D \Theta_M^{(d)} \times \prod_{d=1}^D \Theta_e^{(d)}
 \end{equation}
 
-\textbf{Mathematical Justification}: The Cartesian product structure directly defines the number of parameters in the system and is essential for several fundamental reasons:
+\textbf{Gravitational Field Justification}: The Cartesian product structure of GFPs establishes a continuous gravitational field with varying influence regions, essential for several fundamental reasons:
 \begin{enumerate}
-    \item \textbf{Parameter Count}: The number of parameters in the system is the sum of parameters across all components:
+    \item \textbf{Gravitational Parameter Distribution}: The total number of parameters in the gravitational field is distributed across all regions:
     \begin{equation}
     N = |\Theta_E| + \sum_{d=1}^D |\Theta_M^{(d)}| + \sum_{d=1}^D |\Theta_e^{(d)}|
     \end{equation}
-    This is only possible with the product structure, which maintains separate parameter counts for each component.
+    This distribution creates a gravitational influence spectrum from central (universal) to peripheral (specific) knowledge.
     
-    \item \textbf{Parameter Independence}: Using a product structure guarantees that each parameter can be updated independently during learning, which would not be the case with a summed parameter space where parameters would be forced to share dimensions.
+    \item \textbf{Field Region Independence}: The product structure ensures that parameters in different gravitational field regions maintain independent update dynamics while still influencing each other through gravitational effects.
     
-    \item \textbf{Hierarchical Organization}: The product formalism preserves the Elder-Mentor-Erudite hierarchy in the parameter space itself, ensuring that updates to Elder parameters are properly propagated through the hierarchy.
+    \item \textbf{Gravitational Propagation}: The field organization allows knowledge to flow naturally from central high-influence regions to peripheral regions, with each region's parameters responding differently based on gravitational strength.
     
-    \item \textbf{Domain Separation}: Parameters for different domains remain distinct with a product structure, preventing interference during domain-specific learning while still enabling cross-domain transfer where beneficial.
+    \item \textbf{Domain Coherence}: Parameters in the same gravitational field region but different domains can achieve phase alignment, enabling cross-domain knowledge transfer proportional to their gravitational influence.
     
-    \item \textbf{Optimization Properties}: Gradient-based learning can target specific parameter subspaces efficiently due to the product structure, which would be impossible with a direct sum where gradient updates would affect all levels simultaneously.
+    \item \textbf{Field-aware Optimization}: Gradient-based learning adapts to gravitational field properties, with deeper field regions (Elder) receiving broader but subtler updates, while peripheral regions receive more specific adaptation signals.
 \end{enumerate}
 \end{definition}
 
 \section{Complex-Valued Representation}
 
-\begin{definition}[Complex Parameter Representation]
-Each parameter $\theta \in \Theta$ is a complex-valued vector with polar representation:
+\begin{definition}[Complex-Valued GFP Representation]
+Each Gravitational Field Parameter (GFP) $\theta \in \Theta$ is a complex-valued vector with polar representation:
 
 \begin{equation}
 \theta = \rho e^{i\phi}
 \end{equation}
 
-where $\rho \in \mathbb{R}^n_+$ represents magnitude components and $\phi \in [0, 2\pi)^n$ represents phase components, with $n$ being the dimensionality of the parameter vector in each specific component space.
+where $\rho \in \mathbb{R}^n_+$ represents gravitational field strength components and $\phi \in [0, 2\pi)^n$ represents phase alignment components, with $n$ being the dimensionality of the parameter vector in each specific gravitational field region.
 \end{definition}
 
-This complex representation enables:
+This complex representation of GFPs enables:
 \begin{itemize}
-    \item \textbf{Phase-based information encoding}: Phase components encode relational and temporal patterns
-    \item \textbf{Resonance mechanisms}: Phase alignment enables selective activation based on frequency relationships
-    \item \textbf{Magnitude-based information density}: Radial components encode the strength or importance of knowledge elements
+    \item \textbf{Gravitational phase encoding}: Phase components encode relational knowledge patterns that propagate across the gravitational field
+    \item \textbf{Field resonance mechanisms}: Phase alignment between different field regions enables selective knowledge activation based on gravitational influence
+    \item \textbf{Gravitational information density}: Field strength components encode the magnitude of influence that knowledge elements exert across abstraction levels
 \end{itemize}
 
-\section{Heliomorphic Parameter Operations}
+\section{Gravitational Field Operations}
 
-The parameter spaces support specialized mathematical operations that maintain their heliomorphic structure:
+The GFP spaces support specialized mathematical operations that maintain their gravitational field structure:
 
-\begin{definition}[Core Coupling Parameters]
-Three fundamental parameters govern the interactions between knowledge structures in the Elder framework:
+\begin{definition}[Gravitational Field Coupling Parameters]
+Three fundamental parameters govern the gravitational field interactions in the Elder Heliosystem:
 
 \begin{itemize}
-    \item $\alpha \in [0,1]$: The resonance coupling coefficient that quantifies the strength of knowledge propagation from the Elder level to the Mentor level. When $\alpha = 1$, there is perfect knowledge transfer across abstraction levels.
+    \item $\alpha \in [0,1]$: The gravitational propagation coefficient that quantifies the strength of knowledge transfer between field regions. When $\alpha = 1$, there is perfect gravitational influence connecting central (Elder) and intermediate (Mentor) field regions.
     
-    \item $\beta \in [-1,1]$: The phase alignment parameter that measures coherence between knowledge representations in different domains. Values of $\beta = 1$ indicate perfect alignment, while $\beta = -1$ indicates complete phase opposition.
+    \item $\beta \in [-1,1]$: The gravitational phase alignment parameter that measures coherence between knowledge representations across the field. Values of $\beta = 1$ indicate perfect field alignment, while $\beta = -1$ indicates gravitational interference between field regions.
     
-    \item $\gamma \in \mathbb{R}^+$: The knowledge evolution rate that controls how quickly the system incorporates new information and adapts its internal representations. This parameter is inversely proportional to system stability - when orbital stability decreases, $\gamma$ increases to accelerate adaptation and restore equilibrium; conversely, as stability increases, $\gamma$ decreases, allowing for more stable learning.
+    \item $\gamma \in \mathbb{R}^+$: The gravitational adaptation rate that controls how quickly the field responds to new information. This parameter is inversely proportional to gravitational stability - when field stability decreases, $\gamma$ increases to accelerate adaptation and restore equilibrium; conversely, as stability increases, $\gamma$ decreases, allowing for more stable knowledge propagation throughout the field.
 \end{itemize}
 \end{definition}
 
-\begin{theorem}[Heliomorphic Parameter Transformation]
-For parameters $\theta_1, \theta_2 \in \Theta$, the heliomorphic transformation $\mathcal{T}$ operates as:
+\begin{theorem}[Gravitational Field Transformation]
+For Gravitational Field Parameters $\theta_1, \theta_2 \in \Theta$, the gravitational field transformation $\mathcal{T}$ operates as:
 
 \begin{equation}
 \mathcal{T}(\theta_1, \theta_2) = |\rho_1||\rho_2|e^{i(\phi_1 \oplus \phi_2)}
 \end{equation}
 
-where $\oplus$ is the phase composition operator that preserves heliomorphic properties.
+where $\oplus$ is the phase composition operator that preserves the continuous influence properties across the gravitational field.
 \end{theorem}
 
 \begin{theorem}[Gravitational Field Embedding]
@@ -96,38 +96,38 @@ where $\gamma_j$ represents the gravitational strength of parameter $j$, $\mathb
 This inverse-square relationship ensures that the gravitational influence decreases continuously with distance, allowing for smooth transitions between abstraction levels while maintaining the ability to model knowledge propagation and transformation across the field.
 \end{theorem}
 
-\section{Gravitational Field Properties}
+\section{Fundamental GFP Properties}
 
-The complex Hilbert space structure with gravitational field embedding confers important properties:
+The complex Hilbert space structure with gravitational field embedding confers these fundamental properties to GFPs:
 
 \begin{enumerate}
-    \item \textbf{Continuity}: The gravitational field creates a continuous influence gradient across abstraction levels, without discrete boundaries
+    \item \textbf{Field Continuity}: GFPs establish a continuous gravitational influence gradient across abstraction levels, eliminating discrete boundaries between knowledge regions
     
-    \item \textbf{Inverse-Square Law}: Influence decays according to an inverse-square relationship with distance, matching natural physical principles
+    \item \textbf{Inverse-Square Influence}: GFP gravitational influence decays according to an inverse-square relationship with distance, providing a mathematically elegant and physically inspired knowledge propagation model
     
-    \item \textbf{Completeness}: Parameter spaces are complete, allowing convergent limit operations at every point in the field
+    \item \textbf{Field Completeness}: GFP spaces form complete metric spaces, allowing convergent gravitational operations at every point in the field and ensuring the theoretical soundness of limit operations
     
-    \item \textbf{Separability}: They admit countable dense subsets, enabling efficient approximation throughout the field
+    \item \textbf{Field Separability}: GFP spaces admit countable dense subsets, enabling efficient approximation throughout the gravitational field and supporting computational tractability
     
-    \item \textbf{Inner Product Structure}: Enables measuring similarity between parameter configurations at different field positions
+    \item \textbf{Inner Product Geometry}: The gravitational field geometry encoded in GFPs enables measuring similarity between knowledge representations at different field positions
     
-    \item \textbf{Phase Coherence}: Parameter phase relationships are preserved across the field while strength varies with gravitational influence
+    \item \textbf{Phase Field Coherence}: GFP phase relationships follow field laws and are preserved across gravitational transitions, while influence strength varies continuously with field position
 \end{enumerate}
 
-\section{Application to Knowledge Representation}
+\section{GFP Applications in Knowledge Representation}
 
-In the Elder Heliosystem, this gravitational field parameter structure enables:
+In the Elder Heliosystem, Gravitational Field Parameters (GFPs) enable sophisticated knowledge operations:
 
 \begin{itemize}
-    \item \textbf{Continuous abstraction gradient}: Knowledge transitions smoothly from highly abstract (Elder) at the field center to increasingly specific (Mentor, then Erudite) as radial distance increases
+    \item \textbf{Continuous Abstraction Gradient}: Knowledge flows smoothly through the gravitational field, from universal principles in central regions (Elder GFPs) to increasingly specific applications in intermediate (Mentor GFPs) and peripheral regions (Erudite GFPs)
     
-    \item \textbf{Cross-domain transfer}: Common phase patterns propagate through the gravitational field, allowing knowledge to transfer across different domains according to inverse-square principles
+    \item \textbf{Cross-domain Knowledge Transfer}: Gravitational phase patterns propagate through the field according to inverse-square principles, allowing precise control over how knowledge transfers between different domains based on field position
     
-    \item \textbf{Gravitational resonance}: Phase alignment between parameters at different field positions creates resonance pathways that selectively amplify relevant knowledge transfer
+    \item \textbf{Field Resonance Mechanisms}: Phase alignment between GFPs at different field positions creates gravitational resonance pathways that selectively amplify relevant knowledge transfer while inhibiting irrelevant connections
     
-    \item \textbf{Field-mediated representation}: The complex-valued gravitational field allows encoding both magnitude and phase information, with influence decreasing continuously rather than discretely
+    \item \textbf{Gravitational Information Encoding}: Complex-valued GFPs encode both magnitude (strength) and phase (alignment) information within the continuous gravitational field, providing richer representations than discrete models
     
-    \item \textbf{Energy-efficient computation}: Parameters at similar field positions can share computational resources, with activation governed by gravitational influence
+    \item \textbf{Gravitationally-Guided Computation}: GFPs at similar field positions automatically share computational resources, with activation and propagation governed by gravitational field principles rather than rigid architectural constraints
 \end{itemize}
 
-This mathematical foundation provides a physics-inspired gravitational field model for representing knowledge that naturally supports continuous abstraction levels, cross-domain transfer, and energy-efficient computation through inverse-square principles.
+This gravitational field framework provides an elegant mathematical foundation for representing knowledge that naturally supports continuous influences between abstraction levels, precise cross-domain transfer, and efficient computation through physically-inspired inverse-square principles. GFPs represent a significant advancement over traditional parameter spaces by encoding knowledge within a continuous gravitational field that more accurately models the subtle relationships between concepts at different levels of abstraction.
