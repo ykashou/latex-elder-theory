@@ -80,9 +80,15 @@ where indices $1 \leq k < m < d$ are determined by phase coherence properties.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
-\draw (0,0) circle (2.5);
-\draw (0,0) circle (1.5);
-\draw (0,0) circle (0.7);
+% Draw gravitational field using gradient shading
+\shade[inner color=blue!50, outer color=blue!10, opacity=0.7] (0,0) circle (0.7);
+\shade[inner color=blue!10, outer color=green!30, opacity=0.6] (0,0) circle (1.5);
+\shade[inner color=green!30, outer color=red!20, opacity=0.5] (0,0) circle (2.5);
+
+% Add subtle field lines for gravitational effect
+\foreach \r in {0.7,1.5,2.5}
+  \draw[blue!30, dashed, very thin] (0,0) circle (\r);
+
 \node at (0,0) {$\eldersubspace$};
 \node at (0,1.1) {$\mentorsubspace$};
 \node at (0,2.0) {$\eruditesubspace$};
@@ -96,7 +102,7 @@ where indices $1 \leq k < m < d$ are determined by phase coherence properties.
 \draw[blue, thick] plot [smooth cycle] coordinates {(-0.3,0.4) (0.1,0.6) (0.5,0.3) (0.4,-0.2) (0,-0.3) (-0.4,-0.1)};
 \end{scope}
 \end{tikzpicture}
-\caption{Hierarchical structure of Elder spaces and their realization mapping}
+\caption{Gravitational field structure of Elder spaces and their realization mapping}
 \label{fig:hierarchical-elder-structure}
 \end{figure}
 

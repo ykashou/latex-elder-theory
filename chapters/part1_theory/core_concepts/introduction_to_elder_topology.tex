@@ -29,9 +29,14 @@ where each $\mathcal{S}_k$ represents a collection of related knowledge structur
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[scale=0.8]
-\draw[fill=black!5] (0,0) circle (3);
-\draw[thin, dashed] (0,0) circle (2);
-\draw[thin, dashed] (0,0) circle (1);
+% Draw gravitational field using gradient shading
+\shade[inner color=blue!20, outer color=white, opacity=0.4] (0,0) circle (3);
+\shade[inner color=blue!30, outer color=blue!10, opacity=0.3] (0,0) circle (2);
+\shade[inner color=blue!40, outer color=blue!20, opacity=0.3] (0,0) circle (1);
+
+% Add subtle field lines for gravitational effect
+\foreach \r in {1,2,3}
+  \draw[blue!30, dashed, very thin] (0,0) circle (\r);
 
 \draw[blue, thick] plot [smooth cycle] coordinates {(0.6,0.5) (1.2,1.0) (0.4,1.8) (-0.6,1.6) (-1.0,0.6) (-0.4,0.2)};
 \node at (0.3,1.0) {$\mathcal{S}_2$};
@@ -47,8 +52,11 @@ where each $\mathcal{S}_k$ represents a collection of related knowledge structur
 
 \filldraw (2.6, 1.5) circle (0.1) node[right] {$\mathcal{S}_0$};
 \filldraw (-2.6, -1.5) circle (0.1) node[left] {$\mathcal{S}_0$};
+
+% Add gravitational field label
+\node[font=\small, text=blue!70!black] at (0,2.7) {Gravitational Field};
 \end{tikzpicture}
-\caption{Stratification of Elder space into resonance manifolds. Each layer ($\mathcal{S}_0$, $\mathcal{S}_1$, $\mathcal{S}_2$) represents knowledge structures at different levels of abstraction.}
+\caption{Stratification of Elder space as resonance manifolds within a gravitational field. Each layer ($\mathcal{S}_0$, $\mathcal{S}_1$, $\mathcal{S}_2$) represents knowledge structures at different levels of abstraction and field strengths.}
 \label{fig:elder-stratification}
 \end{figure}
 
