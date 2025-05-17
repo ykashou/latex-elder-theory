@@ -36,7 +36,7 @@ By the Differential Heritage and Phase Continuity Axioms, the integral of $f$ al
 \oint_C f(z) \, dz = \sum_j n_j \oint_{C_j} f(z) \, dz
 \end{equation}
 
-This depends only on the values of $f$ on shells $S_j$ and the winding numbers $n_j$.
+This depends only on the values of $f$ on gravitational influence regions $G_j$ and the winding numbers $n_j$.
 \end{proof}
 
 \begin{theorem}[Heliomorphic Extension]
@@ -49,7 +49,7 @@ A heliomorphic function $f$ defined on an annular region $\mathcal{A} = \{z \in 
 \begin{proof}
 If $f$ extends to a heliomorphic function on $\mathcal{D}$, then by the Completeness Axiom, the radial-phase coupling tensor must have a positive determinant uniformly as $r$ approaches $r_1$.
 
-Conversely, if the limit condition is satisfied, we can use the Existence and Uniqueness Axiom to extend $f$ inward by specifying values on a shell $S_0$ with radius $r_0 < r_1$. The Radial Analyticity Axiom ensures this extension is analytic along radial lines, completing the proof.
+Conversely, if the limit condition is satisfied, we can use the Existence and Uniqueness Axiom to extend $f$ inward by specifying values on a gravitational influence region $G_0$ with radius $r_0 < r_1$. The Radial Analyticity Axiom ensures this extension is analytic along radial lines, completing the proof.
 \end{proof}
 
 \begin{theorem}[Heliomorphic Laurent Series]
@@ -93,36 +93,37 @@ Applying $\mathcal{D}_{\mathcal{H}}$ to this series:
 The eigenfunctions are precisely the terms $r^{\gamma_n} e^{i(n\theta + \beta_n \ln r)}$ with eigenvalues $\lambda_n = (\gamma_n + i(n + \beta_n))/r$. On bounded domains, these form a discrete set.
 \end{proof}
 
-\section{Intershell Dynamics}
+\section{Gravitational Influence Dynamics}
 
 A key feature of heliomorphic functions is their ability to model interactions between different abstraction levels.
 
-\begin{definition}[Intershell Coupling Tensor]
-The coupling between shells $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ is characterized by the tensor:
+\begin{definition}[Gravitational Field Tensor]
+The gravitational field tensor characterizing knowledge influence between any two points in the field is defined as:
 \begin{equation}
-\mathcal{T}_{k,k+1} = \gamma(r_{k+1}) \cdot \nabla_{\mathcal{H}} \otimes \nabla_{\mathcal{H}}
+\mathcal{T}(r_1, r_2, \theta_1, \theta_2) = \gamma(r_1, r_2) \cdot \nabla_{\mathcal{H}} \otimes \nabla_{\mathcal{H}} \cdot \frac{1}{d(r_1,\theta_1,r_2,\theta_2)^2}
 \end{equation}
-evaluated at the boundary radius $r_{k+1}$.
+where $d(r_1,\theta_1,r_2,\theta_2)$ represents the knowledge-space distance between the points, and $\gamma(r_1, r_2)$ is the knowledge evolution rate function that regulates adaptation speed based on gravitational potential.
 \end{definition}
 
-\begin{theorem}[Intershell Propagation]
-A perturbation $\delta K_k$ in shell $\mathcal{S}_k$ induces a perturbation in shell $\mathcal{S}_{k+1}$ given by:
+\begin{theorem}[Gravitational Knowledge Propagation]
+A knowledge perturbation $\delta K$ at radial position $r_1$ induces a change in knowledge representation across the gravitational field according to:
 \begin{equation}
-\delta K_{k+1} = \mathcal{T}_{k,k+1} \cdot \delta K_k + O(||\delta K_k||^2)
+\delta K(r_2) = \mathcal{T}(r_1, r_2) \cdot \delta K(r_1) \cdot G(r_1, r_2) + O(||\delta K(r_1)||^2)
 \end{equation}
+where $G(r_1, r_2)$ is the gravitational influence function that decays with distance according to inverse-square principles.
 \end{theorem}
 
-This theorem characterizes how knowledge propagates between abstraction levels in the Elder Heliosystem, establishing the formal mechanism for hierarchical learning.
+This theorem characterizes how knowledge propagates continuously through the gravitational field of the Elder Heliosystem, establishing a physics-based mechanism for hierarchical learning without requiring discrete shells.
 
 \section{Theoretical Guarantees for Knowledge Representation}
 
 The mathematical properties of heliomorphic functions provide theoretical guarantees for the Elder Heliosystem's knowledge representation capabilities.
 
 \begin{theorem}[Computational Efficiency]
-Operations on heliomorphic functions have the following complexity characteristics:
+Operations on heliomorphic functions in the gravitational influence model have the following complexity characteristics:
 \begin{enumerate}
-    \item Within-shell operations: $O(N_k \log N_k)$ where $N_k$ is the dimensionality of shell $\mathcal{S}_k$
-    \item Cross-shell operations: $O(N_k + N_{k+1})$ for adjacent shells
+    \item Local gravitational operations: $O(N(r) \log N(r))$ where $N(r)$ is the parameter density at radius $r$
+    \item Field propagation operations: $O(N(r_1) + N(r_2))$ between points at radii $r_1$ and $r_2$
     \item Knowledge transfer: $O(P_M M \log M)$ compared to $O(P_M^2 M^2)$ for traditional approaches
 \end{enumerate}
 where $P_M$ is the parameter count and $M$ is the number of domains.
@@ -135,17 +136,17 @@ Any hierarchical knowledge structure with radial abstraction levels and phase-ba
 \begin{proof}
 For a hierarchical knowledge structure with:
 \begin{itemize}
-    \item $k$ radial abstraction levels (Elder, Mentor, Erudite)
+    \item Continuous gravitational influence defining abstraction levels (Elder, Mentor, Erudite)
     \item Angular positions representing knowledge domains
     \item Phase relationships encoding conceptual similarities
 \end{itemize}
 
 We construct a heliomorphic function $f(re^{i\theta})$ where:
 \begin{itemize}
-    \item Radial coordinate $r$ is partitioned into shells representing abstraction levels
+    \item Radial coordinate $r$ corresponds to continuous gravitational influence strength
     \item Angular coordinate $\theta$ represents domain position
-    \item Magnitude $|f|$ encodes knowledge density
-    \item Phase $\arg(f)$ encodes conceptual relationships
+    \item Magnitude $|f|$ encodes knowledge density according to gravitational potential
+    \item Phase $\arg(f)$ encodes conceptual relationships that propagate through the field
 \end{itemize}
 
 By the Existence and Uniqueness Axiom, there exists a unique heliomorphic function satisfying these conditions. The remaining axioms ensure consistent behavior under knowledge transformations.
