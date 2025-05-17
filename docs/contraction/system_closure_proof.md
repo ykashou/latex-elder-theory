@@ -44,11 +44,11 @@ The Elder Theory is built on seven axioms of heliomorphic functions:
 
 2. In the Elder Heliosystem, knowledge transformations are represented as heliomorphic functions $f: \mathcal{H}_1 \rightarrow \mathcal{H}_2$ between heliomorphic domains.
 
-3. The three-level hierarchy (Elder, Mentor, Erudite) corresponds to concentric shells in the heliomorphic domain, with transformations between levels represented as radial transformations.
+3. The three-level hierarchy (Elder, Mentor, Erudite) corresponds to a continuous gravitational field in the heliomorphic domain, with transformations between levels represented as radial transformations following inverse-square principles.
 
 4. Given any knowledge transformation $T$ in the system:
-   - If $T$ operates within a single level, it preserves the shell structure (by Axiom 3)
-   - If $T$ operates between levels, it maps between shells while preserving the heliomorphic structure (by Axioms 4 and 6)
+   - If $T$ operates within a specific field strength region, it preserves the gravitational field structure (by Axiom 3)
+   - If $T$ operates between regions of different field strengths, it follows the gravitational gradient while preserving the heliomorphic structure (by Axioms 4 and 6)
 
 5. Therefore, all knowledge transformations in the Elder Heliosystem result in representations that remain within the system's mathematical framework.
 

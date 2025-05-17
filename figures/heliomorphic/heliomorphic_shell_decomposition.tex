@@ -9,15 +9,19 @@
   \draw[->, thick] (-4.5,0) -- (4.5,0) node[right] {$\text{Re}(z)$};
   \draw[->, thick] (0,-4.5) -- (0,4.5) node[above] {$\text{Im}(z)$};
   
-  % Draw gravitational field using gradient shading
+  % Draw gravitational field using continuous gradient shading
   \shade[inner color=field0, outer color=field1, opacity=0.8] (0,0) circle (1);
   \shade[inner color=field1, outer color=field2, opacity=0.7] (0,0) circle (2);
   \shade[inner color=field2, outer color=field3, opacity=0.6] (0,0) circle (3);
   \shade[inner color=field3, outer color=white, opacity=0.5] (0,0) circle (4);
   
-  % Add subtle field lines for gravitational effect
+  % Add radial field lines for gravitational effect
+  \foreach \angle in {0,30,...,330}
+    \draw[field0!30, very thin] (0,0) -- (\angle:4);
+  
+  % Add subtle circular field lines for gravitational effect
   \foreach \r in {1,2,3,4}
-    \draw[field0!30, dashed, very thin] (0,0) circle (\r);
+    \draw[field0!20, dashed, very thin] (0,0) circle (\r);
   
   % Domain points at different positions
   \filldraw[black] (0.866,0.5) circle (2pt) node[above right] {$D_1$};
@@ -40,29 +44,40 @@
   % Representation of gravitational field function decomposition
   \begin{scope}[shift={(7,0)}]
     % Field decomposition equation
-    \node at (0,3) {$f(z) = \sum_{k=0}^{\infty} f_k(z)$};
-    \node at (0,2) {$f_k(z) = z^k \cdot P_k(z)$};
+    \node at (0,3) {$f(z) = \int_0^{\infty} f_r(z) \, dr$};
+    \node at (0,2) {$f_r(z) = \gamma(r) \cdot g(z,r)$};
     
-    % Function components for each field region
+    % Function components for different field regions
     \draw[field0, thick] (-2,1) -- (2,1);
-    \node[right] at (2,1) {$f_0(z)$ (Elder)};
+    \node[right] at (2,1) {$f_r(z), r \approx 0$ (Elder)};
     
     \draw[field1, thick] (-2,0) -- (2,0);
-    \node[right] at (2,0) {$f_1(z)$ (Mentor)};
+    \node[right] at (2,0) {$f_r(z), r \approx 1.5$ (Mentor)};
     
     \draw[field2, thick] (-2,-1) -- (2,-1);
-    \node[right] at (2,-1) {$f_2(z)$ (Erudite)};
+    \node[right] at (2,-1) {$f_r(z), r \approx 2.5$ (Erudite)};
     
     \draw[field3, thick] (-2,-2) -- (2,-2);
-    \node[right] at (2,-2) {$f_3(z)$ (Task)};
+    \node[right] at (2,-2) {$f_r(z), r \approx 3.5$ (Task)};
+    
+    % Add field strength indicator
+    \draw[->, thick] (-1,-3) -- (1,-3);
+    \node[below] at (0,-3) {Gravitational Field Strength};
+    \node[below] at (-1,-3.3) {Stronger};
+    \node[below] at (1,-3.3) {Weaker};
   \end{scope}
   
   % Field radius labels
-  \node at (1.5,0) {Radius 1.0};
-  \node at (2.5,0) {Radius 2.0};
-  \node at (3.5,0) {Radius 3.0};
-  \node at (4.5,0) {Radius 4.0};
+  \node[font=\tiny] at (1.3,0) {r = 1.0};
+  \node[font=\tiny] at (2.3,0) {r = 2.0};
+  \node[font=\tiny] at (3.3,0) {r = 3.0};
+  \node[font=\tiny] at (4.3,0) {r = 4.0};
   
   % Title
   \node at (0,-5) {Heliomorphic Gravitational Field Decomposition};
+  
+  % Inverse square law indicator
+  \node[align=center] at (-5.5,0) {Field Strength\\$\propto \frac{1}{r^2}$};
+  \draw[->, thick, >=stealth] (-5.5,1) -- (-5.5,3);
+  \node[rotate=90] at (-5.5,2) {decreasing};
 \end{tikzpicture}
