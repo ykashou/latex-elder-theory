@@ -4,8 +4,8 @@ This document tracks the migration from the shell-based model to the continuous 
 
 ## Figures Files
 
-- [ ] `figures/heliomorphic/heliomorphic_shells.tex` - Rename file and update content
-- [ ] `figures/heliomorphic/heliomorphic_shell_decomposition.tex` - Rename file and update content
+- [x] `figures/heliomorphic/heliomorphic_shells.tex` → `figures/heliomorphic/heliomorphic_gravitational_field.tex` - Files exist in parallel
+- [x] `figures/heliomorphic/heliomorphic_shell_decomposition.tex` → `figures/heliomorphic/heliomorphic_gravitational_field_decomposition.tex` - Files exist in parallel
 
 ## Primary Theory Files
 
@@ -22,14 +22,14 @@ This document tracks the migration from the shell-based model to the continuous 
 ## Memory and Loss Functions
 
 - [ ] `chapters/part1_theory/memory_and_efficiency/infinite_memory_dynamics.tex`
-- [ ] `chapters/part1_theory/loss_functions/elder_loss.tex`
-- [ ] `chapters/part1_theory/loss_functions/mentor_loss.tex`
-- [ ] `chapters/part1_theory/loss_functions/erudite_loss.tex`
+- [x] `chapters/part1_theory/loss_functions/elder_loss.tex`
+- [x] `chapters/part1_theory/loss_functions/mentor_loss.tex`
+- [x] `chapters/part1_theory/loss_functions/erudite_loss.tex`
 
 ## Applications
 
-- [ ] `chapters/part1_theory/applications/audio_understanding.tex`
-- [ ] `chapters/part1_theory/applications/model_unification.tex`
+- [x] `chapters/part1_theory/applications/audio_understanding.tex`
+- [x] `chapters/part1_theory/applications/model_unification.tex`
 - [ ] `chapters/part1_theory/applications/additional_domain_applications.tex`
 
 ## Experimental Section
@@ -39,7 +39,7 @@ This document tracks the migration from the shell-based model to the continuous 
 ## Supporting Files
 
 - [ ] `chapters/appendix/symbol_glossary.tex`
-- [ ] `glossary.tex`
+- [x] `glossary.tex`
 - [ ] `main.tex`
 
 ## Documentation
