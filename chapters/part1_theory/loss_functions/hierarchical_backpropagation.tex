@@ -338,7 +338,7 @@ The orbital stability-based learning rate $\eta_{\text{orbital}}$ is defined as:
 \begin{equation}
 \eta_{\text{orbital}} = \eta_0 \cdot \exp\left(-\gamma \cdot \mathcal{L}_{\text{orbital}}\right)
 \end{equation}
-where $\eta_0$ is the base learning rate and $\gamma$ is a decay parameter.
+where $\eta_0$ is the base learning rate and $\gamma$ is a decay parameter that is inversely proportional to system stability. As orbital stability decreases (i.e., $\mathcal{L}_{\text{orbital}}$ increases), $\gamma$ increases to accelerate adaptation and restore equilibrium. Conversely, as stability increases, $\gamma$ decreases, allowing for more stable learning.
 \end{definition}
 
 \begin{definition}[Phase-Based Learning Rate]
