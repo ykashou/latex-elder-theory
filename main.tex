@@ -5,8 +5,8 @@
 
 % Basic packages for styling and math
 \errorcontextlines=999 % For more detailed error messages
-\\usepackage[utf8]{inputenc}
-\\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
 \usepackage{newunicodechar}
 \newunicodechar{≈}{\ensuremath{\approx}}
 \newunicodechar{π}{\ensuremath{\pi}}
@@ -21,7 +21,7 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{tikz}
-\usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
 \usetikzlibrary{decorations.pathmorphing, decorations.markings, decorations.pathreplacing, calc, shapes, shapes.geometric, backgrounds, fit, positioning}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.16}
@@ -33,7 +33,6 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{mathtools}
-\usepackage[most]{tcolorbox}
 \usepackage{listings}
 \usepackage{morefloats}
 \usepackage{placeins}
