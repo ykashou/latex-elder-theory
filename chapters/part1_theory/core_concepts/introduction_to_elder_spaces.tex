@@ -146,19 +146,58 @@ d_{\mathcal{H}}(\Psi(x), \Psi(y)) = F(d_E(x, y))
 where $F: \mathbb{R}^+ \rightarrow \mathbb{R}^+$ is a strictly increasing function determined by the gravitational field structure.
 \end{proposition}
 
-\section{Hierarchical Subspaces}
+\section{Hierarchical Subspaces and Gravitational Stratification}
 
-The Elder space naturally decomposes into nested subspaces that directly correspond to the Elder-Mentor-Erudite hierarchy.
+The Elder space naturally decomposes into nested subspaces that directly correspond to the Elder-Mentor-Erudite hierarchy. This decomposition forms the mathematical basis for the multi-level architecture implemented in Unit III and corresponds to the stratified heliomorphic domains introduced in Unit II.
 
-\begin{definition}[Hierarchical Subspaces]
-An Elder space $\elder{d}$ canonically decomposes into:
+\begin{definition}[Hierarchical Subspace Decomposition]
+An Elder space $\elder{d}$ of dimension $d$ canonically decomposes into three fundamental subspaces:
 \begin{align}
     \eldersubspace &= \mathrm{span}\{\elderstructure{1}, \ldots, \elderstructure{k}\} \\
     \mentorsubspace &= \mathrm{span}\{\elderstructure{k+1}, \ldots, \elderstructure{m}\} \\
     \eruditesubspace &= \mathrm{span}\{\elderstructure{m+1}, \ldots, \elderstructure{d}\}
 \end{align}
-where indices $1 \leq k < m < d$ are determined by phase coherence properties.
+where indices $1 \leq k < m < d$ are determined by gravitational eigenvalues and phase coherence properties. These subspaces satisfy:
+
+\begin{enumerate}
+    \item \textbf{Gravitational Hierarchy}: The gravitational eigenvalues $g_i$ of the basis elements satisfy
+    \begin{equation}
+    g_1 \geq g_2 \geq \ldots \geq g_k > g_{k+1} \geq \ldots \geq g_m > g_{m+1} \geq \ldots \geq g_d > 0
+    \end{equation}
+    with distinct separation between the three subspaces.
+    
+    \item \textbf{Phase Coherence}: Elements within each subspace maintain higher phase coherence with each other than with elements from different subspaces:
+    \begin{equation}
+    \mathbb{E}[\Phi(x \star y^{-1})] \approx 1 \quad \text{for} \quad x,y \in \eldersubspace \; \text{or} \; x,y \in \mentorsubspace \; \text{or} \; x,y \in \eruditesubspace
+    \end{equation}
+    
+    \item \textbf{Influence Directionality}: For $x \in \eldersubspace$, $y \in \mentorsubspace$, $z \in \eruditesubspace$:
+    \begin{equation}
+    \|x \star y\|_E > \|y \star x\|_E \quad \text{and} \quad \|y \star z\|_E > \|z \star y\|_E
+    \end{equation}
+    establishing the hierarchical influence from higher to lower levels.
+\end{enumerate}
 \end{definition}
+
+\begin{theorem}[Correspondence to Heliosystem Architecture]
+The hierarchical subspace decomposition of the Elder space directly corresponds to the Elder-Mentor-Erudite entities in the Elder Heliosystem architecture (Chapter 15) through the following mappings:
+\begin{enumerate}
+    \item Parameters of the Elder entity in the heliosystem are derived from elements in $\eldersubspace$
+    \item Parameters of the Mentor entities correspond to projections onto $\mentorsubspace$
+    \item Parameters of the Erudite entities correspond to projections onto $\eruditesubspace$
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Gravitational Stratification Isomorphism]
+There exists an isomorphism between:
+\begin{enumerate}
+    \item The gravitational strata of Elder spaces: $\{\mathcal{S}_k\}_{k=0}^{d}$ described in Theorem 2.4
+    \item The hierarchical subspaces $\eldersubspace$, $\mentorsubspace$, and $\eruditesubspace$
+    \item The gravitational influence regions $\{\mathcal{D}_k\}_{k=1}^N$ of heliomorphic domains in Chapter 4
+    \item The orbital shells in the Elder Heliosystem described in Chapter 12
+\end{enumerate}
+This isomorphism preserves the gravitational field strength, phase coherence properties, and hierarchical information flow across all four mathematical frameworks.
+\end{theorem}
 
 \begin{figure}[htbp]
 \centering
