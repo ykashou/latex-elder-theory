@@ -47,21 +47,104 @@ satisfying the following axioms:
 Elder spaces fundamentally differ from vector spaces through their phase operator $\Phi$ and non-commutative multiplication $\star$, which together enable the representation of hierarchical knowledge structures.
 
 \begin{theorem}[Structural Elements]
-Every Elder space $\elder{d}$ contains a canonical basis $\{\elderstructure{1}, \elderstructure{2}, \ldots, \elderstructure{d}\}$ with the properties:
+Every Elder space $\elder{d}$ of dimension $d$ contains a canonical basis $\mathcal{B} = \{\elderstructure{1}, \elderstructure{2}, \ldots, \elderstructure{d}\}$ with the following properties:
 \begin{enumerate}
-    \item $\Phi(\elderstructure{i} \star \elderstructure{j}^{-1}) = e^{i\pi/2}$ for $i \neq j$ (phase orthogonality)
-    \item $\Phi(\elderstructure{i} \star \elderstructure{i}^{-1}) = 1$ (phase preservation)
-    \item Every element $x \in \elder{d}$ has a unique representation:
+    \item \textbf{Phase Orthogonality}: For all distinct $i, j \in \{1, 2, \ldots, d\}$,
+    \begin{equation}
+        \Phi(\elderstructure{i} \star \elderstructure{j}^{-1}) = e^{i\pi/2}
+    \end{equation}
+    meaning basis elements maintain perpendicular phase relationships.
+    
+    \item \textbf{Phase Preservation}: For all $i \in \{1, 2, \ldots, d\}$,
+    \begin{equation}
+        \Phi(\elderstructure{i} \star \elderstructure{i}^{-1}) = 1
+    \end{equation}
+    indicating self-interaction preserves original phase.
+    
+    \item \textbf{Spectral Completeness}: Every element $x \in \elder{d}$ has a unique spectral decomposition
     \begin{equation}
         x = \sum_{i=1}^{d} (\lambda_i e^{i\theta_i}) \odot \elderstructure{i}
     \end{equation}
-    where $\lambda_i \in \mathbb{R}^+$ and $\theta_i \in [0, 2\pi)$
+    with magnitude coefficients $\lambda_i \in \mathbb{R}^+$ and phase angles $\theta_i \in [0, 2\pi)$.
+    
+    \item \textbf{Gravitational Alignment}: The basis elements $\{\elderstructure{i}\}$ align with the principal gravitational field directions, such that for the gravitational field operator $\mathcal{G}: \elder{d} \rightarrow \elder{d}$,
+    \begin{equation}
+        \mathcal{G}(\elderstructure{i}) = g_i \odot \elderstructure{i}
+    \end{equation}
+    where $g_i \in \mathbb{R}^+$ is the gravitational eigenvalue corresponding to the $i$-th basis element.
+    
+    \item \textbf{Phase Coherence}: For any linear combination of basis elements with identical phases,
+    \begin{equation}
+        \Phi\left(\sum_{i=1}^{d} \lambda_i \odot \elderstructure{i}\right) = \Phi(\elderstructure{i})
+    \end{equation}
+    when $\Phi(\lambda_i \odot \elderstructure{i}) = \Phi(\lambda_j \odot \elderstructure{j})$ for all $i,j \in \{1,2,\ldots,d\}$.
 \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+Properties 1-3 follow directly from the axioms of Elder spaces. The gravitational alignment property (4) is established by the principle of minimal energy configuration, which forces basis elements to align with the eigenspaces of the gravitational field operator. The phase coherence property (5) is derived from Axiom A4 governing the behavior of the phase operator under addition.
+\end{proof}
+
+\begin{corollary}[Algebraic Structure]
+An Elder space $\elder{d}$ forms a complex algebraic structure with the following properties:
+\begin{enumerate}
+    \item $(\elder{d}, \oplus, \odot)$ forms a vector space over $\mathbb{C}$
+    \item The multiplication operation $\star$ makes $\elder{d}$ a non-commutative algebra over $\mathbb{C}$
+    \item The phase operator $\Phi$ induces a mapping from $\elder{d}$ to the unit circle $\mathbb{S}^1$ satisfying:
+    \begin{equation}
+        \Phi(x \star y) = \Phi(x) \cdot \Phi(y)
+    \end{equation}
+    making it a homomorphism with respect to multiplication
+\end{enumerate}
+This algebraic structure directly corresponds to the heliomorphic function framework introduced in Chapter 4 and the orbital mechanics developed in Chapter 12.
+\end{corollary}
 
 \begin{proof}[Proof Sketch]
 We construct structural elements using the Elder trace operator $\mathrm{tr}_E: \elder{d} \rightarrow \mathbb{C}$, which satisfies $\mathrm{tr}_E(x \star y) = \mathrm{tr}_E(y \star x)$. We define $\langle x, y \rangle_E = \mathrm{tr}_E(x \star y^{\dagger})$ and apply a phase-preserving orthogonalization process to obtain the basis elements with the required properties.
 \end{proof}
+
+\section{Inner Product Structure and Metric Properties}
+
+The algebraic operations in Elder spaces induce a natural inner product structure that respects the phase properties and establishes a rigorous metric framework.
+
+\begin{definition}[Elder Inner Product]
+Let $\elder{d}$ be an Elder space with structural elements $\{\elderstructure{i}\}_{i=1}^d$. The Elder inner product $\langle \cdot, \cdot \rangle_E: \elder{d} \times \elder{d} \rightarrow \mathbb{C}$ is defined as:
+\begin{equation}
+\langle x, y \rangle_E = \sum_{i=1}^d \lambda_i \overline{\mu_i} e^{i(\theta_i - \phi_i)}
+\end{equation}
+where $x = \sum_{i=1}^{d} (\lambda_i e^{i\theta_i}) \odot \elderstructure{i}$ and $y = \sum_{i=1}^{d} (\mu_i e^{i\phi_i}) \odot \elderstructure{i}$ are the spectral decompositions of $x$ and $y$.
+
+This inner product satisfies:
+\begin{enumerate}
+    \item Conjugate symmetry: $\langle x, y \rangle_E = \overline{\langle y, x \rangle_E}$
+    \item Linearity in the first argument: $\langle \alpha x + \beta y, z \rangle_E = \alpha \langle x, z \rangle_E + \beta \langle y, z \rangle_E$
+    \item Positive-definiteness: $\langle x, x \rangle_E > 0$ for all $x \neq 0$
+    \item Phase-compatibility: $|\langle x, y \rangle_E| = |\langle |x|, |y| \rangle_E|$ where $|x|$ denotes the element with the same magnitudes as $x$ but with all phases set to zero
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Metric Properties]
+The Elder inner product induces a metric $d_E: \elder{d} \times \elder{d} \rightarrow \mathbb{R}^+$ defined by:
+\begin{equation}
+d_E(x, y) = \sqrt{\langle x - y, x - y \rangle_E}
+\end{equation}
+which satisfies:
+\begin{enumerate}
+    \item $d_E(x, y) \geq 0$ with equality if and only if $x = y$
+    \item $d_E(x, y) = d_E(y, x)$ (symmetry)
+    \item $d_E(x, z) \leq d_E(x, y) + d_E(y, z)$ (triangle inequality)
+    \item $d_E(\alpha \odot x, \alpha \odot y) = |\alpha| \cdot d_E(x, y)$ (scaling property)
+    \item $d_E(x \star z, y \star z) \leq \|z\|_E \cdot d_E(x, y)$ for some suitable norm $\|\cdot\|_E$ (multiplication stability)
+\end{enumerate}
+\end{theorem}
+
+\begin{proposition}[Connection to Heliomorphic Metrics]
+The Elder metric $d_E$ on $\elder{d}$ is compatible with the heliomorphic domain metric introduced in Chapter 4 through the isomorphism $\Psi: \elder{d} \rightarrow \mathcal{D}$ established in Theorem 4.3, such that:
+\begin{equation}
+d_{\mathcal{H}}(\Psi(x), \Psi(y)) = F(d_E(x, y))
+\end{equation}
+where $F: \mathbb{R}^+ \rightarrow \mathbb{R}^+$ is a strictly increasing function determined by the gravitational field structure.
+\end{proposition}
 
 \section{Hierarchical Subspaces}
 
