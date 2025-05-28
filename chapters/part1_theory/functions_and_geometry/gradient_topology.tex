@@ -374,7 +374,11 @@ At a saddle point $\theta_s$ with negative eigenvalue $\lambda < 0$ and phase co
 \begin{equation}
 d(\theta_t, \mathcal{W}_s) \geq c \cdot e^{\eta |\lambda| t \cdot (1 + \gamma \langle\cos(\Psi)\rangle)}
 \end{equation}
-where $\mathcal{W}_s$ is the stable manifold of the saddle point, and $c$ is a constant depending on initialization.
+where $\mathcal{W}_s$ is the stable manifold of the saddle point, and $c$ is an initialization-dependent scaling constant determined by the initial parameter configuration:
+\begin{equation}
+c = \frac{\|\nabla \mathcal{L}(\theta_0)\|_2}{\|\theta_0 - \theta_{\text{saddle}}\|_2}
+\end{equation}
+where $\theta_0$ is the initial parameter state and $\theta_{\text{saddle}}$ is the nearest saddle point in parameter space. This constant captures the sensitivity of escape trajectories to initial conditions in the Elder gradient topology.
 \end{theorem}
 
 This represents an exponential acceleration in saddle point escape compared to traditional gradient methods, with the acceleration factor directly proportional to phase coherence.
@@ -392,6 +396,23 @@ where $p(x|\theta)$ is the probability distribution induced by parameters $\thet
 \end{definition}
 
 This metric creates a Riemannian structure where the "distance" between parameter configurations incorporates both their statistical dissimilarity and their phase coherence. Natural gradient descent in this metric corresponds to optimizing both prediction accuracy and knowledge transfer efficiency simultaneously.
+
+\textbf{Meta-Learning Through Gradient Topology:}
+
+The Elder system exhibits meta-learning capabilities through its adaptive gradient topology structure. As the system learns, it simultaneously learns how to learn more effectively by optimizing its own gradient flow patterns:
+
+\begin{equation}
+\frac{d\mathcal{G}_{i,j}}{dt} = \alpha \frac{\partial \mathcal{L}_{\text{meta}}}{\partial \mathcal{G}_{i,j}} + \beta \sum_{k} \mathcal{G}_{i,k} \mathcal{G}_{k,j} \cos(\phi_k - \phi_i)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\mathcal{G}_{i,j}$ represents the metric tensor components governing gradient flow
+    \item $\mathcal{L}_{\text{meta}}$ is the meta-learning objective that optimizes learning efficiency
+    \item The second term creates adaptive coupling between gradient directions based on phase relationships
+\end{itemize}
+
+This creates a self-improving learning system where the gradient topology itself evolves to facilitate more effective knowledge acquisition and transfer.
 
 \subsection{Meta-Learning Through Geometric Adaptation}
 
