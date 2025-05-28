@@ -86,10 +86,16 @@
 \renewcommand{\bottomfraction}{0.9}
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.85}
+% ANNOTATION 13: Chapter Summary styling - change to italic formatting
 % Abstract styling through custom environment
 \newenvironment{chapterabstract}
   {\par\small\itshape}
   {\par\vspace{1em}}
+
+% Enhanced chapter summary environment with italic styling
+\newenvironment{chaptersummary}
+  {\par\vspace{0.5em}\begin{quote}\itshape}
+  {\end{quote}\par\vspace{1em}}
 
 % Complex number command
 \newcommand{\C}{\mathbb{C}}
@@ -139,7 +145,7 @@
     \vspace*{40pt}%
     {\fontsize{36}{40}\selectfont \unitname~\theunit}\\[20pt]%
     {\fontsize{24}{30}\selectfont #1}\\[30pt]%
-    {\large \textit{Elder, the Arcane Realization}}\\[10pt]%
+    {\large \textit{Mathematical Knowledge Framework}}\\[10pt]%
     \rule{0.6\textwidth}{1pt}\\[50pt]%
     \includegraphics[width=2.5cm]{figures/elder_symbol.pdf}\\[20pt]%
     \vfill%
@@ -389,6 +395,8 @@ Thirdly, I want to thank my friends. Their belief in me has helped fuel Elder Th
 \input{chapters/part1_theory/mechanics_and_dynamics/critical_phase_thresholds.tex} % Derivation of critical phase thresholds for knowledge transfer
 \input{chapters/part1_theory/mechanics_and_dynamics/rotational_information_dynamics.tex} % Detailed mathematical formalism on rotational dynamics and "learn by teaching"
 \input{chapters/part1_theory/mechanics_and_dynamics/knowledge_theory_elaborations.tex} % Knowledge externalization, curriculum generation, and gap identification
+\input{chapters/part1_theory/mechanics_and_dynamics/syzygy_mathematical_foundations.tex} % Mathematical foundations of syzygy in heliosystem context
+\input{chapters/part1_theory/mechanics_and_dynamics/gravitational_memory_storage.tex} % Gravitational memory storage framework and multi-entity interactions
 \input{chapters/part1_theory/mechanics_and_dynamics/elder_orbital_thermodynamics.tex} % Orbital thermodynamics and reverse diffusion learning
 
 %%% IV. LEARNING DYNAMICS AND ALGORITHMS %%%
