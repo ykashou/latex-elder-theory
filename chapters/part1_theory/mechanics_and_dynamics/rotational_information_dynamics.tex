@@ -145,7 +145,11 @@ where:
 \begin{itemize}
     \item $\eta$ is the base learning rate
     \item $\mathcal{L}$ is a loss function measuring knowledge accuracy
-    \item $\mathcal{F}$ is the feedback received from recent teaching
+    \item $\mathcal{F}$ is the feedback received from recent teaching, quantified as a tensor:
+    \begin{equation}
+    \mathcal{F} = \sum_{k=1}^K \alpha_k \mathbf{T}_k \otimes \mathbf{v}_k \otimes \mathbf{w}_k
+    \end{equation}
+    where $\mathbf{T}_k \in \mathbb{R}^{d \times d}$ are feedback transformation matrices, $\mathbf{v}_k \in \mathbb{R}^d$ are teaching context vectors, $\mathbf{w}_k \in \mathbb{R}^d$ are learning direction vectors, and $\alpha_k$ are phase-dependent weighting coefficients
 \end{itemize}
 \end{theorem}
 
