@@ -36,6 +36,33 @@
 \usepackage{listings}
 \usepackage{morefloats}
 \usepackage{placeins}
+\usepackage{tocloft}
+
+% Setup for List of Equations
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\newcommand{\myequations}[1]{%
+\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
+
+% Create a command to automatically add equations to the list
+\let\oldequation\equation
+\let\endoldequation\endequation
+\renewenvironment{equation}
+  {\oldequation}
+  {\endoldequation\myequations{}}
+
+% For equation arrays and other math environments
+\let\oldeqnarray\eqnarray
+\let\endoldeqnarray\endeqnarray
+\renewenvironment{eqnarray}
+  {\oldeqnarray}
+  {\endoldeqnarray\myequations{}}
+
+% Command to manually add equations with descriptions
+\newcommand{\addequation}[1]{\myequations{#1}}
+
+% Alias for compatibility
+\let\listofequations\listofmyequations
 
 % Increase the float size limit to handle larger figures
 \setcounter{topnumber}{4}
@@ -444,6 +471,7 @@ Thirdly, I want to thank my friends. Their belief in me has helped fuel Elder Th
 \input{chapters/appendix/comparative_analysis.tex}
 \input{chapters/appendix/advanced_proofs.tex}
 \input{chapters/appendix/gravitational_equations_validation.tex}
+\input{chapters/appendix/list_of_equations.tex}
 
 % Bibliography
 \printbibliography[title={References}]
