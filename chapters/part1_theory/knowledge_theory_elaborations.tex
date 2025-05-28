@@ -348,6 +348,62 @@ The time required for knowledge to propagate between different entity types foll
 
 \begin{table}[h]
 \centering
+\caption{Knowledge Propagation Time Examples}
+\label{tab:propagation_times}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Transfer Type} & \textbf{Base Time} & \textbf{Resonance Factor} & \textbf{Effective Time} \\
+\hline
+Elder → Mentor & $T_{E→M} = 2\pi/\omega_E$ & $\gamma_{EM} = 0.3$ & $0.6\pi/\omega_E$ \\
+Mentor → Erudite & $T_{M→Er} = 2\pi/\omega_M$ & $\gamma_{M Er} = 0.4$ & $0.8\pi/\omega_M$ \\
+Elder → Erudite (Direct) & $T_{E→Er} = 4\pi/\omega_E$ & $\gamma_{E Er} = 0.1$ & $3.6\pi/\omega_E$ \\
+Erudite → Mentor (Feedback) & $T_{Er→M} = \pi/\omega_{Er}$ & $\gamma_{Er M} = 0.8$ & $0.2\pi/\omega_{Er}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Mathematical Knowledge Gap Exposure:}
+
+Teaching naturally exposes knowledge gaps through differential projection effectiveness. When an entity attempts to teach concept $C$, the gap exposure function is:
+
+\begin{equation}
+\mathcal{G}_{\text{exposed}}(C, \theta) = \max_{i \in \text{params}(C)} \left| \frac{\partial \mathcal{L}_{\text{teach}}(C)}{\partial \theta_i} \right| - \min_{i \in \text{params}(C)} \left| \frac{\partial \mathcal{L}_{\text{teach}}(C)}{\partial \theta_i} \right|
+\end{equation}
+
+where:
+\begin{itemize}
+    \item Large gradients indicate well-understood parameters
+    \item Small gradients reveal knowledge gaps
+    \item The gap differential quantifies knowledge inconsistency
+\end{itemize}
+
+The subsequent learning disproportionately improves weak areas through adaptive weight updates:
+\begin{equation}
+\Delta\theta_i^{\text{gap}} = \eta \cdot \left(1 + \lambda \cdot \exp\left(-\left|\frac{\partial \mathcal{L}_{\text{teach}}}{\partial \theta_i}\right|\right)\right) \cdot \frac{\partial \mathcal{L}}{\partial \theta_i}
+\end{equation}
+
+This creates exponentially stronger updates for parameters with weak teaching gradients, naturally focusing learning on identified gaps.
+
+\textbf{Learning Rate Stability Relationship:}
+
+The learning rate $\eta$ in the Elder Heliosystem exhibits a deterministic relationship with system stability. Lower learning rates increase stability probability through reduced parameter perturbations:
+
+\begin{equation}
+P_{\text{stability}}(\eta) = 1 - \exp\left(-\frac{\alpha}{\eta}\right) \cdot \beta(\eta)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\alpha > 0$ controls the stability-speed tradeoff
+    \item $\beta(\eta) = \tanh(\gamma \cdot \eta)$ represents oscillation damping
+    \item Lower $\eta$ → slower learning but higher $P_{\text{stability}}$
+    \item Higher $\eta$ → faster learning but potential instability
+\end{itemize}
+
+This deterministic relationship enables precise control over the convergence-stability balance in the Elder Heliosystem through careful learning rate selection.
+
+\begin{table}[h]
+\centering
 \caption{Knowledge Propagation Time Examples (in normalized time units)}
 \begin{tabular}{|l|c|c|c|}
 \hline

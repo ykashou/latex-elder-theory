@@ -36,6 +36,25 @@ where:
     \item $\theta_E = \{\rho_i e^{i\phi_i}\}_{i=1}^d$ are the complex-valued parameters
     \item $\alpha_i(\phi_E) \in [0,1]$ is the phase-dependent activation function for parameter $i$
 \end{itemize}
+
+\textbf{Effective Parameter Dimensionality:}
+
+The effective parameter dimensionality $d_{\text{eff}}(\phi_E)$ at rotational phase $\phi_E$ is defined as:
+
+\begin{equation}
+d_{\text{eff}}(\phi_E) = \sum_{i=1}^d \mathbb{1}\{\alpha_i(\phi_E) > \delta\}
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\mathbb{1}\{\cdot\}$ is the \textbf{indicator function} (also called characteristic function)
+    \item $\mathbb{1}\{A\} = 1$ if condition $A$ is true, and $\mathbb{1}\{A\} = 0$ if condition $A$ is false
+    \item $\delta > 0$ is a small threshold value (typically $\delta = 0.01$ or $\delta = 0.05$)
+    \item $\alpha_i(\phi_E) > \delta$ means parameter $i$ is "significantly active" at phase $\phi_E$
+\end{itemize}
+
+\textbf{Mathematical Interpretation:}
+The indicator function $\mathbb{1}\{\alpha_i(\phi_E) > \delta\}$ counts how many parameters have activation levels above the threshold $\delta$. This provides a measure of the "effective dimensionality" of the parameter space that is actively being used at any given rotational phase, enabling sparse attention mechanisms where only a subset of parameters are active simultaneously.
 \end{definition}
 
 \begin{definition}[External Projection Operator]
