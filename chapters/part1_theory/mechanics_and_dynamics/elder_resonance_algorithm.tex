@@ -861,7 +861,15 @@ The complete algorithmic implementation of resonance-driven updates follows thes
 
 \State Compute phase coherence measures $\Psi^{(l)}_j$ for all parameters
 
-\State Calculate resonance amplification factors:
+\State Calculate resonance amplification factors with time propagation examples:
+
+\textbf{Time Propagation Examples with Resonance Factors:}
+
+For knowledge propagation from Elder to Mentor over time interval $\Delta t$, the resonance-enhanced propagation is:
+\begin{equation}
+\mathcal{K}_{M,k}(t + \Delta t) = \mathcal{K}_{M,k}(t) + \mathcal{R}_{\text{factor}} \cdot \mathcal{T}_{E \rightarrow M,k} \cdot \Delta t
+\end{equation}
+where $\mathcal{R}_{\text{factor}} = 1 + \alpha \cos(\Phi_{\text{res}})$ amplifies transfer during resonant phases.
 \State $\mathcal{R}(\Psi^{(l)}_j) \leftarrow \frac{1 + \gamma \cdot \text{cos}(\Psi^{(l)}_j)}{1 + \gamma}$
 
 \State Update magnitudes:

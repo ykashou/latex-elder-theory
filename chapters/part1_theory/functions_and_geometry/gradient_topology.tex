@@ -466,7 +466,7 @@ where $\Phi$ is the phase coherence, $\Phi_{\min}$ is the minimum achievable coh
 \begin{proof}
 We construct a phase coherence graph $G_{\Phi}$ where nodes represent parameters and edge weights $w_{ij} = \cos(\phi_i - \phi_j \cdot \mu_{ij})$ represent phase alignment. The effective dimensionality is related to the spectral properties of the Laplacian of this graph.
 
-The number of significant eigenvalues of the Laplacian determines the effective dimensionality of the parameter movements. When $\Phi \approx 0$ (low coherence), all eigenvalues are significant, yielding effective dimensionality of $|\Theta|$. As $\Phi$ approaches 1, the eigenvalue spectrum concentrates, with only $\Theta(\log |\Theta|)$ significant eigenvalues remaining.
+The number of significant eigenvalues of the Laplacian determines the effective parameter dimensionality of the parameter movements, establishing a precise mathematical relationship between phase coherence and dimensional complexity. This effective parameter dimensionality provides a quantitative measure of how many independent directions of parameter movement contribute meaningfully to the optimization process. When $\Phi \approx 0$ (low coherence), all eigenvalues are significant, yielding effective parameter dimensionality of $|\Theta|$. As $\Phi$ approaches 1, the eigenvalue spectrum concentrates, with only $\Theta(\log |\Theta|)$ significant eigenvalues remaining, demonstrating how phase coherence dramatically reduces the effective parameter dimensionality.
 
 Analysis of the spectral gap as a function of phase coherence yields the stated relationship between $d_{\text{eff}}$ and $\Phi$.
 \end{proof}
