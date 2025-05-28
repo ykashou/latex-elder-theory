@@ -48,7 +48,11 @@ The external projection operator $\mathcal{P}_{\text{ext}}$ defines how knowledg
 where:
 \begin{itemize}
     \item $\mathcal{T}$ is a knowledge transformation function
-    \item $\kappa(\phi_E) \in [0,1]$ is the phase-dependent emission coefficient
+    \item $\kappa(\phi_E) \in [0,1]$ is the phase-dependent emission coefficient, determined by:
+    \begin{equation}
+    \kappa(\phi_E) = \frac{1}{2}\left(1 + \cos\left(\frac{\phi_E - \phi_{\text{peak}}}{2}\right)\right) \cdot \exp\left(-\beta \|\nabla_{\phi} \mathcal{L}(\phi_E)\|^2\right)
+    \end{equation}
+    where $\phi_{\text{peak}}$ is the phase of maximum knowledge coherence, $\beta > 0$ controls sensitivity to gradient instability, and $\nabla_{\phi} \mathcal{L}$ measures phase-dependent loss gradients
 \end{itemize}
 \end{definition}
 
@@ -63,7 +67,15 @@ For any entity $E$ with parameters $\theta_E$ and rotational phase $\phi_E$, the
 d_{\text{eff}}(\phi_E) = \sum_{i=1}^d \mathbf{1}_{\{\alpha_i(\phi_E) > \delta\}}
 \end{equation}
 
-where $\delta > 0$ is a small threshold and $\mathbf{1}$ is the indicator function.
+This formula quantifies how rotational phase determines the effective dimensionality of active parameters. The components are:
+\begin{itemize}
+\item $d$ is the total parameter dimensionality of entity $E$
+\item $\alpha_i(\phi_E) = |\langle e_i, \nabla_{\theta} \mathcal{L}(\theta_E, \phi_E) \rangle|$ measures the activation strength of parameter $i$ at phase $\phi_E$
+\item $\delta > 0$ is a small threshold determining the minimum activation level for parameter inclusion
+\item $\mathbf{1}_{\{\cdot\}}$ is the indicator function returning 1 if the condition is true, 0 otherwise
+\end{itemize}
+
+The effective dimensionality varies continuously with rotational phase, creating a dynamic attention mechanism where different parameter subsets become active at different phases.
 
 Furthermore, the sequence $\{d_{\text{eff}}(\phi_E)\}_{\phi_E \in [0, 2\pi)}$ satisfies:
 
@@ -213,10 +225,10 @@ For any two parameters $\theta_i = \rho_i e^{i\phi_i}$ and $\theta_j = \rho_j e^
 The "learn by teaching" paradigm can be formalized mathematically using rotational dynamics and feedback loops.
 
 \begin{definition}[Teach-Learn Operator]
-The teach-learn operator $\mathcal{TL}$ that captures one complete rotation cycle is defined as:
+The teach-learn operator $\mathcal{T}\mathcal{L}_{\circlearrowleft}$ (representing the circular nature of knowledge transfer) that captures one complete rotation cycle is defined as:
 
 \begin{equation}
-\mathcal{TL}(\theta) = \mathcal{L}_{\text{phase}} \circ \mathcal{T}_{\text{phase}}(\theta)
+\mathcal{T}\mathcal{L}_{\circlearrowleft}(\theta) = \mathcal{L}_{\text{phase}} \circ \mathcal{T}_{\text{phase}}(\theta)
 \end{equation}
 
 where:
@@ -293,7 +305,7 @@ where $H(\theta)$ is the entropy of the parameter distribution.
 
 \subsection{Rotation-Based Knowledge Distillation}
 
-The rotational dynamics framework provides a natural approach to knowledge distillation in neural networks:
+The rotational dynamics framework provides a natural approach to knowledge distillation in Elder Heliosystem:
 
 \begin{equation}
 \theta_{\text{student}} = \lim_{n \rightarrow \infty} \mathcal{TL}^n(\theta_{\text{teacher}})
