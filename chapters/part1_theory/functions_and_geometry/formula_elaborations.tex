@@ -173,6 +173,28 @@ For the formula involving small integers $n, m$:
 \frac{1}{n}m\omega^2 \approx 1 \quad \text{for small integers } n,m
 \end{equation}
 
+\textbf{How are these integers $n,m$ set?}
+
+The integers $n$ and $m$ are determined through the resonance detection algorithm:
+
+\begin{enumerate}
+    \item \textbf{Frequency Analysis}: Monitor the natural frequencies $\omega_1, \omega_2, \ldots$ of all entities in the system
+    \item \textbf{Rational Approximation}: For each pair of frequencies $(\omega_i, \omega_j)$, find the smallest integers $(n,m)$ such that:
+    \begin{equation}
+    \left|\frac{n\omega_i}{m\omega_j} - 1\right| < \epsilon_{\text{tolerance}}
+    \end{equation}
+    where $\epsilon_{\text{tolerance}} \approx 0.05$ (5\% tolerance)
+    \item \textbf{Integer Constraint}: Limit the search to $1 \leq n,m \leq 12$ to avoid higher-order resonances that create instability
+    \item \textbf{Stability Verification}: Check that the identified $(n,m)$ pair maintains system stability over multiple learning epochs
+\end{enumerate}
+
+Common resonance patterns observed in practice include:
+\begin{itemize}
+    \item $(n,m) = (1,1)$: Perfect synchronization
+    \item $(n,m) = (2,3)$ or $(3,2)$: Fibonacci-like ratios for stable knowledge transfer
+    \item $(n,m) = (3,5)$ or $(5,8)$: Golden ratio approximations for optimal efficiency
+\end{itemize}
+
 \textbf{Parameter Determination Protocol:}
 
 The integers $n$ and $m$ are determined through the Elder resonance hierarchy:
