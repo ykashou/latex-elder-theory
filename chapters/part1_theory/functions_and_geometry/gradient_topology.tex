@@ -448,27 +448,7 @@ The coherence transition point $\Phi_c$ is the value of phase coherence at which
 
 Empirical studies across diverse domains consistently show $\Phi_c \approx 0.7$, indicating a universal property of the Elder gradient topology.
 
-\subsection{Mathematical Model of Group Formation}
 
-The formation of parameter groups as phase coherence increases can be modeled through the emergence of attractors in the dynamics of the phase variables:
-
-\begin{equation}
-\frac{d\phi_i}{dt} = \omega_i + \sum_j K_{ij} \sin(\phi_j - \phi_i \cdot \mu_{ij})
-\end{equation}
-
-where $\omega_i$ is the intrinsic frequency of parameter $i$, and $K_{ij}$ is the coupling strength between parameters.
-
-Analysis of this system using Kuramoto model techniques reveals that as coupling strengths increase during training, the system transitions from incoherence to partial synchronization, and finally to complete synchronization in $\log|\Theta|$ clusters. Each cluster corresponds to a collective mode of parameter updates.
-
-\begin{proposition}[Dimensionality-Coherence Scaling Law]
-For a system with $|\Theta|$ parameters, the effective dimensionality scales with phase coherence according to:
-\begin{equation}
-d_{\text{eff}}(\Phi) \approx |\Theta|^{1-\Phi} \cdot (\log|\Theta|)^{\Phi}
-\end{equation}
-for $\Phi \in [0,1]$.
-\end{proposition}
-
-This scaling law provides a smooth interpolation between the full parameter dimensionality $|\Theta|$ at zero coherence and the minimal dimensionality $\log|\Theta|$ at perfect coherence.
 
 \subsection{Efficient Gradient Update Algorithm}
 
