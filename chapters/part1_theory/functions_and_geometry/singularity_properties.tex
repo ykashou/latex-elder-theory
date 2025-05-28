@@ -10,6 +10,26 @@ Heliomorphic functions form the mathematical foundation of the Elder framework, 
 
 Singularities in heliomorphic functions are not merely mathematical artifacts; they represent critical points in the knowledge landscape that have profound implications for learning dynamics, knowledge transfer, and system stability. Understanding these singularities is essential for characterizing the complete behavior of the Elder system.
 
+\subsection{Data-Induced Singularity Formation}
+
+The emergence of singularities in heliomorphic functions is fundamentally influenced by the structure and distribution of training data. Data characteristics directly determine where and how singularities manifest in the function space:
+
+\begin{theorem}[Data-Dependent Singularity Emergence]
+Given a training dataset $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$, the location of singularities $\{z_k\}$ in the corresponding heliomorphic function $\mathcal{H}_{\mathcal{D}}(z)$ satisfies:
+\begin{equation}
+z_k = \arg\max_{z \in \mathbb{C}} \left[\text{KL}(\mathcal{P}_{\text{local}}(z) \| \mathcal{P}_{\text{global}}) + \lambda \cdot \text{Var}[\nabla \mathcal{L}(z)]\right]
+\end{equation}
+where $\mathcal{P}_{\text{local}}(z)$ is the local data distribution around point $z$, $\mathcal{P}_{\text{global}}$ is the global data distribution, and $\text{Var}[\nabla \mathcal{L}(z)]$ measures gradient variance.
+\end{theorem}
+
+This reveals three primary mechanisms by which data influences singularity emergence:
+
+\textbf{1. Distributional Discontinuities}: Sharp changes in data density create isolated singularities where the heliomorphic function must rapidly adapt its representation.
+
+\textbf{2. Conflicting Labels}: When nearby data points have significantly different labels, the function develops branch singularities to accommodate the contradiction.
+
+\textbf{3. Multi-Modal Structure}: Datasets with multiple distinct modes force the emergence of resonance singularities at the boundaries between different data regimes.
+
 \begin{definition}[Singularity of a Heliomorphic Function]
 A point $z_0$ is a singularity of a heliomorphic function $\mathcal{H}(z)$ if $\mathcal{H}(z)$ is not holomorphic at $z_0$, but is holomorphic at some point in every neighborhood of $z_0$.
 \end{definition}
