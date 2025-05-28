@@ -517,7 +517,7 @@ Analysis of the spectral gap as a function of phase coherence yields the stated 
 
 \subsection{Phase Coherence Regimes and Gradient Update Properties}
 
-The Elder gradient space can be partitioned into three distinct regimes based on phase coherence:
+The Elder gradient space exhibits continuous behavior across the phase coherence spectrum, with smooth transitions between different operational characteristics. For pedagogical clarity, we can identify characteristic regions:
 
 \begin{enumerate}
     \item \textbf{Low Coherence Regime} ($\Phi < 0.3$): In this regime, the system behaves similarly to traditional gradient descent, but parameter updates still operate in a reduced effective dimensional space below the full $|\Theta|$-dimensional space due to inherent Elder system structure. Parameters move with limited coordination.
@@ -549,20 +549,15 @@ The insights from modeling phase coherence and dimensionality reduction lead to 
 \Ensure Updated parameters $\theta'$
 
 \State Compute phase coherence measure $\Phi(\theta)$
-\If{$\Phi(\theta) < 0.3$}
-    \State Perform standard parameter-wise updates: $\theta_i' \leftarrow \theta_i - \eta \cdot \nabla_{\theta_i} \mathcal{L}$ for all $i$
-\ElsIf{$0.3 \leq \Phi(\theta) < 0.7$}
-    \State Perform partial grouping: Identify parameter communities $\{C_k\}$ via spectral clustering
-    \State Compute community gradients $\nabla_{C_k} \mathcal{L}$ 
-    \State Update parameters: $\theta_i' \leftarrow \theta_i - \eta \cdot (\alpha \cdot \nabla_{\theta_i} \mathcal{L} + (1-\alpha) \cdot \nabla_{C_k} \mathcal{L})$ for $i \in C_k$
-    \State where $\alpha = \frac{0.7 - \Phi(\theta)}{0.4}$ is the interpolation factor
-\Else
-    \State Identify resonant parameter groups $\{G_k\}$ using hierarchical clustering on phase relationships
-    \For{each group $G_k$}
-        \State Compute group gradient $\nabla_{G_k} \mathcal{L}$
-        \State Update all parameters in group: $\theta_i' \leftarrow \theta_i - \eta \cdot \nabla_{G_k} \mathcal{L}$ for all $i \in G_k$
-    \EndFor
-\EndIf
+\State Compute continuous adaptation weight $w(\Phi) = \tanh(2\Phi - 1)$
+\State Identify parameter groups $\{G_k\}$ using phase-based clustering with threshold $\delta(\Phi) = 0.1 + 0.9e^{-3\Phi}$
+\For{each parameter $\theta_i$}
+    \State Compute individual gradient $g_i = \nabla_{\theta_i} \mathcal{L}$
+    \State Find parameter group $G_k$ containing $\theta_i$
+    \State Compute group gradient $g_{G_k} = \frac{1}{|G_k|} \sum_{j \in G_k} \nabla_{\theta_j} \mathcal{L}$
+    \State Update parameter with continuous interpolation:
+    \State $\theta_i' \leftarrow \theta_i - \eta \cdot \left[ (1-w(\Phi)) \cdot g_i + w(\Phi) \cdot g_{G_k} \right]$
+\EndFor
 \State \Return $\theta'$
 \end{algorithmic}
 \end{algorithm}
