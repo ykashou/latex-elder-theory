@@ -13,11 +13,53 @@ The equations in this document form the mathematical foundation of Elder Theory,
     \item Learning algorithms and convergence criteria
 \end{itemize}
 
-Each equation is listed with its number, brief description, and page reference for quick navigation.
+Each equation is listed with its number, mathematical content, brief description, and page reference for quick navigation.
 
-\section{Equation Index}
+\section{Key Equations by Category}
 
-The following list automatically includes all numbered equations from the document:
+\subsection{Heliomorphic Function Definitions}
+
+\begin{description}
+\item[Equation 2.1] Heliomorphic Function Definition: $f: \mathbb{C} \to \mathbb{C}$ with radial-phase coupling
+\item[Equation 2.5] Composition Rule: $(f \circ g)(z) = f(g(z))$ preserving heliomorphic properties
+\item[Equation 3.2] Differential Heritage: $\frac{\partial f}{\partial r} = \frac{1}{r}\frac{\partial f}{\partial \phi}$
+\end{description}
+
+\subsection{Orbital Mechanics}
+
+\begin{description}
+\item[Equation 16.3] Elder Gravitational Field: $\mathcal{G}_E(\mathbf{r}) = \frac{G m_E}{|\mathbf{r} - \mathbf{r}_E|^2}$
+\item[Equation 17.1] Orbital Parameter Trajectories: $\frac{d^2\mathbf{r}_i}{dt^2} = \mathcal{G}_{\text{total}}(\mathbf{r}_i)$
+\item[Equation 18.4] Phase Velocity: $\omega_i = \omega_0 + \alpha \sin(\phi_i - \phi_{\text{ref}})$
+\end{description}
+
+\subsection{Thermodynamic Formulations}
+
+\begin{description}
+\item[Equation 20.2] Elder Phase Space Entropy: $S = -k \sum_{\mu} p(\mu) \ln p(\mu)$
+\item[Equation 20.7] Fokker-Planck Equation: $\frac{\partial p(\mu, t)}{\partial t} = -\nabla \cdot (p(\mu, t) \vec{F}(\mu)) + D \nabla^2 p(\mu, t)$
+\item[Equation 20.12] Reverse Diffusion Learning: $\frac{\partial p(\mu, t)}{\partial t} = -D \nabla^2 p(\mu, t) + \nabla \cdot (p(\mu, t) \nabla \ln q(\mu))$
+\end{description}
+
+\subsection{Information Theory}
+
+\begin{description}
+\item[Equation 58.1] Mutual Information Transfer: $I(X;Y) = \sum_{x,y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)}$
+\item[Equation 54.3] Information Capacity: $C = \max_{p(x)} I(X;Y)$
+\item[Equation 55.2] Entropy Dynamics: $\frac{dH}{dt} = -\frac{\partial \mathcal{L}}{\partial H}$
+\end{description}
+
+\subsection{Learning and Convergence}
+
+\begin{description}
+\item[Equation 31.5] Resonance-Amplified Update: $\theta_{t+1} = \theta_t - \eta \nabla \mathcal{L} \cdot R(\phi_t)$
+\item[Equation 60.2] Convergence Guarantee: $\|\theta_t - \theta^*\| \leq \epsilon e^{-\lambda t}$
+\item[Equation 52.1] PAC Learning Bound: $P(|R(\hat{h}) - R^*(h)| \leq \epsilon) \geq 1 - \delta$
+\end{description}
+
+\section{Complete Equation Index}
+
+The following list includes all numbered equations from the document with automatic page references:
 
 \listofequations
 

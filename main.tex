@@ -41,25 +41,39 @@
 % Setup for List of Equations
 \newcommand{\listequationsname}{List of Equations}
 \newlistof{myequations}{equ}{\listequationsname}
-\newcommand{\myequations}[1]{%
-\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}\par}
 
-% Create a command to automatically add equations to the list
+% Enhanced equation tracking with better formatting
+\newcommand{\myequations}[2][]{%
+  \ifx\relax#1\relax
+    \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#2}%
+  \else
+    \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1: #2}%
+  \fi
+}
+
+% Redefine equation environments to auto-track with better labels
 \let\oldequation\equation
 \let\endoldequation\endequation
 \renewenvironment{equation}
   {\oldequation}
-  {\endoldequation\myequations{}}
+  {\endoldequation\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Mathematical equation}}
 
-% For equation arrays and other math environments
+% Enhanced equation tracking for align environment
+\let\oldalign\align
+\let\endoldalign\endalign
+\renewenvironment{align}
+  {\oldalign}
+  {\endoldalign\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Aligned equations}}
+
+% Enhanced equation tracking for eqnarray
 \let\oldeqnarray\eqnarray
 \let\endoldeqnarray\endeqnarray
 \renewenvironment{eqnarray}
   {\oldeqnarray}
-  {\endoldeqnarray\myequations{}}
+  {\endoldeqnarray\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Equation array}}
 
 % Command to manually add equations with descriptions
-\newcommand{\addequation}[1]{\myequations{#1}}
+\newcommand{\addequation}[2][]{\myequations[#1]{#2}}
 
 % Alias for compatibility
 \let\listofequations\listofmyequations
