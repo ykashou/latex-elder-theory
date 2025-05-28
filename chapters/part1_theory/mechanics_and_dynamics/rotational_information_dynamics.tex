@@ -351,6 +351,29 @@ Rotational dynamics can generate automatic curricula for hierarchical learning:
 
 As the system rotates, different combinations of topics, concepts, and tasks become active, creating a natural progression of learning materials.
 
+\textbf{Curriculum Generation Mechanism:}
+
+The rotational dynamics automatically generate educational curricula through phase-dependent activation:
+
+\begin{enumerate}
+    \item \textbf{Topic Selection}: Elder phase $\phi_E(t)$ determines which high-level topics are currently emphasized:
+    \begin{equation}
+    \text{Topics}(\phi_E(t)) = \{T_i : |\phi_E(t) - \phi_{T_i}| < \delta_{\text{topic}}\}
+    \end{equation}
+    
+    \item \textbf{Concept Activation}: Mentor phases $\phi_M(t)$ select relevant concepts within active topics:
+    \begin{equation}
+    \text{Concepts}(\phi_M(t)) = \{C_j : C_j \in \text{Topics}(\phi_E(t)) \land |\phi_M(t) - \phi_{C_j}| < \delta_{\text{concept}}\}
+    \end{equation}
+    
+    \item \textbf{Task Generation}: Erudite phases $\phi_{Er}(t)$ determine specific learning tasks:
+    \begin{equation}
+    \text{Tasks}(\phi_{Er}(t)) = \{T_k : T_k \in \text{Concepts}(\phi_M(t)) \land |\phi_{Er}(t) - \phi_{T_k}| < \delta_{\text{task}}\}
+    \end{equation}
+\end{enumerate}
+
+This creates an adaptive curriculum where learning materials are naturally sequenced based on the system's rotational state, ensuring optimal knowledge progression through the hierarchical structure.
+
 \section{Conclusion}
 
 The mathematical formalism of rotational information dynamics provides a rigorous foundation for understanding how the "learn by teaching" paradigm emerges naturally in the Elder Heliosystem. By distinguishing between revolutionary motion (knowledge exchange between entities) and rotational motion (internal knowledge processing), we gain a complete picture of hierarchical knowledge dynamics.
