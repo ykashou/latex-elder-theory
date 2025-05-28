@@ -238,6 +238,36 @@ with amplitudes $\lambda_i \in \mathbb{R}^+$ and phases $\theta_i \in [0, 2\pi)$
 
 This spectral decomposition allows us to separate knowledge representation across hierarchical levels, with Elder components encoding universal principles, Mentor components encoding domain-specific knowledge, and Erudite components encoding instance-specific information.
 
+\begin{theorem}[Phase Conservation Laws]
+\label{thm:phase_conservation_laws}
+In an Elder space $\elder{d}$, phase transformations preserve essential structural invariants:
+\begin{enumerate}
+    \item \textbf{Phase Additivity}: For any $x, y \in \elder{d}$, $\Phi(x \oplus y) = \Phi(x) \circ \Phi(y)$ where $\circ$ is the phase composition operator.
+    
+    \item \textbf{Multiplicative Coherence}: $\Phi(x \star y) = \Phi(x) \cdot \Phi(y)$ preserves phase relationships under multiplication.
+    
+    \item \textbf{Scaling Invariance}: For $\alpha \in \mathbb{C} \setminus \{0\}$, $|\Phi(\alpha \odot x)| = |\Phi(x)|$ preserves phase magnitude.
+    
+    \item \textbf{Hierarchical Preservation}: Phase transformations between hierarchical levels $\eldersubspace$, $\mentorsubspace$, and $\eruditesubspace$ maintain structural relationships.
+\end{enumerate}
+These laws ensure that knowledge transfer operations preserve essential phase-dependent properties across domain boundaries.
+\end{theorem}
+
+\begin{theorem}[Gravitational Field Structure]
+\label{thm:gravitational_field_structure}
+Every Elder space $\elder{d}$ admits a canonical gravitational field structure $\mathcal{G}: \elder{d} \rightarrow \mathbb{R}^+$ such that:
+\begin{enumerate}
+    \item \textbf{Hierarchical Stratification}: The field partitions $\elder{d}$ into regions $\eldersubspace \subset \mentorsubspace \subset \eruditesubspace$ with decreasing field strength.
+    
+    \item \textbf{Inverse Square Law}: Field strength follows $\mathcal{G}(x) = \frac{G_0}{r^2(x)}$ where $r(x)$ is the distance from the Elder center.
+    
+    \item \textbf{Phase Coupling}: The gradient $\nabla \mathcal{G}$ couples with the phase operator: $\nabla \mathcal{G} \cdot \nabla \Phi = 0$ ensuring orthogonal field-phase dynamics.
+    
+    \item \textbf{Knowledge Attraction}: Knowledge elements experience attractive forces proportional to their compatibility and inversely proportional to their separation in the Elder space.
+\end{enumerate}
+This structure provides the mathematical foundation for hierarchical knowledge organization and cross-domain transfer.
+\end{theorem}
+
 \section{Phase Dynamics}
 
 Elder spaces naturally model learning dynamics through phase-coherent flows, which provide the mathematical foundation for how knowledge evolves across the hierarchical system.
