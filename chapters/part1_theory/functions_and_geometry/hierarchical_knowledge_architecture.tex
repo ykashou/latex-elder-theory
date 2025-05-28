@@ -327,7 +327,7 @@ The Elder Heliosystem and traditional hierarchical models can be viewed as compl
 
 \subsection{Heliomorphic Modes and Transformations}
 
-The concept of the "$n$-th mode of the heliomorphic transformation" $\mathcal{H}_n$ requires elaboration, as it forms the mathematical foundation for knowledge transfer in the Heliosystem.
+The $n$-th mode of the heliomorphic transformation $\mathcal{H}_n$ represents a fundamental mathematical construct that governs knowledge transfer mechanisms within the Elder Heliosystem architecture.
 
 \begin{definition}[Heliomorphic Transformation]
 A heliomorphic transformation $\mathcal{H}: \elderparam \rightarrow \mathcal{F}$ is a mapping from the Elder parameter space to a function space $\mathcal{F}$ of complex-valued functions defined on the domain $\mathbb{C}$. For any $\theta_E \in \elderparam$, the transformation produces a function $\mathcal{H}(\theta_E): \mathbb{C} \rightarrow \mathbb{C}$ with specific analytic properties.
@@ -628,7 +628,11 @@ For an Elder-Mentor-Erudite system trained on dataset $\mathcal{D}$ with $|\math
 \begin{equation}
 \mathbb{E}[\eloss] \leq \frac{1}{n}\sum_{i=1}^n \eloss(\theta_M, \theta_E, x_i, y_i) + \mathcal{O}\left(\sqrt{\frac{\log(1/\delta)}{n}}\right) \cdot R(\mathcal{T})
 \end{equation}
-where $R(\mathcal{T})$ is a complexity measure of the tensor embedding function.
+where $R(\mathcal{T})$ is a complexity measure of the tensor embedding function, specifically defined as:
+\begin{equation}
+R(\mathcal{T}) = \sqrt{\text{rank}(\mathcal{T})} \cdot \log(\|\mathcal{T}\|_{\text{op}}) \cdot \mathcal{C}_{\text{phase}}(\mathcal{T})
+\end{equation}
+with $\text{rank}(\mathcal{T})$ being the tensor rank, $\|\mathcal{T}\|_{\text{op}}$ the operator norm, and $\mathcal{C}_{\text{phase}}(\mathcal{T}) = \int_0^{2\pi} |\mathcal{T}(e^{i\phi})|^2 d\phi$ measuring phase coherence complexity.
 \end{theorem}
 
 \section{Connection to Algebraic Structure}
@@ -788,7 +792,7 @@ where $\gamma > 0$ is the Mentor learning rate. This process accumulates teachin
 \begin{definition}[Space Production]
 Within the Elder-Mentor-Erudite framework:
 \begin{enumerate}
-    \item \textbf{Elder Space}: A singular, unified space $\elder{d}$ governed by a single Elder model that establishes global constraints.
+    \item \textbf{Elder Space}: A singular, unified space $\elder{d}$ governed by a single Elder model that establishes global principles.
     \item \textbf{Mentor Spaces}: Multiple spaces $\{\mathcal{M}_1, \mathcal{M}_2, \ldots, \mathcal{M}_m\}$ where each $\mathcal{M}_i \subset \mentorparams$ represents a specialized teaching strategy for a family of related tasks.
     \item \textbf{Erudite Spaces}: Multiple task-specific spaces $\{\mathcal{E}_1, \mathcal{E}_2, \ldots, \mathcal{E}_n\}$ where each $\mathcal{E}_j \subset \eruditeparams$ contains parameters optimized for executing specific tasks.
 \end{enumerate}

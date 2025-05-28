@@ -13,7 +13,17 @@ Let $\mathcal{D} \subset \complex$ be a domain. The space of heliomorphic functi
 \begin{equation}
 \mathcal{HL}(\mathcal{D}) = \left\{ f: \mathcal{D} \rightarrow \complex \; \middle| \; f \text{ satisfies the heliomorphic differential equations} \right\}
 \end{equation}
-This space is equipped with natural operations of pointwise addition $(f+g)(z) = f(z) + g(z)$, scalar multiplication $(cf)(z) = c \cdot f(z)$, and the heliomorphic convolution $(f * g)(z)$ defined in Section 4.3.
+This space is equipped with natural operations of pointwise addition $(f+g)(z) = f(z) + g(z)$, scalar multiplication $(cf)(z) = c \cdot f(z)$, and the heliomorphic convolution $(f * g)(z)$ defined below.
+\end{definition}
+
+\begin{definition}[Heliomorphic Convolution]
+For heliomorphic functions $f, g \in \mathcal{HL}(\mathcal{D})$, the heliomorphic convolution $(f * g)(z)$ is defined as:
+\begin{equation}
+(f * g)(z) = \frac{1}{2\pi i} \oint_{\partial \mathcal{D}} f(\zeta) g\left(\frac{z\bar{z}}{\bar{\zeta}}\right) \frac{d\zeta}{\zeta - z}
+\end{equation}
+where $\partial \mathcal{D}$ is the boundary of domain $\mathcal{D}$, and the integration is performed along a suitable contour that preserves the heliomorphic structure.
+
+This operation differs from standard complex convolution by incorporating the radial conjugate term $\frac{z\bar{z}}{\bar{\zeta}}$, which accounts for the gravitational field interactions in the Elder Heliosystem.
 \end{definition}
 
 \begin{theorem}[Fundamental Isomorphism Between Elder Spaces and Heliomorphic Functions]
