@@ -137,7 +137,24 @@ The coupling between field regions $\mathcal{S}_k$ and $\mathcal{S}_{k+1}$ is ch
 \begin{equation}
 \mathcal{T}_{k,k+1} = \phi(r_{k+1}) \cdot \nabla_{\odot} \otimes \nabla_{\odot}
 \end{equation}
-where $\otimes$ denotes the tensor product, and $\nabla_{\odot}$ is the heliomorphic gradient evaluated at the transition radius $r_{k+1}$.
+where $\otimes$ denotes the tensor product representation that captures the multidimensional interactions between heliomorphic functions across different abstraction levels. This tensor product formulation enables the representation of complex knowledge relationships that cannot be captured through simple function composition.
+
+\textbf{Tensor Product Representation Elaboration:}
+
+The tensor product $\otimes$ in the heliomorphic context represents a sophisticated mathematical construction that combines knowledge representations from different hierarchical levels:
+
+\begin{equation}
+(\mathcal{H}_i \otimes \mathcal{H}_j)(z) = \sum_{k,l} \alpha_{k,l} \mathcal{H}_i^{(k)}(z) \cdot \mathcal{H}_j^{(l)}(z)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\mathcal{H}_i^{(k)}$ and $\mathcal{H}_j^{(l)}$ are basis functions for the heliomorphic spaces at levels $i$ and $j$
+    \item $\alpha_{k,l}$ are tensor coefficients encoding cross-level interactions
+    \item The tensor product preserves both the heliomorphic structure and hierarchical relationships
+\end{itemize}
+
+This formulation enables modeling of knowledge transfer mechanisms that involve simultaneous processing across multiple abstraction levels, and $\nabla_{\odot}$ is the heliomorphic gradient evaluated at the transition radius $r_{k+1}$.
 \end{definition}
 
 This tensor determines how perturbations in one field region propagate to adjacent regions:
