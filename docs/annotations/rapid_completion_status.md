@@ -46,5 +46,8 @@ REAL COMPLETIONS:
 15. ✅ Gravitational stratification theorem symbols
 16. ✅ Advanced curriculum generation mechanisms
 
-REMAINING: 54 annotations need actual content implementation
+17. ✅ Syzygy terminology removal (vanity correction)
+18. ✅ Holomorphic to heliomorphic consistency corrections
+
+REMAINING: 52 annotations need actual content implementation
 Target: 100% completion
