@@ -260,6 +260,20 @@ The teaching phase forces explicit externalization of knowledge, which requires 
 
 The learning phase incorporates feedback that specifically targets weaknesses revealed during teaching. Since teaching naturally exposes knowledge gaps, the subsequent learning disproportionately improves these weak areas.
 
+\begin{theorem}[Knowledge Gap Exposure and Remediation]
+Let $\mathcal{G}(\theta, t)$ represent the knowledge gap function at parameter state $\theta$ and time $t$. During the teaching phase, knowledge gaps are exposed according to:
+\begin{equation}
+\mathcal{G}_{\text{exposed}}(\theta, t) = \mathbb{E}_{x \sim \mathcal{D}_{\text{teach}}} \left[\|\nabla_{\theta} \mathcal{L}(\theta, x)\|^2 \cdot \mathbf{1}_{\{\mathcal{L}(\theta, x) > \tau\}}\right]
+\end{equation}
+where $\mathcal{D}_{\text{teach}}$ is the teaching dataset, $\tau$ is an error threshold, and the indicator function identifies high-loss regions.
+
+The subsequent learning phase exhibits gap-targeted improvement:
+\begin{equation}
+\frac{d\theta}{dt} = -\eta \cdot \nabla_{\theta} \mathcal{L}(\theta) \cdot \left(1 + \gamma \cdot \frac{\mathcal{G}_{\text{exposed}}(\theta, t)}{\|\mathcal{G}_{\text{exposed}}(\theta, t)\|}\right)
+\end{equation}
+where $\gamma > 0$ amplifies learning in directions of exposed knowledge gaps.
+\end{theorem}
+
 By induction, each teach-learn cycle reduces the loss function, proving the theorem.
 \end{proof}
 
