@@ -2,7 +2,23 @@ modules = ["bash", "python-3.11"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "gobject-introspection", "gtk3", "imagemagick", "pdftk", "pkg-config", "poppler", "poppler_utils", "qhull", "tcl", "texliveFull", "tk"]
+packages = [
+    "cairo",
+    "ffmpeg-full",
+    "freetype",
+    "ghostscript",
+    "gobject-introspection",
+    "gtk3",
+    "imagemagick",
+    "pdftk",
+    "pkg-config",
+    "poppler",
+    "poppler_utils",
+    "qhull",
+    "tcl",
+    "texliveFull",
+    "tk",
+]
 
 [workflows]
 runButton = "Project"
@@ -47,7 +63,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pdflatex test_compiling.tex"
+args = "pdflatex tests/test_compiling.tex"
 
 [[workflows.workflow]]
 name = "simple_test_compilation"
@@ -55,7 +71,23 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pdflatex simple_test.tex"
+args = "pdflatex tests/simple_test.tex"
+
+[[workflows.workflow]]
+name = "elder_symbol_compilation"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pdflatex tests/test_elder_symbol.tex"
+
+[[workflows.workflow]]
+name = "test_issue_compilation"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pdflatex tests/test_issue.tex"
 
 [[workflows.workflow]]
 name = "latex_compilation"
