@@ -191,7 +191,16 @@ where:
 
 This tensor representation enables the Elder system to adapt teaching strategies based on comprehensive performance metrics rather than simple scalar feedback.
 
-This rotational curriculum generation ensures that learners encounter material in optimal sequences determined by the natural dynamics of the Elder Heliosystem, creating an adaptive and responsive educational framework.
+This rotational curriculum generation provides a sophisticated mathematical framework for adaptive learning sequence optimization. The curriculum generation mechanism operates through phase-dependent knowledge exposure, where the Elder system's rotational dynamics naturally determine optimal learning progressions:
+
+\textbf{Curriculum Generation Mathematical Framework:}
+
+The curriculum sequence $\mathcal{C}(t)$ is generated through rotational phase mapping:
+\begin{equation}
+\mathcal{C}(t) = \{\mathcal{K}_i : \phi_E(t) \in [\phi_{\min}^{(i)}, \phi_{\max}^{(i)}]\}
+\end{equation}
+
+where each knowledge element $\mathcal{K}_i$ becomes accessible within specific phase intervals, ensuring that learners encounter material in optimal sequences determined by the natural dynamics of the Elder Heliosystem, creating an adaptive and responsive educational framework.
 
 \section{Mass-Dependent Gravitational Stability}
 
@@ -364,7 +373,11 @@ Erudite → Mentor (Feedback) & $T_{Er→M} = \pi/\omega_{Er}$ & $\gamma_{Er M} 
 
 \textbf{Mathematical Knowledge Gap Exposure:}
 
-Teaching naturally exposes knowledge gaps through differential projection effectiveness. When an entity attempts to teach concept $C$, the gap exposure function is:
+Teaching naturally exposes knowledge gaps through differential projection effectiveness, providing a powerful mechanism for self-assessment and knowledge refinement. When an entity attempts to teach concept $C$, the mathematical formulation of the gap exposure function reveals the precise relationship between teaching effectiveness and internal knowledge completeness:
+
+\textbf{Mathematical Elaboration of Knowledge Gap Exposure:}
+
+The gap exposure function $\mathcal{G}_{\text{exp}}(C, \theta)$ quantifies how teaching attempts reveal deficiencies in the teacher's understanding:
 
 \begin{equation}
 \mathcal{G}_{\text{exposed}}(C, \theta) = \max_{i \in \text{params}(C)} \left| \frac{\partial \mathcal{L}_{\text{teach}}(C)}{\partial \theta_i} \right| - \min_{i \in \text{params}(C)} \left| \frac{\partial \mathcal{L}_{\text{teach}}(C)}{\partial \theta_i} \right|
