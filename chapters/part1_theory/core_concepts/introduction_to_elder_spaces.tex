@@ -180,23 +180,52 @@ where indices $1 \leq k < m < d$ are determined by gravitational eigenvalues and
 \end{definition}
 
 \begin{theorem}[Correspondence to Heliosystem Architecture]
-The hierarchical subspace decomposition of the Elder space directly corresponds to the Elder-Mentor-Erudite entities in the Elder Heliosystem architecture (Chapter 15) through the following mappings:
+\label{thm:heliosystem_correspondence}
+The hierarchical subspace decomposition of the Elder space directly corresponds to the Elder-Mentor-Erudite entities in the Elder Heliosystem architecture (Chapter 15) through the following canonical mappings:
 \begin{enumerate}
-    \item Parameters of the Elder entity in the heliosystem are derived from elements in $\eldersubspace$
-    \item Parameters of the Mentor entities correspond to projections onto $\mentorsubspace$
-    \item Parameters of the Erudite entities correspond to projections onto $\eruditesubspace$
+    \item \textbf{Elder Mapping}: $\Psi_{\mathcal{E}}: \eldersubspace \rightarrow \elderparams$ where parameters of the Elder entity $\elderentity$ in the heliosystem are derived from elements in $\eldersubspace$ via:
+    \begin{equation}
+        \elderparams = \{\Psi_{\mathcal{E}}(x) : x \in \eldersubspace\}
+    \end{equation}
+    
+    \item \textbf{Mentor Mapping}: $\Psi_{\mathcal{M}}: \mentorsubspace \rightarrow \mentorparams$ where parameters of the Mentor entities $\{\mentorentity_i\}_{i=1}^{N_M}$ correspond to projections onto $\mentorsubspace$ via:
+    \begin{equation}
+        \mentorparams = \{\manifoldproj_{\mathcal{M}}(\Psi_{\mathcal{M}}(y)) : y \in \mentorsubspace\}
+    \end{equation}
+    
+    \item \textbf{Erudite Mapping}: $\Psi_{\mathcal{E}r}: \eruditesubspace \rightarrow \eruditeparams$ where parameters of the Erudite entities $\{\eruditeentity_{i,j}\}_{i,j}$ correspond to projections onto $\eruditesubspace$ via:
+    \begin{equation}
+        \eruditeparams = \{\manifoldproj_{\ErM}(\Psi_{\mathcal{E}r}(z)) : z \in \eruditesubspace\}
+    \end{equation}
 \end{enumerate}
+
+These mappings preserve the hierarchical structure: $\eldersubspace \subseteq \mentorsubspace \subseteq \eruditesubspace$ corresponds to the gravitational hierarchy $\elderentity \succ \mentorentity_i \succ \eruditeentity_{i,j}$.
 \end{theorem}
 
 \begin{theorem}[Gravitational Stratification Isomorphism]
-There exists an isomorphism between:
+\label{thm:gravitational_stratification}
+There exists a canonical isomorphism $\Phi_{\text{grav}}: \mathcal{S} \rightarrow \mathcal{H} \times \mathcal{D} \times \mathcal{O}$ between:
 \begin{enumerate}
-    \item The gravitational strata of Elder spaces: $\{\mathcal{S}_k\}_{k=0}^{d}$ described in Theorem 2.4
-    \item The hierarchical subspaces $\eldersubspace$, $\mentorsubspace$, and $\eruditesubspace$
-    \item The gravitational influence regions $\{\mathcal{D}_k\}_{k=1}^N$ of heliomorphic domains in Chapter 4
-    \item The orbital shells in the Elder Heliosystem described in Chapter 12
+    \item The gravitational strata of Elder spaces: $\mathcal{S} = \{\mathcal{S}_k\}_{k=0}^{d}$ described in Theorem 2.4, where $\mathcal{S}_k = \{x \in \elder{d} : g_k \leq \|\mathcal{G}(x)\| < g_{k+1}\}$
+    
+    \item The hierarchical subspaces: $\mathcal{H} = \{\eldersubspace, \mentorsubspace, \eruditesubspace\}$ with stratification mapping $\sigma_{\mathcal{H}}: \mathcal{H} \rightarrow \mathcal{S}$ where:
+    \begin{align}
+        \sigma_{\mathcal{H}}(\eldersubspace) &= \mathcal{S}_0 \\
+        \sigma_{\mathcal{H}}(\mentorsubspace) &= \bigcup_{k=1}^{N_M} \mathcal{S}_k \\
+        \sigma_{\mathcal{H}}(\eruditesubspace) &= \bigcup_{k=N_M+1}^{d} \mathcal{S}_k
+    \end{align}
+    
+    \item The gravitational influence regions: $\mathcal{D} = \{\mathcal{D}_k\}_{k=1}^N$ of heliomorphic domains in Chapter 4, where $\mathcal{D}_k \subset \complex$ with boundary conditions $\partial\mathcal{D}_k = \{z \in \complex : |z| = r_k\}$
+    
+    \item The orbital shells: $\mathcal{O} = \{\mathcal{O}_{\text{Elder}}, \{\mathcal{O}_{\text{Mentor},i}\}_{i=1}^{N_M}, \{\mathcal{O}_{\text{Erudite},i,j}\}_{i,j}\}$ in the Elder Heliosystem described in Chapter 12
 \end{enumerate}
-This isomorphism preserves the gravitational field strength, phase coherence properties, and hierarchical information flow across all four mathematical frameworks.
+
+The isomorphism $\Phi_{\text{grav}}$ preserves:
+\begin{itemize}
+    \item \textbf{Gravitational field strength}: $\|\mathcal{G}(x)\|_{\mathcal{S}} = \|\mathcal{G}_{\mathcal{H}}(\sigma_{\mathcal{H}}(x))\|_{\mathcal{H}}$
+    \item \textbf{Phase coherence}: $\Phi_{\mathcal{S}}(x) = \Phi_{\mathcal{H}}(\sigma_{\mathcal{H}}(x))$ for all $x \in \mathcal{S}$
+    \item \textbf{Hierarchical information flow}: The inclusion relations $\mathcal{S}_0 \subset \mathcal{S}_1 \subset \cdots \subset \mathcal{S}_d$ map to corresponding hierarchical containments across all frameworks
+\end{itemize}
 \end{theorem}
 
 \begin{figure}[htbp]
