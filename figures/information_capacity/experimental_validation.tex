@@ -17,7 +17,7 @@
         
         % Theoretical curve: logarithmic scaling
         \draw[elderorange, thick, domain=1:5.5, samples=100, smooth] 
-            plot (\x, {1.5 + 1.2*ln(\x)});
+            plot (\x, {1.5 + 1.2*ln(max(1,\x))});
         
         % Experimental data points with error bars
         \foreach \x/\y/\err in {1/1.52/0.08, 2/2.28/0.12, 3/2.83/0.15, 4/3.18/0.18, 5/3.46/0.21} {
