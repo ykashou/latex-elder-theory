@@ -162,7 +162,12 @@ Within the learning window, parameters evolve according to:
 
 where:
 \begin{itemize}
-    \item $\eta$ is the base learning rate
+    \item $\eta$ is the base learning rate, which is automatically stabilized through the phase-dependent modulation mechanism:
+    \begin{equation}
+    \eta_{\text{effective}}(t) = \eta \cdot \beta(\phi_E(t)) \cdot \gamma_{\text{stab}}(t)
+    \end{equation}
+    where $\gamma_{\text{stab}}(t) = \left(1 + \|\nabla_{\theta} \mathcal{L}\|^2\right)^{-1/2}$ is an adaptive stabilization factor that automatically reduces the effective learning rate when gradients become large, preventing divergence during rapid phase transitions.
+    
     \item $\mathcal{L}$ is a loss function measuring knowledge accuracy
     \item $\mathcal{F}$ is the feedback received from recent teaching, quantified as a tensor:
     \begin{equation}
@@ -170,6 +175,18 @@ where:
     \end{equation}
     where $\mathbf{T}_k \in \mathbb{R}^{d \times d}$ are feedback transformation matrices, $\mathbf{v}_k \in \mathbb{R}^d$ are teaching context vectors, $\mathbf{w}_k \in \mathbb{R}^d$ are learning direction vectors, and $\alpha_k$ are phase-dependent weighting coefficients
 \end{itemize}
+
+\textbf{Automatic Learning Rate Stabilization Mechanism:}
+
+The base learning rate $\eta$ undergoes automatic stabilization through three complementary mechanisms:
+
+\begin{enumerate}
+    \item \textbf{Phase-Coherent Modulation}: The reception coefficient $\beta(\phi_E(t))$ naturally varies between 0 and 1 as the entity rotates, creating periods of high and low learning receptivity that prevent sustained high-rate learning that could lead to instability.
+    
+    \item \textbf{Gradient-Adaptive Scaling}: The stabilization factor $\gamma_{\text{stab}}(t)$ automatically reduces the effective learning rate when gradient magnitudes increase, implementing a form of adaptive gradient clipping that maintains stability without manual tuning.
+    
+    \item \textbf{Feedback-Driven Regulation}: The teaching feedback tensor $\mathcal{F}$ contains self-correcting signals that guide the learning rate towards optimal values based on recent teaching performance, creating a closed-loop stabilization system.
+\end{enumerate}
 \end{theorem}
 
 \section{Rotational Resonance in the Hierarchical System}
@@ -186,6 +203,26 @@ Two entities $E_1$ and $E_2$ with rotational phases $\phi_1$ and $\phi_2$ and an
 \end{equation}
 
 for small integers $n, m$ and small $\epsilon > 0$.
+
+The integers $n$ and $m$ are determined by the following principles:
+
+\begin{enumerate}
+    \item \textbf{Hierarchy Level Correspondence}: The ratio $n:m$ reflects the hierarchical relationship between entities. For Elder-Mentor resonance, typical ratios are $1:2$, $2:3$, or $1:3$, where the smaller integer corresponds to the higher-level entity.
+    
+    \item \textbf{Knowledge Transfer Efficiency}: Lower-order resonances (smaller values of $n+m$) provide more efficient knowledge transfer. The system naturally seeks resonances with $n+m \leq 5$ for optimal energy efficiency.
+    
+    \item \textbf{Frequency Matching Constraint}: The integers must satisfy $\gcd(n,m) = 1$ to ensure genuine resonance rather than trivial frequency matching.
+    
+    \item \textbf{Stability Requirements}: For long-term stability, $n$ and $m$ are chosen such that the resonance frequency $\omega_{\text{res}} = \frac{n\omega_1 + m\omega_2}{n+m}$ lies within the system's stable frequency band.
+\end{enumerate}
+
+\textbf{Selection Algorithm}: Given two entities with angular velocities $\omega_1$ and $\omega_2$, the optimal resonance integers are found by:
+
+\begin{equation}
+(n^*, m^*) = \arg\min_{n,m \in \mathbb{Z}^+, n+m \leq 5} \left|\frac{n\omega_1}{m\omega_2} - 1\right|
+\end{equation}
+
+subject to $\gcd(n,m) = 1$ and the hierarchy constraint that $n < m$ when entity 1 is hierarchically superior to entity 2.
 \end{definition}
 
 \begin{theorem}[Hierarchical Resonance Amplification]
