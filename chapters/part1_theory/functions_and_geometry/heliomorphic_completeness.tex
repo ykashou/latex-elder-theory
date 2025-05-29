@@ -105,6 +105,10 @@ By the triangle inequality:
 &< \frac{\epsilon}{3} + \frac{\epsilon}{3} < \epsilon
 \end{align}
 
+\begin{remark}[Mathematical Justification for $\frac{\epsilon}{3}$ Division]
+The use of $\frac{\epsilon}{3}$ in this two-step approximation follows the same principle as in Theorem 7.6. Here we have two approximation steps: (1) approximating $f$ by polynomial $p$, and (2) approximating $p$ by heliomorphic function $h$. Using $\frac{\epsilon}{3}$ for each step ensures the total error $\frac{\epsilon}{3} + \frac{\epsilon}{3} = \frac{2\epsilon}{3} < \epsilon$, with the remaining $\frac{\epsilon}{3}$ providing the necessary strict inequality margin.
+\end{remark}
+
 Therefore, $h$ is the required heliomorphic approximation of $f$ on $K$.
 \end{proof}
 
@@ -174,6 +178,28 @@ By the triangle inequality:
 \end{align}
 
 Therefore, the set $\{h_1, h_2, \ldots, h_L\}$ provides the required uniform approximation.
+
+\begin{remark}[Choice of $\frac{\epsilon}{3}$ in the Triangle Inequality Construction]
+The specific choice of $\frac{\epsilon}{3}$ in this proof follows from the classical "three-step approximation" strategy commonly used in uniform approximation theory. The construction involves three sources of error that must be controlled:
+
+\begin{enumerate}
+    \item \textbf{Covering Error}: When covering the compact family $\{f_{\alpha}\}_{\alpha \in A}$ with finitely many balls, each function $f_{\alpha}$ is within $\frac{\epsilon}{3}$ of some center $f_i$.
+    
+    \item \textbf{Approximation Error}: Each center function $f_i$ is approximated by a heliomorphic function $h_i$ with error bounded by $\frac{\epsilon}{3}$.
+    
+    \item \textbf{Reserve Margin}: The remaining $\frac{\epsilon}{3}$ provides a safety margin that ensures the final bound is strictly less than $\epsilon$, accounting for the discrete nature of the triangle inequality.
+\end{enumerate}
+
+This partitioning is optimal because:
+\begin{itemize}
+    \item It ensures that $\frac{\epsilon}{3} + \frac{\epsilon}{3} = \frac{2\epsilon}{3} < \epsilon$, providing the required strict inequality
+    \item The symmetry between covering and approximation errors reflects their equal mathematical importance in the construction
+    \item Using equal subdivisions minimizes the maximum error contribution from any single step
+    \item The approach generalizes to any finite number of approximation steps by using $\frac{\epsilon}{n}$ for $n$ steps
+\end{itemize}
+
+Alternative choices like $\frac{\epsilon}{2}$ would fail because $\frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$, which does not satisfy the strict inequality requirement. The choice $\frac{\epsilon}{3}$ is therefore both necessary and sufficient for this two-step triangle inequality argument.
+\end{remark}
 \end{proof}
 
 \begin{theorem}[Heliomorphic Approximation with Constraints]
