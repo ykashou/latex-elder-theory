@@ -235,17 +235,17 @@ These basins act as attractors in the gradient flow, drawing parameters into con
     % Phase coherence field lines (sophisticated flow visualization)
     \foreach \startx/\starty in {-4.5/3, -4.2/1.5, -4/0, -3.8/-1.5, -4.5/-3} {
         \draw[->, thick, blue!40, opacity=0.7] (\startx,\starty) 
-            to[out=45,in=180] ({-1.5+0.3*sin(180*(\starty+3)/6)},{1.5+0.2*cos(180*(\startx+4.5)/4.5)});
+            to[out=45,in=180] (-1.5,1.5);
     }
     
     \foreach \startx/\starty in {-2/3.5, -1.5/3.2, 0.8/3.8, 1.2/3.5} {
         \draw[->, thick, red!40, opacity=0.7] (\startx,\starty) 
-            to[out=270,in=90] ({0.5+0.4*sin(180*(\startx+2)/4)},{-0.2-0.3*cos(180*(\starty-3)/1)});
+            to[out=270,in=90] (0.5,-0.2);
     }
     
     \foreach \startx/\starty in {4.5/0.5, 4.2/-1, 4.8/-2.5, 4.5/-3.5} {
         \draw[->, thick, green!40, opacity=0.7] (\startx,\starty) 
-            to[out=135,in=315] ({3+0.3*sin(180*(\starty+3)/7)},{2.2+0.3*cos(180*(\startx-4)/1)});
+            to[out=135,in=315] (3,2.2);
     }
     
     % Basin centers (attractors) with phase indicators
@@ -294,10 +294,10 @@ These basins act as attractors in the gradient flow, drawing parameters into con
         \textcolor{green!70}{● Erudite resonance}
     };
     
-    % Sophisticated mathematical notation
+    % Mathematical notation
     \node[font=\tiny, align=center] at (4.2,-3.5) {
-        $\cos(\Psi(\theta)) > 1-\epsilon$\\
-        Phase coherence threshold
+        Phase coherence threshold\\
+        $\cos(\Psi) > 1-\epsilon$
     };
 \end{tikzpicture}
 \caption{Advanced visualization of resonance basins in the Elder parameter space. Each basin $\mathcal{B}_i$ represents regions of high phase coherence where parameters naturally converge. The complex boundaries, field lines showing gradient flow, and resonance centers with phase indicators provide a mathematically precise representation of the Elder Heliosystem's gradient topology.}
