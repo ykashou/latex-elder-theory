@@ -73,79 +73,6 @@ C_{\text{total}} = \sum_{k=1}^K \mathcal{O}(d_k \cdot \log(\frac{1}{\epsilon_k})
 which scales exponentially with hierarchy depth.
 \end{theorem}
 
-\section{Unbounded Audio Generation Framework}
-
-\subsection{Mathematical Formulation for Continuous Audio Generation}
-
-The generation of indefinitely long audio sequences requires a mathematical framework that maintains coherence across arbitrary temporal distances. The Elder Heliosystem achieves this through its rotational dynamics and shell structure.
-
-\begin{theorem}[Continuous Audio Generation]
-For an audio signal $x(t)$ of arbitrary length, the Elder Heliosystem can generate segments with bounded coherence error:
-
-\begin{equation}
-\mathbb{E}[\|x(t+\Delta t) - \hat{x}(t+\Delta t|\Theta, x(t))\|^2] \leq \epsilon_0 + \lambda \cdot \log(\Delta t)
-\end{equation}
-
-where:
-\begin{itemize}
-    \item $\hat{x}(t+\Delta t|\Theta, x(t))$ is the system's prediction at time $t+\Delta t$ given parameters $\Theta$ and context $x(t)$
-    \item $\epsilon_0$ is the base error
-    \item $\lambda$ is a small constant that depends on the system's phase coherence
-\end{itemize}
-\end{theorem}
-
-\begin{proof}
-The proof follows from the hierarchical decomposition of the prediction task across orbital shells.
-
-Let $x(t)$ be decomposed into frequency components across temporal scales: $x(t) = \sum_{k=1}^{\infty} x_k(t)$, where $x_k(t)$ contains information at temporal scale $\Delta t_k$.
-
-The Elder Heliosystem encodes information from scale $k$ in orbital shell $\mathcal{S}_k$. When generating future audio, each shell contributes predictions at its corresponding scale:
-
-\begin{equation}
-\hat{x}(t+\Delta t|\Theta, x(t)) = \sum_{k=1}^K \hat{x}_k(t+\Delta t|\mathcal{S}_k, x(t))
-\end{equation}
-
-The error at each scale $k$ is bounded by $\epsilon_k \propto \epsilon_0 \cdot \gamma^k$ for some decay factor $\gamma < 1$. This creates a convergent error series even as $K \rightarrow \infty$.
-
-The logarithmic term arises from the increasing difficulty of maintaining perfect coherence at longer time scales, but importantly, this growth is only logarithmic in the time difference, not linear.
-\end{proof}
-
-\subsection{Window-Independent Coherence Preservation}
-
-A critical feature for unbounded audio generation is maintaining coherence across processing windows.
-
-\begin{definition}[Heliomorphic Coherence Operator]
-The heliomorphic coherence operator $\mathcal{H}_{\text{coh}}$ maps between adjacent generation windows:
-
-\begin{equation}
-\mathcal{H}_{\text{coh}}(W_i, W_{i+1}) = \int_{\Omega} \complexinner{W_i(t)}{W_{i+1}(t)} \, dt
-\end{equation}
-
-where $W_i$ and $W_{i+1}$ are adjacent windows, $\Omega$ is their overlap region, and $\complexinner{\cdot}{\cdot}$ is the complex inner product.
-\end{definition}
-
-\begin{theorem}[Cross-Window Coherence]
-Given audio generation windows of size $L$ with overlap $\Delta$, the Elder Heliosystem maintains coherence error bounded by:
-
-\begin{equation}
-\|\mathcal{H}_{\text{coh}}(W_i, W_{i+1}) - 1\|^2 \leq \frac{C}{\Delta}
-\end{equation}
-
-where $C$ is a constant dependent on phase coherence.
-\end{theorem}
-
-\begin{proof}
-The coherence between windows arises from phase alignment in the orbital parameter space. When generating window $W_{i+1}$ after $W_i$, the system maintains phase continuity in its rotational state.
-
-The complex parameters maintain continuity according to:
-\begin{equation}
-\theta_{i+1} = \theta_i \cdot e^{i\omega \Delta t}
-\end{equation}
-
-where $\omega$ is the angular velocity of the corresponding parameter in its orbital shell.
-
-This ensures that the phase relationships that generated the end of window $W_i$ smoothly transition to the beginning of window $W_{i+1}$. The error decreases proportionally to the overlap size $\Delta$, as more shared context enables better phase alignment.
-\end{proof}
 
 \section{Memory-Efficient Implementation Through Sparse Activation}
 
@@ -189,109 +116,19 @@ The memory complexity remains constant at:
 regardless of sequence length.
 \end{corollary}
 
-\section{Applications to Unbounded Audio Generation}
 
-\subsection{Window-Based Processing with Global Coherence}
 
-In practical implementations, audio must be generated in finite windows due to hardware constraints. The Elder Heliosystem makes this possible while maintaining global coherence through its orbital memory structure.
+\section{Conclusion: Implications for Unbounded Sequence Generation}
 
-\begin{algorithm}
-\caption{Unbounded Coherent Audio Generation}
-\begin{algorithmic}[1]
-\State \textbf{Input:} Initial audio context $x_0$, target length $L_{\text{total}}$, window size $W$, overlap $\Delta$
-\State \textbf{Output:} Audio sequence $x$ of length $L_{\text{total}}$
-\State Initialize Elder Heliosystem with parameters $\Theta$
-\State Process initial context $x_0$ to establish orbital memory state
-\State $t \gets |x_0|$
-\State $x \gets x_0$
-\While{$t < L_{\text{total}}$}
-    \State Generate window $W_i$ of length $W$ using current orbital state
-    \State Append $W_i$ to $x$, excluding the first $\Delta$ samples if not the first window
-    \State Update orbital memory state with new window $W_i$
-    \State $t \gets t + W - \Delta$
-\EndWhile
-\State \textbf{Return:} $x$
-\end{algorithmic}
-\end{algorithm}
+The Elder Heliosystem's approach to effectively infinite memory through continuous sparse representations and orbital dynamics enables new paradigms for long-sequence processing. By encoding temporal information in the phase components of complex parameters and organizing memory in hierarchical shells, the system overcomes fundamental limitations of traditional approaches.
 
-\subsection{Long-Range Theme Preservation}
-
-A particularly powerful capability is the preservation of musical themes and motifs across arbitrarily long compositions.
-
-\begin{theorem}[Thematic Memory Preservation]
-For a musical theme $\mathcal{T}$ introduced at time $t_0$, the Elder Heliosystem preserves its representation with recall probability at time $t_1$:
-
-\begin{equation}
-P(\text{recall}(\mathcal{T}, t_1) | \text{introduce}(\mathcal{T}, t_0)) \geq 1 - \alpha e^{-\beta \|\mathcal{T}\|_{\text{salience}}}
-\end{equation}
-
-where $\|\mathcal{T}\|_{\text{salience}}$ is the theme's salience measure and $\alpha, \beta$ are system constants.
-\end{theorem}
-
-\begin{proof}
-Musical themes are encoded in the phase relationships of parameters across multiple shells. The salience of a theme determines how deeply it is embedded in the orbital structure.
-
-When a theme $\mathcal{T}$ is introduced, it creates distinctive phase patterns that persist in the rotational dynamics. These patterns may become temporarily inactive but remain encoded in the parameter values.
-
-As the system rotates, these phase patterns periodically return to active states, enabling the system to recall and generate variations of the theme. The probability of recall depends on the theme's salience, which determines its embedding strength across orbital shells.
-\end{proof}
-
-\section{Experimental Validation through Continuous Audio Generation}
-
-The theoretical capacity for unbounded audio generation has been empirically validated through experiments generating extended musical compositions.
-
-\begin{table}[h]
-\centering
-\caption{Experimental Results for Long-Form Audio Generation}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Composition Type} & \textbf{Duration} & \textbf{Window Size} & \textbf{Coherence Score} & \textbf{Memory Usage} \\
-\hline
-Ambient Music & 24 hours & 30 sec & 0.94 & 2.1 GB \\
-Orchestral Symphony & 4 hours & 60 sec & 0.89 & 2.3 GB \\
-Evolving Techno & 12 hours & 45 sec & 0.91 & 1.9 GB \\
-Jazz Improvisation & 8 hours & 20 sec & 0.87 & 2.0 GB \\
-\hline
-\end{tabular}
-\end{table}
-
-These results demonstrate that the Elder Heliosystem can generate coherent audio of arbitrary length while maintaining constant memory usage, independent of the total sequence length.
-
-\section{Comparison with Traditional Approaches}
-
-Traditional approaches to long-form audio generation typically fall into one of two categories:
-
-\begin{enumerate}
-    \item \textbf{Sliding Window Methods}: Process fixed-length contexts with limited memory of past content, leading to decreased coherence over time
-    \item \textbf{Hierarchical Planning}: Create high-level plans then fill in details, but struggle with maintaining local-global coherence
-\end{enumerate}
-
-\begin{table}[h]
-\centering
-\caption{Comparison of Long-Form Audio Generation Approaches}
-\begin{tabular}{|l|c|c|c|}
-\hline
-\textbf{Approach} & \textbf{Memory Scaling} & \textbf{Coherence Scaling} & \textbf{Compute Scaling} \\
-\hline
-Sliding Window & $\mathcal{O}(W)$ & $\mathcal{O}(e^{-\lambda T})$ & $\mathcal{O}(T)$ \\
-Hierarchical Planning & $\mathcal{O}(T^{0.5})$ & $\mathcal{O}(T^{-0.5})$ & $\mathcal{O}(T \log T)$ \\
-Transformer & $\mathcal{O}(T)$ & $\mathcal{O}(1)$ & $\mathcal{O}(T^2)$ \\
-Elder Heliosystem & $\mathcal{O}(1)$ & $\mathcal{O}(\log^{-1} T)$ & $\mathcal{O}(T)$ \\
-\hline
-\end{tabular}
-\end{table}
-
-\section{Conclusion: Implications for Unbounded Creative Generation}
-
-The Elder Heliosystem's approach to effectively infinite memory through continuous sparse representations and orbital dynamics enables a new paradigm for audio generation. By encoding temporal information in the phase components of complex parameters and organizing memory in hierarchical shells, the system overcomes the fundamental limitations of traditional approaches.
-
-Key advances include:
+Key theoretical advances include:
 
 \begin{enumerate}
     \item \textbf{Memory Efficiency}: Constant memory usage regardless of sequence length
-    \item \textbf{Long-Range Coherence}: Logarithmic rather than exponential decay of coherence
-    \item \textbf{Thematic Preservation}: Ability to recall and develop themes introduced arbitrarily far in the past
-    \item \textbf{Seamless Windowing}: Generation in computationally manageable windows while maintaining global coherence
+    \item \textbf{Long-Range Coherence}: Logarithmic rather than exponential decay of coherence over time
+    \item \textbf{Hierarchical Information Preservation}: Ability to maintain and recall patterns introduced at arbitrary temporal distances
+    \item \textbf{Computational Tractability}: Natural sparsity through rotational dynamics enables efficient processing
 \end{enumerate}
 
-These capabilities extend beyond audio to any domain requiring coherent generation of unbounded sequences, including text, video, and multimodal content, establishing the Elder Heliosystem as a framework for truly open-ended creative generation.
+These capabilities establish theoretical foundations for processing unbounded sequences across domains requiring long-term temporal dependencies, providing a mathematical framework for systems that must maintain coherence over extended contexts.
