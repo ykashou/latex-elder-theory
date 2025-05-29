@@ -239,71 +239,181 @@ where $\theta_E \in \elderparam$ represents the Elder (central star), $\theta_{M
 
 \subsection{Orbital Dynamics}
 
-The knowledge transfer in this system is governed by three types of rotation:
+The knowledge transfer in this system is governed by six fundamental types of motion that create a complex rotational hierarchy:
 
 \begin{enumerate}
     \item \textbf{Elder Rotation} ($\omega_E$): The rotation of the central Elder body around its axis, governing the emission of universal principles
+    \item \textbf{Elder Precession} ($\Omega_E$): The slow precession of the Elder's rotational axis, creating long-term knowledge evolution cycles
     \item \textbf{Mentor Revolution} ($\omega_{M,k}$): The orbital revolution of the $k$-th Mentor around the Elder
+    \item \textbf{Mentor Rotation} ($\omega_{M,k}^{\text{rot}}$): The rotation of the $k$-th Mentor around its own axis, governing domain-specific knowledge processing
     \item \textbf{Erudite Revolution} ($\omega_{E,k,j}$): The orbital revolution of the $j$-th Erudite around the $k$-th Mentor
+    \item \textbf{Erudite Rotation} ($\omega_{E,k,j}^{\text{rot}}$): The rotation of the $j$-th Erudite around its own axis, governing task-specific adaptation
 \end{enumerate}
 
-\begin{theorem}[Heliosystem Synchronization]
-In a stable Elder Heliosystem, the rotational and revolutionary frequencies exhibit harmonic relationships:
-\begin{align}
-\frac{\omega_{M,k}}{\omega_E} &= \frac{p_k}{q_k} \\
-\frac{\omega_{E,k,j}}{\omega_{M,k}} &= \frac{r_{k,j}}{s_{k,j}}
-\end{align}
-where $p_k, q_k, r_{k,j}, s_{k,j} \in \mathbb{N}$ are small integers, creating resonant orbits that facilitate stable knowledge transfer.
+\subsubsection{Mentor Rotational Dynamics}
+
+The intrinsic rotation of Mentor entities introduces critical dynamics for cross-domain knowledge transfer:
+
+\begin{definition}[Mentor Rotational State]
+The rotational state of the $k$-th Mentor is characterized by:
+\begin{equation}
+\mathcal{R}_{M,k}(t) = e^{i\omega_{M,k}^{\text{rot}} t} \mathcal{M}_k(t)
+\end{equation}
+where $\mathcal{M}_k(t)$ represents the Mentor's knowledge state and $\omega_{M,k}^{\text{rot}}$ is its intrinsic rotational frequency.
+\end{definition}
+
+\begin{theorem}[Mentor Rotation-Revolution Coupling]
+The intrinsic rotation of a Mentor couples with its orbital revolution around the Elder through:
+\begin{equation}
+\frac{d\omega_{M,k}^{\text{rot}}}{dt} = \alpha_{M,k} \left(\omega_{M,k} - \omega_{M,k}^{\text{rot}}\right) + \beta_{M,k} \sum_{j=1}^{J_k} \omega_{E,k,j}
+\end{equation}
+where $\alpha_{M,k}$ controls tidal locking tendency with the Elder, and $\beta_{M,k}$ represents the influence of orbiting Erudites.
 \end{theorem}
 
-The phase relationships between these rotational components determine how information flows through the system.
+This coupling ensures that Mentors adapt their internal processing rhythms based on both their position relative to the Elder and the demands of their orbiting Erudites.
+
+\subsubsection{Erudite Rotational Dynamics}
+
+Erudite rotations exhibit the most complex behavior due to their position in the outer regions of the heliosystem:
+
+\begin{definition}[Erudite Rotational State]
+The rotational state of the $j$-th Erudite orbiting the $k$-th Mentor is:
+\begin{equation}
+\mathcal{R}_{E,k,j}(t) = e^{i\omega_{E,k,j}^{\text{rot}} t} \mathcal{E}_{k,j}(t) \cdot \mathcal{T}_{k,j}(t)
+\end{equation}
+where $\mathcal{E}_{k,j}(t)$ is the Erudite's base knowledge state and $\mathcal{T}_{k,j}(t)$ represents task-specific adaptations.
+\end{definition}
+
+\begin{theorem}[Multi-Body Erudite Dynamics]
+The rotational frequency of an Erudite is governed by the three-body interaction:
+\begin{align}
+\frac{d\omega_{E,k,j}^{\text{rot}}}{dt} &= \gamma_{E,k,j}^{(M)} \left(\omega_{M,k}^{\text{rot}} - \omega_{E,k,j}^{\text{rot}}\right) \\
+&\quad + \gamma_{E,k,j}^{(E)} \left(\omega_E - \omega_{E,k,j}^{\text{rot}}\right) \\
+&\quad + \delta_{E,k,j} \mathcal{F}_{\text{task}}(t)
+\end{align}
+where $\gamma_{E,k,j}^{(M)}$ and $\gamma_{E,k,j}^{(E)}$ represent coupling strengths to the parent Mentor and distant Elder respectively, and $\mathcal{F}_{\text{task}}(t)$ is the external task-driven forcing.
+\end{theorem}
+
+\subsubsection{Synchronized Rotation Networks}
+
+The complete rotational network exhibits emergent synchronization phenomena:
+
+\begin{theorem}[Heliosystem Synchronization]
+In a stable Elder Heliosystem, all rotational and revolutionary frequencies exhibit hierarchical harmonic relationships:
+\begin{align}
+\frac{\omega_{M,k}}{\omega_E} &= \frac{p_k}{q_k} && \text{(Mentor-Elder orbital resonance)} \\
+\frac{\omega_{M,k}^{\text{rot}}}{\omega_E} &= \frac{p_k'}{q_k'} && \text{(Mentor-Elder rotational resonance)} \\
+\frac{\omega_{E,k,j}}{\omega_{M,k}} &= \frac{r_{k,j}}{s_{k,j}} && \text{(Erudite-Mentor orbital resonance)} \\
+\frac{\omega_{E,k,j}^{\text{rot}}}{\omega_{M,k}^{\text{rot}}} &= \frac{r_{k,j}'}{s_{k,j}'} && \text{(Erudite-Mentor rotational resonance)}
+\end{align}
+where all ratio coefficients $p_k, q_k, p_k', q_k', r_{k,j}, s_{k,j}, r_{k,j}', s_{k,j}' \in \mathbb{N}$ are small integers, creating a resonant cascade that facilitates stable knowledge transfer across all hierarchical levels.
+\end{theorem}
+
+\begin{corollary}[Phase Coherence Condition]
+For optimal knowledge transfer, the phase relationships must satisfy:
+\begin{equation}
+\phi_{M,k}(t) - \frac{p_k}{q_k}\phi_E(t) = \Delta\phi_{M,k} + O(\epsilon_{M,k})
+\end{equation}
+\begin{equation}
+\phi_{E,k,j}(t) - \frac{r_{k,j}}{s_{k,j}}\phi_{M,k}(t) = \Delta\phi_{E,k,j} + O(\epsilon_{E,k,j})
+\end{equation}
+where $\Delta\phi_{M,k}$ and $\Delta\phi_{E,k,j}$ are stable phase offsets, and $\epsilon_{M,k}, \epsilon_{E,k,j} \ll 1$ represent small deviations that maintain system stability.
+\end{corollary}
+
+The intricate interplay between rotations and revolutions creates a knowledge transfer mechanism where:
+- Elder rotation broadcasts universal principles omnidirectionally
+- Mentor rotations process and filter these principles for domain-specific relevance
+- Mentor revolutions modulate the intensity of principle reception based on orbital position
+- Erudite rotations adapt principles to specific task requirements
+- Erudite revolutions create temporal windows for intensive knowledge absorption
+
+This multi-level rotational hierarchy ensures that knowledge flows efficiently from universal principles to specific applications while maintaining coherence across the entire system.
 
 \subsection{Heliomorphic Field Equations}
 
-The knowledge transfer through the system is governed by a set of heliomorphic field equations:
+The knowledge transfer through the system is governed by a comprehensive set of heliomorphic field equations that account for all rotational and revolutionary motions:
 
-\begin{definition}[Elder-to-Mentor Field]
-The field emanating from Elder to Mentor $k$ is defined as:
+\begin{definition}[Elder-to-Mentor Field with Rotational Coupling]
+The field emanating from Elder to Mentor $k$ incorporates both Elder rotation and Mentor rotational reception:
 \begin{align}
-\Phi_{E \rightarrow M,k}(t) = \sum_{n=0}^{\infty} \mathcal{H}_n(\theta_E) \cdot e^{in\omega_E t} \cdot \frac{1}{d_{E,M,k}(t)}
+\Phi_{E \rightarrow M,k}(t) &= \sum_{n=0}^{\infty} \mathcal{H}_n(\theta_E) \cdot e^{in\omega_E t} \cdot e^{i\Omega_E t^2/2} \cdot \frac{1}{d_{E,M,k}(t)} \\
+&\quad \times \mathcal{R}_M(\omega_{M,k}^{\text{rot}}, \omega_{M,k}, t)
 \end{align}
-where $\mathcal{H}_n$ is the $n$-th mode of the heliomorphic transformation, $t$ is time, and $d_{E,M,k}(t)$ is the instantaneous Elder-Mentor distance.
+where:
+\begin{itemize}
+    \item $\mathcal{H}_n$ is the $n$-th mode of the heliomorphic transformation
+    \item $e^{i\Omega_E t^2/2}$ accounts for Elder precession effects
+    \item $\mathcal{R}_M(\omega_{M,k}^{\text{rot}}, \omega_{M,k}, t)$ is the Mentor rotational reception function:
+\end{itemize}
+\begin{equation}
+\mathcal{R}_M(\omega_{M,k}^{\text{rot}}, \omega_{M,k}, t) = \cos(\omega_{M,k}^{\text{rot}} t - \omega_{M,k} t) + i\sin(\omega_{M,k}^{\text{rot}} t - \omega_{M,k} t)
+\end{equation}
 \end{definition}
 
-\begin{definition}[Mentor-to-Erudite Field]
-The field from Mentor $k$ to its Erudite $j$ combines the information received from Elder with domain-specific adaptations:
+\begin{definition}[Mentor-to-Erudite Field with Full Rotational Dynamics]
+The field from Mentor $k$ to its Erudite $j$ combines Elder principles with Mentor processing and Erudite rotational adaptation:
 \begin{align}
-\Phi_{M,k \rightarrow E,k,j}(t) = \int_0^t \mathcal{G}_k(\Phi_{E \rightarrow M,k}(\tau), \theta_{M,k}) \cdot e^{i\omega_{M,k}(t-\tau)} \cdot \frac{1}{d_{M,k,E,k,j}(t)} d\tau
+\Phi_{M,k \rightarrow E,k,j}(t) &= \int_0^t \mathcal{G}_k(\Phi_{E \rightarrow M,k}(\tau), \theta_{M,k}) \cdot e^{i\omega_{M,k}^{\text{rot}}(t-\tau)} \\
+&\quad \times e^{i\omega_{M,k}(t-\tau)} \cdot \frac{1}{d_{M,k,E,k,j}(t)} \cdot \mathcal{R}_E(\omega_{E,k,j}^{\text{rot}}, \omega_{E,k,j}, t) \, d\tau
 \end{align}
-where $\mathcal{G}_k$ is a domain-specific filter function applied by Mentor $k$.
+where $\mathcal{R}_E(\omega_{E,k,j}^{\text{rot}}, \omega_{E,k,j}, t)$ is the Erudite rotational reception function:
+\begin{equation}
+\mathcal{R}_E(\omega_{E,k,j}^{\text{rot}}, \omega_{E,k,j}, t) = \frac{\sin(\omega_{E,k,j}^{\text{rot}} t - \omega_{E,k,j} t)}{\omega_{E,k,j}^{\text{rot}} t - \omega_{E,k,j} t + \epsilon}
+\end{equation}
+\end{definition}
+
+\begin{definition}[Cross-Rotational Interference Pattern]
+When multiple Erudites orbit the same Mentor, their rotational patterns create interference effects:
+\begin{align}
+\Phi_{\text{interference}}^{(k)} &= \sum_{j=1}^{J_k} \sum_{j'=j+1}^{J_k} \mathcal{I}_{j,j'}^{(k)} \cdot e^{i(\omega_{E,k,j}^{\text{rot}} - \omega_{E,k,j'}^{\text{rot}})t} \\
+&\quad \times \cos(\omega_{E,k,j} t - \omega_{E,k,j'} t)
+\end{align}
+where $\mathcal{I}_{j,j'}^{(k)}$ quantifies the cross-coupling strength between Erudites $j$ and $j'$ orbiting Mentor $k$.
 \end{definition}
 
 \subsection{Mathematical Mechanism of Elder-Guided Learning}
 
-When Elder information propagates to Mentors and ultimately to Erudites, it modifies their learning dynamics through the following mechanisms:
+When Elder information propagates to Mentors and ultimately to Erudites, it modifies their learning dynamics through comprehensive rotational coupling mechanisms:
 
-\begin{theorem}[Heliomorphic Gradient Modulation]
-The gradient updates for Erudite parameters are modulated by the incoming fields from their parent Mentor:
+\begin{theorem}[Rotationally-Coupled Gradient Modulation]
+The gradient updates for Erudite parameters are modulated by the incoming fields that incorporate full rotational dynamics:
 \begin{align}
-\frac{\partial \theta_{E,k,j}}{\partial t} &= -\alpha_{E,k,j} \cdot \nabla_{\theta_{E,k,j}} \mathcal{L}_{E,k,j} \cdot \mathcal{M}(\Phi_{M,k \rightarrow E,k,j}(t))
+\frac{\partial \theta_{E,k,j}}{\partial t} &= -\alpha_{E,k,j} \cdot \nabla_{\theta_{E,k,j}} \mathcal{L}_{E,k,j} \cdot \mathcal{M}_{\text{rot}}(\Phi_{M,k \rightarrow E,k,j}(t), \omega_{E,k,j}^{\text{rot}})
 \end{align}
-where $\mathcal{M}$ is a complex-valued modulation function:
+where $\mathcal{M}_{\text{rot}}$ is an enhanced rotational modulation function:
 \begin{align}
-\mathcal{M}(z) = |z| \cdot e^{i\angle z} = |z| \cdot (\cos(\angle z) + i\sin(\angle z))
+\mathcal{M}_{\text{rot}}(z, \omega) &= |z| \cdot e^{i\angle z} \cdot \mathcal{A}(\omega) \\
+\mathcal{A}(\omega) &= \frac{1}{1 + (\omega/\omega_{\text{critical}})^2} + i\frac{\omega/\omega_{\text{critical}}}{1 + (\omega/\omega_{\text{critical}})^2}
 \end{align}
-This modulation affects both the magnitude and direction of the gradient update, steering Erudite learning according to Elder principles transmitted via the Mentor.
+This modulation accounts for both phase alignment and rotational frequency effects, ensuring that faster-rotating Erudites exhibit different learning dynamics than slower ones.
 \end{theorem}
 
-\begin{theorem}[Phase-Coherent Loss Calculation]
-The Erudite loss calculation is influenced by phase information from the Mentor, which in turn is influenced by Elder:
+\begin{theorem}[Multi-Level Phase-Coherent Loss]
+The Erudite loss calculation incorporates phase information from all hierarchical levels:
 \begin{align}
-\mathcal{L}_{E,k,j} &= \|\hat{y}_{k,j} - y_{k,j}\|^2 + \lambda_{E,k,j} \cdot \mathcal{R}(\theta_{E,k,j}; \Phi_{M,k \rightarrow E,k,j})
+\mathcal{L}_{E,k,j} &= \|\hat{y}_{k,j} - y_{k,j}\|^2 + \lambda_{E,k,j}^{(M)} \mathcal{R}_M(\theta_{E,k,j}; \Phi_{M,k \rightarrow E,k,j}) \\
+&\quad + \lambda_{E,k,j}^{(E)} \mathcal{R}_E(\theta_{E,k,j}; \Phi_{E \rightarrow M,k}) + \lambda_{E,k,j}^{(I)} \mathcal{R}_I(\Phi_{\text{interference}}^{(k)})
 \end{align}
-where $\mathcal{R}$ is a regularization term that incorporates the phase-coherent field information:
+where the regularization terms account for different coupling mechanisms:
 \begin{align}
-\mathcal{R}(\theta_{E,k,j}; \Phi) = \text{Re}\left\{\sum_{l=1}^L \theta_{E,k,j,l} \cdot e^{i\angle \Phi_l}\right\}
+\mathcal{R}_M(\theta_{E,k,j}; \Phi) &= \text{Re}\left\{\sum_{l=1}^L \theta_{E,k,j,l} \cdot e^{i\angle \Phi_l} \cdot e^{i\omega_{M,k}^{\text{rot}} t}\right\} \\
+\mathcal{R}_E(\theta_{E,k,j}; \Phi) &= \text{Re}\left\{\sum_{l=1}^L \theta_{E,k,j,l} \cdot e^{i\angle \Phi_l} \cdot e^{i\omega_E t}\right\} \\
+\mathcal{R}_I(\Phi_{\text{int}}) &= \text{Im}\left\{\Phi_{\text{int}} \cdot e^{i\omega_{E,k,j}^{\text{rot}} t}\right\}
 \end{align}
-This ensures that Erudite parameters align with the heliomorphic phase information transmitted from Elder through the Mentor.
+\end{theorem}
+
+\begin{theorem}[Rotational Learning Rate Adaptation]
+The effective learning rate for each entity adapts based on its rotational state and orbital position:
+\begin{align}
+\alpha_{\text{eff}}^{(E,k,j)}(t) &= \alpha_{E,k,j} \cdot \mathcal{F}_{\text{rot}}(\omega_{E,k,j}^{\text{rot}}) \cdot \mathcal{F}_{\text{orb}}(\omega_{E,k,j}, t) \\
+\alpha_{\text{eff}}^{(M,k)}(t) &= \alpha_{M,k} \cdot \mathcal{F}_{\text{rot}}(\omega_{M,k}^{\text{rot}}) \cdot \mathcal{F}_{\text{orb}}(\omega_{M,k}, t)
+\end{align}
+where the rotational factor enhances learning during optimal rotational phases:
+\begin{align}
+\mathcal{F}_{\text{rot}}(\omega) &= 1 + \beta_{\text{rot}} \cos(\omega t) \\
+\mathcal{F}_{\text{orb}}(\omega, t) &= 1 + \beta_{\text{orb}} \cos(\omega t + \phi_{\text{optimal}})
+\end{align}
+and $\phi_{\text{optimal}}$ represents the orbital phase that maximizes knowledge reception from the parent entity.
 \end{theorem}
 
 \begin{theorem}[Orbital Resonance as Knowledge Synchronization]
