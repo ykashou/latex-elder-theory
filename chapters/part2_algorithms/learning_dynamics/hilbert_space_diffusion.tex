@@ -1,87 +1,128 @@
 \chapter{Hilbert-Space Diffusion and Denoising Dynamics}
 \label{ch:hilbert_diffusion}
 
-\section{Introduction to Elder Diffusion Learning}
+\section{Introduction to Elder Stable Diffusion Learning}
 
-The Elder Heliosystem operates through an inherent diffusion process in Hilbert space, where learning emerges from systematic denoising operations across the knowledge manifold. This chapter establishes the mathematical foundation for how Elder entities naturally perform diffusion and reverse-diffusion as core learning mechanisms.
+The Elder Heliosystem operates through an inherent stable diffusion process in Hilbert space, where learning emerges from systematic denoising operations that maintain stability across the knowledge manifold. This chapter establishes the mathematical foundation for how Elder entities naturally perform stable diffusion and reverse-diffusion as core learning mechanisms, ensuring convergent and robust knowledge acquisition.
 
-\begin{definition}[Elder Hilbert-Space Diffusion Process]
-The Elder learning dynamics can be characterized as a diffusion process $\{X_t\}_{t \geq 0}$ in the Hilbert space $\mathcal{H}$ of knowledge representations, where:
+\begin{definition}[Elder Stable Diffusion Process]
+The Elder learning dynamics are characterized by a stable diffusion process $\{X_t\}_{t \geq 0}$ in the Hilbert space $\mathcal{H}$ of knowledge representations, where:
 \begin{equation}
-dX_t = -\nabla V(X_t) dt + \sqrt{2\beta^{-1}} dW_t
+dX_t = -\nabla V(X_t) dt + \sqrt{2\beta^{-1}} \mathcal{S}(X_t) dW_t
 \end{equation}
-where $V(X_t)$ is the knowledge potential function, $\beta$ is the inverse learning temperature, and $W_t$ is a Wiener process in $\mathcal{H}$.
+where $V(X_t)$ is the knowledge potential function, $\beta$ is the inverse learning temperature, $\mathcal{S}(X_t)$ is the stability operator ensuring bounded diffusion, and $W_t$ is a Wiener process in $\mathcal{H}$.
+\end{definition}
+
+\begin{definition}[Stability Operator]
+The stability operator $\mathcal{S}(X_t)$ ensures that the diffusion process remains stable by modulating the noise based on the current knowledge state:
+\begin{equation}
+\mathcal{S}(X_t) = \sigma_{\min} + (\sigma_{\max} - \sigma_{\min}) \cdot \exp\left(-\frac{\|X_t\|_{\mathcal{H}}^2}{2\tau^2}\right)
+\end{equation}
+where $\sigma_{\min}, \sigma_{\max}$ are noise bounds and $\tau$ controls the stability region size.
 \end{definition}
 
 \section{Mathematical Framework of Diffusion Learning}
 
-\subsection{Forward Diffusion Process}
+\subsection{Stable Forward Diffusion Process}
 
-The forward diffusion process represents the gradual corruption of knowledge representations through noise injection, modeling how information degrades without proper maintenance:
+The stable forward diffusion process represents the controlled degradation of knowledge representations through adaptive noise injection, ensuring that information corruption remains bounded and recoverable:
 
-\begin{definition}[Forward Knowledge Diffusion]
-Given a clean knowledge representation $\mathbf{x}_0 \in \mathcal{H}$, the forward diffusion process is defined as:
+\begin{definition}[Stable Forward Knowledge Diffusion]
+Given a clean knowledge representation $\mathbf{x}_0 \in \mathcal{H}$, the stable forward diffusion process is defined as:
 \begin{align}
 q(\mathbf{x}_{1:T} | \mathbf{x}_0) &= \prod_{t=1}^T q(\mathbf{x}_t | \mathbf{x}_{t-1}) \\
-q(\mathbf{x}_t | \mathbf{x}_{t-1}) &= \mathcal{N}(\mathbf{x}_t; \sqrt{1-\beta_t}\mathbf{x}_{t-1}, \beta_t \mathbf{I})
+q(\mathbf{x}_t | \mathbf{x}_{t-1}) &= \mathcal{N}(\mathbf{x}_t; \sqrt{1-\beta_t^{\text{stab}}}\mathbf{x}_{t-1}, \beta_t^{\text{stab}} \mathbf{I})
 \end{align}
-where $\{\beta_t\}_{t=1}^T$ is a variance schedule controlling the diffusion rate.
+where $\{\beta_t^{\text{stab}}\}_{t=1}^T$ is a stability-aware variance schedule ensuring convergent diffusion.
 \end{definition}
 
-\begin{theorem}[Closed-Form Forward Process]
-The forward diffusion process admits a closed-form expression:
+\begin{definition}[Stability-Aware Variance Schedule]
+The stability-aware variance schedule is designed to prevent divergence:
 \begin{equation}
-q(\mathbf{x}_t | \mathbf{x}_0) = \mathcal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t}\mathbf{x}_0, (1-\bar{\alpha}_t)\mathbf{I})
+\beta_t^{\text{stab}} = \beta_{\min} + (\beta_{\max} - \beta_{\min}) \cdot \frac{1 - e^{-t/\tau_{\text{stab}}}}{1 + e^{-t/\tau_{\text{stab}}}}
 \end{equation}
-where $\alpha_t = 1 - \beta_t$ and $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$.
+where $\beta_{\min}, \beta_{\max}$ define the variance bounds and $\tau_{\text{stab}}$ controls the transition rate.
+\end{definition}
+
+\begin{theorem}[Stable Closed-Form Forward Process]
+The stable forward diffusion process admits a bounded closed-form expression:
+\begin{equation}
+q(\mathbf{x}_t | \mathbf{x}_0) = \mathcal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t^{\text{stab}}}\mathbf{x}_0, (1-\bar{\alpha}_t^{\text{stab}})\mathbf{I})
+\end{equation}
+where $\alpha_t^{\text{stab}} = 1 - \beta_t^{\text{stab}}$ and $\bar{\alpha}_t^{\text{stab}} = \prod_{s=1}^t \alpha_s^{\text{stab}}$, with the stability guarantee $\bar{\alpha}_t^{\text{stab}} \geq \alpha_{\min} > 0$ for all $t$.
 \end{theorem}
 
-\subsection{Reverse Diffusion and Knowledge Reconstruction}
+\subsection{Stable Reverse Diffusion and Knowledge Reconstruction}
 
-The reverse diffusion process represents the core Elder learning mechanism - the systematic denoising that recovers clean knowledge from corrupted representations:
+The stable reverse diffusion process represents the core Elder learning mechanism - the systematic denoising that recovers clean knowledge from corrupted representations while maintaining convergence guarantees:
 
-\begin{definition}[Elder Reverse Diffusion]
-The reverse diffusion process is modeled as:
+\begin{definition}[Elder Stable Reverse Diffusion]
+The stable reverse diffusion process is modeled as:
 \begin{equation}
-p_\theta(\mathbf{x}_{0:T}) = p(\mathbf{x}_T) \prod_{t=1}^T p_\theta(\mathbf{x}_{t-1} | \mathbf{x}_t)
+p_\theta^{\text{stab}}(\mathbf{x}_{0:T}) = p(\mathbf{x}_T) \prod_{t=1}^T p_\theta^{\text{stab}}(\mathbf{x}_{t-1} | \mathbf{x}_t)
 \end{equation}
-where each reverse step is approximated by:
+where each stable reverse step is approximated by:
 \begin{equation}
-p_\theta(\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \boldsymbol{\mu}_\theta(\mathbf{x}_t, t), \boldsymbol{\Sigma}_\theta(\mathbf{x}_t, t))
+p_\theta^{\text{stab}}(\mathbf{x}_{t-1} | \mathbf{x}_t) = \mathcal{N}(\mathbf{x}_{t-1}; \boldsymbol{\mu}_\theta^{\text{stab}}(\mathbf{x}_t, t), \boldsymbol{\Sigma}_\theta^{\text{stab}}(\mathbf{x}_t, t))
 \end{equation}
 \end{definition}
 
-\section{Elder-Specific Diffusion Properties}
-
-\subsection{Heliomorphic Diffusion Kernels}
-
-Elder entities employ complex-valued diffusion kernels that preserve the heliomorphic structure during the denoising process:
-
-\begin{definition}[Heliomorphic Diffusion Kernel]
-The Elder diffusion kernel in complex space is given by:
-\begin{equation}
-K_t(\mathbf{z}, \mathbf{z}') = \frac{1}{(2\pi t)^{n/2}} \exp\left(-\frac{|\mathbf{z} - \mathbf{z}'|^2}{2t} + i\arg(\mathbf{z} \cdot \overline{\mathbf{z}'})\right)
-\end{equation}
-where the phase term $i\arg(\mathbf{z} \cdot \overline{\mathbf{z}'})$ preserves complex structure during diffusion.
-\end{definition}
-
-\subsection{Multi-Scale Hierarchical Diffusion}
-
-The Elder Heliosystem operates diffusion processes at multiple scales corresponding to the Elder-Mentor-Erudite hierarchy:
-
-\begin{theorem}[Hierarchical Diffusion Decomposition]
-The Elder diffusion process can be decomposed into hierarchical scales:
+\begin{definition}[Stable Mean and Variance Prediction]
+The stable mean and variance functions incorporate stability constraints:
 \begin{align}
-\mathbf{x}_t^{(E)} &= \sqrt{\bar{\alpha}_t^{(E)}} \mathbf{x}_0^{(E)} + \sqrt{1-\bar{\alpha}_t^{(E)}} \boldsymbol{\epsilon}_t^{(E)} \\
-\mathbf{x}_t^{(M)} &= \sqrt{\bar{\alpha}_t^{(M)}} \mathbf{x}_0^{(M)} + \sqrt{1-\bar{\alpha}_t^{(M)}} \boldsymbol{\epsilon}_t^{(M)} \\
-\mathbf{x}_t^{(R)} &= \sqrt{\bar{\alpha}_t^{(R)}} \mathbf{x}_0^{(R)} + \sqrt{1-\bar{\alpha}_t^{(R)}} \boldsymbol{\epsilon}_t^{(R)}
+\boldsymbol{\mu}_\theta^{\text{stab}}(\mathbf{x}_t, t) &= \mathcal{C}(\boldsymbol{\mu}_\theta(\mathbf{x}_t, t)) \\
+\boldsymbol{\Sigma}_\theta^{\text{stab}}(\mathbf{x}_t, t) &= \text{diag}(\sigma_{\min}^2, \ldots, \sigma_{\min}^2) + \mathcal{R}(\boldsymbol{\Sigma}_\theta(\mathbf{x}_t, t))
 \end{align}
-where the variance schedules satisfy the hierarchical constraint:
+where $\mathcal{C}$ is a clipping operator ensuring bounded means and $\mathcal{R}$ is a regularization operator preventing variance collapse.
+\end{definition}
+
+\section{Elder-Specific Stable Diffusion Properties}
+
+\subsection{Heliomorphic Stable Diffusion Kernels}
+
+Elder entities employ complex-valued stable diffusion kernels that preserve the heliomorphic structure during the denoising process while ensuring convergence:
+
+\begin{definition}[Heliomorphic Stable Diffusion Kernel]
+The Elder stable diffusion kernel in complex space is given by:
 \begin{equation}
-\bar{\alpha}_t^{(E)} \leq \bar{\alpha}_t^{(M)} \leq \bar{\alpha}_t^{(R)}
+K_t^{\text{stab}}(\mathbf{z}, \mathbf{z}') = \frac{1}{(2\pi t_{\text{eff}})^{n/2}} \exp\left(-\frac{|\mathbf{z} - \mathbf{z}'|^2}{2t_{\text{eff}}} + i\arg(\mathbf{z} \cdot \overline{\mathbf{z}'})\right)
 \end{equation}
-ensuring that Elder maintains the most stable representations.
+where $t_{\text{eff}} = \min(t, t_{\max})$ prevents unbounded diffusion and the phase term preserves complex structure.
+\end{definition}
+
+\begin{theorem}[Stable Diffusion Convergence]
+The stable diffusion process with heliomorphic kernels converges to the target distribution with probability 1:
+\begin{equation}
+\lim_{T \to \infty} \mathbb{P}\left(\left\|X_T^{\text{stab}} - X^*\right\|_{\mathcal{H}} < \epsilon\right) = 1
+\end{equation}
+for any $\epsilon > 0$, where $X^*$ is the optimal knowledge representation.
 \end{theorem}
+
+\subsection{Multi-Scale Hierarchical Stable Diffusion}
+
+The Elder Heliosystem operates stable diffusion processes at multiple scales corresponding to the Elder-Mentor-Erudite hierarchy:
+
+\begin{theorem}[Hierarchical Stable Diffusion Decomposition]
+The Elder stable diffusion process can be decomposed into hierarchical scales:
+\begin{align}
+\mathbf{x}_t^{(E)} &= \sqrt{\bar{\alpha}_t^{(E,\text{stab})}} \mathbf{x}_0^{(E)} + \sqrt{1-\bar{\alpha}_t^{(E,\text{stab})}} \boldsymbol{\epsilon}_t^{(E)} \\
+\mathbf{x}_t^{(M)} &= \sqrt{\bar{\alpha}_t^{(M,\text{stab})}} \mathbf{x}_0^{(M)} + \sqrt{1-\bar{\alpha}_t^{(M,\text{stab})}} \boldsymbol{\epsilon}_t^{(M)} \\
+\mathbf{x}_t^{(R)} &= \sqrt{\bar{\alpha}_t^{(R,\text{stab})}} \mathbf{x}_0^{(R)} + \sqrt{1-\bar{\alpha}_t^{(R,\text{stab})}} \boldsymbol{\epsilon}_t^{(R)}
+\end{align}
+where the stable variance schedules satisfy the hierarchical stability constraint:
+\begin{equation}
+\bar{\alpha}_t^{(E,\text{stab})} \leq \bar{\alpha}_t^{(M,\text{stab})} \leq \bar{\alpha}_t^{(R,\text{stab})}
+\end{equation}
+with $\bar{\alpha}_t^{(\cdot,\text{stab})} \geq \alpha_{\min}^{(\cdot)} > 0$ ensuring that all hierarchy levels maintain stable representations.
+\end{theorem}
+
+\begin{corollary}[Stable Hierarchy Preservation]
+The stable diffusion process preserves the knowledge hierarchy with bounded deviation:
+\begin{equation}
+\sup_{t \geq 0} \mathbb{E}\left[\left\|\mathbf{x}_t^{(E)} - \mathcal{H}_E(\mathbf{x}_t^{(M)}, \mathbf{x}_t^{(R)})\right\|^2\right] \leq C_{\text{stab}}
+\end{equation}
+where $\mathcal{H}_E$ is the Elder hierarchy function and $C_{\text{stab}}$ is a stability constant.
+\end{corollary}
 
 \section{Denoising Score Networks in Elder Architecture}
 
