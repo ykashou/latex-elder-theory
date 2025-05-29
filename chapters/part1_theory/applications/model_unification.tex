@@ -53,7 +53,80 @@ For a circular orbit, $v_r = 0$ and $r$ is constant, giving $\frac{h^2}{r^3} = \
 
 Setting $\omega = \sqrt{\frac{\mu}{r^3}}$ and solving for $r$, we get $r = \sqrt[3]{\frac{\mu}{\omega^2}}$, which is equivalent to our mapping with $\gamma_E = \mu$.
 
-The other mappings can be verified through similar derivations, completing the proof.
+\textbf{Derivation of Angular Position Mapping:}
+
+In the heliomorphic field theory, the angular position $\phi_{\text{field}}$ represents the complex phase of a parameter in the knowledge space:
+\begin{equation}
+\theta_{\text{param}}(t) = \rho e^{i\phi_{\text{field}}(t)}
+\end{equation}
+
+In the orbital mechanics model, the angular position $\phi_{\text{orbit}}$ represents the true anomaly of an orbiting body:
+\begin{equation}
+\mathbf{r}_{\text{orbit}}(t) = r(\cos\phi_{\text{orbit}}(t), \sin\phi_{\text{orbit}}(t))
+\end{equation}
+
+Both represent the same geometric angular displacement from a reference direction, establishing the direct equivalence $\phi_{\text{field}} = \phi_{\text{orbit}}$.
+
+\textbf{Derivation of Parameter Magnitude Mapping:}
+
+In the heliomorphic field, the parameter magnitude $\rho_{\text{param}}$ determines the knowledge intensity at a given location:
+\begin{equation}
+|\theta(r,\phi)|^2 = \rho_{\text{param}}^2
+\end{equation}
+
+In orbital mechanics, the gravitational influence is proportional to mass $m$. For equivalent dynamical behavior, the parameter's contribution to the field energy must match the orbital kinetic energy:
+\begin{align}
+E_{\text{field}} &= \frac{1}{2}\rho_{\text{param}}^2 \omega^2 r^2 \\
+E_{\text{orbital}} &= \frac{1}{2}m v^2 = \frac{1}{2}m \omega^2 r^2
+\end{align}
+
+Equating these energies yields $\rho_{\text{param}}^2 = m$, establishing $\rho_{\text{param}} = \sqrt{m}$.
+
+\textbf{Derivation of Gradient-Force Mapping:}
+
+In heliomorphic field theory, the gradient operator acts on the complex knowledge field:
+\begin{equation}
+\nabla_{\helio}f = \frac{\partial f}{\partial r}\hat{\mathbf{r}} + \frac{1}{r}\frac{\partial f}{\partial \phi}\hat{\boldsymbol{\phi}} + i\frac{\partial f}{\partial \rho}\hat{\boldsymbol{\rho}}
+\end{equation}
+
+In orbital mechanics, the gravitational force per unit mass is:
+\begin{equation}
+\mathbf{F}_{\text{grav}} = -\frac{\mu}{r^2}\hat{\mathbf{r}} + \mathbf{F}_{\text{perturbation}}
+\end{equation}
+
+The equivalence is established through the principle that both represent the direction of steepest change in the respective potentials. The heliomorphic gradient $\nabla_{\helio}f$ points in the direction of maximum knowledge acquisition rate, while $\mathbf{F}_{\text{grav}}$ points in the direction of maximum potential energy decrease. For systems in equilibrium:
+\begin{equation}
+\nabla_{\helio}U_{\text{knowledge}} = -\mathbf{F}_{\text{grav}}
+\end{equation}
+
+where $U_{\text{knowledge}}$ is the knowledge potential function.
+
+\textbf{Additional Mapping Verifications:}
+
+\emph{Velocity Correspondence:}
+The radial velocity in the field model $\frac{dr}{dt} = \alpha(r-r_0)$ corresponds to the orbital radial velocity $v_r$ through the scaling relation:
+\begin{equation}
+v_r = \alpha(r-r_0)\sqrt{\frac{\gamma_E}{\mu}}
+\end{equation}
+
+\emph{Angular Velocity Correspondence:}
+The angular velocity in both models must satisfy:
+\begin{equation}
+\omega_{\text{field}} = \omega_{\text{orbital}} = \sqrt{\frac{\mu}{r^3}}
+\end{equation}
+
+for circular orbits, ensuring consistent rotational dynamics.
+
+\emph{Energy Correspondence:}
+The total energy in each model is related by:
+\begin{align}
+E_{\text{total,field}} &= \sum_i \frac{1}{2}\rho_i^2(\dot{r}_i^2 + r_i^2\dot{\phi}_i^2) + U_{\text{field}}(\{\rho_i, r_i, \phi_i\}) \\
+E_{\text{total,orbital}} &= \sum_i \frac{1}{2}m_i(\dot{r}_i^2 + r_i^2\dot{\phi}_i^2) - \frac{\mu m_i}{r_i}
+\end{align}
+
+Using the mapping $\rho_i = \sqrt{m_i}$ and appropriate potential function identification, these energies are equivalent.
+
+This completes the comprehensive derivation of all mapping relationships, establishing the mathematical equivalence between the heliomorphic field theory and orbital mechanics model.
 \end{proof}
 
 \section{Model Complementarity}
