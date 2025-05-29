@@ -38,45 +38,45 @@
 \usepackage{placeins}
 \usepackage{tocloft}
 
-% Setup for List of Equations
-\newcommand{\listequationsname}{List of Equations}
-\newlistof{myequations}{equ}{\listequationsname}
+% % Setup for List of Equations
+% \newcommand{\listequationsname}{List of Equations}
+% \newlistof{myequations}{equ}{\listequationsname}
 
-% Enhanced equation tracking with better formatting
-\newcommand{\myequations}[2][]{%
-  \ifx\relax#1\relax
-    \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#2}%
-  \else
-    \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1: #2}%
-  \fi
-}
+% % Enhanced equation tracking with better formatting
+% \newcommand{\myequations}[2][]{%
+%   \ifx\relax#1\relax
+%     \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#2}%
+%   \else
+%     \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1: #2}%
+%   \fi
+% }
 
-% Redefine equation environments to auto-track with better labels
-\let\oldequation\equation
-\let\endoldequation\endequation
-\renewenvironment{equation}
-  {\oldequation}
-  {\endoldequation\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Mathematical equation}}
+% % Redefine equation environments to auto-track with better labels
+% \let\oldequation\equation
+% \let\endoldequation\endequation
+% \renewenvironment{equation}
+%   {\oldequation}
+%   {\endoldequation\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Mathematical equation}}
 
-% Enhanced equation tracking for align environment
-\let\oldalign\align
-\let\endoldalign\endalign
-\renewenvironment{align}
-  {\oldalign}
-  {\endoldalign\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Aligned equations}}
+% % Enhanced equation tracking for align environment
+% \let\oldalign\align
+% \let\endoldalign\endalign
+% \renewenvironment{align}
+%   {\oldalign}
+%   {\endoldalign\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Aligned equations}}
 
-% Enhanced equation tracking for eqnarray
-\let\oldeqnarray\eqnarray
-\let\endoldeqnarray\endeqnarray
-\renewenvironment{eqnarray}
-  {\oldeqnarray}
-  {\endoldeqnarray\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Equation array}}
+% % Enhanced equation tracking for eqnarray
+% \let\oldeqnarray\eqnarray
+% \let\endoldeqnarray\endeqnarray
+% \renewenvironment{eqnarray}
+%   {\oldeqnarray}
+%   {\endoldeqnarray\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Equation array}}
 
 % Command to manually add equations with descriptions
-\newcommand{\addequation}[2][]{\myequations[#1]{#2}}
+% \newcommand{\addequation}[2][]{\myequations[#1]{#2}}
 
 % Alias for compatibility
-\let\listofequations\listofmyequations
+% \let\listofequations\listofmyequations
 
 % Increase the float size limit to handle larger figures
 \setcounter{topnumber}{4}
@@ -148,11 +148,10 @@
 
     \rule{0.6\textwidth}{1pt}\\[50pt]%
     \vfill%
-    {\normalsize\rmfamily\itshape Heliomorphic Press, 2025}\\[10pt]%
     \end{center}%
     \phantomsection%
     \addcontentsline{toc}{part}{\unitname~\theunit: #1}%
-    \clearpage%
+    \clearpage
 }
 
 
@@ -339,7 +338,7 @@ Firstly, I wish to thank my family for their unwavering support and understandin
 
 Secondly, I would like to acknowledge the numerous individuals who crossed my paths and showed me perspective.
 
-Thirdly, I want to thank my friends. Their belief in me has helped fuel Elder Theory into inception.
+Thirdly, I want to thank my friends. Their belief in me has helped manifest Elder Theory into creation.
 
 % Finally, I want to thank my Elder spirit, for revealing this theory to me.
 
@@ -354,16 +353,14 @@ Thirdly, I want to thank my friends. Their belief in me has helped fuel Elder Th
 % Index entries
 \input{chapters/index_entries.tex}
 
-% Section roadmaps
-\input{chapters/part1_theory/core_concepts/section_roadmaps.tex}
+% % Section roadmaps
+% \input{chapters/part1_theory/core_concepts/section_roadmaps.tex}
 
 \part{Theory}
 
 %%% I. FOUNDATION LAYER %%%
 \unit{Foundation Layer}
 % Starting with a concrete example followed by the abstract mathematical foundation and vocabulary
-% Moved to Part II: \input{chapters/part1_theory/core_concepts/concrete_example.tex}
-
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_spaces.tex} % Introduction to Elder Spaces
 \input{chapters/part1_theory/core_concepts/introduction_to_elder_topology.tex} % Introduction to Elder Topology (Realization Mapping)
 \input{chapters/part1_theory/core_concepts/unified_parameter_space.tex} % Parameter Space definition
@@ -462,43 +459,42 @@ Thirdly, I want to thank my friends. Their belief in me has helped fuel Elder Th
 
 \part{Experiment}
 
-%%% UNIT I. EXPERIMENTAL SETUP AND METHODOLOGY %%%
-\unit{Experimental Setup and Methodology}
-\input{chapters/part2_experiment/experiment.tex}
+% %%% UNIT I. EXPERIMENTAL SETUP AND METHODOLOGY %%%
+% \unit{Experimental Setup and Methodology}
+% \input{chapters/part2_experiment/experiment.tex}
 
-%%% UNIT II. ELDER THEORY IN PRACTICE %%%
-\unit{Elder Theory in Practice}
-\input{chapters/part2_experiment/practice/concrete_example.tex} % Concrete example of Elder Theory in practice
-\input{chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex} % Complete Elder Training System
+% %%% UNIT II. ELDER THEORY IN PRACTICE %%%
+% \unit{Elder Theory in Practice}
+% \input{chapters/part2_experiment/practice/concrete_example.tex} % Concrete example of Elder Theory in practice
+% \input{chapters/part1_theory/mechanics_and_dynamics/elder_training_loop.tex} % Complete Elder Training System
 
-%%% UNIT III. PRACTICAL APPLICATIONS %%%
-\unit{Practical Applications}
-% Applications across various domains
-\input{chapters/part1_theory/applications/audio_encoding_example.tex} % Detailed example of audio encoding in the Elder Heliosystem
-\input{chapters/part1_theory/applications/audio_understanding.tex} % Audio Understanding at the Mentor Level
-\input{chapters/part1_theory/applications/multimodal_audio_generation.tex} % Multimodal Enriched Audio Generation
-\input{chapters/part1_theory/applications/additional_domain_applications.tex} % Applications beyond audio processing
+% %%% UNIT III. PRACTICAL APPLICATIONS %%%
+% \unit{Practical Applications}
+% % Applications across various domains
+% \input{chapters/part1_theory/applications/audio_encoding_example.tex} % Detailed example of audio encoding in the Elder Heliosystem
+% \input{chapters/part1_theory/applications/audio_understanding.tex} % Audio Understanding at the Mentor Level
+% \input{chapters/part1_theory/applications/multimodal_audio_generation.tex} % Multimodal Enriched Audio Generation
+% \input{chapters/part1_theory/applications/additional_domain_applications.tex} % Applications beyond audio processing
 
-%%% UNIT IV. PERFORMANCE EVALUATION %%%
-\unit{Performance Evaluation}
-\input{chapters/part2_experiment/benchmarks.tex}
-\input{chapters/part2_experiment/benchmark_comparison.tex}
+% %%% UNIT IV. PERFORMANCE EVALUATION %%%
+% \unit{Performance Evaluation}
+% \input{chapters/part2_experiment/benchmarks.tex}
+% \input{chapters/part2_experiment/benchmark_comparison.tex}
 
 \backmatter
 
 % Appendices
 \appendix
 \part{Appendices}
-\input{chapters/appendix/symbol_glossary.tex}
-\input{chapters/appendix/terminology_definitions.tex}
-\input{chapters/appendix/dimensional_consistency.tex}
-\input{chapters/appendix/theorem_cross_references.tex}
-\input{chapters/appendix/citation_validation.tex}
-\input{chapters/appendix/numerical_validation.tex}
-\input{chapters/appendix/comparative_analysis.tex}
-\input{chapters/appendix/advanced_proofs.tex}
-\input{chapters/appendix/gravitational_equations_validation.tex}
-\input{chapters/appendix/list_of_equations.tex}
+% \input{chapters/appendix/symbol_glossary.tex}
+% \input{chapters/appendix/terminology_definitions.tex}
+% \input{chapters/appendix/dimensional_consistency.tex}
+% \input{chapters/appendix/theorem_cross_references.tex}
+% \input{chapters/appendix/numerical_validation.tex}
+% \input{chapters/appendix/comparative_analysis.tex}
+% \input{chapters/appendix/advanced_proofs.tex}
+% \input{chapters/appendix/gravitational_equations_validation.tex}
+% \input{chapters/appendix/list_of_equations.tex}
 
 % Bibliography
 \printbibliography[title={References}]
