@@ -528,7 +528,7 @@ This computational efficiency translates directly to faster training times, redu
 
 \subsection{Comparison with Traditional Neural Networks}
 
-To illustrate the efficiency advantages of the Elder Heliosystem, we provide a detailed comparison with traditional 3-layer neural networks using Big O notation.
+To illustrate the efficiency advantages of the Elder Heliosystem, we provide a detailed comparison with traditional 3-layer learning architectures using Big O notation.
 
 \begin{table}[h]
 \centering
@@ -562,7 +562,7 @@ Optimization Iterations & $O(I)$ & $O(I / \gamma)$ where $\gamma > 1$ is the res
 
 \noindent where:
 \begin{itemize}
-    \item $n_1, n_2, n_3$ are the number of neurons in each layer of the traditional neural network
+    \item $n_1, n_2, n_3$ are the number of units in each layer of the traditional learning architecture
     \item $N, M, E$ are the number of parameters in Elder, Mentor, and Erudite components
     \item $D$ is the number of domains
     \item $S$ is the number of samples for transfer learning
@@ -573,7 +573,7 @@ Optimization Iterations & $O(I)$ & $O(I / \gamma)$ where $\gamma > 1$ is the res
 
 \subsection{Analysis of Efficiency Gains}
 
-The primary sources of efficiency gains in the Elder Heliosystem compared to traditional neural networks are:
+The primary sources of efficiency gains in the Elder Heliosystem compared to traditional learning architectures are:
 
 \begin{enumerate}
     \item \textbf{Forward Pass}: In traditional networks, each layer computes activations based on all inputs from the previous layer, resulting in multiplicative complexity based on layer sizes. In the Elder Heliosystem, knowledge propagates through orbital mechanics where only resonant frequencies interact significantly, creating sparse effective connectivity that scales additively.
@@ -586,7 +586,7 @@ The primary sources of efficiency gains in the Elder Heliosystem compared to tra
 \end{enumerate}
 
 \begin{theorem}[Asymptotic Efficiency Gain]
-For a system with $D$ domains, each with approximately equal parameter counts, the asymptotic efficiency gain of the Elder Heliosystem over a traditional neural network architecture is:
+For a system with $D$ domains, each with approximately equal parameter counts, the asymptotic efficiency gain of the Elder Heliosystem over a traditional learning architecture is:
 \begin{equation}
 \text{Efficiency Gain} = \Theta\left(\frac{D^2}{D \log D}\right) = \Theta\left(\frac{D}{\log D}\right)
 \end{equation}
@@ -595,7 +595,7 @@ This efficiency gain approaches $\Theta(D)$ as $D$ becomes large.
 
 \subsection{Detailed Time Complexity Analysis}
 
-We now provide a deeper analysis of the time complexity implications of the Elder Heliosystem compared to traditional neural networks across different operational phases. This analysis explores the nuanced temporal dynamics that emerge during training and inference.
+We now provide a deeper analysis of the time complexity implications of the Elder Heliosystem compared to traditional learning architectures across different operational phases. This analysis explores the nuanced temporal dynamics that emerge during training and inference.
 
 \begin{table}[h]
 \centering
