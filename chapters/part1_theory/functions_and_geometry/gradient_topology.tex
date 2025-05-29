@@ -1,6 +1,6 @@
 \chapter{Gradient Topology in the Elder Heliosystem}
 
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Chapter Summary]
+\begin{tcolorbox}[colback=PureBlue!5!white,colframe=PureBlue!75!black,title=Chapter Summary]
 This chapter examines the topological structure of gradient spaces in the Elder Heliosystem and its implications for learning dynamics. We develop a mathematical framework for analyzing gradient flows on complex-valued manifolds, contrast this approach with traditional Euclidean gradient spaces, and establish key principles governing parameter updates in curved topological environments. The chapter introduces specialized metrics that capture the geometric properties of heliomorphic gradient spaces, formulates theorems on convergence in these non-Euclidean settings, and analyzes how the phase-sensitive gradient topology enables more efficient navigation of the parameter landscape. Through detailed mathematical analysis, we demonstrate how the Elder Heliosystem's gradient topology naturally accounts for hierarchical knowledge structures, provides theoretical guarantees for improved optimization dynamics, and enables more stable and efficient learning compared to conventional approaches.
 \end{tcolorbox}
 
@@ -170,49 +170,137 @@ These basins act as attractors in the gradient flow, drawing parameters into con
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=1.0]
-    % Background grid
-    \draw[gray!30, thin] (-4,-3) grid (4,3);
+\begin{tikzpicture}[scale=1.1]
+    % Background gradient field
+    \shade[inner color=gray!5, outer color=gray!15] (-5,-4) rectangle (5,4);
     
-    % Resonance basin 1 (left)
-    \filldraw[blue!20, thick, blue] (-3,1) ellipse (0.8 and 1.2);
-    \node[blue, font=\small] at (-3,1) {Basin 1};
+    % Create sophisticated resonance basin contours with mathematical precision
+    \begin{scope}
+        % Basin 1: Elder resonance basin (blue) - more complex shape
+        \fill[blue!8] (-2.8,0.5) 
+            to[out=60,in=180] (-1.5,2.2)
+            to[out=0,in=120] (-0.2,1.8)
+            to[out=240,in=45] (-1.2,0.8)
+            to[out=225,in=90] (-2.2,0.1)
+            to[out=270,in=315] (-2.8,0.5);
+        \draw[blue!50, thick] (-2.8,0.5) 
+            to[out=60,in=180] (-1.5,2.2)
+            to[out=0,in=120] (-0.2,1.8)
+            to[out=240,in=45] (-1.2,0.8)
+            to[out=225,in=90] (-2.2,0.1)
+            to[out=270,in=315] (-2.8,0.5);
+        
+        % Basin 2: Mentor resonance basin (red) - central complex shape
+        \fill[red!12] (0.2,-1.5) 
+            to[out=45,in=270] (1.8,-0.2)
+            to[out=90,in=300] (1.2,1.1)
+            to[out=120,in=30] (-0.5,0.8)
+            to[out=210,in=135] (-1.1,-0.8)
+            to[out=315,in=180] (0.2,-1.5);
+        \draw[red!60, thick] (0.2,-1.5) 
+            to[out=45,in=270] (1.8,-0.2)
+            to[out=90,in=300] (1.2,1.1)
+            to[out=120,in=30] (-0.5,0.8)
+            to[out=210,in=135] (-1.1,-0.8)
+            to[out=315,in=180] (0.2,-1.5);
+        
+        % Basin 3: Erudite resonance basin (green) - asymmetric shape
+        \fill[green!10] (2.5,1.2) 
+            to[out=135,in=45] (1.8,2.5)
+            to[out=225,in=90] (2.2,1.8)
+            to[out=270,in=135] (3.2,1.5)
+            to[out=315,in=180] (4.1,1.8)
+            to[out=0,in=225] (3.8,2.8)
+            to[out=45,in=270] (3.2,3.2)
+            to[out=90,in=315] (2.8,2.5)
+            to[out=135,in=0] (2.5,1.2);
+        \draw[green!50, thick] (2.5,1.2) 
+            to[out=135,in=45] (1.8,2.5)
+            to[out=225,in=90] (2.2,1.8)
+            to[out=270,in=135] (3.2,1.5)
+            to[out=315,in=180] (4.1,1.8)
+            to[out=0,in=225] (3.8,2.8)
+            to[out=45,in=270] (3.2,3.2)
+            to[out=90,in=315] (2.8,2.5)
+            to[out=135,in=0] (2.5,1.2);
+    \end{scope}
     
-    % Resonance basin 2 (center)
-    \filldraw[red!20, thick, red] (0,-0.5) ellipse (1.2 and 0.8);
-    \node[red, font=\small] at (0,-0.5) {Basin 2};
+    % Resonance strength contours (level sets)
+    \foreach \r in {0.8,1.4,2.0} {
+        \draw[blue!20, dashed, very thin] (-1.5,1.5) circle (\r);
+        \draw[red!20, dashed, very thin] (0.5,-0.2) circle (\r);
+        \draw[green!20, dashed, very thin] (3,2.2) circle (\r);
+    }
     
-    % Resonance basin 3 (right)
-    \filldraw[green!20, thick, green] (2.5,1.5) ellipse (1.0 and 1.0);
-    \node[green, font=\small] at (2.5,1.5) {Basin 3};
+    % Phase coherence field lines (sophisticated flow visualization)
+    \foreach \startx/\starty in {-4.5/3, -4.2/1.5, -4/0, -3.8/-1.5, -4.5/-3} {
+        \draw[->, thick, blue!40, opacity=0.7] (\startx,\starty) 
+            to[out=45,in=180] ({-1.5+0.3*sin(180*(\starty+3)/6)},{1.5+0.2*cos(180*(\startx+4.5)/4.5)});
+    }
     
-    % Gradient flow arrows into basins
-    \draw[->, thick, blue!70] (-4,2) to[out=0,in=120] (-3,1);
-    \draw[->, thick, blue!70] (-2,2.5) to[out=250,in=60] (-3,1);
-    \draw[->, thick, red!70] (-1.5,-2) to[out=45,in=220] (0,-0.5);
-    \draw[->, thick, red!70] (1.5,-1.8) to[out=135,in=320] (0,-0.5);
-    \draw[->, thick, green!70] (4,0.5) to[out=180,in=30] (2.5,1.5);
-    \draw[->, thick, green!70] (3.5,3) to[out=210,in=90] (2.5,1.5);
+    \foreach \startx/\starty in {-2/3.5, -1.5/3.2, 0.8/3.8, 1.2/3.5} {
+        \draw[->, thick, red!40, opacity=0.7] (\startx,\starty) 
+            to[out=270,in=90] ({0.5+0.4*sin(180*(\startx+2)/4)},{-0.2-0.3*cos(180*(\starty-3)/1)});
+    }
     
-    % Phase coherence contours
-    \draw[dashed, purple] (-3,1) circle (1.5);
-    \draw[dashed, purple] (0,-0.5) circle (1.8);
-    \draw[dashed, purple] (2.5,1.5) circle (1.7);
+    \foreach \startx/\starty in {4.5/0.5, 4.2/-1, 4.8/-2.5, 4.5/-3.5} {
+        \draw[->, thick, green!40, opacity=0.7] (\startx,\starty) 
+            to[out=135,in=315] ({3+0.3*sin(180*(\starty+3)/7)},{2.2+0.3*cos(180*(\startx-4)/1)});
+    }
     
-    % Labels
-    \node at (-4,-2.5) {$\theta_1$};
-    \node at (0,-2.5) {$\theta_2$};
-    \node at (4,-2.5) {$\theta_3$};
-    \node[purple] at (-4,0) {Phase};
-    \node[purple] at (-4,-0.3) {coherence};
+    % Basin centers (attractors) with phase indicators
+    \filldraw[blue!70] (-1.5,1.5) circle (0.08);
+    \draw[blue!70, very thick] (-1.5,1.5) circle (0.15);
+    \foreach \angle in {0,60,120,180,240,300} {
+        \draw[blue!70, thick] ({-1.5+0.1*cos(\angle)},{1.5+0.1*sin(\angle)}) -- ({-1.5+0.2*cos(\angle)},{1.5+0.2*sin(\angle)});
+    }
     
-    % Coordinate axes
-    \draw[->, thick] (-4.5,0) -- (4.5,0);
-    \draw[->, thick] (0,-3.5) -- (0,3.5);
-    \node at (4.7,0) {$\theta_{\text{real}}$};
-    \node at (0,3.7) {$\theta_{\text{imag}}$};
+    \filldraw[red!70] (0.5,-0.2) circle (0.08);
+    \draw[red!70, very thick] (0.5,-0.2) circle (0.15);
+    \foreach \angle in {30,90,150,210,270,330} {
+        \draw[red!70, thick] ({0.5+0.1*cos(\angle)},{-0.2+0.1*sin(\angle)}) -- ({0.5+0.2*cos(\angle)},{-0.2+0.2*sin(\angle)});
+    }
+    
+    \filldraw[green!70] (3,2.2) circle (0.08);
+    \draw[green!70, very thick] (3,2.2) circle (0.15);
+    \foreach \angle in {15,75,135,195,255,315} {
+        \draw[green!70, thick] ({3+0.1*cos(\angle)},{2.2+0.1*sin(\angle)}) -- ({3+0.2*cos(\angle)},{2.2+0.2*sin(\angle)});
+    }
+    
+    % Separatrices (basin boundaries) - critical trajectories
+    \draw[thick, black!60, dashed] (-0.8,3.5) to[out=270,in=135] (1.5,0.5) to[out=315,in=90] (2.2,-2.5);
+    \draw[thick, black!60, dashed] (-4,-0.8) to[out=30,in=225] (-0.2,0.2) to[out=45,in=180] (2.8,1.5);
+    
+    % Mathematical annotations
+    \node[blue!80, font=\small\bfseries] at (-2.2,2.8) {$\mathcal{B}_{\text{Elder}}$};
+    \node[red!80, font=\small\bfseries] at (0.8,-1.8) {$\mathcal{B}_{\text{Mentor}}$};
+    \node[green!80, font=\small\bfseries] at (3.8,1.2) {$\mathcal{B}_{\text{Erudite}}$};
+    
+    % Resonance frequency labels
+    \node[blue!60, font=\tiny] at (-2.8,1) {$\omega_E$};
+    \node[red!60, font=\tiny] at (-0.3,-0.8) {$\omega_M$};
+    \node[green!60, font=\tiny] at (2.5,2.8) {$\omega_{Er}$};
+    
+    % Coordinate system with enhanced labeling
+    \draw[->, very thick] (-5,0) -- (5,0);
+    \draw[->, very thick] (0,-4) -- (0,4);
+    \node[font=\large] at (5.3,0) {$\theta_{\text{real}}$};
+    \node[font=\large] at (0,4.3) {$\theta_{\text{imag}}$};
+    
+    % Phase coherence legend
+    \node[font=\small, align=left] at (-4.5,-3.2) {
+        \textcolor{blue!70}{● Elder resonance}\\
+        \textcolor{red!70}{● Mentor resonance}\\
+        \textcolor{green!70}{● Erudite resonance}
+    };
+    
+    % Sophisticated mathematical notation
+    \node[font=\tiny, align=center] at (4.2,-3.5) {
+        $\cos(\Psi(\theta)) > 1-\epsilon$\\
+        Phase coherence threshold
+    };
 \end{tikzpicture}
-\caption{Resonance basins in the Elder gradient landscape. Each colored region represents a basin where parameters maintain specific phase relationships. Gradient flows (arrows) naturally converge into these basins, while dashed circles show phase coherence boundaries.}
+\caption{Advanced visualization of resonance basins in the Elder parameter space. Each basin $\mathcal{B}_i$ represents regions of high phase coherence where parameters naturally converge. The complex boundaries, field lines showing gradient flow, and resonance centers with phase indicators provide a mathematically precise representation of the Elder Heliosystem's gradient topology.}
 \label{fig:resonance_basins}
 \end{figure}
 

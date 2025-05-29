@@ -1,6 +1,6 @@
 \chapter{Heliomorphic Geometry in Elder Systems}
 
-\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Chapter Summary]
+\begin{tcolorbox}[colback=PureBlue!5!white,colframe=PureBlue!75!black,title=Chapter Summary]
 This chapter establishes the geometric foundations of Elder systems by introducing heliomorphic structures on complex manifolds. We develop a novel geometric framework that generalizes conformal mappings to incorporate radial dynamics, enabling precise modeling of knowledge propagation across abstraction levels. The chapter characterizes the radial flow properties that preserve knowledge integrity during transformations and presents theorems on heliomorphic invariants. We prove that under specific conditions, Elder transformations form a Lie group with a corresponding Lie algebra, allowing for infinitesimal analysis of knowledge evolution. Metrics for quantifying structural preservation during knowledge transfer are derived, with rigorous bounds on information loss. These geometric principles underpin the Elder system's ability to transfer knowledge across domains while maintaining structural relationships.
 \end{tcolorbox}
 
@@ -66,19 +66,19 @@ A \textbf{heliomorphic structure} on a complex manifold $\mathcal{E}_{\mathcal{M
   
   % Legend
   \node[align=left] at (5,2.5) {Gravitational Influence Fields};
-  \draw[thick, dotted, >=stealth, draw=black] (4,2) -- (4.7,2);
-  \node[align=left, font=\small] at (6,2) {Inward Propagation};
-  \draw[thick, dashed, >=stealth, draw=black] (4,1.5) -- (4.7,1.5);
-  \node[align=left, font=\small] at (6,1.5) {Outward Propagation};
-  \draw[thick, >=stealth, draw=black] (4,1) -- (4.7,1);
-  \node[align=left, font=\small] at (6,1) {Angular Transfer};
+  \draw[thick, dotted, >=stealth, draw=black] (5,2) -- (5.7,2);
+  \node[align=left, font=\small] at (7,2) {Inward Propagation};
+  \draw[thick, dashed, >=stealth, draw=black] (5,1.5) -- (5.7,1.5);
+  \node[align=left, font=\small] at (7,1.5) {Outward Propagation};
+  \draw[thick, >=stealth, draw=black] (5,1) -- (5.7,1);
+  \node[align=left, font=\small] at (7,1) {Angular Transfer};
   
-  \shade[inner color=eldercenter, outer color=elderouter, draw=elderborder, dashed] (4,0.5) rectangle (4.3,0.7);
-  \node[align=left, font=\small] at (5.8,0.6) {Elder Field};
-  \shade[inner color=mentorinner, outer color=mentorouter, draw=mentorborder, dashed] (4,0.1) rectangle (4.3,0.3);
-  \node[align=left, font=\small] at (5.9,0.2) {Mentor Field};
-  \shade[inner color=eruditeinner, outer color=eruditeouter, draw=eruditeborder, dashed] (4,-0.3) rectangle (4.3,-0.1);
-  \node[align=left, font=\small] at (5.9,-0.2) {Erudite Field};
+  \shade[inner color=eldercenter, outer color=elderouter, draw=elderborder, dashed] (5,0.5) rectangle (5.3,0.7);
+  \node[align=left, font=\small] at (7,0.6) {Elder Field};
+  \shade[inner color=mentorinner, outer color=mentorouter, draw=mentorborder, dashed] (5,0.1) rectangle (5.3,0.3);
+  \node[align=left, font=\small] at (7,0.2) {Mentor Field};
+  \shade[inner color=eruditeinner, outer color=eruditeouter, draw=eruditeborder, dashed] (5,-0.3) rectangle (5.3,-0.1);
+  \node[align=left, font=\small] at (7,-0.2) {Erudite Field};
   
   % Field radius markers
   \node[font=\small] at (1.5,0.4) {$r=1.5$};
@@ -235,10 +235,10 @@ This representation theorem provides a theoretical foundation for the Elder syst
 \centering
 \begin{tikzpicture}[scale=0.9]
   % Define colors
-  \colorlet{field0}{orange!80!red}
-  \colorlet{field1}{orange!60!red}
-  \colorlet{field2}{orange!40!red}
-  \colorlet{field3}{orange!20!red}
+  \colorlet{field0}{yellow!80!red}
+  \colorlet{field1}{yellow!60!red}
+  \colorlet{field2}{yellow!40!red}
+  \colorlet{field3}{yellow!20!red}
   
   % Define the coordinate system
   \draw[->, thick] (-4.5,0) -- (4.5,0) node[right] {$\text{Re}(z)$};
@@ -271,20 +271,20 @@ This representation theorem provides a theoretical foundation for the Elder syst
   % Representation of gravitational field function decomposition
   \begin{scope}[shift={(7,0)}]
     % Gravitational field decomposition equation
-    \node at (0,3) {$f(z) = \sum_{k=0}^{\infty} f_k(z)$};
-    \node at (0,2) {$f_k(z) = z^k \cdot P_k(z)$};
+    \node at (0.5,3) {$f(z) = \sum_{k=0}^{\infty} f_k(z)$};
+    \node at (0.5,2) {$f_k(z) = z^k \cdot P_k(z)$};
     
     % Function components for each gravitational field region
-    \draw[field0, thick] (-2,1) -- (2,1);
+    \draw[field0, thick] (-1,1) -- (1,1);
     \node[right] at (2,1) {$f_0(z)$ (Elder)};
     
-    \draw[field1, thick] (-2,0) -- (2,0);
+    \draw[field1, thick] (-1,0) -- (1,0);
     \node[right] at (2,0) {$f_1(z)$ (Mentor)};
     
-    \draw[field2, thick] (-2,-1) -- (2,-1);
+    \draw[field2, thick] (-1,-1) -- (1,-1);
     \node[right] at (2,-1) {$f_2(z)$ (Erudite)};
     
-    \draw[field3, thick] (-2,-2) -- (2,-2);
+    \draw[field3, thick] (-1,-2) -- (1,-2);
     \node[right] at (2,-2) {$f_3(z)$ (Task)};
   \end{scope}
   

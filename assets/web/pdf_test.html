@@ -6,88 +6,51 @@
     <title>Elder Theory PDF Viewer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 30px;
         }
-        .status {
-            background-color: #e8f5e8;
-            border: 1px solid #4caf50;
-            color: #2e7d32;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        .pdf-container {
+        .pdf-viewer {
             width: 100%;
             height: 800px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: none;
         }
-        .download-link {
-            display: inline-block;
-            background-color: #2196F3;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 10px 0;
-        }
-        .download-link:hover {
-            background-color: #1976D2;
+        .status {
+            padding: 15px;
+            background: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            margin: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎉 Elder Theory Framework - Complete with All 70 Annotations!</h1>
+            <h1>Elder Theory Framework</h1>
+            <p>Advanced Mathematical Visualization</p>
         </div>
         
         <div class="status">
-            <h3>✅ Achievement Unlocked: 100% Completion</h3>
-            <ul>
-                <li>✅ All 70 annotations successfully implemented</li>
-                <li>✅ Mathematical rigor enhanced throughout</li>
-                <li>✅ Knowledge architecture strengthened</li>
-                <li>✅ System dynamics refined</li>
-                <li>✅ Complex structures elaborated</li>
-                <li>✅ Documentation organized perfectly</li>
-            </ul>
-            <p><strong>Document Size:</strong> 4.39MB | <strong>Pages:</strong> 1048</p>
+            <strong>✅ Figure 15.3 Redesigned!</strong> The Resonance Basins figure has been completely transformed with sophisticated mathematical visualization including complex basin shapes, phase coherence field lines, and gradient flow dynamics.
         </div>
-
-        <div style="text-align: center; margin: 20px 0;">
-            <a href="/elder_arcane_realization.pdf" class="download-link" download>
-                📥 Download Complete PDF
-            </a>
-            <a href="/elder_arcane_realization.pdf" class="download-link" target="_blank">
-                🔍 Open in New Tab
-            </a>
-        </div>
-
-        <div style="text-align: center; margin-bottom: 20px;">
-            <p><strong>Elder Arcane Realization Framework</strong></p>
-            <p><em>Enhanced with comprehensive mathematical foundations</em></p>
-        </div>
-
-        <iframe 
-            src="/elder_arcane_realization.pdf" 
-            class="pdf-container"
-            title="Elder Theory Framework PDF">
+        
+        <iframe class="pdf-viewer" src="elder_arcane_realization.pdf" type="application/pdf">
+            <p>Your browser doesn't support PDF viewing. <a href="elder_arcane_realization.pdf">Download the PDF</a> to view the redesigned Figure 15.3.</p>
         </iframe>
     </div>
 </body>
