@@ -1,118 +1,109 @@
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=0.8, transform shape]
-    % Define styles
+\begin{tikzpicture}[scale=0.95]
+    % Define Elder color palette
+    \definecolor{elderblue}{RGB}{25,76,158}
+    \definecolor{elderorange}{RGB}{231,127,43}
+    \definecolor{eldergreen}{RGB}{34,139,34}
+    \definecolor{elderpurple}{RGB}{102,51,153}
+    
+    % Define clean, modern styles
     \tikzset{
         level/.style={
-            draw,
-            fill=blue!20,
-            rounded corners,
-            minimum width=3.5cm,
-            minimum height=1.4cm,
-            text width=3.3cm,
-            align=center
+            draw=elderblue,
+            fill=elderblue!8,
+            rounded corners=6pt,
+            minimum width=4cm,
+            minimum height=1.8cm,
+            text width=3.8cm,
+            align=center,
+            font=\normalsize,
+            inner sep=8pt
         },
-        channel/.style={
-            draw,
-            fill=orange!20,
-            rounded corners,
-            minimum width=2.8cm,
-            minimum height=1cm,
-            text width=2.6cm,
-            align=center
+        flow/.style={
+            draw=eldergreen,
+            fill=eldergreen!8,
+            rounded corners=4pt,
+            minimum width=3cm,
+            minimum height=1.2cm,
+            text width=2.8cm,
+            align=center,
+            font=\scriptsize,
+            inner sep=4pt
         },
-        capacity/.style={
-            draw,
-            fill=green!20,
-            rounded corners,
+        equation/.style={
+            draw=elderorange,
+            fill=elderorange!5,
+            rounded corners=4pt,
             minimum width=4.5cm,
             minimum height=1cm,
             text width=4.3cm,
-            align=center
+            align=center,
+            font=\scriptsize,
+            inner sep=4pt
         },
         arrow/.style={
             ->,
+            elderblue,
             thick,
             >=latex
         },
-        infotag/.style={
-            draw,
+        info/.style={
+            draw=elderorange,
+            fill=elderorange!15,
             circle,
-            fill=red!10,
-            minimum size=1.2cm,
-            text width=1.1cm,
-            align=center
+            minimum size=1.4cm,
+            font=\scriptsize,
+            inner sep=2pt
         }
     }
     
-    % Hierarchical levels
-    \node[level] (elder) at (0,6) {Elder Level\\Universal Principles};
-    \node[level] (mentor) at (0,3) {Mentor Level\\Meta-Knowledge};
-    \node[level] (erudite) at (0,0) {Erudite Level\\Domain Knowledge};
+    % Title
+    \node[font=\Large\bfseries, elderblue] at (0, 7.5) {Hierarchical Information Flow};
     
-    % Vertical connections
-    \draw[arrow] (elder) -- (mentor);
-    \draw[arrow] (mentor) -- (erudite);
+    % Central hierarchy column
+    \node[level] (elder) at (0, 5.5) {\textbf{Elder Level}\\Universal Principles\\$H(E_l) = \log_2(U)$};
+    \node[level] (mentor) at (0, 3) {\textbf{Mentor Level}\\Meta-Knowledge\\$H(M) = \log_2(K_m)$};
+    \node[level] (erudite) at (0, 0.5) {\textbf{Erudite Level}\\Domain Expertise\\$H(E_r) = \log_2(K_d)$};
     
-    % Channels
-    \node[channel] (e2m) at (3,4.5) {Elder-Mentor\\Channel\\$C_{El \to M}$};
-    \node[channel] (m2e) at (3,1.5) {Mentor-Erudite\\Channel\\$C_{M \to E}$};
+    % Information content indicators (left side)
+    \node[info] (i_elder) at (-5, 5.5) {$I(E_l)$\\High};
+    \node[info] (i_mentor) at (-5, 3) {$I(M)$\\Medium};
+    \node[info] (i_erudite) at (-5, 0.5) {$I(E_r)$\\Specific};
     
-    % Capacity equations
-    \node[capacity] (e2m_eq) at (7,4.5) {$\frac{D_{El}}{2} \log_2\left(1 + \frac{P_{El}}{N_0}\right)$};
-    \node[capacity] (m2e_eq) at (7,1.5) {$\frac{D_M}{2} \log_2\left(1 + \frac{P_M}{N_0}\right)$};
+    % Flow channels (right side)
+    \node[flow] (flow1) at (5, 4.25) {\textbf{Elder $\to$ Mentor}\\Channel Capacity\\$C_1 = \min(B_1, S_1)$};
+    \node[flow] (flow2) at (5, 1.75) {\textbf{Mentor $\to$ Erudite}\\Channel Capacity\\$C_2 = \min(B_2, S_2)$};
     
-    % Connecting channels to equations
-    \draw[arrow] (e2m) -- (e2m_eq);
-    \draw[arrow] (m2e) -- (m2e_eq);
+    % Main information flow arrows
+    \draw[arrow, line width=3pt, eldergreen] (elder) -- (mentor) node[midway, left, font=\scriptsize] {Abstraction};
+    \draw[arrow, line width=3pt, eldergreen] (mentor) -- (erudite) node[midway, left, font=\scriptsize] {Specialization};
     
-    % Information content
-    \node[infotag] (i_elder) at (-3,6) {$I(e_{El})$};
-    \node[infotag] (i_mentor) at (-3,3) {$I(e_M)$};
-    \node[infotag] (i_erudite) at (-3,0) {$I(e_E)$};
+    % Information content connections
+    \draw[arrow, elderblue!60, dashed] (i_elder) -- (elder);
+    \draw[arrow, elderblue!60, dashed] (i_mentor) -- (mentor);
+    \draw[arrow, elderblue!60, dashed] (i_erudite) -- (erudite);
     
-    \draw[arrow, dashed] (i_elder) -- (elder);
-    \draw[arrow, dashed] (i_mentor) -- (mentor);
-    \draw[arrow, dashed] (i_erudite) -- (erudite);
+    % Flow monitoring connections
+    \draw[arrow, eldergreen!60] (elder.east) -- (flow1.west);
+    \draw[arrow, eldergreen!60] (mentor.east) -- (flow1.west);
+    \draw[arrow, eldergreen!60] (mentor.east) -- (flow2.west);
+    \draw[arrow, eldergreen!60] (erudite.east) -- (flow2.west);
     
-    % Bottleneck
-    \node[draw, fill=yellow!20, rounded corners, minimum width=10cm, text width=9.8cm, align=center] (bottleneck) at (3.5,-2) {
-        \textbf{End-to-End Channel Capacity:}\\
-        $C_{El \to E} \leq \min(C_{El \to M}, C_{M \to E})$\\
-        \small Identifies information flow bottlenecks in the hierarchy
+    % System capacity equation at bottom
+    \node[equation] (capacity) at (0, -1.5) {
+        \textbf{End-to-End Capacity:} $C_{total} = \min(C_1, C_2) \cdot (1 + \alpha \cdot R)$
     };
     
-    \draw[arrow, dotted, thick] (e2m_eq) -- (bottleneck);
-    \draw[arrow, dotted, thick] (m2e_eq) -- (bottleneck);
-    
-    % Total information
-    \node[draw, fill=red!15, ellipse, minimum width=8cm, minimum height=1.8cm, text width=7.5cm, align=center] (total) at (3.5,8) {
-        \textbf{Total Information Content:}\\
-        $I_{total} = \sum_{i} I(e_{El,i}) + \sum_{j} I(e_{M,j}) + \sum_{k} I(e_{E,k}) + I_{synergy}$
+    % Resonance enhancement indicator
+    \node[draw=elderpurple, fill=elderpurple!10, rounded corners=3pt, font=\scriptsize, inner sep=3pt] (resonance) at (6, -1.5) {
+        Resonance Factor\\$R = \cos(\Delta\phi)$
     };
     
-    \draw[arrow, dotted, thick] (elder) -- (total);
-    \draw[arrow, dotted, thick] (i_elder) -- (total);
-    
-    % Synergy
-    \node[draw, fill=purple!15, rounded corners, text width=5cm, align=center] (synergy) at (8,6) {
-        \textbf{Synergistic Information:}\\
-        $I_{synergy} = \Omega\left(\log(N_{total}) \cdot \sum_{i,j,k} I(e_{El,i}, e_{M,j}, e_{E,k})\right)$
-    };
-    
-    \draw[arrow, dashed] (synergy) -- (total);
-    
-    % Resonance effect
-    \begin{scope}[shift={(7,3)}]
-        \draw[ultra thick, blue, decorate, decoration={coil, amplitude=2pt, segment length=3pt}] 
-            (0,0) circle (0.8cm);
-        \node at (0,0) {Resonance};
-        \node[above=0.9cm] {Enhances};
-        \draw[arrow, blue] (0,0.8) -- (0,2);
-    \end{scope}
-    
-    % Add title
-    \node[font=\bfseries, scale=1.2] at (3.5,9.5) {Hierarchical Information Flow in the Elder System};
+    % Connect capacity elements
+    \draw[arrow, elderblue] (flow1.south) to[bend right=15] (capacity.north);
+    \draw[arrow, elderblue] (flow2.south) to[bend left=15] (capacity.north);
+    \draw[arrow, elderpurple] (resonance) -- (capacity);
     
 \end{tikzpicture}
 \caption{Information flow and capacity in the Elder system's hierarchical structure. Information content at each level (Elder, Mentor, Erudite) is represented by the Shannon mutual information between entity states and parameters. Information flows between hierarchical levels through channels with specific capacities determined by signal-to-noise ratios and dimensionality. The end-to-end capacity from Elder to Erudite is bounded by the minimum capacity of the individual channels, identifying potential bottlenecks. Resonance mechanisms enhance channel capacity by improving signal quality. The system exhibits synergistic information that scales superlinearly with the number of entities, contributing to the total information content beyond the sum of individual entity information.}
