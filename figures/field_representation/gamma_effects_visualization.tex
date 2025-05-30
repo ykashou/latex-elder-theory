@@ -1,0 +1,186 @@
+\begin{tikzpicture}[scale=0.9]
+
+% Define Elder colors
+\definecolor{ElderBlue}{RGB}{70, 130, 180}
+\definecolor{MentorOrange}{RGB}{255, 140, 70}
+\definecolor{EruditeGreen}{RGB}{60, 180, 120}
+\definecolor{LightGray}{RGB}{240, 240, 240}
+\definecolor{DeepRed}{RGB}{180, 40, 40}
+\definecolor{GammaGold}{RGB}{255, 215, 0}
+
+% Background
+\fill[LightGray!20] (-12, -9) rectangle (12, 8);
+
+% Title
+\node[black, font=\Large\bfseries] at (0, 7.5) {Field Representation Formula with Gamma Effects};
+
+% Left panel: Mathematical Formula
+\begin{scope}[shift={(-8, 3)}]
+    \node[DeepRed, font=\large\bfseries] at (0, 2.5) {Field Representation Formula};
+    
+    % Main formula box
+    \draw[DeepRed, thick, fill=DeepRed!10] (-3.5, 1.2) rectangle (3.5, 2.2);
+    \node[DeepRed, font=\normalsize] at (0, 1.7) {
+        $F_{\theta}^E(x) = \sum_{j=1}^{N} \gamma_j |x - r_j|^2 e^{i\phi_j} \hat{r}_j(x)$
+    };
+    
+    % Component breakdown
+    \node[black, font=\small\bfseries] at (0, 0.8) {Component Analysis:};
+    
+    % Gamma coefficient
+    \draw[GammaGold, thick, fill=GammaGold!10] (-3.5, 0.1) rectangle (3.5, 0.6);
+    \node[GammaGold, font=\small, align=center] at (0, 0.35) {
+        $\gamma_j$: Gravitational coupling strength\\
+        Controls field intensity at position $j$
+    };
+    
+    % Distance term
+    \draw[ElderBlue, thick, fill=ElderBlue!10] (-3.5, -0.6) rectangle (3.5, -0.1);
+    \node[ElderBlue, font=\small, align=center] at (0, -0.35) {
+        $|x - r_j|^2$: Quadratic distance decay\\
+        Gravitational field falloff
+    };
+    
+    % Phase term
+    \draw[MentorOrange, thick, fill=MentorOrange!10] (-3.5, -1.3) rectangle (3.5, -0.8);
+    \node[MentorOrange, font=\small, align=center] at (0, -1.05) {
+        $e^{i\phi_j}$: Complex phase modulation\\
+        Knowledge domain orientation
+    };
+    
+    % Direction term
+    \draw[EruditeGreen, thick, fill=EruditeGreen!10] (-3.5, -2.0) rectangle (3.5, -1.5);
+    \node[EruditeGreen, font=\small, align=center] at (0, -1.75) {
+        $\hat{r}_j(x)$: Radial unit vector\\
+        Spatial field direction
+    };
+\end{scope}
+
+% Center panel: Gamma Effect Visualization
+\begin{scope}[shift={(0, 0)}]
+    \node[GammaGold, font=\large\bfseries] at (0, 4.5) {Gamma Effects on Field Intensity};
+    
+    % Coordinate system
+    \draw[black, thick, ->] (-2.5, -1) -- (2.5, -1) node[right] {$x$};
+    \draw[black, thick, ->] (0, -2.5) -- (0, 2.5) node[above] {$y$};
+    
+    % Three field sources with different gamma values
+    \coordinate (r1) at (-1.5, 0);
+    \coordinate (r2) at (0, 0);
+    \coordinate (r3) at (1.5, 0);
+    
+    % Field source points
+    \fill[ElderBlue] (r1) circle (0.1);
+    \fill[MentorOrange] (r2) circle (0.1);
+    \fill[EruditeGreen] (r3) circle (0.1);
+    
+    % Labels for sources
+    \node[ElderBlue, font=\small] at (-1.5, -0.4) {$r_1$};
+    \node[MentorOrange, font=\small] at (0, -0.4) {$r_2$};
+    \node[EruditeGreen, font=\small] at (1.5, -0.4) {$r_3$};
+    
+    % Gamma values
+    \node[GammaGold, font=\small\bfseries] at (-1.5, 0.4) {$\gamma_1 = 0.5$};
+    \node[GammaGold, font=\small\bfseries] at (0, 0.4) {$\gamma_2 = 1.0$};
+    \node[GammaGold, font=\small\bfseries] at (1.5, 0.4) {$\gamma_3 = 1.5$};
+    
+    % Field intensity contours
+    \foreach \r in {0.3, 0.6, 0.9} {
+        \draw[ElderBlue, opacity=0.3] (r1) circle (\r * 0.5);
+        \draw[MentorOrange, opacity=0.5] (r2) circle (\r);
+        \draw[EruditeGreen, opacity=0.7] (r3) circle (\r * 1.5);
+    }
+    
+    % Field vectors at sample points
+    \foreach \angle in {30, 60, 90, 120, 150} {
+        \coordinate (p1) at ($(r1) + (\angle:0.8)$);
+        \coordinate (p2) at ($(r2) + (\angle:0.8)$);
+        \coordinate (p3) at ($(r3) + (\angle:0.8)$);
+        
+        \draw[ElderBlue, thick, ->] (p1) -- +(\angle-180:0.2);
+        \draw[MentorOrange, thick, ->] (p2) -- +(\angle-180:0.3);
+        \draw[EruditeGreen, thick, ->] (p3) -- +(\angle-180:0.4);
+    }
+    
+    % Legend
+    \node[black, font=\small] at (0, -2.8) {Field strength $\propto \gamma_j |x-r_j|^2$};
+\end{scope}
+
+% Right panel: Combined Field Effect
+\begin{scope}[shift={(8, 0)}]
+    \node[DeepRed, font=\large\bfseries] at (0, 4.5) {Superposed Field};
+    
+    % Coordinate system
+    \draw[black, thick, ->] (-2.5, -1) -- (2.5, -1) node[right] {$x$};
+    \draw[black, thick, ->] (0, -2.5) -- (0, 2.5) node[above] {$y$};
+    
+    % Combined field visualization
+    \foreach \x in {-2, -1.5, ..., 2} {
+        \foreach \y in {-2, -1.5, ..., 2} {
+            \coordinate (p) at (\x, \y);
+            
+            % Calculate combined field intensity (simplified)
+            \pgfmathsetmacro{\dist1}{sqrt((\x + 1.5)^2 + \y^2)}
+            \pgfmathsetmacro{\dist2}{sqrt(\x^2 + \y^2)}
+            \pgfmathsetmacro{\dist3}{sqrt((\x - 1.5)^2 + \y^2)}
+            
+            \pgfmathsetmacro{\field1}{0.5 * \dist1^2}
+            \pgfmathsetmacro{\field2}{1.0 * \dist2^2}
+            \pgfmathsetmacro{\field3}{1.5 * \dist3^2}
+            
+            \pgfmathsetmacro{\totalfield}{\field1 + \field2 + \field3}
+            \pgfmathsetmacro{\intensity}{min(\totalfield / 10, 1)}
+            
+            \fill[DeepRed, opacity=\intensity] (p) circle (0.05);
+        }
+    }
+    
+    % Source positions
+    \fill[black] (-1.5, 0) circle (0.08);
+    \fill[black] (0, 0) circle (0.08);
+    \fill[black] (1.5, 0) circle (0.08);
+    
+    % Combined field equation
+    \node[DeepRed, font=\small, align=center] at (0, -3.2) {
+        $F_{total} = \gamma_1 |x-r_1|^2 + \gamma_2 |x-r_2|^2 + \gamma_3 |x-r_3|^2$
+    };
+\end{scope}
+
+% Bottom panel: Gamma Parameter Effects
+\begin{scope}[shift={(0, -6)}]
+    \node[GammaGold, font=\large\bfseries] at (0, 1.5) {Gamma Parameter Interpretation};
+    
+    % Three boxes showing different gamma effects
+    \draw[GammaGold, thick, fill=GammaGold!10] (-9, -0.5) rectangle (-3, 1);
+    \node[GammaGold, font=\small, align=center] at (-6, 0.25) {
+        \textbf{Small $\gamma$ ($\gamma < 1$)}\\
+        Weak gravitational coupling\\
+        Peripheral field influence\\
+        Limited knowledge transfer
+    };
+    
+    \draw[GammaGold, thick, fill=GammaGold!15] (-2.5, -0.5) rectangle (2.5, 1);
+    \node[GammaGold, font=\small, align=center] at (0, 0.25) {
+        \textbf{Moderate $\gamma$ ($\gamma = 1$)}\\
+        Balanced field strength\\
+        Standard gravitational effect\\
+        Optimal knowledge representation
+    };
+    
+    \draw[GammaGold, thick, fill=GammaGold!20] (3, -0.5) rectangle (9, 1);
+    \node[GammaGold, font=\small, align=center] at (6, 0.25) {
+        \textbf{Large $\gamma$ ($\gamma > 1$)}\\
+        Strong gravitational coupling\\
+        Dominant field influence\\
+        Enhanced knowledge consolidation
+    };
+    
+    % Mathematical interpretation
+    \draw[DeepRed, thick, fill=DeepRed!10] (-6, -2.2) rectangle (6, -1.2);
+    \node[DeepRed, font=\small, align=center] at (0, -1.7) {
+        \textbf{Physical Interpretation}: $\gamma_j$ represents the gravitational mass at knowledge center $r_j$\\
+        Higher $\gamma$ values create stronger learning attractors and deeper knowledge wells
+    };
+\end{scope}
+
+\end{tikzpicture}

@@ -48,13 +48,13 @@
 
 % Center: Heliomorphic differential equations
 \begin{scope}[shift={(0, 3)}]
-    \node[black, font=\large\bfseries] at (0, 1.5) {Heliomorphic Differential Equations};
+    \node[black, font=\large\bfseries] at (0, 3) {Heliomorphic Differential Equations};
     
     % First equation
-    \node[black, font=\normalsize] at (0, 0.8) {$\displaystyle\frac{\partial f}{\partial r} = \gamma(r)e^{i\beta(r,\theta)}\frac{f}{r}$};
+    \node[black, font=\normalsize] at (0, 2) {$\displaystyle\frac{\partial f}{\partial r} = \gamma(r)e^{i\beta(r,\theta)}\frac{f}{r}$};
     
     % Second equation  
-    \node[black, font=\normalsize] at (0, 0.2) {$\displaystyle\frac{\partial f}{\partial \theta} = i\alpha(r,\theta)f$};
+    \node[black, font=\normalsize] at (0, 1) {$\displaystyle\frac{\partial f}{\partial \theta} = i\alpha(r,\theta)f$};
     
     % Parameter descriptions
     \node[ElderBlue, font=\small, align=left] at (0, -0.5) {
@@ -75,7 +75,7 @@
 \end{scope}
 
 % Right side: Gravitational coupling visualization
-\begin{scope}[shift={(7, 0)}]
+\begin{scope}[shift={(5, 0)}]
     % Gravitational field lines
     \foreach \angle in {0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330} {
         \draw[ElderBlue!60, thick, ->] (0,0) -- (\angle:2.5);
@@ -100,21 +100,21 @@
 \end{scope}
 
 % Bottom: Heliomorphic properties
-\begin{scope}[shift={(0, -5.5)}]
+\begin{scope}[shift={(0, -8)}]
     \node[black, font=\large\bfseries] at (0, 2.5) {Key Properties};
     
     % Property boxes - stacked vertically with expanded width
-    \draw[ElderBlue, thick, fill=ElderBlue!10] (-6, 1.2) rectangle (6, 2.2);
+    \draw[ElderBlue, thick, fill=ElderBlue!10] (-7, 1.2) rectangle (7, 2.2);
     \node[ElderBlue, font=\small, align=center] at (0, 1.7) {
         \textbf{Isomorphism}: $\Psi: \elder{d} \rightarrow \mathcal{HL}(\mathcal{D}_d)$ preserves Elder Spaces $\leftrightarrow$ Heliomorphic Functions
     };
     
-    \draw[MentorOrange, thick, fill=MentorOrange!10] (-6, 0.1) rectangle (6, 1.1);
+    \draw[MentorOrange, thick, fill=MentorOrange!10] (-7, 0.1) rectangle (7, 1.1);
     \node[MentorOrange, font=\small, align=center] at (0, 0.6) {
         \textbf{Convolution}: $(f * g)(z) = \frac{1}{2\pi i} \oint f(\zeta) g\left(\frac{z\bar{z}}{\bar{\zeta}}\right) \frac{d\zeta}{\zeta - z}$ enables Knowledge Transfer
     };
     
-    \draw[EruditeGreen, thick, fill=EruditeGreen!10] (-6, -1.0) rectangle (6, 0.0);
+    \draw[EruditeGreen, thick, fill=EruditeGreen!10] (-7, -1.0) rectangle (7, 0.0);
     \node[EruditeGreen, font=\small, align=center] at (0, -0.5) {
         \textbf{Hierarchical Domains}: $\mathcal{D}_{\text{Elder}} \subset \mathcal{D}_{\text{Mentor}} \subset \mathcal{D}_{\text{Erudite}}$ preserve abstraction levels
     };
