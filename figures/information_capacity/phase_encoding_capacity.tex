@@ -1,174 +1,188 @@
 \begin{figure}[t]
 \centering
-\begin{tikzpicture}[scale=0.8, transform shape]
-    % Define styles
+\begin{tikzpicture}[scale=0.9]
+    % Define colors
+    \definecolor{elderblue}{RGB}{25,76,158}
+    \definecolor{elderorange}{RGB}{231,127,43}
+    \definecolor{eldergreen}{RGB}{34,139,34}
+    
+    % Define styles with better spacing and readability
     \tikzset{
         phase/.style={
-            draw,
+            draw=elderblue,
             circle,
-            fill=blue!15,
-            minimum size=1.8cm,
-            text width=1.7cm,
-            align=center
+            fill=elderblue!10,
+            minimum size=1.6cm,
+            text width=1.4cm,
+            align=center,
+            font=\scriptsize
         },
         relation/.style={
-            draw,
-            fill=green!15,
+            draw=eldergreen,
+            fill=eldergreen!10,
             ellipse,
-            minimum width=2.5cm,
-            minimum height=1.4cm,
-            text width=2.3cm,
-            align=center
+            minimum width=2.2cm,
+            minimum height=1.1cm,
+            text width=2cm,
+            align=center,
+            font=\scriptsize
         },
         equation/.style={
-            draw,
-            fill=orange!15,
-            rounded corners,
-            minimum width=5cm,
-            minimum height=1.2cm,
-            text width=4.8cm,
-            align=center
+            draw=elderorange,
+            fill=elderorange!5,
+            rounded corners=4pt,
+            minimum width=4.5cm,
+            minimum height=1cm,
+            text width=4.3cm,
+            align=center,
+            font=\scriptsize
         },
         arrow/.style={
             ->,
+            elderblue,
             thick,
             >=latex
         },
-        guide/.style={
-            dotted,
-            thick
+        curve/.style={
+            thick,
+            samples=50,
+            smooth
         }
     }
     
-    % Phase encoding section
+    % Phase encoding section (redesigned with better spacing)
     \begin{scope}[shift={(0,0)}]
-        % Title
-        \node[font=\bfseries] at (0,5) {Phase Encoding Capacity};
+        % Title with more space
+        \node[font=\large\bfseries, elderblue] at (0,5.5) {Phase Encoding Capacity};
         
-        % Individual phases
-        \node[phase] (p1) at (-2,3) {Entity 1\\Phase};
-        \node[phase] (p2) at (0,3) {Entity 2\\Phase};
-        \node[phase] (p3) at (2,3) {Entity 3\\Phase};
+        % Individual phases with better positioning
+        \node[phase] (p1) at (-2.5,3.5) {Entity 1\\Phase};
+        \node[phase] (p2) at (0,3.5) {Entity 2\\Phase};
+        \node[phase] (p3) at (2.5,3.5) {Entity 3\\Phase};
         
-        % Phase relationships
-        \node[relation] (r12) at (-1,1) {1:2 Phase\\Relationship};
-        \node[relation] (r23) at (1,1) {2:3 Phase\\Relationship};
-        \node[relation] (r13) at (0,-1) {1:3 Phase\\Relationship};
+        % Information bits positioned above phases
+        \node[draw=elderorange, fill=elderorange!20, circle, minimum size=0.7cm, font=\tiny] at (-2.5,4.7) {$K$ bits};
+        \node[draw=elderorange, fill=elderorange!20, circle, minimum size=0.7cm, font=\tiny] at (0,4.7) {$K$ bits};
+        \node[draw=elderorange, fill=elderorange!20, circle, minimum size=0.7cm, font=\tiny] at (2.5,4.7) {$K$ bits};
         
-        % Connections
-        \draw[arrow] (p1) -- (r12);
-        \draw[arrow] (p2) -- (r12);
-        \draw[arrow] (p2) -- (r23);
-        \draw[arrow] (p3) -- (r23);
-        \draw[arrow] (p1) -- (r13);
-        \draw[arrow] (p3) -- (r13);
+        % Phase relationships with cleaner spacing
+        \node[relation] (r12) at (-1.25,1.8) {1:2 Phase\\Relation};
+        \node[relation] (r23) at (1.25,1.8) {2:3 Phase\\Relation};
+        \node[relation] (r13) at (0,0.2) {1:3 Phase\\Relation};
         
-        % Information bits
-        \node[draw, fill=red!10, circle, minimum size=0.8cm] at (-2,4) {$K$ bits};
-        \node[draw, fill=red!10, circle, minimum size=0.8cm] at (0,4) {$K$ bits};
-        \node[draw, fill=red!10, circle, minimum size=0.8cm] at (2,4) {$K$ bits};
-        \node[draw, fill=red!10, circle, minimum size=0.8cm] at (-1,0) {$M_2$ bits};
-        \node[draw, fill=red!10, circle, minimum size=0.8cm] at (1,0) {$M_2$ bits};
-        \node[draw, fill=red!10, circle, minimum size=0.8cm] at (0,-2) {$M_2$ bits};
+        % Information bits for relationships
+        \node[draw=elderorange, fill=elderorange!20, circle, minimum size=0.7cm, font=\tiny] at (-1.25,1) {$M_2$ bits};
+        \node[draw=elderorange, fill=elderorange!20, circle, minimum size=0.7cm, font=\tiny] at (1.25,1) {$M_2$ bits};
+        \node[draw=elderorange, fill=elderorange!20, circle, minimum size=0.7cm, font=\tiny] at (0,-0.6) {$M_3$ bits};
         
-        % Capacity equation
-        \node[equation] (phase_eq) at (0,-4) {
+        % Cleaner connections
+        \draw[arrow, elderblue!60] (p1) -- (r12);
+        \draw[arrow, elderblue!60] (p2) -- (r12);
+        \draw[arrow, elderblue!60] (p2) -- (r23);
+        \draw[arrow, elderblue!60] (p3) -- (r23);
+        \draw[arrow, elderblue!60] (p1) to[bend right=15] (r13);
+        \draw[arrow, elderblue!60] (p3) to[bend left=15] (r13);
+        
+        % Main capacity equation with better spacing
+        \node[equation] (phase_eq) at (0,-2.2) {
             $C_{phase} = N \log_2(K) + \sum_{i=2}^{N} \binom{N}{i} \log_2(M_i)$
         };
         
-        % Resonance enhancement
-        \node[equation] (res_eq) at (0,-6) {
+        % Resonance enhancement equation
+        \node[equation] (res_eq) at (0,-3.7) {
             $C_{phase}^{res} = C_{phase} \cdot (1 + \alpha \cdot r)$
         };
         
-        \draw[guide] (r13) -- (phase_eq);
-        \draw[arrow] (phase_eq) -- (res_eq);
+        % Connection between equations
+        \draw[arrow, elderblue] (phase_eq) -- (res_eq);
     \end{scope}
     
-    % Capacity comparison section
-    \begin{scope}[shift={(8,0)}]
-        % Title
-        \node[font=\bfseries] at (0,5) {Capacity Comparison};
+    % Capacity comparison section (redesigned)
+    \begin{scope}[shift={(9,0)}]
+        % Title with better spacing
+        \node[font=\large\bfseries, elderblue] at (0,5.5) {Capacity Comparison};
         
-        % Coordinate system
-        \draw[->] (-3,0) -- (3,0) node[right] {Parameters};
-        \draw[->] (0,-3) -- (0,3) node[above] {Capacity};
+        % Cleaner coordinate system
+        \draw[thick, elderblue, ->] (-2.5,0) -- (2.5,0) node[right, font=\scriptsize] {Parameters};
+        \draw[thick, elderblue, ->] (0,-0.5) -- (0,3.5) node[above, font=\scriptsize] {Capacity};
         
-        % Traditional network curve
-        \draw[domain=-2.5:2.5, samples=50, smooth, variable=\x, green!50!black, thick] 
-            plot ({\x}, {0.9*\x});
+        % Grid for better readability
+        \draw[gray!20] (-2,0) grid[step=0.5] (2,3);
+        
+        % Traditional network curve (linear)
+        \draw[domain=-2:2, curve, eldergreen, thick] 
+            plot ({\x}, {0.8*\x + 1.5});
             
-        % Elder system curve
-        \draw[domain=-2.5:2.5, samples=50, smooth, variable=\x, red, thick] 
-            plot ({\x}, {0.9*\x + 0.7*ln(abs(\x) + 1)});
+        % Elder system curve (superlinear)
+        \draw[domain=-2:2, curve, elderorange, thick] 
+            plot ({\x}, {0.8*\x + 1.5 + 0.6*ln(abs(\x) + 1)});
             
-        % Curve labels
-        \node[green!50!black] at (2.5,2) {Traditional};
-        \node[red] at (2.5,3) {Elder};
+        % Better curve labels with background
+        \node[eldergreen, fill=white, draw=eldergreen, rounded corners=2pt, font=\scriptsize, inner sep=2pt] at (1.5,1.8) {Traditional};
+        \node[elderorange, fill=white, draw=elderorange, rounded corners=2pt, font=\scriptsize, inner sep=2pt] at (1.5,2.8) {Elder};
         
-        % Capacity ratio equation
-        \node[equation] at (0,-4) {
+        % Capacity ratio equation with better positioning
+        \node[equation] at (0,-1.5) {
             $\frac{C_{Elder}}{C_{traditional}} = \Theta\left(\log D \cdot (1 + \gamma \cdot r)\right)$
         };
         
-        % Enhancement factors
-        \node[draw, fill=blue!10, rounded corners, text width=5cm, align=center] at (0,-6) {
+        % Enhancement factors in cleaner box
+        \node[draw=elderblue, fill=elderblue!5, rounded corners=3pt, text width=4cm, align=left, font=\scriptsize, inner sep=4pt] at (0,-3) {
             $D$ = Number of domains\\
             $r$ = Resonance strength\\
             $\gamma$ = System constant
         };
     \end{scope}
     
-    % Cross-domain information
-    \begin{scope}[shift={(0,-8.5)}]
-        % Title
-        \node[font=\bfseries] at (0,0) {Cross-Domain Capacity Enhancement};
+    % Cross-domain information (redesigned with better spacing)
+    \begin{scope}[shift={(0,-7)}]
+        % Title with better positioning
+        \node[font=\normalsize\bfseries, elderblue] at (0,1) {Cross-Domain Capacity Enhancement};
         
-        % Domains
-        \node[draw, fill=blue!15, circle, minimum size=2cm] (d1) at (-2,-2) {Domain 1};
-        \node[draw, fill=blue!15, circle, minimum size=2cm] (d2) at (2,-2) {Domain 2};
+        % Domains with improved design
+        \node[draw=elderblue, fill=elderblue!10, circle, minimum size=1.8cm, font=\scriptsize] (d1) at (-2,-1.5) {Domain 1};
+        \node[draw=elderblue, fill=elderblue!10, circle, minimum size=1.8cm, font=\scriptsize] (d2) at (2,-1.5) {Domain 2};
         
-        % Shared information
+        % Cleaner overlap visualization
         \begin{scope}
-            \clip (-2,-2) circle (1cm);
-            \clip (2,-2) circle (1cm);
-            \fill[red!20] (-2,-2) -- (2,-2) -- (2,0) -- (-2,0) -- cycle;
+            \clip (-2,-1.5) circle (0.9cm);
+            \fill[elderorange!30] (2,-1.5) circle (0.9cm);
         \end{scope}
         
-        % Information measures
-        \node[draw=none] at (-2.7,-3.2) {$C_{d_1}$};
-        \node[draw=none] at (2.7,-3.2) {$C_{d_2}$};
-        \node[draw=none] at (0,-1.3) {$I(X_{d_1}; X_{d_2})$};
+        % Information measures with better positioning
+        \node[font=\scriptsize] at (-2.5,-2.8) {$C_{d_1}$};
+        \node[font=\scriptsize] at (2.5,-2.8) {$C_{d_2}$};
+        \node[font=\scriptsize] at (0,-0.8) {$I(X_{d_1}; X_{d_2})$};
         
-        % Isomorphism
-        \draw[<->, blue, thick] (-1,-2) -- (1,-2) node[midway, above] {$\alpha$-isomorphism};
+        % Isomorphism connection with cleaner design
+        \draw[<->, eldergreen, thick] (-1.2,-1.5) -- (1.2,-1.5) node[midway, above, font=\scriptsize] {$\alpha$-isomorphism};
         
-        % Equation
-        \node[equation] at (0,-4.5) {
+        % Equation with better spacing
+        \node[equation] at (0,-3.8) {
             $C_{d_1,d_2} = C_{d_1} + C_{d_2} - (1 - \alpha) \cdot I(X_{d_1}; X_{d_2})$
         };
     \end{scope}
     
-    % Multi-domain capacity
-    \begin{scope}[shift={(8,-8.5)}]
-        % Title
-        \node[font=\bfseries] at (0,0) {Multi-Domain Capacity};
+    % Multi-domain capacity (redesigned)
+    \begin{scope}[shift={(9,-7)}]
+        % Title with better positioning
+        \node[font=\normalsize\bfseries, elderblue] at (0,1) {Multi-Domain Capacity};
         
-        % Domain circles in circular arrangement
-        \foreach \i in {1,...,5} {
-            \node[draw, fill=blue!15, circle, minimum size=1.5cm] (d\i) at ({72*\i-72}:-2cm) {Domain \i};
+        % Domain circles in cleaner arrangement
+        \foreach \i in {1,...,4} {
+            \node[draw=elderblue, fill=elderblue!10, circle, minimum size=1.2cm, font=\tiny] (d\i) at ({90*\i-90}:1.8cm) {Domain \i};
         }
         
-        % Center universal principle node
-        \node[draw, fill=red!15, circle, minimum size=2cm] (up) at (0,0) {Universal Principles};
+        % Center universal principle node with better design
+        \node[draw=elderorange, fill=elderorange!15, circle, minimum size=1.4cm, font=\scriptsize] (up) at (0,-0.5) {Universal\\Principles};
         
-        % Connections
-        \foreach \i in {1,...,5} {
-            \draw[<->, blue, thick] (up) -- (d\i);
+        % Cleaner connections
+        \foreach \i in {1,...,4} {
+            \draw[<->, eldergreen, thick] (up) -- (d\i);
         }
         
-        % Amplification equation
-        \node[equation] at (0,-4.5) {
+        % Amplification equation with better positioning
+        \node[equation] at (0,-3.8) {
             $C_{universal} = C_{total} \cdot \left(1 + \beta \cdot \frac{D-1}{D}\right)$
         };
     \end{scope}
