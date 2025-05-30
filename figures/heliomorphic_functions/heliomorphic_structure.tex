@@ -16,7 +16,7 @@
 \fill[LightGray!20] (-10, -7) rectangle (10, 7);
 
 % Left side: Complex domain visualization
-\begin{scope}[shift={(-7, 0)}]
+\begin{scope}[shift={(-6, 0)}]
     % Complex plane axes
     \draw[black, thick, ->] (-3, 0) -- (3, 0) node[right] {$\Re(z)$};
     \draw[black, thick, ->] (0, -3) -- (0, 3) node[above] {$\Im(z)$};
@@ -75,7 +75,7 @@
 \end{scope}
 
 % Right side: Gravitational coupling visualization
-\begin{scope}[shift={(7, 0)}]
+\begin{scope}[shift={(5.5, 0)}]
     % Gravitational field lines
     \foreach \angle in {0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330} {
         \draw[ElderBlue!60, thick, ->] (0,0) -- (\angle:2.5);
@@ -128,7 +128,7 @@
 
 % Mathematical representation box
 \begin{scope}[shift={(0, -6.5)}]
-    \draw[DeepRed, thick, fill=DeepRed!10] (-8, -0.3) rectangle (8, 0.3);
+    \draw[DeepRed, thick, fill=DeepRed!10] (-7, -0.3) rectangle (7, 0.3);
     \node[DeepRed, font=\normalsize] at (0, 0) {
         $\Psi(x)(re^{i\theta}) = \sum_{i=1}^{d} \lambda_i r^{g_i} e^{i(\theta_i + \beta_i \theta)}$
     };
