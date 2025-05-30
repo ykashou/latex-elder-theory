@@ -78,37 +78,37 @@ The key insight is that the shortest path in parameter space is not a straight l
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=0.9]
-    % Loss surface
-    \draw[thick] (-5,0) -- (5,0);
-    \draw[thick, domain=-5:5, smooth, variable=\x] plot ({\x}, {0.1*\x*\x});
+\begin{tikzpicture}[scale=1.0]
+    % Simple loss surface outline
+    \draw[thick, gray!60] (-4,0) -- (4,0);
+    \draw[thick, gray!60, domain=-4:4, smooth, variable=\x] plot ({\x}, {0.08*\x*\x});
     
-    % Traditional gradient path
-    \draw[->, thick, red, dashed] (3.5,1.2) -- (2.5,0.6);
-    \draw[->, thick, red, dashed] (2.5,0.6) -- (1.5,0.2);
-    \draw[->, thick, red, dashed] (1.5,0.2) -- (0.5,0.05);
-    \draw[->, thick, red, dashed] (0.5,0.05) -- (0,0);
-    \node[red] at (2.5,1.5) {Traditional path};
+    % Starting point
+    \fill[black] (3,0.72) circle (2pt);
+    \node[above] at (3,0.72) {Start};
     
-    % Heliomorphic geodesic
-    \draw[->, thick, blue] (3.5,1.2) to[out=200,in=60] (0,0);
-    \node[blue] at (1,2) {Heliomorphic geodesic};
+    % Minimum point
+    \fill[black] (0,0) circle (2pt);
+    \node[below] at (0,0) {Minimum};
     
-    % Local phase space
-    \draw[thick, domain=0:360, smooth, variable=\t] plot ({3.5+0.3*cos(\t)}, {1.2+0.2*sin(\t)});
-    \draw[thick, domain=0:360, smooth, variable=\t] plot ({2.5+0.3*cos(\t)}, {0.6+0.2*sin(\t)});
-    \draw[thick, domain=0:360, smooth, variable=\t] plot ({1.5+0.3*cos(\t)}, {0.2+0.2*sin(\t)});
-    \draw[thick, domain=0:360, smooth, variable=\t] plot ({0.5+0.3*cos(\t)}, {0.05+0.2*sin(\t)});
-    \draw[thick, domain=0:360, smooth, variable=\t] plot ({0+0.3*cos(\t)}, {0+0.2*sin(\t)});
+    % Traditional gradient path (zigzag steps)
+    \draw[->, thick, red, line width=1.5pt] (3,0.72) -- (2.2,0.4);
+    \draw[->, thick, red, line width=1.5pt] (2.2,0.4) -- (1.5,0.18);
+    \draw[->, thick, red, line width=1.5pt] (1.5,0.18) -- (0.8,0.05);
+    \draw[->, thick, red, line width=1.5pt] (0.8,0.05) -- (0,0);
     
-    % Phase connections
-    \draw[->, thick, green!70!black, dashed] (3.2,1.2) to[out=210,in=30] (2.8,0.6);
-    \draw[->, thick, green!70!black, dashed] (2.2,0.6) to[out=210,in=30] (1.8,0.2);
-    \draw[->, thick, green!70!black, dashed] (1.2,0.2) to[out=210,in=30] (0.8,0.05);
-    \draw[->, thick, green!70!black, dashed] (0.2,0.05) to[out=210,in=30] (0.3,0);
-    \node[green!70!black] at (0,1) {Phase coupling};
+    % Heliomorphic geodesic (smooth curve)
+    \draw[->, thick, blue, line width=1.5pt] (3,0.72) to[out=210,in=45] (0,0);
+    
+    % Labels
+    \node[red, font=\small] at (2,1.2) {Traditional Gradient};
+    \node[blue, font=\small] at (1.2,1.5) {Heliomorphic Geodesic};
+    
+    % Axis labels
+    \node[below] at (4,0) {Parameter Space};
+    \node[left, rotate=90] at (-4.5,0.8) {Loss Function};
 \end{tikzpicture}
-\caption{Comparison of traditional gradient descent paths versus heliomorphic geodesics. The traditional approach takes incremental steps along the direction of steepest descent, while heliomorphic geodesics follow curved paths that leverage phase coupling.}
+\caption{Gradient descent paths: Traditional gradient descent follows stepwise linear segments, while heliomorphic geodesics take efficient curved paths through the parameter space.}
 \label{fig:geodesics}
 \end{figure}
 
