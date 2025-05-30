@@ -70,7 +70,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {45.1}{\ignorespaces Orbital perturbation of an Erudite entity due to data-induced mass increase. The entity moves to a lower, faster orbit temporarily, creating a resonance disturbance.}}{525}{figure.caption.50}%
+\contentsline {figure}{\numberline {45.1}{\ignorespaces Orbital perturbation of an Erudite entity due to data-induced mass increase. The temporary mass increment $\Delta m_{\text {data}}$ causes the entity to transition to a lower-radius, higher-velocity orbit, creating gravitational disturbances that propagate through the hierarchical system. The mathematical relationships show how orbital parameters respond to mass changes according to Elder gravitational mechanics.}}{525}{figure.caption.50}%
 \contentsline {figure}{\numberline {45.2}{\ignorespaces The perpetual learning cycle in the Elder system when operated with continuous data ingestion. The cycle maintains itself through orbital dynamics without requiring external optimization schedules.}}{526}{figure.caption.51}%
 \contentsline {figure}{\numberline {45.3}{\ignorespaces Performance trajectory of an Elder system with continuous learning. Note the temporary performance drops following data injections, followed by recovery to higher performance levels.}}{527}{figure.caption.52}%
 \contentsline {figure}{\numberline {45.4}{\ignorespaces Evolution of mass ratios during extended learning cycles across two knowledge domains. Note the convergence to domain-specific optimal values rather than universal constants.}}{529}{figure.caption.55}%

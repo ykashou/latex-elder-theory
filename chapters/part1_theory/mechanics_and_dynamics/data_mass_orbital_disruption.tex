@@ -61,37 +61,79 @@ Figure \ref{fig:erudite_orbit_perturbation} illustrates this orbital disruption 
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[scale=0.8]
-    % Mentor
-    \filldraw[blue!60] (0,0) circle (0.8cm) node[text width=1.2cm, align=center] {Mentor};
+\begin{tikzpicture}[scale=1.0]
+    % Define Elder color palette
+    \definecolor{elderblue}{RGB}{25,76,158}
+    \definecolor{elderorange}{RGB}{231,127,43}
+    \definecolor{eldergreen}{RGB}{34,139,34}
+    \definecolor{elderpurple}{RGB}{102,51,153}
     
-    % Original orbit
-    \draw[dashed] (0,0) circle (3cm);
+    % Background orbital region
+    \fill[elderblue!5] (0,0) circle (4.2cm);
     
-    % New orbit
-    \draw[dotted, thick] (0,0) circle (2.5cm);
+    % Central Mentor entity with enhanced styling
+    \filldraw[elderblue, draw=elderblue!80!black, line width=2pt] (0,0) circle (0.9cm);
+    \node[white, font=\bfseries\large] at (0,0) {M};
+    \node[elderblue!80!black, font=\scriptsize, below] at (0,-1.2) {\textbf{Mentor Entity}};
     
-    % Erudite positions and trajectories
-    \filldraw[green!60] (30:3cm) circle (0.5cm) node[text width=0.8cm, align=center] {Erudite};
-    \filldraw[green!60!black] (60:2.5cm) circle (0.6cm) node[text width=0.8cm, align=center] {Erudite*};
+    % Original stable orbit (dashed)
+    \draw[elderblue!60, line width=2pt, dashed] (0,0) circle (3.2cm);
+    \node[elderblue!60, font=\scriptsize] at (3.2,0.3) {Original orbit $r_0$};
     
-    % Mass increase visualization
-    \draw[<->, thick] (30:3cm) -- (60:2.5cm) node[midway, above right] {Mass increase};
+    % Perturbed orbit (solid)
+    \draw[elderorange, line width=2.5pt] (0,0) circle (2.6cm);
+    \node[elderorange, font=\scriptsize] at (2.6,0.3) {Perturbed orbit $r_1$};
     
-    % Orbital velocity vectors
-    \draw[->, thick, red] (30:3cm) -- ++(120:1cm) node[right] {$\vec{v}_1$};
-    \draw[->, thick, red] (60:2.5cm) -- ++(150:0.8cm) node[right] {$\vec{v}_2$};
+    % Original Erudite position
+    \filldraw[eldergreen, draw=eldergreen!80!black, line width=1.5pt] (45:3.2cm) circle (0.45cm);
+    \node[white, font=\bfseries\small] at (45:3.2cm) {E};
+    \node[eldergreen!80!black, font=\scriptsize, above right] at (45:3.2cm) {$m_{\text{base}}$};
     
-    % Legend
-    \node[draw, fill=white, text width=3.5cm, align=left] at (5,3) {
-        \small
-        --- Original orbit\\
-        $\cdots$ New orbit\\
-        Erudite: Normal mass\\
-        Erudite*: Increased mass
+    % Perturbed Erudite position (larger due to mass increase)
+    \filldraw[elderpurple, draw=elderpurple!80!black, line width=1.5pt] (75:2.6cm) circle (0.6cm);
+    \node[white, font=\bfseries] at (75:2.6cm) {E*};
+    \node[elderpurple!80!black, font=\scriptsize, above right] at (75:2.6cm) {$m_{\text{base}} + \Delta m_{\text{data}}$};
+    
+    % Orbital transition path
+    \draw[elderorange, line width=2pt, ->] (45:3.2cm) to[bend left=15] node[midway, above, font=\scriptsize] {\textbf{Data-induced transition}} (75:2.6cm);
+    
+    % Velocity vectors with proper scaling
+    \draw[eldergreen, line width=2pt, ->] (45:3.2cm) -- ++(135:1.2cm) node[above left, font=\scriptsize] {$\vec{v}_0 = \omega_0 r_0$};
+    \draw[elderpurple, line width=2pt, ->] (75:2.6cm) -- ++(165:1.5cm) node[above left, font=\scriptsize] {$\vec{v}_1 = \omega_1 r_1$};
+    
+    % Mathematical annotations
+    \node[draw=elderblue, fill=elderblue!10, rounded corners=3pt, font=\scriptsize, text width=4cm, align=center] at (6,2) {
+        \textbf{Mass-Orbit Relationships:}\\
+        $r_1 = r_0 \cdot \frac{m_{\text{base}}}{m_{\text{base}} + \Delta m_{\text{data}}}$\\[2pt]
+        $\omega_1 = \omega_0 \cdot \sqrt{\frac{m_{\text{base}} + \Delta m_{\text{data}}}{m_{\text{base}}}}$\\[2pt]
+        $v_1 > v_0$ (conservation of energy)
     };
+    
+    % Data flow visualization
+    \draw[elderorange, line width=3pt, ->] (-5,1) -- (-3,1) node[midway, above, font=\scriptsize] {\textbf{New Data}};
+    \node[elderorange, font=\scriptsize] at (-4,0.5) {$D_{\text{new}}$};
+    
+    % Gravitational field lines (subtle)
+    \foreach \angle in {0,30,60,90,120,150,180,210,240,270,300,330} {
+        \draw[elderblue!20, thin] (0,0) -- (\angle:4cm);
+    }
+    
+    % Enhanced legend with better organization
+    \node[draw=elderblue, fill=white, rounded corners=5pt, text width=4.5cm, align=left, font=\scriptsize] at (6,-2) {
+        \textbf{Legend:}\\
+        \textcolor{elderblue!60}{\rule{1cm}{1pt}} Original stable orbit\\
+        \textcolor{elderorange}{\rule{1cm}{2pt}} Data-perturbed orbit\\
+        \textcolor{eldergreen}{$\bullet$} Erudite (normal mass)\\
+        \textcolor{elderpurple}{$\bullet$} Erudite (increased mass)\\
+        \textcolor{elderorange}{$\rightarrow$} Orbital transition path
+    };
+    
+    % Phase space indicator
+    \node[elderblue!70, font=\scriptsize, rotate=0] at (-3,-3) {\textbf{Phase Space Region}};
+    \draw[elderblue!40] (-4,-3.5) rectangle (-2,-2.5);
+    
 \end{tikzpicture}
-\caption{Orbital perturbation of an Erudite entity due to data-induced mass increase. The entity moves to a lower, faster orbit temporarily, creating a resonance disturbance.}
+\caption{Orbital perturbation of an Erudite entity due to data-induced mass increase. The temporary mass increment $\Delta m_{\text{data}}$ causes the entity to transition to a lower-radius, higher-velocity orbit, creating gravitational disturbances that propagate through the hierarchical system. The mathematical relationships show how orbital parameters respond to mass changes according to Elder gravitational mechanics.}
 \label{fig:erudite_orbit_perturbation}
 \end{figure}
 
