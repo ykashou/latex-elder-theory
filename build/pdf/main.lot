@@ -69,7 +69,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {54.1}{\ignorespaces Comparison of Token-Based and Field-Based Memory Approaches}}{635}{table.caption.72}%
+\contentsline {table}{\numberline {54.1}{\ignorespaces Comparison of Token-Based and Field-Based Memory Approaches}}{633}{table.caption.71}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -80,10 +80,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{740}{table.caption.93}%
-\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{741}{table.caption.94}%
-\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{743}{table.caption.95}%
-\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{744}{table.caption.96}%
-\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{744}{table.caption.97}%
+\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{738}{table.caption.92}%
+\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{739}{table.caption.93}%
+\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{741}{table.caption.94}%
+\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{742}{table.caption.95}%
+\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{742}{table.caption.96}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{751}{table.caption.101}%
+\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{749}{table.caption.100}%
