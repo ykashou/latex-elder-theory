@@ -16,7 +16,7 @@
         
         % Theoretical curve
         \draw[elderorange, thick, domain=1:5, samples=50, smooth] 
-            plot (\x, {1.2 + 0.8*ln(\x)});
+            plot (\x, {1.2 + 0.8*ln(max(1,\x))});
         
         % Data points
         \foreach \x/\y in {1/1.2, 2/1.8, 3/2.2, 4/2.5, 5/2.7} {
