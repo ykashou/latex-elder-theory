@@ -80,10 +80,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{734}{table.caption.90}%
-\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{735}{table.caption.91}%
-\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{737}{table.caption.92}%
-\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{738}{table.caption.93}%
-\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{738}{table.caption.94}%
+\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{732}{table.caption.89}%
+\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{733}{table.caption.90}%
+\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{735}{table.caption.91}%
+\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{736}{table.caption.92}%
+\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{736}{table.caption.93}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{745}{table.caption.98}%
+\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{743}{table.caption.97}%
