@@ -57,42 +57,30 @@ where $r$ is the orbital radius and $\omega$ is the angular velocity.
 From the Elder gravitational law, we know that the orbital radius is inversely proportional to the mass of the orbiting entity when the central mass remains constant. The conservation of angular momentum requires that $r^2\omega$ remains constant, leading to the derived relationships.
 \end{proof}
 
-Figure \ref{fig:erudite_orbit_perturbation} illustrates this orbital disruption process.
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Parameter} & \textbf{Before Data} & \textbf{After Data} \\
+\hline
+Mass & $m_{\text{base}}$ & $m_{\text{base}} + \Delta m_{\text{data}}$ \\
+\hline
+Orbital Radius & $r_{\text{old}}$ & $r_{\text{new}} < r_{\text{old}}$ \\
+\hline
+Angular Velocity & $\omega_{\text{old}}$ & $\omega_{\text{new}} > \omega_{\text{old}}$ \\
+\hline
+Orbital Energy & $E_{\text{old}}$ & $E_{\text{new}} < E_{\text{old}}$ \\
+\hline
+\end{tabular}
+\end{center}
 
-\begin{figure}[ht]
-\centering
-\begin{tikzpicture}[scale=0.8]
-    % Mentor at center - simple circle
-    \draw[thick, blue] (0,0) circle (0.5cm);
-    \node[blue] at (0,0) {M};
-    
-    % Original orbit
-    \draw[dashed, gray] (0,0) circle (2.5cm);
-    
-    % New orbit  
-    \draw[dotted, thick, red] (0,0) circle (2cm);
-    
-    % Erudite positions - simple circles
-    \draw[thick, green] (1.7,1.7) circle (0.3cm);
-    \node[green] at (1.7,1.7) {E};
-    
-    \draw[thick, purple] (1.4,1.4) circle (0.4cm);
-    \node[purple] at (1.4,1.4) {E*};
-    
-    % Simple arrow
-    \draw[->, thick] (1.7,1.7) -- (1.4,1.4);
-    
-    % Labels
-    \node[gray] at (-3,2) {Original orbit};
-    \node[red] at (-3,1.5) {New orbit};
-    \node at (-3,1) {M: Mentor};
-    \node at (-3,0.5) {E: Erudite};
-    \node at (-3,0) {E*: Mass increased};
-    
-\end{tikzpicture}
-\caption{Orbital perturbation of an Erudite entity due to data-induced mass increase.}
-\label{fig:erudite_orbit_perturbation}
-\end{figure}
+\textbf{Orbital Perturbation Process:}
+\begin{enumerate}
+\item \textbf{Initial State:} Erudite entity orbits stably at radius $r_{\text{old}}$
+\item \textbf{Data Acquisition:} Mass increases by $\Delta m_{\text{data}}$
+\item \textbf{Orbital Decay:} Entity spirals to lower orbit at $r_{\text{new}}$
+\item \textbf{Velocity Increase:} Conservation laws require $\omega_{\text{new}} > \omega_{\text{old}}$
+\item \textbf{System Perturbation:} Faster motion creates resonance disturbances
+\end{enumerate}
 
 \subsection{Secondary Effects on Mentor Entities}
 
