@@ -14,76 +14,72 @@ A \textbf{heliomorphic structure} on a complex manifold $\mathcal{E}_{\mathcal{M
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[scale=1.1]
-  % Define colors for gravitational field gradient
-  \colorlet{eldercenter}{blue!50}
-  \colorlet{elderouter}{blue!10}
-  \colorlet{mentorinner}{green!10}
-  \colorlet{mentorouter}{green!40}
-  \colorlet{eruditeinner}{red!10}
-  \colorlet{eruditeouter}{red!30}
-  \colorlet{elderborder}{blue!70}
-  \colorlet{mentorborder}{green!70}
-  \colorlet{eruditeborder}{red!70}
+\begin{tikzpicture}[scale=1.2]
+  % Draw gravitational field regions with clear boundaries
+  \fill[blue!15] (0,0) circle (1.5);
+  \fill[green!15] (0,0) circle (2.5);
+  \fill[red!10] (0,0) circle (3.5);
   
-  % Draw gravitational field with gradient shading
-  \shade[inner color=eldercenter, outer color=elderouter] (0,0) circle (1.5);
-  \shade[inner color=mentorinner, outer color=mentorouter] (0,0) circle (2.5);
-  \shade[inner color=eruditeinner, outer color=eruditeouter] (0,0) circle (3.5);
+  % Draw field boundaries with distinct line styles
+  \draw[blue!80, thick] (0,0) circle (1.5);
+  \draw[green!80, thick] (0,0) circle (2.5);
+  \draw[red!80, thick] (0,0) circle (3.5);
   
-  % Draw dashed field boundaries to indicate continuous transition
-  \draw[dashed, draw=elderborder] (0,0) circle (1.5);
-  \draw[dashed, draw=mentorborder] (0,0) circle (2.5);
-  \draw[dashed, draw=eruditeborder] (0,0) circle (3.5);
+  % Central Elder entity
+  \node[fill=blue!30, circle, minimum size=0.8cm, font=\footnotesize] at (0,0) {Elder};
   
-  % Add Elder, Mentor, Erudite labels
-  \node at (0,0) {\Large Elder};
+  % Mentor entities positioned clearly at intermediate radius
+  \node[fill=green!30, circle, minimum size=0.6cm, font=\tiny] at (0:2) {M1};
+  \node[fill=green!30, circle, minimum size=0.6cm, font=\tiny] at (120:2) {M2};
+  \node[fill=green!30, circle, minimum size=0.6cm, font=\tiny] at (240:2) {M3};
   
-  % Mentor text nodes at different angles
-  \node[text width=1.5cm, align=center] at (60:2) {\small Mentor\\Domain 1};
-  \node[text width=1.5cm, align=center] at (180:2) {\small Mentor\\Domain 2};
-  \node[text width=1.5cm, align=center] at (300:2) {\small Mentor\\Domain 3};
+  % Erudite entities positioned at outer radius without overlap
+  \node[fill=red!25, circle, minimum size=0.5cm, font=\tiny] at (30:3) {E1};
+  \node[fill=red!25, circle, minimum size=0.5cm, font=\tiny] at (90:3) {E2};
+  \node[fill=red!25, circle, minimum size=0.5cm, font=\tiny] at (150:3) {E3};
+  \node[fill=red!25, circle, minimum size=0.5cm, font=\tiny] at (210:3) {E4};
+  \node[fill=red!25, circle, minimum size=0.5cm, font=\tiny] at (270:3) {E5};
+  \node[fill=red!25, circle, minimum size=0.5cm, font=\tiny] at (330:3) {E6};
   
-  % Erudite text nodes at different angles
-  \node[text width=1.5cm, align=center] at (30:3) {\small Erudite\\Task 1.1};
-  \node[text width=1.5cm, align=center] at (75:3) {\small Erudite\\Task 1.2};
-  \node[text width=1.5cm, align=center] at (150:3) {\small Erudite\\Task 2.1};
-  \node[text width=1.5cm, align=center] at (210:3) {\small Erudite\\Task 2.2};
-  \node[text width=1.5cm, align=center] at (270:3) {\small Erudite\\Task 3.1};
-  \node[text width=1.5cm, align=center] at (330:3) {\small Erudite\\Task 3.2};
+  % Knowledge flow arrows - simplified and non-overlapping
+  % Inward flow (abstraction)
+  \draw[->, thick, blue, >=stealth] (30:2.8) -- (30:2.2);
+  \draw[->, thick, blue, >=stealth] (150:2.8) -- (150:2.2);
+  \draw[->, thick, blue, >=stealth] (270:2.8) -- (270:2.2);
   
-  % Arrows for Knowledge Flow
-  % Inward propagation (abstraction)
-  \draw[->, thick, dotted, >=stealth, draw=black] (30:3.3) to[bend right] (60:2.3);
-  \draw[->, thick, dotted, >=stealth, draw=black] (60:2.3) to[bend right] (0.8,0.8);
+  % Outward flow (specialization)  
+  \draw[->, thick, red, >=stealth] (60:1.7) -- (60:2.3);
+  \draw[->, thick, red, >=stealth] (180:1.7) -- (180:2.3);
+  \draw[->, thick, red, >=stealth] (300:1.7) -- (300:2.3);
   
-  % Outward propagation (specialization)
-  \draw[->, thick, dashed, >=stealth, draw=black] (0,-0.8) to[bend right] (300:2.3);
-  \draw[->, thick, dashed, >=stealth, draw=black] (300:2.3) to[bend right] (270:3.3);
+  % Cross-domain transfer (angular)
+  \draw[->, thick, green, >=stealth] (45:2) arc (45:105:2);
+  \draw[->, thick, green, >=stealth] (165:2) arc (165:225:2);
   
-  % Angular dynamics (cross-domain transfer)
-  \draw[->, thick, >=stealth, draw=black] (180:2.3) arc (180:60:2.3);
-  
-  % Legend
-  \node[align=left] at (5,2.5) {Gravitational Influence Fields};
-  \draw[thick, dotted, >=stealth, draw=black] (5,2) -- (5.7,2);
-  \node[align=left, font=\small] at (7,2) {Inward Propagation};
-  \draw[thick, dashed, >=stealth, draw=black] (5,1.5) -- (5.7,1.5);
-  \node[align=left, font=\small] at (7,1.5) {Outward Propagation};
-  \draw[thick, >=stealth, draw=black] (5,1) -- (5.7,1);
-  \node[align=left, font=\small] at (7,1) {Angular Transfer};
-  
-  \shade[inner color=eldercenter, outer color=elderouter, draw=elderborder, dashed] (5,0.5) rectangle (5.3,0.7);
-  \node[align=left, font=\small] at (7,0.6) {Elder Field};
-  \shade[inner color=mentorinner, outer color=mentorouter, draw=mentorborder, dashed] (5,0.1) rectangle (5.3,0.3);
-  \node[align=left, font=\small] at (7,0.2) {Mentor Field};
-  \shade[inner color=eruditeinner, outer color=eruditeouter, draw=eruditeborder, dashed] (5,-0.3) rectangle (5.3,-0.1);
-  \node[align=left, font=\small] at (7,-0.2) {Erudite Field};
-  
-  % Field radius markers
-  \node[font=\small] at (1.5,0.4) {$r=1.5$};
-  \node[font=\small] at (2.5,0.4) {$r=2.5$};
-  \node[font=\small] at (3.5,0.4) {$r=3.5$};
+  % Clear legend positioned to avoid overlap
+  \begin{scope}[shift={(5,0)}]
+    \node[font=\small, align=center] at (0,3) {\textbf{Gravitational Field Structure}};
+    
+    % Field regions
+    \draw[blue!80, thick] (-0.5,2.3) -- (0.5,2.3);
+    \node[font=\small] at (1.5,2.3) {Elder Field (r $\leq$ 1.5)};
+    
+    \draw[green!80, thick] (-0.5,1.9) -- (0.5,1.9);
+    \node[font=\small] at (1.5,1.9) {Mentor Field (1.5 < r $\leq$ 2.5)};
+    
+    \draw[red!80, thick] (-0.5,1.5) -- (0.5,1.5);
+    \node[font=\small] at (1.5,1.5) {Erudite Field (2.5 < r $\leq$ 3.5)};
+    
+    % Knowledge flows
+    \draw[->, thick, blue, >=stealth] (-0.5,1) -- (0.5,1);
+    \node[font=\small] at (1.2,1) {Abstraction};
+    
+    \draw[->, thick, red, >=stealth] (-0.5,0.6) -- (0.5,0.6);
+    \node[font=\small] at (1.2,0.6) {Specialization};
+    
+    \draw[->, thick, green, >=stealth] (-0.5,0.2) arc (-90:0:0.5);
+    \node[font=\small] at (1.2,0.2) {Cross-Domain};
+  \end{scope}
 \end{tikzpicture}
 \caption{Gravitational Influence Field Structure: Elder (central field), Mentor (intermediate field), and Erudite (outer field) organized in a continuous gravitational hierarchy with knowledge flow illustrated by arrows showing abstraction (inward), specialization (outward), and cross-domain transfer (angular).}
 \label{fig:gravitational_influence_fields}

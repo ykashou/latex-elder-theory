@@ -130,5 +130,3 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {64.1}{\ignorespaces Phase propagation in the forward pass implicitly records the computational graph needed for gradient flow in the backward pass}}{739}{figure.caption.100}%
 \contentsline {figure}{\numberline {64.2}{\ignorespaces Orbital paths in the Elder Heliosystem physically encode computational history}}{739}{figure.caption.101}%
-\contentsline {figure}{\numberline {64.3}{\ignorespaces Phase-Aware Backpropagation Algorithm}}{743}{figure.caption.103}%
-\contentsline {figure}{\numberline {64.4}{\ignorespaces Hardware implementation comparison between traditional gradient tape and Elder Heliosystem}}{744}{figure.caption.104}%
