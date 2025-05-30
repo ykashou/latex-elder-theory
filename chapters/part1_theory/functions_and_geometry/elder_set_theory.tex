@@ -37,45 +37,56 @@ For two Elder Sets $\mathcal{E}\mathbb{S}_1$ and $\mathcal{E}\mathbb{S}_2$, the 
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[scale=0.9]
-    % Draw two overlapping circles
-    \def\radius{2}
-    \coordinate (A) at (-1.2,0);
-    \coordinate (B) at (1.2,0);
+\begin{tikzpicture}[scale=1.1]
+    % Define two circles with clear separation
+    \def\radius{1.8}
+    \coordinate (A) at (-1.5,0);
+    \coordinate (B) at (1.5,0);
     
+    % Fill intersection area
     \begin{scope}
         \clip (A) circle (\radius);
-        \fill[blue!20] (B) circle (\radius);
+        \fill[purple!15] (B) circle (\radius);
     \end{scope}
     
-    \draw (A) circle (\radius);
-    \draw (B) circle (\radius);
+    % Draw the two sets with clear boundaries
+    \draw[blue!70, thick] (A) circle (\radius);
+    \draw[green!70, thick] (B) circle (\radius);
     
-    % Label the circles
-    \node at (-2.5,0) {$\mathcal{E}\mathbb{S}_1$};
-    \node at (2.5,0) {$\mathcal{E}\mathbb{S}_2$};
+    % Fill set areas (excluding intersection)
+    \fill[blue!10, opacity=0.7] (A) circle (\radius);
+    \fill[green!10, opacity=0.7] (B) circle (\radius);
     
-    % Elements with phases in first set
-    \node[circle, fill=blue!60, minimum size=0.3cm] (e1) at (-1.5,1) {};
-    \node[circle, fill=blue!60, minimum size=0.3cm] (e2) at (-2,-0.5) {};
+    % Set labels positioned clearly outside circles
+    \node[blue!80, font=\large] at (-3.2,0) {$\mathcal{E}\mathbb{S}_1$};
+    \node[green!80, font=\large] at (3.2,0) {$\mathcal{E}\mathbb{S}_2$};
     
-    % Elements with phases in second set
-    \node[circle, fill=green!60, minimum size=0.3cm] (e3) at (1.5,1) {};
-    \node[circle, fill=green!60, minimum size=0.3cm] (e4) at (2,-0.5) {};
+    % Elements in first set only (non-overlapping positions)
+    \node[circle, fill=blue!60, minimum size=0.25cm] (e1) at (-2.3,0.8) {};
+    \node[circle, fill=blue!60, minimum size=0.25cm] (e2) at (-2.1,-0.9) {};
     
-    % Elements in intersection
-    \node[circle, fill=purple!60, minimum size=0.3cm] (e5) at (0,0.8) {};
-    \node[circle, fill=purple!60, minimum size=0.3cm] (e6) at (0,-0.8) {};
+    % Elements in second set only
+    \node[circle, fill=green!60, minimum size=0.25cm] (e3) at (2.3,0.8) {};
+    \node[circle, fill=green!60, minimum size=0.25cm] (e4) at (2.1,-0.9) {};
     
-    % Phase arrows for elements
-    \draw[->, blue!80] (e1) -- +(45:0.5) node[right] {$\Phi_1(x)$};
-    \draw[->, green!80!black] (e3) -- +(135:0.5) node[left] {$\Phi_2(x)$};
+    % Elements in intersection (clearly separated)
+    \node[circle, fill=purple!60, minimum size=0.25cm] (e5) at (0,1.0) {};
+    \node[circle, fill=purple!60, minimum size=0.25cm] (e6) at (0,-1.0) {};
     
-    % Coherent phase in intersection
-    \draw[->, purple] (e5) -- +(90:0.5) node[above] {$\Phi_1(x) + \Phi_2(x)$};
+    % Phase arrows with clear spacing and labels
+    \draw[->, blue!80, thick] (e1) -- +(-45:0.8) node[below left, font=\small] {$\Phi_1(x)$};
+    \draw[->, green!80, thick] (e3) -- +(45:0.8) node[above right, font=\small] {$\Phi_2(x)$};
+    
+    % Coherent phase in intersection with clear positioning
+    \draw[->, purple!80, thick] (e5) -- +(90:0.8) node[above, font=\small] {$\Phi_1(x) + \Phi_2(x)$};
+    
+    % Operation labels
+    \node[font=\small, blue!70] at (-1.5,-2.8) {Set $\mathcal{E}\mathbb{S}_1$};
+    \node[font=\small, green!70] at (1.5,-2.8) {Set $\mathcal{E}\mathbb{S}_2$};
+    \node[font=\small, purple!70] at (0,-2.8) {Intersection};
     
     % Title
-    \node at (0,-2.5) {Phase-Preserving Set Operations};
+    \node[font=\large] at (0,-3.5) {Phase-Preserving Set Operations};
 \end{tikzpicture}
 \caption{Visualization of phase-preserving set operations, showing how phase information is preserved and combined when performing union and intersection operations}
 \label{fig:phase_set_ops}
