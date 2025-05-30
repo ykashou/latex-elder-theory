@@ -3,7 +3,7 @@
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=0.7, every node/.style={transform shape}]
+\begin{tikzpicture}[scale=0.9, every node/.style={transform shape}]
 
 % Define colors matching Elder theme
 \definecolor{ElderBlue}{RGB}{70, 130, 180}
@@ -13,7 +13,7 @@
 \definecolor{DeepRed}{RGB}{180, 40, 40}
 
 % Background
-\fill[LightGray!20] (-10, -7) rectangle (10, 7);
+\fill[LightGray!20] (-10, -9.5) rectangle (10, 7);
 
 % Left side: Complex domain visualization
 \begin{scope}[shift={(-6, 0)}]
@@ -47,7 +47,7 @@
 \end{scope}
 
 % Center: Heliomorphic differential equations
-\begin{scope}[shift={(0, 2)}]
+\begin{scope}[shift={(0, 3)}]
     \node[black, font=\large\bfseries] at (0, 1.5) {Heliomorphic Differential Equations};
     
     % First equation
@@ -75,7 +75,7 @@
 \end{scope}
 
 % Right side: Gravitational coupling visualization
-\begin{scope}[shift={(5.5, 0)}]
+\begin{scope}[shift={(7, 0)}]
     % Gravitational field lines
     \foreach \angle in {0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330} {
         \draw[ElderBlue!60, thick, ->] (0,0) -- (\angle:2.5);
@@ -100,34 +100,28 @@
 \end{scope}
 
 % Bottom: Heliomorphic properties
-\begin{scope}[shift={(0, -4.5)}]
-    \node[black, font=\large\bfseries] at (0, 0.8) {Key Properties};
+\begin{scope}[shift={(0, -5.5)}]
+    \node[black, font=\large\bfseries] at (0, 2.5) {Key Properties};
     
-    % Property boxes
-    \draw[ElderBlue, thick, fill=ElderBlue!10] (-5.5, -0.5) rectangle (-1.5, 0.5);
-    \node[ElderBlue, font=\small, align=center] at (-3.5, 0) {
-        \textbf{Isomorphism}\\
-        Elder Spaces $\leftrightarrow$\\
-        Heliomorphic Functions
+    % Property boxes - stacked vertically with expanded width
+    \draw[ElderBlue, thick, fill=ElderBlue!10] (-6, 1.2) rectangle (6, 2.2);
+    \node[ElderBlue, font=\small, align=center] at (0, 1.7) {
+        \textbf{Isomorphism}: $\Psi: \elder{d} \rightarrow \mathcal{HL}(\mathcal{D}_d)$ preserves Elder Spaces $\leftrightarrow$ Heliomorphic Functions
     };
     
-    \draw[MentorOrange, thick, fill=MentorOrange!10] (-1, -0.5) rectangle (1, 0.5);
-    \node[MentorOrange, font=\small, align=center] at (0, 0) {
-        \textbf{Convolution}\\
-        $(f * g)(z) =$\\
-        Knowledge Transfer
+    \draw[MentorOrange, thick, fill=MentorOrange!10] (-6, 0.1) rectangle (6, 1.1);
+    \node[MentorOrange, font=\small, align=center] at (0, 0.6) {
+        \textbf{Convolution}: $(f * g)(z) = \frac{1}{2\pi i} \oint f(\zeta) g\left(\frac{z\bar{z}}{\bar{\zeta}}\right) \frac{d\zeta}{\zeta - z}$ enables Knowledge Transfer
     };
     
-    \draw[EruditeGreen, thick, fill=EruditeGreen!10] (1.5, -0.5) rectangle (5.5, 0.5);
-    \node[EruditeGreen, font=\small, align=center] at (3.5, 0) {
-        \textbf{Hierarchical Domains}\\
-        $\mathcal{D}_{\text{Elder}} \subset \mathcal{D}_{\text{Mentor}}$\\
-        $\subset \mathcal{D}_{\text{Erudite}}$
+    \draw[EruditeGreen, thick, fill=EruditeGreen!10] (-6, -1.0) rectangle (6, 0.0);
+    \node[EruditeGreen, font=\small, align=center] at (0, -0.5) {
+        \textbf{Hierarchical Domains}: $\mathcal{D}_{\text{Elder}} \subset \mathcal{D}_{\text{Mentor}} \subset \mathcal{D}_{\text{Erudite}}$ preserve abstraction levels
     };
 \end{scope}
 
 % Mathematical representation box
-\begin{scope}[shift={(0, -6.5)}]
+\begin{scope}[shift={(0, -8.5)}]
     \draw[DeepRed, thick, fill=DeepRed!10] (-7, -0.3) rectangle (7, 0.3);
     \node[DeepRed, font=\normalsize] at (0, 0) {
         $\Psi(x)(re^{i\theta}) = \sum_{i=1}^{d} \lambda_i r^{g_i} e^{i(\theta_i + \beta_i \theta)}$
