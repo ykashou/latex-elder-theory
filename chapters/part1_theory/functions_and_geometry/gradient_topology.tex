@@ -30,48 +30,29 @@ The parameter space of the Elder Heliosystem forms a fiber bundle $\mathcal{E} =
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[scale=1.0]
-    % Base manifold with clear boundaries
-    \draw[thick, blue!70] (0,0) ellipse (4.5 and 1.2);
-    \fill[blue!15, opacity=0.8] (0,0) ellipse (4.5 and 1.2);
-    \node[blue!80, font=\large] at (0,-2.2) {Base manifold $M$ (conceptual space)};
+\begin{tikzpicture}[scale=0.7]
+    % Base manifold - simple ellipse
+    \draw[thick] (0,0) ellipse (3 and 0.8);
+    \node at (0,-1.5) {Base manifold $M$ (conceptual space)};
     
-    % Total space boundary at top
-    \draw[thick, red!70] (-5,4.5) to[out=30,in=150] (5,4.5);
-    \draw[thick, red!70] (-5,4.5) -- (5,4.5);
-    \fill[red!15, opacity=0.6] (-5,4.5) to[out=30,in=150] (5,4.5) -- (5,4.5) -- (-5,4.5);
-    \node[red!80, font=\large] at (0,5.2) {Total space $E$ (parameter space)};
+    % Total space - simple line at top
+    \draw[thick] (-3.5,3.5) -- (3.5,3.5);
+    \node at (0,4) {Total space $E$ (parameter space)};
     
-    % Fibers with proper spacing to avoid overlap
-    \foreach \x in {-3.5,-2,-0.5,1,2.5} {
-        \draw[thick, gray!60] (\x,0.8) -- (\x,3.8);
-        \fill[purple!20] (\x-0.15,3.8) rectangle (\x+0.15,4.2);
-        \draw[thick, purple!70] (\x-0.15,3.8) rectangle (\x+0.15,4.2);
-    }
+    % Simple vertical fibers
+    \draw[thick] (-2.5,0.5) -- (-2.5,3);
+    \draw[thick] (-1,0.5) -- (-1,3);
+    \draw[thick] (0.5,0.5) -- (0.5,3);
+    \draw[thick] (2,0.5) -- (2,3);
     
-    % One additional fiber with clear visual separation
-    \draw[thick, gray!60] (4,0.8) -- (4,3.8);
-    \fill[purple!20] (3.85,3.8) rectangle (4.15,4.2);
-    \draw[thick, purple!70] (3.85,3.8) rectangle (4.15,4.2);
+    % Projection arrow
+    \draw[->, thick] (1,2.5) -- (1,1.2);
+    \node at (1.5,1.8) {$\pi$};
     
-    % Projection arrow with clear positioning
-    \draw[->, thick, green!70, line width=2pt] (2.5,3.5) -- (2.5,1.5);
-    \node[green!80, font=\large] at (3.2,2.5) {$\pi$};
+    % Fiber label
+    \node at (-3.5,2) {Fibers (phase space)};
     
-    % Fiber label with clear positioning
-    \node[purple!80, font=\large] at (-6,3) {Fibers};
-    \node[purple!80, font=\small] at (-6,2.5) {(phase space)};
-    \draw[->, thick, purple!70] (-5.2,2.8) -- (-3.8,3.5);
-    
-    % Visual separation lines
-    \draw[dashed, gray!50] (-5.5,0.8) -- (5.5,0.8);
-    \draw[dashed, gray!50] (-5.5,3.8) -- (5.5,3.8);
-    
-    % Coordinate labels for clarity
-    \node[gray!70, font=\footnotesize] at (-5.2,0.8) {Base level};
-    \node[gray!70, font=\footnotesize] at (-5.2,3.8) {Fiber level};
-    
-\end{tikzpicture}
+\end{tikzpicture>
 \caption{The fiber bundle structure of the Elder gradient manifold showing clear separation between conceptual space, fibers, and parameter space with no overlapping elements.}
 \label{fig:fiber_bundle}
 \end{figure>
