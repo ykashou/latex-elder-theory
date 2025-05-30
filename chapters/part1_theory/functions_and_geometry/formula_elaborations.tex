@@ -151,6 +151,129 @@ The integers $n$ and $m$ represent:
     \item \textbf{Stability Margins}: Determine the robustness of the resonant configuration
 \end{enumerate}
 
+\section{Advanced Formula Derivations}
+
+\subsection{Detailed Breakdown of Gravitational Field Coupling}
+
+The coupling between gravitational fields and knowledge parameters requires careful mathematical treatment. Consider the fundamental coupling equation:
+
+\begin{equation}
+\mathcal{H}_{\text{coupling}} = \sum_{i,j} g_{ij} \phi_i \phi_j^* + \sum_k \lambda_k |\phi_k|^4
+\end{equation}
+
+\textbf{Step-by-step derivation:}
+
+\textbf{Step 1: Identify coupling terms}
+The first sum represents linear coupling between parameter phases:
+\begin{equation}
+\sum_{i,j} g_{ij} \phi_i \phi_j^* = g_{11}|\phi_1|^2 + g_{22}|\phi_2|^2 + 2\Re(g_{12}\phi_1\phi_2^*)
+\end{equation}
+
+\textbf{Step 2: Expand complex parameters}
+For $\phi_i = \rho_i e^{i\theta_i}$:
+\begin{align}
+\phi_1\phi_2^* &= \rho_1 e^{i\theta_1} \cdot \rho_2 e^{-i\theta_2} \\
+&= \rho_1\rho_2 e^{i(\theta_1-\theta_2)} \\
+&= \rho_1\rho_2[\cos(\theta_1-\theta_2) + i\sin(\theta_1-\theta_2)]
+\end{align}
+
+\textbf{Step 3: Extract real component}
+The real part contributing to coupling energy:
+\begin{equation}
+\Re(g_{12}\phi_1\phi_2^*) = |g_{12}|\rho_1\rho_2\cos(\theta_1-\theta_2+\arg(g_{12}))
+\end{equation}
+
+\textbf{Step 4: Complete coupling Hamiltonian}
+The full expression becomes:
+\begin{multline}
+\mathcal{H}_{\text{coupling}} = g_{11}\rho_1^2 + g_{22}\rho_2^2 + 2|g_{12}|\rho_1\rho_2\cos(\Delta\theta) \\
++ \lambda_1\rho_1^4 + \lambda_2\rho_2^4
+\end{multline}
+
+where $\Delta\theta = \theta_1-\theta_2+\arg(g_{12})$.
+
+\subsection{Heliomorphic Function Composition Analysis}
+
+The composition of heliomorphic functions follows specific mathematical rules that differ from standard function composition.
+
+\textbf{Given:} Two heliomorphic functions $f: \mathbb{H} \rightarrow \mathbb{H}$ and $g: \mathbb{H} \rightarrow \mathbb{H}$
+
+\textbf{Goal:} Derive the composition rule $(f \circ g)(z)$
+
+\textbf{Step 1: Express functions in heliomorphic form}
+\begin{align}
+f(z) &= F(\rho, \theta) e^{i\Phi_f(\rho, \theta)} \\
+g(z) &= G(\rho, \theta) e^{i\Phi_g(\rho, \theta)}
+\end{align}
+
+\textbf{Step 2: Intermediate transformation}
+Let $w = g(z) = |w|e^{i\arg(w)}$ where:
+\begin{align}
+|w| &= G(\rho, \theta) \\
+\arg(w) &= \Phi_g(\rho, \theta)
+\end{align}
+
+\textbf{Step 3: Apply outer function}
+\begin{equation}
+(f \circ g)(z) = f(w) = F(|w|, \arg(w)) e^{i\Phi_f(|w|, \arg(w))}
+\end{equation}
+
+\textbf{Step 4: Substitute back}
+\begin{multline}
+(f \circ g)(z) = F(G(\rho, \theta), \Phi_g(\rho, \theta)) \\
+\times e^{i\Phi_f(G(\rho, \theta), \Phi_g(\rho, \theta))}
+\end{multline}
+
+\textbf{Step 5: Chain rule for heliomorphic derivatives}
+The derivative follows the extended chain rule:
+\begin{multline}
+(f \circ g)'(z) = f'(g(z)) \cdot g'(z) \\
++ \frac{\partial f}{\partial \bar{z}}(g(z)) \cdot \overline{g'(z)} \cdot \frac{\partial g}{\partial z}(z)
+\end{multline}
+
+\subsection{Detailed Orbital Resonance Calculation}
+
+The mathematical conditions for orbital resonance require precise calculation of frequency relationships.
+
+\textbf{Problem:} Determine resonance condition for Elder-Mentor orbital system
+
+\textbf{Given parameters:}
+- Elder angular frequency: $\omega_E$
+- Mentor angular frequency: $\omega_M$  
+- Phase difference tolerance: $\epsilon$
+
+\textbf{Step 1: Define resonance condition}
+For $n:m$ resonance where $\gcd(n,m) = 1$:
+\begin{equation}
+n\omega_E = m\omega_M + \delta
+\end{equation}
+where $|\delta| < \epsilon$ represents the frequency mismatch.
+
+\textbf{Step 2: Solve for frequency ratio}
+\begin{equation}
+\frac{\omega_E}{\omega_M} = \frac{m}{n} + \frac{\delta}{n\omega_M}
+\end{equation}
+
+\textbf{Step 3: Phase evolution analysis}
+The relative phase evolves as:
+\begin{equation}
+\Delta\phi(t) = \delta t + \Delta\phi_0
+\end{equation}
+
+\textbf{Step 4: Resonance window calculation}
+For stable resonance, require $|\Delta\phi(t)| < \pi$ over time interval $T$:
+\begin{equation}
+|\delta| < \frac{\pi - |\Delta\phi_0|}{T}
+\end{equation}
+
+\textbf{Step 5: Optimal resonance integers}
+The optimal $(n^*, m^*)$ minimizes:
+\begin{equation}
+\min_{n,m} \left|\frac{\omega_E}{\omega_M} - \frac{m}{n}\right| \text{ subject to } n+m \leq N_{\max}
+\end{equation}
+
+This is solved using continued fraction expansion of $\omega_E/\omega_M$.
+
 \section{Conclusion}
 
-These mathematical elaborations provide the foundation for understanding the intricate relationships within the Elder Heliosystem. The systematic breakdown of formulas reveals the deep mathematical structure underlying the theory's elegant simplicity.
+These detailed mathematical elaborations provide the foundation for understanding the intricate relationships within the Elder Heliosystem. The systematic breakdown of formulas reveals the deep mathematical structure underlying the theory's elegant simplicity. Each step-by-step derivation illuminates the careful mathematical reasoning required to establish the theoretical framework on solid foundations.

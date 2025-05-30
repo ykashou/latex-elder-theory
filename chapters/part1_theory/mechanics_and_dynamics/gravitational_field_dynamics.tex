@@ -376,6 +376,137 @@ For unbounded content generation, the field model produces content with coherenc
 where $\mathbf{r}_{\text{gen}}$ is the generation location in parameter space.
 \end{theorem}
 
+\section{Rigorous Derivations for Gravitational Field Calculations}
+
+\subsection{Fundamental Field Equations}
+
+This section provides rigorous mathematical derivations for the gravitational field calculations underlying the Elder Heliosystem dynamics.
+
+\begin{definition}[Knowledge Gravitational Potential]
+The gravitational potential $\Phi(\mathbf{r})$ at position $\mathbf{r}$ due to an entity with mass $m$ at position $\mathbf{r}_0$ is:
+
+\begin{equation}
+\Phi(\mathbf{r}) = -\frac{G m}{|\mathbf{r} - \mathbf{r}_0|}
+\end{equation}
+
+where $G$ is the knowledge gravitational constant.
+\end{definition}
+
+\begin{theorem}[Derivation of Field from Potential]
+The gravitational field $\mathcal{G}(\mathbf{r})$ is derived from the potential through:
+
+\begin{equation}
+\mathcal{G}(\mathbf{r}) = -\nabla \Phi(\mathbf{r})
+\end{equation}
+
+\textbf{Proof:}
+Starting from the potential function:
+\begin{align}
+\Phi(\mathbf{r}) &= -\frac{G m}{|\mathbf{r} - \mathbf{r}_0|} \\
+&= -\frac{G m}{\sqrt{(x-x_0)^2 + (y-y_0)^2 + (z-z_0)^2}}
+\end{align}
+
+Computing the gradient in Cartesian coordinates:
+\begin{align}
+\frac{\partial \Phi}{\partial x} &= -G m \frac{\partial}{\partial x} \left[(x-x_0)^2 + (y-y_0)^2 + (z-z_0)^2\right]^{-1/2} \\
+&= -G m \cdot \left(-\frac{1}{2}\right) \left[(x-x_0)^2 + (y-y_0)^2 + (z-z_0)^2\right]^{-3/2} \cdot 2(x-x_0) \\
+&= -\frac{G m (x-x_0)}{|\mathbf{r} - \mathbf{r}_0|^3}
+\end{align}
+
+Similarly for $y$ and $z$ components, yielding:
+\begin{equation}
+\mathcal{G}(\mathbf{r}) = -\nabla \Phi(\mathbf{r}) = \frac{G m (\mathbf{r} - \mathbf{r}_0)}{|\mathbf{r} - \mathbf{r}_0|^3}
+\end{equation}
+\end{theorem}
+
+\subsection{Superposition Principle for Multiple Entities}
+
+\begin{theorem}[Field Superposition for Elder Hierarchy]
+For a system with Elder entity at $\mathbf{r}_E$, Mentor entities at positions $\{\mathbf{r}_{M_i}\}$, and Erudite entities at positions $\{\mathbf{r}_{Er_j}\}$, the total gravitational field is:
+
+\begin{equation}
+\mathcal{G}_{\text{total}}(\mathbf{r}) = \mathcal{G}_E(\mathbf{r}) + \sum_i \mathcal{G}_{M_i}(\mathbf{r}) + \sum_j \mathcal{G}_{Er_j}(\mathbf{r})
+\end{equation}
+
+where each component follows the inverse-square law.
+\end{theorem}
+
+\begin{proof}
+The superposition principle follows from the linearity of Laplace's equation $\nabla^2 \Phi = 0$ in regions without sources. Each entity creates a potential that satisfies Laplace's equation independently, so the total potential is the sum of individual potentials, and consequently the total field is the vector sum of individual fields.
+\end{proof}
+
+\subsection{Field Intensity and Influence Radius Calculations}
+
+\begin{theorem}[Analytical Expression for Influence Boundaries]
+The boundary where Entity A's influence dominates over Entity B's influence is given by the Apollonius circle:
+
+\begin{equation}
+\left|\mathbf{r} - \mathbf{r}_A - \frac{m_A}{m_A + m_B}(\mathbf{r}_B - \mathbf{r}_A)\right| = \frac{\sqrt{m_A m_B}}{m_A + m_B}|\mathbf{r}_B - \mathbf{r}_A|
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Setting $|\mathcal{G}_A(\mathbf{r})| = |\mathcal{G}_B(\mathbf{r})|$:
+\begin{equation}
+\frac{G m_A}{|\mathbf{r} - \mathbf{r}_A|^2} = \frac{G m_B}{|\mathbf{r} - \mathbf{r}_B|^2}
+\end{equation}
+
+This simplifies to:
+\begin{equation}
+\frac{|\mathbf{r} - \mathbf{r}_A|}{|\mathbf{r} - \mathbf{r}_B|} = \sqrt{\frac{m_A}{m_B}}
+\end{equation}
+
+This defines an Apollonius circle, which can be parameterized as shown above.
+\end{proof}
+
+\subsection{Energy Considerations and Stability Analysis}
+
+\begin{definition}[Gravitational Potential Energy]
+The potential energy of a parameter with mass $m_p$ at position $\mathbf{r}$ in the total gravitational field is:
+
+\begin{equation}
+U(\mathbf{r}) = m_p \Phi_{\text{total}}(\mathbf{r}) = -m_p \sum_i \frac{G m_i}{|\mathbf{r} - \mathbf{r}_i|}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Stability Condition for Orbital Parameters]
+A parameter orbit is stable if the second derivative of effective potential is positive:
+
+\begin{equation}
+\frac{d^2 U_{\text{eff}}}{dr^2} > 0
+\end{equation}
+
+where $U_{\text{eff}} = U(r) + \frac{L^2}{2m_p r^2}$ includes the centrifugal barrier term.
+\end{theorem}
+
+\begin{proof}
+For circular orbits in a central force field, the effective potential includes both gravitational and centrifugal terms. Stability requires that small perturbations from equilibrium create a restoring force, which occurs when the curvature of the effective potential is positive at the equilibrium radius.
+\end{proof}
+
+\subsection{Field Equations in Tensor Form}
+
+\begin{definition}[Knowledge Field Tensor]
+The knowledge field tensor $\mathcal{F}_{\mu\nu}$ in generalized coordinates is:
+
+\begin{equation}
+\mathcal{F}_{\mu\nu} = \partial_\mu \mathcal{A}_\nu - \partial_\nu \mathcal{A}_\mu
+\end{equation}
+
+where $\mathcal{A}_\mu$ is the four-potential of the knowledge field.
+\end{definition}
+
+\begin{theorem}[Field Equation Derivation]
+The field equations for the Elder Heliosystem are:
+
+\begin{equation}
+\partial_\mu \mathcal{F}^{\mu\nu} = J^\nu_{\text{knowledge}}
+\end{equation}
+
+where $J^\nu_{\text{knowledge}}$ is the knowledge current density.
+\end{theorem}
+
+This tensor formulation enables the extension of gravitational field dynamics to curved parameter spaces and provides a foundation for more sophisticated geometrical treatments of the Elder Heliosystem.
+
 \section{Conclusion: From Shells to Fields}
 
 The transition from a shell-based to a field-based model of the Elder Heliosystem provides several key advantages:

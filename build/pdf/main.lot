@@ -25,51 +25,13 @@
 \contentsline {table}{\numberline {20.1}{\ignorespaces Critical Phase Thresholds: Theory vs. Simulation}}{200}{table.caption.26}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {22.1}{\ignorespaces Knowledge Propagation Velocities}}{214}{table.caption.29}%
-\contentsline {table}{\numberline {22.2}{\ignorespaces Knowledge Propagation Time Examples}}{214}{table.caption.30}%
+\contentsline {table}{\numberline {22.1}{\ignorespaces Knowledge Propagation Velocities}}{216}{table.caption.29}%
+\contentsline {table}{\numberline {22.2}{\ignorespaces Knowledge Propagation Time Examples}}{216}{table.caption.30}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {24.1}{\ignorespaces Knowledge Propagation Time Examples}}{233}{table.caption.32}%
-\contentsline {table}{\numberline {24.2}{\ignorespaces Knowledge Propagation Time Examples (in normalized time units)}}{234}{table.caption.33}%
-\contentsline {table}{\numberline {24.3}{\ignorespaces Elder-to-Erudite Knowledge Propagation Examples}}{234}{table.caption.34}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {35.1}{\ignorespaces Computational complexity of Elder Heliosystem activation functions}}{364}{table.caption.40}%
-\contentsline {table}{\numberline {35.2}{\ignorespaces Comparison between traditional activation functions and Elder Heliosystem equivalents}}{366}{table.caption.41}%
-\contentsline {table}{\numberline {35.3}{\ignorespaces Performance comparison on benchmark tasks}}{367}{table.caption.42}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {38.1}{\ignorespaces Computational and Memory Complexity: Elder Heliosystem vs. Traditional 3-Layer Neural Network}}{387}{table.caption.46}%
-\contentsline {table}{\numberline {38.2}{\ignorespaces Detailed Time Complexity Comparison}}{388}{table.caption.47}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {45.1}{\ignorespaces Recommended Parameter Ranges for Continuous Learning Operation}}{521}{table.caption.53}%
-\contentsline {table}{\numberline {45.2}{\ignorespaces Emergent Mass Ratios by Knowledge Domain}}{522}{table.caption.54}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {54.1}{\ignorespaces Comparison of Token-Based and Field-Based Memory Approaches}}{629}{table.caption.72}%
+\contentsline {table}{\numberline {24.1}{\ignorespaces Knowledge Propagation Time Examples}}{235}{table.caption.32}%
+\contentsline {table}{\numberline {24.2}{\ignorespaces Knowledge Propagation Time Examples (in normalized time units)}}{236}{table.caption.33}%
+\contentsline {table}{\numberline {24.3}{\ignorespaces Elder-to-Erudite Knowledge Propagation Examples}}{236}{table.caption.34}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -80,10 +42,48 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{734}{table.caption.93}%
-\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{735}{table.caption.94}%
-\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{737}{table.caption.95}%
-\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{738}{table.caption.96}%
-\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{738}{table.caption.97}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{745}{table.caption.101}%
+\contentsline {table}{\numberline {35.1}{\ignorespaces Computational complexity of Elder Heliosystem activation functions}}{366}{table.caption.40}%
+\contentsline {table}{\numberline {35.2}{\ignorespaces Comparison between traditional activation functions and Elder Heliosystem equivalents}}{368}{table.caption.41}%
+\contentsline {table}{\numberline {35.3}{\ignorespaces Performance comparison on benchmark tasks}}{369}{table.caption.42}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {38.1}{\ignorespaces Computational and Memory Complexity: Elder Heliosystem vs. Traditional 3-Layer Neural Network}}{389}{table.caption.46}%
+\contentsline {table}{\numberline {38.2}{\ignorespaces Detailed Time Complexity Comparison}}{390}{table.caption.47}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {45.1}{\ignorespaces Recommended Parameter Ranges for Continuous Learning Operation}}{523}{table.caption.53}%
+\contentsline {table}{\numberline {45.2}{\ignorespaces Emergent Mass Ratios by Knowledge Domain}}{524}{table.caption.54}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {54.1}{\ignorespaces Comparison of Token-Based and Field-Based Memory Approaches}}{631}{table.caption.72}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{736}{table.caption.93}%
+\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{737}{table.caption.94}%
+\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{739}{table.caption.95}%
+\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{740}{table.caption.96}%
+\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{740}{table.caption.97}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{747}{table.caption.101}%
