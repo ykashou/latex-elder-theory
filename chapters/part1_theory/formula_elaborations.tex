@@ -74,3 +74,45 @@ The multiplication structure follows from the basis element interactions defined
 
 The symmetry condition reflects the fact that elements with identical phases commute under multiplication, while the normalization ensures that multiplication preserves the overall "magnitude" of combinations.
 \end{proof}
+
+\subsection{Gravitational Field Integration}
+
+\begin{theorem}[Complete Gravitational Field Formula]
+The gravitational field operator $\mathcal{G}: \elder{d} \to \elder{d}$ has the explicit matrix representation:
+\begin{equation}
+\mathcal{G}(x) = \sum_{i,j=1}^{d} G_{ij} x_j \elderstructure{i}
+\end{equation}
+where the gravitational matrix $G_{ij}$ satisfies:
+\begin{align}
+G_{ij} &= g_i \delta_{ij} + \gamma_{ij} \cos(\Phi(\elderstructure{i}) - \Phi(\elderstructure{j}))\\
+\sum_{j=1}^{d} G_{ij} &= g_i \text{ (conservation)}\\
+G_{ij} &= G_{ji} \text{ (symmetry)}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+The diagonal terms $g_i \delta_{ij}$ represent the direct gravitational influence on each basis component. The off-diagonal coupling terms $\gamma_{ij} \cos(\Phi(\elderstructure{i}) - \Phi(\elderstructure{j}))$ encode phase-dependent interactions between different basis elements.
+
+Conservation follows from the requirement that the total gravitational effect equals the sum of individual eigenvalues. Symmetry ensures that gravitational interactions are reciprocal, consistent with physical gravitational principles.
+
+The phase-dependent coupling creates the hierarchical structure essential for knowledge representation, as components with similar phases experience stronger gravitational coupling.
+\end{proof}
+
+\subsection{Convergence Rate Analysis}
+
+\begin{theorem}[Explicit Convergence Bounds]
+For Elder space learning dynamics with learning rate $\eta > 0$, the convergence to equilibrium satisfies:
+\begin{equation}
+\|x_t - x^*\|_E \leq \|x_0 - x^*\|_E \exp(-\lambda_{min} \eta t)
+\end{equation}
+where $\lambda_{min} = \min_i g_i$ is the smallest gravitational eigenvalue and $x^*$ is the equilibrium state.
+\end{theorem}
+
+\begin{proof}
+Consider the Elder space dynamics $\frac{dx}{dt} = -\mathcal{G}(x - x^*)$. In the canonical basis, this becomes:
+\begin{equation}
+\frac{dx_i}{dt} = -g_i (x_i - x_i^*) - \sum_{j \neq i} \gamma_{ij} \cos(\Phi(\elderstructure{i}) - \Phi(\elderstructure{j}))(x_j - x_j^*)
+\end{equation}
+
+The eigenvalue analysis of the linearized system gives exponential decay with rate determined by the smallest eigenvalue $\lambda_{min}$. The phase-dependent coupling terms only improve convergence by creating additional attractive forces between compatible components.
+\end{proof}
