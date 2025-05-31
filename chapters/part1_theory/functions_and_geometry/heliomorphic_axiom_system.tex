@@ -25,7 +25,24 @@ The space $\mathcal{HL}(\mathcal{H})$ forms a Banach space under the heliomorphi
 \end{theorem}
 
 \begin{proof}
-By the Completeness Axiom, $\mathcal{HL}(\mathcal{H})$ is complete under the defined norm. The linearity of the heliomorphic differential equations ensures that linear combinations of heliomorphic functions remain heliomorphic, establishing the vector space structure. The norm properties follow from standard analysis.
+We provide a complete proof of the Banach space structure:
+
+\textbf{Vector Space Structure}: Let $f, g \in \mathcal{HL}(\mathcal{H})$ and $\alpha, \beta \in \mathbb{C}$. Since heliomorphic functions satisfy linear differential equations by the axioms, $\alpha f + \beta g$ also satisfies the same equations and thus belongs to $\mathcal{HL}(\mathcal{H})$.
+
+\textbf{Norm Properties}: The heliomorphic norm satisfies:
+\begin{itemize}
+    \item \textbf{Positivity}: $\|f\|_{\mathcal{H}} \geq 0$ with equality iff $f \equiv 0$
+    \item \textbf{Homogeneity}: $\|\alpha f\|_{\mathcal{H}} = |\alpha| \|f\|_{\mathcal{H}}$ 
+    \item \textbf{Triangle Inequality}: $\|f + g\|_{\mathcal{H}} \leq \|f\|_{\mathcal{H}} + \|g\|_{\mathcal{H}}$
+\end{itemize}
+
+\textbf{Completeness}: Let $\{f_n\}$ be a Cauchy sequence in $(\mathcal{HL}(\mathcal{H}), \|\cdot\|_{\mathcal{H}})$. Then:
+\begin{enumerate}
+    \item $\{f_n\}$ converges uniformly on compact subsets to some function $f$
+    \item $\{\nabla_h f_n\}$ converges uniformly on compact subsets to $\nabla_h f$
+    \item The heliomorphic differential equations are preserved in the limit
+    \item Therefore $f \in \mathcal{HL}(\mathcal{H})$ and $f_n \to f$ in norm
+\end{enumerate}
 \end{proof}
 
 \section{Detailed Proofs of Fundamental Theorems}

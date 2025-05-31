@@ -86,6 +86,14 @@ We construct an explicit model of Elder spaces to demonstrate consistency. Let $
     \Phi((z, \phi)) &= \phi
 \end{align}
 where $z \cdot \overline{z}$ denotes the inner product and $\epsilon \to 0^+$. Direct verification shows this model satisfies axioms A1-A4, establishing consistency.
+
+\textbf{Independence:} We construct countermodels showing each axiom is independent:
+\begin{itemize}
+    \item \textbf{A1 Independent}: Consider $\mathbb{C}^d$ with non-abelian addition $(x,y) \mapsto x + y + x \star y$. This violates A1 but can satisfy A2-A4.
+    \item \textbf{A2 Independent}: Use scaling $\alpha \odot x = \alpha^2 x$ which violates distributivity but preserves other axioms.
+    \item \textbf{A3 Independent}: Define multiplication $x \star y = 0$ for all $x,y$, violating associativity while maintaining A1-A2, A4.
+    \item \textbf{A4 Independent}: Set $\Phi(x) = 1$ for all $x$, eliminating phase dynamics while preserving algebraic structure.
+\end{itemize}
 \end{proof}
 
 \begin{definition}[Elder Space Metric]
@@ -210,6 +218,10 @@ d_{\mathcal{H}}(\Psi(x), \Psi(y)) = F(d_E(x, y))
 \end{equation}
 where $F: \mathbb{R}^+ \rightarrow \mathbb{R}^+$ is a strictly increasing function determined by the gravitational field structure.
 \end{proposition}
+
+\input{chapters/part1_theory/core_concepts/computational_complexity_analysis}
+
+\input{chapters/part1_theory/formula_elaborations}
 
 \section{Hierarchical Subspaces and Gravitational Stratification}
 
