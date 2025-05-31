@@ -9,7 +9,15 @@ Building on the foundational definition of heliomorphic functions, this chapter 
 The space of heliomorphic functions exhibits rich analytical properties that enable hierarchical knowledge representation.
 
 \begin{definition}[Heliomorphic Function Space]
-For a heliomorphic domain $\mathcal{H}$, the space $\mathcal{HL}(\mathcal{H})$ consists of all heliomorphic functions $f: \mathcal{H} \rightarrow \mathbb{C}$ with finite norm $\|f\|_{\mathcal{H}}$.
+For a heliomorphic domain $\mathcal{H}$, the space $\mathcal{HL}(\mathcal{H})$ consists of all heliomorphic functions $f: \mathcal{H} \rightarrow \mathbb{C}$ with finite heliomorphic norm:
+\begin{equation}
+\|f\|_{\mathcal{H}} = \sup_{z \in \mathcal{H}} |f(z)| + \sup_{z \in \mathcal{H}} \|\nabla_h f(z)\|
+\end{equation}
+where $\nabla_h f$ is the heliomorphic gradient defined by:
+\begin{equation}
+\nabla_h f(z) = \left(\frac{\partial f}{\partial r}, \frac{1}{r}\frac{\partial f}{\partial \theta}, \phi(r)\frac{\partial f}{\partial r}\right)
+\end{equation}
+with $z = re^{i\theta}$ and $\phi(r)$ the radial coupling function.
 \end{definition}
 
 \begin{theorem}[Banach Space Structure]

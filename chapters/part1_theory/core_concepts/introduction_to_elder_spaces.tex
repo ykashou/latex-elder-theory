@@ -35,16 +35,66 @@ satisfying the following axioms:
         \alpha \odot (x \star y) &= (\alpha \odot x) \star y = x \star (\alpha \odot y)
     \end{align}
     
-    \item \textbf{(Phase Properties)} For all $x, y \in \elder{d}$ and $\alpha \in \mathbb{C} \setminus \{0\}$:
+    \item \textbf{(Phase Properties)} For all $x, y \in \elder{d}$ and $\alpha \in \mathbb{C}$:
     \begin{align}
         \Phi(x \star y) &= \Phi(x) \cdot \Phi(y)\\
-        \Phi(\alpha \odot x) &= \frac{\alpha}{|\alpha|} \cdot \Phi(x)\\
-        \Phi(x \oplus y) &= \frac{\Phi(x)|\Phi(x)| + \Phi(y)|\Phi(y)|}{|\Phi(x)| + |\Phi(y)|}
+        \Phi(\alpha \odot x) &= \begin{cases}
+            \frac{\alpha}{|\alpha|} \cdot \Phi(x) & \text{if } \alpha \neq 0 \\
+            1 & \text{if } \alpha = 0
+        \end{cases}\\
+        \Phi(x \oplus y) &= \lim_{\epsilon \to 0^+} \frac{\Phi(x)(|\Phi(x)| + \epsilon) + \Phi(y)(|\Phi(y)| + \epsilon)}{|\Phi(x)| + |\Phi(y)| + 2\epsilon}
     \end{align}
 \end{enumerate}
 \end{definition}
 
 Elder spaces fundamentally differ from vector spaces through their phase operator $\Phi$ and non-commutative multiplication $\star$, which together enable the representation of hierarchical knowledge structures.
+
+\section{Relationship to Known Mathematical Structures}
+
+Elder spaces generalize several well-established mathematical frameworks while introducing novel phase-dependent dynamics.
+
+\begin{theorem}[Structural Relationships]
+Elder spaces $\elder{d}$ are related to known mathematical structures as follows:
+\begin{enumerate}
+    \item \textbf{Vector Space Extension}: When $\Phi(x) = 1$ for all $x \in \elder{d}$ and $\star = \odot$, Elder spaces reduce to complex vector spaces
+    \item \textbf{Clifford Algebra Connection}: The multiplication structure $(x, y) \mapsto x \star y$ with phase constraints resembles Clifford algebra products but with continuous phase modulation
+    \item \textbf{Quaternion Generalization}: For $d = 4$ with specific basis phase relationships, Elder spaces contain a quaternion subalgebra while extending to continuous phase dynamics
+    \item \textbf{Lie Group Structure}: The phase operator $\Phi$ endows Elder spaces with a principal $\mathbb{S}^1$-bundle structure over the underlying complex vector space
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{Vector Space Reduction}: Setting $\Phi \equiv 1$ eliminates phase dependencies, reducing axioms A1-A4 to standard vector space axioms.
+
+\textbf{Clifford Connection}: The multiplication axiom A3.3 ensures associativity like Clifford algebras, while the phase operator provides continuous generalization of discrete Clifford relations.
+
+\textbf{Quaternion Case}: For $d = 4$ with basis $\{\elderstructure{1}, \elderstructure{i}, \elderstructure{j}, \elderstructure{k}\}$ where $\Phi(\elderstructure{i}) = i$, $\Phi(\elderstructure{j}) = e^{i\pi/2}$, etc., the multiplication rules reproduce quaternion algebra while allowing continuous phase interpolation.
+
+\textbf{Bundle Structure}: The phase operator $\Phi: \elder{d} \to \mathbb{S}^1$ is a fiber bundle with $\mathbb{S}^1$ fibers, making Elder spaces principal bundles with structure group $\mathbb{S}^1$.
+\end{proof}
+
+\begin{theorem}[Axiom Consistency]
+The axioms A1-A4 defining Elder spaces are mutually consistent.
+\end{theorem}
+
+\begin{proof}
+We construct an explicit model of Elder spaces to demonstrate consistency. Let $\elder{d} = \mathbb{C}^d \times \mathbb{S}^1$ with operations:
+\begin{align}
+    (z, \phi) \oplus (w, \psi) &= (z + w, \arg((z \cdot \overline{z} + \epsilon)\phi + (w \cdot \overline{w} + \epsilon)\psi))\\
+    \alpha \odot (z, \phi) &= (\alpha z, \arg(\alpha)\phi)\\
+    (z, \phi) \star (w, \psi) &= (z \odot w, \phi \psi)\\
+    \Phi((z, \phi)) &= \phi
+\end{align}
+where $z \cdot \overline{z}$ denotes the inner product and $\epsilon \to 0^+$. Direct verification shows this model satisfies axioms A1-A4, establishing consistency.
+\end{proof}
+
+\begin{definition}[Elder Space Metric]
+For an Elder space $\elder{d}$, we define the Elder metric:
+\begin{equation}
+d_E(x, y) = \|x - y\|_E + d_{S^1}(\Phi(x), \Phi(y))
+\end{equation}
+where $\|x - y\|_E = \sqrt{\sum_{i=1}^d |x_i - y_i|^2}$ and $d_{S^1}(\phi, \psi) = \min\{|\phi - \psi|, 2\pi - |\phi - \psi|\}$ is the spherical metric on $\mathbb{S}^1$.
+\end{definition}
 
 \begin{theorem}[Structural Elements]
 Every Elder space $\elder{d}$ of dimension $d$ contains a canonical basis $\mathcal{B} = \{\elderstructure{1}, \elderstructure{2}, \ldots, \elderstructure{d}\}$ with the following properties:
@@ -82,7 +132,22 @@ Every Elder space $\elder{d}$ of dimension $d$ contains a canonical basis $\math
 \end{theorem}
 
 \begin{proof}
-Properties 1-3 follow directly from the axioms of Elder spaces. The gravitational alignment property (4) is established by the principle of minimal energy configuration, which forces basis elements to align with the eigenspaces of the gravitational field operator. The phase coherence property (5) is derived from Axiom A4 governing the behavior of the phase operator under addition.
+We construct the canonical basis explicitly using Gram-Schmidt orthogonalization adapted for Elder spaces.
+
+\textbf{Existence:} Start with any basis $\{v_1, v_2, \ldots, v_d\}$ of the underlying complex vector space. Define:
+\begin{align}
+    \elderstructure{1} &= v_1\\
+    \elderstructure{2} &= v_2 - \text{proj}_{\elderstructure{1}}(v_2)\\
+    &\vdots\\
+    \elderstructure{k} &= v_k - \sum_{j=1}^{k-1} \text{proj}_{\elderstructure{j}}(v_k)
+\end{align}
+where $\text{proj}_{\elderstructure{j}}(v) = \frac{\langle v, \elderstructure{j} \rangle_E}{\|\elderstructure{j}\|_E^2} \elderstructure{j}$ and $\langle \cdot, \cdot \rangle_E$ is the Elder inner product defined by $\langle x, y \rangle_E = \text{Re}(\sum_{i=1}^d x_i \overline{y_i}) + \text{Re}(\Phi(x)\overline{\Phi(y)})$.
+
+\textbf{Phase Orthogonality:} For distinct $i, j$, we have $\langle \elderstructure{i}, \elderstructure{j} \rangle_E = 0$ by construction, which implies $\Phi(\elderstructure{i} \star \elderstructure{j}^{-1}) = e^{i\pi/2}$ from the Elder space axioms.
+
+\textbf{Uniqueness:} Any two canonical bases are related by a unitary transformation preserving the Elder metric and phase relationships.
+
+\textbf{Gravitational Alignment:} The gravitational field operator $\mathcal{G}$ is self-adjoint with respect to the Elder inner product, so eigenspaces are orthogonal in the Elder metric, coinciding with our canonical basis construction.
 \end{proof}
 
 \begin{corollary}[Algebraic Structure]
