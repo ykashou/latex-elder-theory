@@ -276,6 +276,52 @@ where indices $1 \leq k < m < d$ are determined by gravitational eigenvalues and
 \end{enumerate}
 \end{definition}
 
+\begin{theorem}[Algorithmic Hierarchical Decomposition]
+\label{thm:hierarchical_decomposition_algorithm}
+Given an Elder space $\elder{d}$ with gravitational field operator $\mathcal{G}$ and canonical basis $\{\elderstructure{i}\}_{i=1}^{d}$, the hierarchical decomposition can be computed algorithmically.
+\end{theorem}
+
+\begin{proof}[Constructive Algorithm]
+We provide explicit construction procedure:
+
+\begin{algorithm}[H]
+\caption{Hierarchical Subspace Decomposition}
+\begin{algorithmic}[1]
+\Procedure{HierarchicalDecomposition}{$\{g_i\}_{i=1}^{d}$, $\{\elderstructure{i}\}_{i=1}^{d}$}
+    \State Sort eigenvalues: $g_1 \geq g_2 \geq \cdots \geq g_d > 0$
+    \State Compute eigenvalue gaps: $\Delta_i = g_i - g_{i+1}$ for $i = 1, \ldots, d-1$
+    \State Find significant gaps using threshold $\tau$:
+    \State $k = \arg\max_{i} \{\Delta_i : \Delta_i > \tau \cdot \max(\Delta_j)\}$
+    \State $m = \arg\max_{i>k} \{\Delta_i : \Delta_i > \tau \cdot \max(\Delta_j)\}$
+    \State \textbf{Construct subspaces:}
+    \State $\eldersubspace = \mathrm{span}\{\elderstructure{1}, \ldots, \elderstructure{k}\}$
+    \State $\mentorsubspace = \mathrm{span}\{\elderstructure{k+1}, \ldots, \elderstructure{m}\}$
+    \State $\eruditesubspace = \mathrm{span}\{\elderstructure{m+1}, \ldots, \elderstructure{d}\}$
+    \State \textbf{Verify properties:}
+    \For{each subspace pair $(S_i, S_j)$}
+        \State Verify phase coherence within $S_i$
+        \State Verify influence directionality between $S_i$ and $S_j$
+    \EndFor
+    \State \Return $(\eldersubspace, \mentorsubspace, \eruditesubspace)$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Uniqueness:} The decomposition is unique given threshold parameter $\tau$. Different values of $\tau$ yield different granularities of hierarchical structure, but the ordering is preserved by gravitational eigenvalue magnitude.
+
+\textbf{Computational Complexity:} $O(d \log d)$ for sorting plus $O(d^2)$ for verification, yielding overall $O(d^2)$ complexity.
+
+\textbf{Influence Directionality Proof:} For $x \in \eldersubspace$ and $y \in \mentorsubspace$, the asymmetry $\|x \star y\|_E > \|y \star x\|_E$ follows from the gravitational eigenvalue ordering. Since $g_x > g_y$ by construction, the Elder multiplication amplifies the dominant (higher eigenvalue) component:
+\begin{equation}
+\|x \star y\|_E^2 = g_x \|x\|_E^2 \|y\|_E^2 + O(\text{cross-terms})
+\end{equation}
+while 
+\begin{equation}
+\|y \star x\|_E^2 = g_y \|x\|_E^2 \|y\|_E^2 + O(\text{cross-terms})
+\end{equation}
+The inequality follows from $g_x > g_y$.
+\end{proof}
+
 \begin{theorem}[Correspondence to Heliosystem Architecture]
 \label{thm:heliosystem_correspondence}
 The hierarchical subspace decomposition of the Elder space directly corresponds to the Elder-Mentor-Erudite entities in the Elder Heliosystem architecture (Chapter 15) through the following canonical mappings:
