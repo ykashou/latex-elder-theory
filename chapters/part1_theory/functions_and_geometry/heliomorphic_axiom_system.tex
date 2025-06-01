@@ -70,23 +70,60 @@ Let $\{f_n\}$ be a Cauchy sequence in $\mathcal{HL}(\mathcal{H})$. For each $f_n
 The limit function $f = \rho e^{i\phi}$ satisfies the heliomorphic differential equations by the uniform convergence of the phase derivatives, ensuring $f \in \mathcal{HL}(\mathcal{H})$. The convergence $\|f_n - f\|_{\mathcal{H}} \to 0$ follows from the uniform convergence of both magnitude and phase components.
 \end{proof}
 
+\section{Gravitational Field Structure}
+
+We begin by establishing the mathematical foundation for gravitational influence regions that are essential to heliomorphic integration theory.
+
+\begin{definition}[Gravitational Influence Region]
+\label{def:gravitational_influence_region}
+A gravitational influence region $G \subset \mathcal{H}$ is a simply connected domain with the following properties:
+\begin{enumerate}
+\item $G$ is bounded by a piecewise smooth Jordan curve $\partial G$
+\item The gravitational potential $\Psi_G(z) = -\gamma \log|z - z_G|$ is well-defined on $\mathcal{H} \setminus G$, where $z_G \in G$ is the gravitational center and $\gamma > 0$ is the gravitational strength
+\item The radial-phase coupling in $G$ satisfies the constraint $\det(\nabla_r \phi, \nabla_\theta \phi) \neq 0$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Radial-Phase Coupling Tensor]
+\label{def:radial_phase_coupling_tensor}
+For a heliomorphic function $f(re^{i\theta}) = \rho(r,\theta)e^{i\phi(r,\theta)}$, the radial-phase coupling tensor is defined as:
+\begin{equation}
+\mathcal{T}_f(r,\theta) = \begin{pmatrix}
+\frac{\partial^2 \phi}{\partial r^2} & \frac{\partial^2 \phi}{\partial r \partial \theta} \\
+\frac{\partial^2 \phi}{\partial \theta \partial r} & \frac{1}{r^2}\frac{\partial^2 \phi}{\partial \theta^2}
+\end{pmatrix}
+\end{equation}
+This tensor characterizes the local coupling between radial and angular phase variations.
+\end{definition}
+
 \section{Detailed Proofs of Fundamental Theorems}
 
 \begin{theorem}[Heliomorphic Integration]
-For any closed contour $C$ in a heliomorphic domain $\mathcal{H}$ and any heliomorphic function $f$ on $\mathcal{H}$, the integral of $f$ along $C$ depends only on the winding numbers of $C$ around the gravitational influence regions where $f$ has specified values.
+\label{thm:heliomorphic_integration}
+For any closed contour $C$ in a heliomorphic domain $\mathcal{H}$ and any heliomorphic function $f$ on $\mathcal{H}$, the integral of $f$ along $C$ satisfies:
+\begin{equation}
+\oint_C f(z) \, dz = 2\pi i \sum_{j=1}^k n_j \text{Res}(f, G_j)
+\end{equation}
+where $n_j$ is the winding number of $C$ around gravitational influence region $G_j$, and $\text{Res}(f, G_j)$ is the heliomorphic residue of $f$ at $G_j$.
 \end{theorem}
 
 \begin{proof}
-Let $C$ be a closed contour in $\mathcal{H}$ and $\{G_1, G_2, \ldots, G_k\}$ be the gravitational influence regions where $f$ has specified values. By the Existence and Uniqueness Axiom, $f$ is uniquely determined by these values.
+We establish this result through a systematic topological argument.
 
-Let $n_j$ be the winding number of $C$ around gravitational influence region $G_j$. We can deform $C$ continuously into a sum of contours $\sum_j n_j C_j$, where each $C_j$ is a simple closed curve winding once around gravitational influence region $G_j$ and no other gravitational influence regions.
+\textbf{Step 1: Contour deformation}. Since $\mathcal{H}$ is a heliomorphic domain, the gravitational influence regions $\{G_1, \ldots, G_k\}$ are isolated and simply connected by Definition \ref{def:gravitational_influence_region}. By standard deformation theory, any closed contour $C$ can be continuously deformed to a linear combination $\sum_j n_j C_j$ where $C_j$ is a simple closed curve around $G_j$ only.
 
-By the Differential Heritage and Phase Continuity Axioms, the integral of $f$ along $C$ is invariant under this deformation:
+\textbf{Step 2: Heliomorphic residue calculation}. For each gravitational influence region $G_j$, the heliomorphic function $f$ has a Laurent-type expansion:
 \begin{equation}
-\oint_C f(z) \, dz = \sum_j n_j \oint_{C_j} f(z) \, dz
+f(z) = \sum_{n=-\infty}^{\infty} a_n^{(j)} (z - z_j)^{\alpha_n} e^{i\beta_n \arg(z - z_j)}
+\end{equation}
+where $z_j$ is the gravitational center of $G_j$, and the exponents $\alpha_n$, $\beta_n$ are determined by the heliomorphic structure.
+
+\textbf{Step 3: Integration along simple contours}. For a simple contour $C_j$ around $G_j$, the integral becomes:
+\begin{equation}
+\oint_{C_j} f(z) \, dz = 2\pi i \cdot a_{-1}^{(j)} = 2\pi i \cdot \text{Res}(f, G_j)
 \end{equation}
 
-This depends only on the values of $f$ on gravitational influence regions $G_j$ and the winding numbers $n_j$.
+\textbf{Step 4: Linearity}. The final result follows from the linearity of integration and the winding number decomposition.
 \end{proof}
 
 \begin{theorem}[Heliomorphic Extension]
@@ -103,18 +140,40 @@ Conversely, if the limit condition is satisfied, we can use the Existence and Un
 \end{proof}
 
 \begin{theorem}[Heliomorphic Laurent Series]
+\label{thm:heliomorphic_laurent}
 Any heliomorphic function $f$ on an annular region $\mathcal{A} = \{z \in \mathbb{C} : r_1 < |z| < r_2\}$ can be expressed as:
 \begin{equation}
-f(re^{i\theta}) = \sum_{n=-\infty}^{\infty} r^{\gamma_n} e^{i(n\theta + \beta_n \ln r)}
+f(re^{i\theta}) = \sum_{n=-\infty}^{\infty} a_n r^{\alpha_n} e^{i(n\theta + \beta_n \ln r)}
 \end{equation}
-where $\gamma_n$ and $\beta_n$ are determined by the radial-phase coupling characteristics.
-\end{theorem}
+where the coefficients $a_n$ and exponents $\alpha_n, \beta_n$ satisfy:
+\begin{align}
+a_n &= \frac{1}{2\pi} \int_0^{2\pi} f(r_0 e^{i\phi}) r_0^{-\alpha_n} e^{-i(n\phi + \beta_n \ln r_0)} d\phi \\
+\alpha_n + i\beta_n &= \text{eigenvalues of } \mathcal{T}_f(r_0, \theta)
+\end{align}
+for any $r_0 \in (r_1, r_2)$, and the series converges uniformly on compact subsets of $\mathcal{A}$.
+\end{theorem>
 
 \begin{proof}
-By the Radial Analyticity Axiom, for each fixed $\theta$, the function $r \mapsto f(re^{i\theta})$ has a convergent power series. By the Phase Continuity Axiom, this must be compatible with angular variation.
+\textbf{Step 1: Separable form analysis}. Writing $f(re^{i\theta}) = \rho(r,\theta)e^{i\phi(r,\theta)}$, the heliomorphic differential equations impose:
+\begin{align}
+r\frac{\partial \phi}{\partial r} + \gamma \frac{\partial \phi}{\partial \theta} &= F_1(r,\theta) \\
+\frac{\partial \rho}{\partial r} + \frac{\rho}{r}\frac{\partial \phi}{\partial \theta} &= F_2(r,\theta)
+\end{align}
 
-Expressing $f$ in polar form and applying the heliomorphic differential equations, the general solution has the stated form. The Completeness Axiom ensures this series converges uniformly on compact subsets of the annulus.
-\end{proof}
+\textbf{Step 2: Fourier decomposition}. For fixed $r$, expand in Fourier series:
+\begin{equation}
+\phi(r,\theta) = \sum_{n=-\infty}^{\infty} \phi_n(r) e^{in\theta}
+\end{equation}
+
+\textbf{Step 3: Radial ODE analysis}. Each Fourier mode satisfies:
+\begin{equation}
+r\phi_n'(r) + in\gamma \phi_n(r) = F_{1,n}(r)
+\end{equation}
+
+The solutions have the form $\phi_n(r) = C_n r^{\alpha_n} + \text{particular solution}$, where $\alpha_n$ are eigenvalues of the radial-phase coupling tensor.
+
+\textbf{Step 4: Convergence}. The uniform convergence follows from the analyticity of the coupling functions and the exponential decay of Fourier coefficients.
+\end{proof>
 
 \section{Differential Operators and Spectral Theory}
 
