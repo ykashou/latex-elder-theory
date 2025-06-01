@@ -1,7 +1,7 @@
-# Chapter 5: Advanced Properties of Heliomorphic Functions - Mathematical Proof Review Checklist
+# Chapter 6: Advanced Properties of Heliomorphic Functions - Mathematical Proof Review Checklist
 
 ## Overview
-This checklist evaluates the mathematical rigor and logical consistency of Chapter 5 from the perspective of an artisan mathematician, focusing on proof completeness, logical flow, and mathematical prerequisites.
+This checklist evaluates the mathematical rigor and logical consistency of Chapter 6 from the perspective of an artisan mathematician, focusing on proof completeness, logical flow, and mathematical prerequisites.
 
 ## Mathematical Proofs Identified
 
