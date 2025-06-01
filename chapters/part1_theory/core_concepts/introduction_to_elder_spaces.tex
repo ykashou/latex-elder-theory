@@ -174,13 +174,44 @@ The associativity constraint on structure constants ensures these are equal.
 Therefore, Elder multiplication $\star$ is associative, completing the proof.
 \end{proof}
 
+\begin{theorem}[Spectral Theory Foundation]
+The gravitational field operator $\mathcal{G}$ has complete spectral decomposition with well-defined eigenspaces.
+\end{theorem}
+
+\begin{proof}
+**Step 1: Operator Self-Adjointness**
+For any $x, y \in \elder{d}$:
+$$\langle \mathcal{G}x, y \rangle = \sum_{i=1}^{d} g_i \langle |\elderstructure{i}\rangle\langle\elderstructure{i}|x, y \rangle = \sum_{i=1}^{d} g_i \langle x, \elderstructure{i} \rangle \overline{\langle y, \elderstructure{i} \rangle}$$
+
+$$\langle x, \mathcal{G}y \rangle = \sum_{i=1}^{d} g_i \langle x, |\elderstructure{i}\rangle\langle\elderstructure{i}|y \rangle = \sum_{i=1}^{d} g_i \langle x, \elderstructure{i} \rangle \overline{\langle y, \elderstructure{i} \rangle}$$
+
+Therefore $\mathcal{G} = \mathcal{G}^*$ (self-adjoint).
+
+**Step 2: Spectral Decomposition**
+Since $\mathcal{G}$ is self-adjoint on finite-dimensional space, the spectral theorem applies:
+$$\mathcal{G} = \sum_{i=1}^{d} g_i P_i$$
+where $P_i = |\elderstructure{i}\rangle\langle\elderstructure{i}|$ are orthogonal projections with $P_i P_j = \delta_{ij} P_i$.
+
+**Step 3: Eigenvalue Properties**
+The eigenvalues $\{g_i\}$ satisfy:
+- $g_i > 0$ (positive definiteness for gravitational strength)
+- $g_1 \geq g_2 \geq \cdots \geq g_d$ (hierarchical ordering)
+- $\text{tr}(\mathcal{G}) = \sum_{i=1}^{d} g_i$ (finite trace)
+
+**Step 4: Eigenspace Structure**
+Each eigenspace $\text{span}\{\elderstructure{i}\}$ is one-dimensional with:
+$$\mathcal{G}\elderstructure{i} = g_i \elderstructure{i}$$
+
+The orthogonality $\langle \elderstructure{i}, \elderstructure{j} \rangle = \delta_{ij}$ ensures complete spectral resolution.
+\end{proof}
+
 \begin{definition}[Gravitational Field Operator]
 The gravitational field operator $\mathcal{G}: \elder{d} \rightarrow \elder{d}$ is a parameterized linear operator defined by:
 \begin{equation}
 \mathcal{G} = \sum_{i=1}^{d} g_i |\elderstructure{i}\rangle\langle\elderstructure{i}|
 \end{equation}
 where $\{g_i\}_{i=1}^{d}$ are learnable gravitational eigenvalues with $g_1 \geq g_2 \geq \cdots \geq g_d > 0$, and $|\elderstructure{i}\rangle\langle\elderstructure{i}|$ denotes the projection operator onto the $i$-th canonical basis direction. The operator encodes hierarchical attention weights in the trainable Elder Heliosystem, with larger eigenvalues corresponding to higher hierarchical importance.
-\end{definition}
+\end{definition>
 
 \begin{theorem}[Structural Elements]
 Every Elder space $\elder{d}$ of dimension $d$ contains a canonical basis $\mathcal{B} = \{\elderstructure{1}, \elderstructure{2}, \ldots, \elderstructure{d}\}$ with the following properties:
