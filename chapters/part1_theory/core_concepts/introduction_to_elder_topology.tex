@@ -244,9 +244,13 @@ $$\Phi(\mathcal{G}(x)) = g_k \cdot \Phi(x)$$
 This creates distinct phase evolution patterns characteristic of each abstraction level.
 \end{proof}
 
-\begin{corollary}[Connection to Heliomorphic Functions]
-The gravitational stratification of Elder spaces corresponds directly to the stratification of heliomorphic domains established in Chapter 4, where each stratum $\mathcal{S}_k$ maps to a gravitational influence region $\mathcal{D}_k$ in the heliomorphic function framework.
+\begin{corollary}[Stratification Universality]
+The gravitational stratification structure $\{\mathcal{S}_k\}_{k=0}^d$ provides a canonical decomposition that preserves under continuous Elder space transformations. For any Elder space isomorphism $\Psi: \elder{d_1} \rightarrow \elder{d_2}$, the stratification is preserved: $\Psi(\mathcal{S}_k^{(1)}) = \mathcal{S}_k^{(2)}$.
 \end{corollary}
+
+\begin{proof}
+Since $\Psi$ is an Elder space isomorphism, it preserves the gravitational field structure: $G_2(\Psi(x)) = G_1(x)$ for all $x \in \elder{d_1}$. Therefore, $\Psi$ maps level sets to level sets: $\Psi(G_1^{-1}(g_k)) = G_2^{-1}(g_k)$, establishing the stratification preservation.
+\end{proof}
 
 \begin{figure}[ht]
 \centering
@@ -278,11 +282,13 @@ The gravitational stratification of Elder spaces corresponds directly to the str
 % Add gravitational field label
 \node[font=\small, text=blue!70!black] at (0,2.7) {Gravitational Field};
 \end{tikzpicture}
-\caption{Stratification of Elder space as resonance manifolds within a gravitational field. Each layer ($\mathcal{S}_0$, $\mathcal{S}_1$, $\mathcal{S}_2$) represents knowledge structures at different levels of abstraction and field strengths.}
+\caption{Gravitational stratification of Elder space $\elder{d}$ showing level sets $\mathcal{S}_k = G^{-1}(g_k)$ where $G: \elder{d} \rightarrow \mathbb{R}^+$ is the gravitational field function. The stratification satisfies: (1) $\mathcal{S}_0$ (center): highest gravitational field strength $g_0$, (2) $\mathcal{S}_1$ (middle): intermediate field strength $g_1 < g_0$, (3) $\mathcal{S}_2$ (outer): lowest field strength $g_2 < g_1$. Each stratum is a smooth submanifold of codimension 1 by the implicit function theorem.}
 \label{fig:elder-stratification}
 \end{figure}
 
-This stratification is important for understanding the organization of knowledge in the Elder Theory framework, as each layer corresponds to information with similar structural properties and abstraction levels.
+\begin{proposition}[Figure Correspondence]
+The depicted stratification in Figure \ref{fig:elder-stratification} corresponds to a 2-dimensional Elder space $\elder{2}$ with gravitational field function $G(z) = |z|^2 + \alpha|\text{Im}(\Phi(z))|$ for some parameter $\alpha > 0$, where the concentric regions represent exact level sets $G^{-1}(g_k)$ for distinct critical values $g_2 < g_1 < g_0$.
+\end{proposition}
 
 \section{Domain Mappings and Transfer Theory}
 
