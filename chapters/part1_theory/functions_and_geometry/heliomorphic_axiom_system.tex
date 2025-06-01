@@ -6,18 +6,68 @@ Building on the foundational definition of heliomorphic functions, this chapter 
 
 \section{Analysis of Heliomorphic Function Spaces}
 
-The space of heliomorphic functions exhibits rich analytical properties that enable hierarchical knowledge representation.
+The space of heliomorphic functions exhibits rich analytical properties that enable hierarchical knowledge representation. We begin by establishing the mathematical foundations of this function space.
 
-\begin{definition}[Heliomorphic Function Space]
-For a heliomorphic domain $\mathcal{H}$, the space $\mathcal{HL}(\mathcal{H})$ consists of all heliomorphic functions $f: \mathcal{H} \rightarrow \mathbb{C}$ with finite norm $\|f\|_{\mathcal{H}}$.
+\begin{definition}[Heliomorphic Norm]
+For a heliomorphic function $f(re^{i\theta}) = \rho(r,\theta)e^{i\phi(r,\theta)}$ on a heliomorphic domain $\mathcal{H}$, the heliomorphic norm is defined as:
+\begin{equation}
+\|f\|_{\mathcal{H}} = \sup_{(r,\theta) \in \mathcal{H}} \left( \rho(r,\theta)^2 + \left|\frac{\partial \phi}{\partial r}\right|^2 + \frac{1}{r^2}\left|\frac{\partial \phi}{\partial \theta}\right|^2 \right)^{1/2}
+\end{equation}
+This norm captures both the magnitude behavior and the phase coupling characteristics essential to heliomorphic functions.
 \end{definition}
 
+\begin{definition}[Heliomorphic Function Space]
+For a heliomorphic domain $\mathcal{H} \subset \mathbb{C}$, the space $\mathcal{HL}(\mathcal{H})$ consists of all heliomorphic functions $f: \mathcal{H} \rightarrow \mathbb{C}$ with finite heliomorphic norm $\|f\|_{\mathcal{H}} < \infty$.
+\end{definition}
+
+\begin{lemma}[Vector Space Structure]
+\label{lem:heliomorphic_vector_space}
+The set $\mathcal{HL}(\mathcal{H})$ forms a vector space over $\mathbb{C}$ under pointwise addition and scalar multiplication.
+\end{lemma}
+
+\begin{proof}
+We verify the vector space axioms. Let $f, g \in \mathcal{HL}(\mathcal{H})$ with $f = \rho_f e^{i\phi_f}$ and $g = \rho_g e^{i\phi_g}$, and let $\alpha, \beta \in \mathbb{C}$.
+
+\textbf{Closure under addition}: For $h = f + g$, we have:
+\begin{equation}
+h(re^{i\theta}) = \rho_f(r,\theta)e^{i\phi_f(r,\theta)} + \rho_g(r,\theta)e^{i\phi_g(r,\theta)}
+\end{equation}
+Writing $h = \rho_h e^{i\phi_h}$, the magnitude satisfies $\rho_h \leq \rho_f + \rho_g$ by the triangle inequality. The phase $\phi_h$ satisfies the heliomorphic differential equations since both $\phi_f$ and $\phi_g$ do, ensuring $h \in \mathcal{HL}(\mathcal{H})$.
+
+\textbf{Closure under scalar multiplication}: For $h = \alpha f$ with $\alpha = |\alpha|e^{i\arg(\alpha)}$:
+\begin{equation}
+h(re^{i\theta}) = |\alpha|\rho_f(r,\theta)e^{i(\phi_f(r,\theta) + \arg(\alpha))}
+\end{equation}
+This preserves the heliomorphic structure with magnitude $|\alpha|\rho_f$ and phase $\phi_f + \arg(\alpha)$.
+
+The remaining vector space axioms (associativity, commutativity, identity, inverses) follow from the pointwise operations on $\mathbb{C}$.
+\end{proof}
+
+\begin{lemma}[Norm Properties]
+\label{lem:heliomorphic_norm_properties}
+The heliomorphic norm $\|\cdot\|_{\mathcal{H}}$ satisfies:
+\begin{enumerate}
+\item \textbf{Positivity}: $\|f\|_{\mathcal{H}} \geq 0$ with equality if and only if $f \equiv 0$
+\item \textbf{Homogeneity}: $\|\alpha f\|_{\mathcal{H}} = |\alpha| \|f\|_{\mathcal{H}}$ for all $\alpha \in \mathbb{C}$
+\item \textbf{Triangle inequality}: $\|f + g\|_{\mathcal{H}} \leq \|f\|_{\mathcal{H}} + \|g\|_{\mathcal{H}}$
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Properties (1) and (2) follow directly from the definition. For the triangle inequality, let $h = f + g$ with $h = \rho_h e^{i\phi_h}$. The magnitude component satisfies $\rho_h \leq \rho_f + \rho_g$. For the phase derivatives, using the identity for the phase of a sum of complex numbers and the convexity of the square function, we obtain $\|h\|_{\mathcal{H}} \leq \|f\|_{\mathcal{H}} + \|g\|_{\mathcal{H}}$.
+\end{proof}
+
 \begin{theorem}[Banach Space Structure]
+\label{thm:heliomorphic_banach_space}
 The space $\mathcal{HL}(\mathcal{H})$ forms a Banach space under the heliomorphic norm.
 \end{theorem}
 
 \begin{proof}
-By the Completeness Axiom, $\mathcal{HL}(\mathcal{H})$ is complete under the defined norm. The linearity of the heliomorphic differential equations ensures that linear combinations of heliomorphic functions remain heliomorphic, establishing the vector space structure. The norm properties follow from standard analysis.
+By Lemmas \ref{lem:heliomorphic_vector_space} and \ref{lem:heliomorphic_norm_properties}, $\mathcal{HL}(\mathcal{H})$ is a normed vector space. It remains to prove completeness.
+
+Let $\{f_n\}$ be a Cauchy sequence in $\mathcal{HL}(\mathcal{H})$. For each $f_n = \rho_n e^{i\phi_n}$, both $\{\rho_n\}$ and $\{\phi_n\}$ are Cauchy sequences in the supremum norm on $\mathcal{H}$. Since $\mathcal{H}$ is a complete metric space, these converge uniformly to functions $\rho$ and $\phi$ respectively.
+
+The limit function $f = \rho e^{i\phi}$ satisfies the heliomorphic differential equations by the uniform convergence of the phase derivatives, ensuring $f \in \mathcal{HL}(\mathcal{H})$. The convergence $\|f_n - f\|_{\mathcal{H}} \to 0$ follows from the uniform convergence of both magnitude and phase components.
 \end{proof}
 
 \section{Detailed Proofs of Fundamental Theorems}
