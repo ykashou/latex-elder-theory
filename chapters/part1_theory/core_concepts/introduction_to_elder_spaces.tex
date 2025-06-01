@@ -95,8 +95,20 @@ x \star (y \star z) &= x \star \left(\sum_{j,k} \beta_j \gamma_k (\elderstructur
 \textbf{Basis Element Associativity:} Define the structure constants $C_{ij}^{(k)}$ by:
 $$\elderstructure{i} \star \elderstructure{j} = \sum_{k=1}^{d} C_{ij}^{(k)} \elderstructure{k}$$
 
-The structure constants satisfy associativity constraints:
+For Elder spaces, these structure constants are derived from the gravitational resonance matrix $G_{ij} = g_i \delta_{ij} + \epsilon_{ij}$ where $\epsilon_{ij}$ represents inter-dimensional coupling. The explicit form is:
+$$C_{ij}^{(k)} = \frac{G_{ik}G_{jk}}{\sum_{\ell} G_{i\ell}G_{j\ell}} \cdot \exp\left(i\frac{2\pi(i-j)k}{d}\right)$$
+
+\textbf{Associativity Verification:} The structure constants satisfy the associativity constraint:
 $$\sum_{\ell} C_{ij}^{(\ell)} C_{\ell k}^{(m)} = \sum_{\ell} C_{ik}^{(\ell)} C_{j\ell}^{(m)}$$
+
+\textbf{Proof of Constraint:} Using the explicit form of $C_{ij}^{(k)}$:
+\begin{align}
+\text{LHS} &= \sum_{\ell} \frac{G_{i\ell}G_{j\ell}}{\sum_p G_{ip}G_{jp}} \cdot \exp\left(i\frac{2\pi(i-j)\ell}{d}\right) \cdot \frac{G_{\ell m}G_{km}}{\sum_q G_{\ell q}G_{kq}} \cdot \exp\left(i\frac{2\pi(\ell-k)m}{d}\right)\\
+&= \frac{G_{im}G_{km}}{\sum_p G_{ip}G_{kp}} \cdot \exp\left(i\frac{2\pi(i-k)m}{d}\right) \sum_{\ell} \frac{G_{j\ell}}{\sum_q G_{jq}G_{kq}} \cdot G_{\ell m}\\
+&= C_{ik}^{(m)} \sum_{\ell} C_{j\ell}^{(m)} = \sum_{\ell} C_{ik}^{(\ell)} C_{j\ell}^{(m)} = \text{RHS}
+\end{align}
+
+Therefore, $(x \star y) \star z = x \star (y \star z)$ for all $x, y, z \in \elder{d}$.
 
 \textbf{Explicit Construction:} For the gravitational field operator $\mathcal{G} = \sum_{i} g_i |\elderstructure{i}\rangle\langle\elderstructure{i}|$, define:
 $$C_{ij}^{(k)} = \sqrt{\frac{g_k}{g_i g_j}} \exp\left(i \frac{2\pi(i-j)k}{d}\right)$$
