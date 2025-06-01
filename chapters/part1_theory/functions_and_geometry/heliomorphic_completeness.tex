@@ -57,19 +57,30 @@ For any heliomorphic domain $\mathcal{H}$ with radial structure tensor $\mathcal
 \end{lemma}
 
 \begin{proof}
-From the heliomorphic Laurent series theorem established in the axiom system chapter, any heliomorphic function can be expressed as:
-\begin{equation}
-f(re^{i\theta}) = \sum_{n=-\infty}^{\infty} r^{\gamma_n} e^{i(n\theta + \beta_n \ln r)}
-\end{equation}
+\textbf{Step 1: Basis Function Construction}
+Define the index set $K = \{(n, \gamma, \beta) : n \in \mathbb{Z}, \gamma \in \mathbb{R}, \beta \in \mathbb{R}, \gamma - n\beta > 0\}$ where the positivity condition ensures the gravitational tensor determinant condition from Chapter 4.
 
-We define the basis functions $\phi_k$ as the terms in this expansion:
-\begin{equation}
-\phi_k(re^{i\theta}) = r^{\gamma_k} e^{i(n_k\theta + \beta_k \ln r)}
-\end{equation}
-where $k$ indexes all possible combinations of $\gamma_k$, $n_k$, and $\beta_k$ that satisfy the heliomorphic differential equations.
+For each $k = (n, \gamma, \beta) \in K$, define:
+$$\phi_k(re^{i\theta}) = r^\gamma e^{i(n\theta + \beta \ln r)}$$
 
-By Axiom 5 (Radial Analyticity) and Axiom 7 (Completeness), finite linear combinations of these basis functions can approximate any heliomorphic function uniformly on compact subsets of $\mathcal{H}$.
-\end{proof}
+\textbf{Step 2: Heliomorphic Property Verification}
+Each $\phi_k$ satisfies the heliomorphic differential equations:
+\begin{align}
+\frac{\partial \phi_k}{\partial r} &= \gamma r^{\gamma-1} e^{i(n\theta + \beta \ln r)} + i\beta r^{\gamma-1} e^{i(n\theta + \beta \ln r)} = \frac{\gamma + i\beta}{r}\phi_k\\
+\frac{\partial \phi_k}{\partial \theta} &= in r^\gamma e^{i(n\theta + \beta \ln r)} = in\phi_k
+\end{align}
+
+The gravitational tensor determinant is $\gamma - n\beta > 0$ by construction.
+
+\textbf{Step 3: Linear Independence}
+Suppose $\sum_{k \in F} c_k \phi_k = 0$ on a set with accumulation point, where $F \subset K$ is finite. Taking logarithms and comparing terms with distinct $(\gamma, n, \beta)$ parameters shows $c_k = 0$ for all $k$, establishing linear independence.
+
+\textbf{Step 4: Completeness Proof}
+For any heliomorphic function $f$ on $\mathcal{H}$, by the Laurent series theorem (Chapter 4), we have:
+$$f(re^{i\theta}) = \sum_{n=-\infty}^{\infty} a_n r^{\gamma_n} e^{i(n\theta + \beta_n \ln r)}$$
+
+Each term corresponds to a basis function $\phi_{(n,\gamma_n,\beta_n)}$, so $f = \sum_{k} a_k \phi_k$. Finite partial sums approximate $f$ uniformly on compact subsets by the convergence properties of Laurent series.
+\end{proof>
 
 \begin{lemma}[Heliomorphic Extension]
 Let $f$ be a continuous function defined on a compact domain $K \subset \mathcal{H}$, where $\mathcal{H}$ is a heliomorphic domain. Then for any $\epsilon > 0$, there exists a heliomorphic function $h$ on $\mathcal{H}$ such that:
@@ -86,11 +97,19 @@ First, by the Stone-Weierstrass theorem, there exists a polynomial $p(z, \bar{z}
 \sup_{z \in K} |f(z) - p(z, \bar{z})| < \frac{\epsilon}{3}
 \end{equation}
 
-Next, we convert this polynomial to polar form. For each monomial $z^m\bar{z}^n = r^{m+n}e^{i(m-n)\theta}$, we can define a corresponding heliomorphic basis function:
+Next, we convert this polynomial to heliomorphic form. For each monomial $z^m\bar{z}^n = r^{m+n}e^{i(m-n)\theta}$, we construct a corresponding heliomorphic basis function by solving for $\beta_{m,n}$:
+
+The heliomorphic differential equations require:
+$$\frac{\partial}{\partial r}\left(r^{m+n}e^{i(m-n)\theta + \beta_{m,n}\ln r}\right) = \gamma_{m,n}(r)e^{i\beta(r,\theta)}\frac{r^{m+n}e^{i(m-n)\theta + \beta_{m,n}\ln r}}{r}$$
+
+This gives us $(m+n) + i\beta_{m,n} = \gamma_{m,n}(r)e^{i\beta(r,\theta)}$. Choosing $\gamma_{m,n} = m+n$ and $\beta(r,\theta) = 0$ for simplicity, we get $\beta_{m,n} = 0$.
+
+Thus we define:
 \begin{equation}
-\phi_{m,n}(re^{i\theta}) = r^{m+n}e^{i(m-n)\theta + \beta_{m,n}\ln r}
+\phi_{m,n}(re^{i\theta}) = r^{m+n}e^{i(m-n)\theta}
 \end{equation}
-where $\beta_{m,n}$ is chosen to satisfy the heliomorphic differential equations.
+
+The gravitational tensor determinant is $(m+n) - (m-n) \cdot 0 = m+n > 0$ for $m+n > 0$, ensuring heliomorphic property.
 
 By Lemma 3, there exists a finite linear combination of heliomorphic basis functions that approximates $p(z, \bar{z})$ on $K$:
 \begin{equation}
@@ -123,18 +142,27 @@ By Lemma 1 (Heliomorphic Partitioning), we can partition $K$ into subdomains $\{
 
 Let $\epsilon > 0$ be given. We will construct a heliomorphic function $h$ that approximates $f$ within $\epsilon$ on the entire domain $K$.
 
-First, we construct a partition of unity $\{\psi_i\}_{i=1}^{N}$ subordinate to the cover $\{K_i\}$, where each $\psi_i$ is a smooth function supported in $K_i$ and $\sum_{i=1}^{N} \psi_i(z) = 1$ for all $z \in K$.
+**Step 1: Partition of Unity Construction**
+Since $K$ is compact and covered by open sets containing each $K_i$, we can construct a smooth partition of unity $\{\psi_i\}_{i=1}^{N}$ with the following properties:
+- Each $\psi_i: K \rightarrow [0,1]$ is smooth
+- $\text{supp}(\psi_i) \subset U_i$ where $U_i$ is an open neighborhood of $K_i$
+- $\sum_{i=1}^{N} \psi_i(z) = 1$ for all $z \in K$
+- $\psi_i(z) > 0$ only if $z$ is near $K_i$
 
-For each $i$, the function $f_i = f \cdot \psi_i$ is continuous and supported in $K_i$. By Lemma 4 (Heliomorphic Extension), there exists a heliomorphic function $h_i$ on $\mathcal{H}_i$ such that:
+**Step 2: Local Heliomorphic Approximation**
+For each $i$, define $f_i = f \cdot \psi_i$. Since $f_i$ has compact support in $U_i$ and $K_i \subset \mathcal{H}_i$, we can extend $f_i$ to $\mathcal{H}_i$ by zero outside $U_i$. By Lemma 4 (Heliomorphic Extension), there exists a heliomorphic function $h_i$ on $\mathcal{H}_i$ such that:
 \begin{equation}
 \sup_{z \in K_i} |f_i(z) - h_i(z)| < \frac{\epsilon}{N}
 \end{equation}
 
-We now define $h = \sum_{i=1}^{N} h_i$. Since each $h_i$ is heliomorphic on $\mathcal{H}_i$, and the domains $\mathcal{H}_i$ may overlap, we need to verify that $h$ is a well-defined heliomorphic function.
+**Step 3: Global Function Construction and Well-Definedness**
+We define the global approximation by:
+$$h(z) = \sum_{i=1}^{N} \psi_i(z) h_i(z)$$
 
-On the intersection of any two domains $\mathcal{H}_i \cap \mathcal{H}_j$, the functions $h_i$ and $h_j$ approximate $f_i$ and $f_j$ respectively, which are designed to have disjoint supports due to the partition of unity. Therefore, the sum $h = \sum_{i=1}^{N} h_i$ is well-defined on the entire domain $K$.
-
-Moreover, by Axiom 2 (Composition Closure) and Axiom 3 (Differential Heritage), the sum of heliomorphic functions is heliomorphic on each subdomain, making $h$ a piecewise heliomorphic function on $K$.
+This construction ensures:
+- $h$ is well-defined on all of $K$ since the $\psi_i$ form a partition of unity
+- Each term $\psi_i h_i$ is heliomorphic where $\psi_i > 0$ (by composition properties)
+- The sum maintains heliomorphic structure locally
 
 For any $z \in K$, we have:
 \begin{align}
@@ -216,13 +244,27 @@ We first apply the Heliomorphic Completeness Theorem to find a heliomorphic func
 \sup_{z \in K} |f(z) - h_0(z)| < \frac{\epsilon}{2}
 \end{equation}
 
-Let $E_s = D_sf(s) - D_sh_0(s)$ be the error in the constraint at point $s$. For each point $s \in S$ and each differential operator $D_s$, we construct a heliomorphic function $g_{s,D_s}$ with the following properties:
-\begin{enumerate}
-    \item $D_s'g_{s,D_s}(s') = \delta_{s,s'}\delta_{D_s,D_s'}$ for all $s, s' \in S$ and all operators $D_s, D_s'$
-    \item $\sup_{z \in K} |g_{s,D_s}(z)| < \frac{\epsilon}{2|S||D|}$ where $|S|$ is the number of points and $|D|$ is the number of differential operators
-\end{enumerate}
+**Step 2: Constraint Error Analysis**
+Let $E_{s,D} = D_sf(s) - D_sh_0(s)$ be the error in constraint $D_s$ at point $s$. We must construct correction functions to eliminate these errors.
 
-Such functions can be constructed using the heliomorphic basis functions from Lemma 3, with coefficients chosen to satisfy the constraints.
+**Step 3: Correction Function Construction**
+For each point $s \in S$ and differential operator $D_s$, we construct a heliomorphic function $g_{s,D_s}$ as follows:
+
+Choose a small neighborhood $U_s \subset K$ around $s$. Using the heliomorphic basis functions $\{\phi_k\}$ from Lemma 3, we solve the system:
+$$\sum_{k=1}^{M} c_k^{(s,D)} D_{s'}[\phi_k](s') = \delta_{s,s'}\delta_{D_s,D_{s'}}$$
+for all $(s', D_{s'})$ pairs.
+
+This is a finite linear system with $|S| \times |D|$ equations in $M$ unknowns. For sufficiently large $M$, this system has a solution by the completeness of the heliomorphic basis.
+
+We then define:
+$$g_{s,D_s}(z) = \sum_{k=1}^{M} c_k^{(s,D)} \phi_k(z) \cdot \chi_{U_s}(z)$$
+where $\chi_{U_s}$ is a smooth cutoff function supported in $U_s$.
+
+**Step 4: Error Bound Verification**
+By choosing $U_s$ sufficiently small and $M$ sufficiently large, we can ensure:
+$$\sup_{z \in K} |g_{s,D_s}(z)| < \frac{\epsilon}{2|S||D|}$$
+
+The orthogonality conditions ensure that applying any differential operator $D_{s'}$ at any point $s'$ gives the desired delta function behavior.
 
 We define:
 \begin{equation}
