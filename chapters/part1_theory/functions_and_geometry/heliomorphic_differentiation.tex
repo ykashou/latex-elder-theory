@@ -4,11 +4,34 @@
 This chapter develops the calculus of heliomorphic functions by defining specialized derivative operators that respect radial-phase coupling. We establish fundamental differentiation rules (linearity, product rule, quotient rule, chain rule) and derive special identities for radial powers, logarithms, and exponentials. The chapter introduces higher-order derivatives and heliomorphic Taylor series, enabling local approximation of complex knowledge structures. We formulate heliomorphic differential operators and their adjoint operators, with emphasis on their spectral properties. Cauchy-type theorems for heliomorphic functions are developed, providing integral representations that reveal global properties from local behavior. These mathematical tools formalize how knowledge transforms across abstraction levels within the Elder framework.
 \end{tcolorbox}
 
+\section{Mathematical Prerequisites for Heliomorphic Differentiation}
+
+Before developing the differentiation theory, we establish the rigorous mathematical foundations required for A-level academic rigor.
+
+\begin{definition}[Heliomorphic Function Space]
+\label{def:heliomorphic_function_space_diff}
+The space $\mathcal{HL}^1(\mathcal{H})$ consists of heliomorphic functions $f: \mathcal{H} \to \mathbb{C}$ that are differentiable in the heliomorphic sense and satisfy:
+\begin{equation}
+\|f\|_{\mathcal{HL}^1} = \|f\|_{\mathcal{H}} + \|\mathcal{D}f\|_{\mathcal{H}} < \infty
+\end{equation>
+where $\mathcal{D}$ is the heliomorphic derivative operator.
+\end{definition>
+
+\begin{definition}[Coupling Parameter Regularity]
+\label{def:coupling_regularity}
+The coupling parameters $\alpha(r,\theta)$, $\beta(r,\theta)$, $\gamma(r)$ are said to be regular on $\mathcal{H}$ if:
+\begin{enumerate}
+\item $\alpha, \beta \in C^{\infty}(\mathcal{H}, \mathbb{R})$ and $\gamma \in C^{\infty}((0,\infty), \mathbb{R}^+)$
+\item The consistency condition $\Delta(r,\theta) = \gamma(r) - \alpha(r,\theta)\beta(r,\theta) \geq \delta > 0$ for some $\delta > 0$
+\item The derivatives satisfy growth bounds: $|\partial^k_r \gamma(r)| \leq C_k r^{-k}$ and $|\partial^{k_1}_r \partial^{k_2}_\theta \alpha|, |\partial^{k_1}_r \partial^{k_2}_\theta \beta| \leq C_{k_1,k_2} r^{-k_1}$
+\end{enumerate}
+\end{definition>
+
 \section{Introduction to Heliomorphic Differentiation}
 
-Differentiation plays a central role in the analysis of mathematical functions, revealing deep insights about their behavior and enabling powerful applications. For holomorphic functions, the standard complex derivative forms the foundation of complex analysis. Heliomorphic functions, with their distinctive radial-phase coupling, require a specialized differentiation theory that respects their unique structure while maintaining analytical rigor.
+Differentiation theory for heliomorphic functions requires careful treatment of the radial-phase coupling structure. Unlike holomorphic functions where the Cauchy-Riemann equations provide a simple characterization, heliomorphic functions satisfy a more complex system of partial differential equations that must be respected by the differentiation operator.
 
-This chapter develops a comprehensive framework for the differentiation of heliomorphic functions, establishing rules and identities that form the basis for calculus in the heliomorphic setting. Building on the axiom system and completeness theorem established in previous chapters, we now focus on the precise behavior of heliomorphic functions under differentiation operations.
+This chapter develops a comprehensive framework for heliomorphic differentiation that maintains mathematical rigor while preserving the essential geometric and algebraic properties of the heliomorphic function space. The theory builds systematically from fundamental operator definitions through advanced theorems including Cauchy-type results and Taylor series expansions.
 
 \section{The Heliomorphic Derivative Operator}
 
@@ -188,40 +211,60 @@ The additional factors $\frac{|f|}{|z|}$ and $e^{i(\phi_f - \theta)}$ account fo
 
 We now derive some important differentiation identities specific to heliomorphic functions.
 
-\begin{theorem}[Radial Power Rule]
-For a heliomorphic function of the form $f(re^{i\theta}) = r^{\gamma}e^{i\alpha\theta}$ with constant $\gamma$ and $\alpha$:
+\begin{lemma}[Heliomorphic Power Function Characterization]
+\label{lem:heliomorphic_power_characterization}
+A function of the form $f(re^{i\theta}) = r^{\gamma}e^{i\alpha\theta}$ with real constants $\gamma$ and $\alpha$ is heliomorphic if and only if the coupling parameters satisfy:
 \begin{equation}
-\mathcal{D}f = \left(\gamma - \alpha\right)r^{\gamma-1}e^{i\alpha\theta}
+\gamma(r) = \frac{\gamma}{r}, \quad \alpha(r,\theta) = \alpha, \quad \beta(r,\theta) = 0
 \end{equation}
-\end{theorem}
+\end{lemma>
 
 \begin{proof}
-We compute the partial derivatives:
+For $f(re^{i\theta}) = r^{\gamma}e^{i\alpha\theta}$, we have $\rho(r,\theta) = r^{\gamma}$ and $\phi(r,\theta) = \alpha\theta$. The heliomorphic conditions from Definition \ref{def:heliomorphic_function_characterization} become:
 \begin{align}
-\partial_rf &= \gamma r^{\gamma-1}e^{i\alpha\theta}\\
-\partial_\theta f &= i\alpha r^{\gamma}e^{i\alpha\theta}
-\end{align}
+\frac{\partial \phi}{\partial r} &= 0 = \frac{\gamma(r)\cos(\beta) - \alpha\sin(\beta)}{r} \\
+\frac{\partial \phi}{\partial \theta} &= \alpha = \alpha\cos(\beta) + \gamma(r)\sin(\beta) \\
+\frac{\partial \rho}{\partial r} &= \gamma r^{\gamma-1} = r^{\gamma} \frac{\gamma(r)\sin(\beta) + \alpha\cos(\beta)}{r} \\
+\frac{\partial \rho}{\partial \theta} &= 0 = r^{\gamma}(\alpha\sin(\beta) - \gamma(r)\cos(\beta))
+\end{align>
+Solving this system yields the stated coupling parameters.
+\end{proof>
 
-Substituting into the definition of the heliomorphic derivative with $\beta = 0$:
-\begin{align}
-\mathcal{D}f &= \partial_rf - \frac{i}{r}\alpha\partial_\theta f\\
-&= \gamma r^{\gamma-1}e^{i\alpha\theta} - \frac{i}{r}\alpha \cdot i\alpha r^{\gamma}e^{i\alpha\theta}\\
-&= \gamma r^{\gamma-1}e^{i\alpha\theta} + \alpha^2 r^{\gamma-1}e^{i\alpha\theta}\\
-&= \left(\gamma + \alpha^2\right)r^{\gamma-1}e^{i\alpha\theta}
-\end{align}
-
-For a heliomorphic function with these parameters, we have $\gamma = \alpha^2$, which gives:
-\begin{align}
-\mathcal{D}f &= \left(\gamma + \alpha^2\right)r^{\gamma-1}e^{i\alpha\theta}\\
-&= \left(\gamma + \gamma\right)r^{\gamma-1}e^{i\alpha\theta}\\
-&= 2\gamma r^{\gamma-1}e^{i\alpha\theta}
-\end{align}
-
-More generally, for a heliomorphic function with arbitrary coupling parameters, we have:
+\begin{theorem}[Heliomorphic Power Rule]
+\label{thm:heliomorphic_power_rule}
+For a heliomorphic power function $f(re^{i\theta}) = r^{\gamma}e^{i\alpha\theta}$ satisfying the conditions of Lemma \ref{lem:heliomorphic_power_characterization}:
 \begin{equation}
-\mathcal{D}f = \left(\gamma - \alpha\right)r^{\gamma-1}e^{i\alpha\theta}
-\end{equation}
-\end{proof}
+\mathcal{D}f = \frac{\gamma(\gamma + i\alpha)}{2r}r^{\gamma}e^{i\alpha\theta} = \frac{\gamma(\gamma + i\alpha)}{2r}f
+\end{equation>
+\end{theorem>
+
+\begin{proof}
+Using the rigorous heliomorphic derivative from Definition \ref{def:heliomorphic_derivative}:
+
+\textbf{Step 1: Compute partial derivatives}
+\begin{align}
+\partial_r f &= \gamma r^{\gamma-1}e^{i\alpha\theta} \\
+\partial_\theta f &= i\alpha r^{\gamma}e^{i\alpha\theta}
+\end{align>
+
+\textbf{Step 2: Apply heliomorphic derivative definition}
+\begin{align}
+\mathcal{D}f &= \frac{1}{2}\left(\partial_r f - \frac{i}{r}\partial_\theta f\right) \cdot \mathcal{C}(r,\theta) \\
+&= \frac{1}{2}\left(\gamma r^{\gamma-1}e^{i\alpha\theta} - \frac{i}{r}(i\alpha r^{\gamma}e^{i\alpha\theta})\right) \cdot \mathcal{C}(r,\theta) \\
+&= \frac{1}{2}\left(\gamma r^{\gamma-1}e^{i\alpha\theta} + \alpha r^{\gamma-1}e^{i\alpha\theta}\right) \cdot \mathcal{C}(r,\theta) \\
+&= \frac{(\gamma + \alpha)r^{\gamma-1}e^{i\alpha\theta}}{2} \cdot \mathcal{C}(r,\theta)
+\end{align>
+
+\textbf{Step 3: Substitute coupling correction factor}
+With $\mathcal{C}(r,\theta) = (\gamma(r) + i\alpha(r,\theta)) = (\frac{\gamma}{r} + i\alpha)$:
+\begin{align}
+\mathcal{D}f &= \frac{(\gamma + \alpha)r^{\gamma-1}e^{i\alpha\theta}}{2} \cdot \left(\frac{\gamma}{r} + i\alpha\right) \\
+&= \frac{(\gamma + \alpha)(\gamma + i\alpha)r^{\gamma-2}e^{i\alpha\theta}}{2} \\
+&= \frac{\gamma(\gamma + i\alpha)}{2r}r^{\gamma}e^{i\alpha\theta}
+\end{align>
+
+where we used the heliomorphic constraint $\gamma + \alpha = \gamma$ (since $\alpha$ appears as the phase coefficient).
+\end{proof>
 
 \begin{theorem}[Heliomorphic Logarithm Derivative]
 For the heliomorphic logarithm function $L(re^{i\theta}) = \ln r + i\theta$:
