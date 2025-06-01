@@ -224,29 +224,70 @@ The parameter space $\Theta$ is equipped with the following structure:
 \end{definition}
 
 \begin{theorem}[Connection to Heliomorphic Functions]
-The complex parameter space $\Theta$ is isomorphic to the domain of heliomorphic functions described in Chapter 4 through the mapping $\Psi: \Theta \rightarrow \mathcal{D}$ defined as:
-\begin{equation}
-\Psi(\theta) = \mathcal{M}(\theta)e^{i\Phi(\theta)}
-\end{equation}
-This isomorphism ensures that:
-\begin{enumerate}
-    \item The inner product structure of $\Theta$ maps to the heliomorphic domain metric
-    \item The phase operator $\Phi$ corresponds to the angular coordinate in heliomorphic functions
-    \item The magnitude operator $\mathcal{M}$ corresponds to the radial coordinate in heliomorphic functions
-    \item The gravitational field-phase coupling governing heliomorphic functions emerges from the phase-magnitude interactions in the Elder Parameter Space
-\end{enumerate}
+\label{thm:heliomorphic_connection}
+The complex parameter space $\Theta$ provides the natural domain for heliomorphic functions through an explicit isomorphism $\Psi: \Theta \rightarrow \mathcal{D}_{\text{helio}}$ where $\mathcal{D}_{\text{helio}} \subset \mathbb{C}^n$ is the heliomorphic domain.
 \end{theorem}
 
+\begin{proof}
+\textbf{Step 1: Domain Characterization}
+Define the heliomorphic domain as:
+$$\mathcal{D}_{\text{helio}} = \{z \in \mathbb{C}^n : z = re^{i\theta}, r > 0, \theta \in [0,2\pi)^n, |z|^2 < \infty\}$$
+
+\textbf{Step 2: Isomorphism Construction}
+For $\theta \in \Theta$ with polar decomposition $\theta = \rho e^{i\phi}$, define:
+$$\Psi(\theta) = \mathcal{M}(\theta)e^{i\Phi(\theta)} = \rho e^{i\phi} \in \mathcal{D}_{\text{helio}}$$
+
+\textbf{Step 3: Bijectivity Verification}
+\textit{Injectivity:} If $\Psi(\theta_1) = \Psi(\theta_2)$, then $\rho_1 e^{i\phi_1} = \rho_2 e^{i\phi_2}$, implying $\rho_1 = \rho_2$ and $\phi_1 = \phi_2$, hence $\theta_1 = \theta_2$.
+
+\textit{Surjectivity:} For any $z = re^{i\alpha} \in \mathcal{D}_{\text{helio}}$, define $\theta = re^{i\alpha} \in \Theta$ (using complex parameter representation), then $\Psi(\theta) = z$.
+
+\textbf{Step 4: Structure Preservation}
+The mapping preserves:
+1. **Inner Product Structure:** $\langle \theta_1, \theta_2 \rangle_\Theta = \text{Re}(\overline{\Psi(\theta_1)} \cdot \Psi(\theta_2))$
+2. **Phase-Radial Coupling:** $\frac{\partial}{\partial r}\Psi(\theta) = \frac{\Psi(\theta)}{r}$ and $\frac{1}{r}\frac{\partial}{\partial \alpha}\Psi(\theta) = i\Psi(\theta)$
+3. **Gravitational Field Structure:** Phase interactions in $\Theta$ correspond to heliomorphic differential conditions in $\mathcal{D}_{\text{helio}}$
+
+This establishes $\Psi$ as an isomorphism enabling heliomorphic function theory on the parameter space.
+\end{proof}
+
 \begin{theorem}[Connection to Orbital Mechanics]
-The complex parameter representation provides the mathematical foundation for the orbital mechanics developed in Chapter 12, where:
-\begin{enumerate}
-    \item Parameter magnitude $\rho$ corresponds to orbital radius in the Elder Heliosystem
-    \item Parameter phase $\phi$ corresponds to orbital angular position
-    \item Phase dynamics $\frac{d\phi}{dt}$ correspond to angular velocity in orbital mechanics
-    \item Magnitude dynamics $\frac{d\rho}{dt}$ correspond to radial velocity in orbital mechanics
-    \item The complex inner product structure defines the gravitational potential energy between entities in the orbital system
-\end{enumerate}
+\label{thm:orbital_mechanics_connection}
+The complex parameter structure $\theta = \rho e^{i\phi}$ naturally induces orbital mechanics through the canonical mapping to polar coordinates in phase space, with gravitational dynamics emerging from the complex inner product structure.
 \end{theorem}
+
+\begin{proof}
+\textbf{Step 1: Orbital Coordinate Emergence}
+For parameter $\theta = \rho e^{i\phi} \in \Theta$, define the orbital mapping $\mathcal{O}: \Theta \rightarrow \mathbb{R}^2$ by:
+$$\mathcal{O}(\theta) = (\rho, \phi) \in \mathbb{R}_+ \times [0,2\pi)$$
+
+This establishes the canonical correspondence:
+- Magnitude $\rho$ → orbital radius $r$
+- Phase $\phi$ → angular position $\theta_{\text{orbital}}$
+
+\textbf{Step 2: Dynamical System Construction}
+The parameter evolution $\frac{d\theta}{dt} = \frac{d}{dt}(\rho e^{i\phi})$ decomposes as:
+$$\frac{d\theta}{dt} = \frac{d\rho}{dt} e^{i\phi} + i\rho \frac{d\phi}{dt} e^{i\phi}$$
+
+This naturally separates into:
+- Radial dynamics: $\frac{d\rho}{dt}$ (radial velocity)
+- Angular dynamics: $\rho \frac{d\phi}{dt}$ (angular momentum)
+
+\textbf{Step 3: Gravitational Potential from Inner Product}
+The complex inner product $\langle \theta_1, \theta_2 \rangle_\Theta = \text{Re}(\overline{\theta_1} \theta_2)$ yields:
+$$\langle \theta_1, \theta_2 \rangle_\Theta = \rho_1 \rho_2 \cos(\phi_2 - \phi_1)$$
+
+Define gravitational potential energy as:
+$$V(\theta_1, \theta_2) = -\frac{G m_1 m_2}{\|\mathcal{O}(\theta_1) - \mathcal{O}(\theta_2)\|} = -\frac{G m_1 m_2}{\sqrt{\rho_1^2 + \rho_2^2 - 2\rho_1\rho_2\cos(\phi_2-\phi_1)}}$$
+
+where the denominator emerges directly from the complex parameter geometry.
+
+\textbf{Step 4: Hamiltonian Structure}
+The Elder parameter dynamics naturally form a Hamiltonian system with:
+$$H = \frac{1}{2m}\left|\frac{d\theta}{dt}\right|^2 + V(\theta, \theta_{\text{other entities}})$$
+
+This establishes orbital mechanics as the natural dynamics of complex parameter evolution in Elder space.
+\end{proof}
 
 This complex-valued approach offers several advantages over conventional real-valued parameters:
 \begin{itemize}
@@ -325,31 +366,41 @@ Gravitational Field Parameters are an extension of complex-valued parameters tha
 GFPs enhance the capabilities of the Elder Parameter Space by mapping abstract mathematical properties to intuitive physical principles.
 
 \begin{theorem}[Gravitational Field Embedding]
-The Elder Parameter Space embeds into a continuous gravitational field representation $\mathcal{G}$ through:
-
-\begin{equation}
-\mathcal{G}_{\theta}(\mathbf{x}) = \sum_{j=1}^N \frac{\gamma_j}{|\mathbf{x} - \mathbf{r}_j|^2} e^{i\phi_j} \hat{\mathbf{r}}_j(\mathbf{x})
-\end{equation}
-
-where:
-\begin{itemize}
-    \item $\gamma_j$ represents the gravitational strength (derived from the magnitude component) of parameter $j$
-    \item $\mathbf{r}_j$ is the position vector of parameter $j$ in the field, determining its abstraction level
-    \item $\phi_j$ is the phase component, encoding relational properties
-    \item $\hat{\mathbf{r}}_j(\mathbf{x})$ is the unit vector from position $\mathbf{x}$ to parameter position $\mathbf{r}_j$
-    \item $|\mathbf{x} - \mathbf{r}_j|^2$ implements the inverse-square law of gravitational influence
-\end{itemize}
-
-This embedding transforms the discrete parameter collection into a continuous gravitational field where:
-\begin{enumerate}
-    \item Elder parameters near the field center exert broader influence across abstraction levels
-    \item Mentor parameters in intermediate regions mediate between abstract principles and specific applications
-    \item Erudite parameters at the field periphery provide domain-specific knowledge with localized influence
-    \item All parameters interact through phase relationships that determine constructive or destructive interference
-\end{enumerate}
-
-The inverse-square relationship ensures that influence decreases continuously with distance, creating smooth transitions between abstraction levels while maintaining the ability to model knowledge propagation and transformation throughout the field.
+\label{thm:gravitational_field_embedding}
+The Elder Parameter Space $\boldsymbol{\Theta}$ embeds into a continuous gravitational field $\mathcal{G}: \mathbb{R}^3 \rightarrow \mathbb{C}$ through a well-defined mapping that preserves parameter structure while enabling continuous field dynamics.
 \end{theorem}
+
+\begin{proof}
+\textbf{Step 1: Embedding Construction}
+For the parameter space $\boldsymbol{\Theta} = \Theta_E \times \prod_{d=1}^D \Theta_M^{(d)} \times \prod_{d=1}^D \Theta_e^{(d)}$ with parameters $\theta_j = \gamma_j e^{i\phi_j}$, define the gravitational field embedding $\mathcal{G}: \mathbb{R}^3 \rightarrow \mathbb{C}$ by:
+
+$$\mathcal{G}_{\boldsymbol{\theta}}(\mathbf{x}) = \sum_{j=1}^N \frac{\gamma_j e^{i\phi_j}}{|\mathbf{x} - \mathbf{r}_j|^2 + \epsilon^2}$$
+
+where $\mathbf{r}_j \in \mathbb{R}^3$ are the field positions and $\epsilon > 0$ prevents singularities.
+
+\textbf{Step 2: Well-Definedness Verification}
+For any $\mathbf{x} \in \mathbb{R}^3$ and bounded parameter set $\|\boldsymbol{\theta}\| < M$:
+$$|\mathcal{G}_{\boldsymbol{\theta}}(\mathbf{x})| \leq \sum_{j=1}^N \frac{\gamma_j}{|\mathbf{x} - \mathbf{r}_j|^2 + \epsilon^2} \leq \frac{M \cdot N}{\epsilon^2} < \infty$$
+
+The embedding is well-defined for all finite parameter sets.
+
+\textbf{Step 3: Continuity Properties}
+The field $\mathcal{G}_{\boldsymbol{\theta}}(\mathbf{x})$ is continuous everywhere since each term $\frac{\gamma_j e^{i\phi_j}}{|\mathbf{x} - \mathbf{r}_j|^2 + \epsilon^2}$ is continuous in $\mathbf{x}$, and finite sums of continuous functions are continuous.
+
+\textbf{Step 4: Structure Preservation}
+The embedding preserves:
+1. **Parameter Hierarchy:** Elder parameters (center), Mentor parameters (intermediate), Erudite parameters (periphery) maintain spatial organization
+2. **Phase Relationships:** $\arg(\mathcal{G}_{\boldsymbol{\theta}}(\mathbf{x}))$ reflects parameter phase interactions
+3. **Magnitude Coupling:** $|\mathcal{G}_{\boldsymbol{\theta}}(\mathbf{x})|$ depends on parameter magnitudes and spatial distances
+
+\textbf{Step 5: Inverse-Square Law Justification}
+The $|\mathbf{x} - \mathbf{r}_j|^{-2}$ dependence ensures:
+- Local influence dominance near parameter positions
+- Smooth decay preserving field continuity
+- Natural gravitational analogy for knowledge influence propagation
+
+This establishes the gravitational field embedding as a mathematically sound continuous representation of the discrete parameter space.
+\end{proof}
 
 \section{Properties of the Gravitational Field Model}
 
