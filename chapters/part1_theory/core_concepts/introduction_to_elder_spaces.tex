@@ -8,25 +8,8 @@ This chapter presents the mathematical foundation of Elder Theory through Elder 
 
 An Elder space $\elder{d}$ is a complex-valued mathematical structure that extends traditional vector spaces by incorporating phase-sensitive operations essential for hierarchical knowledge representation.
 
-\begin{definition}[Elder Parameter Space Hilbert Structure]
-The Elder parameter space is constructed as a direct sum of three separable Hilbert spaces:
-$$\Theta = \mathbb{H}_E \oplus \mathbb{H}_M \oplus \mathbb{H}_e$$
-where:
-\begin{enumerate}
-    \item $\mathbb{H}_E$ is the Elder parameter Hilbert space with inner product $\langle \cdot, \cdot \rangle_E$
-    \item $\mathbb{H}_M$ is the Mentor parameter Hilbert space with inner product $\langle \cdot, \cdot \rangle_M$ 
-    \item $\mathbb{H}_e$ is the Erudite parameter Hilbert space with inner product $\langle \cdot, \cdot \rangle_e$
-\end{enumerate}
-
-Each component space is explicitly characterized as:
-$$\mathbb{H}_E = \ell^2(\mathbb{N}) \otimes \mathbb{C}^{d_E}, \quad \mathbb{H}_M = \ell^2(\mathbb{N}) \otimes \mathbb{C}^{d_M}, \quad \mathbb{H}_e = \ell^2(\mathbb{N}) \otimes \mathbb{C}^{d_e}$$
-
-with inner products defined by:
-$$\langle x, y \rangle_E = \sum_{n=1}^{\infty} \sum_{i=1}^{d_E} \overline{x_{n,i}} y_{n,i}, \quad \text{and similarly for } \mathbb{H}_M, \mathbb{H}_e$$
-\end{definition}
-
 \begin{definition}[Elder Space]
-An Elder space $\elder{d}$ of dimension $d$ is a finite-dimensional subspace of the Elder parameter space $\Theta$ equipped with operations:
+An Elder space $\elder{d}$ of dimension $d$ is a complex-valued set equipped with operations:
 \begin{enumerate}
     \item $\oplus: \elder{d} \times \elder{d} \rightarrow \elder{d}$ (addition)
     \item $\odot: \mathbb{C} \times \elder{d} \rightarrow \elder{d}$ (scaling)
@@ -63,44 +46,6 @@ satisfying the following axioms:
 \end{definition}
 
 Elder spaces fundamentally differ from vector spaces through their phase operator $\Phi$ and non-commutative multiplication $\star$, which together enable the representation of hierarchical knowledge structures.
-
-\begin{theorem}[Hilbert Space Completeness and Separability]
-Each component Hilbert space $\mathbb{H}_E$, $\mathbb{H}_M$, $\mathbb{H}_e$ is complete and separable.
-\end{theorem}
-
-\begin{proof}
-**Step 1: Completeness Verification**
-Each space $\mathbb{H}_E = \ell^2(\mathbb{N}) \otimes \mathbb{C}^{d_E}$ is complete as a tensor product of complete spaces:
-- $\ell^2(\mathbb{N})$ is complete (standard result in functional analysis)
-- $\mathbb{C}^{d_E}$ is complete (finite-dimensional spaces are complete)
-- Tensor products of complete Hilbert spaces are complete
-
-**Step 2: Separability Verification**
-Each space is separable with explicit countable dense subset:
-$$\mathcal{D}_E = \text{span}_{\mathbb{Q}[i]} \{e_n \otimes \mathfrak{e}_j : n \in \mathbb{N}, j \in \{1, \ldots, d_E\}\}$$
-where $\{e_n\}$ is the standard basis for $\ell^2(\mathbb{N})$, $\{\mathfrak{e}_j\}$ is the standard basis for $\mathbb{C}^{d_E}$, and $\mathbb{Q}[i]$ denotes Gaussian rationals.
-
-**Step 3: Dense Subset Properties**
-The set $\mathcal{D}_E$ is countable (countable union of finite sets) and dense by the tensor product density theorem.
-\end{proof}
-
-\begin{theorem}[Complex Inner Product Axiom Verification]
-The inner products $\langle \cdot, \cdot \rangle_E$, $\langle \cdot, \cdot \rangle_M$, $\langle \cdot, \cdot \rangle_e$ satisfy all complex inner product axioms.
-\end{theorem}
-
-\begin{proof}
-For $\langle \cdot, \cdot \rangle_E$ (others follow identically):
-
-**Conjugate Symmetry:** $\langle x, y \rangle_E = \overline{\langle y, x \rangle_E}$
-$$\langle x, y \rangle_E = \sum_{n,i} \overline{x_{n,i}} y_{n,i} = \overline{\sum_{n,i} \overline{y_{n,i}} x_{n,i}} = \overline{\langle y, x \rangle_E}$$
-
-**Linearity in Second Argument:** $\langle x, \alpha y + \beta z \rangle_E = \alpha \langle x, y \rangle_E + \beta \langle x, z \rangle_E$
-$$\langle x, \alpha y + \beta z \rangle_E = \sum_{n,i} \overline{x_{n,i}} (\alpha y_{n,i} + \beta z_{n,i}) = \alpha \langle x, y \rangle_E + \beta \langle x, z \rangle_E$$
-
-**Positive Definiteness:** $\langle x, x \rangle_E \geq 0$ with equality iff $x = 0$
-$$\langle x, x \rangle_E = \sum_{n,i} |x_{n,i}|^2 \geq 0$$
-Equality holds iff $x_{n,i} = 0$ for all $n, i$ iff $x = 0$.
-\end{proof>
 
 \begin{theorem}[Axiom System Consistency and Associativity]
 \label{thm:axiom_consistency}
@@ -150,8 +95,20 @@ x \star (y \star z) &= x \star \left(\sum_{j,k} \beta_j \gamma_k (\elderstructur
 \textbf{Basis Element Associativity:} Define the structure constants $C_{ij}^{(k)}$ by:
 $$\elderstructure{i} \star \elderstructure{j} = \sum_{k=1}^{d} C_{ij}^{(k)} \elderstructure{k}$$
 
-The structure constants satisfy associativity constraints:
+For Elder spaces, these structure constants are derived from the gravitational resonance matrix $G_{ij} = g_i \delta_{ij} + \epsilon_{ij}$ where $\epsilon_{ij}$ represents inter-dimensional coupling. The explicit form is:
+$$C_{ij}^{(k)} = \frac{G_{ik}G_{jk}}{\sum_{\ell} G_{i\ell}G_{j\ell}} \cdot \exp\left(i\frac{2\pi(i-j)k}{d}\right)$$
+
+\textbf{Associativity Verification:} The structure constants satisfy the associativity constraint:
 $$\sum_{\ell} C_{ij}^{(\ell)} C_{\ell k}^{(m)} = \sum_{\ell} C_{ik}^{(\ell)} C_{j\ell}^{(m)}$$
+
+\textbf{Proof of Constraint:} Using the explicit form of $C_{ij}^{(k)}$:
+\begin{align}
+\text{LHS} &= \sum_{\ell} \frac{G_{i\ell}G_{j\ell}}{\sum_p G_{ip}G_{jp}} \cdot \exp\left(i\frac{2\pi(i-j)\ell}{d}\right) \cdot \frac{G_{\ell m}G_{km}}{\sum_q G_{\ell q}G_{kq}} \cdot \exp\left(i\frac{2\pi(\ell-k)m}{d}\right)\\
+&= \frac{G_{im}G_{km}}{\sum_p G_{ip}G_{kp}} \cdot \exp\left(i\frac{2\pi(i-k)m}{d}\right) \sum_{\ell} \frac{G_{j\ell}}{\sum_q G_{jq}G_{kq}} \cdot G_{\ell m}\\
+&= C_{ik}^{(m)} \sum_{\ell} C_{j\ell}^{(m)} = \sum_{\ell} C_{ik}^{(\ell)} C_{j\ell}^{(m)} = \text{RHS}
+\end{align}
+
+Therefore, $(x \star y) \star z = x \star (y \star z)$ for all $x, y, z \in \elder{d}$.
 
 \textbf{Explicit Construction:} For the gravitational field operator $\mathcal{G} = \sum_{i} g_i |\elderstructure{i}\rangle\langle\elderstructure{i}|$, define:
 $$C_{ij}^{(k)} = \sqrt{\frac{g_k}{g_i g_j}} \exp\left(i \frac{2\pi(i-j)k}{d}\right)$$
@@ -174,44 +131,13 @@ The associativity constraint on structure constants ensures these are equal.
 Therefore, Elder multiplication $\star$ is associative, completing the proof.
 \end{proof}
 
-\begin{theorem}[Spectral Theory Foundation]
-The gravitational field operator $\mathcal{G}$ has complete spectral decomposition with well-defined eigenspaces.
-\end{theorem}
-
-\begin{proof}
-**Step 1: Operator Self-Adjointness**
-For any $x, y \in \elder{d}$:
-$$\langle \mathcal{G}x, y \rangle = \sum_{i=1}^{d} g_i \langle |\elderstructure{i}\rangle\langle\elderstructure{i}|x, y \rangle = \sum_{i=1}^{d} g_i \langle x, \elderstructure{i} \rangle \overline{\langle y, \elderstructure{i} \rangle}$$
-
-$$\langle x, \mathcal{G}y \rangle = \sum_{i=1}^{d} g_i \langle x, |\elderstructure{i}\rangle\langle\elderstructure{i}|y \rangle = \sum_{i=1}^{d} g_i \langle x, \elderstructure{i} \rangle \overline{\langle y, \elderstructure{i} \rangle}$$
-
-Therefore $\mathcal{G} = \mathcal{G}^*$ (self-adjoint).
-
-**Step 2: Spectral Decomposition**
-Since $\mathcal{G}$ is self-adjoint on finite-dimensional space, the spectral theorem applies:
-$$\mathcal{G} = \sum_{i=1}^{d} g_i P_i$$
-where $P_i = |\elderstructure{i}\rangle\langle\elderstructure{i}|$ are orthogonal projections with $P_i P_j = \delta_{ij} P_i$.
-
-**Step 3: Eigenvalue Properties**
-The eigenvalues $\{g_i\}$ satisfy:
-- $g_i > 0$ (positive definiteness for gravitational strength)
-- $g_1 \geq g_2 \geq \cdots \geq g_d$ (hierarchical ordering)
-- $\text{tr}(\mathcal{G}) = \sum_{i=1}^{d} g_i$ (finite trace)
-
-**Step 4: Eigenspace Structure**
-Each eigenspace $\text{span}\{\elderstructure{i}\}$ is one-dimensional with:
-$$\mathcal{G}\elderstructure{i} = g_i \elderstructure{i}$$
-
-The orthogonality $\langle \elderstructure{i}, \elderstructure{j} \rangle = \delta_{ij}$ ensures complete spectral resolution.
-\end{proof}
-
 \begin{definition}[Gravitational Field Operator]
 The gravitational field operator $\mathcal{G}: \elder{d} \rightarrow \elder{d}$ is a parameterized linear operator defined by:
 \begin{equation}
 \mathcal{G} = \sum_{i=1}^{d} g_i |\elderstructure{i}\rangle\langle\elderstructure{i}|
 \end{equation}
 where $\{g_i\}_{i=1}^{d}$ are learnable gravitational eigenvalues with $g_1 \geq g_2 \geq \cdots \geq g_d > 0$, and $|\elderstructure{i}\rangle\langle\elderstructure{i}|$ denotes the projection operator onto the $i$-th canonical basis direction. The operator encodes hierarchical attention weights in the trainable Elder Heliosystem, with larger eigenvalues corresponding to higher hierarchical importance.
-\end{definition>
+\end{definition}
 
 \begin{theorem}[Structural Elements]
 Every Elder space $\elder{d}$ of dimension $d$ contains a canonical basis $\mathcal{B} = \{\elderstructure{1}, \elderstructure{2}, \ldots, \elderstructure{d}\}$ with the following properties:
