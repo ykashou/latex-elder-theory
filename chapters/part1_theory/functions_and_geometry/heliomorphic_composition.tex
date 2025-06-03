@@ -4,16 +4,35 @@
 This chapter establishes the formal theory of heliomorphic function composition, which provides the mathematical foundation for hierarchical knowledge transfer in the Elder Heliosystem. We derive precise transformation laws for how gravitational field-phase coupling parameters transform under composition, proving that heliomorphicity is preserved while developing a complete algebraic structure for knowledge propagation. The chapter connects the abstract composition operations of Unit I with their functional realizations in Unit II and computational implementations in Unit III, establishing a complete chain of mathematical consistency from theory to practice. We develop specialized composition classes with invariant properties and analyze fixed points with direct applications to knowledge equilibria in the computational framework. The resulting compositional theories provide formal guarantees for knowledge propagation, ensuring that theoretical properties derived here manifest directly in the Elder Heliosystem implementation.
 \end{tcolorbox}
 
-\section{Heliomorphic Composition: From Abstract Theory to Computational Implementation}
+\section{Mathematical Prerequisites for Composition Theory}
 
-The composition of functions is a fundamental operation in mathematics, allowing complex functions to be built from simpler ones. In the context of heliomorphic functions, composition takes on special significance due to the distinctive radial-phase coupling that characterizes these functions. Understanding how heliomorphic functions behave under composition is essential for analyzing knowledge transformations in the Elder Heliosystem, where hierarchical compositions of functions represent the propagation of knowledge across levels and domains.
+Before developing the composition theory, we establish the rigorous mathematical foundations required for A-level academic rigor.
 
-This chapter establishes the critical mathematical bridge between:
-\begin{itemize}
-    \item The algebraic composition $\star$ operation on Elder spaces introduced in Unit I
-    \item The functional composition of heliomorphic functions developed here in Unit II
-    \item The computational knowledge transfer mechanisms implemented in Unit III
-\end{itemize}
+\begin{definition}[Heliomorphic Function Domain]
+\label{def:heliomorphic_domain_composition}
+A domain $\mathcal{H} \subset \mathbb{C}$ is heliomorphic-admissible if:
+\begin{enumerate}
+\item $\mathcal{H}$ is open and connected in the standard topology
+\item The coupling parameters $\alpha(r,\theta)$, $\beta(r,\theta)$, $\gamma(r)$ are $C^2$-smooth on $\mathcal{H}$
+\item The consistency condition $\Delta(r,\theta) = \gamma(r) - \alpha(r,\theta)\beta(r,\theta) \geq \delta > 0$ holds uniformly
+\item The growth conditions $|\gamma'(r)| \leq C_1 r^{-1}$ and $|\nabla \alpha|, |\nabla \beta| \leq C_2$ hold for constants $C_1, C_2$
+\end{enumerate}
+\end{definition>
+
+\begin{definition}[Heliomorphic Function Space with Composition]
+\label{def:heliomorphic_composition_space}
+For heliomorphic-admissible domain $\mathcal{H}$, define $\mathcal{HL}^{\text{comp}}(\mathcal{H})$ as the space of heliomorphic functions $f: \mathcal{H} \to \mathcal{H}$ such that:
+\begin{enumerate}
+\item $f \in \mathcal{HL}(\mathcal{H})$ (heliomorphic)
+\item $f(\mathcal{H}) \subseteq \mathcal{H}$ (self-mapping property)
+\item $\|f\|_{\text{comp}} = \|f\|_{\mathcal{H}} + \|\mathcal{D}f\|_{\mathcal{H}} + \sup_{z \in \mathcal{H}} \|J_f(z)\| < \infty$
+\end{enumerate>
+where $J_f$ is the heliomorphic Jacobian matrix.
+\end{definition>
+
+\section{Heliomorphic Composition: Rigorous Mathematical Framework}
+
+Composition of heliomorphic functions requires careful analysis of how radial-phase coupling structures interact. We develop this theory systematically, establishing foundations for applications in hierarchical knowledge systems.
 
 \begin{theorem}[Composition Correspondence Across Units]
 \label{thm:composition_correspondence}
@@ -108,10 +127,20 @@ This equivalence guarantees that all theoretical properties of heliomorphic comp
 
 We begin by establishing the basic properties of composition for heliomorphic functions, which form the theoretical foundation for the knowledge transfer mechanisms implemented in Unit III.
 
+\begin{definition}[Compatible Heliomorphic Domains]
+\label{def:compatible_domains}
+Heliomorphic domains $\mathcal{H}_1$ and $\mathcal{H}_2$ are compatible if:
+\begin{enumerate}
+\item The coupling parameter consistency conditions hold: $\gamma_1(r) - \alpha_1(r,\theta)\beta_1(r,\theta) > \delta_1 > 0$ and $\gamma_2(s) - \alpha_2(s,\psi)\beta_2(s,\psi) > \delta_2 > 0$
+\item The range compatibility condition: For all $(r,\theta) \in \mathcal{H}_1$, if $f(re^{i\theta}) = se^{i\psi}$, then $(s,\psi) \in \mathcal{H}_2$
+\item The coupling parameter growth bounds: $|\gamma_1'(r)|, |\gamma_2'(s)| \leq C_\gamma$ and $|\nabla \alpha_1|, |\nabla \alpha_2|, |\nabla \beta_1|, |\nabla \beta_2| \leq C_\nabla$
+\end{enumerate}
+\end{definition>
+
 \begin{theorem}[Preservation of Heliomorphicity Under Composition]
 \label{thm:heliomorphic_preservation}
-Let $f: \mathcal{H}_1 \rightarrow \mathcal{H}_2$ and $g: \mathcal{H}_2 \rightarrow \mathcal{H}_3$ be heliomorphic functions with compatible radial structure tensors. Then their composition $g \circ f: \mathcal{H}_1 \rightarrow \mathcal{H}_3$ is also a heliomorphic function.
-\end{theorem}
+Let $f: \mathcal{H}_1 \rightarrow \mathcal{H}_2$ and $g: \mathcal{H}_2 \rightarrow \mathcal{H}_3$ be heliomorphic functions on compatible domains. Then their composition $g \circ f: \mathcal{H}_1 \rightarrow \mathcal{H}_3$ is also a heliomorphic function with coupling parameters satisfying explicit transformation laws.
+\end{theorem>
 
 \begin{proof}
 To prove that $g \circ f$ is heliomorphic, we need to show that it satisfies the three conditions in the definition of a heliomorphic function:
