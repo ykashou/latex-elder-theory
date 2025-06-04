@@ -136,13 +136,18 @@ The most distinctive feature of heliomorphic functions is their natural organiza
 
 \subsection{Formal Gravitational Field Decomposition}
 
-\begin{theorem}[Gravitational Field Decomposition]
-A domain $\Omega$ equipped with a heliomorphic structure admits a unique decomposition into gravitational field regions $\{\mathcal{S}_k\}_{k=1}^{\infty}$ such that:
-\begin{equation}
-\Omega = \bigcup_{k=1}^{\infty} \mathcal{S}_k
-\end{equation}
-where each field region $\mathcal{S}_k$ is characterized by a specific radial distance range $[r_k, r_{k+1})$ and consistent behavior under the heliomorphic differential operator.
-\end{theorem}
+\begin{theorem}[Rigorous Stratification Theory]
+\label{thm:rigorous_stratification}
+Let $(\Omega, r, \mathcal{W})$ be a radial-complex domain with $\phi \in C^\infty(\mathbb{R}^+, \mathbb{R})$. Then:
+
+\begin{enumerate}
+\item \textbf{Stratification existence}: The level sets $\{\Sigma_c\}_{c>0}$ form a smooth foliation of $\Omega \setminus \{z_0\}$
+
+\item \textbf{Heliomorphic compatibility}: For each $c > 0$, the restriction of heliomorphic functions to $\Sigma_c$ inherits a well-defined complex structure
+
+\item \textbf{Transverse regularity}: The heliomorphic operator $\mathcal{D}^H$ is transversely elliptic to the stratification
+\end{enumerate}
+\end{theorem>
 
 The proof of this theorem relies on the properties of the radial weighting function $\phi(r)$ in the heliomorphic differential operator. Specifically, we can show that:
 
