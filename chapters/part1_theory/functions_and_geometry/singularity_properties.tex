@@ -4,11 +4,35 @@
 This chapter explores the singularity properties of heliomorphic functions within the Elder framework, focusing on their behavior upon approaching points of mathematical discontinuity. Emphasizing singularities' crucial roles in knowledge transfer and system stability, the text categorizes them into isolated, branch, gravitational, and resonance-induced singularities, each illustrating specific influences in the Elder system. It further details numerical and analytical methods to handle singularities computationally, aiming to mitigate computational instability while preserving knowledge dynamics. By thoroughly investigating these singularities, this chapter lays the groundwork for understanding complex interactions in heliomorphic functions, essential for advancing the broader objectives of the Elder framework.
 \end{tcolorbox}
 
+\section{Mathematical Prerequisites for Heliomorphic Singularity Theory}
+
+Before developing singularity theory, we establish rigorous mathematical foundations that are essential for A-level academic analysis.
+
+\begin{definition}[Heliomorphic Function Domain with Singularities]
+\label{def:singular_heliomorphic_domain}
+A domain $\mathcal{D} \subset \mathbb{C}$ is singularity-admissible for heliomorphic functions if:
+\begin{enumerate}
+\item $\mathcal{D} = \mathcal{D}_{\text{reg}} \cup \mathcal{S}$ where $\mathcal{D}_{\text{reg}}$ is open and connected, and $\mathcal{S} = \{z_1, z_2, \ldots\}$ is a discrete set of singularities
+\item On $\mathcal{D}_{\text{reg}}$, the coupling parameters $\alpha(r,\theta)$, $\beta(r,\theta)$, $\gamma(r)$ are $C^2$-smooth
+\item The consistency condition $\Delta(r,\theta) = \gamma(r) - \alpha(r,\theta)\beta(r,\theta) \geq \delta > 0$ holds on $\mathcal{D}_{\text{reg}}$
+\item Each $z_k \in \mathcal{S}$ has a punctured neighborhood where the heliomorphic differential equations hold
+\end{enumerate>
+\end{definition>
+
+\begin{definition}[Heliomorphic Singularity Strength]
+\label{def:singularity_strength}
+For a heliomorphic singularity at $z_0$, define the singularity strength as:
+\begin{equation}
+\mathcal{S}(z_0) = \lim_{z \to z_0} |z - z_0|^2 \left[|\nabla \rho(r,\theta)|^2 + |\nabla \phi(r,\theta)|^2 + |\Delta(r,\theta)|^{-1}\right]
+\end{equation>
+where $\Delta(r,\theta) = \gamma(r) - \alpha(r,\theta)\beta(r,\theta)$ is the coupling determinant.
+\end{definition>
+
 \section{Introduction to Singularities in Heliomorphic Functions}
 
-Heliomorphic functions form the mathematical foundation of the Elder framework, providing a representation system for complex knowledge patterns that evolve through orbital dynamics. While previous chapters have established the general properties of these functions, this chapter focuses specifically on their behavior near singularities—points where the function or its derivatives are not well-defined or exhibit distinct mathematical characteristics.
+Heliomorphic functions form the mathematical foundation of the Elder framework, providing a representation system for complex knowledge patterns that evolve through orbital dynamics. This chapter develops rigorous singularity theory specifically adapted to the heliomorphic setting, establishing mathematical foundations that go beyond standard complex analysis.
 
-Singularities in heliomorphic functions are not merely mathematical artifacts; they represent critical points in the knowledge landscape that have profound implications for learning dynamics, knowledge transfer, and system stability. Understanding these singularities is essential for characterizing the complete behavior of the Elder system.
+Singularities in heliomorphic functions exhibit unique characteristics due to the radial-phase coupling structure. Unlike standard holomorphic functions, heliomorphic singularities can manifest through coupling parameter degeneracies, creating new classes of singular behavior that require specialized mathematical analysis.
 
 \subsection{Data-Induced Singularity Formation}
 
