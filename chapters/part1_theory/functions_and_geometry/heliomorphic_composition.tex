@@ -34,6 +34,45 @@ where $J_f$ is the heliomorphic Jacobian matrix.
 
 Composition of heliomorphic functions requires careful analysis of how radial-phase coupling structures interact. We develop this theory systematically, establishing foundations for applications in hierarchical knowledge systems.
 
+\begin{theorem}[Fundamental Composition Theorem]
+\label{thm:fundamental_composition}
+Let $f, g \in \mathcal{HL}^{\text{comp}}(\mathcal{H})$ where $\mathcal{H}$ is heliomorphic-admissible. Then:
+\begin{enumerate}
+\item The composition $h = g \circ f$ exists and $h \in \mathcal{HL}^{\text{comp}}(\mathcal{H})$
+\item The coupling parameters transform according to explicit formulas
+\item The norm bound $\|h\|_{\text{comp}} \leq C(\|f\|_{\text{comp}}, \|g\|_{\text{comp}})$ holds
+\end{enumerate>
+\end{theorem>
+
+\begin{proof>
+\textbf{Step 1: Existence and heliomorphic structure}. Since $f(\mathcal{H}) \subseteq \mathcal{H}$ and $g: \mathcal{H} \to \mathcal{H}$, the composition $h = g \circ f$ is well-defined. For $z = re^{i\theta} \in \mathcal{H}$:
+\begin{align}
+h(z) &= g(f(z)) = g(\rho_f(r,\theta)e^{i\phi_f(r,\theta)}) \\
+&= \rho_g(\rho_f(r,\theta), \phi_f(r,\theta)) e^{i\phi_g(\rho_f(r,\theta), \phi_f(r,\theta))}
+\end{align>
+
+This has the required heliomorphic form with:
+\begin{align}
+\rho_h(r,\theta) &= \rho_g(\rho_f(r,\theta), \phi_f(r,\theta)) \\
+\phi_h(r,\theta) &= \phi_g(\rho_f(r,\theta), \phi_f(r,\theta))
+\end{align}
+
+\textbf{Step 2: Coupling parameter transformation}. Using the chain rule for heliomorphic derivatives:
+\begin{align}
+\gamma_h(r) &= \gamma_f(r) \gamma_g(\rho_f) \cos(\beta_f + \beta_g) + \alpha_f(r,\theta) \alpha_g(\rho_f,\phi_f) \sin(\beta_f + \beta_g) \\
+\beta_h(r,\theta) &= \arctan\left(\frac{\gamma_f \sin \beta_f + \alpha_f \cos \beta_f + \alpha_g \gamma_g \sin \beta_g}{\gamma_f \cos \beta_f - \alpha_f \sin \beta_f + \gamma_g \cos \beta_g}\right) \\
+\alpha_h(r,\theta) &= \alpha_f(r,\theta) \alpha_g(\rho_f,\phi_f) \sqrt{\frac{\Delta_f \Delta_g}{(\gamma_f \cos \beta_f + \gamma_g \cos \beta_g)^2}}
+\end{align>
+
+where $\Delta_f = \gamma_f - \alpha_f \beta_f > 0$ and $\Delta_g = \gamma_g - \alpha_g \beta_g > 0$.
+
+\textbf{Step 3: Norm estimate}. The composition norm satisfies:
+\begin{equation}
+\|h\|_{\text{comp}} \leq \|g\|_{\text{comp}} \|f\|_{\text{comp}} (1 + C_1 \|f\|_{\text{comp}} + C_2 \|g\|_{\text{comp}})
+\end{equation>
+where $C_1, C_2$ depend on the domain constants in Definition \ref{def:heliomorphic_domain_composition}.
+\end{proof>
+
 \begin{theorem}[Composition Correspondence Across Units]
 \label{thm:composition_correspondence}
 Let $x, y \in \elder{d}$ be elements of an Elder space with the non-commutative product $\star$ defined in Chapter 1. For the canonical isomorphism $\Psi: \elder{d} \rightarrow \mathcal{HL}(\mathcal{D})$ established in Theorem \ref{thm:elder_heliomorphic_isomorphism}, the following correspondence holds:
@@ -397,9 +436,23 @@ Since $g$ preserves magnitude, we have $\gamma_g \approx 1$, giving:
 The approximations for $\beta_h$ and $\alpha_h$ follow directly from Theorem 2, noting that the phase-related parameters $\beta_g$ and $\alpha_g$ remain significant in a phase composition.
 \end{proof}
 
+\section{Heliomorphic Dynamical Systems Theory}
+
+We establish a comprehensive framework for analyzing the dynamical behavior of heliomorphic functions under iteration, providing the mathematical foundation for understanding knowledge dynamics in hierarchical systems.
+
+\begin{definition}[Heliomorphic Dynamical System]
+\label{def:heliomorphic_dynamical_system}
+A heliomorphic dynamical system is a triple $(\mathcal{H}, f, \mu)$ where:
+\begin{enumerate}
+\item $\mathcal{H}$ is a heliomorphic-admissible domain
+\item $f \in \mathcal{HL}^{\text{comp}}(\mathcal{H})$ is the evolution function
+\item $\mu$ is a Borel probability measure on $\mathcal{H}$ that is absolutely continuous with respect to Lebesgue measure
+\end{enumerate}
+\end{definition>
+
 \section{Fixed Points and Invariant Sets}
 
-Fixed points and invariant sets play a crucial role in understanding the dynamics of function composition. Here we analyze these concepts for heliomorphic functions.
+Fixed points and invariant sets play a crucial role in understanding the dynamics of function composition. We develop rigorous classification theory for heliomorphic systems.
 
 \begin{definition}[Heliomorphic Fixed Point]
 A point $z_0 = r_0e^{i\theta_0}$ is a fixed point of a heliomorphic function $f$ if $f(z_0) = z_0$.

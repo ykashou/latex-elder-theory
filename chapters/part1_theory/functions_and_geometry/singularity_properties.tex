@@ -30,9 +30,16 @@ This reveals three primary mechanisms by which data influences singularity emerg
 
 \textbf{3. Multi-Modal Structure}: Datasets with multiple distinct modes force the emergence of resonance singularities at the boundaries between different data regimes.
 
-\begin{definition}[Singularity of a Heliomorphic Function]
-A point $z_0$ is a singularity of a heliomorphic function $\mathcal{H}(z)$ if $\mathcal{H}(z)$ is not holomorphic at $z_0$, but is holomorphic at some point in every neighborhood of $z_0$.
-\end{definition}
+\begin{definition}[Heliomorphic Singularity]
+\label{def:heliomorphic_singularity}
+A point $z_0 = r_0 e^{i\theta_0}$ is a singularity of a heliomorphic function $\mathcal{H}(z) = \rho(r,\theta)e^{i\phi(r,\theta)}$ if at least one of the following conditions holds:
+\begin{enumerate}
+\item The magnitude function $\rho(r,\theta)$ is not $C^2$-smooth at $(r_0,\theta_0)$
+\item The phase function $\phi(r,\theta)$ is not $C^2$-smooth at $(r_0,\theta_0)$
+\item The coupling parameter determinant $\Delta(r_0,\theta_0) = \gamma(r_0) - \alpha(r_0,\theta_0)\beta(r_0,\theta_0) = 0$
+\item The heliomorphic differential equations fail to hold at $z_0$
+\end{enumerate>
+\end{definition>
 
 \section{Classification of Singularities}
 
