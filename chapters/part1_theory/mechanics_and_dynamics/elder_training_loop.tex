@@ -435,10 +435,10 @@ The primary causes of inefficiency in the gradient accumulation process are:
 
 \subsubsection{Heliomorphic Constraints as a Solution}
 
-A key insight from our research is that the bottlenecks inherent in holomorphic gradient accumulation can be substantially mitigated by transitioning to heliomorphic constraints. Heliomorphic geometry, as detailed in Chapter 8, provides a natural extension of holomorphic structures that is better suited to the hierarchical nature of the Elder Training Loop.
+A key insight from our research is that the bottlenecks inherent in classical gradient accumulation can be substantially mitigated by transitioning to heliomorphic constraints. Heliomorphic geometry, as detailed in Chapter 8, provides a natural extension of classical complex structures that is better suited to the hierarchical nature of the Elder Training Loop.
 
 \begin{theorem}[Heliomorphic Gradient Efficiency]
-Let $\nabla_H \mathcal{L}$ be the gradient under holomorphic constraints and $\nabla_{\odot} \mathcal{L}$ be the gradient under heliomorphic constraints. Then the computational complexity satisfies:
+Let $\nabla_C \mathcal{L}$ be the gradient under classical constraints and $\nabla_{\odot} \mathcal{L}$ be the gradient under heliomorphic constraints. Then the computational complexity satisfies:
 \begin{equation}
 \mathcal{O}(\nabla_{\odot} \mathcal{L}) < \mathcal{O}(\nabla_H \mathcal{L})
 \end{equation}
@@ -450,12 +450,12 @@ Heliomorphic constraints offer three critical advantages for gradient accumulati
 \begin{enumerate}
     \item \textbf{Radial Structure Alignment:} The radial component of heliomorphic operators naturally aligns with the hierarchical structure of domains and tasks, eliminating the need for explicit hierarchical gradient computation.
     
-    \item \textbf{Non-Hierarchical Parameter Organization:} While holomorphic constraints require maintaining strict hierarchical parameter organization, heliomorphic constraints allow parameters to be organized according to their radial distance from the origin, yielding more efficient memory access patterns.
+    \item \textbf{Non-Hierarchical Parameter Organization:} While classical constraints require maintaining strict hierarchical parameter organization, heliomorphic constraints allow parameters to be organized according to their radial distance from the origin, yielding more efficient memory access patterns.
     
     \item \textbf{Implicit Cross-Domain Integration:} The heliomorphic derivative operator $\nabla_{\odot} f = \frac{\partial f}{\partial z} + \rho(r) \cdot \frac{\partial f}{\partial r}$ implicitly handles cross-domain dependencies through the radial weighting function $\rho(r)$.
 \end{enumerate}
 
-Figure \ref{fig:gradient_comparison} illustrates the computational advantages of heliomorphic constraints over traditional holomorphic constraints in gradient accumulation.
+Figure \ref{fig:gradient_comparison} illustrates the computational advantages of heliomorphic constraints over traditional classical constraints in gradient accumulation.
 
 \begin{figure}[h]
 \centering
@@ -538,7 +538,7 @@ Figure \ref{fig:gradient_comparison} illustrates the computational advantages of
     \node[align=left, font=\small] at (2,-1) {Angular Transfer};
   \end{scope}
 \end{tikzpicture}
-\caption{Comparison of gradient flow patterns under holomorphic constraints (left) versus heliomorphic constraints (right). Heliomorphic constraints allow for more direct gradient paths across the hierarchy, reducing computational complexity from $O(M^2)$ to $O(M)$ for cross-domain transfers.}
+\caption{Comparison of gradient flow patterns under classical constraints (left) versus heliomorphic constraints (right). Heliomorphic constraints allow for more direct gradient paths across the hierarchy, reducing computational complexity from $O(M^2)$ to $O(M)$ for cross-domain transfers.}
 \label{fig:gradient_comparison}
 \end{figure}
 
@@ -591,7 +591,7 @@ We address these bottlenecks by leveraging heliomorphic constraints in a special
 \end{algorithmic}
 \end{algorithm}
 
-The key innovation in this algorithm is the use of heliomorphic operators which fundamentally changes how gradients are computed and accumulated. Unlike the previous approach which required hierarchical decomposition and explicit holomorphic constraints, the heliomorphic approach:
+The key innovation in this algorithm is the use of heliomorphic operators which fundamentally changes how gradients are computed and accumulated. Unlike the previous approach which required hierarchical decomposition and explicit classical constraints, the heliomorphic approach:
 
 \begin{enumerate}
     \item Organizes parameters by their radial distance in the complex plane, aligning with the natural hierarchy of domains and tasks
@@ -613,7 +613,7 @@ To resolve the gradient accumulation bottleneck, we implement several specialize
     
     \item \textbf{Complex Gradient Specialization:} We implement specialized CUDA kernels for complex-valued gradient computation that directly operate on complex numbers rather than treating them as pairs of real values.
     
-    \item \textbf{Holomorphic Constraint Fusion:} The holomorphic constraints are applied as part of the gradient computation kernel rather than as a separate post-processing step, reducing memory transfers.
+    \item \textbf{Classical Constraint Fusion:} The classical constraints are applied as part of the gradient computation kernel rather than as a separate post-processing step, reducing memory transfers.
     
     \item \textbf{Cache-Aware Domain Partitioning:} Domains are partitioned to maximize cache reuse, minimizing redundant computations when accumulating gradients across related domains.
 \end{enumerate}
