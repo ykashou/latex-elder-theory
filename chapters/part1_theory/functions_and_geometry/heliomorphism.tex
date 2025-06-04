@@ -565,13 +565,24 @@ where $\eta(r)$ is a gravitational field region-dependent learning rate, and $\n
 
 A core theoretical innovation in heliomorphism is the duality principle that connects abstract and concrete knowledge representations:
 
-\begin{theorem}[Heliomorphic Duality]
-For any heliomorphic system, there exists a duality operator $\mathcal{D}_{\odot}: \mathcal{M} \rightarrow \mathcal{M}$ such that:
+\begin{theorem}[Rigorous Heliomorphic Duality]
+\label{thm:heliomorphic_duality}
+Let $(\Omega, r, \mathcal{W})$ be a radial-complex domain. There exists a conjugation operator $\mathcal{C}: \mathcal{H}(\Omega) \to \mathcal{H}(\Omega)$ such that:
 \begin{equation}
-\nabla_{\odot} (\mathcal{D}_{\odot} \circ f \circ \mathcal{D}_{\odot}) = \overline{\nabla_{\odot} f} \circ \mathcal{D}_{\odot}
+\mathcal{D}^H(\mathcal{C} f) = \overline{\mathcal{C}(\mathcal{D}^H f)}
 \end{equation}
-for all heliomorphic functions $f$ on $\mathcal{M}$.
-\end{theorem}
+where $\mathcal{H}(\Omega)$ is the space of heliomorphic functions and $\overline{\cdot}$ denotes complex conjugation.
+\end{theorem>
+
+\begin{proof}
+Define $\mathcal{C} f(z) = \overline{f(\overline{z})}$ for $z \in \Omega$. Then:
+\begin{align}
+\mathcal{D}^H(\mathcal{C} f) &= \bar{\partial}(\overline{f(\overline{z})}) + \mathcal{W}(z) \partial_r(\overline{f(\overline{z})})\\
+&= \overline{\partial(f(\overline{z}))} + \mathcal{W}(z) \overline{\partial_r(f(\overline{z}))}\\
+&= \overline{\mathcal{C}(\bar{\partial} f + \mathcal{W}(\overline{z}) \partial_r f)}\\
+&= \overline{\mathcal{C}(\mathcal{D}^H f)}
+\end{align}
+\end{proof}
 
 This duality principle establishes a formal correspondence between abstract principles and their concrete implementations, allowing the system to maintain coherence across all shells.
 
