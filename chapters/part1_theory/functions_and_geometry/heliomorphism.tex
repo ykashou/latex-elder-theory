@@ -20,7 +20,7 @@ A radial-complex domain is a tuple $(\Omega, r, \mathcal{W})$ where:
    \end{equation}
    where $\phi \in C^\infty(\mathbb{R}^+, \mathbb{R})$ and $\mathcal{R}(z)$ is the radial projection operator
 \end{enumerate}
-\end{definition>
+\end{definition}
 
 \section{Introduction to Heliomorphic Theory}
 
@@ -31,9 +31,9 @@ Heliomorphic theory extends complex analysis by incorporating radial structure t
 Let $(\Omega, r, \mathcal{W})$ be a radial-complex domain. A function $f \in C^1(\Omega, \mathbb{C})$ is heliomorphic if it satisfies the heliomorphic differential equation:
 \begin{equation}
 \bar{\partial} f + \mathcal{W}(z) \partial_r f = 0
-\end{equation>
+\end{equation}
 where $\bar{\partial} = \frac{1}{2}(\partial_x + i\partial_y)$ is the anti-holomorphic derivative and $\partial_r$ is the radial derivative operator.
-\end{definition>
+\end{definition}
 
 \begin{theorem}[Heliomorphic Function Characterization]
 \label{thm:heliomorphic_characterization}
@@ -41,16 +41,16 @@ A function $f = u + iv \in C^1(\Omega, \mathbb{C})$ is heliomorphic if and only 
 \begin{align}
 \frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y} - \phi(r) \frac{\partial u}{\partial r} \frac{x}{r} - \phi(r) \frac{\partial v}{\partial r} \frac{y}{r} \\
 \frac{\partial u}{\partial y} &= -\frac{\partial v}{\partial x} - \phi(r) \frac{\partial v}{\partial r} \frac{x}{r} + \phi(r) \frac{\partial u}{\partial r} \frac{y}{r}
-\end{align>
+\end{align}
 where $\phi \in C^\infty(\mathbb{R}^+, \mathbb{R})$ is the radial coupling function.
-\end{theorem>
+\end{theorem}
 
-\begin{proof>
+\begin{proof}
 Converting the heliomorphic equation to real coordinates and separating real and imaginary parts:
 $$\bar{\partial} f = \frac{1}{2}\left(\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + i\left(\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}\right)\right)$$
 $$\mathcal{W}(z) \partial_r f = \phi(r) \frac{z}{|z|} \left(\frac{\partial u}{\partial r} + i\frac{\partial v}{\partial r}\right)$$
 Setting $\bar{\partial} f + \mathcal{W}(z) \partial_r f = 0$ and equating real and imaginary parts yields the system.
-\end{proof>
+\end{proof}
 
 The introduction of the radial term $\phi(r)$ fundamentally alters the behavior of these functions while preserving many desirable properties of complex differentiable functions. Most importantly, heliomorphic functions naturally model gravitational field structures where different levels of abstraction exist at different radial distances from the origin, with influence continuously diminishing according to gravitational principles.
 
@@ -96,10 +96,10 @@ The heliomorphic differential operator $\mathcal{D}^H$ satisfies:
    where $\mathcal{C}(f,g) = \phi(r) \langle \nabla_r f, \nabla_r g \rangle$ is the radial coupling term
 
 \item \textbf{Ellipticity}: The principal symbol satisfies $\sigma_1(\mathcal{D}^H)(\xi) = \xi \neq 0$ for $\xi \neq 0$
-\end{enumerate>
-\end{theorem>
+\end{enumerate}
+\end{theorem}
 
-\begin{proof>
+\begin{proof}
 \textbf{Step 1: Linearity}. Direct computation:
 \begin{align}
 \mathcal{D}^H(af + bg) &= \bar{\partial}(af + bg) + \mathcal{W}(z) \partial_r(af + bg)\\
@@ -115,7 +115,7 @@ The heliomorphic differential operator $\mathcal{D}^H$ satisfies:
 \end{align}
 
 \textbf{Step 3: Ellipticity}. The principal symbol is $\sigma_1(\mathcal{D}^H)(\xi) = \xi_1 + i\xi_2 = \xi$, which is non-zero for $\xi \neq 0$.
-\end{proof>
+\end{proof}
 
 \subsection{Heliomorphic Integration}
 
@@ -130,11 +130,11 @@ If $f$ is heliomorphic in a simply connected domain $\Omega$ containing a simple
 
 This formula generalizes Cauchy's integral theorem and has profound implications for understanding how knowledge propagates across the gravitational field in a heliomorphic system.
 
-\section{The Mathematics of Heliomorphic Gravitational Fields}
+\section{Rigorous Heliomorphic Function Spaces and Stratification}
 
-The most distinctive feature of heliomorphic functions is their natural organization into a continuous gravitational field with varying influence by radial distance. This section provides a comprehensive mathematical analysis of this field structure, its properties, and the interactions within it.
+We develop the mathematical theory of function spaces on radial-complex domains, establishing rigorous foundations for heliomorphic analysis without relying on physical analogies.
 
-\subsection{Formal Gravitational Field Decomposition}
+\subsection{Rigorous Mathematical Foundation of Radial Stratification}
 
 \begin{theorem}[Rigorous Stratification Theory]
 \label{thm:rigorous_stratification}
