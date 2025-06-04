@@ -220,7 +220,7 @@ $$\phi(r,\theta) = \int_0^\theta \alpha(r,\phi) d\phi + \int_1^r \beta(s,\theta)
 This reconstructs the polar-radial form, completing the equivalence proof.
 \end{proof}
 
-This definition extends classical holomorphic functions by incorporating gravitational field-phase coupling, establishing a mathematical framework that naturally encodes hierarchical information structure as seen in the Elder space algebraic formalism.
+This definition extends classical complex analysis by incorporating gravitational field-phase coupling, establishing a mathematical framework that naturally encodes hierarchical information structure as seen in the Elder space algebraic formalism.
 
 \input{figures/heliomorphic_functions/heliomorphic_structure.tex}
 
@@ -408,12 +408,12 @@ Suppose two different expansions exist. Taking the difference and applying the o
 \label{thm:information_capacity}
 For a heliomorphic domain $\mathcal{D}$ with $k$ distinct gravitational influence regions, the information capacity $C_{\text{helio}}(\mathcal{D})$ satisfies:
 $$C_{\text{helio}}(\mathcal{D}) \geq k \cdot C_{\text{holo}}(\mathcal{D}_{\text{equiv}})$$
-where $C_{\text{holo}}(\mathcal{D}_{\text{equiv}})$ is the capacity of an equivalent holomorphic function space.
+where $C_{\text{helio}}(\mathcal{D}_{\text{equiv}})$ is the capacity of an equivalent heliomorphic function space.
 \end{theorem}
 
 \begin{proof}
 \textbf{Step 1: Capacity Definition}
-Define information capacity as the maximum number of independent complex parameters that can be encoded in functions satisfying specified boundary conditions. For holomorphic functions on domain $\mathcal{D}_{\text{equiv}}$, this is $\dim_{\mathbb{C}}(\mathcal{H}(\mathcal{D}_{\text{equiv}}))$.
+Define information capacity as the maximum number of independent complex parameters that can be encoded in functions satisfying specified boundary conditions. For heliomorphic functions on domain $\mathcal{D}_{\text{equiv}}$, this is $\dim_{\mathbb{C}}(\mathcal{H}(\mathcal{D}_{\text{equiv}}))$.
 
 \textbf{Step 2: Gravitational Region Independence}
 Each gravitational influence region $\mathcal{R}_i \subset \mathcal{D}$ ($i = 1, \ldots, k$) allows independent specification of radial-phase coupling parameters $(\gamma_i, \alpha_i, \beta_i)$. The heliomorphic differential equations ensure that specifications in different regions are mathematically independent.
@@ -422,12 +422,12 @@ Each gravitational influence region $\mathcal{R}_i \subset \mathcal{D}$ ($i = 1,
 For each region $\mathcal{R}_i$, the heliomorphic structure allows encoding of:
 - Radial scaling parameters: $\gamma_i$
 - Phase coupling parameters: $\alpha_i, \beta_i$ 
-- Complex coefficients in Laurent expansion: equivalent to holomorphic capacity
+- Complex coefficients in Laurent expansion: equivalent to heliomorphic capacity
 
 Total capacity: $C_{\text{helio}}(\mathcal{D}) = \sum_{i=1}^k [3 + C_{\text{holo}}(\mathcal{R}_i)] \geq k \cdot C_{\text{holo}}(\mathcal{D}_{\text{equiv}})$
 
 \textbf{Step 4: Lower Bound Verification}
-The inequality becomes equality when each gravitational region has equivalent holomorphic capacity to the entire equivalent domain, establishing the stated lower bound.
+The inequality becomes equality when each gravitational region has equivalent heliomorphic capacity to the entire equivalent domain, establishing the stated lower bound.
 \end{proof}
 
 \section{Application to the Elder Heliosystem}
