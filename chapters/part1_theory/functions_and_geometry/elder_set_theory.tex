@@ -257,23 +257,43 @@ This conjecture has important implications for the architecture of the system:
 Assuming the Phase Continuum Hypothesis holds, the three-tier architecture of the Elder Heliosystem (Elder-Mentor-Erudite) represents the minimal hierarchical structure capable of spanning the full spectrum of knowledge representation.
 \end{proposition}
 
-\section{Orbital Zermelo-Fraenkel Axioms}
+\section{Rigorous Axiomatic Foundation for Extended Sets}
 
-\subsection{Extended ZF Axioms for Elder Sets}
+\subsection{Mathematical Axiom System for Extended Set Theory}
 
-The foundational axioms of set theory, the Zermelo-Fraenkel (ZF) axioms, require extension to accommodate the phase and orbital properties of Elder Sets.
+We establish a proper axiomatic foundation for extended sets without inappropriate modifications to classical set theory.
 
-\begin{definition}[Orbital Zermelo-Fraenkel Axioms]
-The Orbital ZF (OZF) axioms extend classical ZF axioms with:
+\begin{definition}[Extended Set Theory Axioms]
+\label{def:extended_set_axioms}
+The Extended Set Theory (EST) consists of the standard ZFC axioms augmented with:
 \begin{enumerate}
-    \item \textbf{Axiom of Phase}: Every element $x$ in an Elder Set has a well-defined phase $\Phi(x) \in [0, 2\pi)$.
-    \item \textbf{Axiom of Orbital Relation}: For any two elements $x, y$ in an Elder Set, there exists a well-defined orbital relation $\mathcal{O}(x, y)$.
-    \item \textbf{Axiom of Phase Coherence}: There exists a coherence function $C$ such that for any collection of elements with phases, $C$ determines their collective phase behavior.
-    \item \textbf{Axiom of Hierarchical Containment}: If $x$ is orbitally contained by $y$ (denoted $x \in_{\mathcal{O}} y$), then the phase of $x$ is influenced by the phase of $y$ according to a gravitational influence function.
+\item \textbf{Phase Function Axiom}: For every set $S$, there exists a phase function $\phi: S \to S^1$ where $S^1$ is the unit circle in $\mathbb{C}$.
+\item \textbf{Relational Structure Axiom}: For every set $S$, there exists a binary relation $R \subseteq S \times S$ that is reflexive and transitive.
+\item \textbf{Compatibility Axiom}: For all $(x,y) \in R$, the phase functions satisfy $|\phi(x) - \phi(y)| \leq \pi$.
+\item \textbf{Closure Axiom}: The operations defined on extended sets preserve the extended set structure.
 \end{enumerate}
-\end{definition}
+\end{definition>
 
-These axioms provide a rigorous set-theoretic foundation for Elder Theory that accounts for its unique phase and orbital properties.
+\begin{theorem}[Extended Set Theory Consistency]
+\label{thm:est_consistency}
+If ZFC is consistent, then Extended Set Theory is consistent.
+\end{theorem>
+
+\begin{proof}
+We construct a model of EST within ZFC:
+
+\textbf{Step 1}: Every set $S$ in ZFC can be equipped with the trivial phase function $\phi(x) = 1$ for all $x \in S$.
+
+\textbf{Step 2}: Every set $S$ can be equipped with the diagonal relation $R = \{(x,x) : x \in S\}$, which is reflexive and transitive.
+
+\textbf{Step 3}: The compatibility condition is trivially satisfied since $|\phi(x) - \phi(y)| = 0 \leq \pi$ for all $x,y$.
+
+\textbf{Step 4}: All extended set operations preserve structure by construction.
+
+Therefore, if ZFC has a model, then EST has a model, establishing relative consistency.
+\end{proof>
+
+This rigorous axiomatization provides proper mathematical foundations for extended set structures.
 
 \subsection{The Elder Choice Axiom}
 
@@ -366,37 +386,50 @@ where $H^n(B)$ is the standard $n$-th cohomology group of the base parameter spa
 
 These cohomology groups characterize topological invariants of the Elder phase space, providing insights into its global structure and fundamental principles that govern the mathematical relationships within the Elder framework and constrain possible phase configurations.
 
-\section{Category-Theoretic Formulation of Elder Theory}
+\section{Categorical Framework for Extended Sets}
 
-\subsection{The Category of Elder Sets}
+\subsection{The Category of Extended Sets}
 
-Category theory provides a natural language for expressing the relations and transformations in Elder Theory.
+We establish a rigorous categorical framework for extended sets with proper mathematical foundations.
 
-\begin{definition}[Category of Elder Sets]
-The category $\mathbf{ElderSet}$ consists of:
+\begin{definition}[Category ExtSet]
+\label{def:category_extset}
+The category $\mathbf{ExtSet}$ consists of:
 \begin{itemize}
-    \item Objects: Elder Sets $(\mathcal{E}\mathbb{S}, \Phi, \mathcal{O})$
-    \item Morphisms: Phase-preserving and orbital-structure-preserving maps between Elder Sets
-    \item Composition: Standard function composition
-    \item Identity: Identity function on each Elder Set
+    \item \textbf{Objects}: Extended sets $\mathcal{S} = (S, \phi, R)$ satisfying Definition \ref{def:extended_set}
+    \item \textbf{Morphisms}: Structure-preserving maps $f: \mathcal{S}_1 \to \mathcal{S}_2$ where $f: S_1 \to S_2$ satisfies:
+    \begin{enumerate}
+        \item $\phi_2 \circ f = \phi_1$ (phase preservation)
+        \item $(x,y) \in R_1 \Rightarrow (f(x), f(y)) \in R_2$ (relation preservation)
+    \end{enumerate}
+    \item \textbf{Composition}: Standard function composition
+    \item \textbf{Identity}: Identity morphisms $\text{id}_{\mathcal{S}}: \mathcal{S} \to \mathcal{S}$
 \end{itemize}
 \end{definition}
 
-\subsection{Functorial Properties of Elder Hierarchies}
-
-The hierarchical structure of the Elder Heliosystem can be formalized using functors between appropriate categories.
-
-\begin{definition}[Elder Hierarchy Functor]
-The Elder Hierarchy Functor $\mathcal{H}: \mathbf{ElderSet} \to \mathbf{ElderSet}$ maps an Elder Set to a higher-level Elder Set in the hierarchy, preserving structural relationships.
-\end{definition}
-
-\begin{theorem}[Adjoint Hierarchy Construction]
-The Elder Hierarchy Functor $\mathcal{H}$ forms an adjoint pair with the Projection Functor $\mathcal{P}$:
-\begin{equation}
-\mathcal{H} \dashv \mathcal{P}
-\end{equation}
-This adjunction formally characterizes the relationship between higher and lower levels in the Elder hierarchy.
+\begin{theorem}[ExtSet is a Category]
+\label{thm:extset_category}
+$\mathbf{ExtSet}$ satisfies the category axioms: associativity of composition and identity laws.
 \end{theorem}
+
+\begin{proof}
+\textbf{Associativity}: For composable morphisms $f: \mathcal{S}_1 \to \mathcal{S}_2$, $g: \mathcal{S}_2 \to \mathcal{S}_3$, $h: \mathcal{S}_3 \to \mathcal{S}_4$:
+$$(h \circ g) \circ f = h \circ (g \circ f)$$
+follows from associativity of function composition and preservation of structure.
+
+\textbf{Identity laws}: For any morphism $f: \mathcal{S}_1 \to \mathcal{S}_2$:
+$$f \circ \text{id}_{\mathcal{S}_1} = f = \text{id}_{\mathcal{S}_2} \circ f$$
+follows from identity laws for function composition.
+\end{proof>
+
+\subsection{Hierarchical Functors}
+
+We establish proper functorial relationships between extended set categories.
+
+\begin{definition}[Level Functor]
+\label{def:level_functor}
+For a hierarchical extended set $\mathcal{H} = (\{S_i\}_{i \in I}, \{\phi_i\}_{i \in I}, \{\prec_i\}_{i \in I})$, the level functor $L_i: \mathbf{ExtSet} \to \mathbf{ExtSet}$ maps each extended set to its $i$-th level representation when it exists.
+\end{definition>
 
 \subsection{Natural Transformations as Learning Processes}
 
@@ -439,39 +472,51 @@ A Learning Natural Transformation $\eta: F \Rightarrow G$ between functors $F, G
 
 This category-theoretic formulation provides a powerful framework for understanding the structural properties of learning processes in the Elder Heliosystem.
 
-\section{Quantum Set Theory and Elder Phase Superposition}
+\section{Probabilistic Extensions of Extended Sets}
 
-\subsection{Quantum Superposition of Elder Sets}
+\subsection{Probability Measures on Extended Sets}
 
-The phase-based nature of Elder Sets has natural connections to quantum mechanics, leading to a quantum set-theoretic formulation.
+We develop rigorous probabilistic extensions without inappropriate quantum mechanical analogies.
 
-\begin{definition}[Quantum Elder Set]
-A Quantum Elder Set $\mathcal{Q}\mathcal{E}\mathbb{S}$ is an Elder Set where elements can exist in superpositions of phase states, represented as:
-\begin{equation}
-|\mathcal{Q}\mathcal{E}\mathbb{S}\rangle = \sum_i \alpha_i |x_i, \Phi_i\rangle
-\end{equation}
-where $\alpha_i$ are complex amplitude parameters that encode both magnitude and phase information for each computational path. These complex amplitude parameters satisfy the normalization constraint $\sum_i |\alpha_i|^2 = 1$ and determine the probability distribution over possible computation outcomes through their squared magnitudes $|\alpha_i|^2$.
+\begin{definition}[Probabilistic Extended Set]
+\label{def:probabilistic_extended_set}
+A probabilistic extended set is a tuple $\mathcal{P} = (\mathcal{S}, \mu)$ where:
+\begin{enumerate}
+\item $\mathcal{S} = (S, \phi, R)$ is an extended set
+\item $\mu$ is a probability measure on the $\sigma$-algebra generated by $S$
+\item The measure $\mu$ is compatible with the phase structure: $\mu(\{x : |\phi(x) - c| < \epsilon\})$ is well-defined for all $c \in S^1$ and $\epsilon > 0$
+\end{enumerate}
 \end{definition}
 
-This quantum formulation enables the expression of phase uncertainty and entanglement between elements:
-
-\begin{theorem}[Phase Entanglement]
-In a Quantum Elder Set, elements can exhibit phase entanglement such that the phase of one element is correlated with the phase of another, even without direct orbital interaction.
+\begin{theorem}[Probabilistic Structure Preservation]
+\label{thm:probabilistic_preservation}
+The category of probabilistic extended sets with measure-preserving morphisms forms a well-defined mathematical category.
 \end{theorem}
 
-\subsection{Measurement-Induced Phase Collapse}
+\begin{proof}
+We verify the category axioms:
 
-The process of parameter activation in the Elder Heliosystem can be formalized using the concept of measurement-induced collapse from quantum mechanics.
+\textbf{Objects}: Probabilistic extended sets as defined above.
 
-\begin{definition}[Phase Collapse]
-When a computation path is selected in the Elder Heliosystem, the superposition of potential phase states collapses to a specific configuration according to the probability distribution determined by the squared magnitudes of the complex amplitudes.
-\end{definition}
+\textbf{Morphisms}: Maps $f: \mathcal{P}_1 \to \mathcal{P}_2$ such that:
+\begin{enumerate}
+\item $f: \mathcal{S}_1 \to \mathcal{S}_2$ is a morphism in $\mathbf{ExtSet}$
+\item $\mu_2(f(A)) = \mu_1(A)$ for all measurable sets $A \subseteq S_1$
+\end{enumerate}
 
-This provides a theoretical foundation for the sparsity-inducing properties of the Elder Heliosystem, where only a small fraction of parameters are activated for any given computation.
+\textbf{Composition and identity}: Follow from the corresponding properties in $\mathbf{ExtSet}$ and measure theory.
+\end{proof>
 
-\begin{corollary}[Sparse Activation]
-The phase collapse process naturally induces sparsity in parameter activation, with the activation probability of each parameter determined by its phase alignment with the global system phase.
-\end{corollary}
+\subsection{Information-Theoretic Analysis}
+
+We establish rigorous information-theoretic foundations for analyzing extended set structures.
+
+\begin{definition}[Phase Entropy]
+\label{def:phase_entropy}
+For a probabilistic extended set $\mathcal{P} = (\mathcal{S}, \mu)$, the phase entropy is:
+$$H_{\phi}(\mathcal{P}) = -\int_{S^1} p(\theta) \log p(\theta) \, d\theta$$
+where $p(\theta) = \mu(\{x \in S : \phi(x) = e^{i\theta}\})$ is the phase distribution.
+\end{definition>
 
 \section{Practical Implications for Elder Heliosystem Implementation}
 
