@@ -42,10 +42,6 @@ args = "simple_test_compilation"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "latex_compilation"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "symbol_test"
 
 [[workflows.workflow]]
@@ -88,14 +84,6 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "pdflatex tests/test_issue.tex"
-
-[[workflows.workflow]]
-name = "latex_compilation"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "mkdir -p build/pdf && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && biber --output-directory build/pdf main && makeindex build/pdf/main.idx || true && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && pdflatex -interaction=nonstopmode -output-directory=build/pdf main.tex && cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf"
 
 [[workflows.workflow]]
 name = "symbol_test"
