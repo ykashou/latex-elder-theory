@@ -2,7 +2,7 @@
 
 ## Issue Overview
 
-This document outlines the initial implementation plan for the Elder Heliosystem based on the comprehensive directory structure defined in `go-elder-directory-expansion.md`. The implementation follows the theoretical foundations established in the LaTeX documentation while providing a practical Go-based framework.
+This document outlines the initial implementation plan for the Elder Heliosystem based on the comprehensive directory structure defined in `directory_structure_expansion.md`. The implementation follows the theoretical foundations established in the LaTeX documentation while providing a practical Go-based framework.
 
 ## Implementation Scope
 
@@ -328,10 +328,7 @@ type SystemConfig struct {
 ## Dependencies
 
 ### External Libraries
-- Mathematical computation libraries (complex numbers, tensors)
-- Optimization libraries (gradient descent variants)
-- Serialization libraries (for persistence)
-- Testing frameworks (comprehensive test suites)
+- None (golang std only)
 
 ### Internal Dependencies
 - LaTeX theoretical documentation completion
