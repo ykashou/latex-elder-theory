@@ -119,6 +119,55 @@ The key insight is that phase values can accumulate and preserve temporal inform
 \end{equation}
 
 The spectrum $\mathcal{F}_T[\phi_e](f)$ reveals patterns at different frequencies, effectively reconstructing temporal information without storing individual past tokens.
+
+\begin{definition}[Frequency-Encoded Pattern Data]
+The Fourier spectrum $\mathcal{F}_T[\phi_e](f)$ decomposes temporal patterns into frequency components, where each frequency band $f$ encodes specific temporal structures:
+
+\begin{itemize}
+    \item \textbf{Low frequencies} ($f \in [0, f_{\text{base}}]$): Encode long-term trends and global sequence characteristics
+    \item \textbf{Mid frequencies} ($f \in [f_{\text{base}}, f_{\text{local}}]$): Capture periodic patterns and recurring motifs
+    \item \textbf{High frequencies} ($f \in [f_{\text{local}}, f_{\text{max}}]$): Preserve fine-grained temporal transitions and local variations
+\end{itemize}
+\end{definition}
+
+\begin{theorem}[Pattern Data Characterization]
+For a phase evolution sequence $\{\phi_e(t)\}_{t=0}^T$, the frequency domain representation reveals structured pattern data according to:
+
+\begin{equation}
+|\mathcal{F}_T[\phi_e](f)|^2 = \sum_{k} A_k^2 \delta(f - f_k) + \sigma_{\text{noise}}^2(f)
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $A_k$ represents the amplitude of the $k$-th temporal pattern at frequency $f_k$
+    \item $\delta(f - f_k)$ are Dirac delta functions indicating discrete frequency components
+    \item $\sigma_{\text{noise}}^2(f)$ captures the continuous background spectrum
+\end{itemize}
+
+The pattern data types encoded at each frequency are:
+
+\begin{align}
+\text{Low-frequency patterns:} \quad &|\mathcal{F}_T[\phi_e](f)| \propto \frac{1}{f^\alpha}, \quad \alpha \in [1,2] \\
+\text{Periodic patterns:} \quad &|\mathcal{F}_T[\phi_e](f_k)| = A_k \text{ for discrete } f_k \\
+\text{Transitional patterns:} \quad &\arg(\mathcal{F}_T[\phi_e](f)) = \phi_k(f) \text{ encoding phase relationships}
+\end{align}
+\end{theorem}
+
+\begin{lemma}[Temporal Information Reconstruction]
+Given the frequency spectrum $\mathcal{F}_T[\phi_e](f)$, temporal patterns can be reconstructed without explicit token storage through:
+
+\begin{equation}
+\phi_e(t) = \int_{-\infty}^{\infty} \mathcal{F}_T[\phi_e](f) e^{2\pi i f t} df
+\end{equation}
+
+The reconstructed temporal information preserves:
+\begin{enumerate}
+    \item \textbf{Sequence order}: Encoded in phase relationships between frequency components
+    \item \textbf{Pattern repetition}: Revealed through peak amplitudes at specific frequencies
+    \item \textbf{Temporal correlations}: Captured in cross-frequency phase coherence
+    \item \textbf{Transition dynamics}: Preserved in the continuous spectrum components
+\end{enumerate}
+\end{lemma}
 \end{proof}
 
 \section{Parameter Activation Through Phase Alignment}
