@@ -35,8 +35,36 @@ C_{\text{temporal}}(\theta) = \mathcal{O}(d \cdot \log(\frac{1}{\epsilon}))
 where $\epsilon$ is the phase resolution of the system.
 \end{theorem}
 
+\begin{definition}[Phase Resolution]
+The phase resolution $\epsilon$ represents the minimum distinguishable phase difference in the system, determined by:
+\begin{equation}
+\epsilon = \max\left(\epsilon_{\text{numerical}}, \epsilon_{\text{physical}}, \epsilon_{\text{computational}}\right)
+\end{equation}
+where:
+\begin{itemize}
+    \item $\epsilon_{\text{numerical}} = \frac{2\pi}{2^b}$ for $b$-bit phase precision
+    \item $\epsilon_{\text{physical}}$ represents noise-induced phase uncertainty
+    \item $\epsilon_{\text{computational}}$ accounts for floating-point arithmetic limitations
+\end{itemize}
+\end{definition}
+
+\begin{lemma}[Temporal Position Quantization]
+Given phase resolution $\epsilon$, the unit circle $[0, 2\pi)$ can be partitioned into exactly $N = \lfloor\frac{2\pi}{\epsilon}\rfloor$ distinguishable angular sectors. Each sector $S_k = [k\epsilon, (k+1)\epsilon)$ for $k \in \{0, 1, \ldots, N-1\}$ represents a unique temporal position state.
+
+The mapping from temporal position $t$ to phase sector is:
+\begin{equation}
+\text{sector}(t) = \left\lfloor \frac{\phi(t)}{\epsilon} \right\rfloor \bmod N
+\end{equation}
+where $\phi(t)$ is the phase encoding function for temporal position $t$.
+\end{lemma}
+
 \begin{proof}
-Each complex parameter $\theta_i = \rho_i e^{i\phi_i}$ encodes temporal information in its phase $\phi_i \in [0, 2\pi)$. With phase resolution $\epsilon$, each parameter can distinctly represent $\frac{2\pi}{\epsilon}$ temporal positions.
+Each complex parameter $\theta_i = \rho_i e^{i\phi_i}$ encodes temporal information in its phase $\phi_i \in [0, 2\pi)$. With phase resolution $\epsilon$, the continuous phase space is discretized into $\frac{2\pi}{\epsilon}$ distinguishable angular sectors.
+
+Since phases separated by less than $\epsilon$ are computationally indistinguishable, each parameter can encode exactly $\frac{2\pi}{\epsilon}$ distinct temporal positions. The temporal encoding capacity per parameter is thus:
+\begin{equation}
+C_{\text{single}} = \left\lfloor \frac{2\pi}{\epsilon} \right\rfloor
+\end{equation}
 
 Furthermore, through phase interference patterns, $d$ parameters can encode exponentially more temporal states through their joint distribution. By the Johnson-Lindenstrauss lemma applied to the unit circle, $d$ complex parameters can preserve the relative ordering and approximate distances between $\mathcal{O}(e^{d})$ temporal states with high probability.
 
