@@ -1,9 +1,9 @@
 # Go-Elder Directory Structure Expansion Guide
-## Based on Elder Theory Mathematical Framework
+## Adhering to Original Proposed Structure with Elder Theory Components
 
-This document provides a comprehensive expansion of your proposed Go-Elder directory structure based on the theoretical foundations from your Elder Theory LaTeX documentation.
+This document expands your proposed Go-Elder directory structure while maintaining your original layout and incorporating all theoretical components from your Elder Theory LaTeX documentation.
 
-## Current Proposed Structure
+## Your Original Proposed Structure
 ```
 - go-elder 
     - internal
@@ -22,153 +22,412 @@ This document provides a comprehensive expansion of your proposed Go-Elder direc
         - go-loss
 ```
 
-## Expanded Directory Structure Based on Elder Theory
+## Expanded Structure Following Your Root Organization
 
-### Root Level
-```
-go-elder/
-├── cmd/                           # Application entry points
-│   ├── elder-cli/                 # CLI interface for Elder system
-│   ├── elder-server/              # Server implementation
-│   ├── elder-trainer/             # Training orchestrator
-│   ├── elder-analyzer/            # Analysis and visualization tools
-│   └── elder-transfer/            # Cross-domain transfer utilities
-├── internal/                      # Private application logic
-├── pkg/                          # Public libraries
-├── api/                          # API definitions and protobuf
-├── configs/                      # Configuration files
-├── docs/                         # Documentation
-├── examples/                     # Usage examples
-├── test/                        # Integration tests
-└── scripts/                     # Build and deployment scripts
-```
+### Internal Package Structure (`internal/`)
 
-### Internal Package Structure (Core Implementation)
-
-#### 1. Entity Hierarchy (`internal/entities/`)
-Based on the Elder-Mentor-Erudite hierarchy from your theory:
+#### 1. Elder Entity (`internal/go-elder/`)
+Elder-level core implementation:
 
 ```
 internal/
-├── entities/
-│   ├── elder/
-│   │   ├── core.go                # Elder entity core logic
-│   │   ├── gravitational.go       # Elder gravitational field generation
-│   │   ├── stability.go           # Orbital stability maintenance
-│   │   └── resonance.go          # Elder resonance mechanisms
-│   ├── mentor/
-│   │   ├── core.go                # Mentor entity implementation
-│   │   ├── orbital.go             # Mentor orbital mechanics
-│   │   ├── knowledge_transfer.go  # Knowledge transfer protocols
-│   │   └── erudite_management.go  # Erudite orbit management
-│   └── erudite/
-│       ├── core.go                # Erudite entity implementation
-│       ├── learning.go            # Learning algorithms
-│       ├── specialization.go      # Domain specialization
-│       └── resonance_response.go  # Resonance response mechanisms
+├── go-elder/
+│   ├── core.go                    # Elder entity core logic
+│   ├── gravitational_generation.go # Elder gravitational field generation
+│   ├── universal_principles.go    # Universal knowledge principles
+│   ├── mentor_coordination.go     # Mentor entity coordination
+│   ├── orbital_stability.go       # System-wide orbital stability
+│   ├── resonance_control.go       # Elder resonance mechanisms
+│   ├── parameter_space.go         # Unified parameter space management
+│   └── information_capacity.go    # System information capacity control
 ```
 
-#### 2. Heliosystem Architecture (`internal/heliosystem/`)
-Based on the unified heliosystem framework:
+#### 2. Mentor Entities (`internal/go-mentor/`)
+Mentor-level domain-specific implementations:
 
 ```
-├── heliosystem/
+├── go-mentor/
+│   ├── core/
+│   │   ├── mentor_entity.go       # Core mentor entity implementation
+│   │   ├── domain_knowledge.go    # Domain-specific knowledge management
+│   │   ├── erudite_orchestration.go # Erudite entity orchestration
+│   │   └── orbital_mechanics.go   # Mentor orbital mechanics
+│   ├── domains/
+│   │   ├── audio_mentor.go        # Audio domain mentor
+│   │   ├── vision_mentor.go       # Vision domain mentor
+│   │   ├── language_mentor.go     # Language domain mentor
+│   │   └── multimodal_mentor.go   # Multimodal integration mentor
+│   ├── transfer/
+│   │   ├── knowledge_transfer.go  # Cross-domain knowledge transfer
+│   │   ├── domain_mappings.go     # Domain mapping protocols
+│   │   ├── isomorphism_detection.go # Knowledge isomorphism detection
+│   │   └── universal_extraction.go # Universal principle extraction
+│   └── learning/
+│       ├── mentor_loss.go         # Mentor-specific loss functions
+│       ├── optimization.go        # Mentor optimization dynamics
+│       └── convergence.go         # Mentor convergence analysis
+```
+
+#### 3. Erudite Entities (`internal/go-erudite/`)
+Erudite-level task-specific implementations:
+
+```
+├── go-erudite/
+│   ├── core/
+│   │   ├── erudite_entity.go      # Core erudite entity implementation
+│   │   ├── specialization.go      # Domain specialization mechanisms
+│   │   ├── learning_algorithms.go # Erudite learning algorithms
+│   │   └── resonance_response.go  # Resonance response mechanisms
+│   ├── tasks/
+│   │   ├── audio/
+│   │   │   ├── speech_recognition.go # Speech recognition erudite
+│   │   │   ├── music_analysis.go   # Music analysis erudite
+│   │   │   ├── audio_events.go     # Audio event detection
+│   │   │   └── speaker_id.go       # Speaker identification
+│   │   ├── vision/
+│   │   │   ├── object_recognition.go # Object recognition erudite
+│   │   │   ├── scene_understanding.go # Scene understanding
+│   │   │   └── image_classification.go # Image classification
+│   │   └── language/
+│   │       ├── semantic_analysis.go # Semantic analysis erudite
+│   │       ├── language_generation.go # Language generation
+│   │       └── text_classification.go # Text classification
+│   └── learning/
+│       ├── erudite_loss.go        # Erudite-specific loss functions
+│       ├── pac_learning.go        # PAC learning bounds implementation
+│       └── sample_complexity.go   # Sample complexity analysis
+```
+
+#### 4. Heliosystem (`internal/go-heliosystem/`)
+Unified heliosystem coordination:
+
+```
+├── go-heliosystem/
 │   ├── architecture/
 │   │   ├── unified_framework.go   # Unified theoretical-computational framework
-│   │   ├── isomorphisms.go        # Mathematical isomorphism mappings
-│   │   └── closure_proof.go       # System closure implementation
-│   ├── orbital/
-│   │   ├── mechanics.go           # Orbital mechanics implementation
-│   │   ├── stability.go           # Gravitational stability principles
-│   │   ├── perturbation.go        # Perturbation handling
-│   │   └── conservation.go        # Conservation law enforcement
-│   ├── gravitational/
-│   │   ├── fields.go              # Gravitational field computation
-│   │   ├── stratification.go      # Gravitational stratification
-│   │   ├── coupling.go            # Field-phase coupling
-│   │   └── memory_storage.go      # Gravitational memory storage
-│   └── coordination/
-│       ├── hierarchy.go           # Hierarchical coordination
-│       ├── information_flow.go    # Information flow management
-│       └── phase_synchronization.go # Phase synchronization
+│   │   ├── system_closure.go      # System closure implementation
+│   │   ├── isomorphism_chain.go   # Mathematical isomorphism chain
+│   │   └── hierarchical_mapping.go # Hierarchical level mappings
+│   ├── coordination/
+│   │   ├── hierarchy_control.go   # Hierarchical coordination
+│   │   ├── information_flow.go    # Information flow management
+│   │   ├── phase_synchronization.go # Phase synchronization
+│   │   └── resonance_coupling.go  # Resonance coupling mechanisms
+│   ├── memory/
+│   │   ├── elder_memory_map.go    # Elder memory mapping system
+│   │   ├── gravitational_memory.go # Gravitational memory storage
+│   │   ├── field_based_memory.go  # Field-based memory systems
+│   │   └── infinite_memory.go     # Infinite memory dynamics
+│   └── entropy/
+│       ├── entropy_distribution.go # Hierarchical entropy distribution
+│       ├── entropy_dynamics.go    # Entropy evolution dynamics
+│       ├── information_gradients.go # Information gradient flow
+│       └── channel_capacity.go    # Inter-level channel capacity
 ```
 
-#### 3. Simulation Engine (`internal/simulation/`)
-Enhanced simulation capabilities:
+#### 5. Simulation (`internal/go-simulation/`)
+Comprehensive simulation engine:
 
 ```
-├── simulation/
+├── go-simulation/
 │   ├── engine/
-│   │   ├── core.go                # Simulation engine core
+│   │   ├── simulation_core.go     # Core simulation engine
 │   │   ├── time_evolution.go      # Time evolution algorithms
-│   │   └── state_management.go    # State management
+│   │   ├── state_management.go    # System state management
+│   │   └── hilbert_diffusion.go   # Hilbert space diffusion
 │   ├── dynamics/
 │   │   ├── orbital_dynamics.go    # Orbital dynamics simulation
-│   │   ├── entropy_dynamics.go    # Entropy evolution
-│   │   └── resonance_dynamics.go  # Resonance mechanism simulation
+│   │   ├── gravitational_dynamics.go # Gravitational field dynamics
+│   │   ├── entropy_evolution.go   # Entropy dynamics simulation
+│   │   ├── resonance_dynamics.go  # Resonance mechanism simulation
+│   │   └── perturbation_analysis.go # Perturbation propagation
 │   ├── training/
-│   │   ├── elder_training_loop.go # Elder training loop implementation
-│   │   ├── convergence.go         # Convergence analysis
-│   │   └── optimization.go        # Optimization dynamics
-│   └── analysis/
-│       ├── stability_analysis.go  # Stability analysis tools
-│       ├── performance_metrics.go # Performance measurement
-│       └── visualization.go       # Simulation visualization
+│   │   ├── elder_training_loop.go # Elder training loop algorithm
+│   │   ├── hierarchical_backprop.go # Hierarchical backpropagation
+│   │   ├── convergence_analysis.go # Convergence analysis
+│   │   └── optimization_dynamics.go # Multi-level optimization
+│   └── visualization/
+│       ├── orbital_visualization.go # Orbital dynamics visualization
+│       ├── field_visualization.go # Field visualization
+│       ├── hierarchy_visualization.go # Hierarchy visualization
+│       └── phase_space_plots.go   # Phase space visualization
 ```
 
-#### 4. Quality Assurance (`internal/linters/`)
-Expanded linting and validation:
+#### 6. Linters (`internal/go-linters/`)
+Comprehensive validation and quality assurance:
 
 ```
-├── linters/
+├── go-linters/
 │   ├── mathematical/
-│   │   ├── heliomorphic_validator.go    # Heliomorphic function validation
-│   │   ├── elder_space_checker.go       # Elder space property verification
-│   │   └── isomorphism_validator.go     # Isomorphism preservation checks
+│   │   ├── elder_space_validator.go # Elder space property validation
+│   │   ├── heliomorphic_validator.go # Heliomorphic function validation
+│   │   ├── isomorphism_checker.go  # Isomorphism preservation checks
+│   │   ├── topology_validator.go   # Topological structure validation
+│   │   └── complex_analysis_linter.go # Complex analysis correctness
 │   ├── physical/
-│   │   ├── conservation_checker.go      # Conservation law verification
-│   │   ├── stability_validator.go       # Stability criterion checks
-│   │   └── orbital_validator.go         # Orbital mechanics validation
-│   └── system/
-│       ├── closure_checker.go           # System closure validation
-│       ├── hierarchy_validator.go       # Hierarchy structure checks
-│       └── performance_linter.go        # Performance optimization hints
+│   │   ├── conservation_checker.go # Conservation law verification
+│   │   ├── stability_validator.go  # System stability validation
+│   │   ├── orbital_validator.go    # Orbital mechanics validation
+│   │   ├── gravitational_linter.go # Gravitational field validation
+│   │   └── resonance_checker.go    # Resonance mechanism validation
+│   ├── hierarchy/
+│   │   ├── entity_relationship_linter.go # Entity relationship validation
+│   │   ├── information_flow_checker.go # Information flow validation
+│   │   ├── transfer_validator.go   # Transfer mechanism validation
+│   │   └── coordination_linter.go  # Coordination protocol validation
+│   └── performance/
+│       ├── complexity_analyzer.go  # Computational complexity analysis
+│       ├── memory_efficiency_linter.go # Memory efficiency validation
+│       ├── convergence_checker.go  # Convergence property validation
+│       └── optimization_linter.go  # Optimization efficiency analysis
 ```
 
-### Public Package Structure (pkg/)
+### Public Package Structure (`pkg/`)
 
-#### 1. Mathematical Foundations (`pkg/mathematics/`)
-Core mathematical structures from your theory:
+Following your original naming convention with "go-" prefixes:
+
+#### 1. Field Theory (`pkg/go-field/`)
+Gravitational fields, orbitals, and field-based systems as you specified:
 
 ```
 pkg/
-├── mathematics/
-│   ├── elder_spaces/
-│   │   ├── spaces.go              # Elder space definitions
-│   │   ├── operations.go          # Elder space operations (⊕, ⊙, ⋆)
-│   │   ├── phase_operator.go      # Phase operator Φ implementation
-│   │   ├── spectral.go           # Spectral decomposition
-│   │   └── canonical_basis.go    # Canonical basis structures
+├── go-field/
+│   ├── gravitational/
+│   │   ├── fields.go              # Gravitational field implementation
+│   │   ├── eigenvalues.go         # Gravitational eigenvalue computation
+│   │   ├── coupling.go            # Field-phase coupling tensors
+│   │   ├── stratification.go      # Gravitational stratification
+│   │   └── stability.go          # Gravitational field stability
+│   ├── orbital/
+│   │   ├── mechanics.go           # Orbital mechanics implementation
+│   │   ├── trajectories.go        # Orbital trajectory computation
+│   │   ├── resonance.go          # Orbital resonance mechanisms
+│   │   ├── perturbation.go       # Orbital perturbation theory
+│   │   └── conservation.go       # Orbital conservation laws
+│   ├── memory/
+│   │   ├── gravitational_memory.go # Gravitational memory storage
+│   │   ├── field_storage.go       # Field-based memory systems
+│   │   ├── memory_retrieval.go    # Field-based memory retrieval
+│   │   └── infinite_memory.go     # Infinite memory field dynamics
+│   ├── phase/
+│   │   ├── phase_fields.go        # Phase field implementations
+│   │   ├── phase_coupling.go      # Phase-field coupling mechanisms
+│   │   ├── synchronization.go     # Phase synchronization
+│   │   └── coherence.go          # Phase coherence maintenance
+│   └── entropy/
+│       ├── field_entropy.go       # Field-based entropy measures
+│       ├── entropy_flow.go        # Entropy flow through fields
+│       └── thermodynamics.go      # Field thermodynamics
+```
+
+#### 2. Computational Kernels (`pkg/go-kernel/`)
+Rotational attention, heliomorphic functions, and computational cores as you specified:
+
+```
+├── go-kernel/
 │   ├── heliomorphic/
 │   │   ├── functions.go           # Heliomorphic function implementation
-│   │   ├── convolution.go         # Heliomorphic convolution
+│   │   ├── convolution.go         # Heliomorphic convolution operations
 │   │   ├── differentiation.go     # Heliomorphic differentiation
-│   │   ├── composition.go         # Function composition
-│   │   └── transforms.go         # Heliomorphic transforms
-│   ├── topology/
-│   │   ├── elder_topology.go      # Elder topology structures
-│   │   ├── stratification.go      # Gravitational stratification
-│   │   ├── manifolds.go          # Phase-coherent manifolds
-│   │   └── resonance_structures.go # Resonance topological structures
+│   │   ├── composition.go         # Function composition kernels
+│   │   ├── transforms.go         # Heliomorphic transform kernels
+│   │   └── complex_analysis.go    # Complex analysis operations
+│   ├── attention/
+│   │   ├── rotational_attention.go # Rotational attention mechanisms
+│   │   ├── phase_attention.go     # Phase-based attention
+│   │   ├── gravitational_attention.go # Gravitational field attention
+│   │   ├── hierarchical_attention.go # Hierarchical attention patterns
+│   │   └── resonance_attention.go # Resonance-based attention
+│   ├── elder_spaces/
+│   │   ├── spaces.go              # Elder space mathematical operations
+│   │   ├── operations.go          # Elder space operations (⊕, ⊙, ⋆)
+│   │   ├── phase_operator.go      # Phase operator Φ implementation
+│   │   ├── spectral.go           # Spectral decomposition kernels
+│   │   └── canonical_basis.go    # Canonical basis computations
 │   ├── isomorphisms/
-│   │   ├── elder_heliomorphic.go  # Elder space ↔ Heliomorphic functions
-│   │   ├── parameter_space.go     # Parameter space mappings
-│   │   ├── heliosystem.go        # Heliosystem mappings
-│   │   └── domain_mappings.go    # Cross-domain isomorphisms
-│   └── complex_analysis/
-│       ├── phase_coupling.go      # Phase-field coupling
-│       ├── radial_scaling.go      # Radial scaling functions
-│       └── argument_functions.go  # Complex argument operations
+│   │   ├── elder_heliomorphic.go  # Elder space ↔ Heliomorphic mappings
+│   │   ├── parameter_mappings.go  # Parameter space isomorphisms
+│   │   ├── domain_isomorphisms.go # Cross-domain isomorphism kernels
+│   │   └── structural_mappings.go # Structural isomorphism computation
+│   └── optimization/
+│       ├── gradient_kernels.go    # Multi-level gradient computation
+│       ├── resonance_optimization.go # Resonance-based optimization
+│       ├── hierarchical_descent.go # Hierarchical gradient descent
+│       └── convergence_kernels.go # Convergence computation kernels
+```
+
+#### 3. Tensor Operations (`pkg/go-tensor/`)
+Heliomorphic tensors and specialized tensor operations as you specified:
+
+```
+├── go-tensor/
+│   ├── heliomorphic/
+│   │   ├── heliomorphic_tensors.go # Heliomorphic tensor operations
+│   │   ├── tensor_functions.go     # Tensor-valued heliomorphic functions
+│   │   ├── coupling_tensors.go     # Field-phase coupling tensors
+│   │   ├── transformation_tensors.go # Tensor transformation operations
+│   │   └── composition_tensors.go  # Tensor composition operations
+│   ├── gravitational/
+│   │   ├── gravitational_tensors.go # Gravitational tensor fields
+│   │   ├── stress_energy.go        # Stress-energy tensor operations
+│   │   ├── curvature_tensors.go    # Curvature tensor computations
+│   │   ├── field_tensors.go        # Gravitational field tensors
+│   │   └── metric_tensors.go       # Metric tensor operations
+│   ├── hierarchical/
+│   │   ├── multi_level_tensors.go  # Multi-level tensor operations
+│   │   ├── entity_tensors.go       # Entity-specific tensor representations
+│   │   ├── interaction_tensors.go  # Inter-entity interaction tensors
+│   │   └── coordination_tensors.go # Coordination tensor operations
+│   ├── operations/
+│   │   ├── contraction.go          # Tensor contraction operations
+│   │   ├── outer_product.go        # Tensor outer product operations
+│   │   ├── inner_product.go        # Tensor inner product operations
+│   │   ├── symmetry.go            # Tensor symmetry operations
+│   │   └── decomposition.go       # Tensor decomposition algorithms
+│   └── entropy/
+│       ├── entropy_tensors.go      # Entropy tensor representations
+│       ├── information_tensors.go  # Information-theoretic tensors
+│       └── capacity_tensors.go     # Capacity tensor operations
+```
+
+#### 4. File Operations (`pkg/go-file/`)
+Elder-aware file operations and data management:
+
+```
+├── go-file/
+│   ├── serialization/
+│   │   ├── elder_serialization.go  # Elder entity serialization
+│   │   ├── heliomorphic_serial.go  # Heliomorphic function serialization
+│   │   ├── tensor_serialization.go # Tensor serialization
+│   │   ├── field_serialization.go  # Field serialization
+│   │   └── hierarchy_serialization.go # Hierarchy serialization
+│   ├── compression/
+│   │   ├── elder_compression.go    # Elder-specific compression
+│   │   ├── gravitational_compression.go # Gravitational field compression
+│   │   ├── knowledge_compression.go # Knowledge structure compression
+│   │   └── memory_compression.go   # Memory-efficient compression
+│   ├── formats/
+│   │   ├── elder_format.go         # Elder-specific file formats
+│   │   ├── heliomorphic_format.go  # Heliomorphic function formats
+│   │   ├── tensor_format.go        # Tensor data formats
+│   │   └── interchange_format.go   # Cross-domain interchange formats
+│   ├── persistence/
+│   │   ├── elder_persistence.go    # Elder entity persistence
+│   │   ├── memory_persistence.go   # Memory state persistence
+│   │   ├── training_persistence.go # Training state persistence
+│   │   └── checkpoint_system.go    # Checkpoint management
+│   └── validation/
+│       ├── file_validation.go      # File integrity validation
+│       ├── format_validation.go    # Format compliance validation
+│       └── corruption_detection.go # Data corruption detection
+```
+
+#### 5. Command Line Interface (`pkg/go-cli/`)
+Comprehensive CLI for Elder system interaction:
+
+```
+├── go-cli/
+│   ├── commands/
+│   │   ├── train.go               # Training command interface
+│   │   ├── simulate.go            # Simulation command interface
+│   │   ├── analyze.go             # Analysis command interface
+│   │   ├── transfer.go            # Transfer command interface
+│   │   ├── validate.go           # Validation command interface
+│   │   └── visualize.go          # Visualization command interface
+│   ├── config/
+│   │   ├── elder_config.go        # Elder system configuration
+│   │   ├── simulation_config.go   # Simulation configuration
+│   │   ├── training_config.go     # Training configuration
+│   │   ├── transfer_config.go     # Transfer configuration
+│   │   └── analysis_config.go     # Analysis configuration
+│   ├── output/
+│   │   ├── formatters.go          # Output formatting utilities
+│   │   ├── visualizers.go         # CLI visualization tools
+│   │   ├── reporters.go          # Report generation
+│   │   ├── progress_display.go    # Progress display utilities
+│   │   └── interactive_display.go # Interactive display components
+│   └── validation/
+│       ├── input_validation.go    # User input validation
+│       ├── config_validation.go   # Configuration validation
+│       └── parameter_validation.go # Parameter validation
+```
+
+#### 6. Differential Operations (`pkg/go-diff/`)
+Advanced differentiation for Elder systems:
+
+```
+├── go-diff/
+│   ├── heliomorphic/
+│   │   ├── heliomorphic_diff.go   # Heliomorphic differentiation
+│   │   ├── complex_derivatives.go # Complex derivative operations
+│   │   ├── phase_derivatives.go   # Phase-aware derivatives
+│   │   ├── radial_derivatives.go  # Radial derivative operations
+│   │   └── coupling_derivatives.go # Field-phase coupling derivatives
+│   ├── hierarchical/
+│   │   ├── multi_level_gradients.go # Multi-level gradient computation
+│   │   ├── cross_level_derivatives.go # Cross-level derivatives
+│   │   ├── orbital_derivatives.go # Orbital parameter derivatives
+│   │   ├── entity_gradients.go    # Entity-specific gradients
+│   │   └── coordination_gradients.go # Coordination gradients
+│   ├── gravitational/
+│   │   ├── field_gradients.go     # Gravitational field gradients
+│   │   ├── potential_derivatives.go # Gravitational potential derivatives
+│   │   ├── stability_gradients.go # Stability gradient analysis
+│   │   └── conservation_derivatives.go # Conservation law derivatives
+│   ├── entropy/
+│   │   ├── entropy_gradients.go   # Entropy gradient computation
+│   │   ├── information_gradients.go # Information-theoretic gradients
+│   │   └── capacity_derivatives.go # Capacity derivative analysis
+│   └── numerical/
+│       ├── finite_differences.go  # Finite difference methods
+│       ├── spectral_methods.go    # Spectral differentiation
+│       ├── adaptive_schemes.go    # Adaptive differentiation
+│       └── automatic_diff.go      # Automatic differentiation
+```
+
+#### 7. Loss Functions (`pkg/go-loss/`)
+Hierarchical loss functions and optimization:
+
+```
+├── go-loss/
+│   ├── elder/
+│   │   ├── elder_loss.go          # Elder entity loss functions
+│   │   ├── gravitational_loss.go  # Gravitational stability loss
+│   │   ├── universal_principle_loss.go # Universal principle loss
+│   │   ├── coordination_loss.go   # System coordination loss
+│   │   └── information_capacity_loss.go # Information capacity loss
+│   ├── mentor/
+│   │   ├── mentor_loss.go         # Mentor entity loss functions
+│   │   ├── domain_loss.go         # Domain-specific loss
+│   │   ├── transfer_loss.go       # Knowledge transfer loss
+│   │   ├── orbital_loss.go        # Mentor orbital stability loss
+│   │   └── erudite_coordination_loss.go # Erudite coordination loss
+│   ├── erudite/
+│   │   ├── erudite_loss.go        # Erudite entity loss functions
+│   │   ├── task_specific_loss.go  # Task-specific loss functions
+│   │   ├── learning_loss.go       # Learning optimization loss
+│   │   ├── specialization_loss.go # Domain specialization loss
+│   │   └── resonance_response_loss.go # Resonance response loss
+│   ├── hierarchical/
+│   │   ├── hierarchical_loss.go   # Combined hierarchical loss
+│   │   ├── multi_level_loss.go    # Multi-level loss computation
+│   │   ├── cross_level_loss.go    # Cross-level interaction loss
+│   │   └── system_coherence_loss.go # System coherence loss
+│   ├── transfer/
+│   │   ├── transfer_theorem_loss.go # Transfer theorem loss bounds
+│   │   ├── isomorphism_loss.go    # Isomorphism preservation loss
+│   │   ├── domain_similarity_loss.go # Domain similarity loss
+│   │   └── universal_extraction_loss.go # Universal principle extraction loss
+│   ├── convergence/
+│   │   ├── convergence_loss.go    # Convergence guarantee loss
+│   │   ├── stability_loss.go      # System stability loss
+│   │   ├── pac_learning_loss.go   # PAC learning bound loss
+│   │   └── optimization_loss.go   # Optimization dynamics loss
+│   └── regularization/
+│       ├── gravitational_regularization.go # Gravitational regularization
+│       ├── entropy_regularization.go # Entropy-based regularization
+│       ├── resonance_regularization.go # Resonance regularization
+│       └── complexity_regularization.go # Computational complexity regularization
 ```
 
 #### 2. Field Theory (`pkg/fields/`)
@@ -466,9 +725,31 @@ System analysis and visualization tools:
 │       └── transfer_diagnostics.go    # Transfer mechanism diagnostics
 ```
 
-## Additional Theoretical Components Identified and Categorized
+## Summary: Complete Directory Structure Adhering to Your Original Layout
 
-Based on comprehensive analysis of your Elder Theory LaTeX documentation, I've identified and properly placed these additional major theoretical components beyond gravitational fields, heliomorphic functions, and orbital mechanics:
+Your original structure has been comprehensively expanded while maintaining your exact naming conventions and organizational hierarchy. Here's the complete mapping:
+
+### Your Original → Expanded Structure Mapping
+
+**Internal Packages (`internal/`):**
+- `go-mentor` → Enhanced with domains/, transfer/, learning/ subdirectories covering cross-domain knowledge transfer, domain-specific mentors (audio, vision, language), and mentor-level optimization
+- `go-erudite` → Extended with tasks/ for domain-specific implementations and learning/ for PAC bounds and sample complexity
+- `go-heliosystem` → Expanded to include memory/, entropy/, coordination/ covering the unified theoretical framework and system closure
+- `go-simulation` → Enhanced with dynamics/, training/, visualization/ for comprehensive simulation including entropy evolution and Hilbert space diffusion
+- `go-linters` → Broadened to mathematical/, physical/, hierarchy/, performance/ validation covering the complete theoretical verification suite
+
+**Public Packages (`pkg/`):**
+- `go-field` → Comprehensive field theory including gravitational/, orbital/, memory/, phase/, entropy/ components
+- `go-kernel` → Extended computational kernels with heliomorphic/, attention/, elder_spaces/, isomorphisms/, optimization/ modules
+- `go-tensor` → Enhanced tensor operations covering heliomorphic/, gravitational/, hierarchical/, operations/, entropy/ tensors
+- `go-file` → Complete file management with serialization/, compression/, formats/, persistence/, validation/
+- `go-cli` → Full CLI interface with commands/, config/, output/, validation/
+- `go-diff` → Advanced differentiation including heliomorphic/, hierarchical/, gravitational/, entropy/, numerical/ methods
+- `go-loss` → Comprehensive loss functions covering elder/, mentor/, erudite/, hierarchical/, transfer/, convergence/, regularization/
+
+## Additional Theoretical Components Now Properly Integrated
+
+The expanded structure incorporates these major Elder Theory components beyond your original three focus areas:
 
 ### 1. **Information Theory & Entropy Dynamics**
 - **Hierarchical Entropy Distribution**: How entropy varies across Elder-Mentor-Erudite levels
