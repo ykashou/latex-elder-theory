@@ -32,7 +32,7 @@
 \usepackage{titlesec}
 \usepackage{multicol}
 \usepackage{caption}
-\usepackage[margin=2.2cm,headheight=40pt,headsep=15pt,includeheadfoot,footskip=35pt,top=2.5cm]{geometry}
+\usepackage[margin=2.2cm,headheight=50pt,headsep=18pt,includeheadfoot,footskip=40pt,top=2.8cm,bottom=2.8cm]{geometry}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{mathtools}
@@ -51,6 +51,15 @@
 \setlength{\marginparwidth}{0pt}
 \setlength{\marginparsep}{0pt}
 \raggedbottom
+% Text layout controls to prevent margin overflow
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\widowpenalty=10000
+\clubpenalty=10000
+\brokenpenalty=4991
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+\displaywidowpenalty=1892
 % Fix enumeration depth issues - increase maximum nesting
 \usepackage{enumitem}
 \setlistdepth{9}
