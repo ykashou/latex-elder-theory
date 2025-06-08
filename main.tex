@@ -23,6 +23,31 @@
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{enumitem}
+% Fix deeply nested structures causing margin shift in Unit V onwards
+\setlistdepth{6}
+\renewlist{enumerate}{enumerate}{6}
+\setlist[enumerate,1]{label=\arabic*.}
+\setlist[enumerate,2]{label=(\alph*)}
+\setlist[enumerate,3]{label=\roman*.}
+\setlist[enumerate,4]{label=(\roman*)}
+\setlist[enumerate,5]{label=\alph*.}
+\setlist[enumerate,6]{label=(\alph*)}
+
+\renewlist{itemize}{itemize}{6}
+\setlist[itemize,1]{label=\textbullet}
+\setlist[itemize,2]{label=--}
+\setlist[itemize,3]{label=*}
+\setlist[itemize,4]{label=\textperiodcentered}
+\setlist[itemize,5]{label=--}
+\setlist[itemize,6]{label=*}
+
+% Reset margins to prevent shifting from nested structures
+\setlength{\leftmargini}{2.5em}
+\setlength{\leftmarginii}{2.2em}
+\setlength{\leftmarginiii}{1.87em}
+\setlength{\leftmarginiv}{1.7em}
+\setlength{\leftmarginv}{1em}
+\setlength{\leftmarginvi}{1em}
 \usepackage{tikz}
 \usepackage[most]{tcolorbox}
 \usetikzlibrary{decorations.pathmorphing, decorations.markings, decorations.pathreplacing, calc, shapes, shapes.geometric, backgrounds, fit, positioning}
