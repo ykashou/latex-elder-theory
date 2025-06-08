@@ -23,6 +23,11 @@
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\setlistdepth{20}
+\renewlist{enumerate}{enumerate}{20}
+\renewlist{itemize}{itemize}{20}
+\setlist[enumerate]{leftmargin=*}
+\setlist[itemize]{leftmargin=*}
 \usepackage{tikz}
 \usepackage[most]{tcolorbox}
 \usetikzlibrary{decorations.pathmorphing, decorations.markings, decorations.pathreplacing, calc, shapes, shapes.geometric, backgrounds, fit, positioning}
@@ -32,7 +37,7 @@
 \usepackage{titlesec}
 \usepackage{multicol}
 \usepackage{caption}
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[margin=2.5cm,headheight=30pt,headsep=10pt]{geometry}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{mathtools}
