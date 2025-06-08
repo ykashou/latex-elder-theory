@@ -120,16 +120,16 @@
             \coordinate (p) at (\x, \y);
             
             % Calculate combined field intensity (simplified)
-            \pgfmathsetmacro{\dist1}{sqrt((\x + 1.5)^2 + \y^2)}
-            \pgfmathsetmacro{\dist2}{sqrt(\x^2 + \y^2)}
-            \pgfmathsetmacro{\dist3}{sqrt((\x - 1.5)^2 + \y^2)}
+            \pgfmathsetmacro{\distone}{sqrt((\x + 1.5)*(\x + 1.5) + \y*\y)}
+            \pgfmathsetmacro{\disttwo}{sqrt(\x*\x + \y*\y)}
+            \pgfmathsetmacro{\distthree}{sqrt((\x - 1.5)*(\x - 1.5) + \y*\y)}
             
-            \pgfmathsetmacro{\field1}{0.5 * \dist1^2}
-            \pgfmathsetmacro{\field2}{1.0 * \dist2^2}
-            \pgfmathsetmacro{\field3}{1.5 * \dist3^2}
+            \pgfmathsetmacro{\fieldone}{0.5 * \distone}
+            \pgfmathsetmacro{\fieldtwo}{1.0 * \disttwo}
+            \pgfmathsetmacro{\fieldthree}{1.5 * \distthree}
             
-            \pgfmathsetmacro{\totalfield}{\field1 + \field2 + \field3}
-            \pgfmathsetmacro{\intensity}{min(\totalfield / 10, 1)}
+            \pgfmathsetmacro{\totalfield}{\fieldone + \fieldtwo + \fieldthree}
+            \pgfmathsetmacro{\intensity}{min(\totalfield / 5, 1)}
             
             \fill[DeepRed, opacity=\intensity] (p) circle (0.05);
         }

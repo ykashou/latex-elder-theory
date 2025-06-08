@@ -74,46 +74,6 @@
 \usepackage{placeins}
 \usepackage{tocloft}
 
-% % Setup for List of Equations
-% \newcommand{\listequationsname}{List of Equations}
-% \newlistof{myequations}{equ}{\listequationsname}
-
-% % Enhanced equation tracking with better formatting
-% \newcommand{\myequations}[2][]{%
-%   \ifx\relax#1\relax
-%     \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#2}%
-%   \else
-%     \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1: #2}%
-%   \fi
-% }
-
-% % Redefine equation environments to auto-track with better labels
-% \let\oldequation\equation
-% \let\endoldequation\endequation
-% \renewenvironment{equation}
-%   {\oldequation}
-%   {\endoldequation\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Mathematical equation}}
-
-% % Enhanced equation tracking for align environment
-% \let\oldalign\align
-% \let\endoldalign\endalign
-% \renewenvironment{align}
-%   {\oldalign}
-%   {\endoldalign\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Aligned equations}}
-
-% % Enhanced equation tracking for eqnarray
-% \let\oldeqnarray\eqnarray
-% \let\endoldeqnarray\endeqnarray
-% \renewenvironment{eqnarray}
-%   {\oldeqnarray}
-%   {\endoldeqnarray\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}Equation array}}
-
-% Command to manually add equations with descriptions
-% \newcommand{\addequation}[2][]{\myequations[#1]{#2}}
-
-% Alias for compatibility
-% \let\listofequations\listofmyequations
-
 % Increase the float size limit to handle larger figures
 \setcounter{topnumber}{4}
 \setcounter{bottomnumber}{4}
@@ -132,6 +92,15 @@
 \newenvironment{chaptersummary}
   {\par\vspace{0.5em}\begin{quote}\itshape}
   {\end{quote}\par\vspace{1em}}
+
+% Custom chapter formatting with smaller chapter numbers
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}
+  {\chaptertitlename\ \fontsize{36}{43}\selectfont\thechapter}
+  {20pt}
+  {\Huge}
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
 
 % Complex number command
 \newcommand{\C}{\mathbb{C}}
@@ -392,128 +361,181 @@ Thirdly, I want to thank my friends. Their belief in me has helped manifest Elde
 
 %%% I. FOUNDATION LAYER %%%
 \unit{Foundation Layer}
-% Starting with a concrete example followed by the abstract mathematical foundation and vocabulary
-\input{chapters/part1_theory/core_concepts/introduction_to_elder_spaces.tex} % Introduction to Elder Spaces
-\input{chapters/part1_theory/core_concepts/introduction_to_elder_topology.tex} % Introduction to Elder Topology (Realization Mapping)
-\input{chapters/part1_theory/core_concepts/unified_parameter_space.tex} % Parameter Space definition
+% Introducing Elder Spaces and foundational concepts
+% with initial examples to build understanding
+% Followed by detailed abstract mathematical concepts
+\input{chapters/part1_theory/unit1_foundation_layer/introduction_to_elder_spaces.tex} % Introductory concepts of Elder Spaces
+\input{chapters/part1_theory/unit1_foundation_layer/introduction_to_elder_topology.tex} % Realization Mapping via Elder Topology
+\input{chapters/part1_theory/unit1_foundation_layer/unified_parameter_space.tex} % Laying out Parameter Space definitions
 
 %%% II. HELIOMORPHIC FUNCTIONS AND GEOMETRY %%%
 \unit{Heliomorphic Functions and Geometry}
-% Theoretical foundation and mathematical basis
+% Grounding theoretical mathematics in practical applications
 
-% Formal definition of heliomorphic functions
-\input{chapters/part1_theory/functions_and_geometry/heliomorphic_functions.tex} 
-% Mathematical Formula Elaborations
-\input{chapters/part1_theory/functions_and_geometry/formula_elaborations.tex} 
-% Complete axiom system for heliomorphic functions
-\input{chapters/part1_theory/functions_and_geometry/heliomorphic_axiom_system.tex} 
-% Completeness theorem for heliomorphic functions
-\input{chapters/part1_theory/functions_and_geometry/heliomorphic_completeness.tex} 
- % Differentiation theory for heliomorphic functions
-\input{chapters/part1_theory/functions_and_geometry/heliomorphic_differentiation.tex}
-% Composition properties of heliomorphic functions
-\input{chapters/part1_theory/functions_and_geometry/heliomorphic_composition.tex} 
- % Analysis of singularity properties in heliomorphic functions
-\input{chapters/part1_theory/functions_and_geometry/singularity_properties.tex}
- % Elder Manifold - theoretical foundation
-\input{chapters/part1_theory/functions_and_geometry/elder_manifold.tex}
-% Mathematical basis with heliomorphic geometry
-\input{chapters/part1_theory/functions_and_geometry/heliomorphic_geometry.tex} 
-% Heliomorphism as applied to learning systems
-\input{chapters/part1_theory/functions_and_geometry/heliomorphism.tex} 
- % Set-theoretic foundations of Elder Theory
-\input{chapters/part1_theory/functions_and_geometry/elder_set_theory.tex}
- % Gradient Topology in the Elder Heliosystem
-\input{chapters/part1_theory/functions_and_geometry/gradient_topology.tex}
-% Advanced mathematical concepts: Kähler geometry, complex manifolds, topological properties
-\input{chapters/part1_theory/functions_and_geometry/advanced_mathematical_concepts.tex} 
+% Defining the concept and purpose of heliomorphic functions
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_functions.tex} 
+% Exploring mathematical formulations in depth
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/formula_elaborations.tex} 
+% Establishing a complete axiomatic system for heliomorphic functions
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_axiom_system.tex} 
+% Explaining the completeness theorem for these functions
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_completeness.tex} 
+ % Discussing differentiation theory applicability
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_differentiation.tex}
+% Understanding composition properties and applications
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_composition.tex} 
+ % Analyzing singularity properties inherent in the functions
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/singularity_properties.tex}
+ % Elder Manifold and its conceptual significance
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/elder_manifold.tex}
+% Utilizing heliomorphic geometry for theoretical works
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_geometry.tex} 
+% Investigating Heliomorphism in learning applications
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphism.tex} 
+ % Set-theoretical underpinnings of Elder Theory
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/elder_set_theory.tex}
+ % Gradient topology within the Elder Heliosystem
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/gradient_topology.tex}
+% Advanced math concepts: Kähler geometry, complex manifolds
+% and examining their topological attributes
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/advanced_mathematical_concepts.tex} 
 
 %%% III. ELDER HELIOSYSTEM ARCHITECTURE %%%
 \unit{Elder Heliosystem Architecture}
-% System components and their interactions
+% An overview of system components and their interactions within the Elder Heliosystem
 
-\input{chapters/part1_theory/functions_and_geometry/hierarchical_knowledge_architecture.tex} 
-\input{chapters/part1_theory/mechanics_and_dynamics/elder_orbital_mechanics.tex} % Elder Orbital Mechanics with hierarchical momentum transfer
-\input{chapters/part1_theory/mechanics_and_dynamics/gravitational_field_parameters.tex} % Introduction to Gravitational Field Parameters (GFPs) and self-organization mechanisms
-\input{chapters/part1_theory/mechanics_and_dynamics/activation_based_parameter_selection.tex} % Comprehensive treatment of phase-dependent parameter activation and selection mechanisms
-\input{chapters/part1_theory/mechanics_and_dynamics/gravitational_field_dynamics.tex} % Reframing the system in terms of gravitational fields rather than shells
-\input{chapters/part1_theory/mechanics_and_dynamics/critical_phase_thresholds.tex} % Derivation of critical phase thresholds for knowledge transfer
-\input{chapters/part1_theory/mechanics_and_dynamics/rotational_information_dynamics.tex} % Detailed mathematical formalism on rotational dynamics and "learn by teaching"
-\input{chapters/part1_theory/knowledge_theory_elaborations.tex} % Knowledge externalization, curriculum generation, and gap identification
-\input{chapters/part1_theory/mechanics_and_dynamics/gravitational_memory_storage.tex} % Gravitational memory storage framework and multi-entity interactions
+% Hierarchical knowledge structure elucidation
+\input{chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/hierarchical_knowledge_architecture.tex} 
+% Explaining Elder Orbital Mechanics in context of momentum transfer
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/elder_orbital_mechanics.tex} 
+% Introduction to the parameters guiding the gravitational fields
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/gravitational_field_parameters.tex} 
+% Detailed exposition on activation-based parameters
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/activation_based_parameter_selection.tex} 
+% Reinterpreting system dynamics with gravitational fields
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/gravitational_field_dynamics.tex} 
+% Critical insight into phase threshold derivations
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/critical_phase_thresholds.tex} 
+% Exploring the teaching and rotational dynamics in detail
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/rotational_information_dynamics.tex} 
+% Elaborating on knowledge sharing, curriculum, and gap detection
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/knowledge_theory_elaborations.tex} 
+% The framework for memory storage and interconnected entities
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/gravitational_memory_storage.tex} 
 
 %%% IV. LEARNING DYNAMICS AND ALGORITHMS %%%
 \unit{Learning Dynamics and Algorithms}
 % The learning mechanisms and algorithms
-\input{chapters/part2_algorithms/learning_dynamics/hilbert_space_diffusion.tex} % Hilbert-Space Diffusion and Denoising Dynamics
-\input{chapters/part1_theory/loss_functions/elder_loss.tex} % Elder Loss - Universal Principles
-\input{chapters/part1_theory/loss_functions/elder_loss_convergence.tex} % Convergence Properties of the Elder Loss Function
-\input{chapters/part1_theory/loss_functions/mentor_loss.tex} % Mentor Loss - Meta-Knowledge
-\input{chapters/part1_theory/loss_functions/mentor_loss_landscapes.tex} % Analysis of Mentor Loss Landscapes
-\input{chapters/part1_theory/loss_functions/erudite_loss.tex} % Erudite Loss - Domain-specific Knowledge
-\input{chapters/part1_theory/loss_functions/erudite_loss_bounds.tex} % Theoretical Bounds for Erudite Loss Functions
-\input{chapters/part1_theory/loss_functions/hierarchical_backpropagation.tex} % Hierarchical Backpropagation in the Elder Heliosystem
-\input{chapters/part1_theory/loss_functions/optimization_dynamics.tex} % Optimization Dynamics and Stability Analysis
-\input{chapters/part1_theory/loss_functions/elder_activation_functions.tex} % Elder Heliosystem Activation Functions
+% Hilbert-Space Diffusion and Denoising Dynamics
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/hilbert_space_diffusion.tex}
+% Elder Loss - Universal Principles
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/elder_loss.tex}
+% Convergence Properties of the Elder Loss Function
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/elder_loss_convergence.tex}
+% Mentor Loss - Meta-Knowledge
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/mentor_loss.tex}
+% Analysis of Mentor Loss Landscapes
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/mentor_loss_landscapes.tex}
+% Erudite Loss - Domain-specific Knowledge
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/erudite_loss.tex}
+% Theoretical Bounds for Erudite Loss Functions
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/erudite_loss_bounds.tex}
+% Hierarchical Backpropagation in the Elder Heliosystem
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/hierarchical_backpropagation.tex}
+% Optimization Dynamics and Stability Analysis
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/optimization_dynamics.tex}
+% Elder Heliosystem Activation Functions
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/elder_activation_functions.tex}
 % Elder Training Loop moved to Part II (Experiment) section
-\input{chapters/part1_theory/mechanics_and_dynamics/unified_resonance_mechanism.tex} % Unified Resonance Mechanism Definition
-\input{chapters/part1_theory/mechanics_and_dynamics/oscillatory_coefficients.tex} % Oscillatory Coefficients and Mass Relationships
-\input{chapters/part1_theory/mechanics_and_dynamics/elder_resonance_algorithm.tex} % Elder Heliosystem Resonance Algorithm
-\input{chapters/part1_theory/mechanics_and_dynamics/detailed_resonance_mechanism.tex} % Detailed Resonance Mechanism for Information Transfer
-\input{chapters/part1_theory/mechanics_and_dynamics/phase_space_characterization.tex} % Complete Phase-Space Characterization of Elder Orbital Mechanics
-\input{chapters/part1_theory/mechanics_and_dynamics/conservation_laws.tex} % Conservation Laws in the Elder Orbital System
-\input{chapters/part1_theory/mechanics_and_dynamics/perturbation_propagation.tex} % Perturbation Propagation in the Elder Heliosystem
-\input{chapters/part1_theory/mechanics_and_dynamics/orbital_parameter_relationships.tex} % Orbital Parameter Relationships in the Elder Heliosystem
-\input{chapters/part1_theory/mechanics_and_dynamics/stability_criteria.tex} % Comprehensive Stability Criteria for the Elder Heliosystem
-\input{chapters/part1_theory/mechanics_and_dynamics/data_mass_orbital_disruption.tex} % Data-Mass Coupling and Autonomous Learning
+% Unified Resonance Mechanism Definition
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/unified_resonance_mechanism.tex}
+% Oscillatory Coefficients and Mass Relationships
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/oscillatory_coefficients.tex}
+% Elder Heliosystem Resonance Algorithm
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/elder_resonance_algorithm.tex}
+% Detailed Resonance Mechanism for Information Transfer
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/detailed_resonance_mechanism.tex}
+% Complete Phase-Space Characterization of Elder Orbital Mechanics
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/phase_space_characterization.tex}
+% Conservation Laws in the Elder Orbital System
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/conservation_laws.tex}
+% Perturbation Propagation in the Elder Heliosystem
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/perturbation_propagation.tex}
+% Orbital Parameter Relationships in the Elder Heliosystem
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/orbital_parameter_relationships.tex}
+% Comprehensive Stability Criteria for the Elder Heliosystem
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/stability_criteria.tex}
+% Data-Mass Coupling and Autonomous Learning
+\input{chapters/part1_theory/unit4_learning_dynamics_and_algorithms/data_mass_orbital_disruption.tex}
 
 %%% V. CROSS-DOMAIN KNOWLEDGE TRANSFER %%%
 \unit{Cross-Domain Knowledge Transfer}
 % Knowledge Isomorphisms Between Domains
-\input{chapters/part1_theory/cross_domain/knowledge_isomorphisms.tex} 
+\input{chapters/part1_theory/unit5_cross_domain_knowledge_transfer/knowledge_isomorphisms.tex}
 % Transfer Theorem for Cross-Domain Knowledge
-\input{chapters/part1_theory/cross_domain/transfer_theorem.tex} 
+\input{chapters/part1_theory/unit5_cross_domain_knowledge_transfer/transfer_theorem.tex}
 % Universal Principle Extraction
-\input{chapters/part1_theory/cross_domain/universal_principle_extraction.tex} 
+\input{chapters/part1_theory/unit5_cross_domain_knowledge_transfer/universal_principle_extraction.tex}
 % Formal Mappings Between Knowledge Representations in Different Domains
-\input{chapters/part1_theory/cross_domain/cross_domain_mappings.tex} 
+\input{chapters/part1_theory/unit5_cross_domain_knowledge_transfer/cross_domain_mappings.tex}
 
 %%% VI. THEORETICAL UNIFICATION AND CLOSURE %%%
 \unit{Theoretical Unification and Closure}
 % Bringing the theory to completion through unification
-\input{chapters/part1_theory/applications/model_unification.tex} % Unification of heliomorphic and orbital mechanics models
-\input{chapters/part1_theory/mechanics_and_dynamics/elder_heliosystem_unified.tex} % Comprehensive overview of the Elder Heliosystem as a closed system
-\input{chapters/part1_theory/core_concepts/mathematical_to_ai_connections.tex} % Direct connections between mathematical concepts and AI applications
+% Unification of heliomorphic and orbital mechanics models
+\input{chapters/part1_theory/unit6_theoretical_unification_and_closure/model_unification.tex}
+% Comprehensive overview of the Elder Heliosystem as a closed system
+\input{chapters/part1_theory/unit3_elder_heliosystem_architecture/elder_heliosystem_unified.tex}
+% Direct connections between mathematical concepts and AI applications
+\input{chapters/part1_theory/unit6_theoretical_unification_and_closure/mathematical_to_ai_connections.tex}
 
 %%% VII. MEMORY AND EFFICIENCY PROPERTIES %%%
 \unit{Memory and Efficiency Properties}
 % Mathematical properties and efficiency claims
-\input{chapters/part1_theory/memory_and_efficiency/infinite_memory_dynamics.tex} % Mathematical foundation for unbounded memory and continuous audio generation -> Finite Memory Dynamics
-
-\input{chapters/part1_theory/memory_and_efficiency/field_based_memory_formalization.tex} % Formalization of the field-based memory approach that achieves O(1) memory usage
-\input{chapters/part1_theory/memory_and_efficiency/memory_complexity_proofs.tex} % Rigorous mathematical proofs of memory and computational complexity claims
-\input{chapters/part1_theory/memory_and_efficiency/computational_complexity_analysis.tex} % Comprehensive analysis of computational complexity for all system operations
-\input{chapters/part1_theory/memory_and_efficiency/pac_learning_bounds.tex} % PAC-learning bounds for the Elder system
-\input{chapters/part1_theory/memory_and_efficiency/pac_learning_resonance_connection.tex} % Resonance-enhanced PAC-learning bounds
-\input{chapters/part1_theory/memory_and_efficiency/information_capacity.tex} % Information capacity analysis of the Elder system
-\input{chapters/part1_theory/memory_and_efficiency/entropy_dynamics.tex} % Analysis of how entropy evolves during system operation
-\input{chapters/part1_theory/memory_and_efficiency/minimum_description_length.tex} % Proof that Elder representations achieve minimum description length
-\input{chapters/part1_theory/memory_and_efficiency/compression_properties.tex} % Analysis of compression properties of Elder representations
-\input{chapters/part1_theory/memory_and_efficiency/convergence_guarantees.tex} % Convergence guarantees for the Elder system
-\input{chapters/part1_theory/memory_and_efficiency/elder_memory_map.tex} % Detailed memory map of the Elder Heliosystem
-\input{chapters/part1_theory/memory_and_efficiency/elder_gradient_tape.tex} % Inherent gradient tape properties of the Elder Heliosystem
+% Mathematical foundation for unbounded memory and continuous audio generation -> Finite Memory Dynamics
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/infinite_memory_dynamics.tex}
+% Formalization of the field-based memory approach that achieves O(1) memory usage
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/field_based_memory_formalization.tex}
+% Rigorous mathematical proofs of memory and computational complexity claims
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/memory_complexity_proofs.tex}
+% Comprehensive analysis of computational complexity for all system operations
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/computational_complexity_analysis.tex}
+% PAC-learning bounds for the Elder system
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/pac_learning_bounds.tex}
+% Resonance-enhanced PAC-learning bounds
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/pac_learning_resonance_connection.tex}
+% Information capacity analysis of the Elder system
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/information_capacity.tex}
+% Analysis of how entropy evolves during system operation
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/entropy_dynamics.tex}
+% Proof that Elder representations achieve minimum description length
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/minimum_description_length.tex}
+% Analysis of compression properties of Elder representations
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/compression_properties.tex}
+% Convergence guarantees for the Elder system
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/convergence_guarantees.tex}
+% Detailed memory map of the Elder Heliosystem
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/elder_memory_map.tex}
+% Inherent gradient tape properties of the Elder Heliosystem
+\input{chapters/part1_theory/unit7_memory_and_efficiency_properties/elder_gradient_tape.tex}
 
 
 \part{Experiment}
 
-%%% UNIT I. EXPERIMENTAL SETUP AND METHODOLOGY %%%
-\unit{Experimental Setup and Methodology}
-% Part 2: Experimental Validation - Audiomage Multi-Chapter Series
-\input{chapters/part2_experiments/ch60_audiomage_architecture.tex}
-\input{chapters/part2_experiments/ch61_eleven_level_implementation.tex}
-\input{chapters/part2_experiments/ch62_unified_framework.tex}
-\input{chapters/part2_experiments/ch63_dataset_methodology.tex}
-\input{chapters/part2_experiments/ch64_results_analysis.tex}
+%%% UNIT I. EXPERIMENTAL FRAMEWORK %%%
+\unit{Experimental Framework}
+\input{chapters/part2_experiments/unit1_experimental_framework/unified_framework.tex}
+\input{chapters/part2_experiments/unit1_experimental_framework/dataset_methodology.tex}
+
+%%% UNIT II. AUDIOMAGE IMPLEMENTATION %%%
+\unit{Audiomage Implementation}
+\input{chapters/part2_experiments/unit2_audiomage_implementation/audiomage_architecture.tex}
+\input{chapters/part2_experiments/unit2_audiomage_implementation/eleven_level_implementation.tex}
+\input{chapters/part2_experiments/unit2_audiomage_implementation/audiomage_experiment.tex}
+
+%%% UNIT III. RESULTS AND VALIDATION %%%
+\unit{Results and Validation}
+\input{chapters/part2_experiments/unit3_results_and_validation/results_analysis.tex}
 
 \backmatter
 
