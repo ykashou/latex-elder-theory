@@ -2,7 +2,24 @@ modules = ["bash", "python-3.11"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "gobject-introspection", "gtk3", "imagemagick", "pdftk", "pkg-config", "poppler", "poppler_utils", "qhull", "tcl", "texliveFull", "tk", "tree"]
+packages = [
+    "cairo",
+    "ffmpeg-full",
+    "freetype",
+    "ghostscript",
+    "gobject-introspection",
+    "gtk3",
+    "imagemagick",
+    "pdftk",
+    "pkg-config",
+    "poppler",
+    "poppler_utils",
+    "qhull",
+    "tcl",
+    "texliveFull",
+    "tk",
+    "tree",
+]
 
 [workflows]
 runButton = "Project"
@@ -11,22 +28,6 @@ runButton = "Project"
 name = "Project"
 mode = "parallel"
 author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "visualization_server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "test_compilation"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "simple_test_compilation"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "symbol_test"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
@@ -79,7 +80,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "pdflatex test_elder_symbol.tex"
+args = "pdflatex tests/test_elder_symbol.tex"
 
 [[workflows.workflow]]
 name = "latex_compilation"
