@@ -2,23 +2,7 @@ modules = ["bash", "python-3.11"]
 
 [nix]
 channel = "stable-24_05"
-packages = [
-    "cairo",
-    "ffmpeg-full",
-    "freetype",
-    "ghostscript",
-    "gobject-introspection",
-    "gtk3",
-    "imagemagick",
-    "pdftk",
-    "pkg-config",
-    "poppler",
-    "poppler_utils",
-    "qhull",
-    "tcl",
-    "texliveFull",
-    "tk",
-]
+packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "gobject-introspection", "gtk3", "imagemagick", "pdftk", "pkg-config", "poppler", "poppler_utils", "qhull", "tcl", "texliveFull", "tk", "tree"]
 
 [workflows]
 runButton = "Project"
