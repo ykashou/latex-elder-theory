@@ -164,11 +164,16 @@
 \renewcommand{\theunit}{\Roman{unit}}
 \newcommand{\unitname}{Unit}
 
-% Define the unit command
+% Define the unit command - FIXED to prevent margin shift issues
 \newcommand{\unit}[1]{%
     \refstepcounter{unit}%
     \cleardoublepage%
     \thispagestyle{empty}%
+    % Reset all margins and indentation to prevent nesting issues
+    \setlength{\parindent}{0pt}%
+    \setlength{\leftskip}{0pt}%
+    \setlength{\rightskip}{0pt}%
+    \noindent%
     \begin{center}%
     \normalfont\Large\bfseries\color{DarkSkyBlue}%
     \vspace*{40pt}%
