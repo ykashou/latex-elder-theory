@@ -1,0 +1,194 @@
+\chapter{Audiomage System Architecture}
+
+\begin{tcolorbox}[colback=DarkSkyBlue!5!white,colframe=DarkSkyBlue!75!black,title=Chapter Overview]
+This chapter establishes the foundational architecture for the Audiomage experiment, demonstrating the Elder Heliosystem's capability in audio domain processing through a single Mentor entity coordinating three specialized Erudite entities. We define the hierarchical structure, entity specifications, and coordination mechanisms that enable multi-domain audio analysis.
+\end{tcolorbox}
+
+\section{System Architecture Overview}
+
+The experimental setup implements a simplified Elder Heliosystem with the following hierarchy:
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=3cm,
+    elder/.style={circle, draw=blue!60, fill=blue!20, minimum size=1.5cm, text width=1.2cm, align=center},
+    mentor/.style={rectangle, draw=green!60, fill=green!20, minimum size=1.2cm, text width=2cm, align=center},
+    erudite/.style={ellipse, draw=orange!60, fill=orange!20, minimum size=1cm, text width=1.8cm, align=center}
+]
+
+% Elder
+\node[elder] (elder) {Elder\\Entity};
+
+% Mentor
+\node[mentor, below=of elder] (audiomage) {Audiomage\\Mentor};
+
+% Erudites
+\node[erudite, below left=2cm and 1cm of audiomage] (continuity) {Erudite of\\Continuity};
+\node[erudite, below=2cm of audiomage] (isolation) {Erudite of\\Isolation};
+\node[erudite, below right=2cm and 1cm of audiomage] (creativity) {Erudite of\\Creativity};
+
+% Connections
+\draw[->] (elder) -- (audiomage) node[midway,right] {Universal Principles};
+\draw[->] (audiomage) -- (continuity) node[midway,left] {Temporal Coordination};
+\draw[->] (audiomage) -- (isolation) node[midway,right] {Spectral Decomposition};
+\draw[->] (audiomage) -- (creativity) node[midway,right] {Phase Manipulation};
+
+% Inter-erudite communication
+\draw[<->] (continuity) -- (isolation) node[midway,above] {Knowledge Exchange};
+\draw[<->] (isolation) -- (creativity) node[midway,above] {Processing Coordination};
+\draw[<->] (creativity) to[bend right=30] (continuity) node[midway,below] {Temporal-Phase Coupling};
+
+\end{tikzpicture}
+\caption{Audiomage Experiment Architecture}
+\end{figure}
+
+\section{Entity Specifications}
+
+\subsection{Elder Entity}
+
+The Elder entity maintains universal principles across the audio processing system and provides high-level coordination:
+
+\begin{definition}[Elder Audio Principles]
+The Elder entity establishes universal principles for audio understanding:
+\begin{align}
+\mathcal{U}_{\text{temporal}} &= \text{Temporal coherence across all time scales} \\
+\mathcal{U}_{\text{spectral}} &= \text{Spectral completeness and isolation quality} \\
+\mathcal{U}_{\text{creative}} &= \text{Creative synthesis through phase manipulation}
+\end{align}
+\end{definition}
+
+\subsection{Audiomage Mentor Entity}
+
+The Audiomage Mentor coordinates the three specialized Erudites and implements domain-specific knowledge transfer:
+
+\begin{definition}[Mentor Coordination Function]
+The Audiomage Mentor's coordination function is defined as:
+\begin{equation}
+\mathcal{M}(x) = \sum_{i=1}^{3} \alpha_i \mathcal{E}_i(x) + \beta \mathcal{C}(\mathcal{E}_1(x), \mathcal{E}_2(x), \mathcal{E}_3(x))
+\end{equation}
+where $\mathcal{E}_i$ represents the three Erudites and $\mathcal{C}$ is the cross-erudite coupling function.
+\end{definition}
+
+\subsection{Erudite Specializations}
+
+\subsubsection{Erudite of Continuity}
+Specializes in temporal analysis through 11-level Timelet decomposition:
+
+\begin{definition}[Golden Ratio Timelet Transform]
+The golden ratio-based Timelet transform operates at 11 levels:
+\begin{equation}
+T_{\phi,k}[x](t) = \sum_{n} x(n) \psi_{\phi}(\phi^k t - n), \quad k \in \{0,1,2,...,10\}
+\end{equation}
+where $\phi = \frac{1+\sqrt{5}}{2}$ is the golden ratio and $\psi_{\phi}$ is the golden ratio wavelet.
+\end{definition}
+
+\begin{definition}[Grid Timelet Transform]
+The power-of-2 grid Timelet transform provides complementary temporal analysis:
+\begin{equation}
+T_{\text{grid},k}[x](t) = \sum_{n} x(n) \psi_{\text{grid}}(2^k t - n), \quad k \in \{0,1,2,...,10\}
+\end{equation}
+\end{definition}
+
+The Erudite of Continuity handles:
+\begin{itemize}
+    \item \textbf{Temporal Envelope Analysis}: RMS energy tracking across 11 time scales
+    \item \textbf{Onset Detection}: Attack time identification at multiple resolutions
+    \item \textbf{Rhythmic Pattern Recognition}: Beat and rhythm extraction
+    \item \textbf{Temporal Coherence Measurement}: Cross-scale consistency analysis
+\end{itemize}
+
+\subsubsection{Erudite of Isolation}
+Specializes in spectral decomposition using 11-level Daubechies db4 Wavelet analysis:
+
+\begin{definition}[Daubechies db4 Wavelet Transform]
+The 11-level Daubechies db4 decomposition is defined as:
+\begin{equation}
+W_{k}[x] = \sum_{n} h_k[n] x[2^k m - n], \quad k \in \{0,1,2,...,10\}
+\end{equation}
+where $h_k$ are the Daubechies db4 filter coefficients at level $k$.
+\end{definition}
+
+\begin{definition}[Spectral Energy Distribution]
+Energy distribution across frequency bands at level $k$:
+\begin{equation}
+E_k = \sum_{n} |W_k[x][n]|^2
+\end{equation}
+\end{definition}
+
+The Erudite of Isolation handles:
+\begin{itemize}
+    \item \textbf{Frequency Band Isolation}: Clean separation of spectral components
+    \item \textbf{Spectral Centroid Calculation}: Center frequency estimation per level
+    \item \textbf{Energy Distribution Analysis}: Power across 11 decomposition levels
+    \item \textbf{Harmonic Content Identification}: Peak detection in coefficient space
+    \item \textbf{Time-Frequency Localization}: Joint temporal-spectral feature extraction
+\end{itemize}
+
+\subsubsection{Erudite of Creativity}
+Specializes in creative synthesis using 11-level Phaselet decomposition and manipulation:
+
+\begin{definition}[Multi-Resolution Phaselet Transform]
+The 11-level Phaselet transform extracts instantaneous phase across resolution levels:
+\begin{equation}
+\phi_k(t) = \angle[x_k(t) + j \mathcal{H}\{x_k(t)\}], \quad k \in \{0,1,2,...,10\}
+\end{equation}
+where $\mathcal{H}\{\cdot\}$ is the Hilbert transform and $x_k(t)$ is the signal at resolution level $k$.
+\end{definition}
+
+\begin{definition}[Phase Coherence Analysis]
+Phase coherence at level $k$ is measured as:
+\begin{align}
+\gamma_k &= \left|\frac{1}{N}\sum_{n=1}^{N} e^{j\phi_k[n]}\right| \\
+\text{Phase Velocity:} \quad \dot{\phi}_k[n] &= \phi_k[n] - \phi_k[n-1] \\
+\text{Phase Acceleration:} \quad \ddot{\phi}_k[n] &= \dot{\phi}_k[n] - \dot{\phi}_k[n-1]
+\end{align}
+\end{definition}
+
+\begin{definition}[Cross-Level Phase Synchronization]
+Phase synchronization between levels $i$ and $j$ is:
+\begin{equation}
+\text{PSI}_{i,j} = \left|\frac{1}{T}\sum_{t=1}^{T} e^{j[\phi_i(t) - \phi_j(t)]}\right|
+\end{equation}
+\end{definition}
+
+The Erudite of Creativity performs phase analysis across exactly 11 decomposition levels:
+\begin{itemize}
+    \item \textbf{Instantaneous Phase Extraction}: $\phi_k(t)$ for all 11 resolution levels
+    \item \textbf{Phase Coherence Mapping}: Coherence strength $\gamma_k$ per level
+    \item \textbf{Phase Dynamics Analysis}: Velocity and acceleration across scales
+    \item \textbf{Inter-Level Synchronization}: Cross-frequency phase locking measurement
+    \item \textbf{Creative Phase Manipulation}: Selective phase modification for synthesis
+\end{itemize}
+
+\section{Coordination Mechanisms}
+
+\subsection{Cross-Erudite Knowledge Transfer}
+
+The system implements sophisticated knowledge transfer between Erudites:
+
+\begin{definition}[Temporal-Spectral Coupling]
+Information flows between Continuity and Isolation Erudites:
+\begin{equation}
+\mathcal{T}_{C \rightarrow I} = \sum_{k=0}^{10} \alpha_k T_k \cdot W_k
+\end{equation}
+where temporal features $T_k$ inform spectral analysis $W_k$ at level $k$.
+\end{definition}
+
+\begin{definition}[Spectral-Creative Coupling]
+Spectral information guides creative synthesis:
+\begin{equation}
+\mathcal{T}_{I \rightarrow C} = \sum_{k=0}^{10} \beta_k W_k \cdot \phi_k
+\end{equation}
+where spectral coefficients $W_k$ influence phase manipulation $\phi_k$.
+\end{definition}
+
+\subsection{Elder Oversight Mechanisms}
+
+The Elder entity provides system-wide coordination through universal principle enforcement:
+
+\begin{equation}
+\mathcal{U}_{\text{system}} = \lambda_1 \mathcal{U}_{\text{temporal}} + \lambda_2 \mathcal{U}_{\text{spectral}} + \lambda_3 \mathcal{U}_{\text{creative}}
+\end{equation}
+
+where $\lambda_i$ are dynamic weighting factors adapted based on system performance.
