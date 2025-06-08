@@ -1140,55 +1140,56 @@ Supporting Audio & 39:55:33 & N/A & 48 kHz / 24-bit \\
 \caption{Primary multimodal dataset for Audiomage experiment}
 \end{table}
 
-\subsubsection{Erudite-Specific Data Stratification}
+\subsubsection{Multi-Domain Feature Stratification}
 
-The 39:55:33 dataset is strategically partitioned across the three erudites based on their specialized processing capabilities:
+The complete 39:55:33 dataset is processed by all three erudites simultaneously, with each extracting specialized features from the entire dataset:
 
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|l|l|}
 \hline
-\textbf{Erudite} & \textbf{Data Type} & \textbf{Duration} & \textbf{Allocation} & \textbf{Processing Focus} \\
+\textbf{Erudite} & \textbf{Analysis Type} & \textbf{Source Data} & \textbf{Coverage} & \textbf{Processing Focus} \\
 \hline
-Continuity & Timelet Data & 13:18:31 & 33.3\% & Temporal coherence analysis \\
+Continuity & Timelet Extraction & Full Dataset & 39:55:33 & Temporal coherence analysis \\
 \hline
-Isolation & Wavelet Data & 13:18:31 & 33.3\% & Spectral decomposition \\
+Isolation & Wavelet Extraction & Full Dataset & 39:55:33 & Spectral decomposition \\
 \hline
-Creativity & Phaselet Data & 13:18:31 & 33.3\% & Phase manipulation synthesis \\
+Creativity & Phaselet Extraction & Full Dataset & 39:55:33 & Phase manipulation synthesis \\
 \hline
 \end{tabular}
-\caption{Stratified data allocation across erudite specializations}
+\caption{Multi-domain feature extraction from complete dataset}
 \end{table}
 
-\subsubsection{Data Preprocessing Pipeline}
+\subsubsection{Parallel Multi-Domain Processing Pipeline}
 
-The video-audio dataset undergoes specialized preprocessing for each erudite:
+The complete video-audio dataset undergoes simultaneous processing across all three analysis domains, with each erudite extracting specialized features from the same source material:
 
-\begin{definition}[Timelet Data Extraction]
-For the Erudite of Continuity, temporal continuity features are extracted from both video and audio components:
+\begin{definition}[Parallel Timelet Extraction]
+The Erudite of Continuity processes the complete dataset to extract 11-level temporal features:
 \begin{align}
-\text{Timelet}_{\text{video}}(t) &= \sum_{k=1}^{K} w_k \cdot \text{TemporalGradient}(V(t), k\Delta t) \\
-\text{Timelet}_{\text{audio}}(t) &= \sum_{k=1}^{K} w_k \cdot \text{TemporalEnvelope}(A(t), k\Delta t)
+\text{Timelet}_{k}(t) &= \mathcal{T}_k[\text{CompleteDataset}(t)] \quad k \in \{0,1,...,10\} \\
+\text{GoldenRatio}_{k} &= \phi^{-k} \cdot \text{BaseScale} \\
+\text{GridScale}_{k} &= 2^{-k} \cdot \text{BaseScale}
 \end{align}
-where $V(t)$ is the video frame sequence and $A(t)$ is the audio signal.
+where the complete 39:55:33 dataset feeds into all 11 temporal analysis levels.
 \end{definition}
 
-\begin{definition}[Wavelet Data Extraction]
-For the Erudite of Isolation, spectral and spatial frequency components are isolated:
+\begin{definition}[Parallel Wavelet Extraction]
+The Erudite of Isolation processes the complete dataset for 11-level spectral decomposition:
 \begin{align}
-\text{Wavelet}_{\text{video}}(f) &= \mathcal{W}[\text{SpatialFreq}(V)] \text{ (spatial wavelets)} \\
-\text{Wavelet}_{\text{audio}}(f) &= \mathcal{W}[\text{SpectralFreq}(A)] \text{ (frequency wavelets)}
+\text{Wavelet}_{k}(f) &= \mathcal{W}_k[\text{CompleteDataset}(f)] \quad k \in \{0,1,...,10\} \\
+\text{Daubechies}_{k} &= \text{db4}^{(k)}[\text{FullSpectrum}]
 \end{align}
-where $\mathcal{W}$ denotes wavelet decomposition operators.
+where all 11 decomposition levels analyze the entire frequency content.
 \end{definition}
 
-\begin{definition}[Phaselet Data Extraction]
-For the Erudite of Creativity, phase relationships between video and audio are analyzed:
+\begin{definition}[Parallel Phaselet Extraction]
+The Erudite of Creativity processes the complete dataset for 11-level phase analysis:
 \begin{align}
-\text{Phaselet}_{\text{sync}}(t) &= \arg(\mathcal{F}[V(t)]) - \arg(\mathcal{F}[A(t)]) \\
-\text{Phaselet}_{\text{creative}}(t) &= \text{PhaseModulation}(\text{Phaselet}_{\text{sync}}(t))
+\text{Phaselet}_{k}(\phi) &= \mathcal{P}_k[\text{CompleteDataset}(\phi)] \quad k \in \{0,1,...,10\} \\
+\text{InstantPhase}_{k} &= \angle[\text{HilbertTransform}^{(k)}[\text{FullSignal}]]
 \end{align}
-where phase relationships drive creative synthesis patterns.
+where all 11 phase resolution levels extract from the complete signal.
 \end{definition}
 
 \subsubsection{Dataset Content Distribution}
