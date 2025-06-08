@@ -32,7 +32,7 @@
 \usepackage{titlesec}
 \usepackage{multicol}
 \usepackage{caption}
-\usepackage[margin=2.2cm,headheight=30pt,headsep=10pt,includeheadfoot]{geometry}
+\usepackage[margin=2.2cm,headheight=40pt,headsep=15pt,includeheadfoot,footskip=35pt,top=2.5cm]{geometry}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{mathtools}
@@ -47,6 +47,21 @@
 \vbadness=1000
 \hfuzz=1pt
 \vfuzz=1pt
+% Additional margin fixes for Unit V onwards
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparsep}{0pt}
+\raggedbottom
+% Fix enumeration depth issues - increase maximum nesting
+\usepackage{enumitem}
+\setlistdepth{9}
+\setlist[itemize,1]{label=$\bullet$}
+\setlist[itemize,2]{label=$\circ$}
+\setlist[itemize,3]{label=$\ast$}
+\setlist[itemize,4]{label=$\cdot$}
+\setlist[enumerate,1]{label=\arabic*.}
+\setlist[enumerate,2]{label=(\alph*)}
+\setlist[enumerate,3]{label=\roman*.}
+\setlist[enumerate,4]{label=\Alph*.}
 \usepackage{placeins}
 \usepackage{tocloft}
 
