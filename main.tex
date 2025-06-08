@@ -22,32 +22,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{booktabs}
-\usepackage{enumitem}
-% Fix deeply nested structures causing margin shift in Unit V onwards
-\setlistdepth{6}
-\renewlist{enumerate}{enumerate}{6}
-\setlist[enumerate,1]{label=\arabic*.}
-\setlist[enumerate,2]{label=(\alph*)}
-\setlist[enumerate,3]{label=\roman*.}
-\setlist[enumerate,4]{label=(\roman*)}
-\setlist[enumerate,5]{label=\alph*.}
-\setlist[enumerate,6]{label=(\alph*)}
-
-\renewlist{itemize}{itemize}{6}
-\setlist[itemize,1]{label=\textbullet}
-\setlist[itemize,2]{label=--}
-\setlist[itemize,3]{label=*}
-\setlist[itemize,4]{label=\textperiodcentered}
-\setlist[itemize,5]{label=--}
-\setlist[itemize,6]{label=*}
-
-% Reset margins to prevent shifting from nested structures
-\setlength{\leftmargini}{2.5em}
-\setlength{\leftmarginii}{2.2em}
-\setlength{\leftmarginiii}{1.87em}
-\setlength{\leftmarginiv}{1.7em}
-\setlength{\leftmarginv}{1em}
-\setlength{\leftmarginvi}{1em}
+% \usepackage{enumitem} % Removed due to label conflicts
 \usepackage{tikz}
 \usepackage[most]{tcolorbox}
 \usetikzlibrary{decorations.pathmorphing, decorations.markings, decorations.pathreplacing, calc, shapes, shapes.geometric, backgrounds, fit, positioning}
@@ -57,12 +32,45 @@
 \usepackage{titlesec}
 \usepackage{multicol}
 \usepackage{caption}
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[left=2.2cm,right=2.2cm,top=3.0cm,bottom=3.0cm,headheight=60pt,headsep=20pt,footskip=45pt,includeheadfoot]{geometry}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{mathtools}
 \usepackage{listings}
+\usepackage{microtype}
+\usepackage{ragged2e}
 \usepackage{morefloats}
+% Better line breaking and margin control
+\tolerance=2000
+\emergencystretch=10pt
+\hbadness=1000
+\vbadness=1000
+\hfuzz=1pt
+\vfuzz=1pt
+% Additional margin fixes for Unit V onwards
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparsep}{0pt}
+\raggedbottom
+% Text layout controls to prevent margin overflow
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\widowpenalty=10000
+\clubpenalty=10000
+\brokenpenalty=4991
+\predisplaypenalty=10000
+\postdisplaypenalty=1549
+\displaywidowpenalty=1892
+% Fix enumeration depth issues - increase maximum nesting
+\usepackage{enumitem}
+\setlistdepth{9}
+\setlist[itemize,1]{label=$\bullet$}
+\setlist[itemize,2]{label=$\circ$}
+\setlist[itemize,3]{label=$\ast$}
+\setlist[itemize,4]{label=$\cdot$}
+\setlist[enumerate,1]{label=\arabic*.}
+\setlist[enumerate,2]{label=(\alph*)}
+\setlist[enumerate,3]{label=\roman*.}
+\setlist[enumerate,4]{label=\Alph*.}
 \usepackage{placeins}
 \usepackage{tocloft}
 
@@ -164,16 +172,11 @@
 \renewcommand{\theunit}{\Roman{unit}}
 \newcommand{\unitname}{Unit}
 
-% Define the unit command - FIXED to prevent margin shift issues
+% Define the unit command
 \newcommand{\unit}[1]{%
     \refstepcounter{unit}%
     \cleardoublepage%
     \thispagestyle{empty}%
-    % Reset all margins and indentation to prevent nesting issues
-    \setlength{\parindent}{0pt}%
-    \setlength{\leftskip}{0pt}%
-    \setlength{\rightskip}{0pt}%
-    \noindent%
     \begin{center}%
     \normalfont\Large\bfseries\color{DarkSkyBlue}%
     \vspace*{40pt}%
