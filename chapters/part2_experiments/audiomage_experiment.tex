@@ -73,60 +73,106 @@ The Audiomage Mentor maintains audio domain knowledge $\mathcal{K}_{\text{audio}
 \end{definition}
 
 \subsubsection{Erudite of Continuity}
-Specializes in temporal continuity analysis using Timelet decomposition:
+Specializes in temporal continuity analysis using 11-level Timelet decomposition with both Natural (Golden Ratio) and Grid (Power-of-2) approaches:
 
-\begin{definition}[Timelet Transform]
-The Timelet transform for audio signal $x(t)$ is defined as:
+\begin{definition}[Natural Timelet Transform - Golden Ratio Stratification]
+For audio signal $x(t)$ with length $L$, the Natural Timelet transform at level $k \in \{0,1,2,...,10\}$ is:
 \begin{equation}
-T_{\tau,s}[x](t) = \int_{-\infty}^{\infty} x(u) \psi_{\tau,s}^*(u-t) du
+T^{(N)}_{k}[x](t) = \int_{-\infty}^{\infty} x(u) \psi^{(N)}_{k}(u-t) du
 \end{equation}
-where $\psi_{\tau,s}(t) = \frac{1}{\sqrt{s}} \psi\left(\frac{t-\tau}{s}\right)$ is the Timelet basis function with temporal shift $\tau$ and scale $s$.
+where the temporal scale follows golden ratio stratification:
+\begin{equation}
+\tau_k = \tau_0 \times \phi^{-k}, \quad \phi = \frac{1+\sqrt{5}}{2}, \quad \tau_0 = \frac{L}{\phi^{10}}
+\end{equation}
 \end{definition}
 
-The Erudite of Continuity analyzes:
+\begin{definition}[Grid Timelet Transform - Power-of-2 Decomposition]
+The Grid Timelet transform provides dyadic temporal decomposition:
+\begin{equation}
+T^{(G)}_{k}[x](t) = \int_{-\infty}^{\infty} x(u) \psi^{(G)}_{k}(u-t) du
+\end{equation}
+with uniform temporal scales:
+\begin{equation}
+\tau_k = \frac{\tau_0}{2^k}, \quad k \in \{0,1,2,...,10\}
+\end{equation}
+\end{definition}
+
+The Erudite of Continuity extracts features across exactly 11 decomposition levels:
 \begin{itemize}
-    \item Temporal pattern persistence across time scales
-    \item Rhythm and tempo consistency
-    \item Long-range temporal dependencies
-    \item Temporal envelope evolution
+    \item \textbf{Temporal Envelope Analysis}: RMS energy within each golden/grid window
+    \item \textbf{Attack/Decay Detection}: Edge detection at all 11 scales  
+    \item \textbf{Rhythmic Pattern Recognition}: Autocorrelation-based periodicity across levels
+    \item \textbf{Cross-Scale Temporal Coherence}: Inter-level correlation analysis
+    \item \textbf{Natural vs Grid Comparison}: Golden ratio vs dyadic temporal structure analysis
 \end{itemize}
 
 \subsubsection{Erudite of Isolation}
-Specializes in spectral isolation using Wavelet decomposition:
+Specializes in spectral isolation using 11-level Daubechies db4 Wavelet decomposition:
 
-\begin{definition}[Wavelet Isolation Analysis]
-The Wavelet isolation transform decomposes audio signal $x(t)$ into isolated frequency components:
+\begin{definition}[Daubechies db4 Wavelet Decomposition]
+The 11-level Daubechies db4 wavelet transform decomposes audio signal $x(t)$ using:
 \begin{equation}
-W_{a,b}[x](t) = \frac{1}{\sqrt{a}} \int_{-\infty}^{\infty} x(u) \psi^*\left(\frac{u-b}{a}\right) du
+W_{j,k}[x] = \sum_{n} x[n] \psi_{j,k}^*[n], \quad j \in \{0,1,2,...,10\}
 \end{equation}
-where $a$ is the scale parameter and $b$ is the translation parameter.
+where $\psi_{j,k}[n] = 2^{-j/2} \psi(2^{-j}n - k)$ and $\psi$ is the Daubechies db4 mother wavelet with 4 vanishing moments.
 \end{definition}
 
-The Erudite of Isolation focuses on:
+\begin{definition}[Spectral Band Energy Distribution]
+At each decomposition level $j$, the energy distribution is:
+\begin{align}
+E_j &= \sum_{k} |W_{j,k}|^2 \\
+\text{Frequency Bands:} \quad &\text{Sub-bass (Levels 10-11): 20-60 Hz} \\
+&\text{Bass (Levels 8-9): 60-250 Hz} \\
+&\text{Low-mid (Levels 6-7): 250-500 Hz} \\
+&\text{Mid (Levels 4-5): 500-2kHz} \\
+&\text{High-mid (Levels 2-3): 2-4kHz} \\
+&\text{Treble (Levels 0-1): 4-20kHz}
+\end{align}
+\end{definition}
+
+The Erudite of Isolation extracts spectral features across exactly 11 decomposition levels:
 \begin{itemize}
-    \item Frequency band isolation and analysis
-    \item Spectral feature extraction
-    \item Noise separation and filtering
-    \item Harmonic structure identification
+    \item \textbf{Spectral Coefficient Matrix}: $C[11 \times N/2^j]$ for complete frequency analysis
+    \item \textbf{Energy Profile Vector}: $E[j]$ across all 11 frequency bands
+    \item \textbf{Spectral Centroid Calculation}: Weighted frequency center of mass
+    \item \textbf{Harmonic Content Identification}: Peak detection in coefficient space
+    \item \textbf{Time-Frequency Localization}: Joint temporal-spectral feature extraction
 \end{itemize}
 
 \subsubsection{Erudite of Creativity}
-Specializes in creative synthesis using Phaselet manipulation:
+Specializes in creative synthesis using 11-level Phaselet decomposition and manipulation:
 
-\begin{definition}[Phaselet Transform]
-The Phaselet transform manipulates the phase structure of audio signals:
+\begin{definition}[Multi-Resolution Phaselet Transform]
+The 11-level Phaselet transform extracts instantaneous phase across resolution levels:
 \begin{equation}
-P_{\phi,\omega}[x](t) = \mathcal{F}^{-1}\left\{|\mathcal{F}[x](\omega)| \cdot e^{i(\arg(\mathcal{F}[x](\omega)) + \phi(\omega))}\right\}(t)
+\phi_k(t) = \angle[x_k(t) + j \mathcal{H}\{x_k(t)\}], \quad k \in \{0,1,2,...,10\}
 \end{equation}
-where $\phi(\omega)$ is a frequency-dependent phase modification function.
+where $\mathcal{H}\{\cdot\}$ is the Hilbert transform and $x_k(t)$ is the signal at resolution level $k$.
 \end{definition}
 
-The Erudite of Creativity handles:
+\begin{definition}[Phase Coherence Analysis]
+Phase coherence at level $k$ is measured as:
+\begin{align}
+\gamma_k &= \left|\frac{1}{N}\sum_{n=1}^{N} e^{j\phi_k[n]}\right| \\
+\text{Phase Velocity:} \quad \dot{\phi}_k[n] &= \phi_k[n] - \phi_k[n-1] \\
+\text{Phase Acceleration:} \quad \ddot{\phi}_k[n] &= \dot{\phi}_k[n] - \dot{\phi}_k[n-1]
+\end{align}
+\end{definition}
+
+\begin{definition}[Cross-Level Phase Synchronization]
+Phase synchronization between levels $i$ and $j$ is:
+\begin{equation}
+\text{PSI}_{i,j} = \left|\frac{1}{T}\sum_{t=1}^{T} e^{j[\phi_i(t) - \phi_j(t)]}\right|
+\end{equation}
+\end{definition}
+
+The Erudite of Creativity performs phase analysis across exactly 11 decomposition levels:
 \begin{itemize}
-    \item Phase-based audio synthesis
-    \item Creative manipulation of spectral phases
-    \item Novel audio texture generation
-    \item Harmonic phase relationships
+    \item \textbf{Instantaneous Phase Extraction}: $\phi_k(t)$ for all 11 resolution levels
+    \item \textbf{Phase Coherence Mapping}: Coherence strength $\gamma_k$ per level
+    \item \textbf{Phase Dynamics Analysis}: Velocity and acceleration across scales
+    \item \textbf{Inter-Level Synchronization}: Cross-frequency phase locking measurement
+    \item \textbf{Creative Phase Manipulation}: Selective phase modification for synthesis
 \end{itemize}
 
 \section{Implementation Framework}
@@ -197,24 +243,34 @@ func (e *ElderEntity) CalculateStability() float64 {
 
 \begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Audiomage Mentor Implementation, fonttitle=\bfseries]
 \begin{verbatim}
-// AudiomageMentor coordinates audio domain processing
+// AudiomageMentor coordinates 11-level multi-domain audio processing
 type AudiomageMentor struct {
     Phase                Complex
     DomainKnowledge      map[string][]float64
     EruditeCoordination  map[string]*EruditeInterface
     TransferEfficiency   float64
     ElderConnection      *ElderEntity
+    MultiDomainAnalysis  *MultiDomainAnalysis
 }
 
-// EruditeInterface defines the interface for all erudites
+// EruditeInterface defines the interface for all erudites with 11-level processing
 type EruditeInterface interface {
     Process(data []float64) []float64
     GetSpecialization() string
     UpdatePhase(newPhase Complex)
     GetPerformanceMetrics() map[string]float64
+    GetLevelCount() int // Always returns 11 for consistency
 }
 
-// NewAudiomageMentor creates a new Audiomage mentor
+// MultiDomainAnalysis integrates all three analysis domains
+type MultiDomainAnalysis struct {
+    WaveletEngine  *WaveletAnalysis11Level
+    TimeletEngine  *TimeletAnalysis11Level  
+    PhaseletEngine *PhaseletAnalysis11Level
+    UnifiedFeatures map[string]float64
+}
+
+// NewAudiomageMentor creates a new Audiomage mentor with 11-level analysis
 func NewAudiomageMentor(elder *ElderEntity) *AudiomageMentor {
     return &AudiomageMentor{
         Phase: Complex{Real: 0.8, Imag: 0.6},
@@ -226,6 +282,12 @@ func NewAudiomageMentor(elder *ElderEntity) *AudiomageMentor {
         EruditeCoordination: make(map[string]*EruditeInterface),
         TransferEfficiency:  0.75,
         ElderConnection:     elder,
+        MultiDomainAnalysis: &MultiDomainAnalysis{
+            WaveletEngine:   NewWaveletAnalysis11Level(),
+            TimeletEngine:   NewTimeletAnalysis11Level(),
+            PhaseletEngine:  NewPhaseletAnalysis11Level(),
+            UnifiedFeatures: make(map[string]float64),
+        },
     }
 }
 
@@ -273,20 +335,29 @@ func (a *AudiomageMentor) applyCrossEruditeTransfer(results map[string][]float64
 
 \begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Erudite of Continuity Implementation, fonttitle=\bfseries]
 \begin{verbatim}
-// EruditeOfContinuity specializes in temporal analysis using Timelets
+// EruditeOfContinuity specializes in 11-level Timelet analysis
 type EruditeOfContinuity struct {
-    Phase              Complex
-    TimeletCoefficients [][]float64
-    TemporalMemory     []float64
-    ContinuityMetrics  map[string]float64
+    Phase                 Complex
+    GoldenRatioLevels    [11]TimeletLevel11
+    GridLevels           [11]TimeletLevel11
+    TemporalFeatures     map[string][11]float64
+    ContinuityMetrics    map[string]float64
 }
 
-// NewEruditeOfContinuity creates a new continuity erudite
+// TimeletLevel11 represents one of the 11 analysis levels
+type TimeletLevel11 struct {
+    Scale           float64
+    WindowSize      int
+    EnvelopeData    []float64
+    AttackTimes     []float64
+    RhythmicPattern []float64
+}
+
+// NewEruditeOfContinuity creates a new 11-level continuity erudite
 func NewEruditeOfContinuity() *EruditeOfContinuity {
     return &EruditeOfContinuity{
-        Phase:              Complex{Real: 0.9, Imag: 0.4},
-        TimeletCoefficients: make([][]float64, 16),
-        TemporalMemory:     make([]float64, 1024),
+        Phase:            Complex{Real: 0.9, Imag: 0.4},
+        TemporalFeatures: make(map[string][11]float64),
         ContinuityMetrics: map[string]float64{
             "temporal_coherence": 0.85,
             "rhythm_stability":   0.78,
@@ -295,47 +366,59 @@ func NewEruditeOfContinuity() *EruditeOfContinuity {
     }
 }
 
-// Process implements temporal continuity analysis
+// Process implements 11-level temporal continuity analysis
 func (e *EruditeOfContinuity) Process(audioData []float64) []float64 {
-    // Initialize result slice
-    result := make([]float64, len(audioData))
+    // Extract Golden Ratio Timelets (11 levels)
+    e.extractGoldenRatioTimelets(audioData)
     
-    // Apply Timelet-based temporal analysis
-    timeletResult := e.computeTimeletTransform(audioData)
+    // Extract Grid Timelets (11 levels)
+    e.extractGridTimelets(audioData)
     
-    // Analyze temporal patterns
-    patterns := e.extractTemporalPatterns(timeletResult)
+    // Calculate temporal features across all 11 levels
+    e.calculateTemporalFeatures()
     
-    // Apply continuity enhancement
-    for i, value := range patterns {
-        if i < len(result) {
-            result[i] = e.enhanceContinuity(value, i)
-        }
-    }
-    
-    // Update temporal memory for future processing
-    e.updateTemporalMemory(result)
-    
-    return result
+    // Generate unified temporal output
+    return e.generateTimeletOutput(audioData)
 }
 
-// computeTimeletTransform implements simplified Timelet transform
-func (e *EruditeOfContinuity) computeTimeletTransform(signal []float64) [][]float64 {
-    scales := []float64{1.0, 2.0, 4.0, 8.0, 16.0}
-    result := make([][]float64, len(scales))
+// extractGoldenRatioTimelets performs 11-level golden ratio decomposition
+func (e *EruditeOfContinuity) extractGoldenRatioTimelets(signal []float64) {
+    phi := (1.0 + math.Sqrt(5.0)) / 2.0 // Golden ratio
+    baseScale := float64(len(signal)) / math.Pow(phi, 10)
     
-    for s, scale := range scales {
-        result[s] = make([]float64, len(signal))
-        windowSize := int(scale * 32) // Scale-dependent window
+    for k := 0; k < 11; k++ {
+        scale := baseScale * math.Pow(phi, -float64(k))
+        windowSize := int(scale)
+        if windowSize < 1 {
+            windowSize = 1
+        }
         
-        for i := 0; i < len(signal); i++ {
-            sum := 0.0
-            count := 0
-            
-            // Compute windowed analysis
-            for j := -windowSize/2; j < windowSize/2; j++ {
-                idx := i + j
-                if idx >= 0 && idx < len(signal) {
+        e.GoldenRatioLevels[k].Scale = scale
+        e.GoldenRatioLevels[k].WindowSize = windowSize
+        e.GoldenRatioLevels[k].EnvelopeData = e.calculateRMSEnvelope(signal, windowSize)
+        e.GoldenRatioLevels[k].AttackTimes = e.detectOnsets(e.GoldenRatioLevels[k].EnvelopeData)
+        e.GoldenRatioLevels[k].RhythmicPattern = e.analyzeRhythm(e.GoldenRatioLevels[k].EnvelopeData)
+    }
+}
+
+// extractGridTimelets performs 11-level power-of-2 decomposition
+func (e *EruditeOfContinuity) extractGridTimelets(signal []float64) {
+    baseLength := float64(len(signal))
+    
+    for k := 0; k < 11; k++ {
+        scale := baseLength / math.Pow(2, float64(k))
+        windowSize := int(scale)
+        if windowSize < 1 {
+            windowSize = 1
+        }
+        
+        e.GridLevels[k].Scale = scale
+        e.GridLevels[k].WindowSize = windowSize
+        e.GridLevels[k].EnvelopeData = e.calculateRMSEnvelope(signal, windowSize)
+        e.GridLevels[k].AttackTimes = e.detectOnsets(e.GridLevels[k].EnvelopeData)
+        e.GridLevels[k].RhythmicPattern = e.analyzeRhythm(e.GridLevels[k].EnvelopeData)
+    }
+}
                     // Apply Gaussian-like window
                     weight := math.Exp(-float64(j*j) / (2.0 * scale * scale))
                     sum += signal[idx] * weight
@@ -422,34 +505,32 @@ func (e *EruditeOfContinuity) GetPerformanceMetrics() map[string]float64 {
 
 \begin{tcolorbox}[colback=CodeBackground, colframe=DarkGray, title=Erudite of Isolation Implementation, fonttitle=\bfseries]
 \begin{verbatim}
-// EruditeOfIsolation specializes in spectral isolation using Wavelets
+// EruditeOfIsolation specializes in 11-level Daubechies db4 Wavelet analysis
 type EruditeOfIsolation struct {
     Phase             Complex
-    WaveletBanks      [][]float64
-    SpectralMemory    []float64
+    WaveletLevels     [11]WaveletLevel11
+    EnergyProfile     [11]float64
+    SpectralFeatures  map[string]float64
     IsolationMetrics  map[string]float64
-    FrequencyBands    []FrequencyBand
 }
 
-// FrequencyBand represents an isolated frequency range
-type FrequencyBand struct {
-    LowFreq    float64
-    HighFreq   float64
-    Coefficients []float64
-    Energy     float64
+// WaveletLevel11 represents one of the 11 wavelet decomposition levels
+type WaveletLevel11 struct {
+    Coefficients     []float64
+    Energy          float64
+    FrequencyBand   string
+    SpectralCentroid float64
 }
 
-// NewEruditeOfIsolation creates a new isolation erudite
+// NewEruditeOfIsolation creates a new 11-level isolation erudite
 func NewEruditeOfIsolation() *EruditeOfIsolation {
     return &EruditeOfIsolation{
-        Phase:           Complex{Real: 0.6, Imag: 0.8},
-        WaveletBanks:    make([][]float64, 8),
-        SpectralMemory:  make([]float64, 512),
-        FrequencyBands:  initializeFrequencyBands(),
+        Phase:            Complex{Real: 0.6, Imag: 0.8},
+        SpectralFeatures: make(map[string]float64),
         IsolationMetrics: map[string]float64{
-            "spectral_purity":    0.88,
-            "isolation_quality":  0.82,
-            "frequency_resolution": 0.75,
+            "spectral_purity":       0.88,
+            "isolation_quality":     0.82,
+            "frequency_resolution":  0.75,
         },
     }
 }
