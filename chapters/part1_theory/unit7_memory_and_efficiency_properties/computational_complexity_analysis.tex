@@ -321,16 +321,50 @@ However, for cross-domain knowledge transfer, traditional networks typically req
 
 \subsection{Comparison to Transformer Architectures}
 
-\begin{theorem}[Elder vs. Transformers]
-For a sequence of length $S$ and embedding dimension $E$, transformer models have complexity $O(S^2 \cdot E)$ for the attention mechanism, while the Elder system's orbital interaction mechanism has complexity $O(N_{total}^2 \cdot D)$.
+\subsubsection{Rotational Attention vs. Standard Transformer Attention}
+
+\begin{theorem}[Rotational Attention vs. Transformer Attention]
+For a sequence of length $S$ and embedding dimension $E$, standard transformer attention has complexity $O(S^2 \cdot E)$, while Elder's Rotational Attention mechanism has complexity $O(S \cdot E \cdot \log S + \phi \cdot S)$ where $\phi$ represents the rotational phase computation cost.
 \end{theorem}
 
 \begin{proof}
-The self-attention mechanism in transformer models computes attention scores between all pairs of tokens, resulting in $O(S^2)$ operations, each involving vector products of dimension $E$, giving total complexity $O(S^2 \cdot E)$.
+Standard transformer attention computes attention scores between all pairs of tokens:
+\begin{equation}
+\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{equation}
+This requires $O(S^2)$ pairwise computations, each involving $E$-dimensional vectors, yielding $O(S^2 \cdot E)$ complexity.
 
-The Elder system's orbital interaction mechanism similarly involves all pairs of entities, giving $O(N_{total}^2)$ operations, each with dimensionality $D$, resulting in complexity $O(N_{total}^2 \cdot D)$.
+Elder's Rotational Attention mechanism leverages orbital phase relationships:
+\begin{equation}
+\text{RotAttn}(Q,K,V,\Phi) = \text{softmax}\left(\frac{Q(K \odot R(\Phi))^T}{\sqrt{d_k}}\right)V
+\end{equation}
+where $R(\Phi)$ represents rotational phase matrices and $\odot$ denotes element-wise multiplication with rotational encoding.
 
-For comparable systems, $S \approx N_{total}$ and $E \approx D$, making the asymptotic complexities equivalent. However, the Elder system's hierarchical structure allows for optimization techniques that can reduce this complexity in practice.
+The key computational advantages are:
+\begin{itemize}
+    \item Phase computation: $O(\phi \cdot S)$ where $\phi$ is the phase calculation complexity
+    \item Rotational encoding application: $O(S \cdot E)$ 
+    \item Attention with phase-structured queries: $O(S \cdot E \cdot \log S)$ due to hierarchical phase organization
+\end{itemize}
+
+Total complexity: $O(S \cdot E \cdot \log S + \phi \cdot S)$, which is significantly more efficient than standard attention for large sequences.
+\end{proof}
+
+\begin{theorem}[Memory Efficiency of Rotational Attention]
+Rotational Attention requires $O(S \cdot E + \phi)$ memory compared to $O(S^2)$ for standard transformer attention.
+\end{theorem}
+
+\begin{proof}
+Standard attention stores the full attention matrix of size $S \times S$, requiring $O(S^2)$ memory.
+
+Rotational Attention stores:
+\begin{itemize}
+    \item Rotational phase vectors: $O(\phi)$ memory
+    \item Phase-encoded representations: $O(S \cdot E)$ memory
+    \item No explicit attention matrix storage due to implicit phase-based computation
+\end{itemize}
+
+This yields total memory complexity of $O(S \cdot E + \phi)$, providing quadratic memory savings for long sequences.
 \end{proof}
 
 \section{Complexity of Specific Algorithms}
@@ -387,16 +421,6 @@ approaching 1 for large systems.
 
 \begin{proof}
 Entity computations are largely independent during forward passes, making them highly parallelizable. The main sequential bottlenecks occur in the hierarchical update processes, which scale as $O(1)$ relative to the total system size $N_{total}$. Thus, the non-parallelizable fraction $\alpha = \frac{1}{N_{total}}$, giving a parallelizable fraction of $1 - \alpha = \frac{N_{total} - 1}{N_{total}}$.
-\end{proof}
-
-\subsection{Memory-Computation Tradeoffs}
-
-\begin{theorem}[Memory-Computation Tradeoff]
-For the Elder Heliosystem, a memory-computation tradeoff exists where reducing computational complexity by a factor of $k$ requires increasing memory usage by a factor of $O(k)$.
-\end{theorem}
-
-\begin{proof}
-Computational complexity can be reduced by precomputing and storing intermediate results. For example, orbital interaction terms can be precomputed and stored to avoid recomputation. If we store $k$ times more precomputed values, we can reduce computation by a factor of approximately $k$, giving the stated tradeoff.
 \end{proof}
 
 \section{Complexity in Learning Scenarios}

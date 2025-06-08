@@ -35,7 +35,7 @@ args = "latex_compilation"
 
 [[workflows.workflow]]
 name = "visualization_server"
-author = "agent"
+author = 29553732
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -44,7 +44,7 @@ waitForPort = 5000
 
 [[workflows.workflow]]
 name = "test_compilation"
-author = "agent"
+author = 29553732
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -52,7 +52,7 @@ args = "pdflatex tests/test_compiling.tex"
 
 [[workflows.workflow]]
 name = "simple_test_compilation"
-author = "agent"
+author = 29553732
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -60,7 +60,7 @@ args = "pdflatex tests/simple_test.tex"
 
 [[workflows.workflow]]
 name = "elder_symbol_compilation"
-author = "agent"
+author = 29553732
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -68,7 +68,7 @@ args = "pdflatex tests/test_elder_symbol.tex"
 
 [[workflows.workflow]]
 name = "test_issue_compilation"
-author = "agent"
+author = 29553732
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -76,7 +76,7 @@ args = "pdflatex tests/test_issue.tex"
 
 [[workflows.workflow]]
 name = "symbol_test"
-author = "agent"
+author = 29553732
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
