@@ -179,24 +179,24 @@ The complete training process for comprehensive DAG collections follows:
 \REQUIRE Dataset $\mathcal{D}$, DAG collection $\mathcal{G} = \{G_1, G_2, \ldots, G_k\}$
 \ENSURE Trained Elder system with optimized DAG collection
 \FOR{each DAG $G_i \in \mathcal{G}$}
-    \STATE Initialize all node parameters $\theta_v^{(i)}$ for $v \in V_i$
-    \STATE Initialize intra-DAG knowledge transfer weights $W_{ij}^{(i)}$
+    \STATE Initialize node parameters $\theta_v^{(i)}$ for all $v \in V_i$
+    \STATE Initialize intra-DAG weights $W_{ij}^{(i)}$
 \ENDFOR
-\STATE Initialize inter-DAG knowledge transfer coefficients $\gamma_{ij}$
+\STATE Initialize inter-DAG coefficients $\gamma_{ij}$
 \FOR{each training epoch}
     \FOR{each batch $B \subset \mathcal{D}$}
-        \STATE Execute comprehensive DAG forward pass on batch $B$
-        \STATE Compute domain-specific losses $L_i$ for each DAG $G_i$
+        \STATE Execute comprehensive DAG forward pass on $B$
+        \STATE Compute domain losses $L_i$ for each DAG $G_i$
         \STATE Execute comprehensive DAG backward pass
         \STATE Update parameters via distributed gradient descent
-        \STATE Apply domain-specific gravitational field updates
+        \STATE Apply gravitational field updates
         \STATE Synchronize inter-DAG knowledge transfer
     \ENDFOR
-    \STATE Validate structural integrity of all DAGs in collection
+    \STATE Validate DAG structural integrity
     \STATE Update inter-DAG coupling coefficients $\gamma_{ij}$
     \STATE Rebalance computational load across DAGs
 \ENDFOR
-\RETURN Trained Elder system with comprehensive optimized DAG collection
+\RETURN Trained Elder system with optimized DAG collection
 \end{algorithmic}
 \end{algorithm}
 
