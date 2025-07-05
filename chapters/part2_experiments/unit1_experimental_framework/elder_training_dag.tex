@@ -30,22 +30,22 @@ The training architecture maintains a comprehensive list of specialized DAGs, ea
 \begin{algorithm}[H]
 \caption{Elder Training DAG List Construction}
 \begin{algorithmic}[1]
-\REQUIRE Domain specifications $\mathcal{D} = \{D_1, D_2, \ldots, D_k\}$, learning objectives $\mathcal{L}$
-\ENSURE Comprehensive DAG collection $\mathcal{G} = \{G_1, G_2, \ldots, G_k\}$
+\REQUIRE Domains $\mathcal{D} = \{D_1, \ldots, D_k\}$, objectives $\mathcal{L}$
+\ENSURE DAG collection $\mathcal{G} = \{G_1, \ldots, G_k\}$
 \FOR{each domain $D_i \in \mathcal{D}$}
-    \STATE Initialize domain-specific Elder node $E_i$
-    \STATE Create Mentor layer $M_i = \{M_{i1}, M_{i2}, \ldots, M_{im_i}\}$ for domain $D_i$
+    \STATE Initialize Elder node $E_i$
+    \STATE Create Mentor layer $M_i = \{M_{i1}, \ldots, M_{im_i}\}$
     \FOR{each Mentor $M_{ij}$}
-        \STATE Create Erudite sublayer $R_{ij} = \{R_{ij1}, R_{ij2}, \ldots, R_{ijn_{ij}}\}$
-        \STATE Connect each $R_{ijk}$ to $M_{ij}$ with knowledge transfer edges
-        \STATE Ensure no cycles within domain DAG $G_i$
+        \STATE Create Erudite layer $R_{ij} = \{R_{ij1}, \ldots, R_{ijn_{ij}}\}$
+        \STATE Connect $R_{ijk}$ to $M_{ij}$
+        \STATE Ensure acyclic structure
     \ENDFOR
-    \STATE Validate DAG properties for $G_i$
-    \STATE Initialize domain-specific knowledge transfer weights $W_i$
-    \STATE Add $G_i$ to collection $\mathcal{G}$
+    \STATE Validate DAG properties
+    \STATE Initialize weights $W_i$
+    \STATE Add $G_i$ to collection
 \ENDFOR
-\STATE Establish inter-DAG connections through shared Elder nodes
-\RETURN Comprehensive DAG collection $\mathcal{G}$
+\STATE Establish inter-DAG connections
+\RETURN Collection $\mathcal{G}$
 \end{algorithmic}
 \end{algorithm}
 
@@ -73,24 +73,24 @@ The forward pass processes knowledge through the comprehensive DAG list structur
 \begin{algorithm}[H]
 \caption{Comprehensive DAG Forward Pass}
 \begin{algorithmic}[1]
-\REQUIRE DAG collection $\mathcal{G} = \{G_1, G_2, \ldots, G_k\}$, input data $X$
-\ENSURE Forward activations $A = \{A_1, A_2, \ldots, A_k\}$
+\REQUIRE Collection $\mathcal{G} = \{G_1, \ldots, G_k\}$, input $X$
+\ENSURE Activations $A = \{A_1, \ldots, A_k\}$
 \FOR{each DAG $G_i \in \mathcal{G}$}
-    \STATE Perform topological sort on $G_i$
-    \STATE Initialize domain-specific activation map $A_i$
-    \FOR{each node $v$ in topological order of $G_i$}
-        \IF{$v$ is Elder node}
-            \STATE Compute Elder activation: $A_i[v] = \Phi_E^{(i)}(X, \theta_v)$
-        \ELSIF{$v$ is Mentor node}
-            \STATE Compute Mentor activation: $A_i[v] = \Phi_M^{(i)}(\sum_{u \in \text{parents}_i(v)} A_i[u], \theta_v)$
-        \ELSE{$v$ is Erudite node}
-            \STATE Compute Erudite activation: $A_i[v] = \Phi_R^{(i)}(\sum_{u \in \text{parents}_i(v)} A_i[u], \theta_v)$
+    \STATE Topological sort on $G_i$
+    \STATE Initialize activation map $A_i$
+    \FOR{each node $v$ in order}
+        \IF{$v$ is Elder}
+            \STATE $A_i[v] = \Phi_E^{(i)}(X, \theta_v)$
+        \ELSIF{$v$ is Mentor}
+            \STATE $A_i[v] = \Phi_M^{(i)}(\sum_u A_i[u], \theta_v)$
+        \ELSE{$v$ is Erudite}
+            \STATE $A_i[v] = \Phi_R^{(i)}(\sum_u A_i[u], \theta_v)$
         \ENDIF
-        \STATE Apply domain-specific heliomorphic transformations to $A_i[v]$
+        \STATE Apply transformations to $A_i[v]$
     \ENDFOR
 \ENDFOR
-\STATE Perform inter-DAG knowledge synchronization
-\RETURN Comprehensive activation collection $A$
+\STATE Synchronize knowledge
+\RETURN Activations $A$
 \end{algorithmic}
 \end{algorithm}
 
@@ -101,22 +101,22 @@ The backward pass leverages the comprehensive DAG list structure for efficient g
 \begin{algorithm}[H]
 \caption{Comprehensive DAG Backward Pass}
 \begin{algorithmic}[1]
-\REQUIRE DAG collection $\mathcal{G}$, loss gradients $\nabla L = \{\nabla L_1, \nabla L_2, \ldots, \nabla L_k\}$
-\ENSURE Parameter gradients $\nabla \theta = \{\nabla \theta_1, \nabla \theta_2, \ldots, \nabla \theta_k\}$
+\REQUIRE Collection $\mathcal{G}$, gradients $\nabla L = \{\nabla L_1, \ldots, \nabla L_k\}$
+\ENSURE Parameter gradients $\nabla \theta = \{\nabla \theta_1, \ldots, \nabla \theta_k\}$
 \FOR{each DAG $G_i \in \mathcal{G}$}
-    \STATE Perform reverse topological sort on $G_i$
-    \STATE Initialize domain-specific gradient map $\nabla \theta_i$
-    \FOR{each node $v$ in reverse topological order of $G_i$}
-        \STATE Compute local gradient: $\nabla_v^{(i)} = \frac{\partial L_i}{\partial A_i[v]}$
-        \FOR{each parent $u$ of $v$ in $G_i$}
-            \STATE Accumulate gradient: $\nabla_u^{(i)} += \nabla_v^{(i)} \cdot \frac{\partial A_i[v]}{\partial A_i[u]}$
-            \STATE Apply gravitational coupling: $\nabla_u^{(i)} \cdot G_{uv}^{(i)}$
+    \STATE Reverse topological sort on $G_i$
+    \STATE Initialize gradient map $\nabla \theta_i$
+    \FOR{each node $v$ in reverse order}
+        \STATE Compute local: $\nabla_v^{(i)} = \frac{\partial L_i}{\partial A_i[v]}$
+        \FOR{each parent $u$ of $v$}
+            \STATE Accumulate: $\nabla_u^{(i)} += \nabla_v^{(i)} \cdot \frac{\partial A_i[v]}{\partial A_i[u]}$
+            \STATE Apply coupling: $\nabla_u^{(i)} \cdot G_{uv}^{(i)}$
         \ENDFOR
-        \STATE Update parameter gradient: $\nabla \theta_i[v] = \nabla_v^{(i)} \cdot \frac{\partial A_i[v]}{\partial \theta_v}$
+        \STATE Update: $\nabla \theta_i[v] = \nabla_v^{(i)} \cdot \frac{\partial A_i[v]}{\partial \theta_v}$
     \ENDFOR
 \ENDFOR
-\STATE Perform inter-DAG gradient synchronization
-\RETURN Comprehensive parameter gradients $\nabla \theta$
+\STATE Synchronize gradients
+\RETURN Gradients $\nabla \theta$
 \end{algorithmic}
 \end{algorithm}
 
@@ -176,27 +176,27 @@ The complete training process for comprehensive DAG collections follows:
 \begin{algorithm}[H]
 \caption{Comprehensive DAG Training Orchestration}
 \begin{algorithmic}[1]
-\REQUIRE Dataset $\mathcal{D}$, DAG collection $\mathcal{G} = \{G_1, G_2, \ldots, G_k\}$
-\ENSURE Trained Elder system with optimized DAG collection
+\REQUIRE Dataset $\mathcal{D}$, DAG collection $\mathcal{G} = \{G_1, \ldots, G_k\}$
+\ENSURE Trained Elder system
 \FOR{each DAG $G_i \in \mathcal{G}$}
-    \STATE Initialize node parameters $\theta_v^{(i)}$ for all $v \in V_i$
-    \STATE Initialize intra-DAG weights $W_{ij}^{(i)}$
+    \STATE Initialize parameters $\theta_v^{(i)}$ for $v \in V_i$
+    \STATE Initialize weights $W_{ij}^{(i)}$
 \ENDFOR
-\STATE Initialize inter-DAG coefficients $\gamma_{ij}$
-\FOR{each training epoch}
+\STATE Initialize coefficients $\gamma_{ij}$
+\FOR{each epoch}
     \FOR{each batch $B \subset \mathcal{D}$}
-        \STATE Execute comprehensive DAG forward pass on $B$
-        \STATE Compute domain losses $L_i$ for each DAG $G_i$
-        \STATE Execute comprehensive DAG backward pass
-        \STATE Update parameters via distributed gradient descent
-        \STATE Apply gravitational field updates
-        \STATE Synchronize inter-DAG knowledge transfer
+        \STATE Forward pass on $B$
+        \STATE Compute losses $L_i$
+        \STATE Backward pass
+        \STATE Update parameters
+        \STATE Apply field updates
+        \STATE Synchronize transfer
     \ENDFOR
-    \STATE Validate DAG structural integrity
-    \STATE Update inter-DAG coupling coefficients $\gamma_{ij}$
-    \STATE Rebalance computational load across DAGs
+    \STATE Validate integrity
+    \STATE Update coefficients $\gamma_{ij}$
+    \STATE Rebalance load
 \ENDFOR
-\RETURN Trained Elder system with optimized DAG collection
+\RETURN Trained system
 \end{algorithmic}
 \end{algorithm}
 
