@@ -227,34 +227,34 @@ where $\text{MI}$ denotes mutual information between wavelet magnitude and insta
 
 The synthesis process combines outputs from all three analysis domains:
 
-\begin{algorithm}[H]
-\caption{11-Level Unified Audio Synthesis}
-\begin{algorithmic}[1]
-\REQUIRE Audio signal $x[n]$, length $N$
-\ENSURE Unified output $y[n]$
-\STATE Initialize $W \leftarrow$ WaveletEngine.Process($x$)
-\STATE Initialize $T \leftarrow$ TimeletEngine.Process($x$)
-\STATE Initialize $P \leftarrow$ PhaseletEngine.Process($x$)
-\FOR{$k = 0$ to $10$}
-    \STATE Compute wavelet-timelet correlation $\rho_{WT}^{(k)}$
-    \STATE Compute timelet-phaselet synchronization $\text{Sync}_{TP}^{(k)}$
-    \STATE Compute wavelet-phaselet coupling $\text{Coupling}_{WP}^{(k)}$
-    \STATE Store cross-domain features for level $k$
-\ENDFOR
-\FOR{$n = 0$ to $N-1$}
-    \STATE Compute base synthesis: $y_{base}[n] \leftarrow 0.4 \cdot W[n] + 0.35 \cdot T[n] + 0.25 \cdot P[n]$
-    \IF{$n < 11$}
-        \STATE Apply level-specific enhancement using $\rho_{WT}^{(n)}$
-        \STATE Apply synchronization correction using $\text{Sync}_{TP}^{(n)}$
-        \STATE Apply coupling adjustment using $\text{Coupling}_{WP}^{(n)}$
-        \STATE Compute final output: $y[n] \leftarrow y_{base}[n] \cdot (1 + 0.1 \cdot \rho_{WT}^{(n)})$
-    \ELSE
-        \STATE $y[n] \leftarrow y_{base}[n]$
-    \ENDIF
-\ENDFOR
-\RETURN $y$
-\end{algorithmic}
-\end{algorithm}
+\textbf{11-Level Unified Audio Synthesis Algorithm:}
+\begin{enumerate}
+\item \textbf{Input:} Audio signal $x[n]$, length $N$
+\item \textbf{Output:} Unified output $y[n]$
+\item Initialize $W \leftarrow$ WaveletEngine.Process($x$)
+\item Initialize $T \leftarrow$ TimeletEngine.Process($x$)
+\item Initialize $P \leftarrow$ PhaseletEngine.Process($x$)
+\item For $k = 0$ to $10$:
+    \begin{itemize}
+    \item Compute wavelet-timelet correlation $\rho_{WT}^{(k)}$
+    \item Compute timelet-phaselet synchronization $\text{Sync}_{TP}^{(k)}$
+    \item Compute wavelet-phaselet coupling $\text{Coupling}_{WP}^{(k)}$
+    \item Store cross-domain features for level $k$
+    \end{itemize}
+\item For $n = 0$ to $N-1$:
+    \begin{itemize}
+    \item Compute base synthesis: $y_{base}[n] \leftarrow 0.4 \cdot W[n] + 0.35 \cdot T[n] + 0.25 \cdot P[n]$
+    \item If $n < 11$:
+        \begin{itemize}
+        \item Apply level-specific enhancement using $\rho_{WT}^{(n)}$
+        \item Apply synchronization correction using $\text{Sync}_{TP}^{(n)}$
+        \item Apply coupling adjustment using $\text{Coupling}_{WP}^{(n)}$
+        \item Compute final output: $y[n] \leftarrow y_{base}[n] \cdot (1 + 0.1 \cdot \rho_{WT}^{(n)})$
+        \end{itemize}
+    \item Else: $y[n] \leftarrow y_{base}[n]$
+    \end{itemize}
+\item Return $y$
+\end{enumerate}
 
 \section{Performance Analysis}
 

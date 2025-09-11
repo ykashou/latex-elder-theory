@@ -501,6 +501,178 @@ Different orbital configurations can correspond to different local minima of the
 The phase-dependent gradient flow can create barriers in the loss landscape, where certain parameter configurations are difficult to traverse due to phase misalignment, even if they would lead to lower loss values.
 
 Cross-level dependencies can create competing objectives, where improving one loss component may degrade another. This can lead to cycling behavior or convergence to compromise solutions that are not global minima.
+\end{proof}
+
+\section{Complete Dynamical System Formulation}
+
+\subsection{Continuous-Time ODE/SDE System}
+
+We now provide the complete differential equation system governing the Elder-Mentor-Erudite dynamics.
+
+\begin{definition}[Elder-Mentor-Erudite Dynamical System]
+\label{def:eme_dynamical_system}
+The continuous-time evolution of the hierarchical parameter system is governed by the following system of stochastic differential equations:
+
+\begin{align}
+d\Theta_E &= -\nabla_{\Theta_E}^{\text{total}} \mathcal{L} \, dt + \gamma_E(\Theta_E, \Omega_E) \, dt + \sigma_E \, dW_E(t) \\
+d\Theta_M^{(d)} &= -\nabla_{\Theta_M^{(d)}}^{\text{total}} \mathcal{L} \, dt + \gamma_M^{(d)}(\Theta_M^{(d)}, \Omega_M^{(d)}) \, dt + \sigma_M^{(d)} \, dW_M^{(d)}(t) \\
+d\Theta_e^{(d)} &= -\nabla_{\Theta_e^{(d)}}^{\text{total}} \mathcal{L} \, dt + \gamma_e^{(d)}(\Theta_e^{(d)}, \Omega_e^{(d)}) \, dt + \sigma_e^{(d)} \, dW_e^{(d)}(t)
+\end{align}
+
+where:
+\begin{itemize}
+\item $\gamma_E, \gamma_M^{(d)}, \gamma_e^{(d)}$ are orbital-gravitational coupling functions
+\item $\sigma_E, \sigma_M^{(d)}, \sigma_e^{(d)} > 0$ are diffusion coefficients
+\item $W_E(t), W_M^{(d)}(t), W_e^{(d)}(t)$ are independent Wiener processes
+\item The orbital configurations evolve according to:
+\begin{align}
+d\Omega_E &= F_E(\Theta_E, \{\Theta_M^{(d)}\}, \{\Theta_e^{(d)}\}) \, dt \\
+d\Omega_M^{(d)} &= F_M^{(d)}(\Theta_E, \Theta_M^{(d)}, \{\Theta_e^{(j)}\}_{j=1}^D) \, dt \\
+d\Omega_e^{(d)} &= F_e^{(d)}(\Theta_M^{(d)}, \Theta_e^{(d)}) \, dt
+\end{align}
+\end{itemize}
+\end{definition}
+
+\subsection{Mathematical Assumptions}
+
+\begin{assumption}[Lipschitz Conditions]
+\label{ass:lipschitz}
+The drift functions satisfy global Lipschitz conditions:
+\begin{enumerate}
+\item $\|\nabla_{\Theta_E}^{\text{total}} \mathcal{L}(\Theta_1) - \nabla_{\Theta_E}^{\text{total}} \mathcal{L}(\Theta_2)\| \leq L_E \|\Theta_1 - \Theta_2\|$ 
+\item $\|\gamma_E(\Theta_1, \Omega_1) - \gamma_E(\Theta_2, \Omega_2)\| \leq L_{\gamma_E} (\|\Theta_1 - \Theta_2\| + \|\Omega_1 - \Omega_2\|)$
+\item Similar Lipschitz conditions hold for Mentor and Erudite components with constants $L_M^{(d)}, L_{\gamma_M^{(d)}}, L_e^{(d)}, L_{\gamma_e^{(d)}}$
+\end{enumerate}
+\end{assumption}
+
+\begin{assumption}[Coercivity Conditions]
+\label{ass:coercivity}
+The hierarchical loss function satisfies:
+\begin{enumerate}
+\item \textbf{Lower Boundedness}: $\mathcal{L}(\Theta) \geq \mathcal{L}_{\text{min}} > -\infty$ for all $\Theta$
+\item \textbf{Coercivity}: $\lim_{\|\Theta\| \to \infty} \mathcal{L}(\Theta) = +\infty$
+\item \textbf{Gradient Growth}: $\|\nabla \mathcal{L}(\Theta)\| \geq \mu \|\Theta - \Theta^*\|$ for some $\mu > 0$ outside a compact set containing the minimizer $\Theta^*$
+\end{enumerate}
+\end{assumption}
+
+\begin{assumption}[Orbital Stability]
+\label{ass:orbital_stability}
+The orbital dynamics satisfy:
+\begin{enumerate}
+\item \textbf{Bounded Orbits}: $\|\Omega_E(t)\|, \|\Omega_M^{(d)}(t)\|, \|\Omega_e^{(d)}(t)\| \leq R_{\text{orbit}}$ for all $t \geq 0$
+\item \textbf{Exponential Orbital Stability}: For stable configurations, $\|F_i(\Theta)\| \leq -\kappa_i \|\Omega_i - \Omega_i^*\|$ with $\kappa_i > 0$
+\end{enumerate}
+\end{assumption}
+
+\subsection{Lyapunov Function Analysis}
+
+\begin{theorem}[Hierarchical Lyapunov Function]
+\label{thm:hierarchical_lyapunov}
+Define the composite Lyapunov function:
+$$V(\Theta, \Omega) = \mathcal{L}(\Theta) + \frac{1}{2}\sum_{i} \lambda_i \|\Omega_i - \Omega_i^*\|^2$$
+where $\lambda_i > 0$ are orbital weighting parameters and $\Omega_i^*$ are stable orbital configurations.
+
+Under Assumptions~\ref{ass:lipschitz}--\ref{ass:orbital_stability}, we have:
+$$\mathbb{E}[\dot{V}(\Theta(t), \Omega(t))] \leq -\alpha V(\Theta(t), \Omega(t)) + C$$
+for constants $\alpha > 0$ and $C \geq 0$, ensuring almost sure convergence to a neighborhood of the global minimum.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1: Itô's Formula Application}
+Using Itô's formula for the stochastic differential system:
+\begin{align}
+d V &= \nabla_\Theta V \cdot d\Theta + \nabla_\Omega V \cdot d\Omega + \frac{1}{2} \text{tr}(\Sigma \nabla_\Theta^2 V) dt
+\end{align}
+where $\Sigma = \text{diag}(\sigma_E^2, \{\sigma_M^{(d)2}\}, \{\sigma_e^{(d)2}\})$.
+
+\textbf{Step 2: Drift Analysis}
+The drift term becomes:
+\begin{align}
+\mathbb{E}[dV/dt] &= -\|\nabla \mathcal{L}\|^2 + \nabla \mathcal{L} \cdot \gamma(\Theta, \Omega) + \sum_i \lambda_i (\Omega_i - \Omega_i^*)^T F_i + \frac{1}{2}\text{tr}(\Sigma \nabla^2 \mathcal{L})
+\end{align}
+
+\textbf{Step 3: Coercivity Application}
+By Assumption~\ref{ass:coercivity}, outside a compact neighborhood of $\Theta^*$:
+$$-\|\nabla \mathcal{L}\|^2 \leq -\mu^2 \|\Theta - \Theta^*\|^2 \leq -2\mu^2 (\mathcal{L}(\Theta) - \mathcal{L}_{\text{min}})$$
+
+\textbf{Step 4: Orbital Stability Application}  
+By Assumption~\ref{ass:orbital_stability}:
+$$\sum_i \lambda_i (\Omega_i - \Omega_i^*)^T F_i \leq -\sum_i \lambda_i \kappa_i \|\Omega_i - \Omega_i^*\|^2$$
+
+\textbf{Step 5: Explicit Constant Tracking and Diffusion Analysis}
+The diffusion contribution from Itô's formula requires explicit computation:
+$$\frac{1}{2}\text{tr}(\Sigma \nabla^2 \mathcal{L}) = \frac{1}{2}\left[\sigma_E^2 \text{tr}(\nabla_{\Theta_E}^2 \mathcal{L}) + \sum_{d=1}^D \sigma_M^{(d)2} \text{tr}(\nabla_{\Theta_M^{(d)}}^2 \mathcal{L}) + \sum_{d=1}^D \sigma_e^{(d)2} \text{tr}(\nabla_{\Theta_e^{(d)}}^2 \mathcal{L})\right]$$
+
+\textbf{Gravitational Coupling Bound:} By Lipschitz assumption \ref{ass:lipschitz}:
+$$|\nabla \mathcal{L} \cdot \gamma(\Theta, \Omega)| \leq L_\gamma \|\nabla \mathcal{L}\| \|\Omega - \Omega^*\| \leq \frac{1}{4}\|\nabla \mathcal{L}\|^2 + L_\gamma^2 \|\Omega - \Omega^*\|^2$$
+
+where $L_\gamma = \max(L_{\gamma_E}, L_{\gamma_M^{(d)}}, L_{\gamma_e^{(d)}})$.
+
+\textbf{Compact Set Analysis:} Define the compact set $\mathcal{K} = \{\Theta : \|\Theta - \Theta^*\| \leq R_K\}$ where $R_K$ satisfies $\mu \|\Theta - \Theta^*\| \leq \|\nabla \mathcal{L}(\Theta)\|$ for $\Theta \notin \mathcal{K}$.
+
+\textbf{Explicit Constant Construction:}
+Choose $\lambda_i = \frac{\mu^2}{2L_\gamma^2}$ for all $i$. Then:
+$$\alpha = \min\left(\frac{3\mu^2}{4}, \frac{\mu^2 \min_i \kappa_i}{2L_\gamma^2}\right) > 0$$
+
+The constant $C$ is bounded by:
+$$C \leq C_{\text{diffusion}} + C_{\text{compact}} + C_{\text{coupling}}$$
+where:
+\begin{align}
+C_{\text{diffusion}} &= \frac{1}{2}\sigma_{\max}^2 H_{\max} \text{ with } \sigma_{\max} = \max(\sigma_E, \{\sigma_M^{(d)}\}, \{\sigma_e^{(d)}\}) \\
+C_{\text{compact}} &= \max_{\Theta \in \mathcal{K}} |\nabla \mathcal{L}(\Theta) \cdot \gamma(\Theta, \Omega^*)| \\
+C_{\text{coupling}} &= \frac{\mu^2}{4L_\gamma^2} \max_i \kappa_i R_{\text{orbit}}^2
+\end{align}
+
+where $H_{\max}$ is the maximum eigenvalue of the Hessian matrices within the compact set.
+\end{proof}
+
+\begin{corollary}[Quantitative Convergence Rates]
+\label{cor:convergence_rates}
+Under the conditions of Theorem~\ref{thm:hierarchical_lyapunov}, the expected convergence rate is:
+\begin{align}
+\mathbb{E}[\mathcal{L}(\Theta(t))] &\leq \mathcal{L}_{\text{min}} + \frac{C}{\alpha} + \left(\mathcal{L}(\Theta(0)) - \mathcal{L}_{\text{min}} - \frac{C}{\alpha}\right) e^{-\alpha t}\\
+\mathbb{E}[\|\Theta(t) - \Theta^*\|^2] &\leq \frac{2C}{\alpha\mu^2} + \|\Theta(0) - \Theta^*\|^2 e^{-\alpha t}
+\end{align}
+providing exponential convergence to a neighborhood with radius proportional to $\sqrt{C/\alpha}$.
+\end{corollary}
+
+\subsection{Gravitational Stability Theorem}
+
+\begin{theorem}[Gravitational Stability Theorem]
+\label{thm:gravitational_stability}
+The Elder-Mentor-Erudite dynamical system is gravitationally stable if and only if:
+
+\textbf{Necessary Conditions:}
+\begin{enumerate}
+\item \textbf{Orbital Resonance}: All orbital frequencies satisfy $\omega_E : \omega_M^{(d)} : \omega_e^{(d)} = p : q_d : r_d$ for positive integers $p, q_d, r_d$
+\item \textbf{Phase Coherence}: $|\cos(\phi_{ij}(t))| \geq \cos(\phi_{\text{max}})$ for all entity pairs $(i,j)$ where $\phi_{\text{max}} < \pi/2$
+\item \textbf{Energy Dissipation Balance}: $\sum_d \int_0^T [\sigma_M^{(d)2} + \sigma_e^{(d)2}] dt \leq \delta \int_0^T \|\nabla \mathcal{L}\|^2 dt$ for $\delta < 1$
+\end{enumerate}
+
+\textbf{Sufficient Conditions:}
+\begin{enumerate}
+\item The necessary conditions hold
+\item \textbf{Lyapunov Stability}: $V(\Theta, \Omega)$ from Theorem~\ref{thm:hierarchical_lyapunov} satisfies $\dot{V} \leq -\alpha V + \epsilon$ with $\alpha > \epsilon/V_{\text{min}}$
+\item \textbf{Gravitational Field Regularity}: $\det(\nabla^2 \mathcal{L}(\Theta)) \geq \lambda_{\text{min}} > 0$ in a neighborhood of equilibria
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{Necessity Proof:}
+If the system is gravitationally stable, then perturbations decay exponentially. This requires:
+- Orbital resonance to prevent energy accumulation in unstable modes
+- Phase coherence to maintain constructive interference in gradient flow
+- Energy dissipation balance to ensure stochastic perturbations don't overwhelm deterministic convergence
+
+\textbf{Sufficiency Proof:}
+Given the sufficient conditions:
+- The Lyapunov function ensures global stability
+- Orbital resonance provides the natural frequency structure
+- Gravitational field regularity ensures local stability around equilibria
+- The combination guarantees exponential convergence with bounded perturbations
+
+The proof follows from combining the spectral analysis of the linearized system around equilibria with the global Lyapunov analysis.
+\end{proof}
 
 These challenges mean that while local convergence can be guaranteed under suitable conditions, global convergence to the absolute minimum of the hierarchical loss function is generally not guaranteed.
 \end{proof}

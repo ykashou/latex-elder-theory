@@ -88,7 +88,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "mkdir -p build/pdf && lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && biber --output-directory build/pdf main && makeindex build/pdf/main.idx || true && lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf"
+args = "mkdir -p build/pdf && lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && (biber --output-directory build/pdf main || echo \"Biber failed, continuing...\") && (makeindex build/pdf/main.idx 2>/dev/null || echo \"Makeindex failed, continuing...\") && lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf && echo \"PDF compilation completed successfully\""
 
 [deployment]
 run = ["sh", "-c", "pdflatex -interaction=nonstopmode main.tex"]

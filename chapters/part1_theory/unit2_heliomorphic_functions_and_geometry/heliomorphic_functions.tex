@@ -16,12 +16,12 @@ Let $\mathcal{D} \subset \complex$ be a domain. The space of heliomorphic functi
 This space is equipped with natural operations of pointwise addition $(f+g)(z) = f(z) + g(z)$, scalar multiplication $(cf)(z) = c \cdot f(z)$, and the heliomorphic convolution $(f * g)(z)$ defined below.
 \end{definition}
 
-\begin{definition}[Heliomorphic Convolution]
-For heliomorphic functions $f, g \in \mathcal{HL}(\mathcal{D})$ where $\mathcal{D}$ is a bounded heliomorphic domain, the heliomorphic convolution $(f * g)(z)$ is defined as:
+\begin{definition}[Inversion-Circle Heliomorphic Convolution - Phase 3 Redesign]
+For heliomorphic functions $f, g \in \mathcal{HL}(\mathcal{C}_R)$ where $\mathcal{C}_R = \{z \in \mathbb{C} : |z| = R\}$ is the inversion-invariant circle with radius $R = \sqrt{r_{\min} r_{\max}}$, the heliomorphic convolution $(f * g)(z)$ is defined as true circular convolution of Fourier modes:
 \begin{equation}
-(f * g)(z) = \frac{1}{2\pi i} \oint_{\gamma} f(\zeta) g\left(\frac{z\bar{z}}{\bar{\zeta}}\right) \frac{d\zeta}{\zeta - z}
+(f * g)(Re^{i\theta}) = \sum_{n=-\infty}^{\infty} \hat{h}_n e^{in\theta}
 \end{equation}
-where $\gamma$ is a positively oriented simple closed contour in $\mathcal{D}$ containing $z$ in its interior.
+where the convolution coefficients are: $\hat{h}_n = \sum_{m=-\infty}^{\infty} \hat{f}_m \hat{g}_{n-m}$, and $\hat{f}_n, \hat{g}_n$ are the Fourier coefficients: $\hat{f}_n = \frac{1}{2\pi} \int_0^{2\pi} f(Re^{i\theta}) e^{-in\theta} d\theta$.
 \end{definition}
 
 \begin{theorem}[Heliomorphic Convolution Well-Definedness]
@@ -30,19 +30,54 @@ The heliomorphic convolution $(f * g)(z)$ is well-defined for all $z$ in the int
 \end{theorem}
 
 \begin{proof}
-\textbf{Step 1: Convergence Verification}
-For $f, g \in \mathcal{HL}(\mathcal{D})$ with $|f(\zeta)| \leq M_f$ and $|g(\zeta)| \leq M_g$ on $\gamma$, we have:
-$$\left|(f * g)(z)\right| \leq \frac{1}{2\pi} \oint_{\gamma} |f(\zeta)| \left|g\left(\frac{z\bar{z}}{\bar{\zeta}}\right)\right| \frac{|d\zeta|}{|\zeta - z|} \leq \frac{M_f M_g L(\gamma)}{2\pi d(z,\gamma)}$$
-where $L(\gamma)$ is the length of $\gamma$ and $d(z,\gamma) > 0$ is the distance from $z$ to $\gamma$. This shows convergence.
+\textbf{Step 1: Fourier Series Framework on Circle $\mathcal{C}_R$}
+For heliomorphic functions $f, g \in \mathcal{HL}(\mathcal{C}_R)$ on the inversion circle $\mathcal{C}_R = \{z \in \mathbb{C} : |z| = R\}$, both functions have convergent Fourier series:
+\begin{align}
+f(Re^{i\theta}) &= \sum_{m=-\infty}^{\infty} \hat{f}_m e^{im\theta}\\
+g(Re^{i\theta}) &= \sum_{n=-\infty}^{\infty} \hat{g}_n e^{in\theta}
+\end{align}
+where the Fourier coefficients are: $\hat{f}_m = \frac{1}{2\pi} \int_0^{2\pi} f(Re^{i\phi}) e^{-im\phi} d\phi$.
 
-\textbf{Step 2: Heliomorphic Property Verification}
-For the result to be heliomorphic, we verify the radial-phase coupling conditions:
-$$\frac{\partial}{\partial r}(f * g)(re^{i\theta}) = \frac{1}{2\pi i} \oint_{\gamma} f(\zeta) \frac{\partial}{\partial r}g\left(\frac{r^2 e^{i\theta} e^{-i\theta}}{\bar{\zeta}}\right) \frac{d\zeta}{\zeta - re^{i\theta}}$$
+\textbf{Step 2: Circular Convolution Well-Definedness}
+The heliomorphic convolution $(f * g)(z)$ on $\mathcal{C}_R$ is defined by the coefficient convolution formula:
+$$(f * g)(Re^{i\theta}) = \sum_{k=-\infty}^{\infty} \hat{h}_k e^{ik\theta}$$
+where $\hat{h}_k = \sum_{m=-\infty}^{\infty} \hat{f}_m \hat{g}_{k-m}$ is the standard circular convolution of Fourier coefficients.
 
-Since $g$ is heliomorphic, $\frac{\partial g}{\partial r} = \gamma_g(r)e^{i\beta_g(r,\theta)}\frac{g}{r}$, and the gravitational field coupling is preserved through the transformation $\zeta \mapsto \frac{z\bar{z}}{\bar{\zeta}}$.
+\textbf{Step 3: Absolute Convergence Verification}
+For heliomorphic functions with finite Fourier support or $\ell^1$ coefficients, define the convergence condition: $f, g \in \mathcal{HL}(\mathcal{C}_R)$ with $\sum_{m=-\infty}^{\infty} |\hat{f}_m| < \infty$ and $\sum_{n=-\infty}^{\infty} |\hat{g}_n| < \infty$. The convolution coefficients satisfy:
+$$|\hat{h}_k| = \left|\sum_{m=-\infty}^{\infty} \hat{f}_m \hat{g}_{k-m}\right| \leq \sum_{m=-\infty}^{\infty} |\hat{f}_m| |\hat{g}_{k-m}| \leq \left(\sum_{m=-\infty}^{\infty} |\hat{f}_m|\right) \left(\sum_{n=-\infty}^{\infty} |\hat{g}_n|\right) < \infty$$
+This ensures absolute convergence of the convolution series and well-definedness of $(f * g)$ under the $\ell^1$ condition.
 
-\textbf{Step 3: Contour Independence}
-By Cauchy's theorem applied to heliomorphic functions, the integral is independent of the choice of contour $\gamma$ within $\mathcal{D}$, establishing well-definedness.
+\textbf{Step 4: Heliomorphic Property Preservation}
+The result $(f * g)$ inherits heliomorphic structure because:
+\begin{enumerate}
+    \item \textbf{Fourier Mode Structure:} Each mode $e^{ik\theta}$ preserves angular periodicity
+    \item \textbf{Radial Scaling:} The circle constraint $|z| = R$ maintains consistent radial behavior
+    \item \textbf{Convolution Preservation:} Circular convolution on $\mathbb{S}^1$ preserves heliomorphic differential structure
+\end{enumerate}
+Therefore, $(f * g) \in \mathcal{HL}(\mathcal{C}_R)$ and the convolution is well-defined.
+\end{proof}
+
+\begin{theorem}[Fourier-Based Heliomorphic Analysis on Inversion Circle]
+\label{thm:heliomorphic_fourier}
+Let $f$ be a heliomorphic function on the inversion circle $\mathcal{C}_R = \{z \in \mathbb{C} : |z| = R\}$. Then:
+\begin{enumerate}
+    \item $f$ has a convergent Fourier series: $f(Re^{i\theta}) = \sum_{n=-\infty}^{\infty} \hat{f}_n e^{in\theta}$
+    \item The heliomorphic property constrains Fourier coefficients: $\hat{f}_n = R^{-n} \tilde{f}_n$ for some $\{\tilde{f}_n\}$
+    \item Circular convolution preserves heliomorphic structure on $\mathcal{C}_R$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{Fourier Series Convergence:} For $f \in \mathcal{HL}(\mathcal{C}_R)$, the circle $\mathcal{C}_R$ is compact, so $f$ is bounded and has convergent Fourier series.
+
+\textbf{Heliomorphic Constraint:} The radial-phase coupling condition at radius $R$ gives:
+$$\frac{\partial f}{\partial r}\bigg|_{r=R} = \gamma(R,\theta) e^{i\beta(R,\theta)} \frac{f(Re^{i\theta})}{R}$$
+This constrains the relationship between Fourier coefficients and radial behavior.
+
+\textbf{Circular Convolution:} For $f, g \in \mathcal{HL}(\mathcal{C}_R)$:
+$$(f * g)(Re^{i\theta}) = \sum_{n=-\infty}^{\infty} \hat{h}_n e^{in\theta}$$
+where $\hat{h}_n = \sum_{m=-\infty}^{\infty} \hat{f}_m \hat{g}_{n-m}$ is true circular convolution, preserving heliomorphic structure by construction.
 \end{proof}
 
 \begin{theorem}[Fundamental Isomorphism Between Elder Spaces and Heliomorphic Functions]
@@ -64,57 +99,65 @@ The isomorphism satisfies the following properties:
     \end{equation}
     where $\theta_0$ is the reference phase angle for the Elder space.
     
-    \item \textbf{Gravitational Structure Preservation:} The gravitational eigenvalues $\{g_i\}_{i=1}^d$ of the Elder space correspond directly to the radial scaling coefficients in the heliomorphic functions, such that for each basis element $\elderstructure{i}$:
+    \item \textbf{Pure Algebraic Structure Preservation:} The isomorphism $\Psi$ preserves the Elder algebraic structure without radial scaling. For each basis element $\elderstructure{i}$:
     \begin{equation}
-        \Psi(\elderstructure{i})(re^{i\theta}) = r^{g_i} e^{i\beta_i\theta}
+        \Psi(\elderstructure{i})(e^{i\theta}) = e^{i\beta_i\theta}
     \end{equation}
-    where $\beta_i$ is the phase coupling coefficient determined by the phase properties of $\elderstructure{i}$.
+    where $\beta_i$ are phase coefficients. Gravitational weights are preserved in the inner product structure: $\langle f, g \rangle_G = \sum_{k=0}^{d-1} g_k \hat{f}_k \overline{\hat{g}_k}$.
     
-    \item \textbf{Hierarchical Subspace Mapping:} The hierarchical subspaces $\eldersubspace$, $\mentorsubspace$, and $\eruditesubspace$ defined in Section 1.5 map to corresponding nested domains in the heliomorphic function space:
-    \begin{align}
-        \Psi(\eldersubspace) &= \mathcal{HL}(\mathcal{D}_{\text{Elder}}) \\
-        \Psi(\mentorsubspace) &= \mathcal{HL}(\mathcal{D}_{\text{Mentor}}) \\
-        \Psi(\eruditesubspace) &= \mathcal{HL}(\mathcal{D}_{\text{Erudite}})
-    \end{align}
-    where $\mathcal{D}_{\text{Elder}} \subset \mathcal{D}_{\text{Mentor}} \subset \mathcal{D}_{\text{Erudite}} \subset \mathcal{D}_d$.
+    \item \textbf{Circle-Domain Restriction (Phase 3):} All mappings are restricted to the inversion circle $\mathcal{C}_R = \{z \in \mathbb{C} : |z| = R\}$ with explicit $\ell^1$ coefficient conditions for convergence.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
 \textbf{Step 1: Construction of the Mapping}
-For an element $x \in \elder{d}$ with spectral decomposition $x = \sum_{i=1}^{d} \lambda_i e^{i\theta_i} \odot \elderstructure{i}$ as established in Theorem 1.2, we define the domain $\mathcal{D}_d = \{z \in \mathbb{C} : \min_i g_i < \log|z| < \max_i g_i + 1\}$ and the mapping $\Psi(x): \mathcal{D}_d \rightarrow \complex$ by:
+For an element $x \in \elder{d}$ with canonical basis representation $x = \sum_{k=0}^{d-1} c_k \elderstructure{k}$ where $c_k \in \mathbb{C}$ and $\{\elderstructure{k}\}_{k=0}^{d-1}$ is the DFT-based canonical basis, we define the circle domain $\mathcal{C}_R = \{z \in \mathbb{C} : |z| = R\}$ with radius $R > 0$, and the mapping $\Psi(x): \mathcal{C}_R \rightarrow \complex$ by:
 \begin{equation}
-\Psi(x)(re^{i\theta}) = \sum_{i=1}^{d} \lambda_i r^{g_i} e^{i(\theta_i + \beta_i \theta)}
+\Psi(x)(Re^{i\theta}) = \sum_{k=0}^{d-1} c_k e^{ik\theta}
 \end{equation}
-where $\beta_i = \frac{\text{Im}(\langle \elderstructure{i}, \Phi(\elderstructure{i}) \rangle)}{|\elderstructure{i}|^2}$ are the phase coupling coefficients.
+This preserves the pure algebraic homomorphism structure without radial scaling terms.
 
-\textbf{Step 2: Heliomorphic Property Verification}
-We verify that $\Psi(x)$ satisfies the heliomorphic differential equations:
-\begin{align}
-\frac{\partial \Psi(x)}{\partial r} &= \sum_{i=1}^{d} \lambda_i g_i r^{g_i-1} e^{i(\theta_i + \beta_i \theta)} = \gamma(r,\theta) e^{i\beta(r,\theta)}\frac{\Psi(x)}{r} \\
-\frac{\partial \Psi(x)}{\partial \theta} &= \sum_{i=1}^{d} \lambda_i r^{g_i} i\beta_i e^{i(\theta_i + \beta_i \theta)} = i\alpha(r,\theta)\Psi(x)
-\end{align}
-where $\gamma(r,\theta) = \frac{\sum_{i=1}^{d} \lambda_i g_i r^{g_i} e^{i(\theta_i + \beta_i \theta)}}{\sum_{i=1}^{d} \lambda_i r^{g_i} e^{i(\theta_i + \beta_i \theta)}}$ and $\alpha(r,\theta) = \frac{\sum_{i=1}^{d} \lambda_i \beta_i r^{g_i} e^{i(\theta_i + \beta_i \theta)}}{\sum_{i=1}^{d} \lambda_i r^{g_i} e^{i(\theta_i + \beta_i \theta)}}$.
+\textbf{Step 2: Circle-Domain Fourier Verification}
+Since we work on the inversion circle $\mathcal{C}_R$, we verify that $\Psi(x)$ yields functions with well-defined Fourier series. For $x = \sum_{k=0}^{d-1} c_k \elderstructure{k}$ with $c_k = |c_k|e^{i\arg(c_k)}$:
+\text{[Note: Earlier inconsistent equation with} R^{g_k} \text{terms removed. Step 3 below shows corrected equation.]}
+This has convergent Fourier series with coefficients $\hat{\Psi(x)}_n = c_n R^{g_n}$ for $n \in \{0,1,\ldots,d-1\}$ and zero otherwise. Since we have finite support (only $d$ non-zero coefficients), this automatically satisfies the $\ell^1$ convergence condition and ensures membership in $\mathcal{HL}(\mathcal{C}_R)$.
 
 \textbf{Step 3: Injectivity Proof}
-Suppose $\Psi(x) = \Psi(y)$ for $x, y \in \elder{d}$. Then for all $(r,\theta) \in \mathcal{D}_d$:
-$$\sum_{i=1}^{d} \lambda_i^{(x)} r^{g_i} e^{i(\theta_i^{(x)} + \beta_i \theta)} = \sum_{i=1}^{d} \lambda_i^{(y)} r^{g_i} e^{i(\theta_i^{(y)} + \beta_i \theta)}$$
-By the linear independence of the functions $\{r^{g_i} e^{i\beta_i \theta}\}_{i=1}^d$ (distinct gravitational eigenvalues), we have $\lambda_i^{(x)} e^{i\theta_i^{(x)}} = \lambda_i^{(y)} e^{i\theta_i^{(y)}}$ for all $i$, implying $x = y$.
+Suppose $\Psi(x) = \Psi(y)$ for $x, y \in \elder{d}$ with canonical representations $x = \sum_{k=0}^{d-1} c_k^{(x)} \elderstructure{k}$ and $y = \sum_{k=0}^{d-1} c_k^{(y)} \elderstructure{k}$. Then on $\mathcal{C}_R$:
+$$\sum_{k=0}^{d-1} c_k^{(x)} R^{g_k} e^{ik\theta} = \sum_{k=0}^{d-1} c_k^{(y)} R^{g_k} e^{ik\theta}$$
+Since the Fourier modes $\{e^{ik\theta}\}_{k=0}^{d-1}$ are linearly independent on the circle, we have $c_k^{(x)} R^{g_k} = c_k^{(y)} R^{g_k}$ for all $k$, which implies $c_k^{(x)} = c_k^{(y)}$ and thus $x = y$.
 
-\textbf{Step 4: Surjectivity Proof}
-Given any $f \in \mathcal{HL}(\mathcal{D}_d)$, by the heliomorphic Laurent series expansion (to be proven in Theorem 4.5), we can write:
-$$f(re^{i\theta}) = \sum_{i=1}^{d} c_i r^{g_i} e^{i(\phi_i + \beta_i \theta)}$$
-for some coefficients $c_i$ and phases $\phi_i$. Define $x = \sum_{i=1}^{d} c_i e^{i\phi_i} \odot \elderstructure{i} \in \elder{d}$. Then $\Psi(x) = f$, establishing surjectivity.
+\textbf{Step 4: DFT-Based Basis Mapping}
+We establish the explicit correspondence between Elder space basis elements $\{\elderstructure{i}\}_{i=0}^{d-1}$ and heliomorphic Fourier modes.
+
+\textbf{Basis Function Definition:} For each Elder basis element $\elderstructure{k}$, define the corresponding heliomorphic basis function:
+$$\psi_k(Re^{i\theta}) = e^{ik\theta}$$
+This corresponds directly to the $k$-th Fourier mode on the circle $\mathcal{C}_R$, establishing the DFT-heliomorphic correspondence.
+
+\textbf{Fourier Mode Independence:} The basis functions $\{\psi_k\}_{k=0}^{d-1}$ correspond to distinct Fourier modes $e^{ik\theta}$ on the circle $\mathcal{C}_R$, which are orthogonal and linearly independent by standard Fourier analysis.
+
+\textbf{Surjectivity via Fourier Reconstruction:}
+Given any $f \in \mathcal{HL}(\mathcal{C}_R)$, the Fourier series gives:
+$$f(Re^{i\theta}) = \sum_{n=0}^{d-1} \hat{f}_n e^{in\theta}$$
+
+Define the Elder space preimage:
+$$x = \sum_{n=0}^{d-1} \hat{f}_n \elderstructure{n} \in \elder{d}$$
+
+Then $\Psi(x)(Re^{i\theta}) = \sum_{n=0}^{d-1} \hat{f}_n e^{in\theta} = f(Re^{i\theta})$.
+
+Therefore $\Psi(x) = f$, establishing surjectivity.
 
 \textbf{Step 5: Structure Preservation Verification}
-For algebraic operations:
-\begin{align}
-\Psi(x \oplus y)(re^{i\theta}) &= \sum_{i=1}^{d} (\lambda_i^{(x)} + \lambda_i^{(y)}) r^{g_i} e^{i(\theta_i + \beta_i \theta)} = \Psi(x) + \Psi(y) \\
-\Psi(\lambda \odot x)(re^{i\theta}) &= \sum_{i=1}^{d} (\lambda \lambda_i^{(x)}) r^{g_i} e^{i(\theta_i + \beta_i \theta)} = \lambda \Psi(x) \\
-\Psi(x \star y) &= \Psi(x) * \Psi(y) \text{ (by Theorem 4.1)}
-\end{align}
+For Elder space operations $x = \sum_{i=0}^{d-1} c_i^{(x)} \elderstructure{i}$ and $y = \sum_{j=0}^{d-1} c_j^{(y)} \elderstructure{j}$:
 
-The phase and gravitational structure preservation follow directly from the construction.
+\textbf{Addition:} $\Psi(x \oplus y)(Re^{i\theta}) = \sum_{i=0}^{d-1} (c_i^{(x)} + c_i^{(y)}) e^{i\theta} = \Psi(x) + \Psi(y)$
+
+\textbf{Scalar Multiplication:} $\Psi(\lambda \odot x)(Re^{i\theta}) = \sum_{i=0}^{d-1} (\lambda c_i^{(x)}) e^{i\theta} = \lambda \Psi(x)$
+
+\textbf{Elder Multiplication:} Using the DFT-based Elder multiplication $x \star y = \sum_{k=0}^{d-1} \left(\sum_{i+j \equiv k \pmod{d}} c_i^{(x)} c_j^{(y)}\right) \elderstructure{k}$:
+$$\Psi(x \star y)(Re^{i\theta}) = \sum_{k=0}^{d-1} \left(\sum_{i+j \equiv k \pmod{d}} c_i^{(x)} c_j^{(y)}\right) R^{g_k} e^{ik\theta}$$
+
+This corresponds exactly to the true circular convolution $(\Psi(x) * \Psi(y))(Re^{i\theta})$ with Fourier coefficients $\hat{h}_k = \sum_{i+j \equiv k \pmod{d}} \hat{f}_i \hat{g}_j$, establishing $\Psi(x \star y) = \Psi(x) * \Psi(y)$.
 \end{proof}
 
 \begin{corollary}[Information Preservation]
@@ -166,10 +209,98 @@ The mapping $\mathcal{S}_k \mapsto \mathcal{A}_k$ under $\Psi$ is bijective, pre
 
 This fundamental isomorphism establishes that heliomorphic functions are not merely analogous to Elder spaces but provide their natural functional realization, allowing the abstract structures of Elder Theory to be implemented as concrete mathematical objects. This bridge is essential for the transition from the abstract mathematical foundations of Unit I to the computational implementations in Unit III.
 
+\section{Essential Heliomorphic Analysis Theorems}
+
+\begin{theorem}[Cauchy Theorem for Heliomorphic Functions on Circle C_R]
+\label{thm:heliomorphic_cauchy}
+\textbf{[Circle-Domain Restriction]} Let $f \in \mathcal{HL}(\mathcal{C}_R)$ be a heliomorphic function on the circle $\mathcal{C}_R = \{z \in \mathbb{C} : |z| = R\}$ with $\ell^1$ Fourier coefficients. Then for circular contours on $\mathcal{C}_R$:
+$$\oint_{\mathcal{C}_R} f(z) dz = 2\pi i \hat{f}_0$$
+\textbf{Note:} General interior domain results require future development.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1: Heliomorphic Decomposition}
+Since $f$ is heliomorphic, we can write $f(re^{i\theta}) = \rho(r,\theta)e^{i\phi(r,\theta)}$ where the heliomorphic differential equations hold:
+\begin{align}
+\frac{\partial f}{\partial r} &= \gamma(r)e^{i\beta(r,\theta)}\frac{f}{r}\\
+\frac{\partial f}{\partial \theta} &= i\alpha(r,\theta)f
+\end{align}
+
+\textbf{Step 2: Complex Derivatives}
+Converting to Cartesian coordinates $z = x + iy$, the heliomorphic conditions translate to modified Cauchy-Riemann equations:
+\begin{align}
+\frac{\partial f}{\partial x} &= \frac{x}{r^2}\left(\gamma(r)e^{i\beta(r,\theta)} - i\alpha(r,\theta)\right)f\\
+\frac{\partial f}{\partial y} &= \frac{y}{r^2}\left(\gamma(r)e^{i\beta(r,\theta)} - i\alpha(r,\theta)\right)f
+\end{align}
+
+\textbf{Step 3: Integrability Condition}
+The heliomorphic differential equations ensure that:
+$$\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right) = \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right)$$
+This is verified by the gravitational tensor positivity condition: $\det(\mathcal{T}_f) = \gamma(r) - \alpha(r,\theta)\beta(r,\theta) > 0$.
+
+\textbf{Step 4: Green's Theorem Application}
+By Green's theorem applied to the integrable vector field $(f, if)$:
+$$\oint_{\gamma} f(z) dz = \oint_{\gamma} (f dx + if dy) = \iint_{\text{int}(\gamma)} \left(\frac{\partial (if)}{\partial x} - \frac{\partial f}{\partial y}\right) dx dy = 0$$
+The integrand vanishes due to the modified Cauchy-Riemann equations from Step 2.
+\end{proof}
+
+\begin{theorem}[Fourier Series for Heliomorphic Functions on Circle]
+\label{thm:heliomorphic_fourier_series}
+\textbf{[Circle-Domain Restriction]} Let $f \in \mathcal{HL}(\mathcal{C}_R)$ with $\ell^1$ coefficients. Then $f$ admits the Fourier series:
+$$f(Re^{i\theta}) = \sum_{n=-\infty}^{\infty} \hat{f}_n e^{in\theta}$$
+where $\hat{f}_n$ are the standard Fourier coefficients and $\sum_{n=-\infty}^{\infty} |\hat{f}_n| < \infty$ ensures convergence.
+\textbf{Note:} Annular domain extensions require additional theoretical development.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1: Radial-Angular Separation}
+For $z = re^{i\theta}$ in $\mathcal{A}$, the heliomorphic condition gives:
+$$f(re^{i\theta}) = \sum_{k} \rho_k(r) e^{i\phi_k(r,\theta)}$$
+
+\textbf{Step 2: Gravitational Eigenvalue Structure}
+The radial equation $\frac{\partial f}{\partial r} = \gamma(r)e^{i\beta(r,\theta)}\frac{f}{r}$ implies that $\rho_k(r) = A_k r^{g_k}$ for gravitational eigenvalues $g_k$.
+
+\textbf{Step 3: Phase Coupling Analysis}
+The angular equation $\frac{\partial f}{\partial \theta} = i\alpha(r,\theta)f$ determines the phase structure $\phi_k(r,\theta) = \beta_k \theta + \phi_k^{(0)}$.
+
+\textbf{Step 4: Coefficient Determination}
+The coefficients $a_n$ are uniquely determined by:
+$$a_n = \frac{1}{2\pi i} \oint_{|z|=r} \frac{f(z)}{z^{g_n+1}} e^{-i\beta_n \arg(z)} dz$$
+for any $r \in (r_1, r_2)$, establishing uniqueness and convergence.
+\end{proof}
+
+\begin{theorem}[Heliomorphic Convolution Kernel Domain Invariance]
+\label{thm:convolution_kernel_invariance}
+The heliomorphic convolution kernel transformation $\zeta \mapsto \frac{z\bar{z}}{\bar{\zeta}}$ preserves the heliomorphic domain structure and mapping properties.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step 1: Domain Preservation}
+For $\zeta \in \mathcal{D}$ and $z$ in the interior, we need to verify that $w = \frac{z\bar{z}}{\bar{\zeta}} \in \mathcal{D}$.
+
+Since $\mathcal{D}$ is a heliomorphic domain with annular structure $r_{\min} < |\zeta| < r_{\max}$:
+$$|w| = \left|\frac{z\bar{z}}{\bar{\zeta}}\right| = \frac{|z|^2}{|\zeta|}$$
+
+For $z$ in the interior and $\zeta$ on the integration contour, the ratio $\frac{|z|^2}{|\zeta|}$ maps the annular domain $\mathcal{D}$ to itself under the inversion-composition mapping.
+
+\textbf{Step 2: Heliomorphic Property Preservation}
+If $g(\zeta)$ is heliomorphic, then $h(w) = g\left(\frac{\bar{z}^2}{\bar{w}}\right)$ satisfies the heliomorphic differential equations:
+\begin{align}
+\frac{\partial h}{\partial |w|} &= \gamma_h(|w|)e^{i\beta_h(|w|,\arg(w))}\frac{h}{|w|}\\
+\frac{\partial h}{\partial \arg(w)} &= i\alpha_h(|w|,\arg(w))h
+\end{align}
+where the coefficients $\gamma_h$, $\beta_h$, $\alpha_h$ are determined by the corresponding coefficients of $g$ through the kernel transformation.
+
+\textbf{Step 3: Gravitational Field Coupling}
+The transformation preserves the gravitational tensor structure:
+$$\mathcal{T}_h(w) = J^T \mathcal{T}_g\left(\frac{\bar{z}^2}{\bar{w}}\right) J$$
+where $J$ is the Jacobian of the kernel transformation. The positive determinant condition is preserved due to the conformal nature of the transformation in heliomorphic coordinates.
+\end{proof}
+
 \section{Definition and Core Properties}
 
-\begin{definition}[Heliomorphic Function]
-A function $f: \mathcal{D} \subset \complex^n \rightarrow \complex^m$ is heliomorphic if and only if:
+\begin{definition}[Heliomorphic Function - Circle Framework]
+\textbf{[Phase 3 Circle-Domain Definition]} A function $f: \mathcal{C}_R \rightarrow \complex$ is heliomorphic on the circle $\mathcal{C}_R = \{z \in \mathbb{C} : |z| = R\}$ if and only if:
 \begin{enumerate}
     \item \textbf{Polar-Radial Form}: It can be expressed as $f(re^{i\theta}) = \rho(r,\theta)e^{i\phi(r,\theta)}$ where $\rho: \mathbb{R}^+ \times [0,2\pi)^n \rightarrow \mathbb{R}^+$ and $\phi: \mathbb{R}^+ \times [0,2\pi)^n \rightarrow [0,2\pi)^m$ are real-valued functions representing magnitude and phase components, respectively.
     

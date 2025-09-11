@@ -63,6 +63,8 @@
 % Fix enumeration depth issues - increase maximum nesting
 \usepackage{enumitem}
 \setlistdepth{9}
+\renewlist{enumerate}{enumerate}{9}
+\renewlist{itemize}{itemize}{9}
 \setlist[itemize,1]{label=$\bullet$}
 \setlist[itemize,2]{label=$\circ$}
 \setlist[itemize,3]{label=$\ast$}
@@ -197,7 +199,7 @@
     bottom=2.5cm,
     headsep=1cm,
     footskip=1cm,
-    headheight=25.2pt
+    headheight=26pt
 }
 
 % Set up headers and footers

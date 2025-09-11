@@ -27,27 +27,27 @@ An Elder Training DAG Collection is a set of directed acyclic graphs $\mathcal{G
 
 The training architecture maintains a comprehensive list of specialized DAGs, each optimized for specific computational domains:
 
-\begin{algorithm}[H]
-\caption{Elder Training DAG List Construction}
-\begin{algorithmic}[1]
-\REQUIRE Domains $\mathcal{D} = \{D_1, \ldots, D_k\}$, objectives $\mathcal{L}$
-\ENSURE DAG collection $\mathcal{G} = \{G_1, \ldots, G_k\}$
-\FOR{each domain $D_i \in \mathcal{D}$}
-    \STATE Initialize Elder node $E_i$
-    \STATE Create Mentor layer $M_i = \{M_{i1}, \ldots, M_{im_i}\}$
-    \FOR{each Mentor $M_{ij}$}
-        \STATE Create Erudite layer $R_{ij} = \{R_{ij1}, \ldots, R_{ijn_{ij}}\}$
-        \STATE Connect $R_{ijk}$ to $M_{ij}$
-        \STATE Ensure acyclic structure
-    \ENDFOR
-    \STATE Validate DAG properties
-    \STATE Initialize weights $W_i$
-    \STATE Add $G_i$ to collection
-\ENDFOR
-\STATE Establish inter-DAG connections
-\RETURN Collection $\mathcal{G}$
-\end{algorithmic}
-\end{algorithm}
+\textbf{Elder Training DAG List Construction Algorithm:}
+\begin{enumerate}
+\item \textbf{Input:} Domains $\mathcal{D} = \{D_1, \ldots, D_k\}$, objectives $\mathcal{L}$
+\item \textbf{Output:} DAG collection $\mathcal{G} = \{G_1, \ldots, G_k\}$
+\item For each domain $D_i \in \mathcal{D}$:
+    \begin{itemize}
+    \item Initialize Elder node $E_i$
+    \item Create Mentor layer $M_i = \{M_{i1}, \ldots, M_{im_i}\}$
+    \item For each Mentor $M_{ij}$:
+        \begin{itemize}
+        \item Create Erudite layer $R_{ij} = \{R_{ij1}, \ldots, R_{ijn_{ij}}\}$
+        \item Connect $R_{ijk}$ to $M_{ij}$
+        \item Ensure acyclic structure
+        \end{itemize}
+    \item Validate DAG properties
+    \item Initialize weights $W_i$
+    \item Add $G_i$ to collection
+    \end{itemize}
+\item Establish inter-DAG connections
+\item Return Collection $\mathcal{G}$
+\end{enumerate}
 
 \subsection{Inter-DAG Knowledge Transfer Pathways}
 
