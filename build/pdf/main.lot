@@ -20,19 +20,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {20.1}{\ignorespaces Critical Phase Thresholds: Theory vs. Simulation}}{214}{table.caption.20}%
+\contentsline {table}{\numberline {20.1}{\ignorespaces Critical Phase Thresholds: Theory vs. Simulation}}{216}{table.caption.20}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {22.1}{\ignorespaces Knowledge Propagation Velocities}}{233}{table.caption.23}%
-\contentsline {table}{\numberline {22.2}{\ignorespaces Knowledge Propagation Time Examples}}{233}{table.caption.24}%
+\contentsline {table}{\numberline {22.1}{\ignorespaces Knowledge Propagation Velocities}}{235}{table.caption.23}%
+\contentsline {table}{\numberline {22.2}{\ignorespaces Knowledge Propagation Time Examples}}{235}{table.caption.24}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {24.1}{\ignorespaces Knowledge Propagation Time Examples}}{254}{table.caption.26}%
-\contentsline {table}{\numberline {24.2}{\ignorespaces Knowledge Propagation Time Examples (in normalized time units)}}{255}{table.caption.27}%
-\contentsline {table}{\numberline {24.3}{\ignorespaces Elder-to-Erudite Knowledge Propagation Examples}}{255}{table.caption.28}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {24.1}{\ignorespaces Knowledge Propagation Time Examples}}{256}{table.caption.26}%
+\contentsline {table}{\numberline {24.2}{\ignorespaces Knowledge Propagation Time Examples (in normalized time units)}}{257}{table.caption.27}%
+\contentsline {table}{\numberline {24.3}{\ignorespaces Elder-to-Erudite Knowledge Propagation Examples}}{257}{table.caption.28}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -44,8 +41,11 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {38.1}{\ignorespaces Computational and Memory Complexity: Elder Heliosystem vs. Traditional 3-Layer Neural Network}}{414}{table.caption.36}%
-\contentsline {table}{\numberline {38.2}{\ignorespaces Detailed Time Complexity Comparison}}{415}{table.caption.37}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {38.1}{\ignorespaces Computational and Memory Complexity: Elder Heliosystem vs. Traditional 3-Layer Neural Network}}{416}{table.caption.36}%
+\contentsline {table}{\numberline {38.2}{\ignorespaces Detailed Time Complexity Comparison}}{417}{table.caption.37}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -53,19 +53,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {45.1}{\ignorespaces Recommended Parameter Ranges for Continuous Learning Operation}}{558}{table.caption.43}%
-\contentsline {table}{\numberline {45.2}{\ignorespaces Emergent Mass Ratios by Knowledge Domain}}{559}{table.caption.44}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {54.1}{\ignorespaces Comparison of Token-Based and Field-Based Memory Approaches}}{668}{table.caption.61}%
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {45.1}{\ignorespaces Recommended Parameter Ranges for Continuous Learning Operation}}{560}{table.caption.43}%
+\contentsline {table}{\numberline {45.2}{\ignorespaces Emergent Mass Ratios by Knowledge Domain}}{561}{table.caption.44}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -75,30 +64,41 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{772}{table.caption.79}%
-\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{774}{table.caption.80}%
-\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{775}{table.caption.81}%
-\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{776}{table.caption.82}%
-\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{777}{table.caption.83}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{783}{table.caption.87}%
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {66.1}{\ignorespaces Unified Framework Performance Metrics}}{793}{table.caption.89}%
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {68.1}{\ignorespaces Primary multimodal dataset for Audiomage experiment}}{801}{table.caption.90}%
-\contentsline {table}{\numberline {68.2}{\ignorespaces Multi-domain feature extraction from complete dataset}}{802}{table.caption.91}%
-\contentsline {table}{\numberline {68.3}{\ignorespaces Content distribution within the 39:55:33 dataset}}{803}{table.caption.92}%
-\contentsline {table}{\numberline {68.4}{\ignorespaces Processing Performance Benchmarks}}{807}{table.caption.93}%
+\contentsline {table}{\numberline {54.1}{\ignorespaces Comparison of Token-Based and Field-Based Memory Approaches}}{670}{table.caption.61}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {71.1}{\ignorespaces Multi-domain feature extraction from complete dataset}}{838}{table.caption.98}%
-\contentsline {table}{\numberline {71.2}{\ignorespaces Content distribution within the 39:55:33 dataset}}{839}{table.caption.99}%
-\contentsline {table}{\numberline {71.3}{\ignorespaces Baseline comparison framework for experimental validation}}{844}{table.caption.100}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {72.1}{\ignorespaces 11-Level Analysis Performance Results}}{850}{table.caption.103}%
-\contentsline {table}{\numberline {72.2}{\ignorespaces Elder Heliosystem Integration Performance}}{851}{table.caption.105}%
-\contentsline {table}{\numberline {72.3}{\ignorespaces Performance Analysis by Content Category}}{853}{table.caption.107}%
-\contentsline {table}{\numberline {72.4}{\ignorespaces Relative Importance of Each Decomposition Level}}{854}{table.caption.109}%
-\contentsline {table}{\numberline {72.5}{\ignorespaces Comparative Analysis with Traditional Approaches}}{855}{table.caption.110}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {64.1}{\ignorespaces System Memory (RAM) Organization}}{774}{table.caption.79}%
+\contentsline {table}{\numberline {64.2}{\ignorespaces Accelerator Memory Organization}}{776}{table.caption.80}%
+\contentsline {table}{\numberline {64.3}{\ignorespaces Knowledge Parameter Storage Breakdown}}{777}{table.caption.81}%
+\contentsline {table}{\numberline {64.4}{\ignorespaces Parameter Distribution Across Memory Hierarchy}}{778}{table.caption.82}%
+\contentsline {table}{\numberline {64.5}{\ignorespaces Memory Footprint Summary}}{779}{table.caption.83}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {65.1}{\ignorespaces Comparison between traditional gradient tape and Elder Heliosystem's inherent gradient tracking}}{785}{table.caption.87}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {66.1}{\ignorespaces Unified Framework Performance Metrics}}{795}{table.caption.89}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {68.1}{\ignorespaces Primary multimodal dataset for Audiomage experiment}}{803}{table.caption.90}%
+\contentsline {table}{\numberline {68.2}{\ignorespaces Multi-domain feature extraction from complete dataset}}{804}{table.caption.91}%
+\contentsline {table}{\numberline {68.3}{\ignorespaces Content distribution within the 39:55:33 dataset}}{805}{table.caption.92}%
+\contentsline {table}{\numberline {68.4}{\ignorespaces Processing Performance Benchmarks}}{809}{table.caption.93}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {71.1}{\ignorespaces Multi-domain feature extraction from complete dataset}}{840}{table.caption.98}%
+\contentsline {table}{\numberline {71.2}{\ignorespaces Content distribution within the 39:55:33 dataset}}{841}{table.caption.99}%
+\contentsline {table}{\numberline {71.3}{\ignorespaces Baseline comparison framework for experimental validation}}{846}{table.caption.100}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {72.1}{\ignorespaces 11-Level Analysis Performance Results}}{852}{table.caption.103}%
+\contentsline {table}{\numberline {72.2}{\ignorespaces Elder Heliosystem Integration Performance}}{853}{table.caption.105}%
+\contentsline {table}{\numberline {72.3}{\ignorespaces Performance Analysis by Content Category}}{855}{table.caption.107}%
+\contentsline {table}{\numberline {72.4}{\ignorespaces Relative Importance of Each Decomposition Level}}{856}{table.caption.109}%
+\contentsline {table}{\numberline {72.5}{\ignorespaces Comparative Analysis with Traditional Approaches}}{857}{table.caption.110}%
