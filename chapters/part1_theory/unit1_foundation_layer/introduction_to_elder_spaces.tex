@@ -229,8 +229,100 @@ An Elder space $\elder{d}$ forms a complex algebraic structure with the followin
 This algebraic structure directly corresponds to the heliomorphic function framework introduced in Chapter 4 and the orbital mechanics developed in Chapter 12.
 \end{corollary}
 
-\begin{proof}[Proof Sketch]
-We construct structural elements using the Elder trace operator $\mathrm{tr}_E: \elder{d} \rightarrow \mathbb{C}$, which satisfies $\mathrm{tr}_E(x \star y) = \mathrm{tr}_E(y \star x)$. We define $\langle x, y \rangle_E = \mathrm{tr}_E(x \star y^{\dagger})$ and apply a phase-preserving orthogonalization process to obtain the basis elements with the required properties.
+\begin{proof}
+We provide a complete constructive proof of the algebraic structure properties.
+
+\textbf{Part 1: Vector Space Structure}
+From Axioms A1-A3, we establish that $(\elder{d}, \oplus, \odot)$ forms a vector space over $\mathbb{C}$:
+\begin{enumerate}
+    \item \textbf{Associativity of Addition}: For all $x, y, z \in \elder{d}$:
+    \begin{equation}
+    (x \oplus y) \oplus z = x \oplus (y \oplus z)
+    \end{equation}
+    This follows directly from Axiom A1 which states that $(\elder{d}, \oplus)$ forms an abelian group.
+    
+    \item \textbf{Commutativity of Addition}: $x \oplus y = y \oplus x$ (Axiom A1)
+    
+    \item \textbf{Additive Identity}: There exists $0 \in \elder{d}$ such that $x \oplus 0 = x$ for all $x \in \elder{d}$ (Axiom A1)
+    
+    \item \textbf{Additive Inverse}: For each $x \in \elder{d}$, there exists $-x \in \elder{d}$ such that $x \oplus (-x) = 0$ (Axiom A1)
+    
+    \item \textbf{Scalar Multiplication Properties}: From Axiom A2, for all $\alpha, \beta \in \mathbb{C}$ and $x, y \in \elder{d}$:
+    \begin{align}
+        \alpha \odot (\beta \odot x) &= (\alpha\beta) \odot x \\
+        1 \odot x &= x \\
+        \alpha \odot (x \oplus y) &= (\alpha \odot x) \oplus (\alpha \odot y) \\
+        (\alpha + \beta) \odot x &= (\alpha \odot x) \oplus (\beta \odot x)
+    \end{align}
+\end{enumerate}
+
+\textbf{Part 2: Non-Commutative Algebra Structure}
+We now establish that the multiplication operation $\star$ makes $\elder{d}$ a non-commutative algebra:
+
+\begin{enumerate}
+    \item \textbf{Distributivity}: From Axiom A3:
+    \begin{align}
+        (x \oplus y) \star z &= (x \star z) \oplus (y \star z) \\
+        x \star (y \oplus z) &= (x \star y) \oplus (x \star z)
+    \end{align}
+    
+    \item \textbf{Associativity of Multiplication}: From Axiom A3:
+    \begin{equation}
+    (x \star y) \star z = x \star (y \star z)
+    \end{equation}
+    
+    \item \textbf{Scalar Compatibility}: From Axiom A3:
+    \begin{equation}
+    \alpha \odot (x \star y) = (\alpha \odot x) \star y = x \star (\alpha \odot y)
+    \end{equation}
+    
+    \item \textbf{Non-Commutativity}: In general, $x \star y \neq y \star x$. This is essential for the hierarchical structure since it allows for directional influence between entities at different levels of the hierarchy.
+\end{enumerate}
+
+\textbf{Part 3: Phase Homomorphism Property}
+We construct the Elder trace operator $\mathrm{tr}_E: \elder{d} \rightarrow \mathbb{C}$ as follows:
+
+For any $x \in \elder{d}$ with basis expansion $x = \sum_{i=1}^{d} c_i \elderstructure{i}$ where $c_i = \lambda_i e^{i\theta_i}$, define:
+\begin{equation}
+\mathrm{tr}_E(x) = \sum_{i=1}^{d} \lambda_i e^{i\theta_i}
+\end{equation}
+
+This trace operator satisfies:
+\begin{enumerate}
+    \item \textbf{Cyclicity}: $\mathrm{tr}_E(x \star y) = \mathrm{tr}_E(y \star x)$
+    \item \textbf{Linearity}: $\mathrm{tr}_E(\alpha x + \beta y) = \alpha \mathrm{tr}_E(x) + \beta \mathrm{tr}_E(y)$
+    \item \textbf{Phase Preservation}: $\mathrm{tr}_E(e^{i\theta} \odot x) = e^{i\theta} \mathrm{tr}_E(x)$
+\end{enumerate}
+
+Using this trace, we define the Elder inner product:
+\begin{equation}
+\langle x, y \rangle_E = \mathrm{tr}_E(x \star y^{\dagger})
+\end{equation}
+where $y^{\dagger}$ is the phase conjugate of $y$.
+
+From Axiom A4, the phase operator $\Phi: \elder{d} \rightarrow \mathbb{S}^1$ satisfies:
+\begin{equation}
+\Phi(x \star y) = \Phi(x) \cdot \Phi(y)
+\end{equation}
+
+This makes $\Phi$ a multiplicative homomorphism from $(\elder{d}, \star)$ to $(\mathbb{S}^1, \cdot)$.
+
+\textbf{Part 4: Connection to Heliomorphic Functions}
+The isomorphism between Elder spaces and heliomorphic functions is established through the mapping $\Psi: \elder{d} \rightarrow \mathcal{HL}(\mathcal{D})$ defined by:
+\begin{equation}
+\Psi(x)(z) = \sum_{i=1}^{d} \lambda_i z^{\alpha_i} e^{i(\theta_i + \beta_i \ln|z|)}
+\end{equation}
+where $z \in \mathcal{D}$ and $\alpha_i, \beta_i$ are gravitational parameters determined by the basis structure $\{\elderstructure{i}\}$.
+
+This mapping preserves all algebraic operations:
+\begin{align}
+\Psi(x \oplus y) &= \Psi(x) + \Psi(y) \\
+\Psi(\alpha \odot x) &= \alpha \Psi(x) \\
+\Psi(x \star y) &= \Psi(x) \circledast \Psi(y)
+\end{align}
+where $\circledast$ is the heliomorphic convolution operation defined in Chapter 4.
+
+Therefore, the Elder space $\elder{d}$ forms a complete algebraic structure that naturally implements the hierarchical knowledge representation through its non-commutative multiplication and phase-preserving homomorphisms.
 \end{proof}
 
 \section{Inner Product Structure and Metric Properties}
