@@ -6,10 +6,10 @@ This chapter presents the mathematical foundation of Elder Theory through Elder 
 
 \section{Foundational Axioms}
 
-An Elder space $\elder{d}$ is a complex-valued mathematical structure that extends traditional vector spaces by incorporating phase-sensitive operations essential for hierarchical knowledge representation.
+An Elder space $\elder{d}$ is a complex-valued mathematical structure that extends traditional vector spaces by incorporating phase-sensitive operations essential for hierarchical knowledge representation.\index{Elder Space}
 
 \begin{definition}[Elder Space]
-\label{def:elder_space}
+\label{def:elder_space}\index{Elder Space!definition}
 An Elder space $\elder{d}$ of dimension $d$ is a complex-valued set equipped with operations:
 \begin{enumerate}
     \item $\oplus: \elder{d} \times \elder{d} \rightarrow \elder{d}$ (addition)
@@ -62,7 +62,7 @@ The global phase operator $\Phi$ extracts the aggregate phase of an element, whi
 Elder spaces fundamentally differ from vector spaces through their phase operator $\Phi$ and non-commutative multiplication $\star$, which together enable the representation of hierarchical knowledge structures.
 
 \begin{theorem}[Axiom System Consistency and Associativity]
-\label{thm:axiom_consistency}
+\label{thm:axiom_consistency}\index{Axiom System!consistency}\index{Associativity}
 The Elder space axiom system A1-A4 is internally consistent, and the Elder multiplication operation $\star$ satisfies associativity.
 \end{theorem}
 
@@ -146,6 +146,7 @@ Therefore, Elder multiplication $\star$ is associative, completing the proof.
 \end{proof}
 
 \begin{definition}[Gravitational Field Operator]
+\label{def:gravitational_field_operator}\index{Gravitational Field Operator}\index{Operator!Gravitational Field}
 The gravitational field operator $\mathcal{G}: \elder{d} \rightarrow \elder{d}$ is a parameterized linear operator defined by:
 \begin{equation}
 \mathcal{G} = \sum_{i=1}^{d} g_i |\elderstructure{i}\rangle\langle\elderstructure{i}|
@@ -154,6 +155,8 @@ where $\{g_i\}_{i=1}^{d}$ are learnable gravitational eigenvalues with $g_1 \geq
 \end{definition}
 
 \begin{theorem}[Structural Elements]
+\label{thm:structural_elements}
+% DEPENDENCIES: Definition~\ref{def:elder_space}, Definition~\ref{def:gravitational_field_operator}
 Every Elder space $\elder{d}$ of dimension $d$ contains a canonical basis $\mathcal{B} = \{\elderstructure{1}, \elderstructure{2}, \ldots, \elderstructure{d}\}$ with the following properties:
 \begin{enumerate}
     \item \textbf{Phase Orthogonality}: For all distinct $i, j \in \{1, 2, \ldots, d\}$,
@@ -272,6 +275,8 @@ The construction is unique up to unitary transformations that preserve both eige
 \end{proof}
 
 \begin{corollary}[Algebraic Structure]
+\label{cor:algebraic_structure}
+% DEPENDENCIES: Theorem~\ref{thm:axiom_consistency}, Definition~\ref{def:elder_space}
 An Elder space $\elder{d}$ forms a complex algebraic structure with the following properties:
 \begin{enumerate}
     \item $(\elder{d}, \oplus, \odot)$ forms a vector space over $\mathbb{C}$
@@ -359,6 +364,7 @@ All three properties are proven, completing the verification of the algebraic st
 The algebraic operations in Elder spaces induce a natural inner product structure that respects the phase properties and establishes a rigorous metric framework.
 
 \begin{definition}[Elder Inner Product]
+\index{Inner Product!Elder}\index{Elder Space!inner product}
 Let $\elder{d}$ be an Elder space with structural elements $\{\elderstructure{i}\}_{i=1}^d$. The Elder inner product $\langle \cdot, \cdot \rangle_E: \elder{d} \times \elder{d} \rightarrow \mathbb{C}$ is defined as:
 \begin{equation}
 \langle x, y \rangle_E = \sum_{i=1}^d \lambda_i \overline{\mu_i} e^{i(\theta_i - \phi_i)}
@@ -375,6 +381,8 @@ This inner product satisfies:
 \end{definition}
 
 \begin{theorem}[Metric Properties]
+\label{thm:metric_properties}
+% DEPENDENCIES: Elder Inner Product definition, Lemma~\ref{lem:elder_cauchy_schwarz}
 The Elder inner product induces a metric $d_E: \elder{d} \times \elder{d} \rightarrow \mathbb{R}^+$ defined by:
 \begin{equation}
 d_E(x, y) = \sqrt{\langle x - y, x - y \rangle_E}
@@ -398,6 +406,7 @@ We establish each metric property rigorously:
 First establish the Cauchy-Schwarz inequality for Elder inner products:
 
 \begin{lemma}[Elder Cauchy-Schwarz]
+\label{lem:elder_cauchy_schwarz}
 For all $x, y \in \elder{d}$: $|\langle x, y \rangle_E|^2 \leq \langle x, x \rangle_E \langle y, y \rangle_E$
 \end{lemma}
 
@@ -441,6 +450,7 @@ d_E(x \star z, y \star z)^2 &= \langle (x - y) \star z, (x - y) \star z \rangle_
 \end{proof}
 
 \begin{proposition}[Connection to Heliomorphic Metrics]
+\label{prop:heliomorphic_metric_connection}
 The Elder metric $d_E$ on $\elder{d}$ is compatible with the heliomorphic domain metric introduced in Chapter 4 through the isomorphism $\Psi: \elder{d} \rightarrow \mathcal{D}$ established in Theorem 4.3, such that:
 \begin{equation}
 d_{\mathcal{H}}(\Psi(x), \Psi(y)) = F(d_E(x, y))
@@ -453,6 +463,7 @@ where $F: \mathbb{R}^+ \rightarrow \mathbb{R}^+$ is a strictly increasing functi
 The Elder space naturally decomposes into nested subspaces that directly correspond to the Elder-Mentor-Erudite hierarchy. This decomposition forms the mathematical basis for the multi-level architecture implemented in Unit III and corresponds to the stratified heliomorphic domains introduced in Unit II.
 
 \begin{definition}[Hierarchical Subspace Decomposition]
+\label{def:hierarchical_subspace_decomposition}
 An Elder space $\elder{d}$ of dimension $d$ canonically decomposes into three fundamental subspaces:
 \begin{align}
     \eldersubspace &= \mathrm{span}\{\elderstructure{1}, \ldots, \elderstructure{k}\} \\
@@ -468,21 +479,23 @@ where indices $1 \leq k < m < d$ are determined by gravitational eigenvalues and
     \end{equation}
     with distinct separation between the three subspaces.
     
-    \item \textbf{Phase Coherence}: Elements within each subspace maintain higher phase coherence with each other than with elements from different subspaces:
+    \item \textbf{Phase Coherence}: Elements within each subspace maintain higher phase coherence with each other than with elements from different subspaces. Specifically, for uniformly distributed unit-norm elements $x, y$ from the same subspace, the expected phase difference satisfies:
     \begin{equation}
-    \mathbb{E}[\Phi(x \star y^{-1})] \approx 1 \quad \text{for} \quad x,y \in \eldersubspace \; \text{or} \; x,y \in \mentorsubspace \; \text{or} \; x,y \in \eruditesubspace
+    \left|\mathbb{E}_{x,y \sim \mathcal{U}(S)}[\Phi(x \star y^{-1})] - 1\right| < \epsilon_{\text{coh}}
     \end{equation}
+    where $\mathbb{E}_{x,y \sim \mathcal{U}(S)}[\cdot]$ denotes expectation over uniformly distributed elements from subspace $S \in \{\eldersubspace, \mentorsubspace, \eruditesubspace\}$, and $\epsilon_{\text{coh}} = O(1/\sqrt{|S|})$ is the coherence tolerance decreasing with subspace dimension $|S|$.
     
-    \item \textbf{Influence Directionality}: For $x \in \eldersubspace$, $y \in \mentorsubspace$, $z \in \eruditesubspace$:
+    \item \textbf{Influence Directionality}: For unit-norm elements $x \in \eldersubspace$, $y \in \mentorsubspace$, $z \in \eruditesubspace$ with $\|x\|_E = \|y\|_E = \|z\|_E = 1$:
     \begin{equation}
-    \|x \star y\|_E > \|y \star x\|_E \quad \text{and} \quad \|y \star z\|_E > \|z \star y\|_E
+    \|x \star y\|_E \geq (1 + \delta_E) \|y \star x\|_E \quad \text{and} \quad \|y \star z\|_E \geq (1 + \delta_M) \|z \star y\|_E
     \end{equation}
-    establishing the hierarchical influence from higher to lower levels.
+    where $\delta_E, \delta_M > 0$ are the hierarchical influence gaps determined by the gravitational eigenvalue ratios: $\delta_E = (g_1 - g_k)/(g_1 + g_k)$ and $\delta_M = (g_{k+1} - g_m)/(g_{k+1} + g_m)$, establishing the hierarchical influence from higher to lower levels with quantitative bounds.
 \end{enumerate}
 \end{definition}
 
 \begin{theorem}[Algorithmic Hierarchical Decomposition]
 \label{thm:hierarchical_decomposition_algorithm}
+% DEPENDENCIES: Definition~\ref{def:hierarchical_subspace_decomposition}, Definition~\ref{def:gravitational_field_operator}
 Given an Elder space $\elder{d}$ with gravitational field operator $\mathcal{G}$ and canonical basis $\{\elderstructure{i}\}_{i=1}^{d}$, the hierarchical decomposition can be computed algorithmically.
 \end{theorem}
 
@@ -606,6 +619,8 @@ The isomorphism $\Phi_{\text{grav}}$ preserves:
 \end{figure}
 
 \begin{theorem}[Spectral Decomposition]
+\label{thm:spectral_decomposition}
+% DEPENDENCIES: Theorem~\ref{thm:structural_elements} (canonical basis)
 Every element $x \in \elder{d}$ has a unique spectral decomposition:
 \begin{equation}
 x = \sum_{i=1}^{d} \lambda_i e^{i\theta_i} \odot \elderstructure{i}
@@ -616,7 +631,7 @@ with amplitudes $\lambda_i \in \mathbb{R}^+$ and phases $\theta_i \in [0, 2\pi)$
 This spectral decomposition allows us to separate knowledge representation across hierarchical levels, with Elder components encoding universal principles, Mentor components encoding domain-specific knowledge, and Erudite components encoding instance-specific information.
 
 \begin{theorem}[Phase Conservation Laws]
-\label{thm:phase_conservation_laws}
+\label{thm:phase_conservation_laws}\index{Phase Conservation}\index{Conservation Laws!phase}
 % DEPENDENCIES: Definition~\ref{def:elder_space} (Axioms A1-A4), Definition~\ref{def:elder_magnitude_norm}
 In an Elder space $\elder{d}$, phase transformations preserve essential structural invariants:
 \begin{enumerate}
@@ -702,7 +717,7 @@ All four conservation laws are proven.
 \end{proof}
 
 \begin{theorem}[Gravitational Field Structure]
-\label{thm:gravitational_field_structure}
+\label{thm:gravitational_field_structure}\index{Gravitational Field!structure}\index{Hierarchical Stratification}
 % DEPENDENCIES: Definition~\ref{def:gravitational_field_operator}, Theorem (Structural Elements)
 Every Elder space $\elder{d}$ admits a canonical gravitational field structure $\mathcal{G}: \elder{d} \rightarrow \mathbb{R}^+$ such that:
 \begin{enumerate}
@@ -800,6 +815,7 @@ All four properties of the gravitational field structure are established.
 Elder spaces naturally model learning dynamics through phase-coherent flows, which provide the mathematical foundation for how knowledge evolves across the hierarchical system.
 
 \begin{definition}[Phase-Coherent Elder Flow]
+\label{def:phase_coherent_flow}
 A phase-coherent Elder flow is a continuous-time evolution:
 \begin{equation}
 \frac{dx}{dt} = F(x, \Phi(x), t)
@@ -1062,7 +1078,7 @@ The Elder product $\star$ forms a non-commutative algebraic structure with the f
 \end{enumerate}
 
 \begin{theorem}[Elder Structural Correspondence]
-\label{thm:elder-structural}
+\label{thm:elder-structural}\index{C*-algebra}\index{Non-commutative Algebra}\index{Elder Space!C*-algebra structure}
 % DEPENDENCIES: Definition~\ref{def:elder_space}, Corollary (Algebraic Structure)
 An Elder space with its structural product and phase operator forms a non-commutative C*-algebra with unique algebraic properties.
 \end{theorem}
@@ -1165,6 +1181,7 @@ This correspondence reveals the deep mathematical foundation of Elder Theory, es
 The abstract structure of Elder spaces provides the foundation for efficient computational implementations.
 
 \begin{definition}[Computational Elder Space]
+\label{def:computational_elder_space}
 A computational Elder space $\elder{d, \mathbb{B}}$ with bit-depth $\mathbb{B}$ has:
 \begin{enumerate}
     \item Amplitudes $\lambda_i$ quantized to $\mathbb{B}$ bits
@@ -1174,7 +1191,7 @@ A computational Elder space $\elder{d, \mathbb{B}}$ with bit-depth $\mathbb{B}$ 
 \end{definition}
 
 \begin{theorem}[Complexity Bounds]
-\label{thm:complexity_bounds}
+\label{thm:complexity_bounds}\index{Complexity!time}\index{Complexity!space}\index{Computational Complexity}
 % DEPENDENCIES: Definition of Computational Elder Space
 Operations in a computational Elder space $\elder{d, \mathbb{B}}$ have:
 \begin{enumerate}
