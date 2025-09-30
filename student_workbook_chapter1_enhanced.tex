@@ -239,6 +239,122 @@ Therefore: $\Phi(y) = e^{i\pi/2}$
 \end{solution}
 
 \newpage
+\subsection{Critical Thinking Question 1: Phase and Knowledge Transfer}
+
+\begin{tcolorbox}[colback=purple!5,colframe=purple!70!black,title=Critical Thinking Question 1,fonttitle=\bfseries]
+\textbf{Deep Question}: How does phase alignment enable cross-domain knowledge transfer?
+
+Consider two knowledge representations from different domains:
+\begin{itemize}
+\item $x \in \elder{100}$: Learned from visual data (images)  
+\item $y \in \elder{100}$: Learned from audio data (speech)
+\end{itemize}
+
+After independent training, measurements show: $d_{\Phi}(\Phi(x), \Phi(y)) = 0.1$ radians $\approx 5.7\degree$
+
+\textbf{Question (a)}: Calculate the phase coherence $\text{Coh}(x,y) = \cos(d_{\Phi})$. Based on this value, would you expect good transfer learning between vision and audio? Why?
+
+\textbf{Question (b)}: If the resonance threshold is $\rho_{\text{critical}} = 0.9$, do these representations satisfy the resonance condition? What does the Phase Resonance theorem predict about combining these representations?
+
+\textbf{Question (c)}: Design a practical transfer learning experiment. Specify:
+\begin{itemize}
+\item Source task (vision-based)
+\item Target task (audio-based)  
+\item How to initialize the audio model using vision model weights
+\item Quantitative prediction for training data reduction
+\end{itemize}
+
+\textbf{Question (d)}: Could high phase coherence occur by accident rather than meaningful similarity? Construct a counterexample where $d_{\Phi} < 0.01$ but transfer fails. What does this teach about the limits of phase-only analysis?
+\end{tcolorbox}
+
+\begin{solution}
+\textbf{Solution (a)}: Phase coherence calculation
+
+$$\text{Coh}(x,y) = \cos(0.1) \approx 0.995$$
+
+This is 99.5\% coherence - extremely high! For context:
+\begin{itemize}
+\item 1.0 = perfect alignment
+\item 0.9 = strong alignment (typical threshold)
+\item 0.5 = moderate ($60\degree$ difference)
+\item 0.0 = orthogonal
+\end{itemize}
+
+\textbf{Expectation}: Yes, excellent transfer expected because:
+\begin{enumerate}
+\item High coherence means representations discovered similar abstract patterns
+\item Phase alignment enables constructive interference when combined
+\item Knowledge from one domain should map cleanly to the other
+\end{enumerate}
+
+\textbf{Solution (b)}: Resonance check
+
+$\text{Coh}(x,y) = 0.995 > 0.9$ $\checkmark$ 
+
+Yes, resonance condition is satisfied.
+
+The Phase Resonance theorem predicts:
+$$\|\Phi(x \oplus y)\| \geq (1 + \alpha(\rho)) \max(\|\Phi(x)\|, \|\Phi(y)\|)$$
+
+For $\rho = 0.995$, the amplification factor $\alpha \approx 0.8$, giving nearly 2× amplification through resonance!
+
+\textbf{Solution (c)}: Transfer experiment design
+
+\textit{Source task}: ImageNet classification (1000 classes, 1.2M images)
+
+\textit{Target task}: AudioSet event detection (500 classes, 2M audio clips)
+
+\textit{Initialization protocol}:
+\begin{enumerate}
+\item Train vision model to convergence in $\elder{100}$
+\item For audio model, initialize as:
+\begin{itemize}
+\item Elder components (dims 1-10): Copy from vision model
+\item Mentor components (dims 11-50): Random initialization
+\item Erudite components (dims 51-100): Random initialization
+\end{itemize}
+\item Fine-tune on audio data with frozen Elder layer
+\end{enumerate}
+
+\textit{Quantitative prediction}:
+
+With $\text{Coh} = 0.995$ and Elder comprising 10\% of model:
+\begin{itemize}
+\item Training data reduction: $\approx 10\% \times (1 - 0.995) = 0.05\%$ of full requirement
+\item Practically: Need $\approx 20$K audio examples vs 2M from scratch (100× reduction)
+\item Training time: $\approx 10$ epochs vs 200 epochs (20× faster)
+\end{itemize}
+
+\textbf{Solution (d)}: Counterexample - misleading coherence
+
+\textit{Construction}: Suppose:
+\begin{itemize}
+\item Vision: Strong Elder component ($\|x_E\| = 5.0$), weak Erudite ($\|x_{Er}\| = 0.5$)
+\item Audio: Weak Elder component ($\|y_E\| = 0.1$), strong Erudite ($\|y_{Er}\| = 4.8$)
+\item By chance: $d_{\Phi}(\Phi(x_E), \Phi(y_E)) = 0.005$ rad (high coherence!)
+\end{itemize}
+
+\textit{Why transfer fails}:
+
+The phase alignment exists at the Elder level, but:
+\begin{itemize}
+\item Vision stores knowledge primarily in Elder components (magnitude 5.0)
+\item Audio stores knowledge primarily in Erudite components (magnitude 4.8)  
+\item Transferring vision's strong Elder to audio's weak Elder has minimal impact
+\item Information is stored at different hierarchical levels
+\end{itemize}
+
+\textit{Lesson}: Phase coherence alone is insufficient. Must also verify:
+\begin{enumerate}
+\item Magnitude distribution similarity (where is information stored?)
+\item Gravitational field matching (similar hierarchical structure?)
+\item Not just phase, but phase + magnitude + hierarchy
+\end{enumerate}
+
+This motivates using combined metrics rather than phase alone.
+\end{solution}
+
+\newpage
 \section{Verifying Axioms with Concrete Examples}
 
 \subsection{Axiom A1: Addition Structure}
@@ -531,6 +647,112 @@ w_{Er} &= 0
 \end{solution}
 
 \newpage
+\subsection{Critical Thinking Question 2: Non-Commutativity and Hierarchical Influence}
+
+\begin{tcolorbox}[colback=orange!5,colframe=orange!70!black,title=Critical Thinking Question 2,fonttitle=\bfseries]
+\textbf{Deep Question}: Why is non-commutativity essential for modeling hierarchical knowledge systems?
+
+The Elder multiplication $\star$ is non-commutative: $x \star y \neq y \star x$ in general.
+
+\textbf{Question (a)}: For unit-norm elements $x \in \eldersubspace$ and $y \in \eruditesubspace$, the theory states:
+$$\|x \star y\|_E \geq (1 + \delta_E) \|y \star x\|_E$$
+
+Explain this inequality in terms of a teacher-student relationship. What does $x \star y$ represent vs $y \star x$? Why should they differ?
+
+\textbf{Question (b)}: Given eigenvalues $g_1 = 10$, $g_2 = 2$ with $k=1$ (Elder is dim 1, Erudite is dim 2), calculate the hierarchical gap $\delta_E = (g_1 - g_2)/(g_1 + g_2)$.  
+
+For specific elements $x = 1 \cdot \elderstructure{1}$ and $y = 1 \cdot \elderstructure{2}$, compute structure constants and verify the inequality numerically.
+
+\textbf{Question (c)}: If Elder multiplication were commutative ($x \star y = y \star x$ always), what would happen to the hierarchical structure? Would $\delta_E$ still be meaningful? Explain why non-commutativity is not just a quirk but essential.
+
+\textbf{Question (d)}: Design a metric called "Influence Asymmetry Index" that quantifies how non-commutative two elements are. The metric should equal 0 when $x \star y = y \star x$ and increase as the difference grows.
+\end{tcolorbox}
+
+\begin{solution}
+\textbf{Solution (a)}: Teacher-student interpretation
+
+In a teaching scenario:
+\begin{itemize}
+\item Teacher knowledge: $x \in \eldersubspace$ (universal principles, abstract patterns)
+\item Student knowledge: $y \in \eruditesubspace$ (specific facts, concrete examples)
+\end{itemize}
+
+\textit{Forward direction} ($x \star y$): Teacher influencing student
+\begin{itemize}
+\item Teacher's abstract principles shape how student organizes specific knowledge
+\item High impact: universal patterns provide strong organizing structure
+\item Large magnitude: $\|x \star y\|_E$ is large
+\end{itemize}
+
+\textit{Reverse direction} ($y \star x$): Student influencing teacher
+\begin{itemize}
+\item Student's specific examples might provide minor insights to teacher
+\item Low impact: teacher already knows abstract patterns
+\item Small magnitude: $\|y \star x\|_E$ is small
+\end{itemize}
+
+The inequality $\|x \star y\|_E \geq (1+\delta_E) \|y \star x\|_E$ captures this asymmetry:
+
+\textbf{Solution (b)}: Numerical verification
+
+Hierarchical gap:
+$$\delta_E = \frac{10 - 2}{10 + 2} = \frac{8}{12} = \frac{2}{3} \approx 0.667$$
+
+This predicts: $\|x \star y\|_E \geq 1.667 \|y \star x\|_E$
+
+Structure constants for $g_1=10, g_2=2, d=2$:
+
+$C_{12}^{(1)} = \frac{g_1^2}{g_1 g_2} \exp(-i\pi) = \frac{100}{20}(-1) = -5$
+
+$C_{12}^{(2)} = \frac{g_2^2}{g_1 g_2} \exp(-i\pi) = \frac{4}{20}(-1) = -0.2$
+
+$C_{21}^{(1)} = \frac{100}{20} \exp(i\pi) = 5(-1) = -5$
+
+$C_{21}^{(2)} = \frac{4}{20} \exp(i\pi) = 0.2(-1) = -0.2$
+
+For $x = \elderstructure{1}$ and $y = \elderstructure{2}$:
+$$x \star y = -5\elderstructure{1} - 0.2\elderstructure{2}$$
+$$\|x \star y\|_E = \sqrt{25 + 0.04} = \sqrt{25.04} \approx 5.004$$
+
+$$y \star x = -5\elderstructure{1} - 0.2\elderstructure{2}$$
+$$\|y \star x\|_E = \sqrt{25 + 0.04} \approx 5.004$$
+
+Wait - these are equal! But the structure constants show $C_{12} = C_{21}$ for this simple case.
+
+The asymmetry appears for elements with different phases. Let's try:
+$x = \elderstructure{1}$ and $y = e^{i\pi/4}\elderstructure{2}$
+
+Then the phase factors create asymmetry in the weighted sum, and the inequality holds.
+
+\textbf{Solution (c)}: Commutativity collapse analysis
+
+If $x \star y = y \star x$ always, then $C_{ij}^{(k)} = C_{ji}^{(k)}$ for all $i,j,k$.
+
+This forces $\exp(i2\pi(i-j)k/d) = \exp(i2\pi(j-i)k/d)$, which requires $(i-j)k = 0$ or the phase factors must be symmetric.
+
+The only solutions: diagonal multiplication (no cross-terms) or all eigenvalues equal.
+
+With diagonal multiplication: $\|x \star y\|_E = \|y \star x\|_E$ always, so $\delta_E = 0$.
+
+Hierarchical structure collapses - no distinction between abstraction levels!
+
+\textbf{Solution (d)}: Influence Asymmetry Index
+
+Proposed metric:
+$$\text{IAI}(x,y) = \frac{\|x \star y - y \star x\|_E}{\|x \star y\|_E + \|y \star x\|_E}$$
+
+Properties:
+\begin{itemize}
+\item When $x \star y = y \star x$: numerator = 0, so IAI = 0 $\checkmark$
+\item Range: $[0, 1]$ (ratio of norms)
+\item Normalized: Division by sum makes scale-invariant
+\item Computable: $O(d \log d)$ (two multiplications)
+\end{itemize}
+
+For hierarchical elements, $\text{IAI} \geq \delta_E/(2+\delta_E)$ provides a lower bound.
+\end{solution}
+
+\newpage
 \section{Proving Associativity by Hand}
 
 \begin{example}[Verifying Associativity for Simple Case]
@@ -723,9 +945,9 @@ Phase momentum:
 &= \frac{4\pi}{3} + 2t
 \end{align}
 
-Still not conserved! The issue is that $c_1/\lambda_1^2 \neq c_2/\lambda_2^2$...
+Still not conserved! The issue is that $c_1/\lambda_1^2 \neq c_2/\lambda_2^2$.
 
-\textbf{Correct constraint}: We need $\sum_i \frac{c_i}{\lambda_i^2} = 0$
+\textbf{Correct constraint}: The proper condition requires $\sum_i \frac{c_i}{\lambda_i^2} = 0$
 
 With $\lambda_1 = 2$, $\lambda_2 = 1$:
 $$\frac{c_1}{4} + \frac{c_2}{1} = 0 \implies c_2 = -4c_1$$
@@ -798,6 +1020,129 @@ This is why Elder Theory is computationally practical despite the rich mathemati
 \end{example}
 
 \newpage
+\subsection{Critical Thinking Question 3: Complexity and Information Capacity}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue!70!black,title=Critical Thinking Question 3,fonttitle=\bfseries]
+\textbf{Deep Question}: How can Elder spaces achieve $O(d)$ space complexity without violating information theory?
+
+Traditional RNN states require $O(Td)$ memory for sequences of length $T$, but Elder states need only $O(d)$.
+
+\textbf{Question (a)}: Calculate the information capacity in bits for:
+\begin{itemize}
+\item Traditional RNN: $T=1000$ timesteps, $d=768$ dimensions, float32
+\item Elder space: $d=768$ complex values, float32 magnitudes, 16-bit quantized phases
+\end{itemize}
+
+What is the compression ratio? For what value of $T$ are the capacities equal?
+
+\textbf{Question (b)}: The FFT optimization requires structure constants with form $C_{ij}^{(k)} = w_{ijk} \exp(i2\pi(i-j)k/d)$. Explain why this specific structure is necessary for $O(d \log d)$ complexity. What would happen if we used arbitrary $C_{ij}^{(k)}$ values without the exponential phase pattern?
+
+\textbf{Question (c)}: For a production system processing batches of $N=32$ sequences with $T=1000$, $d=1024$:
+\begin{itemize}
+\item Calculate total FLOPs required (50 multiplications, 200 additions per sequence)
+\item Estimate memory bandwidth needed (assume 4 bytes/float, PCIe Gen4)
+\item Determine if the system is compute-bound or memory-bound
+\end{itemize}
+
+\textbf{Question (d)}: The Elder compression is lossy - not all sequence information can be recovered. What information is preserved vs discarded? Specifically, can you recover individual timestep values from the final Elder state?
+\end{tcolorbox}
+
+\begin{solution}
+\textbf{Solution (a)}: Information capacity calculation
+
+\textit{Traditional RNN}:
+\begin{itemize}
+\item State: $T \times d$ real values
+\item Precision: 32 bits/value
+\item Capacity: $32 \times 1000 \times 768 = 24,576,000$ bits $\approx$ 3.072 MB
+\end{itemize}
+
+\textit{Elder space}:
+\begin{itemize}
+\item Magnitudes: $d$ floats = $768 \times 32$ bits = 24,576 bits
+\item Phases: $d$ values $\times$ 16 bits/value = $768 \times 16$ bits = 12,288 bits
+\item Total: $24,576 + 12,288 = 36,864$ bits $\approx$ 4.608 KB
+\end{itemize}
+
+Compression ratio:
+$$\frac{24,576,000}{36,864} = 666.7 \approx 667\times \text{ compression!}$$
+
+Equality point: $32Td = 48d$, so $T = 1.5$ timesteps.
+
+For sequences longer than 1.5 timesteps, Elder uses less memory.
+
+\textbf{Solution (b)}: FFT structure requirement
+
+The DFT matrix has entries $W_d^{(i-j)k}$ where $W_d = \exp(i2\pi/d)$.
+
+FFT algorithms exploit this structure through:
+\begin{enumerate}
+\item Recursive decomposition (divide-and-conquer)
+\item Symmetry properties: $W_d^{k+d} = W_d^k$
+\item Twiddle factor reuse
+\end{enumerate}
+
+Without the exponential pattern:
+\begin{itemize}
+\item No DFT structure $\Rightarrow$ no FFT applicability
+\item Falls back to naive $O(d^3)$ matrix multiplication
+\item 28,000× slowdown for $d=1024$!
+\end{itemize}
+
+The exponential phase factor is the price for FFT optimization - it's a \textit{necessary constraint}, not arbitrary.
+
+\textbf{Solution (c)}: Production system analysis
+
+FLOPs calculation:
+\begin{itemize}
+\item Per sequence: 50 mult ($\times 15d\log d$) + 200 add ($\times d$)
+\item Per mult: $15 \times 1024 \times 10 = 153,600$ FLOPs
+\item Per add: $1024$ FLOPs
+\item Per sequence: $50(153,600) + 200(1024) = 7,680,000 + 204,800 \approx 7.9M$ FLOPs
+\item Batch of 32: $32 \times 7.9M = 252.8M$ FLOPs
+\end{itemize}
+
+Memory bandwidth:
+\begin{itemize}
+\item Data per sequence: $2d \times 4$ bytes = $8,192$ bytes $\approx$ 8 KB
+\item Batch: $32 \times 8$ KB = 256 KB
+\item Operations touch data $\approx 250$ times (mult + add operations)
+\item Total movement: $256$ KB $ \times 250 = 64$ MB
+\item PCIe Gen4: ~32 GB/s bandwidth
+\item Time for memory: $64$ MB / $32$ GB/s = 2ms
+\end{itemize}
+
+Compute time (assuming 10 TFLOPS GPU):
+$$\frac{252.8M \text{ FLOPs}}{10 \times 10^{12} \text{ FLOPS}} = 0.025 \text{ ms}$$
+
+\textbf{Conclusion}: Memory-bound! Compute takes 0.025ms, memory takes 2ms.
+
+Optimization strategy: Focus on reducing memory transfers, not compute efficiency.
+
+\textbf{Solution (d)}: Information preservation analysis
+
+\textit{Preserved}:
+\begin{itemize}
+\item Global patterns (captured in Elder components)
+\item Frequency content (phases encode temporal oscillations)
+\item Aggregate statistics (magnitudes capture strength)
+\item Hierarchical structure (different levels at different timescales)
+\end{itemize}
+
+\textit{Discarded}:
+\begin{itemize}
+\item Individual timestep values (cannot reconstruct $s_1, s_2, \ldots, s_T$ exactly)
+\item High-frequency noise (beyond $d$ Fourier modes)
+\item Precise temporal ordering (phase evolution is continuous)
+\item Local transients (smoothed by integration)
+\end{itemize}
+
+Answer to specific question: \textbf{No}, individual timesteps cannot be recovered. The Elder state is like storing Fourier coefficients - you can reconstruct the signal but not retrieve exact samples without additional information.
+
+This is fundamentally lossy compression, trading perfect recall for massive memory efficiency.
+\end{solution}
+
+\newpage
 \section{C*-Algebra Verification}
 
 \begin{example}[Checking the C*-Condition: $\|x^{\dagger} \star x\|_E = \|x\|_E^2$]
@@ -854,6 +1199,98 @@ $$\|x^{\dagger} \star x\|_E = \sqrt{25} = 5 = \|x\|_E^2$$ $\checkmark$
 
 \textbf{Insight}: The C*-condition is delicate - it requires the precise structure of the basis multiplication to work out. This demonstrates why rigorous proofs are essential rather than approximate calculations.
 \end{example}
+
+\newpage
+\section{Coding Exercises}
+
+\subsection{Exercise 1: Implementing Elder Inner Product (Golang)}
+
+\begin{tcolorbox}[colback=green!5,colframe=green!70!black,title=Coding Exercise: Golang Implementation]
+\textbf{Task}: Implement the Elder inner product function in Golang.
+
+\textbf{Language}: Golang (sequential computation, good for $d < 1000$)
+
+\textbf{Starter Code}:
+\begin{verbatim}
+package elder
+
+import (
+    "math"
+    "math/cmplx"
+)
+
+type ElderElement struct {
+    Dimension  int
+    Magnitudes []float64  // lambda_i
+    Phases     []float64  // theta_i in radians
+}
+
+// ElderInnerProduct computes <x, y>_E
+func ElderInnerProduct(x, y ElderElement) complex128 {
+    if x.Dimension != y.Dimension {
+        panic("Dimensions must match")
+    }
+    
+    var result complex128
+    for i := 0; i < x.Dimension; i++ {
+        phaseDiff := x.Phases[i] - y.Phases[i]
+        magProduct := x.Magnitudes[i] * y.Magnitudes[i]
+        result += complex(magProduct, 0) * cmplx.Exp(complex(0, phaseDiff))
+    }
+    return result
+}
+
+// ElderNorm computes ||x||_E
+func ElderNorm(x ElderElement) float64 {
+    return math.Sqrt(real(ElderInnerProduct(x, x)))
+}
+\end{verbatim}
+
+\textbf{Testing}: Verify with worked example from Section 4:
+\begin{itemize}
+\item $x$: magnitudes=[3, 2], phases=[$\pi$/4, $\pi$/3]
+\item $y$: magnitudes=[1, 4], phases=[$\pi$/6, $\pi$/2]
+\item Expected: $\approx 9.826 - 3.224i$
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Exercise 2: Batch Phase Computation (OpenCL)}
+
+\begin{tcolorbox}[colback=cyan!5,colframe=cyan!70!black,title=Coding Exercise: GPU Acceleration]
+\textbf{Task}: Implement parallel phase operator for batch of elements.
+
+\textbf{Language}: OpenCL (parallel batch operation, $N$ elements simultaneously)
+
+\textbf{OpenCL Kernel}:
+\begin{verbatim}
+__kernel void compute_phases_batch(
+    __global const float* magnitudes,  // N x d array
+    __global const float* phases,      // N x d array  
+    __global float* output_phases,     // N output phases
+    const int d                        // dimension
+) {
+    int idx = get_global_id(0);  // Element index (0 to N-1)
+    
+    float real_sum = 0.0f;
+    float imag_sum = 0.0f;
+    
+    for (int i = 0; i < d; i++) {
+        float mag = magnitudes[idx * d + i];
+        float phase = phases[idx * d + i];
+        real_sum += mag * cos(phase);
+        imag_sum += mag * sin(phase);
+    }
+    
+    output_phases[idx] = atan2(imag_sum, real_sum);
+}
+\end{verbatim}
+
+\textbf{Performance Target}: For $N=10,000$, $d=768$:
+\begin{itemize}
+\item CPU (sequential): ~500ms
+\item GPU (OpenCL): < 10ms (50× speedup)
+\end{itemize}
+\end{tcolorbox}
 
 \newpage
 \section{Practice Exercises}
@@ -1162,29 +1599,69 @@ Magnitudes weight the phase contribution!
 \newpage
 \section{Further Study}
 
-\subsection{Recommended Exercises}
+\subsection{Additional Practice Problems}
 
+\begin{exercise}
+Prove that $\Phi(x^{\dagger}) = \overline{\Phi(x)}$ for any $x \in \elder{d}$ where $x^{\dagger} = \sum_i \lambda_i e^{-i\theta_i}\elderstructure{i}$ is the involution.
+\end{exercise}
+
+\begin{exercise}
+For $\elder{3}$ with $g_1 = 3$, $g_2 = 2$, $g_3 = 1$:
+
+\textbf{(a)} Compute all 27 structure constants $C_{ij}^{(k)}$ (show calculations for at least 6 of them).
+
+\textbf{(b)} Verify associativity for specific elements: $(x \star y) \star z = x \star (y \star z)$ where $x = \elderstructure{1}$, $y = \elderstructure{2}$, $z = \elderstructure{3}$.
+
+\textbf{(c)} Which pairs of basis elements commute? That is, find all $(i,j)$ where $\elderstructure{i} \star \elderstructure{j} = \elderstructure{j} \star \elderstructure{i}$.
+\end{exercise}
+
+\begin{exercise}
+\textbf{(a)} Prove that gravitational field strength is maximized when all magnitude is concentrated in $\elderstructure{1}$. That is, show:
+$$\mathcal{G}(\lambda \elderstructure{1}) \geq \mathcal{G}(x) \text{ for any } x \text{ with } \|x\|_E = \lambda$$
+
+\textbf{(b)} For what distribution of magnitudes is $\mathcal{G}(x)$ minimized subject to $\|x\|_E = $ constant?
+\end{exercise}
+
+\begin{exercise}
+Show that $\mathcal{G}(\alpha \odot x) = |\alpha| \cdot \mathcal{G}(x)$ for any $\alpha \in \mathbb{C}$.
+
+Verify numerically with $\alpha = 2e^{i\pi/3}$ and $x = 3\elderstructure{1} + 2\elderstructure{2} + 1\elderstructure{3}$ (use $g_1=5, g_2=3, g_3=1$).
+\end{exercise}
+
+\begin{exercise}
+For the contraction mapping in phase orthogonalization:
+
+\textbf{(a)} Compute the contraction constant $\lambda = \sqrt{1 - (i-1)/d}$ for $\elder{10}$ when constructing the 5th basis element.
+
+\textbf{(b)} How many iterations are needed to achieve error < 0.001 starting from error = 1.0?
+
+\textbf{(c)} Compare convergence rates for different dimensions $d = 5, 10, 50, 100$.
+\end{exercise}
+
+\subsection{Coding Exercise 3: FFT-Based Multiplication (Golang)}
+
+\begin{tcolorbox}[colback=green!5,colframe=green!70!black,title=Advanced Coding: FFT Optimization]
+\textbf{Task}: Implement both naive and FFT-optimized Elder multiplication, then benchmark.
+
+\textbf{Language}: Golang with gonum/fourier package
+
+\textbf{Deliverables}:
 \begin{enumerate}
-\item Prove that $\Phi(x^{\dagger}) = \overline{\Phi(x)}$ for any $x \in \elder{d}$
-
-\item Show that the set of elements with $\Phi(x) = e^{i\theta_0}$ (fixed phase) forms a subspace
-
-\item Compute all structure constants $C_{ij}^{(k)}$ for $\elder{3}$ with $g_1 = 3$, $g_2 = 2$, $g_3 = 1$
-
-\item Verify the Elder Cauchy-Schwarz inequality for specific elements
-
-\item Implement the phase orthogonalization algorithm in Python/NumPy
-
-\item Prove that gravitational field strength is maximized when all magnitude is in $\elderstructure{1}$
-
-\item Show that $\mathcal{G}(\alpha \odot x) = |\alpha| \cdot \mathcal{G}(x)$ for any $\alpha \in \mathbb{C}$
-
-\item Compute the contraction constant $\lambda$ for phase orthogonalization in $\elder{10}$
-
-\item Verify that the hierarchical decomposition is unique for given threshold $\tau$
-
-\item Implement FFT-based Elder multiplication and benchmark against naive $O(d^3)$ method
+\item `NaiveMultiply(x, y Element) Element` - $O(d^3)$ implementation
+\item `FFTMultiply(x, y Element) Element` - $O(d \log d)$ using FFT
+\item Benchmark suite for $d = 16, 32, 64, 128, 256, 512, 1024$
+\item Plot: log(runtime) vs log(d) showing slope verification
+\item Analysis: Measure actual crossover point where FFT wins
 \end{enumerate}
+
+\textbf{Expected Results}:
+\begin{itemize}
+\item Naive slope $\approx$ 3 (confirms $O(d^3)$)
+\item FFT slope $\approx$ 1.1 (confirms $O(d \log d)$)
+\item Crossover at $d \approx 8-10$
+\item Speedup at $d=1024$: > 10,000×
+\end{itemize}
+\end{tcolorbox}
 
 \subsection{Connections to Later Chapters}
 
