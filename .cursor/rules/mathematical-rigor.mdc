@@ -1,0 +1,201 @@
+---
+description: Mathematical rigor and proof completeness requirements
+alwaysApply: true
+---
+
+# Mathematical Rigor Rules for Elder Theory
+
+## Theorem-Definition-Proof Structure
+
+### Every Theorem MUST Have:
+1. ✅ **Formal statement** with numbered label
+2. ✅ **Complete proof** (no "proof omitted" or "trivial")
+3. ✅ **Dependencies listed** (which theorems/lemmas it uses)
+4. ✅ **Forward references** tracked (what depends on this)
+
+### Proof Completeness Checklist:
+```latex
+\begin{theorem}[Theorem Name]
+\label{thm:unique_label}
+Statement of theorem with all assumptions explicitly stated.
+\end{theorem}
+
+\begin{proof}
+1. State all assumptions
+2. Identify which prior results are used
+3. Show each logical step
+4. Identify where key insights occur
+5. Conclude with ∎ or \qed
+\end{proof}
+```
+
+## Proof Gap Detection
+
+### Red Flags (NEVER acceptable):
+- ❌ "The proof is straightforward"
+- ❌ "It can be shown that..."
+- ❌ "Obviously..."
+- ❌ "Clearly..."
+- ❌ "By direct calculation..." (without showing calculation)
+- ❌ "The rest follows similarly"
+
+### Required Explicitness:
+- ✅ Show ALL steps for first instance
+- ✅ If pattern repeats, state: "By identical argument..."
+- ✅ Reference specific equations/theorems by number
+- ✅ State when using axioms vs derived results
+
+## Dependency Tracking
+
+### Theorem Dependencies MUST Be:
+1. **Tracked**: Which theorems depend on which definitions/lemmas
+2. **Acyclic**: No circular dependencies
+3. **Minimal**: Don't cite stronger results when weaker suffice
+4. **Explicit**: State dependencies in proof
+
+### Example:
+```latex
+\begin{proof}[Proof using Theorem~\ref{thm:heliomorphic_completeness}]
+By Theorem~\ref{thm:heliomorphic_completeness}, the heliomorphic 
+function space is complete. Applying this with Definition~\ref{def:elder_space}...
+\end{proof}
+```
+
+## Assumption Verification
+
+### Every Proof MUST:
+- ✅ List ALL assumptions at start
+- ✅ Verify assumptions are met before applying theorems
+- ✅ State domain restrictions explicitly
+- ✅ Identify which results require which assumptions
+
+### Common Pitfalls:
+- ❌ Assuming convergence without proving it
+- ❌ Assuming continuity/differentiability without stating
+- ❌ Assuming existence without construction
+- ❌ Assuming uniqueness without proof
+
+## Notation Consistency
+
+### Before Using New Notation:
+1. ✅ Check if already defined in `macros/math_macros.tex`
+2. ✅ If new, add to macros file with comment
+3. ✅ Never redefine existing notation
+4. ✅ Add to consolidated notation appendix
+
+## Counterexample Requirements
+
+### When Stating "X does not hold":
+- ✅ Provide explicit counterexample
+- ✅ Show calculation demonstrating failure
+- ✅ Explain why counterexample is minimal
+
+## Edge Case Coverage
+
+### Proofs MUST Address:
+- ✅ Boundary cases (n=0, n=1, limiting cases)
+- ✅ Degenerate cases (zero measure, empty set)
+- ✅ Infinite/unbounded cases (when relevant)
+- ✅ Singular points/discontinuities
+
+## Mathematical Writing Style
+
+### Definitions:
+```latex
+\begin{definition}[Concept Name]
+\label{def:unique_label}
+A [object] is a [mathematical structure] satisfying:
+\begin{enumerate}
+    \item Property 1
+    \item Property 2
+    \item ...
+\end{enumerate}
+\end{definition}
+```
+
+### Theorems:
+```latex
+\begin{theorem}[Descriptive Name]
+\label{thm:unique_label}
+Let [assumptions]. Then [conclusion].
+\end{theorem}
+```
+
+### Lemmas (Auxiliary Results):
+```latex
+\begin{lemma}[Purpose of Lemma]
+\label{lem:unique_label}
+Statement of auxiliary result used in main theorem.
+\end{lemma}
+```
+
+### Corollaries (Immediate Consequences):
+```latex
+\begin{corollary}[What It Shows]
+\label{cor:unique_label}
+As an immediate consequence of Theorem~\ref{thm:main}, we have...
+\end{corollary}
+```
+
+## Proof Techniques Documentation
+
+### When Using Standard Techniques:
+```latex
+\begin{proof}[Proof by Induction]
+\textbf{Base case:} ...
+\textbf{Inductive hypothesis:} ...
+\textbf{Inductive step:} ...
+Therefore by induction...
+\end{proof}
+```
+
+```latex
+\begin{proof}[Proof by Contradiction]
+Assume toward contradiction that...
+[Derive contradiction]
+This contradicts [known fact], therefore...
+\end{proof}
+```
+
+```latex
+\begin{proof}[Proof by Construction]
+We explicitly construct... Define x as follows:
+[Construction steps]
+We verify the required properties:
+[Verification]
+\end{proof}
+```
+
+## Quantifier Precision
+
+### Universal Quantification:
+✅ "For all x ∈ X, property P(x) holds"
+❌ "Property P(x) holds" (implicit quantifier unclear)
+
+### Existential Quantification:
+✅ "There exists x ∈ X such that P(x)"
+✅ "There exists a unique x ∈ X such that P(x)"
+❌ "We can find x where P(x)" (vague)
+
+## Equation Numbering
+
+### Number Important Equations:
+```latex
+\begin{equation}
+\label{eq:important_result}
+f(x) = \int_0^x g(t) dt
+\end{equation}
+```
+
+### Reference by Number:
+```latex
+By equation~\eqref{eq:important_result}, we have...
+```
+
+### Don't Number Trivial Steps:
+```latex
+\begin{align*}
+x + y &= 5 \\
+2x + 2y &= 10
+\end{align*}
+```

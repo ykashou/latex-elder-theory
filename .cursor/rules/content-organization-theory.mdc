@@ -1,0 +1,437 @@
+---
+description: Content organization rules for mathematical theory vs experiments
+alwaysApply: true
+---
+
+# Content Organization: Theory vs Experiments
+
+## Structural Hierarchy
+
+```
+PART I: THEORY (Theoretical Foundations)
+├── Unit I: Foundation Layer
+│   ├── Axioms, postulates, basic definitions
+│   ├── Elder space structure theorems
+│   └── Parameter space formalization
+├── Unit II: Heliomorphic Functions and Geometry
+│   ├── Function definitions and properties
+│   ├── Completeness theorems
+│   └── Geometric structures
+├── Unit III: Elder Heliosystem Architecture
+│   ├── Orbital mechanics theory
+│   ├── Gravitational field parameters
+│   └── Memory storage formalization
+├── Unit IV: Learning Dynamics and Algorithms
+│   ├── Loss function theory
+│   ├── Convergence proofs
+│   └── Algorithm specifications
+├── Unit V: Cross-Domain Knowledge Transfer
+│   ├── Knowledge isomorphisms
+│   ├── Transfer theorems
+│   └── Universal principle extraction
+├── Unit VI: Theoretical Unification and Closure
+│   ├── Model unification
+│   ├── System completeness
+│   └── Mathematical-AI connections
+└── Unit VII: Memory and Efficiency Properties
+    ├── Complexity bounds (O-notation proofs)
+    ├── PAC learning theory
+    └── Information capacity analysis
+
+PART II: EXPERIMENTS (Empirical Validation)
+├── Unit I: Experimental Framework
+│   ├── Methodology
+│   ├── Dataset descriptions
+│   └── Evaluation protocols
+├── Unit II: Implementation
+│   ├── Audiomage architecture
+│   ├── 11-level implementation
+│   └── Experimental setup
+└── Unit III: Results and Validation
+    ├── Performance metrics
+    ├── Comparative analysis
+    └── Empirical findings
+```
+
+## Content Classification Rules
+
+### THEORY (Part I) Contains:
+
+✅ **Pure Mathematics**:
+```latex
+\begin{definition}[Elder Space]
+An Elder space $\elder{d}$ is...
+\end{definition}
+
+\begin{theorem}[Heliomorphic Completeness]
+Let f : \elder{d} → \elder{k}. Then...
+\end{theorem}
+
+\begin{proof}
+By construction... Therefore... ∎
+\end{proof}
+```
+
+✅ **Theoretical Bounds**:
+```latex
+\begin{theorem}[Computational Complexity]
+The Elder algorithm has time complexity O(n log n).
+\end{theorem}
+
+\begin{proof}
+[Mathematical proof of bound]
+\end{proof}
+```
+
+✅ **Abstract Examples**:
+```latex
+\begin{example}[Illustrative Abstract Case]
+Consider an Elder space with d=3. By Theorem~\ref{thm:structure}...
+\end{example}
+```
+
+✅ **Theoretical Diagrams**:
+- Commutative diagrams
+- Abstract geometric illustrations  
+- Concept maps
+- Phase space diagrams (mathematical)
+
+❌ **NOT in Theory**:
+- Python/Go/C++ code
+- Performance graphs (actual data)
+- Dataset tables
+- Benchmark comparisons
+- "We ran experiment X and got Y"
+- Hardware specifications
+
+### EXPERIMENTS (Part II) Contains:
+
+✅ **Implementations**:
+```latex
+\begin{algorithm}
+\caption{Elder Training Algorithm}
+\begin{algorithmic}[1]
+\Procedure{Train}{data, params}
+    \State Initialize $\theta \gets \theta_0$
+    \For{epoch = 1 to max\_epochs}
+        \State [computational steps]
+    \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+
+✅ **Empirical Results**:
+```latex
+\begin{table}[h]
+\caption{Performance Comparison on Audio Dataset}
+\begin{tabular}{lcc}
+\toprule
+Method & Accuracy & Time (s) \\
+\midrule
+Elder System & 94.2\% & 12.3 \\
+Transformer & 92.1\% & 45.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+```
+
+✅ **Performance Plots**:
+```latex
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/convergence_plot.pdf}
+\caption{Convergence of Elder loss on validation set over 100 epochs.}
+\end{figure}
+```
+
+✅ **Experimental Descriptions**:
+```latex
+We trained the Elder system on the LibriSpeech dataset 
+using an NVIDIA A100 GPU. Training took 48 hours...
+```
+
+❌ **NOT in Experiments**:
+- Theorem statements
+- Mathematical proofs
+- Axiomatic definitions
+- Abstract geometric diagrams
+
+## Moving Content Between Parts
+
+### When to Move Theory → Experiments:
+
+**Indicators:**
+- Section title: "Experiment:", "Implementation:", "Results:", "Validation:"
+- Contains phrases: "We implemented...", "We trained...", "We measured..."
+- Shows plots of actual data
+- Describes computational procedures
+- Reports timing/memory measurements
+
+**Example Migration:**
+```latex
+% WRONG: In theory chapter
+\section{Validation of Heliomorphic Completeness}
+We implemented the heliomorphic function using PyTorch and trained
+it on MNIST. The results show...
+
+% RIGHT: Move to experiments chapter
+% In theory chapter:
+The theoretical framework is validated in Section~\ref{sec:exp_validation}.
+
+% In experiments chapter:
+\section{Validation of Heliomorphic Completeness}
+\label{sec:exp_validation}
+We validate Theorem~\ref{thm:heliomorphic_completeness} empirically
+by implementing...
+```
+
+### When to Move Experiments → Theory:
+
+**Indicators:**
+- Proves mathematical properties
+- Establishes bounds without data
+- Pure mathematical derivation
+- No computation required
+
+**Example Migration:**
+```latex
+% WRONG: In experiments chapter  
+\section{Proof of O(n log n) Complexity}
+\begin{proof}
+By analyzing the algorithm structure...
+\end{proof}
+
+% RIGHT: Move to theory chapter
+% In theory chapter:
+\begin{theorem}[Computational Complexity]
+The Elder algorithm has O(n log n) complexity.
+\end{theorem}
+\begin{proof}
+[Mathematical proof]
+\end{proof}
+
+% In experiments chapter:
+The O(n log n) complexity proven in Theorem~\ref{thm:complexity}
+is confirmed by our benchmarks (Figure~\ref{fig:timing}).
+```
+
+## Cross-Referencing Between Parts
+
+### Theory → Experiments:
+```latex
+% In theory chapter:
+The following theoretical result is empirically validated in 
+Section~\ref{sec:audiomage_validation} (Part II, Unit III).
+
+\begin{theorem}[PAC Learning Bound]
+With probability at least 1-δ, the error satisfies...
+\end{theorem}
+```
+
+### Experiments → Theory:
+```latex
+% In experiments chapter:
+Our implementation follows Algorithm~\ref{alg:elder_training} 
+specified in Part I, Unit IV, Chapter~\ref{ch:algorithms}.
+
+The empirical results confirm the O(n log n) complexity bound
+proven in Theorem~\ref{thm:complexity}.
+```
+
+## Chapter Organization Templates
+
+### Theory Chapter Structure:
+```latex
+\chapter{Chapter Title}
+
+\begin{tcolorbox}[colback=DarkSkyBlue!5!white,title=Chapter Summary]
+High-level overview of mathematical content and its role in theory.
+\end{tcolorbox}
+
+\section{Motivation}
+Why this mathematical structure is needed for Elder Theory.
+
+\section{Formal Definitions}
+\begin{definition}[Key Concept]
+Mathematical definition with all parameters specified.
+\end{definition}
+
+\section{Main Results}
+\begin{theorem}[Main Result]
+Formal statement with explicit assumptions.
+\end{theorem}
+
+\begin{proof}
+Complete proof with all steps shown.
+\end{proof}
+
+\section{Corollaries and Consequences}
+\begin{corollary}
+Immediate consequences of main theorem.
+\end{corollary}
+
+\section{Examples (Abstract)}
+\begin{example}
+Illustrative mathematical example (no computation).
+\end{example}
+
+\section{Connection to Elder Theory}
+How this mathematics enables Elder's capabilities.
+
+\section{Chapter Summary}
+What was established and how it connects to next chapter.
+```
+
+### Experiment Chapter Structure:
+```latex
+\chapter{Chapter Title}
+
+\begin{tcolorbox}[title=Chapter Overview]
+Overview of experiments and their objectives.
+\end{tcolorbox}
+
+\section{Experimental Objectives}
+What we aim to validate from theory.
+
+\section{Methodology}
+\subsection{Datasets}
+Description of datasets used.
+
+\subsection{Implementation Details}
+Algorithm implementations, hyperparameters.
+
+\subsection{Evaluation Metrics}
+How we measure performance.
+
+\section{Results}
+\subsection{Quantitative Results}
+Tables, graphs, statistical analysis.
+
+\subsection{Qualitative Analysis}
+Visual examples, case studies.
+
+\section{Analysis and Discussion}
+\subsection{Comparison to Theory}
+How results relate to theoretical predictions.
+
+\subsection{Comparison to Baselines}
+How Elder compares to other methods.
+
+\section{Limitations and Future Work}
+What remains to be explored.
+```
+
+## Appendix Organization
+
+### Theory Appendices:
+```
+Appendix A: Glossary of Terms
+Appendix B: Consolidated Mathematical Notation
+Appendix C: Advanced Proofs
+Appendix D: Theorem Cross-References
+Appendix E: Dimensional Consistency Checks
+```
+
+### Experiment Appendices:
+```
+Appendix F: Dataset Specifications
+Appendix G: Hyperparameter Settings
+Appendix H: Extended Benchmark Results
+Appendix I: Implementation Code (if included)
+```
+
+## Content Type Decision Tree
+
+```
+Is this content...?
+│
+├─ Pure mathematical proof?
+│  └─→ THEORY (Part I)
+│
+├─ Algorithm specification (no implementation)?
+│  └─→ THEORY (Part I, Unit IV)
+│
+├─ Complexity bound proof?
+│  └─→ THEORY (Part I, Unit VII)
+│
+├─ Implementation code or pseudocode?
+│  └─→ EXPERIMENTS (Part II, Unit II)
+│
+├─ Performance measurements?
+│  └─→ EXPERIMENTS (Part II, Unit III)
+│
+├─ Dataset description?
+│  └─→ EXPERIMENTS (Part II, Unit I)
+│
+├─ Empirical validation of theorem?
+│  ├─ Theoretical claim → THEORY
+│  └─ Experimental verification → EXPERIMENTS
+│
+└─ Visual diagram?
+   ├─ Abstract/mathematical → THEORY
+   └─ Data plot/graph → EXPERIMENTS
+```
+
+## Migration Checklist
+
+When moving content from theory to experiments:
+- [ ] Copy content to new location
+- [ ] Add forward reference in theory chapter
+- [ ] Add backward reference in experiments chapter
+- [ ] Update cross-references (\ref{} labels)
+- [ ] Verify theorem dependencies still satisfied
+- [ ] Update table of contents if needed
+- [ ] Recompile document to check references
+- [ ] Remove original content from theory chapter
+- [ ] Update any citations to moved content
+
+## Elder Theory Specific Guidelines
+
+### Algorithm Specifications:
+**Theory**: Mathematical specification of algorithm
+```latex
+% In theory:
+\begin{definition}[Elder Training Algorithm]
+Given data $\mathcal{D}$, minimize $\mathcal{L}_E(\theta)$ where...
+\end{definition}
+```
+
+**Experiments**: Concrete implementation
+```latex
+% In experiments:
+\begin{algorithm}
+\caption{Elder Training Implementation}
+\begin{algorithmic}
+\State learning\_rate = 0.001
+\State optimizer = Adam(params, lr=learning\_rate)
+...
+\end{algorithmic}
+\end{algorithm}
+```
+
+### Complexity Analysis:
+**Theory**: Proof of bounds
+```latex
+% In theory:
+\begin{theorem}[Time Complexity]
+Elder training has O(nd log d) complexity where n is data size, d is dimension.
+\end{theorem}
+\begin{proof}
+[Mathematical proof]
+\end{proof}
+```
+
+**Experiments**: Empirical verification
+```latex
+% In experiments:
+\begin{figure}
+\includegraphics{timing_vs_dimension.pdf}
+\caption{Empirical timing confirms O(nd log d) scaling predicted by
+Theorem~\ref{thm:complexity}.}
+\end{figure}
+```
+
+### Audiomage Example:
+**Theory** (Part I, Unit VI): Mathematical framework for audio generation
+**Experiments** (Part II, Unit II): Audiomage implementation with 11 levels

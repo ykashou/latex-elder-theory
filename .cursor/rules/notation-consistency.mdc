@@ -1,0 +1,256 @@
+---
+description: Mathematical notation consistency and macro management
+alwaysApply: true
+---
+
+# Notation Consistency Rules
+
+## Macro Usage (MANDATORY)
+
+### Before Writing Math:
+1. ✅ Search `macros/math_macros.tex` for existing commands
+2. ✅ Use existing macros ALWAYS
+3. ✅ Never write `\mathcal{E}_d` if `\elder{d}` exists
+
+### Adding New Notation:
+```latex
+% In macros/math_macros.tex
+
+% ANNOTATION #XX: Brief description of why needed
+\newcommand{\notationname}{\mathcal{X}} % What it represents
+```
+
+### Required Documentation:
+- ✅ Add to `chapters/appendix/consolidated_notation.tex`
+- ✅ Include in symbol glossary with page reference
+- ✅ Add index entry for first usage
+
+## Symbol Conflicts (CRITICAL)
+
+### Before Defining Symbol:
+1. ✅ Check entire document for existing use
+2. ✅ Search bibliography for standard meanings
+3. ✅ Avoid overloading (one symbol = one meaning)
+
+### Common Conflicts to Avoid:
+- ❌ Using $\mathcal{M}$ for both "Mentor" and "Mass"
+- ❌ Using $L$ for both "Loss" and "Lebesgue"
+- ❌ Using $\Phi$ for both "Phase" and "Phi-function"
+
+## Notation Categories
+
+### Entities (MUST use defined macros):
+```latex
+\elder{d}     % Elder space of dimension d
+\mentor{k}    % Mentor space
+\erudite{n}   % Erudite space
+```
+
+### Loss Functions:
+```latex
+\elderloss    % Elder loss function
+\mentorloss   % Mentor loss  
+\eruditeloss  % Erudite loss
+```
+
+### Operators:
+```latex
+\teachlearnop           % Teach-learn operator
+\gravitationalop        % Gravitational operator
+\helioderiv             % Heliomorphic derivative
+```
+
+### Manifolds:
+```latex
+\EM      % Elder Manifold
+\MM      % Mentor Manifold
+\ErM     % Erudite Manifold
+```
+
+## Subscript/Superscript Conventions
+
+### Subscripts indicate:
+- Entity type: $\Theta_{\text{Elder}}$, $\Theta_{\text{Mentor}}$
+- Index: $x_i$, $g_j$
+- Domain: $\mathcal{L}_{\text{audio}}$
+
+### Superscripts indicate:
+- Power: $x^2$
+- Iteration: $x^{(t)}$
+- Dual: $\phi^*$
+- Inverse: $f^{-1}$
+
+## Greek Letters (Consistent Usage)
+
+### Reserved Meanings:
+- $\theta, \phi$: Phase angles (rotational)
+- $\rho$: Magnitude/radius
+- $\gamma$: Oscillatory coefficients
+- $\mu$: Mass parameters
+- $\epsilon$: Approximation error/small quantities
+- $\delta$: Kronecker delta or variation
+- $\omega$: Angular velocity/frequency
+
+## Blackboard Bold ($\mathbb{•}$)
+
+### Number Systems:
+- $\mathbb{N}$: Natural numbers
+- $\mathbb{Z}$: Integers
+- $\mathbb{R}$: Real numbers
+- $\mathbb{C}$: Complex numbers
+- $\mathbb{S}^1$: Unit circle
+
+❌ Never use for other purposes
+
+## Calligraphic ($\mathcal{•}$)
+
+### Spaces and Operators:
+- $\mathcal{E}$: Elder entity/space
+- $\mathcal{M}$: Mentor entity/space  
+- $\mathcal{L}$: Loss function
+- $\mathcal{H}$: Heliomorphic operator
+- $\mathcal{G}$: Gravitational operator
+
+## Fraktur ($\mathfrak{•}$)
+
+### Structural Elements:
+- $\mathfrak{A}_i$: Elder structure basis elements
+- Use for algebraic structures
+
+## Bold ($\mathbf{•}$)
+
+### Vectors and Matrices:
+- $\mathbf{x}$: Vector
+- $\mathbf{W}$: Matrix
+- Use sparingly in Elder Theory (prefer component notation)
+
+## Common Notation Patterns
+
+### Complex Numbers:
+```latex
+z = \rho e^{i\phi}          % Polar form
+z = a + bi                   % Cartesian form
+|z|                          % Magnitude
+\arg(z)                      % Argument/phase
+\bar{z}                      % Complex conjugate
+```
+
+### Function Spaces:
+```latex
+f: X \rightarrow Y           % Function notation
+\mathcal{C}(X, Y)           % Continuous functions
+\mathcal{L}^2(X)            % L^2 space
+```
+
+### Sets and Operations:
+```latex
+x \in X                      % Element of
+A \subset B                  % Subset
+A \cup B                     % Union
+A \cap B                     % Intersection
+\emptyset                    % Empty set
+```
+
+### Norms and Inner Products:
+```latex
+\|x\|                        % Norm
+\langle x, y \rangle        % Inner product
+\|x\|_2                      % L^2 norm
+\|f\|_{\infty}              % Supremum norm
+```
+
+## Elder Theory Specific Notation
+
+### Heliomorphic Functions:
+```latex
+\helio                       % Heliomorphic space
+\helioderiv                  % Heliomorphic derivative
+\helioflow                   % Heliomorphic flow
+```
+
+### Gravitational Parameters:
+```latex
+\oscillatorycoeff           % γ - Oscillatory coefficient
+\massgravrel                % μ - Mass-gravity relationship
+\eldermassgrav              % μ_E - Elder mass parameter
+```
+
+### Teach-Learn Operations:
+```latex
+\teachlearnop               % Generic teach-learn
+\elderteachop               % Elder teaching
+\mentorteachop              % Mentor teaching
+\eruditelearningop          % Erudite learning
+```
+
+## Index Usage
+
+### When to Add Index Entry:
+```latex
+% First mention of important concept
+\index{Elder Space}
+An Elder space \elder{d} is...
+
+% Important theorem
+\index{Heliomorphic Completeness}
+\begin{theorem}[Heliomorphic Completeness]
+...
+```
+
+### Index Categories:
+- Concepts: `\index{Elder Space}`
+- Theorems: `\index{Heliomorphic Completeness Theorem}`
+- Operators: `\index{Gravitational Operator@$\gravitationalop$}`
+- Symbols: `\index{gamma@$\gamma$ (oscillatory coefficient)}`
+
+## Consistency Check Commands
+
+### Before Committing:
+```bash
+# Check for undefined macros
+grep -r "\\mathcal{E}_d" chapters/ | grep -v "%"
+
+# Find potential macro usage
+grep -r "Elder space" chapters/ | head -20
+
+# Check for direct symbol use (should use macros)
+grep -r "\\mathcal{L}_{Elder}" chapters/ | grep -v "%"
+```
+
+## Macro Naming Conventions
+
+### Pattern:
+- `\conceptname` - Main concept (e.g., `\elder`, `\mentor`)
+- `\conceptnameop` - Associated operator (e.g., `\elderteachop`)
+- `\conceptnameparam` - Parameters (e.g., `\elderparams`)
+
+### Examples:
+```latex
+\newcommand{\elder}[1]{\mathcal{E}_{#1}}           % Entity
+\newcommand{\elderspace}{\mathcal{E}}              % Space
+\newcommand{\elderloss}{\mathcal{L}_E}             % Loss
+\newcommand{\elderparams}{\Theta_{\text{Elder}}}   % Parameters
+```
+
+## Notation Table Maintenance
+
+### Update After Changes:
+1. ✅ Edit `chapters/appendix/consolidated_notation.tex`
+2. ✅ Add new symbol with:
+   - Symbol itself
+   - Description
+   - First page of usage
+   - Related concepts
+
+### Notation Table Format:
+```latex
+\begin{longtable}{llp{0.5\textwidth}}
+\toprule
+\textbf{Symbol} & \textbf{Description} & \textbf{First Use} \\
+\midrule
+$\elder{d}$ & Elder space of dimension $d$ & p.~\pageref{def:elder_space} \\
+$\mathcal{G}$ & Gravitational operator & p.~\pageref{def:gravitational_op} \\
+$\gamma$ & Oscillatory coefficient & p.~\pageref{eq:oscillatory_coeff} \\
+\bottomrule
+\end{longtable}
+```

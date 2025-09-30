@@ -1,0 +1,355 @@
+---
+description: Tracking theorem dependencies and ensuring logical flow
+alwaysApply: true
+---
+
+# Theorem Dependency Management
+
+## Dependency Graph Rules
+
+### Every Theorem Must Track:
+1. **Prerequisites**: Which definitions/lemmas/theorems it uses
+2. **Dependents**: Which results depend on it
+3. **Depth**: How many levels from axioms
+
+### Dependency Documentation:
+```latex
+\begin{theorem}[Heliomorphic Completeness]
+\label{thm:heliomorphic_completeness}
+% DEPENDENCIES:
+%   - Definition~\ref{def:heliomorphic_function}
+%   - Lemma~\ref{lem:cauchy_convergence}
+%   - Theorem~\ref{thm:elder_space_properties}
+% USED BY:
+%   - Theorem~\ref{thm:universal_approximation}
+%   - Corollary~\ref{cor:existence_uniqueness}
+Statement...
+\end{theorem}
+```
+
+## Logical Flow Verification
+
+### Building Order (MUST follow):
+```
+Axioms/Postulates
+    ↓
+Definitions (primitive concepts)
+    ↓
+Lemmas (auxiliary results)
+    ↓
+Theorems (main results)
+    ↓
+Corollaries (immediate consequences)
+    ↓
+Applications (practical use)
+```
+
+### Circular Dependency Check:
+❌ **FORBIDDEN**:
+```
+Theorem A uses Theorem B
+Theorem B uses Theorem C
+Theorem C uses Theorem A  ← CIRCULAR!
+```
+
+✅ **Correct**:
+```
+Axiom 1
+    ↓
+Theorem A
+    ↓
+Theorem B (uses A)
+    ↓
+Theorem C (uses A, B)
+```
+
+## Forward References
+
+### When Stating Result Before Proof:
+```latex
+The following theorem (proven in Section~\ref{sec:advanced_proofs}) 
+establishes...
+
+\begin{theorem}[Name]
+\label{thm:forward_ref}
+Statement...
+\end{theorem}
+
+\begin{proof}
+See Section~\ref{sec:advanced_proofs}, Theorem~\ref{thm:forward_ref_proof}.
+\end{proof}
+```
+
+### Later in document:
+```latex
+\section{Advanced Proofs}
+\label{sec:advanced_proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:forward_ref}]
+Detailed proof here...
+\end{proof}
+```
+
+**Forward references acceptable when:**
+- Proof is very long and disrupts flow
+- Requires advanced techniques introduced later
+- Belongs in appendix for completeness
+
+## Example Dependencies: Elder Theory Structure
+
+### Foundation Layer (Unit I):
+```
+Axioms A1-A4 (Elder Space Axioms)
+    ↓
+Definition 1.1: Elder Space
+    ↓
+Theorem 1.1: Axiom Consistency (uses A1-A4)
+    ↓
+Theorem 1.2: Structural Elements (uses Thm 1.1)
+    ↓
+Lemma 1.3: Phase Orthogonality (uses Thm 1.2)
+    ↓
+Definition 1.4: Gravitational Field Operator (uses Thm 1.2)
+```
+
+### Functions and Geometry (Unit II):
+```
+Definition 1.1: Elder Space (from Unit I)
+    ↓
+Definition 2.1: Heliomorphic Function
+    ↓
+Theorem 2.1: Heliomorphic Properties (uses Def 2.1, Thm 1.2)
+    ↓
+Lemma 2.2: Cauchy Convergence (uses Def 2.1)
+    ↓
+Theorem 2.3: Heliomorphic Completeness (uses Lem 2.2, Thm 2.1)
+```
+
+### Cross-Unit Dependencies:
+```
+Unit I: Elder Spaces (foundation)
+    ↓
+Unit II: Heliomorphic Functions (uses Unit I)
+    ↓
+Unit III: Heliosystem Architecture (uses Units I, II)
+    ↓
+Unit IV: Learning Dynamics (uses Units I, II, III)
+    ↓
+Unit V: Cross-Domain Transfer (uses Units II, IV)
+    ↓
+Unit VI: Unification (uses all previous units)
+    ↓
+Unit VII: Memory Properties (uses Units III, IV, VI)
+```
+
+## Cross-Unit Dependency Documentation
+
+### When Theorem in Unit V uses Unit III result:
+```latex
+\begin{theorem}[Knowledge Transfer]
+\label{thm:knowledge_transfer}
+% CROSS-UNIT DEPENDENCIES:
+%   - Theorem~\ref{thm:gravitational_dynamics} (Unit III, Ch. 9)
+%   - Definition~\ref{def:orbital_mechanics} (Unit III, Ch. 8)
+% PREREQUISITE READING:
+%   - Section~\ref{sec:orbital_mechanics} (Unit III)
+%   - Chapter~\ref{ch:heliosystem_architecture} (Unit III)
+Let...
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:gravitational_dynamics} from Unit III, 
+the gravitational field dynamics satisfy...
+\end{proof}
+```
+
+## Maintaining Dependency Graph File
+
+Create `docs/theorem_dependency_graph.md`:
+```markdown
+# Theorem Dependency Graph
+
+## Unit I: Foundation Layer
+
+### Axioms
+- **A1**: Addition Structure
+- **A2**: Scaling Compatibility
+- **A3**: Multiplication Properties
+- **A4**: Phase Properties
+
+### Definition 1.1: Elder Space
+- **Depends on**: Axioms A1-A4
+- **Used by**: All theorems in Unit I
+- **File**: `chapters/part1_theory/unit1_foundation_layer/introduction_to_elder_spaces.tex`
+- **Line**: 11
+
+### Theorem 1.1: Axiom Consistency
+- **Depends on**: Axioms A1-A4, Definition 1.1
+- **Used by**: Theorem 1.2, Lemma 1.3, all subsequent theorems
+- **File**: `chapters/part1_theory/unit1_foundation_layer/introduction_to_elder_spaces.tex`
+- **Line**: 52
+- **Proof type**: Constructive (explicit model given)
+
+### Theorem 1.2: Structural Elements
+- **Depends on**: Theorem 1.1, Definition 1.1
+- **Used by**: Theorem 2.1, Theorem 3.5, Definition 1.4
+- **File**: `chapters/part1_theory/unit1_foundation_layer/introduction_to_elder_spaces.tex`
+- **Line**: 142
+- **Proof type**: Existence and uniqueness
+
+## Unit II: Heliomorphic Functions and Geometry
+
+### Definition 2.1: Heliomorphic Function
+- **Depends on**: Definition 1.1 (Elder Space), Theorem 1.2
+- **Used by**: All theorems in Unit II
+- **File**: `chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_functions.tex`
+- **Line**: 25
+
+### Theorem 2.3: Heliomorphic Completeness
+- **Depends on**: Definition 2.1, Lemma 2.2, Theorem 1.2
+- **Used by**: Theorem 4.5 (Universal Approximation), Theorem 6.2
+- **File**: `chapters/part1_theory/unit2_heliomorphic_functions_and_geometry/heliomorphic_completeness.tex`
+- **Line**: 78
+- **Proof type**: Limit construction with Cauchy sequences
+
+## Dependency Visualization
+
+```
+         A1-A4 (Axioms)
+            ↓
+       Def 1.1 (Elder Space)
+            ↓
+    Thm 1.1 (Consistency)
+            ↓
+    Thm 1.2 (Structure)
+        ↙        ↘
+  Def 1.4        Def 2.1
+(Grav Field)  (Heliomorphic)
+        ↓            ↓
+    Thm 3.x      Thm 2.3
+  (Dynamics)   (Completeness)
+        ↘          ↙
+        Thm 4.5 (Universal Approx)
+              ↓
+      Thm 5.x (Transfer)
+              ↓
+       Thm 6.x (Unification)
+              ↓
+    Thm 7.x (Memory/Efficiency)
+```
+```
+
+## Dependency Checking Script
+
+Create `scripts/check_dependencies.sh`:
+```bash
+#!/bin/bash
+# Check for undefined theorem references
+
+echo "Checking theorem dependencies..."
+
+# Find all \label{thm:*} definitions
+grep -rn "\\label{thm:" chapters/ | while read line; do
+    file=$(echo "$line" | cut -d: -f1)
+    label=$(echo "$line" | sed 's/.*\\label{\([^}]*\)}.*/\1/')
+    
+    # Check if label is referenced
+    refs=$(grep -r "\\ref{$label}" chapters/ | wc -l)
+    
+    if [ "$refs" -eq 0 ]; then
+        echo "WARNING: Theorem $label defined but never referenced"
+        echo "  File: $file"
+    fi
+done
+
+echo ""
+echo "Checking for undefined references..."
+
+# Find all \ref{thm:*} usages
+grep -rn "\\ref{thm:" chapters/ | while read line; do
+    ref=$(echo "$line" | sed 's/.*\\ref{\([^}]*\)}.*/\1/')
+    
+    # Check if label exists
+    defs=$(grep -r "\\label{$ref}" chapters/ | wc -l)
+    
+    if [ "$defs" -eq 0 ]; then
+        echo "ERROR: Reference to undefined theorem: $ref"
+        echo "  Location: $(echo $line | cut -d: -f1-2)"
+    fi
+done
+
+echo "Dependency check complete."
+```
+
+## Cyclic Dependency Detection
+
+### Manual Check:
+```bash
+# Create dependency list
+grep -r "DEPENDENCIES:" chapters/ > deps.txt
+
+# Check for cycles (requires manual inspection)
+cat deps.txt | grep "thm:"
+```
+
+### When Found:
+1. Identify the cycle
+2. Determine which dependency is weakest
+3. Strengthen one theorem to not need the other
+4. Or: Break cycle by introducing lemma
+
+## Dependency Depth Analysis
+
+### Axiom Depth = 0
+### Definition from Axioms = Depth 1
+### Theorem using Depth k results = Depth k+1
+
+**Track in dependency graph:**
+```markdown
+### Theorem 2.3: Heliomorphic Completeness
+- **Dependency Depth**: 4
+  - Uses Lemma 2.2 (depth 3)
+  - Uses Theorem 1.2 (depth 2)
+```
+
+**Too Deep?**
+If depth > 10, consider:
+- Are intermediate results necessary?
+- Can we prove more directly?
+- Should we introduce stronger axioms?
+
+## References to Future Work
+
+### Acceptable Forward Reference:
+```latex
+\begin{remark}
+The converse of this theorem (that completeness implies convergence) 
+will be established in Theorem~\ref{thm:converse} after we develop 
+the necessary machinery in Section~\ref{sec:convergence_theory}.
+\end{remark}
+```
+
+### Unacceptable Circular Logic:
+```latex
+\begin{theorem}[A]
+By Theorem~\ref{thm:B}, we have...
+\end{theorem}
+
+% Later:
+\begin{theorem}[B]  
+By Theorem~\ref{thm:A}, we have...  ← CIRCULAR!
+\end{theorem}
+```
+
+## Updating Dependencies After Changes
+
+### When adding new theorem:
+1. Document what it depends on
+2. Update dependency graph
+3. Check if existing theorems should cite it
+4. Update "USED BY" in prerequisites
+
+### When modifying proof:
+1. Check if dependencies changed
+2. Update dependency comments
+3. Verify no new circular dependencies introduced

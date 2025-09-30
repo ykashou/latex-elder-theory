@@ -15,12 +15,14 @@
 }
 
 % Loss functions
-\newcommand{\eloss}{\mathcal{L}_{\text{El}}}
-\newcommand{\mloss}{\mathcal{L}_M}
-\newcommand{\erloss}{\mathcal{L}_E}
-\newcommand{\elderloss}{\mathcal{L}_E}
-\newcommand{\mentorloss}{\mathcal{L}_M}
-\newcommand{\eruditeloss}{\mathcal{L}_E}
+% Fixed notation: Elder (E), Mentor (M), Erudite (Er)
+\newcommand{\elderloss}{\mathcal{L}_{\text{Elder}}}
+\newcommand{\mentorloss}{\mathcal{L}_{\text{Mentor}}}
+\newcommand{\eruditeloss}{\mathcal{L}_{\text{Erudite}}}
+% Short forms (use sparingly, prefer full forms above)
+\newcommand{\eloss}{\mathcal{L}_{\text{Elder}}}  % Elder loss
+\newcommand{\mloss}{\mathcal{L}_{\text{Mentor}}}  % Mentor loss
+\newcommand{\erloss}{\mathcal{L}_{\text{Erudite}}}  % Erudite loss
 
 % Magefile notation
 \newcommand{\magefile}{\mathcal{M}}
@@ -72,6 +74,11 @@
 \newcommand{\EM}{\mathcal{E}_{\mathcal{M}}} % Elder Manifold
 \newcommand{\MM}{\mathcal{M}_{\mathcal{M}}} % Mentor Manifold  
 \newcommand{\ErM}{\mathcal{E}r_{\mathcal{M}}} % Erudite Manifold
+
+% Elder norms and magnitudes
+\newcommand{\eldernorm}[1]{\|#1\|_E}  % Elder norm
+\newcommand{\eldermag}[1]{\|#1\|_{\text{mag}}}  % Elder magnitude component norm
+\newcommand{\elderphaseweight}[1]{w(#1)}  % Elder phase weight function
 
 % ANNOTATIONS 3-10: Additional core mathematical structures
 \newcommand{\tensorsum}{\oplus_{\otimes}} % Tensor sum operator

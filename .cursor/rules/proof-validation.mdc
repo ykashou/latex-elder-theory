@@ -1,0 +1,392 @@
+---
+description: Proof validation checklist and common pitfalls
+alwaysApply: true
+---
+
+# Proof Validation for Mathematical Theory
+
+## Proof Checklist (Before Committing)
+
+### Structure:
+- [ ] Proof begins with `\begin{proof}` or `\begin{proof}[Proof Technique]`
+- [ ] All assumptions explicitly stated at beginning
+- [ ] All notation defined before use
+- [ ] Logical flow is clear (Step 1 → Step 2 → ...)
+- [ ] Proof concludes with `\end{proof}` (auto-inserts ∎)
+
+### Content:
+- [ ] No logical leaps (every step justified)
+- [ ] No undefined symbols or notation
+- [ ] No circular reasoning
+- [ ] Edge cases addressed (n=0, empty set, infinity, etc.)
+- [ ] Counterexamples provided when proving negation
+
+### References:
+- [ ] All cited theorems exist and are proven earlier
+- [ ] Labels match actual theorem numbers (`\ref{thm:...}`)
+- [ ] No forward references to unproven results
+- [ ] Cross-references use `\ref{}` not hardcoded numbers
+
+### Rigor:
+- [ ] Quantifiers clear (∀, ∃, ∃!)
+- [ ] Direction of implications correct (⇒, ⇐, ⇔)
+- [ ] Induction properly structured (base + inductive step)
+- [ ] Contradiction arguments well-formed
+
+## Common Proof Pitfalls
+
+### 1. Quantifier Confusion
+❌ **Wrong**:
+```latex
+For some x, P(x) holds. Therefore Q(x) holds for all x.
+```
+
+✅ **Correct**:
+```latex
+Let x ∈ X be arbitrary. We show P(x) ⇒ Q(x). 
+Since x was arbitrary, Q(x) holds for all x ∈ X.
+```
+
+### 2. Assuming What You're Proving
+❌ **Wrong**:
+```latex
+\begin{theorem}
+The function f is continuous.
+\end{theorem}
+
+\begin{proof}
+Since f is continuous, for all ε > 0...
+\end{proof}
+```
+
+✅ **Correct**:
+```latex
+\begin{proof}
+Let ε > 0 be arbitrary. We show there exists δ > 0 such that
+|x - x₀| < δ ⇒ |f(x) - f(x₀)| < ε.
+
+Choose δ = ε/2. Then for |x - x₀| < δ:
+[derivation showing |f(x) - f(x₀)| < ε]
+
+Therefore f satisfies the ε-δ definition of continuity.
+\end{proof}
+```
+
+### 3. Insufficient Edge Case Coverage
+❌ **Wrong**:
+```latex
+\begin{theorem}
+For all n ∈ ℕ, P(n) holds.
+\end{theorem}
+
+\begin{proof}
+For n = 5, we have... Therefore P(n) holds. ∎
+\end{proof}
+```
+
+✅ **Correct**:
+```latex
+\begin{proof}[Proof by Induction]
+\textbf{Base case (n=0):} P(0) holds because...
+
+\textbf{Inductive hypothesis:} Assume P(k) for some k ≥ 0.
+
+\textbf{Inductive step:} We show P(k+1).
+[Using P(k), derive P(k+1)]
+
+By induction, P(n) holds for all n ∈ ℕ.
+\end{proof}
+```
+
+### 4. Existential Without Construction
+❌ **Wrong**:
+```latex
+\begin{theorem}
+There exists x ∈ X such that P(x).
+\end{theorem}
+
+\begin{proof}
+Clearly such an x exists. ∎
+\end{proof}
+```
+
+✅ **Correct**:
+```latex
+\begin{proof}[Explicit Construction]
+Define x = [explicit formula or procedure].
+
+We verify P(x):
+[Step-by-step verification that x satisfies P]
+
+Therefore x ∈ X and P(x) holds.
+\end{proof}
+```
+
+### 5. Confusing "If" and "Only If"
+❌ **Wrong**:
+```latex
+\begin{theorem}
+f is continuous if and only if f⁻¹(U) is open for all open U.
+\end{theorem}
+
+\begin{proof}
+If f⁻¹(U) is open for all open U, then f is continuous.
+[proof of forward direction only]
+∎
+\end{proof}
+```
+
+✅ **Correct**:
+```latex
+\begin{proof}
+(⇒) Assume f is continuous. Let U be open...
+[prove f⁻¹(U) is open]
+
+(⇐) Assume f⁻¹(U) is open for all open U...
+[prove f is continuous]
+
+Therefore f is continuous ⇔ f⁻¹(U) is open for all open U.
+\end{proof}
+```
+
+## Proof Techniques with Templates
+
+### Direct Proof:
+```latex
+\begin{proof}[Direct Proof]
+Assume [hypothesis H]. We show [conclusion C].
+
+From H, we have [fact 1].
+By [theorem/lemma], [fact 2].
+Combining these, [fact 3].
+Therefore C holds.
+\end{proof}
+```
+
+### Proof by Contradiction:
+```latex
+\begin{proof}[Proof by Contradiction]
+Assume toward contradiction that ¬C (i.e., [negation of conclusion]).
+
+From this assumption, [derive fact 1].
+By [reasoning], [derive fact 2].
+But this contradicts [known fact K from hypothesis or prior theorem].
+
+Therefore our assumption ¬C must be false, so C holds.
+\end{proof}
+```
+
+### Proof by Induction:
+```latex
+\begin{proof}[Proof by Induction]
+\textbf{Base case:} For n = 0 [or n = 1], we have
+[direct verification of P(0)]
+
+\textbf{Inductive hypothesis:} Assume P(k) holds for some k ≥ 0.
+That is, assume [explicit statement of P(k)].
+
+\textbf{Inductive step:} We prove P(k+1).
+[Using P(k), derive P(k+1)]
+
+By the principle of mathematical induction, P(n) holds for all n ∈ ℕ.
+\end{proof}
+```
+
+### Strong Induction:
+```latex
+\begin{proof}[Strong Induction]
+\textbf{Base case:} Verify P(0) and P(1).
+
+\textbf{Strong inductive hypothesis:} 
+Assume P(j) holds for all 0 ≤ j ≤ k.
+
+\textbf{Inductive step:} We show P(k+1).
+[Use any/all of P(0), P(1), ..., P(k) to derive P(k+1)]
+
+By strong induction, P(n) holds for all n ≥ 0.
+\end{proof}
+```
+
+### Proof by Construction:
+```latex
+\begin{proof}[Explicit Construction]
+We construct x ∈ X satisfying property P as follows:
+
+\textbf{Construction:} Define
+\begin{equation*}
+x = [explicit formula or algorithmic procedure]
+\end{equation*}
+
+\textbf{Verification:} We verify x satisfies P.
+
+\textit{Property 1:} [Show x satisfies property 1 of P]
+
+\textit{Property 2:} [Show x satisfies property 2 of P]
+
+Therefore x satisfies P.
+\end{proof}
+```
+
+### Proof by Cases:
+```latex
+\begin{proof}[Proof by Cases]
+We consider all possible cases:
+
+\textbf{Case 1:} Assume [condition 1].
+[Proof that conclusion holds in this case]
+
+\textbf{Case 2:} Assume [condition 2].
+[Proof that conclusion holds in this case]
+
+\textbf{Case 3:} Assume [condition 3].
+[Proof that conclusion holds in this case]
+
+Since these cases exhaust all possibilities, the result holds.
+\end{proof}
+```
+
+### Proof by Contrapositive:
+```latex
+\begin{proof}[Proof by Contrapositive]
+We prove the contrapositive: ¬C ⇒ ¬H.
+
+Assume ¬C, i.e., [negation of conclusion].
+[Derive consequences]
+Therefore ¬H, i.e., [negation of hypothesis].
+
+Since ¬C ⇒ ¬H, by contraposition we have H ⇒ C.
+\end{proof}
+```
+
+## Verification After Writing Proof
+
+### Mathematical Verification:
+```bash
+# Check all referenced labels exist
+grep "\\ref{" chapter.tex | while read ref; do
+    label=$(echo $ref | sed 's/.*\\ref{\([^}]*\)}.*/\1/')
+    grep -q "\\label{$label}" chapters/**/*.tex || echo "Missing label: $label"
+done
+
+# Check for undefined citations
+grep "\\cite{" chapter.tex | while read cite; do
+    key=$(echo $cite | sed 's/.*\\cite{\([^}]*\)}.*/\1/')
+    grep -q "^@.*{$key," bibliography.bib || echo "Missing citation: $key"
+done
+```
+
+### Logical Verification Checklist:
+1. ✅ Read proof backward (conclusion → premises)
+2. ✅ Check each "therefore" has justification
+3. ✅ Verify no hidden assumptions in notation
+4. ✅ Ensure uniqueness claimed only when proven
+5. ✅ Check quantifiers match claimed result
+6. ✅ Verify all cases covered in case analysis
+7. ✅ Check induction base case proven
+8. ✅ Verify contradiction actually contradicts something
+
+### Peer Review Questions:
+- **Clarity**: Can I follow every step?
+- **Completeness**: Are there any unexplained jumps?
+- **Insight**: Do I see where key insights occur?
+- **Rigor**: Are edge cases handled?
+- **Correctness**: Is the logic sound?
+
+## Special Considerations for Elder Theory
+
+### Heliomorphic Function Proofs:
+```latex
+\begin{proof}[Heliomorphic Proof Pattern]
+Let f : \elder{d} → \elder{k} be heliomorphic.
+
+\textbf{Phase preservation:} We show Φ(f(x ⋆ y)) = Φ(f(x)) · Φ(f(y)).
+[Verification using phase operator properties]
+
+\textbf{Magnitude growth:} We bound |f(x)|.
+[Use gravitational field operator bounds]
+
+\textbf{Completeness:} We show f is well-defined on completion.
+[Use Cauchy sequence argument]
+
+Therefore f satisfies the heliomorphic properties.
+\end{proof}
+```
+
+### Gravitational Dynamics Proofs:
+```latex
+\begin{proof}[Orbital Mechanics Proof Pattern]
+Consider Elder entity E with gravitational field G_E.
+
+\textbf{Energy conservation:} We verify conservation of
+E_total = E_kinetic + E_potential.
+[Show dE/dt = 0]
+
+\textbf{Stability:} We show orbital parameters remain bounded.
+[Use Lyapunov function]
+
+\textbf{Resonance:} We characterize resonant frequencies.
+[Solve characteristic equation]
+
+Therefore the orbital system is stable.
+\end{proof}
+```
+
+### Information-Theoretic Proofs:
+```latex
+\begin{proof}[Information Theory Proof Pattern]
+Let I(X;Y) denote mutual information.
+
+\textbf{Entropy bound:} We establish H(X) ≤ log|X|.
+[Use definition of entropy]
+
+\textbf{Information transfer:} We bound I(X;Y) ≤ min(H(X), H(Y)).
+[Use data processing inequality]
+
+\textbf{Learning bound:} We show error decreases with O(1/n).
+[Apply PAC learning framework]
+
+Therefore the learning algorithm is efficient.
+\end{proof}
+```
+
+## Proof Anti-Patterns (Never Do This)
+
+### ❌ Hand-Waving:
+```latex
+\begin{proof}
+It is obvious that... The rest is straightforward. ∎
+\end{proof}
+```
+
+### ❌ Proof by Authority:
+```latex
+\begin{proof}
+According to [famous mathematician], this must be true. ∎
+\end{proof}
+```
+
+### ❌ Proof by Intimidation:
+```latex
+\begin{proof}
+The proof is left as a trivial exercise for the reader. ∎
+\end{proof}
+```
+
+### ❌ Circular Reasoning:
+```latex
+\begin{proof}
+A is true because B is true.
+B is true because A is true. ∎
+\end{proof}
+```
+
+### ❌ Proof by Example:
+```latex
+\begin{theorem}
+For all n ∈ ℕ, property P(n) holds.
+\end{theorem}
+
+\begin{proof}
+For n = 1, 2, 3, we have verified P(n). ∎
+\end{proof}
+```
