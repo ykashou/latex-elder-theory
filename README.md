@@ -9,7 +9,7 @@ A novel mathematical framework for multi-domain learning and knowledge represent
 [![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/ykashou/latex-elder-theory)
 [![License: Elder](https://img.shields.io/badge/License-Elder-blue.svg)](./LICENSE)
 [![LaTeX](https://img.shields.io/badge/LaTeX-TeX%20Live%202025-008080.svg)](https://www.tug.org/texlive/)
-[![Pages](https://img.shields.io/badge/pages-934-orange.svg)](./build/theory/elder_arcane_realization.pdf)
+[![Pages](https://img.shields.io/badge/pages-932-orange.svg)](./build/theory/elder_arcane_realization.pdf)
 
 [Theory PDF](./build/theory/elder_arcane_realization.pdf) • [Student Workbook](./build/student_workbook/workbook.pdf) • [Documentation](./docs) • [Report Issue](https://github.com/ykashou/latex-elder-theory/issues)
 

@@ -180,6 +180,8 @@
 
 ## POST-MIGRATION
 
+- [x] Merge conflicts resolved (build/pdf/ files, elder_training_dag.tex)
+- [x] Merge commit created and pushed (commit: 47c78ac)
 - [ ] Create pull request for reorganization
       https://github.com/ykashou/latex-elder-theory/pull/new/refactor/repository-structure
 ---
