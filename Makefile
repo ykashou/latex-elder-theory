@@ -34,18 +34,31 @@ theory:
 	@echo "Theory PDF: $(BUILD_THEORY)/elder_arcane_realization.pdf"
 	@ls -lh $(BUILD_THEORY)/elder_arcane_realization.pdf 2>/dev/null || echo "Build may have failed"
 
-# Teaching Guide
+# Teaching Guide (builds all chapters)
 teaching_guide:
-	@echo "Building Teaching Guide..."
-	$(CONTAINER) run $(CONTAINER_OPTS) $(TEXLIVE_IMAGE) lualatex --interaction=nonstopmode --output-directory=$(BUILD_TEACHING) teaching_guide/chapter1_guide.tex 2>&1 | grep -E "(Output written|Error)" || true
-	@echo "Teaching Guide PDF: $(BUILD_TEACHING)/chapter1_guide.pdf"
+	@echo "Building Teaching Guides for all chapters..."
+	@for chapter_dir in teaching_guide/chapter*/; do \
+		if [ -f "$$chapter_dir/guide.tex" ]; then \
+			chapter_num=$$(basename $$chapter_dir); \
+			echo "Building Teaching Guide: $$chapter_num..."; \
+			$(CONTAINER) run $(CONTAINER_OPTS) $(TEXLIVE_IMAGE) bash -c "cd $$chapter_dir && lualatex --interaction=nonstopmode --output-directory=../../$(BUILD_TEACHING) --jobname=$${chapter_num}_guide guide.tex" 2>&1 | grep -E "(Output written|Error)" || true; \
+			echo "  Output: $(BUILD_TEACHING)/$${chapter_num}_guide.pdf"; \
+		fi \
+	done
+	@echo "Teaching Guide PDFs in: $(BUILD_TEACHING)/"
 
-# Student Workbook (regular version only)
+# Student Workbook (builds all chapters)
 student_workbook:
-	@echo "Building Student Workbook..."
-	@$(CONTAINER) run $(CONTAINER_OPTS) $(TEXLIVE_IMAGE) bash -c "lualatex --interaction=nonstopmode --output-directory=$(BUILD_WORKBOOK) student_workbook/chapter1/workbook.tex" 2>&1 | grep -E "(Output written|Error)" || true
-	@echo "Workbook PDF: $(BUILD_WORKBOOK)/workbook.pdf"
-	@ls -lh $(BUILD_WORKBOOK)/workbook.pdf 2>/dev/null || echo "Build may have failed"
+	@echo "Building Student Workbooks for all chapters..."
+	@for chapter_dir in student_workbook/chapter*/; do \
+		if [ -f "$$chapter_dir/workbook.tex" ]; then \
+			chapter_num=$$(basename $$chapter_dir); \
+			echo "Building Student Workbook: $$chapter_num..."; \
+			$(CONTAINER) run $(CONTAINER_OPTS) $(TEXLIVE_IMAGE) bash -c "cd $$chapter_dir && lualatex --interaction=nonstopmode --output-directory=../../$(BUILD_WORKBOOK) --jobname=$${chapter_num}_workbook workbook.tex" 2>&1 | grep -E "(Output written|Error)" || true; \
+			echo "  Output: $(BUILD_WORKBOOK)/$${chapter_num}_workbook.pdf"; \
+		fi \
+	done
+	@echo "Student Workbook PDFs in: $(BUILD_WORKBOOK)/"
 
 # Clean auxiliary files
 clean:
@@ -69,16 +82,16 @@ help:
 	@echo "  make theory           - Build main theory document (default, ~5-10 min)"
 	@echo "                          Includes: Table of Contents, List of Figures,"
 	@echo "                          List of Tables, Bibliography, Index"
-	@echo "  make teaching_guide   - Build teaching guide"
-	@echo "  make student_workbook - Build student workbook (regular version)"
+	@echo "  make teaching_guide   - Build all teaching guide chapters"
+	@echo "  make student_workbook - Build all student workbook chapters"
 	@echo "  make clean            - Remove auxiliary files"
 	@echo "  make realclean        - Remove all generated files including PDFs"
 	@echo "  make help             - Show this help message"
 	@echo ""
 	@echo "Output locations:"
-	@echo "  Theory:         $(BUILD_THEORY)/elder_arcane_realization.pdf"
-	@echo "  Teaching Guide: $(BUILD_TEACHING)/chapter1_guide.pdf"
-	@echo "  Workbook:       $(BUILD_WORKBOOK)/workbook.pdf"
+	@echo "  Theory:          $(BUILD_THEORY)/elder_arcane_realization.pdf"
+	@echo "  Teaching Guides: $(BUILD_TEACHING)/chapter*_guide.pdf"
+	@echo "  Workbooks:       $(BUILD_WORKBOOK)/chapter*_workbook.pdf"
 	@echo ""
 	@echo "Note: All builds use the TeX Live container (podman/docker)"
 
