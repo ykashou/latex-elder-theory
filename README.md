@@ -1,297 +1,530 @@
-# Elder Theory: The Arcane Realization
+<div align="center">
 
-A novel mathematical framework for multi-domain learning and knowledge representation.
+<img src="./shared/figures/elder_symbol.png" alt="Elder Symbol" width="120"/>
 
-## About This Project
+# Elder Theory
 
-"Elder Theory: The Arcane Realization" is a comprehensive mathematical textbook that introduces a theoretical framework for hierarchical knowledge representation and multi-domain learning. The book presents the Elder-Mentor-Erudite system, which models how learning occurs at different levels of abstraction through orbital dynamics and gravitational interactions.
+A novel mathematical framework for multi-domain learning and knowledge representation
 
-## Repository Structure
+[![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/ykashou/latex-elder-theory)
+[![License: Elder](https://img.shields.io/badge/License-Elder-blue.svg)](./LICENSE)
+[![LaTeX](https://img.shields.io/badge/LaTeX-TeX%20Live%202025-008080.svg)](https://www.tug.org/texlive/)
+[![Pages](https://img.shields.io/badge/pages-934-orange.svg)](./build/theory/elder_arcane_realization.pdf)
 
-```
-elder-theory/
-├── chapters/               # All chapter content organized by section
-│   ├── part1_theory/       # Theoretical foundations (Units I-VII)
-│   │   ├── unit1_foundation_layer/
-│   │   ├── unit2_heliomorphic_functions_and_geometry/
-│   │   ├── unit3_elder_heliosystem_architecture/
-│   │   ├── unit4_learning_dynamics_and_algorithms/
-│   │   ├── unit5_cross_domain_knowledge_transfer/
-│   │   ├── unit6_theoretical_unification_and_closure/
-│   │   └── unit7_memory_and_efficiency_properties/
-│   ├── part2_experiments/  # Empirical validation (Units I-III)
-│   └── appendix/           # Advanced proofs and references
-├── figures/                # Diagrams, illustrations, and figures
-├── macros/                 # LaTeX macros and custom commands
-│   ├── math_macros.tex     # Mathematical notation definitions
-│   ├── chapter_summary.tex # Chapter summary template
-│   └── tikz_styles.tex     # TikZ diagram styles
-├── docs/                   # Documentation and review materials
-│   ├── reviews/            # Chapter reviews and assessments
-│   ├── annotations/        # Annotation tracking
-│   └── *.md                # Various documentation files
-├── build/                  # Compilation artifacts (generated, gitignored)
-│   └── pdf/                # Output PDF files
-├── student_workbook_chapter1.tex  # Chapter 1 pedagogical companion
-├── student_workbook_README.md     # Workbook documentation
-├── main.tex                # Main document file
-├── bibliography.bib        # Bibliography references
-└── Makefile                # Build automation
-```
+[Theory PDF](./build/theory/elder_arcane_realization.pdf) • [Student Workbook](./build/student_workbook/workbook.pdf) • [Documentation](./docs) • [Report Issue](https://github.com/ykashou/latex-elder-theory/issues)
 
-## Building the Document
+</div>
 
-### Method 1: Using Containers (Recommended - No Local Installation)
+## 📚 About
 
-The easiest way to build the PDFs is using **Podman** or **Docker** with the official TeX Live container. This requires no local LaTeX installation.
+**"Elder Theory: The Arcane Realization"** is a comprehensive mathematical textbook that introduces a theoretical framework for hierarchical knowledge representation and multi-domain learning. The book presents the **Elder-Mentor-Erudite system**, which models how learning occurs at different levels of abstraction through orbital dynamics and gravitational interactions.
 
-#### Prerequisites:
-- Podman (recommended) or Docker installed
-- No LaTeX installation needed!
+### Key Concepts:
 
-#### Build Main Document:
+- **Elder Spaces** - Novel mathematical structures with phase operators and gravitational fields
+- **Heliomorphic Functions** - Generalization of holomorphic functions with learning properties
+- **Hierarchical Learning** - Multi-level knowledge representation (Elder-Mentor-Erudite)
+- **Orbital Mechanics** - Knowledge transfer through gravitational resonance
+- **O(1) Memory** - Theoretical framework achieving constant memory complexity
 
-```bash
-# Full compilation pipeline (4 passes: latex → biber → makeindex → latex → latex)
-# Creates: build/pdf/elder_arcane_realization.pdf (936 pages, ~4.2 MB)
+## 🎯 Features
 
-podman run --rm -v $(pwd):/workspace:Z -w /workspace \
-  docker.io/texlive/texlive:latest \
-  bash -c "mkdir -p build/pdf && \
-    lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && \
-    biber --output-directory build/pdf main && \
-    makeindex build/pdf/main.idx && \
-    lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && \
-    lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex && \
-    cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf"
-```
+- ✅ **Rigorous Mathematical Theory** - 934 pages of publication-ready proofs and theorems
+- ✅ **Student Workbook** - 37-page companion with worked examples and exercises
+- ✅ **Teaching Guide** - Instructor resources with lecture notes and rubrics
+- ✅ **Complete Notation System** - Consistent mathematical macros throughout
+- ✅ **Container-Based Builds** - No local LaTeX installation required
+- ✅ **Modular Structure** - Theory, teaching materials, and student resources organized separately
 
-**For Docker**, replace `podman` with `docker` and remove the `:Z` SELinux label:
-```bash
-docker run --rm -v $(pwd):/workspace -w /workspace \
-  docker.io/texlive/texlive:latest \
-  bash -c "mkdir -p build/pdf && ..."
-```
+## 🛠 Tech Stack
 
-#### Build Student Workbook:
+- **Typesetting**: LaTeX (TeX Live 2025)
+- **Engine**: LuaLaTeX
+- **Bibliography**: Biber (biblatex)
+- **Diagrams**: TikZ + PGFPlots
+- **Containerization**: Podman with official TeX Live image
+- **Build System**: GNU Make
+- **Version Control**: Git
 
-```bash
-# Single-pass compilation (no bibliography needed)
-# Creates: build/pdf/student_workbook_chapter1.pdf (37 pages, ~245 KB)
+## 📋 Prerequisites
 
-podman run --rm -v $(pwd):/workspace:Z -w /workspace \
-  docker.io/texlive/texlive:latest \
-  lualatex --interaction=nonstopmode --output-directory=build/pdf student_workbook_chapter1.tex
-```
-
-#### Quick Build (Main Document Only):
-
-```bash
-# Single pass - faster but may have incomplete cross-references
-podman run --rm -v $(pwd):/workspace:Z -w /workspace \
-  docker.io/texlive/texlive:latest \
-  lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex
-```
-
-### Method 2: Using Local LaTeX Installation
-
-#### Prerequisites:
-
-- **Full TeX Live distribution** (2024 or later recommended)
-  ```bash
-  # Fedora/RHEL
-  sudo dnf install texlive-scheme-full biber
-  
-  # Ubuntu/Debian  
-  sudo apt-get install texlive-full biber
-  
-  # macOS with Homebrew
-  brew install --cask mactex
-  ```
-
+- **Podman** >= 4.0 (or Docker)
 - **GNU Make** (usually pre-installed)
+- **No LaTeX installation needed!** (uses container)
 
-#### Compilation Using Makefile:
+## 🚦 Quick Start
 
-The included Makefile provides convenient targets:
+### Build Theory Document (Recommended)
 
 ```bash
-# Full build with bibliography, index, and all references
-make pdf
+# Clone repository
+git clone https://github.com/ykashou/latex-elder-theory.git
+cd latex-elder-theory
 
-# Quick build without rebuilding references  
-make quick
+# Build main theory document (~5-10 minutes)
+make theory
 
-# Clean auxiliary files but keep PDFs
+# View result
+open build/theory/elder_arcane_realization.pdf
+```
+
+**Output**: 934-page PDF with complete theory (4.2 MB)
+
+### Build All Documents
+
+```bash
+# Build everything
+make theory              # Main theory document
+make student_workbook    # Student workbook
+make teaching_guide      # Teaching guide
+
+# Or see all options
+make help
+```
+
+## 📁 Repository Structure
+
+```
+latex-elder-theory/
+├── theory/                    # 📘 Main Mathematical Theory
+│   ├── main.tex              # Document entry point
+│   ├── chapters/             # All chapter content
+│   │   ├── part1_theory/     # Theoretical foundations (Units I-VII)
+│   │   │   ├── unit1_foundation_layer/
+│   │   │   ├── unit2_heliomorphic_functions_and_geometry/
+│   │   │   ├── unit3_elder_heliosystem_architecture/
+│   │   │   ├── unit4_learning_dynamics_and_algorithms/
+│   │   │   ├── unit5_cross_domain_knowledge_transfer/
+│   │   │   ├── unit6_theoretical_unification_and_closure/
+│   │   │   └── unit7_memory_and_efficiency_properties/
+│   │   ├── part2_experiments/ # Empirical validation (Units I-III)
+│   │   └── appendix/         # Advanced proofs and references
+│   └── bibliography.bib      # Bibliography references
+│
+├── student_workbook/          # 🎓 Student Learning Materials
+│   ├── README.md             # Student resources overview
+│   └── chapter1/             # Chapter 1 materials
+│       ├── workbook.tex      # Regular workbook
+│       ├── workbook_enhanced.tex  # Enhanced version
+│       ├── study_book.tex    # Study book
+│       └── components/       # Workbook parts
+│
+├── teaching_guide/            # 👨‍🏫 Instructor Resources
+│   ├── README.md             # Teaching guide overview
+│   ├── chapter1_guide.tex    # Chapter 1 instructor guide
+│   ├── lecture_notes/        # Lecture materials
+│   ├── assessment_rubrics/   # Grading criteria
+│   └── solutions_manual/     # Complete solutions
+│
+├── shared/                    # 🔧 Common Resources
+│   ├── macros/               # LaTeX macros and commands
+│   │   ├── math_macros.tex   # Mathematical notation
+│   │   ├── tikz_styles.tex   # TikZ diagram styles
+│   │   └── chapter_summary.tex # Summary templates
+│   ├── figures/              # Diagrams and illustrations
+│   └── examples/             # Code examples and algorithms
+│
+├── build/                     # 📦 Build Outputs (gitignored)
+│   ├── theory/               # Theory PDF output
+│   ├── teaching_guide/       # Teaching guide output
+│   └── student_workbook/     # Workbook outputs
+│
+├── docs/                      # 📝 Documentation
+│   ├── annotations/          # Annotation tracking
+│   ├── reviews/              # Chapter reviews
+│   └── archive/              # Archived planning docs
+│
+├── scripts/                   # 🔨 Build and Automation Scripts
+├── assets/                    # 🎨 Static Assets
+├── tests/                     # 🧪 Test Files
+├── Makefile                   # Build system
+└── README.md                  # This file
+```
+
+## 🏗️ Building the Documents
+
+### Method 1: Using Make (Recommended)
+
+The easiest way to build PDFs using the container:
+
+```bash
+# Main theory document (5-10 minutes, 934 pages)
+make theory
+
+# Student workbook (1 minute, 37 pages)
+make student_workbook
+
+# Teaching guide (1 minute, 5 pages)
+make teaching_guide
+
+# Clean auxiliary files
 make clean
 
 # Clean everything including PDFs
 make realclean
 
-# Watch for changes and automatically rebuild
-make watch
+# Show all options
+make help
 ```
 
-#### Manual Compilation:
+### Method 2: Direct Container Commands
 
 ```bash
-# Main document (full pipeline)
-mkdir -p build/pdf
-lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex
-biber --output-directory build/pdf main
-makeindex build/pdf/main.idx
-lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex
-lualatex --interaction=nonstopmode --output-directory=build/pdf main.tex
-cp build/pdf/main.pdf build/pdf/elder_arcane_realization.pdf
-
-# Student workbook
-lualatex --output-directory=build/pdf student_workbook_chapter1.tex
-```
-
-### Build Outputs
-
-After successful compilation, you'll have:
-
-| File | Pages | Size | Description |
-|------|-------|------|-------------|
-| `build/pdf/elder_arcane_realization.pdf` | ~936 | ~4.2 MB | Complete theoretical document |
-| `build/pdf/student_workbook_chapter1.pdf` | 37 | ~245 KB | Chapter 1 pedagogical companion |
-| `build/pdf/main.pdf` | ~936 | ~4.2 MB | Same as elder_arcane_realization.pdf |
-
-### Troubleshooting Build Issues
-
-#### Common Issues:
-
-**Issue**: `lualatex: command not found`  
-**Solution**: Use container method (Method 1) or install TeX Live
-
-**Issue**: "Too deeply nested" errors  
-**Solution**: These are in appendix files, not core chapters. PDF still generates.
-
-**Issue**: Bibliography warnings  
-**Solution**: Ensure `bibliography.bib` exists. Some citations may reference future work.
-
-**Issue**: Missing fonts  
-**Solution**: Install complete TeX Live distribution, not minimal install
-
-**Issue**: Permission errors with containers  
-**Solution**: Add `:Z` flag for Podman on SELinux systems (Fedora/RHEL)
-
-## Editing Guidelines
-
-### Adding a New Chapter
-
-1. Create a new `.tex` file in the appropriate subdirectory under `chapters/`
-2. Add an `\input{}` command in `main.tex` at the appropriate position
-3. Follow the established chapter structure:
-   - Begin with `\chapter{Title}`
-   - Include a concise abstract
-   - Use consistent section numbering
-   - End with a chapter summary using `\chaptersummary{}`
-
-### Mathematical Notation
-
-Custom mathematical notation for Elder Theory is defined in `macros/math_macros.tex`. Please use these consistent macros rather than defining new commands for the same concepts.
-
-Key notation includes:
-- `\elder{d}` - Elder space of dimension d
-- `\realization{X}` - Realization mapping of entity X
-- `\elderloss`, `\mentorloss`, `\eruditeloss` - Loss functions
-
-### Figures and Diagrams
-
-- Place all figures in the `figures/` directory
-- Use TikZ for diagrams when possible for consistent styling
-- Use the Elder color scheme defined in `main.tex`
-
-## Student Workbooks
-
-### Overview
-
-**Student workbooks** are pedagogical companions to the main theoretical chapters. They provide:
-- **Worked examples** with complete step-by-step solutions
-- **Practice exercises** with detailed answer keys
-- **Numerical calculations** demonstrating abstract concepts
-- **Intuition building** for complex mathematical ideas
-
-### Available Workbooks:
-
-| Workbook | Chapters Covered | Pages | Exercises | Status |
-|----------|------------------|-------|-----------|--------|
-| `student_workbook_chapter1.tex` | Introduction to Elder Spaces | 37 | 10+ | ✅ Complete |
-| `student_workbook_chapter2.tex` | Elder Topology | TBD | TBD | 🚧 Planned |
-| `student_workbook_chapter3.tex` | Parameter Spaces | TBD | TBD | 🚧 Planned |
-
-### Building Student Workbooks:
-
-**Using containers** (recommended):
-```bash
-# Chapter 1 workbook
+# Theory document (if Make is unavailable)
 podman run --rm -v $(pwd):/workspace:Z -w /workspace \
   docker.io/texlive/texlive:latest \
-  lualatex --output-directory=build/pdf student_workbook_chapter1.tex
+  bash -c "cd theory && \
+    lualatex --interaction=nonstopmode --output-directory=../build/theory main.tex && \
+    cd ../build/theory && biber main && cd ../../theory && \
+    makeindex ../build/theory/main.idx && \
+    lualatex --interaction=nonstopmode --output-directory=../build/theory main.tex && \
+    lualatex --interaction=nonstopmode --output-directory=../build/theory main.tex && \
+    lualatex --interaction=nonstopmode --output-directory=../build/theory main.tex && \
+    lualatex --interaction=nonstopmode --output-directory=../build/theory main.tex && \
+    cp ../build/theory/main.pdf ../build/theory/elder_arcane_realization.pdf"
 ```
 
-**Using local LaTeX**:
-```bash
-lualatex --output-directory=build/pdf student_workbook_chapter1.tex
-```
+**For Docker**: Replace `podman` with `docker` and remove `:Z` SELinux label.
 
-### What's Inside:
+## 📦 Build Outputs
 
-Each workbook includes:
-- 15+ worked examples with every arithmetic step shown
-- 10+ practice exercises with complete solutions
+After successful compilation:
+
+| Document | File | Pages | Size | Build Time |
+|----------|------|-------|------|------------|
+| **Theory** | `build/theory/elder_arcane_realization.pdf` | 934 | 4.2 MB | 5-10 min |
+| **Workbook** | `build/student_workbook/workbook.pdf` | 37 | 245 KB | 1 min |
+| **Teaching Guide** | `build/teaching_guide/chapter1_guide.pdf` | 5 | 70 KB | 1 min |
+
+### Theory Document Contents:
+
+- ✅ Table of Contents
+- ✅ List of Figures (133 entries)
+- ✅ List of Tables (103 entries)
+- ✅ Part I: Theory (7 Units, 896 pages)
+  - Unit I: Foundation Layer
+  - Unit II: Heliomorphic Functions and Geometry
+  - Unit III: Elder Heliosystem Architecture
+  - Unit IV: Learning Dynamics and Algorithms
+  - Unit V: Cross-Domain Knowledge Transfer
+  - Unit VI: Theoretical Unification and Closure
+  - Unit VII: Memory and Efficiency Properties
+- ✅ Part II: Experiments (3 Units)
+- ✅ Appendices (Glossary, Notation, Advanced Proofs)
+- ✅ Bibliography
+- ✅ Index
+
+## 🎓 Student Resources
+
+### Student Workbook
+
+Pedagogical companion with:
+- 15+ worked examples with complete arithmetic steps
+- 10+ practice exercises with detailed solutions
 - Intuition boxes explaining abstract concepts
-- Common mistakes and how to avoid them
 - Formula reference sheets
 - Calculation checklists
-- Real-world application examples
+- Common mistakes appendix
 
-### Target Audience:
+**Location**: `student_workbook/chapter1/workbook.tex`  
+**Build**: `make student_workbook`
 
-- **Students** learning Elder Theory for the first time
-- **Researchers** implementing Elder algorithms
-- **Instructors** preparing course materials
-- **Self-learners** wanting hands-on practice
+### Alternative Versions
 
-See `student_workbook_README.md` for complete documentation.
+- **Enhanced Workbook**: `student_workbook/chapter1/workbook_enhanced.tex` (50 pages)
+- **Study Book**: `student_workbook/chapter1/study_book.tex` (82 pages)
 
-### Creating New Workbooks:
+Build manually when needed (see `student_workbook/README.md`).
 
-To create a workbook for a new chapter:
-1. Follow the template in `.cursor/rules/student-workbook-guidelines.mdc`
-2. Include worked examples for all major theorems
-3. Provide exercises at beginner/intermediate/advanced levels
-4. Add formula reference boxes and calculation checklists
-5. Compile and verify all arithmetic
+## 👨‍🏫 Teaching Resources
 
-**Guidelines**: See `.cursor/rules/student-workbook-guidelines.mdc` for comprehensive creation guidelines.
+### For Instructors
 
-## Content Guidelines
+The teaching guide provides:
+- Lecture notes with pacing suggestions
+- Assessment rubrics for grading
+- Complete solutions manuals
+- Discussion prompts
+- Learning objectives per chapter
+- Common student misconceptions
 
-### For Main Document:
+**Status**: 🚧 Under development  
+**Location**: `teaching_guide/`
+
+## 📝 Content Guidelines
+
+### For Theory Document:
+
 - Maintain mathematical rigor with formal definitions, theorems, and proofs
-- Follow the ruleset in `.cursor/rules/*.mdc` for consistency
+- Follow ruleset in `.cursor/rules/` for consistency
 - Include complete proofs (no "proof sketches")
 - Add dependency comments to all theorems
-- Use macros from `macros/math_macros.tex` consistently
-- Add new terms to the glossary and index
+- Use macros from `shared/macros/math_macros.tex` consistently
+- Add new terms to glossary and index
 
 ### For Student Workbooks:
+
 - Show all arithmetic steps explicitly
 - Use concrete numerical values (not just variables)
 - Provide intuition before formal calculations
 - Include interpretations of results
 - Progressive difficulty (beginner → advanced)
-- Self-contained sections (can be studied independently)
+- Self-contained sections
 
-See `.cursor/rules/student-workbook-guidelines.mdc` for detailed workbook creation standards.
+See `.cursor/rules/` for detailed guidelines.
 
-## Contact
+## 🔧 Customization
 
-For questions or contributions, please contact the author at ykashou@example.edu.
+### Mathematical Notation
 
-## License
+Custom notation is defined in `shared/macros/math_macros.tex`:
 
-Copyright © 2025 by Yanal Luay Kashou. All rights reserved.
+```latex
+\elder{d}         % Elder space of dimension d
+\mentor{k}        % Mentor space
+\erudite{n}       % Erudite space
+\elderloss        % Elder loss function
+\helio            % Heliomorphic function space
+```
+
+### Adding New Chapters
+
+1. Create `.tex` file in appropriate `theory/chapters/` subdirectory
+2. Add `\input{}` command in `theory/main.tex`
+3. Follow established chapter structure
+4. Use `\chaptersummary{}` template
+5. Add to table of contents
+
+### Creating New Workbooks
+
+See `.cursor/rules/student-workbook-guidelines.mdc` for comprehensive guidelines.
+
+## 🧪 Testing
+
+```bash
+# Compile test documents
+cd tests/
+make test
+
+# Check for LaTeX errors
+grep "Error" build/theory/main.log
+
+# Verify cross-references
+grep "undefined" build/theory/main.log
+```
+
+## ⚠️ Troubleshooting
+
+### Common Issues:
+
+**Issue**: `podman: command not found`  
+**Solution**: Install podman or use docker (replace `podman` with `docker` in commands)
+
+**Issue**: "Too deeply nested" errors  
+**Solution**: These are in appendix files, not core chapters. PDF still generates successfully.
+
+**Issue**: Missing bibliography entries  
+**Solution**: Ensure `theory/bibliography.bib` exists. Some citations may reference future work.
+
+**Issue**: Permission errors with containers (SELinux)  
+**Solution**: Add `:Z` flag for Podman on SELinux systems (Fedora/RHEL): `-v $(pwd):/workspace:Z`
+
+**Issue**: Incomplete List of Figures/Tables  
+**Solution**: Ensure all 5 LaTeX passes complete (this is automated in `make theory`)
+
+## 🤝 Contributing
+
+### For Mathematical Content:
+
+1. Fork the repository
+2. Create branch following convention:
+   - `feature/unit-X-chapter-Y` for new chapters
+   - `fix/annotation-XX` for addressing annotations
+   - `docs/chapter-X-review` for documentation
+3. Follow mathematical rigor rules (see `.cursor/rules/`)
+4. Ensure document compiles: `make theory`
+5. Update notation appendix if adding new symbols
+6. Submit pull request with detailed description
+
+### For Student Materials:
+
+1. Follow workbook guidelines in `.cursor/rules/`
+2. Include complete worked solutions
+3. Test compilation: `make student_workbook`
+4. Verify all arithmetic steps shown
+
+### For Teaching Resources:
+
+1. Add to `teaching_guide/` directory
+2. Include learning objectives
+3. Provide assessment rubrics
+4. Follow LaTeX styling conventions
+
+## 📖 Documentation
+
+### Key Documents:
+
+- **Annotation System**: `docs/annotation_implementation_checklist.md`
+- **Theorem Dependencies**: See dependency tracking in `.cursor/rules/`
+- **Content Organization**: Theory vs Experiments guidelines
+- **Mathematical Rigor**: Proof validation requirements
+- **Notation Consistency**: Symbol usage rules
+
+### Build System:
+
+- **Makefile**: Container-based builds for all documents
+- **Scripts**: `scripts/` directory contains automation tools
+- **Rules**: `.cursor/rules/` contains quality guidelines
+
+## 🎨 Features in Detail
+
+### Mathematical Rigor
+
+Every theorem includes:
+- ✅ Complete formal proofs (no sketches)
+- ✅ Explicit dependency tracking
+- ✅ All assumptions stated upfront
+- ✅ Edge cases addressed
+- ✅ Counterexamples when needed
+
+### Notation System
+
+- ✅ Consistent macros across 934 pages
+- ✅ Consolidated notation appendix
+- ✅ Symbol glossary with page references
+- ✅ Index of terms
+
+### Visual Elements
+
+- ✅ 133 figures (TikZ diagrams)
+- ✅ 103 tables (data and comparisons)
+- ✅ Colored theorem environments
+- ✅ Chapter summaries in styled boxes
+
+## 🚀 Advanced Usage
+
+### Editing Content
+
+```bash
+# Edit theory chapters
+vim theory/chapters/part1_theory/unit1_foundation_layer/introduction_to_elder_spaces.tex
+
+# Rebuild
+make theory
+
+# Quick rebuild (skip bibliography/index)
+podman run --rm -v $(pwd):/workspace:Z -w /workspace \
+  docker.io/texlive/texlive:latest \
+  bash -c "cd theory && lualatex --output-directory=../build/theory main.tex"
+```
+
+### Adding New Macros
+
+```bash
+# Edit shared macros
+vim shared/macros/math_macros.tex
+
+# Add to notation appendix
+vim theory/chapters/appendix/consolidated_notation.tex
+
+# Rebuild to verify
+make theory
+```
+
+### Working with Figures
+
+```bash
+# Add new TikZ figure
+vim shared/figures/new_category/new_diagram.tex
+
+# Reference in chapter
+# \input{../../shared/figures/new_category/new_diagram.tex}
+
+# Rebuild
+make theory
+```
+
+## 📊 Repository Statistics
+
+### Content Scale:
+
+- **Theory Chapters**: 108 .tex files
+- **Total Pages**: 934 (theory) + 37 (workbook) + 5 (teaching) = 976 pages
+- **Figures**: 133 diagrams across 18 categories
+- **Tables**: 103 data tables
+- **Theorems**: 100+ proven theorems
+- **Proofs**: Complete, rigorous proofs throughout
+
+### Build Complexity:
+
+- **LaTeX Passes**: 5 (for complete cross-references and lists)
+- **Compilation Time**: ~5-10 minutes (theory), ~1 minute (workbooks)
+- **Dependencies**: Bibliography (biber), Index (makeindex), Cross-references
+
+## 🌟 Use Cases
+
+### For Students:
+
+1. Read theory document for formal mathematics
+2. Work through student workbook for practice
+3. Attempt exercises before checking solutions
+4. Build intuition with worked examples
+
+### For Researchers:
+
+1. Study theoretical framework (Part I)
+2. Examine experimental validation (Part II)
+3. Reference notation appendix
+4. Cite theorems and definitions
+
+### For Instructors:
+
+1. Use theory as textbook
+2. Assign workbook exercises
+3. Reference teaching guide for lecture planning
+4. Use assessment rubrics for grading
+
+### For Implementers:
+
+1. Study algorithmic specifications (Unit IV)
+2. Reference complexity bounds (Unit VII)
+3. Examine implementation examples (Part II)
+4. Use as specification for Elder system implementation
+
+## 📄 License
+
+Copyright © 2025 by Yanal Luay Kashou.
+
+This work is licensed under the **Elder License** - an open-source license permitting reproduction, distribution, and transmission with attribution.
+
+See [LICENSE](LICENSE) file for complete terms.
+
+## 🙏 Acknowledgments
+
+- The mathematical community for foundational theories
+- Complex analysis and operator theory traditions
+- Machine learning research inspiring novel frameworks
+- All who seek to understand dynamic knowledge representation
+
+## 📮 Contact
+
+- **Author**: Yanal Luay Kashou
+- **Email**: yanal.kashou@gmail.com
+- **GitHub**: [@ykashou](https://github.com/ykashou)
+- **Issues**: [Report bugs or request features](https://github.com/ykashou/latex-elder-theory/issues)
+
+## 🔗 Related Resources
+
+- **Elder Labs**: https://elder.labs (theoretical foundation)
+- **Research Papers**: (to be published)
+- **Implementation**: (to be open-sourced)
+
+---
+
+<div align="center">
+
+**Made with <3 and mathematical rigor by [Yanal Luay Kashou](https://github.com/ykashou)**
+
+*Dedicated to all who seek to understand the fundamental principles of dynamic knowledge representation*
+
+</div>

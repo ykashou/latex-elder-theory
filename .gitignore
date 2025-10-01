@@ -28,12 +28,13 @@
 # Bibliography generation
 *.brf
 
-# Build directory contents except .gitkeep
-build/*
-!build/.gitkeep
-!build/pdf/
-build/pdf/*
-!build/pdf/.gitkeep
+# Build directory contents
+build/theory/*
+!build/theory/.gitkeep
+build/teaching_guide/*
+!build/teaching_guide/.gitkeep
+build/student_workbook/*
+!build/student_workbook/.gitkeep
 
 # Replit specific
 .replit
@@ -58,7 +59,11 @@ Thumbs.db
 
 # Latex builds
 build
-attached_assets
+attached_assets/
 output
 docs
+!docs/reviews/
+attached
 
+# Assets
+assets/web/
