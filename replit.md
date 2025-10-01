@@ -69,20 +69,32 @@ The repository is organized as an academic publication with experimental validat
 
 ### Structure
 ```
-elder-theory/
-├── chapters/               # Theoretical content organized by units
-│   ├── part1_theory/      # 7 units of theoretical foundations
-│   └── part2_experiments/ # Experimental validation
-├── figures/               # Mathematical diagrams and visualizations
-├── macros/               # LaTeX mathematical notation
-├── build/                # Compilation artifacts
-└── assets/               # Web visualizations and data
+latex-elder-theory/
+├── theory/                    # Main mathematical theory document
+│   ├── main.tex              # Document entry point (940 pages)
+│   ├── chapters/             # Theoretical content organized by units
+│   │   ├── part1_theory/    # 7 units of theoretical foundations
+│   │   └── part2_experiments/ # Experimental validation
+│   └── bibliography.bib     # References
+├── student_workbook/          # Student learning materials
+│   └── chapter1/             # Chapter 1 workbook (37 pages)
+├── teaching_guide/            # Instructor resources
+│   └── chapter1_guide.tex    # Teaching guide (5 pages)
+├── shared/                    # Common resources
+│   ├── macros/               # LaTeX mathematical notation
+│   ├── figures/              # Mathematical diagrams and visualizations
+│   └── examples/             # Code examples and algorithms
+└── build/                     # Compilation artifacts
+    ├── theory/               # Theory PDF output
+    ├── student_workbook/     # Workbook PDF output
+    └── teaching_guide/       # Teaching guide PDF output
 ```
 
 ### Build Process
-- Makefile-based compilation system
-- Automated PDF generation
-- Web asset deployment for interactive visualizations
+- Container-based compilation (podman/docker + TeX Live 2025)
+- Makefile targets: `make theory`, `make student_workbook`, `make teaching_guide`
+- Automated PDF generation with complete bibliography and index
+- 6 LaTeX passes for complete List of Figures and List of Tables
 
 ## Changelog
 
