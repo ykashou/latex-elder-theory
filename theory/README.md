@@ -10,7 +10,7 @@ From repository root:
 make theory
 ```
 
-**Output**: `../build/theory/elder_arcane_realization.pdf` (934 pages, 4.2 MB)
+**Output**: `../build/theory/elder_arcane_realization.pdf` (940 pages, 4.2 MB)
 
 ## Contents
 

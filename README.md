@@ -9,7 +9,7 @@ A novel mathematical framework for multi-domain learning and knowledge represent
 [![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/ykashou/latex-elder-theory)
 [![License: Elder](https://img.shields.io/badge/License-Elder-blue.svg)](./LICENSE)
 [![LaTeX](https://img.shields.io/badge/LaTeX-TeX%20Live%202025-008080.svg)](https://www.tug.org/texlive/)
-[![Pages](https://img.shields.io/badge/pages-932-orange.svg)](./build/theory/elder_arcane_realization.pdf)
+[![Pages](https://img.shields.io/badge/pages-940-orange.svg)](./build/theory/elder_arcane_realization.pdf)
 
 [Theory PDF](./build/theory/elder_arcane_realization.pdf) • [Student Workbook](./build/student_workbook/workbook.pdf) • [Documentation](./docs) • [Report Issue](https://github.com/ykashou/latex-elder-theory/issues)
 
@@ -29,7 +29,7 @@ A novel mathematical framework for multi-domain learning and knowledge represent
 
 ## 🎯 Features
 
-- ✅ **Rigorous Mathematical Theory** - 934 pages of publication-ready proofs and theorems
+- ✅ **Rigorous Mathematical Theory** - 940 pages of publication-ready proofs and theorems
 - ✅ **Student Workbook** - 37-page companion with worked examples and exercises
 - ✅ **Teaching Guide** - Instructor resources with lecture notes and rubrics
 - ✅ **Complete Notation System** - Consistent mathematical macros throughout
@@ -148,7 +148,7 @@ latex-elder-theory/
 The easiest way to build PDFs using the container:
 
 ```bash
-# Main theory document (5-10 minutes, 934 pages)
+# Main theory document (5-10 minutes, 940 pages)
 make theory
 
 # Student workbook (1 minute, 37 pages)
@@ -389,7 +389,7 @@ Every theorem includes:
 
 ### Notation System
 
-- ✅ Consistent macros across 934 pages
+- ✅ Consistent macros across 940 pages
 - ✅ Consolidated notation appendix
 - ✅ Symbol glossary with page references
 - ✅ Index of terms
@@ -449,7 +449,7 @@ make theory
 ### Content Scale:
 
 - **Theory Chapters**: 108 .tex files
-- **Total Pages**: 934 (theory) + 37 (workbook) + 5 (teaching) = 976 pages
+- **Total Pages**: 940 (theory) + 37 (workbook) + 5 (teaching) = 982 pages
 - **Figures**: 133 diagrams across 18 categories
 - **Tables**: 103 data tables
 - **Theorems**: 100+ proven theorems

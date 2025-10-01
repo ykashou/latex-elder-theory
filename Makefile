@@ -17,14 +17,15 @@ $(shell mkdir -p $(BUILD_THEORY) $(BUILD_TEACHING) $(BUILD_WORKBOOK))
 # Default target
 all: theory
 
-# Theory (main document) - Full compilation with 5 LaTeX passes for complete TOC/LOF/LOT
+# Theory (main document) - Full compilation with 6 LaTeX passes for complete TOC/LOF/LOT
 theory:
 	@echo "Building Elder Theory (main document)..."
-	@echo "This will take several minutes (5 LaTeX passes for complete lists)..."
+	@echo "This will take several minutes (6 LaTeX passes for complete lists)..."
 	$(CONTAINER) run $(CONTAINER_OPTS) $(TEXLIVE_IMAGE) bash -c "cd theory && \
 		lualatex --interaction=nonstopmode --output-directory=../$(BUILD_THEORY) main.tex && \
 		cd ../$(BUILD_THEORY) && biber main && cd ../../theory && \
 		makeindex ../$(BUILD_THEORY)/main.idx && \
+		lualatex --interaction=nonstopmode --output-directory=../$(BUILD_THEORY) main.tex && \
 		lualatex --interaction=nonstopmode --output-directory=../$(BUILD_THEORY) main.tex && \
 		lualatex --interaction=nonstopmode --output-directory=../$(BUILD_THEORY) main.tex && \
 		lualatex --interaction=nonstopmode --output-directory=../$(BUILD_THEORY) main.tex && \
