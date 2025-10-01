@@ -1,0 +1,305 @@
+---
+description: Annotation and mathematical improvement tracking system
+alwaysApply: true
+---
+
+# Annotation Tracking for Mathematical Theory
+
+## Annotation System
+
+### File Location:
+- Master list: `docs/annotation_implementation_checklist.md`
+- Detailed annotations: `docs/annotations/annotation_summary.md`
+- Per-range checklists: `docs/annotations/annotation_XX_YY_checklist.md`
+
+### Annotation Format in LaTeX:
+```latex
+% ANNOTATION #XX: Brief description
+% Status: [Pending | In Progress | Complete]
+% Category: [notation | proof | reorganization | removal]
+% Priority: [Critical | High | Medium | Low]
+```
+
+## Annotation Categories
+
+### 1. Mathematical Notation (#notation, #symbology)
+**When to create:**
+- Missing or inconsistent symbol definitions
+- Notation conflicts across chapters
+- Need for more expressive operators
+
+**Resolution requires:**
+- Update `macros/math_macros.tex`
+- Update `chapters/appendix/consolidated_notation.tex`
+- Search-and-replace throughout document
+
+### 2. Formula Elaboration (#formulae, #elucidation)
+**When to create:**
+- Complex formula needs step-by-step breakdown
+- Readers need intuition for mathematical objects
+- Visual diagram would aid understanding
+
+**Resolution requires:**
+- Create subsection with detailed derivation
+- Add TikZ diagram if appropriate
+- Cross-reference from main formula
+
+### 3. Proof Gaps (#proof, #improvement)
+**When to create:**
+- Proof skips non-trivial steps
+- Assumptions not explicitly stated
+- Edge cases not covered
+
+**Resolution requires:**
+- Complete missing steps
+- State all assumptions upfront
+- Add counterexamples for negative results
+
+### 4. Content Reorganization (#move, #structure)
+**When to create:**
+- Theoretical examples in wrong section
+- Experiments mixed with theory
+- Dependencies out of order
+
+**Resolution requires:**
+- Move content to appropriate chapter
+- Update cross-references
+- Ensure theorem dependencies preserved
+
+### 5. Content Removal (#trim, #removal)
+**When to create:**
+- Redundant proofs
+- Outdated preliminary content
+- Excessive notation obfuscating understanding
+
+**Resolution requires:**
+- Verify no other content depends on it
+- Remove from all files
+- Update cross-references
+
+### 6. Gravitational Field Theory (#verbiage, #improvement)
+**When to create:**
+- Gravitational terminology inconsistencies
+- Need for gravitational field parameter elaboration
+- Self-organization mechanisms need clarification
+
+**Resolution requires:**
+- Update terminology throughout
+- Add detailed mathematical framework
+- Create dedicated chapters if needed
+
+### 7. Learning Dynamics (#random, #note, #concept)
+**When to create:**
+- Knowledge theory connections unclear
+- Teaching-learning mechanisms need elaboration
+- Gap identification needs mathematical basis
+
+**Resolution requires:**
+- Develop mathematical formalism
+- Connect to information theory
+- Add explicit algorithms
+
+## Workflow: Addressing Annotations
+
+### Step 1: Assess Impact
+```bash
+# Search for annotation references
+grep -r "ANNOTATION #42" chapters/
+
+# Check theorem dependencies
+grep -r "ref{thm:affected}" chapters/
+
+# Find related content
+grep -r "heliomorphic" chapters/ | wc -l
+```
+
+### Step 2: Implement Fix
+- Make changes to relevant .tex files
+- Update macros if needed
+- Regenerate figures if required
+
+### Step 3: Verify Completeness
+```bash
+# Compile document
+make clean && make
+
+# Check for errors
+grep "Undefined control sequence" build/pdf/main.log
+grep "multiply defined" build/pdf/main.log
+grep "Citation.*undefined" build/pdf/main.log
+grep "Reference.*undefined" build/pdf/main.log
+
+# Check specific compilation passes
+pdflatex main.tex  # First pass
+biber main         # Bibliography
+makeindex main     # Index
+pdflatex main.tex  # Second pass
+pdflatex main.tex  # Final pass
+```
+
+### Step 4: Update Tracking
+```markdown
+## Annotation #42: [Title]
+- **Status**: ✅ Complete (was: Pending)
+- **Date**: 2025-01-15
+- **Files Changed**:
+  - chapters/part1_theory/unit2.../heliomorphic_functions.tex
+  - macros/math_macros.tex
+- **Verification**: Compiles without errors, notation consistent
+- **Cross-references updated**: Yes
+- **Tests**: Theorem dependencies verified
+```
+
+## Annotation Priority System
+
+### Critical (address immediately):
+- ❌ Incorrect proofs or mathematical errors
+- ❌ Notation conflicts causing ambiguity
+- ❌ Missing key definitions preventing understanding
+- ❌ Circular theorem dependencies
+
+### High (address this session):
+- ⚠️ Incomplete proofs with gaps
+- ⚠️ Formula elaborations for complex expressions
+- ⚠️ Content organization issues
+- ⚠️ Missing cross-references
+
+### Medium (address this phase):
+- 📝 Additional visual aids
+- 📝 Terminology improvements
+- 📝 Cross-reference enhancements
+- 📝 Index entry additions
+
+### Low (nice to have):
+- 💡 Formatting polish
+- 💡 Additional examples
+- 💡 Stylistic improvements
+- 💡 Historical context
+
+## Annotation Workflow Example
+
+### Annotation #21: Add oscillatory coefficient γ and mass relationship
+
+**Step 1: Assess**
+```bash
+# Where is γ currently used?
+grep -r "\\gamma" chapters/part1_theory/unit4*
+
+# Where should mass-gravity relationship be defined?
+grep -r "gravitational.*mass" chapters/
+```
+
+**Step 2: Implement**
+```latex
+% In macros/math_macros.tex
+% ANNOTATION 21: Add oscillatory coefficient γ and mass relationship
+\newcommand{\oscillatorycoeff}{\gamma}              % Oscillatory coefficient  
+\newcommand{\massgravrel}{\mu_{\text{grav}}}       % Mass-gravity relationship
+\newcommand{\eldermassgrav}{\mu_{\mathcal{E}}}     % Elder mass-gravitational
+```
+
+**Step 3: Update Usage**
+```latex
+% In chapters/part1_theory/unit4.../oscillatory_coefficients.tex
+The oscillatory coefficient $\oscillatorycoeff$ relates the mass 
+$\massgravrel$ to the gravitational field strength through...
+
+\begin{equation}
+\oscillatorycoeff_i = \frac{\massgravrel_i}{|\mathcal{G}_i|^2}
+\end{equation}
+```
+
+**Step 4: Verify**
+```bash
+# Compile and check
+make clean && make
+
+# Verify no undefined commands
+grep "Undefined control sequence" build/pdf/main.log
+```
+
+**Step 5: Document**
+```markdown
+## Annotation #21: ✅ Complete
+- Added oscillatory coefficient macros to math_macros.tex
+- Updated Unit IV Chapter 8 (oscillatory_coefficients.tex)
+- Added to consolidated notation appendix
+- Compilation successful, no errors
+```
+
+## Tracking Multiple Annotations
+
+### Working on Phase:
+Create `docs/annotations/annotation_batch_YYYY_MM_DD.md`:
+```markdown
+# Annotation Batch: YYYY-MM-DD
+
+## Annotations in this batch:
+- #21: Oscillatory coefficients ✅ Complete
+- #25: Entity symbols 🔄 In Progress  
+- #30: Teach-learn notation 🔲 Pending
+
+## Progress: 1/3 (33%)
+
+## Blockers:
+- Annotation #30 requires #25 to be completed first
+
+## Notes:
+- Consider combining #25 and #30 into single PR
+```
+
+## Integration with Git
+
+### Commit Messages:
+```bash
+git commit -m "fix: address Annotation #42 - add oscillatory coefficient notation
+
+- Added \oscillatorycoeff macro to math_macros.tex
+- Updated Chapter 8 to use new macro consistently
+- Added entry to consolidated notation appendix
+
+Resolves Annotation #42
+Related: #21, #25"
+```
+
+### Branch Naming:
+```bash
+git checkout -b annotation/42-oscillatory-coefficients
+# Work on annotation
+git commit -am "Complete annotation #42"
+git push origin annotation/42-oscillatory-coefficients
+```
+
+## Bulk Annotation Resolution
+
+### When Completing Many Annotations:
+```bash
+# Create tracking file
+cat > docs/annotations/bulk_resolution_$(date +%Y%m%d).md << EOF
+# Bulk Annotation Resolution: $(date +%Y-%m-%d)
+
+## Annotations Addressed:
+$(grep -r "ANNOTATION #" chapters/ | grep "Complete" | wc -l) annotations completed
+
+## Summary:
+- Notation additions: X
+- Proof completions: Y
+- Content reorganizations: Z
+- Content removals: W
+
+## Files Modified:
+$(git diff --name-only main | wc -l) files changed
+EOF
+```
+
+## Annotation Review Checklist
+
+Before marking annotation as complete:
+- [ ] Mathematical change is correct
+- [ ] All affected files updated
+- [ ] Cross-references still valid
+- [ ] Document compiles without errors
+- [ ] Notation added to appendix (if applicable)
+- [ ] Index entries added (if applicable)
+- [ ] Tracking document updated
+- [ ] No new annotations created by this change
