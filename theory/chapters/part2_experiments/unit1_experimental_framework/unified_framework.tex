@@ -201,8 +201,7 @@ func (u *UnifiedAudioAnalysis) GetAnalysisReport() map[string]interface{} {
 The unified framework extracts correlation features across all 11 levels of decomposition:
 
 \begin{definition}[Wavelet-Timelet Correlation]
-At each level $k \in \{0,1,...,10\}$, the correlation between frequency and temporal domains is:
-\begin{equation}
+At each level $k \in \{0,1,...,10\}$, the correlation between frequency and temporal domains is quantified as:
 \rho_{WT}^{(k)} = \frac{\text{Cov}(W_k, T_k)}{\sigma_{W_k} \sigma_{T_k}}
 \end{equation}
 where $W_k$ and $T_k$ are the wavelet and timelet coefficients at level $k$.
@@ -237,13 +236,20 @@ The synthesis process combines outputs from all three analysis domains:
 \STATE Initialize $T \leftarrow$ TimeletEngine.Process($x$)
 \STATE Initialize $P \leftarrow$ PhaseletEngine.Process($x$)
 \FOR{$k = 0$ to $10$}
-    \STATE Compute $\rho_{WT}^{(k)}$, $\text{Sync}_{TP}^{(k)}$, $\text{Coupling}_{WP}^{(k)}$
+    \STATE Compute wavelet-timelet correlation $\rho_{WT}^{(k)}$
+    \STATE Compute timelet-phaselet synchronization $\text{Sync}_{TP}^{(k)}$
+    \STATE Compute wavelet-phaselet coupling $\text{Coupling}_{WP}^{(k)}$
     \STATE Store cross-domain features for level $k$
 \ENDFOR
 \FOR{$n = 0$ to $N-1$}
-    \STATE $y[n] \leftarrow 0.4 \cdot W[n] + 0.35 \cdot T[n] + 0.25 \cdot P[n]$
+    \STATE Compute base synthesis: $y_{base}[n] \leftarrow 0.4 \cdot W[n] + 0.35 \cdot T[n] + 0.25 \cdot P[n]$
     \IF{$n < 11$}
-        \STATE Apply cross-domain enhancement using $\rho_{WT}^{(n)}$
+        \STATE Apply level-specific enhancement using $\rho_{WT}^{(n)}$
+        \STATE Apply synchronization correction using $\text{Sync}_{TP}^{(n)}$
+        \STATE Apply coupling adjustment using $\text{Coupling}_{WP}^{(n)}$
+        \STATE Compute final output: $y[n] \leftarrow y_{base}[n] \cdot (1 + 0.1 \cdot \rho_{WT}^{(n)})$
+    \ELSE
+        \STATE $y[n] \leftarrow y_{base}[n]$
     \ENDIF
 \ENDFOR
 \RETURN $y$
@@ -363,17 +369,3 @@ Cross-Domain Correlation & N/A & 0.85 & 0.82 \\
 \end{tabular}
 \caption{Unified Framework Performance Metrics}
 \end{table}
-
-\section{Future Extensions}
-
-\subsection{Adaptive Level Selection}
-
-Future enhancements may include adaptive selection of decomposition levels based on signal characteristics:
-
-\begin{equation}
-\text{Levels}_{\text{adaptive}} = \arg\max_{L \in \{5,7,9,11,13\}} \frac{\text{Information}_{\text{captured}}(L)}{\text{Complexity}(L)}
-\end{equation}
-
-\subsection{Real-Time Processing}
-
-The framework provides foundation for real-time audio processing applications with streaming 11-level analysis capabilities.

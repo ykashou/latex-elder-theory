@@ -181,6 +181,7 @@
 ## POST-MIGRATION
 
 - [ ] Create pull request for reorganization
+      https://github.com/ykashou/latex-elder-theory/pull/new/refactor/repository-structure
 ---
 
 ## SUCCESS CRITERIA
